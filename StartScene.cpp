@@ -17,9 +17,26 @@ void StartScene::Init()
 void StartScene::Update()
 {
 	Scene::Update();
-	if (KEYMANAGER->isOnceKeyDown(VK_F1)) SCENEMANAGER->changeScene("Dungeon");
-	if (KEYMANAGER->isOnceKeyDown(VK_F2)) SCENEMANAGER->changeScene("Entrance");
-	if (KEYMANAGER->isOnceKeyDown(VK_F3)) SCENEMANAGER->changeScene("Town");
-	if (KEYMANAGER->isOnceKeyDown(VK_F4)) SCENEMANAGER->changeScene("Shop");
+	if (KEYMANAGER->isOnceKeyDown(VK_F1)) 
+	{
+		SCENEMANAGER->changeScene("Dungeon");
+		cout << "´øÀü¾À" << endl;
+	}
+	if (KEYMANAGER->isOnceKeyDown(VK_F2)) 
+	{
+		SCENEMANAGER->changeScene("Entrance");
+		cout << "´øÀüÀÔ±¸¾À" << endl;
+	}
+	if (KEYMANAGER->isOnceKeyDown(VK_F3)) 
+	{
+		SCENEMANAGER->changeScene("Town");
+		cout << "¸¶À»¾À" << endl;
+	}
+	if (KEYMANAGER->isOnceKeyDown(VK_F4))
+	{
+		SCENEMANAGER->changeScene("Shop");
+		cout << "»óÁ¡¾À" << endl;
+	}
 }
+
 
