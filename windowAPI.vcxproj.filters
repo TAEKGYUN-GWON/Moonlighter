@@ -67,6 +67,21 @@
     <Filter Include="2DGameFramework\MapTool">
       <UniqueIdentifier>{4f183df9-7dee-411b-a752-cf66aa8b113f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\Dungeon">
+      <UniqueIdentifier>{77c2c191-8351-4c00-a599-fdc9d525ada1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Town">
+      <UniqueIdentifier>{c05d42b8-fe8c-4a5e-aa2e-81c8b800830b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Shop">
+      <UniqueIdentifier>{7286e60a-52d9-4ffb-871d-53ea36caf427}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Entrance">
+      <UniqueIdentifier>{e38e88b7-f833-48ab-9698-a4c2d9bb7edf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Start">
+      <UniqueIdentifier>{46eefbbd-5e0e-4ee3-9b0c-fb0d6bbdb874}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -156,9 +171,6 @@
     <ClInclude Include="ObjectPool.hpp">
       <Filter>2DGameFramework\ObjectPool</Filter>
     </ClInclude>
-    <ClInclude Include="StartScene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>2DGameFramework\Object\Component\header</Filter>
     </ClInclude>
@@ -194,6 +206,21 @@
     </ClInclude>
     <ClInclude Include="JsonManager.h">
       <Filter>2DGameFramework\Manager\header</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonScene.h">
+      <Filter>playGround\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="TownScene.h">
+      <Filter>playGround\Town</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopScene.h">
+      <Filter>playGround\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="EntranceScene.h">
+      <Filter>playGround\Entrance</Filter>
+    </ClInclude>
+    <ClInclude Include="StartScene.h">
+      <Filter>playGround\Start</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -263,9 +290,6 @@
     <ClCompile Include="ObjectPool.cpp">
       <Filter>2DGameFramework\ObjectPool</Filter>
     </ClCompile>
-    <ClCompile Include="StartScene.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>2DGameFramework\Object\Component\cpp</Filter>
     </ClCompile>
@@ -298,6 +322,21 @@
     </ClCompile>
     <ClCompile Include="JsonManager.cpp">
       <Filter>2DGameFramework\Manager\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonScene.cpp">
+      <Filter>playGround\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="TownScene.cpp">
+      <Filter>playGround\Town</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopScene.cpp">
+      <Filter>playGround\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="EntranceScene.cpp">
+      <Filter>playGround\Entrance</Filter>
+    </ClCompile>
+    <ClCompile Include="StartScene.cpp">
+      <Filter>playGround\Start</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
