@@ -6,7 +6,7 @@ void ShopScene::Init()
 	Scene::Init();
 
 
-
+	GRAPHICMANAGER->AddImage("Shop", L"shop_background");
 	//이미지 렌더
 }
 
