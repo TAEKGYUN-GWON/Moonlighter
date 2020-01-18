@@ -147,16 +147,6 @@ list<Vector2> Astar::pathFinder(Vector2 start, Vector2 end)
 	return _pathList;
 }
 
-void Astar::Release()
-{
-}
-
-void Astar::Update()
-{
-
-
-}
-
 void Astar::Render()
 {
 
