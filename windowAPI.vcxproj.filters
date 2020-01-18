@@ -231,6 +231,15 @@
     <ClInclude Include="StartScene.h">
       <Filter>playGround\Start</Filter>
     </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>playGround\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>playGround\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>playGround\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -346,6 +355,15 @@
     </ClCompile>
     <ClCompile Include="StartScene.cpp">
       <Filter>playGround\Start</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>playGround\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>playGround\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>playGround\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
