@@ -15,9 +15,9 @@ private:
 		Down = 1,
 
 	};
+	vector<Tile*>_vTotalList;
+	vector<Tile*>::iterator _viTotalList;
 
-	multimap<Vector2, Tile*> _mTotalList;
-	multimap<Vector2, Tile*>::iterator _miTotalList;
 
 	vector <Tile*> _OpenList;
 	vector <Tile*>::iterator _iOpenList;
@@ -31,7 +31,7 @@ private:
 	Tile* _endTile;
 	Tile* _currentTile;
 
-	
+
 
 	//요건 나중에 테스트할때 쓸것.
 	bool _start;
@@ -59,7 +59,7 @@ public:
 	bool CanOpenUp(Vector2 idx);
 	bool CanOpenDown(Vector2 idx);
 
-	bool SetCost(Tile* node, float cost, Tile* parent );
+	bool SetCost(Tile* node, float cost, Tile* parent);
 
 	void AddOpenList(Tile* node);
 	void AddCloseList(Tile* node);
@@ -67,6 +67,5 @@ public:
 	Tile* GetMinFNode();
 
 	void SetPathcList();
-
 };
 
