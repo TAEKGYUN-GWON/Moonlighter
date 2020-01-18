@@ -25,7 +25,7 @@ public:
 	Item();
 	~Item();
 
-	virtual void Init(EItemType type, string ImageKey, int price, int itemCount = 1);
+	virtual void Init();
 	virtual void Update();
 	virtual void Render();
 
