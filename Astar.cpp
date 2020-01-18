@@ -62,10 +62,8 @@ vector <Tile*> Astar::GetDirList(Vector2 idx)
 		nodeList.push_back(_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) - 1]);
 
 
-	
 	if (CanOpenRight(idx))
 		nodeList.push_back(_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) + 1]);
-
 
 	
 	if (CanOpenUp(idx))
@@ -124,10 +122,10 @@ list<Vector2> Astar::pathFinder(Vector2 start, Vector2 end)
 
 	_currentTile = _startTile;
 	AddOpenList(_currentTile);
+
 	bool theEnd = false;
 	while (!theEnd)
 	{
-
 		for (Tile* t : GetDirList(Vector2(_currentTile->GetIdX(), _currentTile->GetIdY())))
 		{
 
@@ -144,6 +142,7 @@ list<Vector2> Astar::pathFinder(Vector2 start, Vector2 end)
 		_currentTile = GetMinFNode();
 		if (_currentTile == nullptr) break;
 	}
+
 	return _pathList;
 }
 

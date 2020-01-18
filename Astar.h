@@ -18,15 +18,14 @@ private:
 	vector<Tile*>_vTotalList;
 	vector<Tile*>::iterator _viTotalList;
 
-
 	vector <Tile*> _OpenList;
 	vector <Tile*>::iterator _iOpenList;
 
 	vector <Tile*> _ClosedList;
 	vector <Tile*>::iterator _iClosedList;
 
-
 	list<Vector2> _pathList;
+
 	Tile* _startTile;
 	Tile* _endTile;
 	Tile* _currentTile;
@@ -50,8 +49,6 @@ public:
 
 	list<Vector2> pathFinder(Vector2 start, Vector2 end);
 
-	void Release();
-	void Update();
 	void Render();
 
 	bool CanOpenLeft(Vector2 idx);
