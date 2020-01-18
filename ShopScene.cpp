@@ -29,6 +29,7 @@ void ShopScene::Init()
 	//GRAPHICMANAGER->AddFrameImage("", L"resource/img/Shop/shop_door.png", 5, 1);
 	//GRAPHICMANAGER->AddFrameImage("", L"resource/img/Shop/will_getup.png", 58, 1);
 
+	//Object* obj = Object::CreateObject<Object>(); //매개변수를 안넣었으므로 샵씬에 귀속되는 오브젝트임
 
 	CAMERA->SetScale(Vector2(2.f, 1.f));
 }

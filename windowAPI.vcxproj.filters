@@ -91,6 +91,9 @@
     <Filter Include="playGround\Item">
       <UniqueIdentifier>{77c1421c-a7e0-4770-97b1-e405843461d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\Shop\NPC">
+      <UniqueIdentifier>{3d10edcc-b2c8-408c-818b-6539ee48799f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -231,6 +234,15 @@
     <ClInclude Include="StartScene.h">
       <Filter>playGround\Start</Filter>
     </ClInclude>
+    <ClInclude Include="Npc.h">
+      <Filter>playGround\Shop\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="NpcManager.h">
+      <Filter>playGround\Shop\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="NpcState.h">
+      <Filter>playGround\Shop\NPC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -346,6 +358,15 @@
     </ClCompile>
     <ClCompile Include="StartScene.cpp">
       <Filter>playGround\Start</Filter>
+    </ClCompile>
+    <ClCompile Include="Npc.cpp">
+      <Filter>playGround\Shop\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NpcManager.cpp">
+      <Filter>playGround\Shop\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NpcState.cpp">
+      <Filter>playGround\Shop\NPC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
