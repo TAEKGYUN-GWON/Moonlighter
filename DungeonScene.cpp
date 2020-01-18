@@ -7,7 +7,6 @@ void DungeonScene::Init()
 
 	_player = Object::CreateObject<Player>();
 	_player->Init();
-
 }
 
 void DungeonScene::Update()

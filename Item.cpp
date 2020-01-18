@@ -12,7 +12,7 @@ Item::~Item()
 
 }
 
-void Item::Init()
+void Item::Init(EItemType type, string ImageKey, int price, int itemCount)
 {
 	
 

@@ -6,6 +6,7 @@ class Player : public Object
 private:
 	Sprite* _sprite;
 	PhysicsBody* _physics;
+	float _speed;
 
 public:
 	Player();
