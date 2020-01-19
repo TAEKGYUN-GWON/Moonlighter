@@ -240,11 +240,11 @@
     <ClInclude Include="NpcState.h">
       <Filter>playGround\Shop\NPC</Filter>
     </ClInclude>
-    <ClInclude Include="ShopStand.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="NpcManager.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopStand.h">
+      <Filter>playGround\Shop\NPC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -368,11 +368,11 @@
     <ClCompile Include="NpcState.cpp">
       <Filter>playGround\Shop\NPC</Filter>
     </ClCompile>
-    <ClCompile Include="ShopStand.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="NpcManager.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopStand.cpp">
+      <Filter>playGround\Shop\NPC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
