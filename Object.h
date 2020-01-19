@@ -19,6 +19,7 @@ protected:
 	bool _isActive = true;
 	bool _allowsUpdate = true;
 	bool _allowInit = true;
+	bool _allowRender = true;
 	Object* _parent;
 	vector<Object*> _children;
 
@@ -46,10 +47,15 @@ public:
 	inline void SetIsActive(bool active) { _isActive = active; }
 
 	inline bool GetIsActive() { return _isActive; }
-	inline bool GetAllowsUpdate() { return _allowsUpdate; }
 
+	inline bool GetAllowsUpdate() { return _allowsUpdate; }
 	inline void SetAllowsUpdate() { _allowsUpdate = !_allowsUpdate; }
 	inline void SetAllowsUpdate(bool active) { _allowsUpdate = active; }
+
+	inline bool GetAllowsRender() { return _allowRender; }
+	inline void SetAllowsRender() { _allowRender = !_allowRender; }
+	inline void SetAllowsRender(bool active) { _allowRender = active; }
+
 
 	inline bool GetAllowInit() { return _allowInit; }
 	
