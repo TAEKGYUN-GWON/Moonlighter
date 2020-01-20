@@ -222,6 +222,12 @@
     <ClInclude Include="StartScene.h">
       <Filter>playGround\Start</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>playGround\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemystate.h">
+      <Filter>playGround\Dungeon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -337,6 +343,12 @@
     </ClCompile>
     <ClCompile Include="StartScene.cpp">
       <Filter>playGround\Start</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>playGround\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemystate.cpp">
+      <Filter>playGround\Dungeon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
