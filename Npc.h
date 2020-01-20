@@ -7,24 +7,24 @@ class NpcState;
 class Npc :	public Object
 {
 private:
+	Sprite* _sprite;
+	PhysicsBody* _physics;
+	float _speed;
+
 	ShopStand* _shopStand;
 	NpcState* _npcState;
 
-
-
 public:
+	Npc();
 
 	virtual void Init() override;
 	virtual void Release() override;
 	virtual void Update() override;
 	virtual void Render() override;
 
-	Npc();
-
-	void SetState(NpcState* npcstate);	//상태 정의 //왜 Npc*로 받는지 잘 모르겠음 베꼈음
-	void BuyStuffs();	//물건 사기 행동
+	void SetState(NpcState* npcstate);	//상태 정의 
+	void Act();			//물건 사기, 이동 등 행동
 	void NotBuyStuffs();//물건 안사기 행동
-	void Move();		//이동 행동 (상태에 따라 바껴야함)
 	void GoHome();		//집에 가기 행동
 
 

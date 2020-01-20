@@ -14,14 +14,14 @@ protected:
 	}
 
 public :
-	virtual void BuyStuffs(Npc* npc) = 0;	//물건 사기 행동
+//	virtual void BuyStuffs(Npc* npc) = 0;	//물건 사기 행동
 	virtual void NotBuyStuffs(Npc* npc) = 0;//물건 안사기 행동
-	virtual void Move(Npc* npc) = 0;		//이동 행동 (상태에 따라 바껴야함)
+	virtual void Act(Npc* npc) = 0;		//이동 행동 (상태에 따라 바껴야함)
 	virtual void GoHome(Npc* npc) = 0;		//집에 가기 행동
-
+	
 };
 
-class NpcStateIdle : NpcState
+class NpcStateIdle : public NpcState
 {
 	//Npc가 얘 써야해서 스태틱..
 	static NpcStateIdle* instance;
@@ -29,47 +29,47 @@ class NpcStateIdle : NpcState
 public:
 	static NpcStateIdle* GetInstance();
 
-	virtual void BuyStuffs(Npc* npc);
+//	virtual void BuyStuffs(Npc* npc);
 	virtual void NotBuyStuffs(Npc* npc);
-	virtual void Move(Npc* npc);
+	virtual void Act(Npc* npc);
 	virtual void GoHome(Npc* npc);
 };
-class NpcStateSearch : NpcState
+class NpcStateDecide : public NpcState
 {
-	static NpcStateSearch* instance;
+	static NpcStateDecide* instance;
 
 public:
-	static NpcStateSearch* GetInstance();
+	static NpcStateDecide* GetInstance();
 
-	virtual void BuyStuffs(Npc* npc);
+//	virtual void BuyStuffs(Npc* npc);
 	virtual void NotBuyStuffs(Npc* npc);
-	virtual void Move(Npc* npc);
+	virtual void Act(Npc* npc);
 	virtual void GoHome(Npc* npc);
 
 };
-class NpcStateInline : NpcState
+class NpcStateInline : public NpcState
 {
 	static NpcStateInline* instance;
 
 public:
 	static NpcStateInline* GetInstance();
 
-	virtual void BuyStuffs(Npc* npc);
+//	virtual void BuyStuffs(Npc* npc);
 	virtual void NotBuyStuffs(Npc* npc);
-	virtual void Move(Npc* npc);
+	virtual void Act(Npc* npc);
 	virtual void GoHome(Npc* npc);
 
 };
-class NpcStateGoHome : NpcState
+class NpcStateGoHome : public NpcState
 {
 	static NpcStateGoHome* instance;
 
 public:
 	static NpcStateGoHome* GetInstance();
 
-	virtual void BuyStuffs(Npc* npc);
+//	virtual void BuyStuffs(Npc* npc);
 	virtual void NotBuyStuffs(Npc* npc);
-	virtual void Move(Npc* npc);
+	virtual void Act(Npc* npc);
 	virtual void GoHome(Npc* npc);
 
 };

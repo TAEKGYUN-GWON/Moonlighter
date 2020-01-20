@@ -3,7 +3,7 @@
 
 //★이부분 뭔지 모르겠음 일단 있어서 베낌
 NpcStateIdle* NpcStateIdle::instance;
-NpcStateSearch* NpcStateSearch::instance;
+NpcStateDecide* NpcStateDecide::instance;
 NpcStateInline* NpcStateInline::instance;
 NpcStateGoHome* NpcStateGoHome::instance;
 
@@ -13,49 +13,56 @@ NpcStateIdle* NpcStateIdle::GetInstance()
 {
 	if (instance == nullptr)
 	{
-		instance = new NpcStateIdle(); //★ ㅇ
+		instance = new NpcStateIdle(); //★ 
 	}
 	return instance;
-}
-
-void NpcStateIdle::BuyStuffs(Npc* npc)
-{
 }
 
 void NpcStateIdle::NotBuyStuffs(Npc* npc)
 {
+	cout << "이런건 없음" << endl;
 }
 
-void NpcStateIdle::Move(Npc* npc)
+void NpcStateIdle::Act(Npc* npc)
 {
+	//테이블 vector 돌려서 _isActive = false 인 테이블을 찾는다
+	//찾았으면 그 테이블 앞으로 이동한다
+	//이동 완료하면 _npcState = Decide 가 되어야함
+
+	//SetNpcState(npc, NpcStateDecide); //이렇게 해주면 될듯..
+
+	//살지 말지 결정은 어디에서 해줘야함?
+	//Npc.cpp의 update에서 해주겠음 일단
 }
 
 void NpcStateIdle::GoHome(Npc* npc)
 {
+	//SetNpcState(npc, NpcStateGoHome); //고홈 상태로 바꿈
 }
 //======================Search 상태===========================
-NpcStateSearch* NpcStateSearch::GetInstance()
+NpcStateDecide* NpcStateDecide::GetInstance()
 {
 	if (instance == nullptr)
 	{
-		instance = new NpcStateSearch();
+		instance = new NpcStateDecide();
 	}
 	return instance;
 }
 
-void NpcStateSearch::BuyStuffs(Npc* npc)
+void NpcStateDecide::NotBuyStuffs(Npc* npc)
 {
+	//if 가격이
+	//상태->Idle로 바꿈
 }
 
-void NpcStateSearch::NotBuyStuffs(Npc* npc)
+void NpcStateDecide::Act(Npc* npc)
 {
+	//구매하고
+	//상태->줄서기로 바꿈
+
 }
 
-void NpcStateSearch::Move(Npc* npc)
-{
-}
-
-void NpcStateSearch::GoHome(Npc* npc)
+void NpcStateDecide::GoHome(Npc* npc)
 {
 }
 //======================Inline 상태===========================
@@ -68,15 +75,11 @@ NpcStateInline* NpcStateInline::GetInstance()
 	return instance;
 }
 
-void NpcStateInline::BuyStuffs(Npc* npc)
-{
-}
-
 void NpcStateInline::NotBuyStuffs(Npc* npc)
 {
 }
 
-void NpcStateInline::Move(Npc* npc)
+void NpcStateInline::Act(Npc* npc)
 {
 }
 
@@ -93,15 +96,11 @@ NpcStateGoHome* NpcStateGoHome::GetInstance()
 	return instance;
 }
 
-void NpcStateGoHome::BuyStuffs(Npc* npc)
-{
-}
-
 void NpcStateGoHome::NotBuyStuffs(Npc* npc)
 {
 }
 
-void NpcStateGoHome::Move(Npc* npc)
+void NpcStateGoHome::Act(Npc* npc)
 {
 }
 
