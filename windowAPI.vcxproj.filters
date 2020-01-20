@@ -252,6 +252,9 @@
     <ClInclude Include="NpcState.h">
       <Filter>playGround\Shop\Npc</Filter>
     </ClInclude>
+    <ClInclude Include="ShopStand.h">
+      <Filter>playGround\Shop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -385,6 +388,9 @@
     </ClCompile>
     <ClCompile Include="NpcState.cpp">
       <Filter>playGround\Shop\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopStand.cpp">
+      <Filter>playGround\Shop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

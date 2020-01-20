@@ -1,11 +1,14 @@
 #pragma once
 #include "Npc.h"
+#include "ShopStand.h"
 
 class NpcState
 {
 private:
 
+
 protected:
+	ShopStand* _shopStand;
 
 	//setter
 	void SetNpcState(Npc* npc, NpcState* npcstate)

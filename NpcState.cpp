@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "NpcState.h"
 
+
 //★이부분 뭔지 모르겠음 일단 있어서 베낌
 NpcStateIdle* NpcStateIdle::instance;
 NpcStateDecide* NpcStateDecide::instance;
@@ -51,14 +52,18 @@ NpcStateDecide* NpcStateDecide::GetInstance()
 
 void NpcStateDecide::NotBuyStuffs(Npc* npc)
 {
-	//if 가격이
-	//상태->Idle로 바꿈
+	//문앞으로 이동하고
+	//SetNpcState(npc, NpcStateIdle);
+	//이거하고 랜덤숫자로 카운터를 돌린다
+	//카운터가 다되면 Idle->Act 상태로 가야함
+	//집에는 안가, 집에가는건 따로..
 }
 
 void NpcStateDecide::Act(Npc* npc)
 {
-	//구매하고
-	//상태->줄서기로 바꿈
+	//구매하기로 결심했으면
+	//테이블에 있던 아이템 좌표가 캐릭터한테 붙어야함
+	//_shopStand->SetActive(false); //테이블을 inactivate 해줌
 
 }
 
