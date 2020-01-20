@@ -1,12 +1,14 @@
 #pragma once
 #include "Scene.h"
-class ShopScene :public Scene
-{
+#include "Player.h"
 
-	
+class ShopScene : public Scene
+{
+private:
+	Player* _player;
+
 public:
 	virtual void Init();
 	virtual void Update();
-	virtual void Render();
 };
 

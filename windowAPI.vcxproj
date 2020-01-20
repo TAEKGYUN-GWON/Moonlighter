@@ -29,13 +29,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -48,7 +48,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -155,17 +155,16 @@
     <ClInclude Include="DungeonScene.h" />
     <ClInclude Include="EntranceScene.h" />
     <ClInclude Include="iniDataManager.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="JsonManager.h" />
     <ClInclude Include="Maptool.h" />
-    <ClInclude Include="Npc.h" />
-    <ClInclude Include="NpcManager.h" />
-    <ClInclude Include="NpcState.h" />
     <ClInclude Include="omega.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="ShopScene.h" />
-    <ClInclude Include="ShopStand.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="keyManager.h" />
@@ -206,16 +205,15 @@
     <ClCompile Include="DungeonScene.cpp" />
     <ClCompile Include="EntranceScene.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="JsonManager.cpp" />
     <ClCompile Include="Maptool.cpp" />
-    <ClCompile Include="Npc.cpp" />
-    <ClCompile Include="NpcManager.cpp" />
-    <ClCompile Include="NpcState.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Graphic.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="ShopScene.cpp" />
-    <ClCompile Include="ShopStand.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="keyManager.cpp" />
