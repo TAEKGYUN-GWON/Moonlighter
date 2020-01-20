@@ -1,7 +1,8 @@
 #pragma once
 #include "Object.h"
 #include "ShopStand.h"
-#include "NpcState.h"
+
+class NpcState;
 
 class Npc :	public Object
 {
@@ -17,6 +18,8 @@ public:
 	virtual void Release() override;
 	virtual void Update() override;
 	virtual void Render() override;
+
+	Npc();
 
 	void SetState(NpcState* npcstate);	//상태 정의 //왜 Npc*로 받는지 잘 모르겠음 베꼈음
 	void BuyStuffs();	//물건 사기 행동
