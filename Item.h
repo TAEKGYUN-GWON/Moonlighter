@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Object.h"
 
 enum EItemType
@@ -42,6 +41,8 @@ public:
 	void SetPrice(int price) {
 		_price = price;
 	}
+
+	static Item* CreateItem(string MobName);
 
 };
 
