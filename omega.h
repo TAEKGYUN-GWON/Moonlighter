@@ -1,5 +1,6 @@
 #pragma once
 #include"Object.h"
+#include "Scene.h"
 #include"Sprite.h"
 #include"Transform.h"
 #include"PhysicsBody.h"

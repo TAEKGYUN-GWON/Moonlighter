@@ -4,6 +4,9 @@
 void ShopScene::Init()
 {
 	Scene::Init();
+
+	_player = Object::CreateObject<Player>();
+	_player->Init();
 }
 
 void ShopScene::Update()

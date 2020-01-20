@@ -157,9 +157,12 @@
     <ClInclude Include="Enemystate.h" />
     <ClInclude Include="EntranceScene.h" />
     <ClInclude Include="iniDataManager.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="JsonManager.h" />
     <ClInclude Include="Maptool.h" />
     <ClInclude Include="omega.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="ObjectManager.h" />
@@ -206,8 +209,11 @@
     <ClCompile Include="Enemystate.cpp" />
     <ClCompile Include="EntranceScene.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="JsonManager.cpp" />
     <ClCompile Include="Maptool.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Graphic.cpp" />
     <ClCompile Include="ObjectManager.cpp" />

@@ -18,5 +18,7 @@ public:
 	virtual void PhysicsUpdate();			//연산 전용 함수
 	virtual void Render();
 
+	b2World* GetWorld() { return _b2World; }
+
 };
 

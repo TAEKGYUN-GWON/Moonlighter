@@ -82,6 +82,15 @@
     <Filter Include="playGround\Start">
       <UniqueIdentifier>{46eefbbd-5e0e-4ee3-9b0c-fb0d6bbdb874}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\Inventory">
+      <UniqueIdentifier>{9e52936e-db88-4610-a177-47ed26e541e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Player">
+      <UniqueIdentifier>{bb54c656-9ba4-4370-9828-9b7f5995e818}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Item">
+      <UniqueIdentifier>{77c1421c-a7e0-4770-97b1-e405843461d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -222,11 +231,14 @@
     <ClInclude Include="StartScene.h">
       <Filter>playGround\Start</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>playGround\Dungeon</Filter>
+    <ClInclude Include="Inventory.h">
+      <Filter>playGround\Inventory</Filter>
     </ClInclude>
-    <ClInclude Include="Enemystate.h">
-      <Filter>playGround\Dungeon</Filter>
+    <ClInclude Include="Item.h">
+      <Filter>playGround\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>playGround\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -344,11 +356,14 @@
     <ClCompile Include="StartScene.cpp">
       <Filter>playGround\Start</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>playGround\Dungeon</Filter>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>playGround\Inventory</Filter>
     </ClCompile>
-    <ClCompile Include="Enemystate.cpp">
-      <Filter>playGround\Dungeon</Filter>
+    <ClCompile Include="Item.cpp">
+      <Filter>playGround\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>playGround\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

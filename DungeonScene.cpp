@@ -1,16 +1,12 @@
 #include "stdafx.h"
 #include "DungeonScene.h"
 
-
 void DungeonScene::Init()
 {
 	Scene::Init();
 
-	Object* obj = Object::CreateObject<Object>();
-	auto a = obj->AddComponent<Sprite>();
-
-	 
-
+	_player = Object::CreateObject<Player>();
+	_player->Init();
 }
 
 void DungeonScene::Update()
