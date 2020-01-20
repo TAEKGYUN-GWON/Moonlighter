@@ -12,19 +12,20 @@ class Item : public Object
 
 protected:
 
+	//아이템이 소모품인지 그외 다른 모든것인지를 정한다.
 	EItemType _type;
-
+	
+	//가격, 아이템의 수량을 나타낸다.
 	int _price, _itemCount;
 
+	//아이템이 사용할 이미지를 저장
 	Sprite* _image;
-
-
 
 public:
 	Item();
 	~Item();
 
-	virtual void Init();
+	virtual void Init(EItemType types, int itemCount);
 	virtual void Update();
 	virtual void Render();
 
