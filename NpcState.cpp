@@ -52,6 +52,7 @@ NpcStateDecide* NpcStateDecide::GetInstance()
 
 void NpcStateDecide::NotBuyStuffs(Npc* npc)
 {
+	//안사기로 한것임
 	//문앞으로 이동하고
 	//SetNpcState(npc, NpcStateIdle);
 	//이거하고 랜덤숫자로 카운터를 돌린다
@@ -61,7 +62,7 @@ void NpcStateDecide::NotBuyStuffs(Npc* npc)
 
 void NpcStateDecide::Act(Npc* npc)
 {
-	//구매하기로 결심했으면
+	//구매하기로 결심한것임
 	//테이블에 있던 아이템 좌표가 캐릭터한테 붙어야함
 	//_shopStand->SetActive(false); //테이블을 inactivate 해줌
 
@@ -82,14 +83,21 @@ NpcStateInline* NpcStateInline::GetInstance()
 
 void NpcStateInline::NotBuyStuffs(Npc* npc)
 {
+	cout << "일어날 수 없는 일임" << endl;
 }
 
 void NpcStateInline::Act(Npc* npc)
 {
+	//Idle 상대로 바껴야함
+	//계산이 끝났으니까 줄서기가 된거임
+	//플레이어가 J눌러서 허락해줬을 때 Inline::Act 로 들어와야함
+	//혹은 플레이어가 너무 안눌러줬을떄 자동으로 들어와야되는데, 구현 안해도 아무도 모름
+	//SetNpcState(npc, NpcStateIdle);
 }
 
 void NpcStateInline::GoHome(Npc* npc)
 {
+	cout << "이런일은 일어날 수 없다.." << endl;
 }
 //======================GoHome 상태===========================
 NpcStateGoHome* NpcStateGoHome::GetInstance()
@@ -103,12 +111,15 @@ NpcStateGoHome* NpcStateGoHome::GetInstance()
 
 void NpcStateGoHome::NotBuyStuffs(Npc* npc)
 {
+	cout << "이 상태에서는 행동이 없음" << endl;
 }
 
 void NpcStateGoHome::Act(Npc* npc)
 {
+	cout << "이 상태에서는 행동이 없음" << endl;
 }
 
 void NpcStateGoHome::GoHome(Npc* npc)
 {
+	cout << "이 상태에서는 행동이 없음" << endl;
 }
