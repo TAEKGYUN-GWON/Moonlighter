@@ -258,8 +258,11 @@
     <ClInclude Include="ETC.h">
       <Filter>playGround\Item\etc</Filter>
     </ClInclude>
-    <ClInclude Include="EtCetera.h">
+    <ClInclude Include="Vine.h">
       <Filter>playGround\Item\etc</Filter>
+    </ClInclude>
+    <ClInclude Include="Crystal_Energy.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -395,8 +398,11 @@
     <ClCompile Include="ETC.cpp">
       <Filter>playGround\Item\etc</Filter>
     </ClCompile>
-    <ClCompile Include="EtCetera.cpp">
+    <ClCompile Include="Vine.cpp">
       <Filter>playGround\Item\etc</Filter>
+    </ClCompile>
+    <ClCompile Include="Crystal_Energy.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -151,11 +151,11 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Crystal_Energy.h" />
     <ClInclude Include="DrawComponent.h" />
     <ClInclude Include="DungeonScene.h" />
     <ClInclude Include="EntranceScene.h" />
     <ClInclude Include="ETC.h" />
-    <ClInclude Include="EtCetera.h" />
     <ClInclude Include="iniDataManager.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
@@ -198,6 +198,7 @@
     <ClInclude Include="utils.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
+    <ClInclude Include="Vine.h" />
     <ClInclude Include="windowAPI.h" />
   </ItemGroup>
   <ItemGroup>
@@ -206,11 +207,11 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Crystal_Energy.cpp" />
     <ClCompile Include="DrawComponent.cpp" />
     <ClCompile Include="DungeonScene.cpp" />
     <ClCompile Include="EntranceScene.cpp" />
     <ClCompile Include="ETC.cpp" />
-    <ClCompile Include="EtCetera.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -250,6 +251,7 @@
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />
+    <ClCompile Include="Vine.cpp" />
     <ClCompile Include="windowAPI.cpp" />
   </ItemGroup>
   <ItemGroup>
