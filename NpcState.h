@@ -5,7 +5,8 @@
 class NpcState
 {
 protected:
-	int _counter; //idle 상태에 시간잴거
+	int _counter = 0; //idle 상태에 시간잴거
+	bool _isFunctionDone = false; //함수 할일다했냐? 안다했음
 
 	ShopStand* _shopStand; //써야될거같아서 넣어둠
 	Npc* _npc;
