@@ -1,78 +1,61 @@
 #pragma once
-#include "Npc.h"
 #include "ShopStand.h"
+#include "Npc.h"
 
 class NpcState
 {
-private:
-
-
 protected:
-	ShopStand* _shopStand;
+	int _counter; //idle 상태에 시간잴거
 
-	//setter
-	void SetNpcState(Npc* npc, NpcState* npcstate)
-	{ 
-		npc->SetState(npcstate);
-	}
+	ShopStand* _shopStand; //써야될거같아서 넣어둠
+	Npc* _npc;
 
 public :
-//	virtual void BuyStuffs(Npc* npc) = 0;	//물건 사기 행동
-	virtual void NotBuyStuffs(Npc* npc) = 0;//물건 안사기 행동
-	virtual void Act(Npc* npc) = 0;		//이동 행동 (상태에 따라 바껴야함)
-	virtual void GoHome(Npc* npc) = 0;		//집에 가기 행동
-	
+	NpcState() {};
+	~NpcState() {};
+
+	virtual void StateIn(Npc* npc) = 0;
+	virtual void StateStay(Npc* npc) = 0;
+	virtual void StateOut(Npc* npc) = 0;
 };
 
-class NpcStateIdle : public NpcState
+class NpcIdle : public NpcState
 {
-	//Npc가 얘 써야해서 스태틱..
-	static NpcStateIdle* instance;
-
+	static NpcIdle* instance;
 public:
-	static NpcStateIdle* GetInstance();
+	static NpcIdle* GetInstance();
 
-//	virtual void BuyStuffs(Npc* npc);
-	virtual void NotBuyStuffs(Npc* npc);
-	virtual void Act(Npc* npc);
-	virtual void GoHome(Npc* npc);
+	virtual void StateIn(Npc* npc);
+	virtual void StateStay(Npc* npc);
+	virtual void StateOut(Npc* npc);
 };
-class NpcStateDecide : public NpcState
+class NpcDecide : public NpcState
 {
-	static NpcStateDecide* instance;
-
+	static NpcDecide* instance;
 public:
-	static NpcStateDecide* GetInstance();
+	static NpcDecide* GetInstance();
 
-//	virtual void BuyStuffs(Npc* npc);
-	virtual void NotBuyStuffs(Npc* npc);
-	virtual void Act(Npc* npc);
-	virtual void GoHome(Npc* npc);
-
+	virtual void StateIn(Npc* npc);
+	virtual void StateStay(Npc* npc);
+	virtual void StateOut(Npc* npc);
 };
-class NpcStateInline : public NpcState
+class NpcInline : public NpcState
 {
-	static NpcStateInline* instance;
-
+	static NpcInline* instance;
 public:
-	static NpcStateInline* GetInstance();
+	static NpcInline* GetInstance();
 
-//	virtual void BuyStuffs(Npc* npc);
-	virtual void NotBuyStuffs(Npc* npc);
-	virtual void Act(Npc* npc);
-	virtual void GoHome(Npc* npc);
-
+	virtual void StateIn(Npc* npc);
+	virtual void StateStay(Npc* npc);
+	virtual void StateOut(Npc* npc);
 };
-class NpcStateGoHome : public NpcState
+class NpcExit : public NpcState
 {
-	static NpcStateGoHome* instance;
-
+	static NpcExit* instance;
 public:
-	static NpcStateGoHome* GetInstance();
+	static NpcExit* GetInstance();
 
-//	virtual void BuyStuffs(Npc* npc);
-	virtual void NotBuyStuffs(Npc* npc);
-	virtual void Act(Npc* npc);
-	virtual void GoHome(Npc* npc);
-
+	virtual void StateIn(Npc* npc);
+	virtual void StateStay(Npc* npc);
+	virtual void StateOut(Npc* npc);
 };

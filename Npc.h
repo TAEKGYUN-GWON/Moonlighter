@@ -1,8 +1,11 @@
 #pragma once
 #include "Object.h"
 #include "ShopStand.h"
+#include <list>
 
 class NpcState;
+
+
 
 class Npc :	public Object
 {
@@ -14,18 +17,22 @@ private:
 	ShopStand* _shopStand;
 	NpcState* _npcState;
 
+	//리스트 벡터2 값 만들어놔야함, a스타용 
+
 public:
-	Npc();
+	Npc() {};
+	~Npc() {};
 
 	virtual void Init() override;
 	virtual void Release() override;
 	virtual void Update() override;
 	virtual void Render() override;
 
-	void SetState(NpcState* npcstate);	//상태 정의 
-	void Act();			//물건 사기, 이동 등 행동
-	void NotBuyStuffs();//물건 안사기 행동
-	void GoHome();		//집에 가기 행동
+	void SetNpcState(NpcState* npcstate) { _npcState = npcstate; }
+
+	void In();
+	void Stay();
+	void Out();
 
 
 };

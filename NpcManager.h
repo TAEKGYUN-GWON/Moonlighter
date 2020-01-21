@@ -17,3 +17,6 @@ public:
 	void StateControl();
 };
 
+//npc 중에 isactive(ㅇ기ㅓ말고 다른거 써야함) 인 애가 있으면
+//erase.
+

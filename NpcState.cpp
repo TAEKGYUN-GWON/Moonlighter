@@ -1,125 +1,157 @@
 #include "stdafx.h"
 #include "NpcState.h"
+#include "Npc.h"
 
+NpcIdle* NpcIdle::instance;
+NpcDecide* NpcDecide::instance;
+NpcInline* NpcInline::instance;
+NpcExit* NpcExit::instance;
 
-//★이부분 뭔지 모르겠음 일단 있어서 베낌
-NpcStateIdle* NpcStateIdle::instance;
-NpcStateDecide* NpcStateDecide::instance;
-NpcStateInline* NpcStateInline::instance;
-NpcStateGoHome* NpcStateGoHome::instance;
-
-//======================IDLE 상태===========================
-
-NpcStateIdle* NpcStateIdle::GetInstance()
+NpcIdle* NpcIdle::GetInstance()
 {
 	if (instance == nullptr)
 	{
-		instance = new NpcStateIdle(); //★ 
+		instance = new NpcIdle();
 	}
 	return instance;
 }
 
-void NpcStateIdle::NotBuyStuffs(Npc* npc)
+//==================대기=====================
+void NpcIdle::StateIn(Npc* npc)
 {
-	cout << "이런건 없음" << endl;
+	//일단 여기로 들어와야하므로 조건 없이 들여보내줘야함..
+	//길을 찾는다
+	//창가로 보낸다
+	//창가에 사람이 있으면 옆칸으로 보낸다
 }
 
-void NpcStateIdle::Act(Npc* npc)
+void NpcIdle::StateStay(Npc* npc)
 {
-	//테이블 vector 돌려서 _isActive = false 인 테이블을 찾는다
-	//찾았으면 그 테이블 앞으로 이동한다
-	//이동 완료하면 _npcState = Decide 가 되어야함
+	//if ()//창가 자리에 도착하면
+	{
+		_counter++; //시작해서
+		if (_counter > RND->getFromIntTo(300, 1000)) //대기시간 거쳐서
+		{
+			StateOut(npc); //IDLE상태에서 내보낸다
+		}
 
-	//SetNpcState(npc, NpcStateDecide); //이렇게 해주면 될듯..
-
-	//살지 말지 결정은 어디에서 해줘야함?
-	//Npc.cpp의 update에서 해주겠음 일단
+	}
 }
 
-void NpcStateIdle::GoHome(Npc* npc)
+void NpcIdle::StateOut(Npc* npc)
 {
-	//SetNpcState(npc, NpcStateGoHome); //고홈 상태로 바꿈
+	//이제 EXIT랑 DECIDE 중 어느 상태로 갈지 정해야함
+	int a = RND->getInt(4);
+
+	if (a < 3 && a >= 0) //0, 1, 2일 때
+	{
+		_npc->SetNpcState(NpcIdle::GetInstance());//IDLE 상태로 만듦
+	}
+	else if (a == 3) //3일 때
+	{
+		_npc->SetNpcState(NpcExit::GetInstance()); //EXIT 상태로 만듦
+	}
 }
-//======================Search 상태===========================
-NpcStateDecide* NpcStateDecide::GetInstance()
+
+NpcDecide* NpcDecide::GetInstance()
 {
 	if (instance == nullptr)
 	{
-		instance = new NpcStateDecide();
+		instance = new NpcDecide();
 	}
 	return instance;
 }
 
-void NpcStateDecide::NotBuyStuffs(Npc* npc)
+//==================살말=====================
+void NpcDecide::StateIn(Npc* npc)
 {
-	//안사기로 한것임
-	//문앞으로 이동하고
-	//SetNpcState(npc, NpcStateIdle);
-	//이거하고 랜덤숫자로 카운터를 돌린다
-	//카운터가 다되면 Idle->Act 상태로 가야함
-	//집에는 안가, 집에가는건 따로..
+	//들어와서 할거 없음.. 바로 stay 불러
+	StateStay(npc);
 }
 
-void NpcStateDecide::Act(Npc* npc)
+void NpcDecide::StateStay(Npc* npc)
 {
-	//구매하기로 결심한것임
-	//테이블에 있던 아이템 좌표가 캐릭터한테 붙어야함
-	//_shopStand->SetActive(false); //테이블을 inactivate 해줌
-
+	//머무르면서도 할거 없음.. 그냥 나가
+	StateOut(npc);
 }
 
-void NpcStateDecide::GoHome(Npc* npc)
+void NpcDecide::StateOut(Npc* npc)
 {
+	//가격 판단을 여기서 한다
+	//if (가격이 생각한거 * 1.1 보다 크다)
+	{
+		//화난 얼굴 이미지  띄우기
+		if (_counter > 500)
+		{
+			_npc->SetNpcState(NpcIdle::GetInstance());
+		}
+	}
+	//else if (가격이 생각한거 * 1.1 다 작고 생각보다 크다(10퍼센트 비싸다)
+	{
+		//불만이지만 사는 표정 띄우기
+		if (_counter > 500)
+		{
+			_npc->SetNpcState(NpcInline::GetInstance());
+		}
+	}
+	//else if (가격이 생각한거보다 싸고 0.9보다는 비싸다)
+	{
+		//웃는 얼굴 표정 띄우기
+		if (_counter > 500)
+		{
+			_npc->SetNpcState(NpcInline::GetInstance());
+		}
+	}
+	//else if (가격이 생각한거 * 0.9 (10퍼 싸다)
+	{
+		//눈에 동전뜬 얼굴 표정 띄우기
+		if (_counter > 500)
+		{
+			_npc->SetNpcState(NpcInline::GetInstance());
+		}
+	}
 }
-//======================Inline 상태===========================
-NpcStateInline* NpcStateInline::GetInstance()
+
+NpcInline* NpcInline::GetInstance()
 {
 	if (instance == nullptr)
 	{
-		instance = new NpcStateInline();
+		instance = new NpcInline();
 	}
 	return instance;
 }
 
-void NpcStateInline::NotBuyStuffs(Npc* npc)
+//==================줄서기=====================
+void NpcInline::StateIn(Npc* npc)
 {
-	cout << "일어날 수 없는 일임" << endl;
 }
 
-void NpcStateInline::Act(Npc* npc)
+void NpcInline::StateStay(Npc* npc)
 {
-	//Idle 상대로 바껴야함
-	//계산이 끝났으니까 줄서기가 된거임
-	//플레이어가 J눌러서 허락해줬을 때 Inline::Act 로 들어와야함
-	//혹은 플레이어가 너무 안눌러줬을떄 자동으로 들어와야되는데, 구현 안해도 아무도 모름
-	//SetNpcState(npc, NpcStateIdle);
 }
 
-void NpcStateInline::GoHome(Npc* npc)
+void NpcInline::StateOut(Npc* npc)
 {
-	cout << "이런일은 일어날 수 없다.." << endl;
 }
-//======================GoHome 상태===========================
-NpcStateGoHome* NpcStateGoHome::GetInstance()
+
+NpcExit* NpcExit::GetInstance()
 {
 	if (instance == nullptr)
 	{
-		instance = new NpcStateGoHome();
+		instance = new NpcExit();
 	}
 	return instance;
 }
 
-void NpcStateGoHome::NotBuyStuffs(Npc* npc)
+//==================나가기=====================
+void NpcExit::StateIn(Npc* npc)
 {
-	cout << "이 상태에서는 행동이 없음" << endl;
 }
 
-void NpcStateGoHome::Act(Npc* npc)
+void NpcExit::StateStay(Npc* npc)
 {
-	cout << "이 상태에서는 행동이 없음" << endl;
 }
 
-void NpcStateGoHome::GoHome(Npc* npc)
+void NpcExit::StateOut(Npc* npc)
 {
-	cout << "이 상태에서는 행동이 없음" << endl;
 }

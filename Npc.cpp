@@ -2,11 +2,6 @@
 #include "Npc.h"
 #include "NpcState.h"
 
-//생성자임
-Npc::Npc()
-{
-	_npcState = NpcStateIdle::GetInstance(); //여기가 문제임..
-}
 
 void Npc::Init()
 {
@@ -27,47 +22,36 @@ void Npc::Init()
 
 void Npc::Release()
 {
+	Object::Release();
 }
 
 void Npc::Update()
 {
-
-	//========행동들을 함수로 빼놨음============
-	//SetState(NpcState * npcstate); //이거도 여기다가 이렇게 하면 되는것인지..
-	//if (생각보다 가격이 낮으면)
-	{
-	Act();
-	}
-	//else if (생각보다 가격이 높으면)
-	{
-	NotBuyStuffs();
-	}
-	GoHome();
+	In();
+	//아래 함수들은 In에서 조건주고 보내기로..
+	//Stay();
+	//Out();
 	
 	Object::Update();
 }
 
 void Npc::Render()
 {
+	Object::Render();
 }
 
-//=============아래 함수들은 행동임=================
-void Npc::SetState(NpcState* npcstate) //받아온 상태
+//상태 정의
+void Npc::In()
 {
-	this->_npcState = npcstate;
+	_npcState->StateIn(this);
 }
 
-void Npc::Act()
+void Npc::Stay()
 {
-	_npcState->Act(this); //받아온 상태 클래스의 함수를 실행함
+	_npcState->StateStay(this);
 }
 
-void Npc::NotBuyStuffs()
+void Npc::Out()
 {
-	_npcState->NotBuyStuffs(this); //받아온 상태 클래스의 함수를 실행함
-}
-
-void Npc::GoHome()
-{
-	_npcState->GoHome(this); //받아온 상태 클래스의 함수를 실행함
+	_npcState->StateOut(this);
 }
