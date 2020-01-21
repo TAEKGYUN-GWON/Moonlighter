@@ -264,6 +264,9 @@
     <ClInclude Include="Crystal_Energy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="ETCS.h">
+      <Filter>playGround\Item\etc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -403,6 +406,9 @@
     </ClCompile>
     <ClCompile Include="Crystal_Energy.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ETCS.cpp">
+      <Filter>playGround\Item\etc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
