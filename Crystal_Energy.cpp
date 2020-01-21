@@ -18,7 +18,7 @@ void Crystal_Energy::Init()
 	_name = "Crystal_Energy";
 
 	_image = AddComponent<Sprite>();
-	_image->SetImgName("Items");
+	_image->SetImgName("\resource\img\Items\Items");
 	_image->SetFrameX(2);
 	_image->SetFrameY(2);
 }

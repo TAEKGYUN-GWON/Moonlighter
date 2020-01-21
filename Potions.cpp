@@ -24,5 +24,5 @@ void Potion_S::Init(Vector2 pos)
 	_name = "Potion_S";
 
 	_image = AddComponent<Sprite>();
-	//_image->SetImgName("")
+	_image->SetImgName("\resource\img\Items\Potion_S");
 }

@@ -19,7 +19,7 @@ void Vine::Init()
 	_name = "Vine";
 
 	_image = AddComponent<Sprite>();
-	_image->SetImgName("Items");
+	_image->SetImgName("\resource\img\Items\Items");
 	_image->SetFrameX(3);
 	_image->SetFrameY(2);
 }
