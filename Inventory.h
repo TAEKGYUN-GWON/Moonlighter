@@ -6,6 +6,16 @@ private:
 	
 	struct tagItemInfo
 	{
+		tagItemInfo(Item* item, int some)
+		{
+			this->item = item;
+			this->some = some;
+		}
+		tagItemInfo(Item* item)
+		{
+			this->item = item;
+			this->some = 1;
+		}
 		Item* item;
 		int some;
 	};
@@ -22,6 +32,6 @@ public:
 	void Release();
 
 	void Insert(Item* item);
-	void Remove(string name);
+	void Remove(string name, int num);
 
 };
