@@ -148,6 +148,7 @@
     <ClInclude Include="Astar.h" />
     <ClInclude Include="BoxWorldManager.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CheckStand.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="Component.h" />
@@ -161,7 +162,7 @@
     <ClInclude Include="Maptool.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="NpcManager.h" />
-    <ClInclude Include="NpcState.h" />
+    <ClInclude Include="NpcShopState.h" />
     <ClInclude Include="omega.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />
@@ -203,6 +204,7 @@
     <ClCompile Include="Astar.cpp" />
     <ClCompile Include="BoxWorldManager.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CheckStand.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="DrawComponent.cpp" />
@@ -215,7 +217,7 @@
     <ClCompile Include="Maptool.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="NpcManager.cpp" />
-    <ClCompile Include="NpcState.cpp" />
+    <ClCompile Include="NpcShopState.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Graphic.cpp" />

@@ -1,8 +1,9 @@
 #pragma once
 #include "ShopStand.h"
 #include "Npc.h"
+#include "CheckStand.h"
 
-class NpcState
+class NpcShopState
 {
 protected:
 	int _counter = 0; //idle 상태에 시간잴거
@@ -10,17 +11,18 @@ protected:
 
 	ShopStand* _shopStand; //써야될거같아서 넣어둠
 	Npc* _npc;
+	CheckStand* _checkStand;
 
 public :
-	NpcState() {};
-	~NpcState() {};
+	NpcShopState() {};
+	~NpcShopState() {};
 
 	virtual void StateIn(Npc* npc) = 0;
 	virtual void StateStay(Npc* npc) = 0;
 	virtual void StateOut(Npc* npc) = 0;
 };
 
-class NpcIdle : public NpcState
+class NpcIdle : public NpcShopState
 {
 	static NpcIdle* instance;
 public:
@@ -30,7 +32,7 @@ public:
 	virtual void StateStay(Npc* npc);
 	virtual void StateOut(Npc* npc);
 };
-class NpcDecide : public NpcState
+class NpcDecide : public NpcShopState
 {
 	static NpcDecide* instance;
 public:
@@ -40,7 +42,7 @@ public:
 	virtual void StateStay(Npc* npc);
 	virtual void StateOut(Npc* npc);
 };
-class NpcInline : public NpcState
+class NpcInline : public NpcShopState
 {
 	static NpcInline* instance;
 public:
@@ -50,7 +52,7 @@ public:
 	virtual void StateStay(Npc* npc);
 	virtual void StateOut(Npc* npc);
 };
-class NpcExit : public NpcState
+class NpcExit : public NpcShopState
 {
 	static NpcExit* instance;
 public:

@@ -3,7 +3,7 @@
 #include "ShopStand.h"
 #include <list>
 
-class NpcState;
+class NpcShopState;
 
 
 
@@ -15,7 +15,7 @@ private:
 	float _speed;
 
 	ShopStand* _shopStand;
-	NpcState* _npcState;
+	NpcShopState* _npcState;
 
 	//리스트 벡터2 값 만들어놔야함, a스타용 
 
@@ -28,7 +28,7 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 
-	void SetNpcState(NpcState* npcstate) { _npcState = npcstate; }
+	void SetNpcState(NpcShopState* npcstate) { _npcState = npcstate; }
 
 	void In();
 	void Stay();

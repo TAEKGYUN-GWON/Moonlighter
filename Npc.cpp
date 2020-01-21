@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Npc.h"
-#include "NpcState.h"
+#include "NpcShopState.h"
 
 
 void Npc::Init()

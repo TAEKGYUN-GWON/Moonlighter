@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "NpcState.h"
+#include "NpcShopState.h"
 #include "Npc.h"
 
 NpcIdle* NpcIdle::instance;
@@ -140,8 +140,7 @@ void NpcInline::StateIn(Npc* npc)
 	//if (앞에 사람이 있으면) return;
 	//if (앞에 사람이 없으면)
 	{
-		//계산대의 _isActivated 를 true 로 만든다.
-		//계산대 클래스가 아직 없음...
+		_checkStand->SetStandState(true); //계산대를 사용중으로 만듦
 		StateStay(npc);
 	}
 }
@@ -152,7 +151,7 @@ void NpcInline::StateStay(Npc* npc)
 	//플레이어가 J를 누르기를 기다려야 한다..
 	//아마 이렇게 직접 처리하지는 않을거고
 	//플레이어가 J를 누르면 계산대의 Activated가 false가 되어야하고
-	//if(!_isActivated) //계산대 비활성화 상태면
+	if(!_checkStand->GetStandState()) //계산대 비활성화 상태면 (플레이어가 J눌렀다면)
 	{
 		StateOut(npc);
 	}

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "NpcManager.h"
 #include "Npc.h"
-#include "NpcState.h"
+#include "NpcShopState.h"
 
 void NpcManager::Init()
 {

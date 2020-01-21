@@ -249,10 +249,13 @@
     <ClInclude Include="NpcManager.h">
       <Filter>playGround\Shop\Npc</Filter>
     </ClInclude>
-    <ClInclude Include="NpcState.h">
+    <ClInclude Include="ShopStand.h">
+      <Filter>playGround\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="NpcShopState.h">
       <Filter>playGround\Shop\Npc</Filter>
     </ClInclude>
-    <ClInclude Include="ShopStand.h">
+    <ClInclude Include="CheckStand.h">
       <Filter>playGround\Shop</Filter>
     </ClInclude>
   </ItemGroup>
@@ -386,10 +389,13 @@
     <ClCompile Include="NpcManager.cpp">
       <Filter>playGround\Shop\Npc</Filter>
     </ClCompile>
-    <ClCompile Include="NpcState.cpp">
+    <ClCompile Include="ShopStand.cpp">
+      <Filter>playGround\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="NpcShopState.cpp">
       <Filter>playGround\Shop\Npc</Filter>
     </ClCompile>
-    <ClCompile Include="ShopStand.cpp">
+    <ClCompile Include="CheckStand.cpp">
       <Filter>playGround\Shop</Filter>
     </ClCompile>
   </ItemGroup>
