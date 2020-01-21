@@ -14,6 +14,7 @@ void Astar::Init()
 {
 	_vTotalList.clear();
 	SetTiles();
+
 }
 
 void Astar::SetTiles()
@@ -28,17 +29,28 @@ void Astar::SetTiles()
 		{
 			Tile* node = new Tile;
 			node->Init(j, i);
-			
+
 			_vTotalList.push_back(node);
 		}
 	}
+	int a;
 }
 
 void Astar::InitTotalList()
 {
-	
+	//for (auto it = _mTotalList.begin(); it != _mTotalList.end(); it++)
+	//{
+	//	(*it).second->SetCostF(-1);
+	//	(*it).second->SetCostG(0);
+	//	(*it).second->SetCostH(0);
+	//	(*it).second->SetIsClose(0);
+	//	(*it).second->SetIsOpen(0);
+	//	(*it).second->SetParentNode(nullptr);
+
+	//}
 	for (Tile* t : _vTotalList)
 	{
+		if (t->GetAttribute() == "wall")continue;
 		t->SetCostF(-1);
 		t->SetCostG(0);
 		t->SetCostH(0);
@@ -46,6 +58,9 @@ void Astar::InitTotalList()
 		t->SetIsOpen(0);
 		t->SetParentNode(nullptr);
 	}
+	if (_startTile != nullptr)	_startTile->SetAttribute("");
+	if (_endTile != nullptr)  _endTile->SetAttribute("");
+	_startTile = _endTile = nullptr;
 
 	_OpenList.clear();
 	_ClosedList.clear();
@@ -57,25 +72,35 @@ vector <Tile*> Astar::GetDirList(Vector2 idx)
 	vector<Tile*> dirList;
 	vector<Tile*> nodeList;
 
-	
+	//_miTotalList = _mTotalList.find(Vector2(idx.x - (int)1, idx.y));
+
+	//Tile* t = _vTotalList[(int)idx.x + TILENUMX * (int)idx.y];
+
 	if (CanOpenLeft(idx))
 		nodeList.push_back(_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) - 1]);
 
 
+	//_miTotalList = _mTotalList.find(Vector2(idx.x + (int)1, idx.y));
+
 	if (CanOpenRight(idx))
 		nodeList.push_back(_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) + 1]);
 
-	
+
+	//_miTotalList = _mTotalList.find(Vector2(idx.x, idx.y- (int)1));
+
 	if (CanOpenUp(idx))
 		nodeList.push_back(_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) - TILENUMX]);
 
+
+	//_miTotalList = _mTotalList.find(Vector2(idx.x, idx.y+ (int)1));
 
 	if (CanOpenDown(idx))
 		nodeList.push_back(_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) + TILENUMX]);
 
 	for (Tile* t : nodeList)
 	{
-	
+		//_miTotalList = _mTotalList.find(Vector2(idx.x, idx.y));
+
 		if (SetCost(t, 10, _vTotalList[((int)idx.x + TILENUMX * (int)idx.y)]))
 			dirList.push_back(t);
 	}
@@ -83,23 +108,28 @@ vector <Tile*> Astar::GetDirList(Vector2 idx)
 	nodeList.clear();
 
 
+	//_miTotalList = _mTotalList.find(Vector2(idx.x+ (int)1, idx.y + (int)1));
 	if (CanOpenRight(idx) && CanOpenDown(idx))
 		nodeList.push_back(_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) + 1 + TILENUMX]);
 
 
+	//_miTotalList = _mTotalList.find(Vector2(idx.x - (int)1, idx.y + (int)1));
 	if (CanOpenLeft(idx) && CanOpenDown(idx))
 		nodeList.push_back(_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) - 1 + TILENUMX]);
 
 
+	//_miTotalList = _mTotalList.find(Vector2(idx.x + (int)1, idx.y - (int)1));
 	if (CanOpenRight(idx) && CanOpenUp(idx))
 		nodeList.push_back(_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) + 1 - TILENUMX]);
 
 
+	//_miTotalList = _mTotalList.find(Vector2(idx.x - (int)1, idx.y - (int)1));
 	if (CanOpenLeft(idx) && CanOpenUp(idx))
 		nodeList.push_back(_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) - 1 - TILENUMX]);
 
 	for (Tile* t : nodeList)
 	{
+		//_miTotalList = _mTotalList.find(Vector2(idx.x, idx.y));
 		if (SetCost(t, 14, _vTotalList[((int)idx.x + TILENUMX * (int)idx.y)]))
 			dirList.push_back(t);
 	}
@@ -113,19 +143,26 @@ list<Vector2> Astar::pathFinder(Vector2 start, Vector2 end)
 	Vector2 startId((int)(start.x / TILEWIDTH), (int)(start.y / TILEHEIGHT));
 	Vector2 endId((int)(end.x / TILEWIDTH), (int)(end.y / TILEHEIGHT));
 
-	
+	//_miTotalList = _mTotalList.find(startId);
+	//_startTile = _miTotalList->second;
+	//_startTile->SetAttribute("start");
+
 	_startTile = _vTotalList[(int)startId.x + TILENUMX * (int)startId.y];
 	_startTile->SetAttribute("start");
+
+	//_miTotalList = _mTotalList.find(endId);
+	//_endTile = _miTotalList->second;
+	//_endTile->SetAttribute("end");
 
 	_endTile = _vTotalList[(int)endId.x + TILENUMX * (int)endId.y];
 	_endTile->SetAttribute("end");
 
 	_currentTile = _startTile;
 	AddOpenList(_currentTile);
-
 	bool theEnd = false;
 	while (!theEnd)
 	{
+
 		for (Tile* t : GetDirList(Vector2(_currentTile->GetIdX(), _currentTile->GetIdY())))
 		{
 
@@ -142,46 +179,93 @@ list<Vector2> Astar::pathFinder(Vector2 start, Vector2 end)
 		_currentTile = GetMinFNode();
 		if (_currentTile == nullptr) break;
 	}
-
+	int a;
 	return _pathList;
 }
 
 void Astar::Render()
 {
 
+	/*for (_miTotalList = _mTotalList.begin(); _miTotalList!= _mTotalList.end(); ++_miTotalList)
+	{
+		_miTotalList->second->Render();
+	}*/
+
 	for (Tile* t : _vTotalList)
+	{
 		t->Render();
+		if (t->GetAttribute() == "wall")
+		{
+			GRAPHICMANAGER->DrawTextD2D(t->GetCenter(), L"1", 10, 1.0f, ColorF::Aquamarine);
+			t->GetComponent<Sprite>()->SetRectColor(ColorF::Red);
+		}
+		else if (t->GetAttribute() == "start")
+			t->GetComponent<Sprite>()->SetRectColor(ColorF::Pink);
+		else if (t->GetAttribute() == "end")
+			t->GetComponent<Sprite>()->SetRectColor(ColorF::Ivory);
+		else
+			t->GetComponent<Sprite>()->SetRectColor(ColorF::Blue);
+
+	}
+	int a;
 }
 
 bool Astar::CanOpenLeft(Vector2 idx)
 {
+	//_miTotalList = _mTotalList.find(Vector2(idx.x - (int)1, idx.y));
+	if (idx.x - (int)1 <= -1) return false;
 
-	if (idx.x - (int)1 == 0) return false;
+	if (_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) - 1]->GetAttribute() == "wall") return false;
+
+	if (_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) - 1]->GetIsClose()) return false;
+
 	if (_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) - 1] == nullptr) return false;
+
 	return true;
 }
 
 bool Astar::CanOpenRight(Vector2 idx)
 {
+	//_miTotalList = _mTotalList.find(Vector2(idx.x + (int)1, idx.y));
 
-	if (idx.x + (int)1 == TILENUMX) return false;
+	if (idx.x + (int)1 >= TILENUMX) return false;
+
+	if (_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) + 1]->GetAttribute() == "wall") return false;
+
+	if (_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) + 1]->GetIsClose()) return false;
+
 	if (_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) + 1] == nullptr) return false;
+
 	return true;
 }
 
 bool Astar::CanOpenUp(Vector2 idx)
 {
+	//_miTotalList = _mTotalList.find(Vector2(idx.x, idx.y- (int)1));
 
-	if (idx.y - (int)1 == -1) return false;
+	if (idx.y - (int)1 <= -1) return false;
+
+	if (_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) - TILENUMX]->GetAttribute() == "wall") return false;
+
+	if (_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) - TILENUMX]->GetIsClose()) return false;
+
 	if (_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) - TILENUMX] == nullptr) return false;
+
 	return true;
 }
 
 bool Astar::CanOpenDown(Vector2 idx)
 {
+	//_miTotalList = _mTotalList.find(Vector2(idx.x , idx.y+ (int)1));
 
-	if (idx.y + (int)1 == TILENUMY) return false;
+	if (idx.y + (int)1 >= TILENUMY) return false;
+
+	if (_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) + TILENUMX]->GetAttribute() == "wall") return false;
+
+	if (_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) + TILENUMX]->GetIsClose()) return false;
+
 	if (_vTotalList[((int)idx.x + TILENUMX * (int)idx.y) + TILENUMX] == nullptr) return false;
+
 	return true;
 }
 
@@ -201,12 +285,13 @@ bool Astar::SetCost(Tile* node, float cost, Tile* parent)
 		node->SetCostH(valH);
 		node->SetCostF(cost + valH);
 		node->SetParentNode(parent);
+		int a;
 	}
 
 	return true;
 }
 
-void Astar::AddOpenList(Tile * node)
+void Astar::AddOpenList(Tile* node)
 {
 	if (node == nullptr || node->GetAttribute() == "wall") return;
 
@@ -217,12 +302,13 @@ void Astar::AddOpenList(Tile * node)
 	node->SetIsOpen(true);
 
 	_OpenList.push_back(node);
+	int a;
 }
 
-void Astar::AddCloseList(Tile * node)
+void Astar::AddCloseList(Tile* node)
 {
 
-	if (node == NULL) return;
+	if (node == nullptr) return;
 	node->SetIsOpen(false);
 	node->SetIsClose(true);
 
@@ -235,9 +321,10 @@ void Astar::AddCloseList(Tile * node)
 
 	}
 	_ClosedList.push_back(node);
+	int a;
 }
 
-Tile * Astar::GetMinFNode()
+Tile* Astar::GetMinFNode()
 {
 	float tempTotalCost = FLT_MAX;
 	Tile* tempTile = nullptr;

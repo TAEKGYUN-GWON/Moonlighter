@@ -240,6 +240,9 @@
     <ClInclude Include="Player.h">
       <Filter>playGround\Player</Filter>
     </ClInclude>
+    <ClInclude Include="loadingScene.h">
+      <Filter>2DGameFramework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -364,6 +367,9 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>playGround\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="loadingScene.cpp">
+      <Filter>2DGameFramework</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

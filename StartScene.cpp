@@ -12,8 +12,6 @@ void StartScene::Init()
 	SCENEMANAGER->addScene("Town", new TownScene);
 	SCENEMANAGER->addScene("Entrance", new EntranceScene);
 	SCENEMANAGER->addScene("Shop", new ShopScene);
-
-	
 }
 
 void StartScene::Update()
@@ -23,5 +21,13 @@ void StartScene::Update()
 	if (KEYMANAGER->isOnceKeyDown('2')) SCENEMANAGER->changeScene("Entrance");
 	if (KEYMANAGER->isOnceKeyDown('3')) SCENEMANAGER->changeScene("Town");
 	if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
+
+
+
+}
+
+void StartScene::Render()
+{
+	Scene::Render();
 }
 
