@@ -258,9 +258,6 @@
     <ClInclude Include="ETC.h">
       <Filter>playGround\Item\etc</Filter>
     </ClInclude>
-    <ClInclude Include="Vine.h">
-      <Filter>playGround\Item\etc</Filter>
-    </ClInclude>
     <ClInclude Include="ETCS.h">
       <Filter>playGround\Item\etc</Filter>
     </ClInclude>
@@ -396,9 +393,6 @@
       <Filter>playGround\Item\Potion</Filter>
     </ClCompile>
     <ClCompile Include="ETC.cpp">
-      <Filter>playGround\Item\etc</Filter>
-    </ClCompile>
-    <ClCompile Include="Vine.cpp">
       <Filter>playGround\Item\etc</Filter>
     </ClCompile>
     <ClCompile Include="ETCS.cpp">

@@ -7,6 +7,7 @@ void Potion::Init()
 
 	_tag = "Potion";
 	_type = EItemType::useable;
+	_maxCount = 5;
 }
 
 void Potion::SetHealRate(int healRate)

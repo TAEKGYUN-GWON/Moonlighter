@@ -34,6 +34,7 @@ public:
 	//Get Something
 	int GetMaxCount() { return _maxCount; }
 	int GetPrice() { return _price; }
+	Vector2 GetPos() { return _trans->GetPos(); }
 	EItemType GetType() { return _type; }
 
 	//Set Something
@@ -44,8 +45,11 @@ public:
 	void SetPrice(int price) {
 		_price = price;
 	}
+
+	void setPos(Vector2 pos) { _trans->SetPos(pos); }
+
 	template <typename T>
-	static T* CreateItem(string MobName, Vector2 pos);
+	static T* CreateItem(Vector2 pos);
 
 };
 
