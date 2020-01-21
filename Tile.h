@@ -1,11 +1,22 @@
 #pragma once
 #include"Object.h"
 
-#define TILENUMX (1335 / TILEWIDTH)
-#define TILENUMY (1100 / TILEHEIGHT)
-
 #define TILEWIDTH 30
 #define TILEHEIGHT 30
+
+#define SET_TILEWIDTH 60
+#define SET_TILEHEIGHT 60
+
+//#define TILENUMX (1335 / TILEWIDTH)
+//#define TILENUMY (1100 / TILEHEIGHT)
+
+#define TILENUMX 100
+#define TILENUMY 100
+
+enum type {
+
+
+};
 
 class Tile : public Object
 {
@@ -29,7 +40,7 @@ private:
 
 public:
 	Tile() :_f(0), _g(0),
-		_h(0), _idX(0), _idY(0) 
+		_h(0), _idX(0), _idY(0)
 	{
 		_attribute.clear();
 	}
@@ -64,7 +75,7 @@ public:
 
 	void SetIsOpen(bool isOpen) { _isOpen = isOpen; }
 	bool GetIsOpen() { return _isOpen; }
-	
+
 	void SetIsClose(bool isClose) { _isClose = isClose; }
 	bool GetIsClose() { return _isClose; }
 

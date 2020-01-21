@@ -240,6 +240,12 @@
     <ClInclude Include="Player.h">
       <Filter>playGround\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Direct2D.h">
+      <Filter>2DGameFramework\image</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>2DGameFramework\Object\Component\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -364,6 +370,12 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>playGround\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Direct2D.cpp">
+      <Filter>2DGameFramework\image</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>2DGameFramework\Object\Component\cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

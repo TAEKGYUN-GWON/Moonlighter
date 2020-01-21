@@ -7,7 +7,7 @@
 HINSTANCE	_hInstance;
 HWND		_hWnd;
 
-POINT _ptMouse;		//마우스 용 POINT
+POINT		_ptMouse;
 
 
 //함수의 프로토타입 선언

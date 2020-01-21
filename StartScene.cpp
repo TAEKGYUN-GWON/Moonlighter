@@ -4,6 +4,7 @@
 #include "EntranceScene.h"
 #include "ShopScene.h"
 #include "TownScene.h"
+#include "Maptool.h"
 
 void StartScene::Init()
 {
@@ -12,6 +13,7 @@ void StartScene::Init()
 	SCENEMANAGER->addScene("Town", new TownScene);
 	SCENEMANAGER->addScene("Entrance", new EntranceScene);
 	SCENEMANAGER->addScene("Shop", new ShopScene);
+	SCENEMANAGER->addScene("Maptool", new Maptool);
 
 	
 }
@@ -23,5 +25,6 @@ void StartScene::Update()
 	if (KEYMANAGER->isOnceKeyDown('2')) SCENEMANAGER->changeScene("Entrance");
 	if (KEYMANAGER->isOnceKeyDown('3')) SCENEMANAGER->changeScene("Town");
 	if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
+	if (KEYMANAGER->isOnceKeyDown('5')) SCENEMANAGER->changeScene("Maptool");
 }
 
