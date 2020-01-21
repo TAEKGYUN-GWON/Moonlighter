@@ -12,4 +12,6 @@ void Item::Init()
 void Item::Update()
 {
 	super::Update();
+
+	Item* i = Item::CreateItem<Potion>();
 }

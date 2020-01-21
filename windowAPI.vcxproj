@@ -151,7 +151,6 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="Component.h" />
-    <ClInclude Include="Crystal_Energy.h" />
     <ClInclude Include="DrawComponent.h" />
     <ClInclude Include="DungeonScene.h" />
     <ClInclude Include="EntranceScene.h" />
@@ -208,7 +207,6 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
-    <ClCompile Include="Crystal_Energy.cpp" />
     <ClCompile Include="DrawComponent.cpp" />
     <ClCompile Include="DungeonScene.cpp" />
     <ClCompile Include="EntranceScene.cpp" />

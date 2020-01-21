@@ -12,4 +12,5 @@ void Potion::Init()
 void Potion::SetHealRate(int healRate)
 {
 	_healRate = healRate;
+
 }
