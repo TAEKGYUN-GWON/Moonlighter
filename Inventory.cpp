@@ -50,11 +50,14 @@ void Inventory::Insert(Item* item)
 
 void Inventory::Remove(string name, int num)
 {
+	int count = num;
 	//for (iter = _inven.begin(); iter != _inven.end(); iter++)
 	//{
 	//	if (iter->second->item->GetName() == name)
 	//	{
-	//		
 	//	}
 	//}
+	//맵을 돌아서 카운트를 아이템 갯수만큼 증가시켜준다
+	//그 이후에 삭제 
+	//공무원 패턴 생각해 봐야함
 }

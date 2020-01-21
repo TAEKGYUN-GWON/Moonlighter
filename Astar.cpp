@@ -70,6 +70,7 @@ void Astar::InitTotalList()
 vector <Tile*> Astar::GetDirList(Vector2 idx)
 {
 	vector<Tile*> dirList;
+
 	vector<Tile*> nodeList;
 
 	//_miTotalList = _mTotalList.find(Vector2(idx.x - (int)1, idx.y));
@@ -140,6 +141,7 @@ vector <Tile*> Astar::GetDirList(Vector2 idx)
 list<Vector2> Astar::pathFinder(Vector2 start, Vector2 end)
 {
 	InitTotalList();
+
 	Vector2 startId((int)(start.x / TILEWIDTH), (int)(start.y / TILEHEIGHT));
 	Vector2 endId((int)(end.x / TILEWIDTH), (int)(end.y / TILEHEIGHT));
 
@@ -160,9 +162,9 @@ list<Vector2> Astar::pathFinder(Vector2 start, Vector2 end)
 	_currentTile = _startTile;
 	AddOpenList(_currentTile);
 	bool theEnd = false;
+
 	while (!theEnd)
 	{
-
 		for (Tile* t : GetDirList(Vector2(_currentTile->GetIdX(), _currentTile->GetIdY())))
 		{
 
@@ -179,6 +181,7 @@ list<Vector2> Astar::pathFinder(Vector2 start, Vector2 end)
 		_currentTile = GetMinFNode();
 		if (_currentTile == nullptr) break;
 	}
+
 	int a;
 	return _pathList;
 }
