@@ -6,4 +6,5 @@ void ETC::Init()
 	super::Init();
 
 	_tag = "ETC";
+	_type = EItemType::etc;
 }

@@ -5,7 +5,7 @@
 void Item::Init()
 {
 	_tag = "Item";
-	_itemCount = 1;
+	_maxCount = 1;
 	_price = 0;
 }
 

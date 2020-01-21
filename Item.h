@@ -18,7 +18,7 @@ protected:
 	EItemType _type;
 
 	//가격, 아이템의 수량을 나타낸다.
-	int _price, _itemCount;
+	int _price, _maxCount;
 
 	//아이템이 사용할 이미지를 저장
 	Sprite* _image;
@@ -32,14 +32,14 @@ public:
 	virtual void Update();
 
 	//Get Something
-	int GetItemCount() { return _itemCount; }
+	int GetMaxCount() { return _maxCount; }
 	int GetPrice() { return _price; }
 	EItemType GetType() { return _type; }
 
 	//Set Something
-	void SetItemCount(int count) {
-		_itemCount += count;
-	}
+	//void SetItemCount(int count) {
+	//	_MaxCount += count;
+	//}
 
 	void SetPrice(int price) {
 		_price = price;
