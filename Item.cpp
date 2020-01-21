@@ -12,5 +12,4 @@ void Item::Init()
 void Item::Update()
 {
 	super::Update();
-
 }
