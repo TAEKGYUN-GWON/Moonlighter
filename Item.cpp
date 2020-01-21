@@ -1,29 +1,15 @@
 #include "stdafx.h"
 #include "Item.h"
+#include "Potion.h"
 
-
-Item::Item()
+void Item::Init()
 {
-
-}
-
-Item::~Item()
-{
-
-}
-
-void Item::Init(EItemType type, string ImageKey, int price, int itemCount)
-{
-	
-
+	_tag = "Item";
+	_itemCount = 1;
+	_price = 0;
 }
 
 void Item::Update()
 {
-
-}
-
-void Item::Render()
-{
-
+	super::Update();
 }
