@@ -4,7 +4,7 @@
 #include "EntranceScene.h"
 #include "ShopScene.h"
 #include "TownScene.h"
-
+#include "Inventory.h"
 void StartScene::Init()
 {
 	Scene::Init();
@@ -12,6 +12,8 @@ void StartScene::Init()
 	SCENEMANAGER->addScene("Town", new TownScene);
 	SCENEMANAGER->addScene("Entrance", new EntranceScene);
 	SCENEMANAGER->addScene("Shop", new ShopScene);
+	Inventory* inven = Object::CreateObject<Inventory>();
+	inven->Init();
 }
 
 void StartScene::Update()

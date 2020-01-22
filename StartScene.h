@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-
+#include "Inventory.h"
 class StartScene : public Scene
 {
 private:
