@@ -429,7 +429,19 @@ void Maptool::TileSetting()
 #pragma endregion
 #pragma region Dungeon
 
-	_mTileList.insert(make_pair(("empty"), tagTile().Clone("empty", "None", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("bigRock"), tagTile().Clone("bigRock", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("rock"), tagTile().Clone("rock", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("brokenPillar"), tagTile().Clone("brokenPillar", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("fountain"), tagTile().Clone("fountain", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("lathe"), tagTile().Clone("lathe", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("pillar"), tagTile().Clone("pillar", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("pot"), tagTile().Clone("pot", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("pot_slime"), tagTile().Clone("pot_slime", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("skull1"), tagTile().Clone("skull1", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("skull2"), tagTile().Clone("skull2", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("skull3"), tagTile().Clone("skull3", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("smallRock"), tagTile().Clone("smallRock", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("smallRock_slime"), tagTile().Clone("smallRock_slime", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
 #pragma endregion
 	_sampleTile[0].imgKey = _mTileList.find("build_fountain")->second->imgKey;
 	_sampleTile[1].imgKey = _mTileList.find("build_Retaile")->second->imgKey;
