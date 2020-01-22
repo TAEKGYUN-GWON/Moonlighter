@@ -1,7 +1,8 @@
 #pragma once
 #include "ShopStand.h"
-#include "Npc.h"
 #include "CheckStand.h"
+
+class Npc;
 
 class NpcShopState
 {
@@ -10,12 +11,12 @@ protected:
 	bool _isFunctionDone = false; //함수 할일다했냐? 안다했음
 
 	ShopStand* _shopStand; //써야될거같아서 넣어둠
-	Npc* _npc;
 	CheckStand* _checkStand;
 
 public :
 	NpcShopState() {};
 	~NpcShopState() {};
+
 
 	virtual void StateIn(Npc* npc) = 0;
 	virtual void StateStay(Npc* npc) = 0;

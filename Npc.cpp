@@ -3,11 +3,15 @@
 #include "NpcShopState.h"
 
 
+
 void Npc::Init()
 {
 	Object::Init();
 
 	_tag = "Npc";
+
+	_npcShopState = NpcIdle::GetInstance();
+	
 	
 	_trans->SetPos(WINSIZEX / 2, WINSIZEY / 2);
 	_trans->SetWorldPos(Vector2(30, 50)); //나중에 그림 크기대로 바꿔주기, framewidth
@@ -43,15 +47,15 @@ void Npc::Render()
 //상태 정의
 void Npc::In()
 {
-	_npcState->StateIn(this);
+	_npcShopState->StateIn(this);
 }
 
 void Npc::Stay()
 {
-	_npcState->StateStay(this);
+	_npcShopState->StateStay(this);
 }
 
 void Npc::Out()
 {
-	_npcState->StateOut(this);
+	_npcShopState->StateOut(this);
 }

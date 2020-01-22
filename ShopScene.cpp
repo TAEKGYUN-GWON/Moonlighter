@@ -9,6 +9,9 @@ void ShopScene::Init()
 
 	_player = Object::CreateObject<Player>();
 	_player->Init();
+
+	_npcMgr = new NpcManager;
+	_npcMgr->Init();
 }
 
 void ShopScene::Update()
@@ -20,5 +23,5 @@ void ShopScene::Update()
 void ShopScene::Render()
 {
 	GRAPHICMANAGER->FindImage("ShopBg")->Render(WINSIZEX/2, WINSIZEY/2, CENTER);
-
+	_player->Render();
 }

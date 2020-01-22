@@ -19,8 +19,11 @@ NpcIdle* NpcIdle::GetInstance()
 //==================대기=====================
 void NpcIdle::StateIn(Npc* npc)
 {
+	//여긴 들어와짐
+	//Npc상태를 IDLE로 두고 In()에서 StateIn()을 불러줘서 들어옴
 	//if (창가자리에 도착함)
 	{
+		cout << "NPCIDLE:stateIn" << endl;
 		StateStay(npc);
 	}
 	//else if (창가자리에 도착 안했으면)
@@ -34,11 +37,13 @@ void NpcIdle::StateIn(Npc* npc)
 
 void NpcIdle::StateStay(Npc* npc)
 {
+
 	if (!_isFunctionDone) //아직 일 안했을때
 	{
 		_counter++; //시작해서
-		if (_counter > RND->getFromIntTo(300, 1000)) //대기시간 거쳐서
+		if (_counter > RND->getFromIntTo(1, 10)) //대기시간 거쳐서
 		{
+			cout << "NPCIDLE:statestay" << endl;
 			_counter = 0;
 			_isFunctionDone = true;
 			StateOut(npc); //IDLE상태에서 내보낸다
@@ -51,15 +56,17 @@ void NpcIdle::StateOut(Npc* npc)
 {
 	//이제 EXIT랑 DECIDE 중 어느 상태로 갈지 정해야함
 	int a = RND->getInt(4);
-
+	cout << "NpcIdle: StateOut" << endl;
 	if (a < 3 && a >= 0) //0, 1, 2일 때
 	{
-		_npc->SetNpcState(NpcIdle::GetInstance());//IDLE 상태로 만듦
+		cout << "NPC IDLE로 돌아감 다시 대기" << endl;
+		npc->SetNpcState(NpcIdle::GetInstance());//IDLE 상태로 만듦
 		_isFunctionDone = false; //여기서 되돌려줌..다른애들 들어갈 수 있게
 	}
 	else if (a == 3) //3일 때
 	{
-		_npc->SetNpcState(NpcExit::GetInstance()); //EXIT 상태로 만듦
+		cout << "NPCEXIT:Getinstance , 가게 나감" << endl;
+		npc->SetNpcState(NpcExit::GetInstance()); //EXIT 상태로 만듦
 		_isFunctionDone = false; //여기서 되돌려줌..다른애들 들어갈 수 있게
 	}
 }
@@ -94,7 +101,7 @@ void NpcDecide::StateOut(Npc* npc)
 		//화난 얼굴 이미지  띄우기
 		if (_counter > 500)
 		{
-			_npc->SetNpcState(NpcIdle::GetInstance());
+			npc->SetNpcState(NpcIdle::GetInstance());
 		}
 	}
 	//else if (가격이 생각한거 * 1.1 다 작고 생각보다 크다(10퍼센트 비싸다)
@@ -102,7 +109,7 @@ void NpcDecide::StateOut(Npc* npc)
 		//불만이지만 사는 표정 띄우기
 		if (_counter > 500)
 		{
-			_npc->SetNpcState(NpcInline::GetInstance());
+			npc->SetNpcState(NpcInline::GetInstance());
 		}
 	}
 	//else if (가격이 생각한거보다 싸고 0.9보다는 비싸다)
@@ -110,7 +117,7 @@ void NpcDecide::StateOut(Npc* npc)
 		//웃는 얼굴 표정 띄우기
 		if (_counter > 500)
 		{
-			_npc->SetNpcState(NpcInline::GetInstance());
+			npc->SetNpcState(NpcInline::GetInstance());
 		}
 	}
 	//else if (가격이 생각한거 * 0.9 (10퍼 싸다)
@@ -118,7 +125,7 @@ void NpcDecide::StateOut(Npc* npc)
 		//눈에 동전뜬 얼굴 표정 띄우기
 		if (_counter > 500)
 		{
-			_npc->SetNpcState(NpcInline::GetInstance());
+			npc->SetNpcState(NpcInline::GetInstance());
 		}
 	}
 }
@@ -160,7 +167,7 @@ void NpcInline::StateStay(Npc* npc)
 void NpcInline::StateOut(Npc* npc)
 {
 
-	_npc->SetNpcState(NpcIdle::GetInstance());
+	npc->SetNpcState(NpcIdle::GetInstance());
 
 }
 

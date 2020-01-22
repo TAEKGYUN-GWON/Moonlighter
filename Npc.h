@@ -5,8 +5,6 @@
 
 class NpcShopState;
 
-
-
 class Npc :	public Object
 {
 private:
@@ -15,7 +13,7 @@ private:
 	float _speed;
 
 	ShopStand* _shopStand;
-	NpcShopState* _npcState;
+	NpcShopState* _npcShopState;
 
 	//리스트 벡터2 값 만들어놔야함, a스타용 
 
@@ -28,7 +26,7 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 
-	void SetNpcState(NpcShopState* npcstate) { _npcState = npcstate; }
+	void SetNpcState(NpcShopState* npcshopstate) { _npcShopState = npcshopstate; }
 
 	void In();
 	void Stay();
