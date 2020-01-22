@@ -36,7 +36,25 @@ void Maptool::Init()
 	GRAPHICMANAGER->AddImage("empty", L"resource/img/empty.png");
 #pragma endregion
 
+#pragma region SetTilePage2
+	GRAPHICMANAGER->AddImage("smallRock", L"resource/img/Object/smallRock.png");
+	GRAPHICMANAGER->AddImage("smallRock_slime", L"resource/img/Object/smallRock_slime.png");
+	GRAPHICMANAGER->AddImage("bigRock", L"resource/img/Object/bigRock.png");
+	GRAPHICMANAGER->AddImage("book", L"resource/img/Object/book.png");
+	GRAPHICMANAGER->AddImage("pot", L"resource/img/Object/pot.png");
+	GRAPHICMANAGER->AddImage("pot_slime", L"resource/img/Object/pot_slime.png");
+	GRAPHICMANAGER->AddImage("lathe", L"resource/img/Object/lathe.png");
+	GRAPHICMANAGER->AddImage("fountain", L"resource/img/Object/fountain.png");
+	GRAPHICMANAGER->AddImage("pillar", L"resource/img/Object/pillar.png");
+	GRAPHICMANAGER->AddImage("skull1", L"resource/img/Object/skull1.png");
+	GRAPHICMANAGER->AddImage("skull2", L"resource/img/Object/skull2.png");
+	GRAPHICMANAGER->AddImage("skull3", L"resource/img/Object/skull3.png");
+	GRAPHICMANAGER->AddImage("brokenPillar", L"resource/img/Object/brokenPillar.png");
+#pragma endregion
+
+
 	GRAPHICMANAGER->AddFrameImage("set_tile", L"set_tile3.png", 4, 6);
+	GRAPHICMANAGER->AddFrameImage("set_tile_dungeon", L"set_tile_dungeon.png", 4, 6);
 	GRAPHICMANAGER->AddFrameImage("will_dungeon", L"will_dungeon.png", 10, 13);
 
 	SetUp();
