@@ -22,24 +22,24 @@ void NpcIdle::StateIn(Npc* npc)
 	//여긴 들어와짐
 	//Npc상태를 IDLE로 두고 In()에서 StateIn()을 불러줘서 들어옴
 	//if (창가자리에 도착함)
-	{
+	//{
 		cout << "NPCIDLE:stateIn 가게 입장상태" << endl;
-		StateStay(npc);
-	}
+	//	StateStay(npc);
+	//}
 	//else if (창가자리에 도착 안했으면)
-	{
+	//{
 		//길을 찾는다(창가를 찾음)
 		//창가가 비었으면 거기로 가고 
 		//창가에 사람이 있으면 옆칸으로 보낸다
 	
-	}
+	//}
 }
 
 void NpcIdle::StateStay(Npc* npc)
 {
 
 	_counter++; //시작해서
-	if (_counter > RND->getFromIntTo(1, 10)) //대기시간 거쳐서
+	if (_counter > RND->getFromIntTo(60, 100)) //대기시간 거쳐서 //이게 StateIn 유지시간에 영향줌
 	{
 		cout << "NPCIDLE:statestay중" << endl;
 		_counter = 0;
@@ -52,18 +52,18 @@ void NpcIdle::StateStay(Npc* npc)
 void NpcIdle::StateOut(Npc* npc)
 {
 	//이제 EXIT랑 DECIDE 중 어느 상태로 갈지 정해야함
-	//int a = RND->getInt(4);
-	//cout << "NpcIdle: StateOut 들어옴" << endl;
-	//if (a < 3 && a >= 0) //0, 1, 2일 때
-	//{
-		cout << "NpcIdle:StateOut:계산대로 이동, decide로 가" << endl;
-		npc->SetNpcState(NpcDecide::GetInstance());//NpcDecide 상태로 만듦
-	//}
-	//else if (a == 3) //3일 때
-	//{
-	//	cout << "NpdIdle,StateOut:나가기로 결심" << endl;
-	//	npc->SetNpcState(NpcExit::GetInstance()); //EXIT 상태로 만듦
-	//}
+	int a = RND->getInt(4);
+	cout << "NpcIdle: StateOut 들어옴" << endl;
+	if (a < 3 && a >= 0) //0, 1, 2일 때
+	{
+	cout << "NpcIdle:StateOut:계산대로 이동, decide로 가" << endl;
+	npc->SetNpcState(NpcDecide::GetInstance());//NpcDecide 상태로 만듦
+	}
+	else if (a == 3) //3일 때
+	{
+		cout << "NpdIdle,StateOut:나가기로 결심" << endl;
+		npc->SetNpcState(NpcExit::GetInstance()); //EXIT 상태로 만듦
+	}
 }
 
 NpcDecide* NpcDecide::GetInstance()
@@ -233,4 +233,5 @@ void NpcExit::StateOut(Npc* npc)
 {
 	//여긴 암거도 없어도 될듯..
 	cout << "집에 간다" << endl;
+	//여기서 npc를 isactive=false; 시키고, 벡터는 매니저에서 지움
 }

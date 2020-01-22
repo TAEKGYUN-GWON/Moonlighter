@@ -9,7 +9,8 @@ void Npc::Init()
 
 	_tag = "Npc";
 
-	_npcShopState = NpcIdle::GetInstance();
+	SetNpcState(NpcIdle::GetInstance());
+	
 	
 	
 	_trans->SetPos(WINSIZEX / 2, WINSIZEY / 2);
@@ -32,9 +33,9 @@ void Npc::Release()
 
 void Npc::Update()
 {
-	In();
+	//In();
 	//아래 함수들은 In에서 조건주고 보내기로..
-	//Stay();
+	Stay();
 	//Out();
 	
 	Object::Update();
@@ -43,6 +44,13 @@ void Npc::Update()
 void Npc::Render()
 {
 	Object::Render();
+}
+
+void Npc::SetNpcState(NpcShopState* npcshopstate)
+{
+	_npcShopState = npcshopstate;
+	_npcShopState->StateIn(this);
+	
 }
 
 //상태 정의

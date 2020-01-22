@@ -12,6 +12,8 @@ private:
 	vector<Npc*> _vNpc;
 	CheckStand* _checkStand;
 
+	int _counter; //이 시간만큼 흐른 뒤 새로운 엔피씨 입장함
+
 public:
 	void Init();
 	void Update();

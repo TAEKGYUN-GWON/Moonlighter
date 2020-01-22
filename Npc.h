@@ -31,7 +31,7 @@ public:
 
 	void SetCheckStandLink(CheckStand* checkstand) { _checkStand = checkstand; }
 	CheckStand* GetCheckStand() { return _checkStand; }
-	void SetNpcState(NpcShopState* npcshopstate) { _npcShopState = npcshopstate; }
+	void SetNpcState(NpcShopState* npcshopstate);
 
 	void In();
 	void Stay();

@@ -4,19 +4,47 @@
 
 void NpcManager::Init()
 {
-	//for (int i =0; i < 4; i++)
-	//{
+	_counter = 0;
+
+	for (int i = 0; i < 4; i++)
+	{
 		_npc = Object::CreateObject<Npc>();
 		_npc->Init();
 		_npc->SetCheckStandLink(_checkStand);
 
+		//_counter = 0;
 		_vNpc.push_back(_npc);
-	//}
+
+	}
 
 }
 
 void NpcManager::Update()
 {
+
+	//isactive가 false인 npc벡터를 찾아서
+	//false인 애가 있으면 지워버려
+
+
+
+	//_counter++;
+
+	//if (_counter > RND->getInt(500))
+	////if (_counter > RND->getFromIntTo(10, 200))
+	//{
+	//	for (int i = 0; i < 4; i++)
+	//	{
+	//		_npc = Object::CreateObject<Npc>();
+	//		_npc->Init();
+	//		_npc->SetCheckStandLink(_checkStand);
+
+	//		_counter = 0;
+	//		_vNpc.push_back(_npc);
+	//		break;
+	//	}
+
+	//}
+
 	//if (_vNpc.size() < 4)
 	//{
 	//	_npc = Object::CreateObject<Npc>();
