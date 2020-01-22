@@ -6,7 +6,6 @@
 
 void Npc::Init()
 {
-	Object::Init();
 
 	_tag = "Npc";
 
@@ -22,6 +21,8 @@ void Npc::Init()
 	_physics->Init(BodyType::DYNAMIC, 1.0f);
 
 	_speed = 3.0f;
+
+	Object::Init();
 }
 
 void Npc::Release()

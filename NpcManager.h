@@ -1,12 +1,16 @@
 #pragma once
 #include <vector>
 #include "Npc.h"
+#include "CheckStand.h"
+
+class CheckStand;
 
 class NpcManager
 {
 private:
 	Npc* _npc;
 	vector<Npc*> _vNpc;
+	CheckStand* _checkStand;
 
 public:
 	void Init();
@@ -15,6 +19,8 @@ public:
 	void Render();
 
 	void StateControl();
+
+	void SetCheckStandLink(CheckStand* checkstand) { _checkStand = checkstand; }
 
 };
 

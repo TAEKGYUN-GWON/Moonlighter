@@ -8,7 +8,6 @@ class NpcShopState
 {
 protected:
 	int _counter = 0; //idle 상태에 시간잴거
-	bool _isFunctionDone = false; //함수 할일다했냐? 안다했음
 
 	ShopStand* _shopStand; //써야될거같아서 넣어둠
 	CheckStand* _checkStand;
@@ -17,6 +16,7 @@ public :
 	NpcShopState() {};
 	~NpcShopState() {};
 
+	void SetCheckStandLink(CheckStand* checkstand) { _checkStand = checkstand; }
 
 	virtual void StateIn(Npc* npc) = 0;
 	virtual void StateStay(Npc* npc) = 0;

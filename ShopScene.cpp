@@ -10,13 +10,21 @@ void ShopScene::Init()
 	_player = Object::CreateObject<Player>();
 	_player->Init();
 
-	_npcMgr = new NpcManager;
+	_checkStand = Object::CreateObject<CheckStand>();
+	_checkStand->Init();
+	
+	_npcMgr = new NpcManager; //NPC CreateObject는 NpcManager에서 해준다.
+	_npcMgr->SetCheckStandLink(_checkStand);
 	_npcMgr->Init();
+
+
+	//_npcShopState = new NpcShopState;
+	//_npcShopState->SetCheckStandLink(_checkStand);
 }
 
 void ShopScene::Update()
 {
-
+	_npcMgr->Update();
 	Scene::Update();
 }
 

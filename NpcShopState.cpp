@@ -23,7 +23,7 @@ void NpcIdle::StateIn(Npc* npc)
 	//Npc상태를 IDLE로 두고 In()에서 StateIn()을 불러줘서 들어옴
 	//if (창가자리에 도착함)
 	{
-		cout << "NPCIDLE:stateIn" << endl;
+		cout << "NPCIDLE:stateIn 가게 입장상태" << endl;
 		StateStay(npc);
 	}
 	//else if (창가자리에 도착 안했으면)
@@ -38,37 +38,32 @@ void NpcIdle::StateIn(Npc* npc)
 void NpcIdle::StateStay(Npc* npc)
 {
 
-	if (!_isFunctionDone) //아직 일 안했을때
+	_counter++; //시작해서
+	if (_counter > RND->getFromIntTo(1, 10)) //대기시간 거쳐서
 	{
-		_counter++; //시작해서
-		if (_counter > RND->getFromIntTo(1, 10)) //대기시간 거쳐서
-		{
-			cout << "NPCIDLE:statestay" << endl;
-			_counter = 0;
-			_isFunctionDone = true;
-			StateOut(npc); //IDLE상태에서 내보낸다
-		}
+		cout << "NPCIDLE:statestay중" << endl;
+		_counter = 0;
 
+		StateOut(npc); //IDLE상태에서 내보낸다
 	}
+
 }
 
 void NpcIdle::StateOut(Npc* npc)
 {
 	//이제 EXIT랑 DECIDE 중 어느 상태로 갈지 정해야함
-	int a = RND->getInt(4);
-	cout << "NpcIdle: StateOut" << endl;
-	if (a < 3 && a >= 0) //0, 1, 2일 때
-	{
-		cout << "NPC IDLE로 돌아감 다시 대기" << endl;
-		npc->SetNpcState(NpcIdle::GetInstance());//IDLE 상태로 만듦
-		_isFunctionDone = false; //여기서 되돌려줌..다른애들 들어갈 수 있게
-	}
-	else if (a == 3) //3일 때
-	{
-		cout << "NPCEXIT:Getinstance , 가게 나감" << endl;
-		npc->SetNpcState(NpcExit::GetInstance()); //EXIT 상태로 만듦
-		_isFunctionDone = false; //여기서 되돌려줌..다른애들 들어갈 수 있게
-	}
+	//int a = RND->getInt(4);
+	//cout << "NpcIdle: StateOut 들어옴" << endl;
+	//if (a < 3 && a >= 0) //0, 1, 2일 때
+	//{
+		cout << "NpcIdle:StateOut:계산대로 이동, decide로 가" << endl;
+		npc->SetNpcState(NpcDecide::GetInstance());//NpcDecide 상태로 만듦
+	//}
+	//else if (a == 3) //3일 때
+	//{
+	//	cout << "NpdIdle,StateOut:나가기로 결심" << endl;
+	//	npc->SetNpcState(NpcExit::GetInstance()); //EXIT 상태로 만듦
+	//}
 }
 
 NpcDecide* NpcDecide::GetInstance()
@@ -97,37 +92,64 @@ void NpcDecide::StateOut(Npc* npc)
 {
 	//가격 판단을 여기서 한다
 	//if (가격이 생각한거 * 1.1 보다 크다)
+	_counter++;
+	
+	//테스트용
+	int a = RND->getInt(2);
+	switch (a)
 	{
+	case 0:
 		//화난 얼굴 이미지  띄우기
 		if (_counter > 500)
 		{
+			cout << "안사기로 결심, Idle로 돌아감" << endl;
+			_counter = 0;
 			npc->SetNpcState(NpcIdle::GetInstance());
 		}
-	}
-	//else if (가격이 생각한거 * 1.1 다 작고 생각보다 크다(10퍼센트 비싸다)
-	{
-		//불만이지만 사는 표정 띄우기
-		if (_counter > 500)
-		{
-			npc->SetNpcState(NpcInline::GetInstance());
-		}
-	}
-	//else if (가격이 생각한거보다 싸고 0.9보다는 비싸다)
-	{
-		//웃는 얼굴 표정 띄우기
-		if (_counter > 500)
-		{
-			npc->SetNpcState(NpcInline::GetInstance());
-		}
-	}
-	//else if (가격이 생각한거 * 0.9 (10퍼 싸다)
-	{
+		break;
+	case 1:
 		//눈에 동전뜬 얼굴 표정 띄우기
 		if (_counter > 500)
 		{
+			cout << "사기로 결심, Inline으로 감" << endl;
+			_counter = 0;
 			npc->SetNpcState(NpcInline::GetInstance());
 		}
+		break;
 	}
+	//{
+	//	//화난 얼굴 이미지  띄우기
+	//	if (_counter > 500)
+	//	{
+	//		cout << "안사기로 결심, Idle로 돌아감" << endl;
+	//		npc->SetNpcState(NpcIdle::GetInstance());
+	//	}
+	//}
+	////else if (가격이 생각한거 * 1.1 다 작고 생각보다 크다(10퍼센트 비싸다)
+	//{
+	//	//불만이지만 사는 표정 띄우기
+	//	if (_counter > 500)
+	//	{
+	//		npc->SetNpcState(NpcInline::GetInstance());
+	//	}
+	//}
+	////else if (가격이 생각한거보다 싸고 0.9보다는 비싸다)
+	//{
+	//	//웃는 얼굴 표정 띄우기
+	//	if (_counter > 500)
+	//	{
+	//		npc->SetNpcState(NpcInline::GetInstance());
+	//	}
+	//}
+	//else if (가격이 생각한거 * 0.9 (10퍼 싸다)
+	//{
+	//	//눈에 동전뜬 얼굴 표정 띄우기
+	//	if (_counter > 500)
+	//	{
+	//		cout << "사기로 결심, Inline으로 감" << endl;
+	//		npc->SetNpcState(NpcInline::GetInstance());
+	//	}
+	//}
 }
 
 NpcInline* NpcInline::GetInstance()
@@ -142,31 +164,41 @@ NpcInline* NpcInline::GetInstance()
 //==================줄서기=====================
 void NpcInline::StateIn(Npc* npc)
 {
+	SetCheckStandLink (npc->GetCheckStand());
 	//★여긴 고심해서 내용을 추가해라..
 	//책상이 _isActivated 상태면 (앞사람이 접촉중) 앞에 사람이 있는 것
 	//if (앞에 사람이 있으면) return;
 	//if (앞에 사람이 없으면)
-	{
-		_checkStand->SetStandState(true); //계산대를 사용중으로 만듦
+	//{
+	cout << "Inline 들어왔음." << endl;
+	//if (_checkStand)
+	//{
+	//	cout << "기다리는 중" << endl;
+	//	return;
+	//} //사용중이면 대기해
+	cout << "계산대를 내가 사용" << endl;
+	_checkStand->SetStandisInUse(true); //계산대를 사용중으로 만듦
 		StateStay(npc);
-	}
+	//}
 }
 
 void NpcInline::StateStay(Npc* npc)
 {
-
+	cout << "줄서서 기다리는 중" << endl;
 	//플레이어가 J를 누르기를 기다려야 한다..
 	//아마 이렇게 직접 처리하지는 않을거고
 	//플레이어가 J를 누르면 계산대의 Activated가 false가 되어야하고
-	if(!_checkStand->GetStandState()) //계산대 비활성화 상태면 (플레이어가 J눌렀다면)
-	{
+	//if(!_checkStand->GetStandState()) //계산대 비활성화 상태면 (플레이어가 J눌렀다면)
+	//{
+		cout << "물건 샀다" << endl;
 		StateOut(npc);
-	}
+	//}
 }
 
 void NpcInline::StateOut(Npc* npc)
 {
 
+	cout << "IDLE로 돌아간다" << endl;
 	npc->SetNpcState(NpcIdle::GetInstance());
 
 }
@@ -183,15 +215,22 @@ NpcExit* NpcExit::GetInstance()
 //==================나가기=====================
 void NpcExit::StateIn(Npc* npc)
 {
+	//_isFunctionDone = true;
 	StateStay(npc);
+
 }
 
 void NpcExit::StateStay(Npc* npc)
 {
+	StateOut(npc);
+	//★
+	//cout << "NpdExit:statestay 엔피씨 집에갔다" << endl; //이거 무한으로 찍힘..
+	//이렇게 지웠다간 무한으로 지워지겠음..
 	//해당 엔피씨 벡터를 지운다.. 들어온 npc를 지워..
 }
 
 void NpcExit::StateOut(Npc* npc)
 {
 	//여긴 암거도 없어도 될듯..
+	cout << "집에 간다" << endl;
 }
