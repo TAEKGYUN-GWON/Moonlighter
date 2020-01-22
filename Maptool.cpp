@@ -65,8 +65,10 @@ void Maptool::Init()
 
 	p = Object::CreateObject<Player>();
 	p->Init();
-	p->GetSprite()->SetImgName("build_fountain");
-
+	p->GetSprite()->Init(true);
+	p->GetSprite()->SetImgName("will_dungeon");
+	p->GetSprite()->SetFrameY(1);
+	p->GetSprite()->Stop();
 }
 
 void Maptool::Update()
@@ -147,16 +149,16 @@ void Maptool::Render()
 			int cullX = CAMERA->GetPosition().x / TILEWIDTH;
 			int cullY = CAMERA->GetPosition().y / TILEHEIGHT;
 
-			_index = (i + cullY) * TILENUMX + (j + cullX);
+			int index = (i + cullY) * TILENUMX + (j + cullX);
 
-			if (_index < 0 || _index >= TILENUMX * TILENUMY) continue;
+			if (index < 0 || index >= TILENUMX * TILENUMY) continue;
 
-			if (_tiles[_index]->GetAttribute() == "Wall") _tiles[_index]->GetComponent<Sprite>()->SetFillRect(true);
-			else if(_tiles[_index]->GetAttribute() != "Wall") _tiles[_index]->GetComponent<Sprite>()->SetFillRect(false);
+			if (_tiles[index]->GetAttribute() == "Wall") _tiles[index]->GetComponent<Sprite>()->SetFillRect(true);
+			else if(_tiles[index]->GetAttribute() != "Wall") _tiles[index]->GetComponent<Sprite>()->SetFillRect(false);
 
-			if (_tiles[_index]->GetChildren().size() > 0) _tiles[_index]->GetChildren()[0]->Render();
-			sprintf_s(buffer, "%d", _index);
-			GRAPHICMANAGER->DrawTextD2D(_tiles[_index]->GetTrans()->GetPos() + Vector2(-(TILEWIDTH / 2) + 2, TILEHEIGHT / 7), buffer, 10, 1.0f, ColorF::Yellow);
+			if (_tiles[index]->GetChildren().size() > 0) _tiles[index]->GetChildren()[0]->Render();
+			sprintf_s(buffer, "%d", index);
+			GRAPHICMANAGER->DrawTextD2D(_tiles[index]->GetTrans()->GetPos() + Vector2(-(TILEWIDTH / 2) + 2, TILEHEIGHT / 7), buffer, 10, 1.0f, ColorF::Yellow);
 		}
 	}
 
@@ -204,12 +206,12 @@ void Maptool::SetUp()
 	{
 		for (int j = 0; j < TILENUMX; ++j)
 		{
-			_index = j + TILENUMX * i;
+			int index = j + TILENUMX * i;
 
-			_tiles[_index] = Object::CreateObject<Tile>();
-			_tiles[_index]->Init(j, i);
-			_tiles[_index]->AddComponent<Sprite>();
-			_tiles[_index]->SetAttribute("None");
+			_tiles[index] = Object::CreateObject<Tile>();
+			_tiles[index]->Init(j, i);
+			_tiles[index]->AddComponent<Sprite>();
+			_tiles[index]->SetAttribute("None");
 		}
 	}
 	for (int i = 0; i < SAMPLE_TILE_Y_NUM; ++i)
