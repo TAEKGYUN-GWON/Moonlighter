@@ -52,7 +52,6 @@ void Maptool::Init()
 	GRAPHICMANAGER->AddImage("brokenPillar", L"resource/img/Object/brokenPillar.png");
 #pragma endregion
 
-
 	GRAPHICMANAGER->AddFrameImage("set_tile", L"set_tile3.png", 4, 6);
 	GRAPHICMANAGER->AddFrameImage("set_tile_dungeon", L"set_tile_dungeon.png", 4, 6);
 	GRAPHICMANAGER->AddFrameImage("will_dungeon", L"will_dungeon.png", 10, 13);
@@ -82,6 +81,7 @@ void Maptool::Update()
 			_currentTile.imgKey = "empty";
 			_currentTile.isFrame = false;
 			_currentTile.size = Vector2(1, 1);
+			//_currentTile.vSize[0] = Vector2(1, 1);
 			_ctrSelect = Attribute::NONE_MOVE;
 			//return;
 		}
@@ -135,8 +135,6 @@ void Maptool::Update()
 	if (KEYMANAGER->isOnceKeyUp('2')) _curFrameY = (_curFrameY + 1) % 2;
 }
 
-
-
 void Maptool::Render()
 {
 	Scene::Render();
@@ -178,14 +176,16 @@ void Maptool::Render()
 		GRAPHICMANAGER->DrawFrameImage(_currentTile.imgKey, _ptMouse, 0, 0, 0.85f, _currentTile.pivot, false);
 		
 		// FIXME : 다시 보자
-		GRAPHICMANAGER->DrawRect(_ptMouse, _currentTile.size, 0.0f, ColorF::Red, _currentTile.pivot, 1.0f, false);
+		GRAPHICMANAGER->DrawRect(_ptMouse, Vector2(_currentTile.size.x * TILEWIDTH, _currentTile.size.y * TILEHEIGHT), 0.0f, ColorF::Red, _currentTile.pivot, 1.0f, false);
+		//GRAPHICMANAGER->DrawRect(_ptMouse, Vector2(_currentTile.vSize[0].x * TILEWIDTH, _currentTile.vSize[0].y * TILEHEIGHT), 0.0f, ColorF::Red, _currentTile.pivot, 1.0f, false);
 	}
 	else
 	{
 		GRAPHICMANAGER->DrawImage(_currentTile.imgKey, _ptMouse, 0.85f, _currentTile.pivot, false);
 		
 		// FIXME : 다시 보자
-		GRAPHICMANAGER->DrawRect(_ptMouse, _currentTile.size, 0.0f, ColorF::Red, _currentTile.pivot, 1.0f, false);
+		GRAPHICMANAGER->DrawRect(_ptMouse, Vector2(_currentTile.size.x * TILEWIDTH, _currentTile.size.y * TILEHEIGHT), 0.0f, ColorF::Red, _currentTile.pivot, 1.0f, false);
+		//GRAPHICMANAGER->DrawRect(_ptMouse, Vector2(_currentTile.vSize[0].x * TILEWIDTH, _currentTile.vSize[0].y * TILEHEIGHT), 0.0f, ColorF::Red, _currentTile.pivot, 1.0f, false);
 	}
 }
 
@@ -278,8 +278,10 @@ void Maptool::SetMap()
 			_currentTile.imgKey = FindTile(_sampleTile[i].imgKey)->imgKey;
 			_currentTile.isFrame = FindTile(_sampleTile[i].imgKey)->isFrame;
 
-			_currentTile.startPos = FindTile(_sampleTile[i].imgKey)->startPos;
-			_currentTile.size = FindTile(_sampleTile[i].imgKey)->size;
+			//_currentTile.vStartPos = FindTile(_sampleTile[i].imgKey)->vStartPos;
+			//_currentTile.vSize = FindTile(_sampleTile[i].imgKey)->vSize;
+			_currentTile.startPos2 = FindTile(_sampleTile[i].imgKey)->startPos;
+			_currentTile.size2 = FindTile(_sampleTile[i].imgKey)->size;
 			_currentTile.startPos2 = FindTile(_sampleTile[i].imgKey)->startPos2;
 			_currentTile.size2 = FindTile(_sampleTile[i].imgKey)->size2;
 
@@ -400,6 +402,12 @@ void Maptool::TileSetting()
 {
 	_mTileList.insert(make_pair(("build_fountain"), tagTile().Clone("build_fountain", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(3, 1), Vector2(3, 1))));
 	_mTileList.insert(make_pair(("build_Retaile"), tagTile().Clone("build_Retaile", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(12, 14), Vector2(12, 12), Vector2(10, 2), Vector2(3, 2))));
+	//_mTileList.insert(make_pair(("build_Retaile"), tagTile().Clone("build_Retaile", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM)));
+	
+	//Vector2 v[] = { Vector2(12, 14), Vector2(10, 2) };
+	//Vector2 s[] = {Vector2(12, 12), Vector2(3, 2)};
+	//_mTileList.find("build_Retaile")->second->Setting(v, s, 2);
+
 	_mTileList.insert(make_pair(("build_Shop"), tagTile().Clone("build_Shop", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(17, 12), Vector2(17, 12))));
 	_mTileList.insert(make_pair(("build_Top1"), tagTile().Clone("build_Top1", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(11, 10), Vector2(11, 10))));
 	_mTileList.insert(make_pair(("build_Well"), tagTile().Clone("build_Well", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(4, 3), Vector2(4, 3))));

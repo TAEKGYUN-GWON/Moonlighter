@@ -36,9 +36,12 @@ struct tagCurrentTile
 	string imgKey;
 	bool isFrame;
 
+	//vector<Vector2> vStartPos;
+	//vector<Vector2> vSize;
+
 	Vector2 startPos;
 	Vector2 size;
-
+	
 	Vector2 startPos2;
 	Vector2 size2;
 
@@ -69,15 +72,28 @@ enum Attribute
 	NONE,
 };
 
+//typedef struct tagCoordinate
+//{
+//	vector<Vector2> vStartPos;
+//	vector<Vector2> vSize;
+//}vCoordinate;
+
 struct tagTile
 {
 	string imgKey;
 	//Attribute attribute;
 	string attribute;
+
+	//vector<Vector2> vStartPos;
+	//vector<Vector2> vSize;
+
+	//vCoordinate vCoord;
+
 	Vector2 startPos;
 	Vector2 startPos2;
 	Vector2 size;
 	Vector2 size2;
+
 	bool isFrame;
 	int frameX;
 	int frameY;
@@ -91,13 +107,31 @@ struct tagTile
 		frameX = 1;
 		frameY = 1;
 		pivot = PIVOT::CENTER;
+
+		//vStartPos.clear();
+		//vSize.clear();
+		//
+		//vCoord.vStartPos.clear();
+		//vCoord.vSize.clear();
+
 		startPos = Vector2(1, 1);
 		size = Vector2(1, 1);
 		startPos2 = Vector2(1, 1);
 		size2 = Vector2(1, 1);
 	}
 
+	//vCoordinate Setting(Vector2* startPos, Vector2* size, int arrLen)
+	//{
+	//	for (int i = 0; i < arrLen; ++i)
+	//	{
+	//		vCoord.vStartPos.push_back(startPos[i]);
+	//		vCoord.vSize.push_back(size[i]);
+	//	}
+	//}
+
 	tagTile* Clone(string imgKey, string attribute, bool isFrame, int frameX, int frameY, PIVOT pivot, Vector2 startPos, Vector2 size, Vector2 startPos2, Vector2 size2)
+	//tagTile* Clone(string imgKey, string attribute, bool isFrame, int frameX, int frameY, PIVOT pivot, vector<Vector2> startPos, vector<Vector2> size)
+	//tagTile* Clone(string imgKey, string attribute, bool isFrame, int frameX, int frameY, PIVOT pivot)
 	{
 		tagTile* tile = new tagTile;
 		tile->imgKey = imgKey;
@@ -106,10 +140,15 @@ struct tagTile
 		tile->frameX = frameX;
 		tile->frameY = frameY;
 		tile->pivot = pivot;
+		
+		//tile->vStartPos.clear();
+		//tile->vSize.clear();
+
 		tile->startPos = startPos;
 		tile->size = size;
 		tile->startPos2 = startPos2;
 		tile->size2 = size2;
+
 		return tile;
 	}
 
@@ -122,10 +161,10 @@ struct tagTile
 		tile->frameX = frameX;
 		tile->frameY = frameY;
 		tile->pivot = pivot;
-		tile->startPos = startPos;
-		tile->size = size;
-		tile->startPos2 = Vector2(1, 1);
-		tile->size2 = Vector2(1, 1);
+		//tile->startPos = startPos;
+		//tile->size = size;
+		//tile->startPos2 = Vector2(1, 1);
+		//tile->size2 = Vector2(1, 1);
 		return tile;
 	}
 };
