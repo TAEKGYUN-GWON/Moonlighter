@@ -264,6 +264,12 @@ void GraphicsManager::DrawRect(Vector2 pos, Vector2 size, float angle, ColorF::E
 	case CENTER:
 		_renderTarget->DrawRectangle(RectF(pos.x - size.x / 2, pos.y - size.y / 2, pos.x + size.x / 2, pos.y + size.y / 2), brush, strokeWidth);
 		break;
+	case BOTTOM:
+		_renderTarget->DrawRectangle(RectF(pos.x - size.x / 2, pos.y - size.y, pos.x + size.x / 2, pos.y), brush, strokeWidth);
+		break;
+	case RIGHT_BOTTOM:
+		_renderTarget->DrawRectangle(RectF(pos.x - size.x, pos.y - size.y, pos.x, pos.y), brush, strokeWidth);
+		break;
 	}
 
 	SafeRelease(brush);

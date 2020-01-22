@@ -24,6 +24,8 @@ private:
 	int _idX;
 	int _idY;
 
+	int _id;
+
 	//F = G + H
 	float _f;		//총 비용
 	float _g;	//시작위치로부터 현재 노드
@@ -35,8 +37,8 @@ private:
 	Tile* _parent;
 
 	string _attribute;	//타일속성
-
 	ColorF::Enum _color;
+	RECT _rc;
 
 public:
 	Tile() :_f(0), _g(0),
@@ -81,5 +83,11 @@ public:
 
 	void SetColor(ColorF::Enum color) { _color = color; }
 	void SetFrameXY(int x, int y);
+
+	void SetRect(RECT rc) { _rc = rc; }
+	RECT GetRect() { return _rc; }
+
+	void SetId(int id) { _id = id; }
+	int GetId() { return _id; }
 };
 

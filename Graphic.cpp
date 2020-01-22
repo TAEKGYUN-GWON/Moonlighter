@@ -145,6 +145,12 @@ void Graphic::Render(Vector2 pos, float alpha, PIVOT pivot, bool cameraAffect)
 	case BOTTOM:
 		dxArea = RectF(-_graphicInfo->size.x / 2, -_graphicInfo->size.y, _graphicInfo->size.x / 2, 0);
 		break;
+	case RIGHT_BOTTOM:
+		dxArea = RectF(-_graphicInfo->size.x, -_graphicInfo->size.y, 0, 0);
+		break;
+	case LEFT_BOTTOM:
+		dxArea = RectF(0, -_graphicInfo->size.y, _graphicInfo->size.x, 0);
+		break;
 	}
 
 	_RT->SetTransform(sacle * rotation * trans);
@@ -196,6 +202,12 @@ void Graphic::Render(Vector2 pos, Vector2 scale, float angle, bool flipX, float 
 		break;
 	case BOTTOM:
 		dxArea = RectF(-_graphicInfo->size.x / 2, -_graphicInfo->size.y, _graphicInfo->size.x / 2, 0);
+		break;
+	case RIGHT_BOTTOM:
+		dxArea = RectF(-_graphicInfo->size.x, -_graphicInfo->size.y, 0, 0);
+		break;
+	case LEFT_BOTTOM:
+		dxArea = RectF(0, -_graphicInfo->size.y, _graphicInfo->size.x, 0);
 		break;
 	}
 

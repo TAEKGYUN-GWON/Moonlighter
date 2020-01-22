@@ -5,8 +5,10 @@
 //#define SAMPLE_TILE_X_NUM 8//32
 //#define SAMPLE_TILE_Y_NUM 10//20
 
-#define SAMPLE_TILE_X_NUM 4//32
-#define SAMPLE_TILE_Y_NUM 5//20
+#define SAMPLE_TILE_X_NUM 4
+#define SAMPLE_TILE_Y_NUM 6
+
+#define COL_SIZE 25
 
 #pragma region 잠시보류
 
@@ -39,6 +41,15 @@ struct tagCurrentTile
 {
 	string imgKey;
 	bool isFrame;
+
+	Vector2 startPos;
+	Vector2 size;
+
+	Vector2 startPos2;
+	Vector2 size2;
+
+	//Vector2 colSize;
+	PIVOT pivot;
 	//int x;
 	//int y;
 };
@@ -53,7 +64,7 @@ struct tagSampleTile
 
 #pragma endregion
 
-enum class Attribute
+enum Attribute
 {
 	NONE_MOVE,
 	DESTRUCTION,
@@ -65,22 +76,36 @@ enum class Attribute
 struct tagTile
 {
 	string imgKey;
-	Attribute attribute;
-	vector<int> size;
+	//Attribute attribute;
+	string attribute;
+	Vector2 startPos;
+	Vector2 startPos2;
+	Vector2 size;
+	Vector2 size2;
 	bool isFrame;
 	int frameX;
 	int frameY;
+	int id;
+	PIVOT pivot;
 
 	tagTile()
 	{
 		imgKey.clear();
-		attribute = Attribute::NONE;
+		attribute = "None";
 		isFrame = false;
 		frameX = 1;
 		frameY = 1;
+		id = 0;
+		pivot = PIVOT::CENTER;
+		startPos = Vector2(1, 1);
+		size = Vector2(1, 1);
+		startPos2 = Vector2(1, 1);
+		size2 = Vector2(1, 1);
+		id = 0;
 	}
 
-	tagTile* Clone(string imgKey, Attribute attribute, bool isFrame, int frameX, int frameY)
+	//tagTile* Clone(string imgKey, Attribute attribute, bool isFrame, int frameX, int frameY, PIVOT pivot, Vector2 size)
+	tagTile* Clone(string imgKey, string attribute, bool isFrame, int frameX, int frameY, PIVOT pivot, Vector2 startPos, Vector2 size, Vector2 startPos2, Vector2 size2)
 	{
 		tagTile* tile = new tagTile;
 		tile->imgKey = imgKey;
@@ -88,13 +113,39 @@ struct tagTile
 		tile->isFrame = isFrame;
 		tile->frameX = frameX;
 		tile->frameY = frameY;
+		tile->pivot = pivot;
+		tile->startPos = startPos;
+		tile->size = size;
+		tile->startPos2 = startPos2;
+		tile->size2 = size2;
+		tile->id = 0;
+		return tile;
+	}
 
+	//tagTile* Clone(string imgKey, Attribute attribute, bool isFrame, int frameX, int frameY, PIVOT pivot)
+	tagTile* Clone(string imgKey, string attribute, bool isFrame, int frameX, int frameY, PIVOT pivot, Vector2 startPos, Vector2 size)
+	{
+		tagTile* tile = new tagTile;
+		tile->imgKey = imgKey;
+		tile->attribute = attribute;
+		tile->isFrame = isFrame;
+		tile->frameX = frameX;
+		tile->frameY = frameY;
+		tile->pivot = pivot;
+		tile->startPos = startPos;
+		tile->size = size;
+		tile->startPos2 = Vector2(1, 1);
+		tile->size2 = Vector2(1, 1);
+		tile->id = 0;
 		return tile;
 	}
 };
-
+#include"Player.h"
 class Maptool : public Scene
 {
+private:
+	
+
 private:
 	typedef map<string, tagTile*> mapTileList;
 	typedef map<string, tagTile*>::iterator mapTileIter;
@@ -114,6 +165,7 @@ private:
 	int _curFrameY;
 
 	int _index = 0;
+	int _id;
 
 	int a;
 
@@ -124,6 +176,8 @@ private:
 
 	POINT _prevMouse;
 
+	Player* p;
+
 public:
 	virtual void Init();
 	virtual void Update();
@@ -131,6 +185,13 @@ public:
 
 	void SetUp();
 	void SetMap();
+	void RemoveObject();
+	//void FindIndex(int curIdx, Vector2 size);
+	void SetAttribute(int curIdx, Vector2 size);
+	void SetAttribute(int curIdx, Vector2 StartPos, Vector2 size);
+	void SetAttribute(int curIdx, Vector2 StartPos, Vector2 size, Vector2 StartPos2, Vector2 size2, string attribute);
+
+	int FindId();
 
 	tagTile* FindTile(string imgKey);
 };
