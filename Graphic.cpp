@@ -114,6 +114,12 @@ void Graphic::Render(float x, float y, PIVOT pivot)
 	case BOTTOM:
 		dxArea = RectF(-_graphicInfo->size.x / 2, -_graphicInfo->size.y, _graphicInfo->size.x / 2, 0);
 		break;
+	case RIGHT_BOTTOM:
+		dxArea = RectF(-_graphicInfo->size.x, -_graphicInfo->size.y, 0, 0);
+		break;
+	case LEFT_BOTTOM:
+		dxArea = RectF(0, -_graphicInfo->size.y, _graphicInfo->size.x, 0);
+		break;
 	}
 
 	_RT->SetTransform(Matrix3x2F::Identity() * rotation * trans* CAMERA->GetMatrix());
@@ -240,6 +246,12 @@ void Graphic::RenderUI(float x, float y, PIVOT pivot)
 	case BOTTOM:
 		dxArea = RectF(-_graphicInfo->size.x / 2, -_graphicInfo->size.y, _graphicInfo->size.x / 2, 0);
 		break;
+	case RIGHT_BOTTOM:
+		dxArea = RectF(-_graphicInfo->size.x, -_graphicInfo->size.y, 0, 0);
+		break;
+	case LEFT_BOTTOM:
+		dxArea = RectF(0, -_graphicInfo->size.y, _graphicInfo->size.x, 0);
+		break;
 	}
 
 	_RT->SetTransform(Matrix3x2F::Identity() * rotation * trans);
@@ -269,6 +281,12 @@ void Graphic::RenderUI(Vector2 pos, PIVOT pivot)
 		break;
 	case BOTTOM:
 		dxArea = RectF(-_graphicInfo->size.x / 2, -_graphicInfo->size.y, _graphicInfo->size.x / 2, 0);
+		break;
+	case RIGHT_BOTTOM:
+		dxArea = RectF(-_graphicInfo->size.x, -_graphicInfo->size.y, 0, 0);
+		break;
+	case LEFT_BOTTOM:
+		dxArea = RectF(0, -_graphicInfo->size.y, _graphicInfo->size.x, 0);
 		break;
 	}
 
@@ -310,6 +328,12 @@ void Graphic::FrameRender(float x, float y, int curFrameX, int curFrameY, PIVOT 
 		break;
 	case BOTTOM:
 		dxArea = RectF(-_graphicInfo->size.x / 2, -_graphicInfo->size.y, _graphicInfo->size.x / 2, 0);
+		break;
+	case RIGHT_BOTTOM:
+		dxArea = RectF(-_graphicInfo->size.x, -_graphicInfo->size.y, 0, 0);
+		break;
+	case LEFT_BOTTOM:
+		dxArea = RectF(0, -_graphicInfo->size.y, _graphicInfo->size.x, 0);
 		break;
 	}
 
@@ -357,6 +381,12 @@ void Graphic::FrameRender(Vector2 pos, int curFrameX, int curFrameY, float alpha
 		break;
 	case BOTTOM:
 		dxArea = RectF(-_graphicInfo->size.x / 2, -_graphicInfo->size.y, _graphicInfo->size.x / 2, 0);
+		break;
+	case RIGHT_BOTTOM:
+		dxArea = RectF(-_graphicInfo->size.x, -_graphicInfo->size.y, 0, 0);
+		break;
+	case LEFT_BOTTOM:
+		dxArea = RectF(0, -_graphicInfo->size.y, _graphicInfo->size.x, 0);
 		break;
 	}
 
@@ -418,6 +448,12 @@ void Graphic::FrameRender(Vector2 pos, int curFrameX, int curFrameY, Vector2 sca
 		break;
 	case BOTTOM:
 		dxArea = RectF(-_graphicInfo->size.x / 2, -_graphicInfo->size.y, _graphicInfo->size.x / 2, 0);
+		break;
+	case RIGHT_BOTTOM:
+		dxArea = RectF(-_graphicInfo->size.x, -_graphicInfo->size.y, 0, 0);
+		break;
+	case LEFT_BOTTOM:
+		dxArea = RectF(0, -_graphicInfo->size.y, _graphicInfo->size.x, 0);
 		break;
 	}
 
