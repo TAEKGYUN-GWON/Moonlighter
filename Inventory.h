@@ -1,7 +1,7 @@
 #pragma once
 #include "Item.h"
 #include "Object.h"
-
+#include "Component.h"
 struct tagItemInfo
 {
 	tagItemInfo(Item* item, int some)
@@ -18,14 +18,16 @@ struct tagItemInfo
 	int some;
 };
 
-class Inventory : public Object
+class Inventory 
 {
 private:
 	
 	Graphic* _ui;
+	Object* _select;
 
 	multimap<string, tagItemInfo> _inven;
 	multimap<string, tagItemInfo>::iterator iter;
+	bool _isActive;
 
 public:
 
@@ -43,5 +45,6 @@ public:
 	void Remove(string name, int num);
 
 	void Quantity();
-
+	bool GetActive() { return _isActive; }
+	void SetActive(bool active) { _isActive = active; }
 };

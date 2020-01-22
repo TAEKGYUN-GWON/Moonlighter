@@ -4,7 +4,6 @@
 #include "EntranceScene.h"
 #include "ShopScene.h"
 #include "TownScene.h"
-#include "Inventory.h"
 void StartScene::Init()
 {
 	Scene::Init();
@@ -12,7 +11,7 @@ void StartScene::Init()
 	SCENEMANAGER->addScene("Town", new TownScene);
 	SCENEMANAGER->addScene("Entrance", new EntranceScene);
 	SCENEMANAGER->addScene("Shop", new ShopScene);
-	Inventory* inven = Object::CreateObject<Inventory>();
+	inven = new Inventory;
 	inven->Init();
 }
 
@@ -24,12 +23,13 @@ void StartScene::Update()
 	if (KEYMANAGER->isOnceKeyDown('3')) SCENEMANAGER->changeScene("Town");
 	if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
 
-
+	inven->Update();
 
 }
 
 void StartScene::Render()
 {
 	Scene::Render();
+	inven->Render();
 }
 
