@@ -185,5 +185,7 @@ public:
 	int FindId();
 
 	tagTile* FindTile(string imgKey);
+
+	void TileSetting();
 };
 
