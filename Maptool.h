@@ -182,6 +182,8 @@ private:
 
 	mapTileList _mTileList;
 
+	SamplePage _page;
+
 	int _ctrSelect;
 	int _curFrameX;
 	int _curFrameY;
@@ -212,5 +214,6 @@ public:
 	tagTile* FindTile(string imgKey);
 
 	void TileSetting();
+	void SetPage();
 };
 
