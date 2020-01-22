@@ -85,7 +85,6 @@ struct tagTile
 	bool isFrame;
 	int frameX;
 	int frameY;
-	int id;
 	PIVOT pivot;
 
 	tagTile()
@@ -95,13 +94,11 @@ struct tagTile
 		isFrame = false;
 		frameX = 1;
 		frameY = 1;
-		id = 0;
 		pivot = PIVOT::CENTER;
 		startPos = Vector2(1, 1);
 		size = Vector2(1, 1);
 		startPos2 = Vector2(1, 1);
 		size2 = Vector2(1, 1);
-		id = 0;
 	}
 
 	//tagTile* Clone(string imgKey, Attribute attribute, bool isFrame, int frameX, int frameY, PIVOT pivot, Vector2 size)
@@ -118,7 +115,6 @@ struct tagTile
 		tile->size = size;
 		tile->startPos2 = startPos2;
 		tile->size2 = size2;
-		tile->id = 0;
 		return tile;
 	}
 
@@ -136,7 +132,6 @@ struct tagTile
 		tile->size = size;
 		tile->startPos2 = Vector2(1, 1);
 		tile->size2 = Vector2(1, 1);
-		tile->id = 0;
 		return tile;
 	}
 };
@@ -165,12 +160,8 @@ private:
 	int _curFrameY;
 
 	int _index = 0;
-	int _id;
-
-	int a;
 
 	Object* _btn1;
-	Object* obj;
 
 	bool _isDown;
 
