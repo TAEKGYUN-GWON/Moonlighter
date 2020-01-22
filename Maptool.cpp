@@ -37,8 +37,11 @@ void Maptool::Init()
 #pragma endregion
 
 #pragma region SetDungeonSet
+
+	GRAPHICMANAGER->AddImage("smallRock", L"resource/img/Object/smallRock.png");
+	GRAPHICMANAGER->AddImage("smallRock_slime", L"resource/img/Object/smallRock_slime.png");
 	GRAPHICMANAGER->AddImage("bigRock", L"resource/img/Object/bigRock.png");
-	GRAPHICMANAGER->AddImage("rock", L"resource/img/Object/rock.png");
+	GRAPHICMANAGER->AddImage("book", L"resource/img/Object/book.png");
 	GRAPHICMANAGER->AddImage("brokenPillar", L"resource/img/Object/brokenPillar.png");
 	GRAPHICMANAGER->AddImage("fountain", L"resource/img/Object/fountain.png");
 	GRAPHICMANAGER->AddImage("lathe", L"resource/img/Object/lathe.png");
@@ -48,8 +51,7 @@ void Maptool::Init()
 	GRAPHICMANAGER->AddImage("skull1", L"resource/img/Object/skull1.png");
 	GRAPHICMANAGER->AddImage("skull2", L"resource/img/Object/skull2.png");
 	GRAPHICMANAGER->AddImage("skull3", L"resource/img/Object/skull3.png");
-	GRAPHICMANAGER->AddImage("smallRock", L"resource/img/Object/smallRock.png");
-	GRAPHICMANAGER->AddImage("smallRock_slime", L"resource/img/Object/smallRock_slime.png");
+
 
 #pragma endregion
 
@@ -57,6 +59,7 @@ void Maptool::Init()
 	GRAPHICMANAGER->AddFrameImage("set_tile_dungeon", L"set_tile_dungeon.png", 4, 6);
 	GRAPHICMANAGER->AddFrameImage("will_dungeon", L"will_dungeon.png", 10, 13);
 
+	_page = SamplePage::TOWN;
 	SetUp();
 
 	_isDown = false;
@@ -69,6 +72,7 @@ void Maptool::Init()
 	p->GetSprite()->SetImgName("will_dungeon");
 	p->GetSprite()->SetFrameY(1);
 	p->GetSprite()->Stop();
+
 }
 
 void Maptool::Update()
@@ -131,8 +135,19 @@ void Maptool::Update()
 		RemoveObject();
 	}
 
-	if (KEYMANAGER->isOnceKeyUp('1')) _curFrameX = (_curFrameX + 1) % 3;
-	if (KEYMANAGER->isOnceKeyUp('2')) _curFrameY = (_curFrameY + 1) % 2;
+
+
+	if (KEYMANAGER->isOnceKeyUp('3'))
+	{
+		_page = SamplePage::TOWN;
+		SetPage();
+	}
+
+	if (KEYMANAGER->isOnceKeyUp('4'))
+	{
+		_page = SamplePage::DONGEON;
+		SetPage();
+	}
 }
 
 
@@ -156,7 +171,7 @@ void Maptool::Render()
 			if (_tiles[index]->GetAttribute() == "Wall") _tiles[index]->GetComponent<Sprite>()->SetFillRect(true);
 			else if(_tiles[index]->GetAttribute() != "Wall") _tiles[index]->GetComponent<Sprite>()->SetFillRect(false);
 
-			if (_tiles[index]->GetChildren().size() > 0) _tiles[index]->GetChildren()[0]->Render();
+			//if (_tiles[index]->GetChildren().size() > 0) _tiles[index]->GetChildren()[0]->Render();
 			sprintf_s(buffer, "%d", index);
 			GRAPHICMANAGER->DrawTextD2D(_tiles[index]->GetTrans()->GetPos() + Vector2(-(TILEWIDTH / 2) + 2, TILEHEIGHT / 7), buffer, 10, 1.0f, ColorF::Yellow);
 		}
@@ -168,9 +183,16 @@ void Maptool::Render()
 	{
 		GRAPHICMANAGER->DrawRect(Vector2(_sampleTile[i].pos.x, _sampleTile[i].pos.y), Vector2(SET_TILEWIDTH, SET_TILEHEIGHT), 0.0f, ColorF::White, PIVOT::CENTER, 1.0f, false);
 	}
-
-	GRAPHICMANAGER->DrawImage("set_tile", Vector2(WINSIZEX - 150, 30), 1.0f,  PIVOT::TOP, false);
-
+	switch (_page)
+	{
+	case TOWN:
+		GRAPHICMANAGER->DrawImage("set_tile", Vector2(WINSIZEX - 150, 30), 1.0f, PIVOT::TOP, false);
+		break;
+	case DONGEON:
+		GRAPHICMANAGER->DrawImage("set_tile_dungeon", Vector2(WINSIZEX - 150, 30), 1.0f, PIVOT::TOP, false);
+		break;
+	}
+	
 	_btn1->Render();
 
 	if (_currentTile.isFrame)
@@ -431,42 +453,85 @@ void Maptool::TileSetting()
 #pragma endregion
 #pragma region Dungeon
 
-	_mTileList.insert(make_pair(("bigRock"), tagTile().Clone("bigRock", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
-	_mTileList.insert(make_pair(("rock"), tagTile().Clone("rock", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
-	_mTileList.insert(make_pair(("brokenPillar"), tagTile().Clone("brokenPillar", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
-	_mTileList.insert(make_pair(("fountain"), tagTile().Clone("fountain", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
-	_mTileList.insert(make_pair(("lathe"), tagTile().Clone("lathe", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
-	_mTileList.insert(make_pair(("pillar"), tagTile().Clone("pillar", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
-	_mTileList.insert(make_pair(("pot"), tagTile().Clone("pot", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
-	_mTileList.insert(make_pair(("pot_slime"), tagTile().Clone("pot_slime", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
-	_mTileList.insert(make_pair(("skull1"), tagTile().Clone("skull1", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
-	_mTileList.insert(make_pair(("skull2"), tagTile().Clone("skull2", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
-	_mTileList.insert(make_pair(("skull3"), tagTile().Clone("skull3", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
-	_mTileList.insert(make_pair(("smallRock"), tagTile().Clone("smallRock", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
-	_mTileList.insert(make_pair(("smallRock_slime"), tagTile().Clone("smallRock_slime", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("bigRock"), tagTile().Clone("bigRock", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("book"), tagTile().Clone("book", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("brokenPillar"), tagTile().Clone("brokenPillar", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("fountain"), tagTile().Clone("fountain", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("lathe"), tagTile().Clone("lathe", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("pillar"), tagTile().Clone("pillar", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("pot"), tagTile().Clone("pot", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("pot_slime"), tagTile().Clone("pot_slime", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("skull1"), tagTile().Clone("skull1", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("skull2"), tagTile().Clone("skull2", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("skull3"), tagTile().Clone("skull3", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("smallRock"), tagTile().Clone("smallRock", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("smallRock_slime"), tagTile().Clone("smallRock_slime", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
 #pragma endregion
-	_sampleTile[0].imgKey = _mTileList.find("build_fountain")->second->imgKey;
-	_sampleTile[1].imgKey = _mTileList.find("build_Retaile")->second->imgKey;
-	_sampleTile[2].imgKey = _mTileList.find("build_Shop")->second->imgKey;
-	_sampleTile[3].imgKey = _mTileList.find("build_Top1")->second->imgKey;
-	_sampleTile[4].imgKey = _mTileList.find("build_Well")->second->imgKey;
-	_sampleTile[5].imgKey = _mTileList.find("door")->second->imgKey;
-	_sampleTile[6].imgKey = _mTileList.find("doordown")->second->imgKey;
-	_sampleTile[7].imgKey = _mTileList.find("dungeonLobby_entryStructure")->second->imgKey;
-	_sampleTile[8].imgKey = _mTileList.find("dungeonLobby_entryStructureLeft")->second->imgKey;
-	_sampleTile[9].imgKey = _mTileList.find("dungeonLobby_entryStructureRight")->second->imgKey;
-	_sampleTile[10].imgKey = _mTileList.find("build_Bottom3")->second->imgKey;
-	_sampleTile[11].imgKey = _mTileList.find("bench")->second->imgKey;
-	_sampleTile[12].imgKey = _mTileList.find("build_Board")->second->imgKey;
-	_sampleTile[13].imgKey = _mTileList.find("build_Bottom1")->second->imgKey;
-	_sampleTile[14].imgKey = _mTileList.find("build_Bottom2")->second->imgKey;
-	_sampleTile[15].imgKey = _mTileList.find("Village_OilLamps_1")->second->imgKey;
-	_sampleTile[16].imgKey = _mTileList.find("build_Enchant")->second->imgKey;
-	_sampleTile[17].imgKey = _mTileList.find("build_Forge")->second->imgKey;
-	_sampleTile[18].imgKey = _mTileList.find("tree")->second->imgKey;
-	_sampleTile[19].imgKey = _mTileList.find("Village_OilLamps_2")->second->imgKey;
-	_sampleTile[20].imgKey = _mTileList.find("dungeonLobby_middleRighttRock")->second->imgKey;
-	_sampleTile[21].imgKey = _mTileList.find("forgeBoard")->second->imgKey;
-	_sampleTile[22].imgKey = _mTileList.find("potionBoard")->second->imgKey;
-	_sampleTile[23].imgKey = _mTileList.find("empty")->second->imgKey;
+	SetPage();
+}
+
+void Maptool::SetPage()
+{
+	switch (_page)
+	{
+	case TOWN:
+	{
+		_sampleTile[0].imgKey = _mTileList.find("build_fountain")->second->imgKey;
+		_sampleTile[1].imgKey = _mTileList.find("build_Retaile")->second->imgKey;
+		_sampleTile[2].imgKey = _mTileList.find("build_Shop")->second->imgKey;
+		_sampleTile[3].imgKey = _mTileList.find("build_Top1")->second->imgKey;
+		_sampleTile[4].imgKey = _mTileList.find("build_Well")->second->imgKey;
+		_sampleTile[5].imgKey = _mTileList.find("door")->second->imgKey;
+		_sampleTile[6].imgKey = _mTileList.find("doordown")->second->imgKey;
+		_sampleTile[7].imgKey = _mTileList.find("dungeonLobby_entryStructure")->second->imgKey;
+		_sampleTile[8].imgKey = _mTileList.find("dungeonLobby_entryStructureLeft")->second->imgKey;
+		_sampleTile[9].imgKey = _mTileList.find("dungeonLobby_entryStructureRight")->second->imgKey;
+		_sampleTile[10].imgKey = _mTileList.find("build_Bottom3")->second->imgKey;
+		_sampleTile[11].imgKey = _mTileList.find("bench")->second->imgKey;
+		_sampleTile[12].imgKey = _mTileList.find("build_Board")->second->imgKey;
+		_sampleTile[13].imgKey = _mTileList.find("build_Bottom1")->second->imgKey;
+		_sampleTile[14].imgKey = _mTileList.find("build_Bottom2")->second->imgKey;
+		_sampleTile[15].imgKey = _mTileList.find("Village_OilLamps_1")->second->imgKey;
+		_sampleTile[16].imgKey = _mTileList.find("build_Enchant")->second->imgKey;
+		_sampleTile[17].imgKey = _mTileList.find("build_Forge")->second->imgKey;
+		_sampleTile[18].imgKey = _mTileList.find("tree")->second->imgKey;
+		_sampleTile[19].imgKey = _mTileList.find("Village_OilLamps_2")->second->imgKey;
+		_sampleTile[20].imgKey = _mTileList.find("dungeonLobby_middleRighttRock")->second->imgKey;
+		_sampleTile[21].imgKey = _mTileList.find("forgeBoard")->second->imgKey;
+		_sampleTile[22].imgKey = _mTileList.find("potionBoard")->second->imgKey;
+		_sampleTile[23].imgKey = _mTileList.find("empty")->second->imgKey;
+	}
+		break;
+	case DONGEON:
+	{
+		_sampleTile[0].imgKey = _mTileList.find("smallRock")->second->imgKey;
+		_sampleTile[1].imgKey = _mTileList.find("smallRock_slime")->second->imgKey;
+		_sampleTile[2].imgKey = _mTileList.find("bigRock")->second->imgKey;
+		_sampleTile[3].imgKey = _mTileList.find("book")->second->imgKey;
+		_sampleTile[4].imgKey = _mTileList.find("pot")->second->imgKey;
+		_sampleTile[5].imgKey = _mTileList.find("pot_slime")->second->imgKey;
+		_sampleTile[6].imgKey = _mTileList.find("lathe")->second->imgKey;
+		_sampleTile[7].imgKey = _mTileList.find("fountain")->second->imgKey;
+		_sampleTile[8].imgKey = _mTileList.find("pillar")->second->imgKey;
+		_sampleTile[9].imgKey = _mTileList.find("skull1")->second->imgKey;
+		_sampleTile[10].imgKey = _mTileList.find("skull2")->second->imgKey;
+		_sampleTile[11].imgKey = _mTileList.find("skull3")->second->imgKey;
+		_sampleTile[12].imgKey = _mTileList.find("brokenPillar")->second->imgKey;
+		_sampleTile[13].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[14].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[15].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[16].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[17].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[18].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[19].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[20].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[21].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[22].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[23].imgKey = _mTileList.find("empty")->second->imgKey;
+	}
+		break;
+	case PAGE_END:
+		break;
+	}
+	
 }

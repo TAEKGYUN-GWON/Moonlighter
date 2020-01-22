@@ -141,6 +141,8 @@ private:
 	tagSampleTile _sampleTile[SAMPLE_TILE_X_NUM * SAMPLE_TILE_Y_NUM];
 	Tile* _tiles[TILENUMX * TILENUMY];
 
+	SamplePage _page;
+
 	mapTileList _mTileList;
 
 	int _ctrSelect;
@@ -173,5 +175,7 @@ public:
 	tagTile* FindTile(string imgKey);
 
 	void TileSetting();
+
+	void SetPage();
 };
 
