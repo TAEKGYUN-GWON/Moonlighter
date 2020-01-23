@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "Tile.h"
 #include"Player.h"
+#include <commdlg.h> //OPENFILENAME을 위한 헤더
 
 //#define SAMPLE_TILE_X_NUM 8//32
 //#define SAMPLE_TILE_Y_NUM 10//20
@@ -161,10 +162,10 @@ struct tagTile
 		tile->frameX = frameX;
 		tile->frameY = frameY;
 		tile->pivot = pivot;
-		//tile->startPos = startPos;
-		//tile->size = size;
-		//tile->startPos2 = Vector2(1, 1);
-		//tile->size2 = Vector2(1, 1);
+		tile->startPos = startPos;
+		tile->size = size;
+		tile->startPos2 = Vector2(1, 1);
+		tile->size2 = Vector2(1, 1);
 		return tile;
 	}
 };
@@ -196,17 +197,22 @@ private:
 
 	Player* p;
 
+	HWND _saveName;
+	RECT _rcLoad;
+	RECT _rcSave;
+
 public:
 	virtual void Init();
 	virtual void Update();
 	virtual void Render();
 
+	void Save();
+	void Load();
+
 	void SetUp();
 	void SetMap();
 	void RemoveObject();
 	//void FindIndex(int curIdx, Vector2 size);
-	void SetAttribute(int curIdx, Vector2 size);
-	void SetAttribute(int curIdx, Vector2 StartPos, Vector2 size);
 	void SetAttribute(int curIdx, Vector2 StartPos, Vector2 size, Vector2 StartPos2, Vector2 size2, string attribute);
 
 	int FindId();

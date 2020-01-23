@@ -111,12 +111,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	PAINTSTRUCT ps;
 	HDC			hdc;
 
+	char str[128];
+	int len;
+
 	switch (iMessage)
 	{
 	case WM_CREATE:
 
 		break;
-
 	case WM_MOUSEMOVE:
 		_ptMouse.x = static_cast<float>(LOWORD(lParam));
 		_ptMouse.y = static_cast<float>(HIWORD(lParam));
@@ -138,8 +140,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		}
 	}
 	break;
-
-
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;

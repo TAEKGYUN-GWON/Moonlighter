@@ -56,6 +56,8 @@ void Maptool::Init()
 	GRAPHICMANAGER->AddFrameImage("set_tile_dungeon", L"set_tile_dungeon.png", 4, 6);
 	GRAPHICMANAGER->AddFrameImage("will_dungeon", L"will_dungeon.png", 10, 13);
 
+	_page = SamplePage::TOWN;
+
 	SetUp();
 
 	_isDown = false;
@@ -68,11 +70,76 @@ void Maptool::Init()
 	p->GetSprite()->SetImgName("will_dungeon");
 	p->GetSprite()->SetFrameY(1);
 	p->GetSprite()->Stop();
+	p->GetSprite()->SetCameraAffect(false);
+
+	_rcLoad = RectMakeCenter(WINSIZEX - 100, WINSIZEY - 100, 100, 30);
+	_rcSave = RectMakeCenter(WINSIZEX - 100, WINSIZEY - 150, 100, 30);
 }
 
 void Maptool::Update()
 {
 	Scene::Update();
+
+	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+	{
+		if (PtInRect(&_rcLoad, _ptMouse))
+		{
+			OPENFILENAME ofn;
+			char filePathSize[1028] = "";
+			ZeroMemory(&ofn, sizeof(OPENFILENAME));
+
+			ofn.lStructSize = sizeof(OPENFILENAME);
+			ofn.hwndOwner = NULL;
+			ofn.lpstrFile = filePathSize;
+			ofn.nMaxFile = sizeof(filePathSize);
+			ofn.nFilterIndex = true;
+			ofn.lpstrFileTitle = NULL;
+			ofn.nMaxFileTitle = NULL;
+			ofn.lpstrInitialDir = NULL;
+			ofn.lpstrFilter = ("À½¾ÇÆÄÀÏ¸¸³Ö¾îÁà¶ó");
+			ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+			if (GetOpenFileName(&ofn) == FALSE) return;
+
+			char temp[1028];
+			strncpy_s(temp, strlen(ofn.lpstrFile) + 1, ofn.lpstrFile, strlen(ofn.lpstrFile));
+
+			char* context = NULL;
+			char* token = strtok_s(temp, "\\", &context);
+
+			while (strlen(context))
+			{
+				token = strtok_s(NULL, "\\", &context);
+			}
+
+			char* title = token;
+			token = strtok_s(title, ".", &context);
+		}
+		if (PtInRect(&_rcSave, _ptMouse))
+		{
+			OPENFILENAME ofn;
+			char filePathSize[1028] = "";
+			//TCHAR filter[] = "Every file(*.*) \0*.*\0TextFile\0*.txt;*.doc\0";
+			//TCHAR filter[] = "Every file(*.*) \0*.*\0TextFile\0*.txt;*.doc\0¸Ê(.map)\0*.map\0";
+			char filter[1028] = "Every file(*.*) \0*.*\0TextFile\0*.txt;*.doc\0¸Ê(.map)\0*.map\0";
+
+			ZeroMemory(&ofn, sizeof(OPENFILENAME));
+
+			ofn.lStructSize = sizeof(OPENFILENAME);
+			ofn.hwndOwner = NULL;
+			//ofn.lpstrFile = filePathSize;
+			ofn.lpstrFile = filter;
+			ofn.nMaxFile = sizeof(filePathSize);
+			ofn.nFilterIndex = true;
+			ofn.lpstrFileTitle = NULL;
+			ofn.nMaxFileTitle = NULL;
+			ofn.lpstrInitialDir = NULL;
+			ofn.lpstrFilter = filter;
+			ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+			if (GetSaveFileName(&ofn) == FALSE) return;
+		}
+	}
 
 	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
 	{
@@ -200,6 +267,45 @@ void Maptool::Render()
 		GRAPHICMANAGER->DrawRect(_ptMouse, Vector2(_currentTile.size.x * TILEWIDTH, _currentTile.size.y * TILEHEIGHT), 0.0f, ColorF::Red, _currentTile.pivot, 1.0f, false);
 		//GRAPHICMANAGER->DrawRect(_ptMouse, Vector2(_currentTile.vSize[0].x * TILEWIDTH, _currentTile.vSize[0].y * TILEHEIGHT), 0.0f, ColorF::Red, _currentTile.pivot, 1.0f, false);
 	}
+
+	GRAPHICMANAGER->DrawRect(Vector2(_rcLoad.left, _rcLoad.top), Vector2((_rcLoad.right - _rcLoad.left), (_rcLoad.bottom - _rcLoad.top)), 0.0f, ColorF::Blue, CENTER, 1.0f, false);
+	GRAPHICMANAGER->DrawRect(Vector2(_rcSave.left, _rcSave.top), Vector2((_rcSave.right - _rcSave.left), (_rcSave.bottom - _rcSave.top)), 0.0f, ColorF::Red, CENTER, 1.0f, false);
+}
+
+void Maptool::Save()
+{
+	//HANDLE file;
+	//DWORD write;
+	//
+	//GetWindowText(_btnSaveName, titleSave, 256);
+	//
+	//string str = titleSave;
+	//str += ".map";
+	//
+	//file = CreateFile(str.c_str(), GENERIC_WRITE, 0, NULL,
+	//	CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	//
+	//WriteFile(file, _tiles, sizeof(Tile) * TILEWIDTH * TILEHEIGHT, &write, NULL);
+	//CloseHandle(file);
+}
+
+void Maptool::Load()
+{
+	//HANDLE file;
+	//DWORD read;
+	//
+	//GetWindowText(_btnLoadName, titleLoad, 256);
+	//
+	//string str = titleLoad;
+	//str += ".map";
+	//
+	////file = CreateFile(titleLoad, GENERIC_READ, 0, NULL,
+	//file = CreateFile(str.c_str(), GENERIC_READ, 0, NULL,
+	//	OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	//
+	//ReadFile(file, _tiles, sizeof(Tile) * TILEWIDTH * TILEHEIGHT, &read, NULL);
+	//
+	//CloseHandle(file);
 }
 
 void Maptool::SetUp()
@@ -293,8 +399,8 @@ void Maptool::SetMap()
 
 			//_currentTile.vStartPos = FindTile(_sampleTile[i].imgKey)->vStartPos;
 			//_currentTile.vSize = FindTile(_sampleTile[i].imgKey)->vSize;
-			_currentTile.startPos2 = FindTile(_sampleTile[i].imgKey)->startPos;
-			_currentTile.size2 = FindTile(_sampleTile[i].imgKey)->size;
+			_currentTile.startPos = FindTile(_sampleTile[i].imgKey)->startPos;
+			_currentTile.size = FindTile(_sampleTile[i].imgKey)->size;
 			_currentTile.startPos2 = FindTile(_sampleTile[i].imgKey)->startPos2;
 			_currentTile.size2 = FindTile(_sampleTile[i].imgKey)->size2;
 
@@ -311,7 +417,7 @@ void Maptool::RemoveObject()
 	{
 		if (_tiles[i]->GetChildren().size())
 		{
-			if ((_ptMouse.x <= WINSIZEX - 300) && PtInRect(&RectMakeBottomCenter(_tiles[i]->GetChildren()[0]->GetTrans()->GetPos().x - CAMERA->GetPosition().x, _tiles[i]->GetChildren()[0]->GetTrans()->GetPos().y - CAMERA->GetPosition().y, _tiles[i]->GetChildren()[0]->GetTrans()->GetScale().x, _tiles[i]->GetChildren()[0]->GetTrans()->GetScale().y), _ptMouse))
+			if ((_ptMouse.x <= WINSIZEX - 300) && PtInRect(&RectMakeRightBottom(_tiles[i]->GetChildren()[0]->GetTrans()->GetPos().x - CAMERA->GetPosition().x, _tiles[i]->GetChildren()[0]->GetTrans()->GetPos().y - CAMERA->GetPosition().y, _tiles[i]->GetChildren()[0]->GetTrans()->GetScale().x, _tiles[i]->GetChildren()[0]->GetTrans()->GetScale().y), _ptMouse))
 			{
 				string s = _tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->GetImgKey();
 				SetAttribute(i, FindTile(s)->startPos, FindTile(s)->size, FindTile(s)->startPos2, FindTile(s)->size2, "None");
@@ -332,34 +438,6 @@ void Maptool::RemoveObject()
 		//
 		//	break;
 		//}
-	}
-}
-
-void Maptool::SetAttribute(int curIdx, Vector2 size)
-{
-	int start = (curIdx - (TILENUMX * (size.y - 1))) - (size.x - 1);
-
-	for (int i = 0; i < size.y; ++i)
-	{
-		for (int j = 0; j < size.x; ++j)
-		{
-			if (start + j + (TILENUMX * i) < 0)continue;
-			_tiles[start + j + (TILENUMX * i)]->SetAttribute(FindTile(_currentTile.imgKey)->attribute);
-		}
-	}
-}
-
-void Maptool::SetAttribute(int curIdx, Vector2 StartPos, Vector2 size)
-{
-	int start = (curIdx - (TILENUMX * (StartPos.y - 1))) - (StartPos.x - 1);
-
-	for (int i = 0; i < size.y; ++i)
-	{
-		for (int j = 0; j < size.x; ++j)
-		{
-			if (start + j + (TILENUMX * i) < 0)continue;
-			_tiles[start + j + (TILENUMX * i)]->SetAttribute(FindTile(_currentTile.imgKey)->attribute);
-		}
 	}
 }
 
