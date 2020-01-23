@@ -94,6 +94,9 @@
     <Filter Include="playGround\Shop\Npc">
       <UniqueIdentifier>{0a0724a8-d624-45bd-9848-e35ab53c5fe1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\Shop\ShopStand">
+      <UniqueIdentifier>{a8f5da20-97c4-47a4-b981-fb523187115d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -249,14 +252,17 @@
     <ClInclude Include="NpcManager.h">
       <Filter>playGround\Shop\Npc</Filter>
     </ClInclude>
-    <ClInclude Include="ShopStand.h">
-      <Filter>playGround\Shop</Filter>
-    </ClInclude>
     <ClInclude Include="NpcShopState.h">
       <Filter>playGround\Shop\Npc</Filter>
     </ClInclude>
     <ClInclude Include="CheckStand.h">
       <Filter>playGround\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopStand.h">
+      <Filter>playGround\Shop\ShopStand</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopStandManager.h">
+      <Filter>playGround\Shop\ShopStand</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -389,14 +395,17 @@
     <ClCompile Include="NpcManager.cpp">
       <Filter>playGround\Shop\Npc</Filter>
     </ClCompile>
-    <ClCompile Include="ShopStand.cpp">
-      <Filter>playGround\Shop</Filter>
-    </ClCompile>
     <ClCompile Include="NpcShopState.cpp">
       <Filter>playGround\Shop\Npc</Filter>
     </ClCompile>
     <ClCompile Include="CheckStand.cpp">
       <Filter>playGround\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopStand.cpp">
+      <Filter>playGround\Shop\ShopStand</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopStandManager.cpp">
+      <Filter>playGround\Shop\ShopStand</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
