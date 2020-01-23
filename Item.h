@@ -12,8 +12,6 @@ class Item : public Object
 
 protected:
 
-	typedef Object super;
-
 	//아이템이 소모품인지 그외 다른 모든것인지를 정한다.
 	EItemType _type;
 
@@ -24,13 +22,11 @@ protected:
 	Sprite* _image;
 
 public:
-	Item() {}
-	~Item() {}
 
 	virtual void Init();
-	virtual void Init(Vector2 pos) = 0;
+	virtual void Init(Vector2 pos) {};
 	virtual void Update();
-
+	Sprite* GetSprite() { return _image; }
 	//Get Something
 	int GetMaxCount() { return _maxCount; }
 	int GetPrice() { return _price; }
@@ -44,6 +40,7 @@ public:
 	void SetPrice(int price) {
 		_price = price;
 	}
+	void SetMaxCount(int num) { _maxCount = num; }
 	template <typename T>
 	static T* CreateItem(string MobName, Vector2 pos);
 

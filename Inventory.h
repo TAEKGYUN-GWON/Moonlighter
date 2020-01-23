@@ -49,4 +49,5 @@ public:
 	bool GetActive() { return _isActive; }
 	void SetActive(bool active) { _isActive = active; }
 	void KeyCon();
+	void PosCorrection();
 };

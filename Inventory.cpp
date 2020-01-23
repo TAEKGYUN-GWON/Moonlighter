@@ -15,12 +15,25 @@ void Inventory::Init()
 {
 	_ui = GRAPHICMANAGER->AddImage("inventory", L"resource/img/UI/Inventory.png");
 	_select = GRAPHICMANAGER->AddImage("invenSlot", L"resource/img/UI/invenSlot.png");
+	GRAPHICMANAGER->AddImage("Potion_S", L"resource/img/Items/Potion_S.png");
 	_isActive = false;
 	//_select = Object::CreateObject<Object>();
 	//_select->SetParent(nullptr);
 
 	pos = Vector2(154, 125);
+	Item* test = Object::CreateObject<Item>();
+	test->SetIsActive(false);
+	test->Init();
+	auto a = test->GetSprite();
+	a->Init();
+	a->SetImgName("Potion_S");
+	test->SetName("test");
+	test->SetMaxCount(5);
 
+	for (int i = 0; i < 3; i++)
+		Insert(test);
+
+	cout << _inven.size() << endl;
 }
 void Inventory::Update()
 {
@@ -40,7 +53,16 @@ void Inventory::Render()
 	if (!_isActive) return;
 
 	_ui->RenderUI(Vector2(WINSIZEX / 2, WINSIZEY / 2));
+	for (iter = _inven.begin(); iter != _inven.end(); iter++)
+	{
+		iter->second.item->GetComponent<Sprite>()->GetGraphic()->RenderUI(iter->second.item->GetTrans()->GetPos());
+		char buffer[128];
+		sprintf_s(buffer, "%d",iter->second.some);
+		Vector2 pos = Vector2(iter->second.item->GetTrans()->GetPos().x + 20, iter->second.item->GetTrans()->GetPos().y + 20);
+		GRAPHICMANAGER->DrawTextD2D(pos, buffer, 15);
+	}
 	_select->RenderUI(pos);
+
 }
 
 void Inventory::Insert(Item* item)
@@ -57,7 +79,75 @@ void Inventory::Insert(Item* item)
 			}
 		}
 	}
-	if (_inven.size() >= 15) return;
+	if (_inven.size() >= 20) return;
+
+
+#pragma region 아이템 위치 지정
+	switch (_inven.size())
+	{
+	case 0:
+		item->GetTrans()->SetPos(154,125);
+		break;
+	case 1:
+		item->GetTrans()->SetPos(242, 125);
+		break; 
+	case 2:
+		item->GetTrans()->SetPos(328, 125);
+		break;
+	case 3:
+		item->GetTrans()->SetPos(416, 125);
+		break;
+	case 4:
+		item->GetTrans()->SetPos(504, 125);
+		break;
+	case 5:
+		item->GetTrans()->SetPos(154, 242);
+		break;
+	case 6:
+		item->GetTrans()->SetPos(242, 242);
+		break;
+	case 7:
+		item->GetTrans()->SetPos(328, 242);
+		break;
+	case 8:
+		item->GetTrans()->SetPos(416, 242);
+		break;
+	case 9:
+		item->GetTrans()->SetPos(504, 242);
+		break;
+	case 10:
+		item->GetTrans()->SetPos(154, 338);
+		break;
+	case 11:
+		item->GetTrans()->SetPos(242, 338);
+		break;
+	case 12:
+		item->GetTrans()->SetPos(328, 338);
+		break;
+	case 13:
+		item->GetTrans()->SetPos(416, 338);
+		break;
+	case 14:
+		item->GetTrans()->SetPos(504, 338);
+		break;
+	case 15:
+		item->GetTrans()->SetPos(154, 437);
+		break;
+	case 16:
+		item->GetTrans()->SetPos(242, 437);
+		break;
+	case 17:
+		item->GetTrans()->SetPos(328, 437);
+		break;
+	case 18:
+		item->GetTrans()->SetPos(416, 437);
+		break;
+	case 19:
+		item->GetTrans()->SetPos(504, 437);
+		break;
+	}
+
+#pragma endregion
 
 	_inven.insert(make_pair(item->GetName(), tagItemInfo(item)));
 }
@@ -103,19 +193,26 @@ void Inventory::KeyCon()
 
 	if (KEYMANAGER->isOnceKeyDown('W'))
 	{
-
+		if (pos.y == 242.f) pos = Vector2(pos.x, 125);
+		else if(pos.y >= 125.f && pos.y >= 242.f)pos = Vector2(pos.x, pos.y - 98);
 	}
 	if (KEYMANAGER->isOnceKeyDown('A'))
 	{
-		pos = Vector2(pos.x - 87.5, pos.y);
+		if(pos.x >= 241.5) pos = Vector2(pos.x - 87.5, pos.y);
 	}
 	if (KEYMANAGER->isOnceKeyDown('S'))
 	{
-
+		if (pos.y == 125.f) pos = Vector2(pos.x, 242);
+		else if(pos.y <= 340.f)pos = Vector2(pos.x, pos.y + 98);
 	}
 	if (KEYMANAGER->isOnceKeyDown('D'))
 	{
-		pos = Vector2(pos.x + 87.5, pos.y);
+		if (pos.x <= 416.5) pos = Vector2(pos.x + 87.5, pos.y);
 	}
+}
+
+void Inventory::PosCorrection()
+{
+	
 }
 

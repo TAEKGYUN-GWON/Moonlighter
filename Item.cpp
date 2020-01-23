@@ -4,12 +4,14 @@
 
 void Item::Init()
 {
+	Object::Init();
 	_tag = "Item";
 	_maxCount = 1;
 	_price = 0;
+	_image = AddComponent<Sprite>();
 }
 
 void Item::Update()
 {
-	super::Update();
+	Object::Update();
 }
