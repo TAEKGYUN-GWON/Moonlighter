@@ -1,6 +1,9 @@
 #pragma once
 #include "singletonBase.h"
 
+#define ZOOM_MIN 0.01f
+#define ZOOM_MAX 2.5f
+
 class Camera :public singletonBase<Camera>
 {
 private:
@@ -14,7 +17,7 @@ private:
 	Vector2				_endPos;
 
 	Vector2				_shakeUpPos;
-	Vector2				__shakeDownPos;
+	Vector2				_shakeDownPos;
 
 	float				_angle;
 	float				_speed;
