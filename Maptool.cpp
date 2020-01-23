@@ -69,11 +69,12 @@ void Maptool::Init()
 
 	p = Object::CreateObject<Player>();
 	p->Init();
+	p->GetTrans()->SetPos(p->GetTrans()->GetPos() - CAMERA->GetPosition());
 	p->GetSprite()->Init(true);
 	p->GetSprite()->SetImgName("will_dungeon");
 	p->GetSprite()->SetFrameY(1);
 	p->GetSprite()->Stop();
-	p->GetSprite()->SetCameraAffect(false);
+	//p->GetSprite()->SetCameraAffect(false);
 
 	_rcLoad = RectMakeCenter(WINSIZEX - 100, WINSIZEY - 100, 100, 30);
 	_rcSave = RectMakeCenter(WINSIZEX - 100, WINSIZEY - 150, 100, 30);
@@ -82,7 +83,7 @@ void Maptool::Init()
 void Maptool::Update()
 {
 	Scene::Update();
-
+	
 	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
 		if (PtInRect(&_rcLoad, _ptMouse))
@@ -169,16 +170,6 @@ void Maptool::Update()
 
 	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
 	{
-		if (PtInRect(&_btn1->GetTrans()->GetRect(), _ptMouse))
-		{
-			_currentTile.imgKey = "empty";
-			_currentTile.isFrame = false;
-			_currentTile.size = Vector2(1, 1);
-			//_currentTile.vSize[0] = Vector2(1, 1);
-			_ctrSelect = Attribute::NONE_MOVE;
-			//return;
-		}
-
 		SetMap();
 	}
 
@@ -247,10 +238,7 @@ void Maptool::Render()
 	{
 		for (int j = 0; j < 33; ++j)
 		{
-			int cullX = CAMERA->GetPosition().x / TILEWIDTH;
-			int cullY = CAMERA->GetPosition().y / TILEHEIGHT;
-
-			int index = (i + cullY) * TILENUMX + (j + cullX);
+			int index = (i + (int)CAMERA->GetPosition().y / TILEHEIGHT) * TILENUMX + (j + (int)CAMERA->GetPosition().x / TILEWIDTH);
 
 			if (index < 0 || index >= TILENUMX * TILENUMY) continue;
 
@@ -263,6 +251,7 @@ void Maptool::Render()
 		}
 	}
 
+	// sample tile image background
 	GRAPHICMANAGER->DrawFillRect(Vector2(WINSIZEX - 150, WINSIZEY / 2), Vector2(300, WINSIZEY), 0.0f, ColorF::Aquamarine, 1.0f, CENTER, false);
 	
 	for (int i = 0; i < SAMPLE_TILE_X_NUM * SAMPLE_TILE_Y_NUM; ++i)
@@ -270,11 +259,10 @@ void Maptool::Render()
 		GRAPHICMANAGER->DrawRect(Vector2(_sampleTile[i].pos.x, _sampleTile[i].pos.y), Vector2(SET_TILEWIDTH, SET_TILEHEIGHT), 0.0f, ColorF::White, PIVOT::CENTER, 1.0f, false);
 	}
 
-	//GRAPHICMANAGER->DrawImage("set_tile", Vector2(WINSIZEX - 150, 30), 1.0f,  PIVOT::TOP, false);
 	switch (_page)
 	{
-	case TOWN: GRAPHICMANAGER->DrawImage("set_tile", Vector2(WINSIZEX - 150, 30), 1.0f, PIVOT::TOP, false); break;
-	case DONGEON: GRAPHICMANAGER->DrawImage("set_tile_dungeon", Vector2(WINSIZEX - 150, 30), 1.0f, PIVOT::TOP, false); break;
+	case SamplePage::TOWN: GRAPHICMANAGER->DrawImage("set_tile", Vector2(WINSIZEX - 150, 30), 1.0f, PIVOT::TOP, false); break;
+	case SamplePage::DONGEON: GRAPHICMANAGER->DrawImage("set_tile_dungeon", Vector2(WINSIZEX - 150, 30), 1.0f, PIVOT::TOP, false); break;
 	}
 
 	_btn1->Render();
@@ -298,17 +286,6 @@ void Maptool::Render()
 
 	GRAPHICMANAGER->DrawRect(Vector2(_rcLoad.left, _rcLoad.top), Vector2((_rcLoad.right - _rcLoad.left), (_rcLoad.bottom - _rcLoad.top)), 0.0f, ColorF::Blue, PIVOT::LEFT_TOP, 1.0f, false);
 	GRAPHICMANAGER->DrawRect(Vector2(_rcSave.left, _rcSave.top), Vector2((_rcSave.right - _rcSave.left), (_rcSave.bottom - _rcSave.top)), 0.0f, ColorF::Red, PIVOT::LEFT_TOP, 1.0f, false);
-
-
-
-	sprintf_s(buffer, "index X : %d", (_ptMouse.x - (int)CAMERA->GetPosition().x) / TILEWIDTH);
-	GRAPHICMANAGER->DrawTextD2D(Vector2(WINSIZEX / 2, 30), buffer, 20, 1.0f, ColorF::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
-
-	sprintf_s(buffer, "index Y : %d", (_ptMouse.y - (int)CAMERA->GetPosition().y) / TILEHEIGHT);
-	GRAPHICMANAGER->DrawTextD2D(Vector2(WINSIZEX / 2, 60), buffer, 20, 1.0f, ColorF::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
-
-	sprintf_s(buffer, "index T : %d", ((_ptMouse.x - (int)CAMERA->GetPosition().x) / TILEWIDTH) + TILENUMX * ((_ptMouse.y - (int)CAMERA->GetPosition().y) / TILEHEIGHT));
-	GRAPHICMANAGER->DrawTextD2D(Vector2(WINSIZEX / 2, 90), buffer, 20, 1.0f, ColorF::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
 }
 
 void Maptool::Save()
@@ -402,7 +379,7 @@ void Maptool::SetMap()
 {
 	if (_ptMouse.x > WINSIZEX - 300) return;
 	
-	int index = ((_ptMouse.x - (int)CAMERA->GetPosition().x) / TILEWIDTH) + TILENUMX * ((_ptMouse.y - (int)CAMERA->GetPosition().y) / TILEHEIGHT);
+	int index = ((_ptMouse.x + (int)CAMERA->GetPosition().x) / TILEWIDTH) + TILENUMX * ((_ptMouse.y + (int)CAMERA->GetPosition().y) / TILEHEIGHT);
 
 	if (_tiles[index]->GetChildren().size() > 0) return;
 
@@ -424,48 +401,38 @@ void Maptool::SetMap()
 			_tiles[index]->GetChildren()[0]->AddComponent<Sprite>()->Init(true, true);
 			_tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->SetImgName(_currentTile.imgKey);
 			_tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->SetFPS(0.5f);
-			_tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(_currentTile.pivot);
 		}
-		else
-		{
-			_tiles[index]->GetChildren()[0]->AddComponent<Sprite>()->SetImgName(_currentTile.imgKey);
-			_tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(_currentTile.pivot);
-		}
+		else _tiles[index]->GetChildren()[0]->AddComponent<Sprite>()->SetImgName(_currentTile.imgKey);
+		
+		_tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(_currentTile.pivot);
 	}
 }
 
 void Maptool::ClickSetTile()
 {
-	if (_ptMouse.x <= WINSIZEX - 300) return;
+	if (_ptMouse.x < WINSIZEX - 270 || _ptMouse.x >(WINSIZEX - 270) + (SET_TILEWIDTH * SAMPLE_TILE_X_NUM) ||
+		_ptMouse.y < 30 || _ptMouse.y > 30 + (SET_TILEHEIGHT * SAMPLE_TILE_Y_NUM)) return;
 
-	int index = ((_ptMouse.x - (int)CAMERA->GetPosition().x) / TILEWIDTH) + TILENUMX * ((_ptMouse.y - (int)CAMERA->GetPosition().y) / TILEHEIGHT);
+	int index = ((_ptMouse.x - (WINSIZEX - 270) + (int)CAMERA->GetPosition().x) / SET_TILEWIDTH) + SAMPLE_TILE_X_NUM * ((_ptMouse.y - 30 + (int)CAMERA->GetPosition().y) / SET_TILEHEIGHT);
 
-	for (int i = 0; i < SAMPLE_TILE_X_NUM * SAMPLE_TILE_Y_NUM; ++i)
-	{
-		if (PtInRect(&RectMakeCenter(_sampleTile[i].pos.x, _sampleTile[i].pos.y, SET_TILEWIDTH, SET_TILEHEIGHT), _ptMouse))
-		{
-			_currentTile.imgKey = FindTile(_sampleTile[i].imgKey)->imgKey;
-			_currentTile.isFrame = FindTile(_sampleTile[i].imgKey)->isFrame;
+	_currentTile.imgKey = FindTile(_sampleTile[index].imgKey)->imgKey;
+	_currentTile.isFrame = FindTile(_sampleTile[index].imgKey)->isFrame;
 
-			//_currentTile.vStartPos = FindTile(_sampleTile[i].imgKey)->vStartPos;
-			//_currentTile.vSize = FindTile(_sampleTile[i].imgKey)->vSize;
-			_currentTile.startPos = FindTile(_sampleTile[i].imgKey)->startPos;
-			_currentTile.size = FindTile(_sampleTile[i].imgKey)->size;
-			_currentTile.startPos2 = FindTile(_sampleTile[i].imgKey)->startPos2;
-			_currentTile.size2 = FindTile(_sampleTile[i].imgKey)->size2;
+	//_currentTile.vStartPos = FindTile(_sampleTile[i].imgKey)->vStartPos;
+	//_currentTile.vSize = FindTile(_sampleTile[i].imgKey)->vSize;
+	_currentTile.startPos = FindTile(_sampleTile[index].imgKey)->startPos;
+	_currentTile.size = FindTile(_sampleTile[index].imgKey)->size;
+	_currentTile.startPos2 = FindTile(_sampleTile[index].imgKey)->startPos2;
+	_currentTile.size2 = FindTile(_sampleTile[index].imgKey)->size2;
 
-			_currentTile.pivot = FindTile(_sampleTile[i].imgKey)->pivot;
-
-			break;
-		}
-	}
+	_currentTile.pivot = FindTile(_sampleTile[index].imgKey)->pivot;
 }
 
 void Maptool::RemoveObject()
 {
 	if (_ptMouse.x > WINSIZEX - 300) return;
 
-	int index = ((_ptMouse.x - (int)CAMERA->GetPosition().x) / TILEWIDTH) + TILENUMX * ((_ptMouse.y - (int)CAMERA->GetPosition().y) / TILEHEIGHT);
+	int index = ((_ptMouse.x + (int)CAMERA->GetPosition().x) / TILEWIDTH) + TILENUMX * ((_ptMouse.y + (int)CAMERA->GetPosition().y) / TILEHEIGHT);
 
 	if (_eraser == EraserType::Image)
 	{
@@ -585,7 +552,7 @@ void Maptool::SetPage()
 {
 	switch (_page)
 	{
-	case TOWN:
+	case SamplePage::TOWN:
 	{
 		_sampleTile[0].imgKey = _mTileList.find("build_fountain")->second->imgKey;
 		_sampleTile[1].imgKey = _mTileList.find("build_Retaile")->second->imgKey;
@@ -613,7 +580,7 @@ void Maptool::SetPage()
 		_sampleTile[23].imgKey = _mTileList.find("empty")->second->imgKey;
 	}
 	break;
-	case DONGEON:
+	case SamplePage::DONGEON:
 	{
 		_sampleTile[0].imgKey = _mTileList.find("smallRock")->second->imgKey;
 		_sampleTile[1].imgKey = _mTileList.find("smallRock_slime")->second->imgKey;
@@ -641,6 +608,6 @@ void Maptool::SetPage()
 		_sampleTile[23].imgKey = _mTileList.find("empty")->second->imgKey;
 	}
 	break;
-	case PAGE_END: break;
+	case SamplePage::PAGE_END: break;
 	}
 }

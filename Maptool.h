@@ -47,7 +47,7 @@ struct tagSampleTile
 
 #pragma endregion
 
-enum SamplePage
+enum class SamplePage
 {
 	TOWN,
 	DONGEON,
