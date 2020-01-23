@@ -303,36 +303,82 @@ void Maptool::Save()
 	//	CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	//
 	////WriteFile(file, _tiles, sizeof(Tile) * TILEWIDTH * TILEHEIGHT, &write, NULL);
-	//WriteFile(file, _tiles, sizeof(Tile*) * TILENUMX * TILENUMY, &write, NULL);
+	//WriteFile(file, _tagTiles, sizeof(tagTile) * TILENUMX * TILENUMY, &write, NULL);
 	//CloseHandle(file);
 
-	//MessageBox(_hWnd, "저장 되었을지도..?", str.c_str(), MB_OK);
+	HANDLE file;
+	DWORD write;
+
+	string str = "Town.map";
+
+	file = CreateFile(str.c_str(), GENERIC_WRITE, 0, NULL,
+		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	WriteFile(file, _tagTiles, sizeof(tagTile) * TILENUMX * TILENUMY, &write, NULL);
+	CloseHandle(file);
+
+	MessageBox(_hWnd, "저장 되었을지도..?", str.c_str(), MB_OK);
 }
 
 void Maptool::Load()
 {
 	HANDLE file;
 	DWORD read;
-	
+
 	//GetWindowText(_btnLoadName, titleLoad, 256);
-	
+
 	//string str = titleLoad;
 	//str += ".map";
 	string str = "Town.map";
-	
+
 	//file = CreateFile(titleLoad, GENERIC_READ, 0, NULL,
-	file = CreateFile(str.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	file = CreateFile(str.c_str(), GENERIC_READ, 0, NULL,
+		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	if (file != INVALID_HANDLE_VALUE)
 	{
-		ReadFile(file, _tiles, sizeof(Tile*) * TILENUMX * TILENUMY, &read, NULL);
+		ReadFile(file, _tagTiles, sizeof(tagTile) * TILENUMX * TILENUMY, &read, NULL);
 		CloseHandle(file);
 		InvalidateRect(_hWnd, NULL, false);
+		for (int i = 0; i < TILENUMX * TILENUMY; i++)
+		{
+			_tiles[i]->SetAttribute(_tagTiles[i].attribute);
+			_tiles[i]->SetImgName(_tagTiles[i].imgKey);//말이 되나...?
+			_tiles[i]->SetIsFrame(_tagTiles[i].isFrame);
+			_tiles[i]->SetPivot(_tagTiles[i].pivot);
+
+			if (_tiles[i]->GetImgName() != "None")
+			{
+				_tiles[i]->AddChild(Object::CreateObject<Object>());
+
+				_tiles[i]->GetChildren()[0]->GetTrans()->SetPos(_tiles[i]->GetTrans()->GetPos() + Vector2(0, TILEHEIGHT / 2));
+				if (_tiles[i]->GetPivot() == RIGHT_BOTTOM) _tiles[i]->GetChildren()[0]->GetTrans()->SetPos(_tiles[i]->GetTrans()->GetPos() + Vector2(TILEWIDTH / 2, TILEHEIGHT / 2));
+
+
+				_tiles[i]->GetChildren()[0]->GetTrans()->SetScale(GRAPHICMANAGER->FindImage(_tiles[i]->GetImgName())->GetFrameWidth(), GRAPHICMANAGER->FindImage(_tiles[i]->GetImgName())->GetFrameHeight());
+				_tiles[i]->GetChildren()[0]->GetTrans()->SetRect();
+
+				if (_tiles[i]->GetIsFrame())
+				{
+					_tiles[i]->GetChildren()[0]->AddComponent<Sprite>()->Init(true, true);
+					_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetImgName(_tiles[i]->GetImgName());
+					_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetFPS(0.5f);
+					_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(_tiles[i]->GetPivot());
+				}
+				else
+				{
+					_tiles[i]->GetChildren()[0]->AddComponent<Sprite>()->SetImgName(_tiles[i]->GetImgName());
+					_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(_tiles[i]->GetPivot());
+				}
+			}
+		}
 	}
 	else
 	{
 		MessageBox(_hWnd, "없쒀", str.c_str(), MB_OK);
 	}
+
+
 
 	MessageBox(_hWnd, "불러와져라", str.c_str(), MB_OK);
 }
@@ -360,6 +406,11 @@ void Maptool::SetUp()
 			_tiles[index]->Init(j, i);
 			_tiles[index]->AddComponent<Sprite>();
 			_tiles[index]->SetAttribute("None");
+
+			_tagTiles[index].attribute = "None";
+			_tagTiles[index].imgKey = "None";
+			_tagTiles[index].isFrame = false;
+			_tagTiles[index].pivot = PIVOT::CENTER;
 		}
 	}
 	for (int i = 0; i < SAMPLE_TILE_Y_NUM; ++i)
@@ -396,6 +447,10 @@ void Maptool::SetMap()
 		_tiles[index]->GetChildren()[0]->GetTrans()->SetScale(GRAPHICMANAGER->FindImage(_currentTile.imgKey)->GetFrameWidth(), GRAPHICMANAGER->FindImage(_currentTile.imgKey)->GetFrameHeight());
 		_tiles[index]->GetChildren()[0]->GetTrans()->SetRect();
 
+		_tagTiles[index].isFrame = _currentTile.isFrame;
+		_tagTiles[index].imgKey = _currentTile.imgKey;
+		_tagTiles[index].pivot = _currentTile.pivot;
+
 		if (_currentTile.isFrame)
 		{
 			_tiles[index]->GetChildren()[0]->AddComponent<Sprite>()->Init(true, true);
@@ -413,7 +468,7 @@ void Maptool::ClickSetTile()
 	if (_ptMouse.x < WINSIZEX - 270 || _ptMouse.x >(WINSIZEX - 270) + (SET_TILEWIDTH * SAMPLE_TILE_X_NUM) ||
 		_ptMouse.y < 30 || _ptMouse.y > 30 + (SET_TILEHEIGHT * SAMPLE_TILE_Y_NUM)) return;
 
-	int index = ((_ptMouse.x - (WINSIZEX - 270) + (int)CAMERA->GetPosition().x) / SET_TILEWIDTH) + SAMPLE_TILE_X_NUM * ((_ptMouse.y - 30 + (int)CAMERA->GetPosition().y) / SET_TILEHEIGHT);
+	int index = ((_ptMouse.x - (WINSIZEX - 270)) / SET_TILEWIDTH) + SAMPLE_TILE_X_NUM * ((_ptMouse.y - 30) / SET_TILEHEIGHT);
 
 	_currentTile.imgKey = FindTile(_sampleTile[index].imgKey)->imgKey;
 	_currentTile.isFrame = FindTile(_sampleTile[index].imgKey)->isFrame;
@@ -465,6 +520,7 @@ void Maptool::SetAttribute(int curIdx, Vector2 StartPos, Vector2 size, Vector2 S
 			if (start + j + (TILENUMX * i) < 0)continue;
 
 			_tiles[start + j + (TILENUMX * i)]->SetAttribute(attribute);
+			_tagTiles[start + j + (TILENUMX * i)].attribute = attribute;
 		}
 	}
 
@@ -477,6 +533,7 @@ void Maptool::SetAttribute(int curIdx, Vector2 StartPos, Vector2 size, Vector2 S
 			if (start + j + (TILENUMX * i) < 0)continue;
 
 			_tiles[start + j + (TILENUMX * i)]->SetAttribute(attribute);
+			_tagTiles[start + j + (TILENUMX * i)].attribute = attribute;
 		}
 	}
 }

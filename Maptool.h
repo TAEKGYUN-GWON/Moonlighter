@@ -103,6 +103,7 @@ struct tagTile
 		isFrame = false;
 		frameX = 1;
 		frameY = 1;
+		//pivot = PIVOT::RIGHT_BOTTOM;
 		pivot = PIVOT::CENTER;
 
 		//vStartPos.clear();
@@ -176,6 +177,7 @@ private:
 	tagCurrentTile _currentTile;
 	tagSampleTile _sampleTile[SAMPLE_TILE_X_NUM * SAMPLE_TILE_Y_NUM];
 	Tile* _tiles[TILENUMX * TILENUMY];
+	tagTile _tagTiles[TILENUMX * TILENUMY];
 
 	mapTileList _mTileList;
 
