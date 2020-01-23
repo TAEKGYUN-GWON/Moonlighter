@@ -287,16 +287,25 @@ void Maptool::Render()
 
 void Maptool::Save()
 {
-	for (int i = 0; i < TILENUMX * TILENUMY; i++)
-	{
-		char index[128];
-		sprintf(index, "%d", i);
-		char* attribute;
-		strcpy(attribute, _tiles[i]->GetAttribute().c_str());
-		char* imgName;//(대충 지각해서 지금 개 쫄리는 사람)
-		strcpy(imgName, _tiles[i]->GetImgName().c_str());
-		INIDATAMANAGER->addData(index, attribute, imgName);
-	}
+	HANDLE file;
+	DWORD write;
+
+	//GetWindowText(_btnSaveName, titleSave, 256);
+
+	//string str = titleSave;
+	//str += ".map";
+	string str = "Town.map";
+
+	file = CreateFile(str.c_str(), GENERIC_WRITE, 0, NULL,
+		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	//WriteFile(file, _tiles, sizeof(Tile) * TILEWIDTH * TILEHEIGHT, &write, NULL);
+	WriteFile(file, _tagTiles, sizeof(tagTile) * TILENUMX * TILENUMY, &write, NULL);
+	CloseHandle(file);
+
+
+
+	MessageBox(_hWnd, "저장 되었을지도..?", str.c_str(), MB_OK);
 }
 
 void Maptool::Load()
@@ -316,9 +325,41 @@ void Maptool::Load()
 
 	if (file != INVALID_HANDLE_VALUE)
 	{
-		ReadFile(file, _tiles, sizeof(Tile) * TILENUMX * TILENUMY, &read, NULL);
+		ReadFile(file, _tagTiles, sizeof(tagTile) * TILENUMX * TILENUMY, &read, NULL);
 		CloseHandle(file);
 		InvalidateRect(_hWnd, NULL, false);
+		for (int i = 0; i < TILENUMX * TILENUMY; i++)
+		{
+			_tiles[i]->SetAttribute(_tagTiles[i].attribute);
+			_tiles[i]->SetImgName(_tagTiles[i].imgKey);
+			_tiles[i]->SetIsFrame(_tagTiles[i].isFrame);
+			_tiles[i]->SetPivot(_tagTiles[i].pivot);
+
+			if (_tiles[i]->GetImgName() != "None")
+			{
+				_tiles[i]->AddChild( Object::CreateObject<Object>());
+
+				_tiles[i]->GetChildren()[0]->GetTrans()->SetPos(_tiles[i]->GetTrans()->GetPos() + Vector2(0,TILEHEIGHT/2));
+				if (_tiles[i]->GetPivot() == RIGHT_BOTTOM) _tiles[i]->GetChildren()[0]->GetTrans()->SetPos(_tiles[i]->GetTrans()->GetPos() + Vector2(TILEWIDTH / 2, TILEHEIGHT / 2));
+
+				
+				_tiles[i]->GetChildren()[0]->GetTrans()->SetScale(GRAPHICMANAGER->FindImage(_tiles[i]->GetImgName())->GetFrameWidth(), GRAPHICMANAGER->FindImage(_tiles[i]->GetImgName())->GetFrameHeight());
+				_tiles[i]->GetChildren()[0]->GetTrans()->SetRect();
+
+				if (_tiles[i]->GetIsFrame())
+				{
+					_tiles[i]->GetChildren()[0]->AddComponent<Sprite>()->Init(true, true);
+					_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetImgName(_tiles[i]->GetImgName());
+					_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetFPS(0.5f);
+					_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(_tiles[i]->GetPivot());
+				}
+				else
+				{
+					_tiles[i]->GetChildren()[0]->AddComponent<Sprite>()->SetImgName(_tiles[i]->GetImgName());
+					_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(_tiles[i]->GetPivot());
+				}
+			}
+		}
 	}
 	else
 	{
@@ -354,6 +395,12 @@ void Maptool::SetUp()
 			_tiles[index]->Init(j, i);
 			_tiles[index]->AddComponent<Sprite>();
 			_tiles[index]->SetAttribute("None");
+
+			_tagTiles[index].attribute = "None";
+			_tagTiles[index].imgKey = "None";
+			_tagTiles[index].isFrame = false;
+			_tagTiles[index].pivot = PIVOT::CENTER;
+
 		}
 	}
 	for (int i = 0; i < SAMPLE_TILE_Y_NUM; ++i)
@@ -394,6 +441,9 @@ void Maptool::SetMap()
 
 				_tiles[i]->GetChildren()[0]->GetTrans()->SetScale(GRAPHICMANAGER->FindImage(_currentTile.imgKey)->GetFrameWidth(), GRAPHICMANAGER->FindImage(_currentTile.imgKey)->GetFrameHeight());
 				_tiles[i]->GetChildren()[0]->GetTrans()->SetRect();
+				_tagTiles[i].isFrame = _currentTile.isFrame;
+				_tagTiles[i].imgKey = _currentTile.imgKey;
+				_tagTiles[i].pivot = _currentTile.pivot;
 
 				if (_currentTile.isFrame)
 				{
@@ -401,11 +451,16 @@ void Maptool::SetMap()
 					_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetImgName(_currentTile.imgKey);
 					_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetFPS(0.5f);
 					_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(_currentTile.pivot);
+					_tiles[i]->SetImgName(_currentTile.imgKey);
+					_tiles[i]->SetIsFrame(true);
+
 				}
 				else
 				{
 					_tiles[i]->GetChildren()[0]->AddComponent<Sprite>()->SetImgName(_currentTile.imgKey);
 					_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(_currentTile.pivot);
+					_tiles[i]->SetImgName(_currentTile.imgKey);
+					_tiles[i]->SetIsFrame(false);
 				}
 
 				break;
@@ -475,6 +530,7 @@ void Maptool::SetAttribute(int curIdx, Vector2 StartPos, Vector2 size, Vector2 S
 			if (start + j + (TILENUMX * i) < 0)continue;
 
 			_tiles[start + j + (TILENUMX * i)]->SetAttribute(attribute);
+			_tagTiles[start + j + (TILENUMX * i)].attribute = attribute;
 		}
 	}
 
@@ -487,6 +543,7 @@ void Maptool::SetAttribute(int curIdx, Vector2 StartPos, Vector2 size, Vector2 S
 			if (start + j + (TILENUMX * i) < 0)continue;
 
 			_tiles[start + j + (TILENUMX * i)]->SetAttribute(attribute);
+			_tagTiles[start + j + (TILENUMX * i)].attribute = attribute;
 		}
 	}
 }

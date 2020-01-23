@@ -34,12 +34,14 @@ private:
 	bool _isOpen;
 	bool _isClose;
 
+	bool _isFrame;
+
 	Tile* _parent;
 
 	string _attribute;	//鸥老加己
 
 	string _imgName;	//鸥老加己
-
+	PIVOT _pivot;
 	ColorF::Enum _color;
 	RECT _rc;
 
@@ -95,5 +97,11 @@ public:
 
 	void SetImgName(string name) { _imgName = name; }
 	string GetImgName() { return _imgName; }
+
+	void SetIsFrame(bool active) { _isFrame = active; }
+	bool GetIsFrame() { return _isFrame; }
+
+	void SetPivot(PIVOT pivot) { _pivot = pivot; }
+	PIVOT GetPivot() { return _pivot; }
 };
 

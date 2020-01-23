@@ -180,7 +180,7 @@ private:
 	tagCurrentTile _currentTile;
 	tagSampleTile _sampleTile[SAMPLE_TILE_X_NUM * SAMPLE_TILE_Y_NUM];
 	Tile* _tiles[TILENUMX * TILENUMY];
-
+	tagTile _tagTiles[TILENUMX * TILENUMY];
 	mapTileList _mTileList;
 
 	SamplePage _page;

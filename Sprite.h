@@ -48,6 +48,9 @@ public:
 	inline void SetShowRect(bool show) { _isShowRect = show; }
 	inline void SetCameraAffect(bool isAffect) { _isCameraAffect = isAffect; }
 
+	void SetIsFrame(bool isFrame) { _isFrame = isFrame; }
+	void SetIsLoop(bool isLoop) { _isLoop = isLoop; }
+
 	inline string GetImgKey() { return _imgKey; }
 	inline float GetAlpha() { return _alpha; }
 	inline bool GetFlipX() { return _isFlipX; }
