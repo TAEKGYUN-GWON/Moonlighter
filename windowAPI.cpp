@@ -9,7 +9,6 @@ HWND		_hWnd;
 
 POINT		_ptMouse;
 
-
 //함수의 프로토타입 선언
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
@@ -38,7 +37,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmd
 	_hWnd = CreateWindow(
 		WINNAME,
 		WINNAME,
-		WS_OVERLAPPEDWINDOW,
+		WS_OVERLAPPEDWINDOW | WS_THICKFRAME,
 		WINSTARTX,
 		WINSTARTY,
 		WINSIZEX,
@@ -102,7 +101,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmd
 
 	return message.wParam;
 }
-
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {

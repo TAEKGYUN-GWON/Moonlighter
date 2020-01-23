@@ -84,60 +84,73 @@ void Maptool::Update()
 	{
 		if (PtInRect(&_rcLoad, _ptMouse))
 		{
-			OPENFILENAME ofn;
-			char filePathSize[1028] = "";
-			ZeroMemory(&ofn, sizeof(OPENFILENAME));
+#pragma region FileLoadTest
+			//OPENFILENAME ofn;
+			//char filePathSize[1028] = "";
+			//ZeroMemory(&ofn, sizeof(OPENFILENAME));
+			//
+			//ofn.lStructSize = sizeof(OPENFILENAME);
+			//ofn.hwndOwner = NULL;
+			//ofn.lpstrFile = filePathSize;
+			//ofn.nMaxFile = sizeof(filePathSize);
+			//ofn.nFilterIndex = true;
+			//ofn.lpstrFileTitle = NULL;
+			//ofn.nMaxFileTitle = NULL;
+			//ofn.lpstrInitialDir = NULL;
+			//ofn.lpstrFilter = ("À½¾ÇÆÄÀÏ¸¸³Ö¾îÁà¶ó");
+			//ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+			//
+			//if (GetOpenFileName(&ofn) == FALSE) return;
+			//
+			//char temp[1028];
+			//strncpy_s(temp, strlen(ofn.lpstrFile) + 1, ofn.lpstrFile, strlen(ofn.lpstrFile));
+			//
+			//char* context = NULL;
+			//char* token = strtok_s(temp, "\\", &context);
+			//
+			//while (strlen(context))
+			//{
+			//	token = strtok_s(NULL, "\\", &context);
+			//}
+			//
+			//char* title = token;
+			//token = strtok_s(title, ".", &context);
+#pragma endregion
 
-			ofn.lStructSize = sizeof(OPENFILENAME);
-			ofn.hwndOwner = NULL;
-			ofn.lpstrFile = filePathSize;
-			ofn.nMaxFile = sizeof(filePathSize);
-			ofn.nFilterIndex = true;
-			ofn.lpstrFileTitle = NULL;
-			ofn.nMaxFileTitle = NULL;
-			ofn.lpstrInitialDir = NULL;
-			ofn.lpstrFilter = ("À½¾ÇÆÄÀÏ¸¸³Ö¾îÁà¶ó");
-			ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
-
-			if (GetOpenFileName(&ofn) == FALSE) return;
-
-			char temp[1028];
-			strncpy_s(temp, strlen(ofn.lpstrFile) + 1, ofn.lpstrFile, strlen(ofn.lpstrFile));
-
-			char* context = NULL;
-			char* token = strtok_s(temp, "\\", &context);
-
-			while (strlen(context))
-			{
-				token = strtok_s(NULL, "\\", &context);
-			}
-
-			char* title = token;
-			token = strtok_s(title, ".", &context);
+			Load();
+			
 		}
 		if (PtInRect(&_rcSave, _ptMouse))
 		{
-			OPENFILENAME ofn;
-			char filePathSize[1028] = "";
-			//TCHAR filter[] = "Every file(*.*) \0*.*\0TextFile\0*.txt;*.doc\0";
-			//TCHAR filter[] = "Every file(*.*) \0*.*\0TextFile\0*.txt;*.doc\0¸Ê(.map)\0*.map\0";
-			char filter[1028] = "Every file(*.*) \0*.*\0TextFile\0*.txt;*.doc\0¸Ê(.map)\0*.map\0";
+#pragma region FileSaveTest
+			//OPENFILENAME ofn;
+			//char filePathSize[1028] = "";
+			////TCHAR filter[] = "Every file(*.*) \0*.*\0TextFile\0*.txt;*.doc\0";
+			//char filter[1028] = "Every file(*.*) \0*.*\0TextFile\0*.txt;*.doc\0¸Ê(.map)\0*.map*\0";
+			//
+			//ZeroMemory(&ofn, sizeof(OPENFILENAME));
+			//
+			//ofn.lStructSize = sizeof(OPENFILENAME);
+			//ofn.hwndOwner = NULL;
+			////ofn.lpstrFile = filePathSize;
+			//ofn.lpstrFile = filter;
+			//ofn.nMaxFile = sizeof(filePathSize);
+			//ofn.nFilterIndex = true;
+			//ofn.lpstrFileTitle = NULL;
+			//ofn.nMaxFileTitle = NULL;
+			//ofn.lpstrInitialDir = NULL;
+			//ofn.lpstrFilter = filter;
+			//ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+			//
+			////if (GetSaveFileName(&ofn) == FALSE) return;
+			//if (GetSaveFileName(&ofn) != FALSE)
+			//{
+			//	wsprintf(filePathSize, "%s ÆÄÀÏ", ofn.lpstrFile);
+			//	MessageBox(_hWnd, filePathSize, "ÀúÀå", MB_OK);
+			//}
+#pragma endregion
 
-			ZeroMemory(&ofn, sizeof(OPENFILENAME));
-
-			ofn.lStructSize = sizeof(OPENFILENAME);
-			ofn.hwndOwner = NULL;
-			//ofn.lpstrFile = filePathSize;
-			ofn.lpstrFile = filter;
-			ofn.nMaxFile = sizeof(filePathSize);
-			ofn.nFilterIndex = true;
-			ofn.lpstrFileTitle = NULL;
-			ofn.nMaxFileTitle = NULL;
-			ofn.lpstrInitialDir = NULL;
-			ofn.lpstrFilter = filter;
-			ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
-
-			if (GetSaveFileName(&ofn) == FALSE) return;
+			Save();
 		}
 	}
 
@@ -268,44 +281,61 @@ void Maptool::Render()
 		//GRAPHICMANAGER->DrawRect(_ptMouse, Vector2(_currentTile.vSize[0].x * TILEWIDTH, _currentTile.vSize[0].y * TILEHEIGHT), 0.0f, ColorF::Red, _currentTile.pivot, 1.0f, false);
 	}
 
-	GRAPHICMANAGER->DrawRect(Vector2(_rcLoad.left, _rcLoad.top), Vector2((_rcLoad.right - _rcLoad.left), (_rcLoad.bottom - _rcLoad.top)), 0.0f, ColorF::Blue, CENTER, 1.0f, false);
-	GRAPHICMANAGER->DrawRect(Vector2(_rcSave.left, _rcSave.top), Vector2((_rcSave.right - _rcSave.left), (_rcSave.bottom - _rcSave.top)), 0.0f, ColorF::Red, CENTER, 1.0f, false);
+	GRAPHICMANAGER->DrawRect(Vector2(_rcLoad.left, _rcLoad.top), Vector2((_rcLoad.right - _rcLoad.left), (_rcLoad.bottom - _rcLoad.top)), 0.0f, ColorF::Blue, PIVOT::LEFT_TOP, 1.0f, false);
+	GRAPHICMANAGER->DrawRect(Vector2(_rcSave.left, _rcSave.top), Vector2((_rcSave.right - _rcSave.left), (_rcSave.bottom - _rcSave.top)), 0.0f, ColorF::Red, PIVOT::LEFT_TOP, 1.0f, false);
 }
 
 void Maptool::Save()
 {
-	//HANDLE file;
-	//DWORD write;
-	//
+	HANDLE file;
+	DWORD write;
+	
 	//GetWindowText(_btnSaveName, titleSave, 256);
-	//
+	
 	//string str = titleSave;
 	//str += ".map";
-	//
-	//file = CreateFile(str.c_str(), GENERIC_WRITE, 0, NULL,
-	//	CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-	//
+	string str = "Town.map";
+	
+	file = CreateFile(str.c_str(), GENERIC_WRITE, 0, NULL,
+		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	
 	//WriteFile(file, _tiles, sizeof(Tile) * TILEWIDTH * TILEHEIGHT, &write, NULL);
-	//CloseHandle(file);
+	WriteFile(file, _tiles, sizeof(Tile) * TILENUMX * TILENUMY, &write, NULL);
+	CloseHandle(file);
+
+	MessageBox(_hWnd, "ÀúÀå µÇ¾úÀ»Áöµµ..?", str.c_str(), MB_OK);
 }
 
 void Maptool::Load()
 {
-	//HANDLE file;
-	//DWORD read;
-	//
+	HANDLE file;
+	DWORD read;
+	
 	//GetWindowText(_btnLoadName, titleLoad, 256);
-	//
+	
 	//string str = titleLoad;
 	//str += ".map";
-	//
-	////file = CreateFile(titleLoad, GENERIC_READ, 0, NULL,
-	//file = CreateFile(str.c_str(), GENERIC_READ, 0, NULL,
-	//	OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-	//
+	string str = "Town.map";
+	
+	//file = CreateFile(titleLoad, GENERIC_READ, 0, NULL,
+	file = CreateFile(str.c_str(), GENERIC_READ, 0, NULL,
+		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	if (file != INVALID_HANDLE_VALUE)
+	{
+		ReadFile(file, _tiles, sizeof(Tile) * TILENUMX * TILENUMY, &read, NULL);
+		CloseHandle(file);
+		InvalidateRect(_hWnd, NULL, false);
+	}
+	else
+	{
+		MessageBox(_hWnd, "¾ø¾¬", str.c_str(), MB_OK);
+	}
+	
 	//ReadFile(file, _tiles, sizeof(Tile) * TILEWIDTH * TILEHEIGHT, &read, NULL);
-	//
-	//CloseHandle(file);
+	
+
+	MessageBox(_hWnd, "ºÒ·¯¿ÍÁ®¶ó", str.c_str(), MB_OK);
 }
 
 void Maptool::SetUp()
