@@ -232,6 +232,7 @@ void NpcExit::StateStay(Npc* npc)
 void NpcExit::StateOut(Npc* npc)
 {
 	//여긴 암거도 없어도 될듯..
-	cout << "집에 간다" << endl;
+	if (npc->GetIsActive())	cout << "★★집에 간다★★" << endl;
+	npc->SetIsActive(false);
 	//여기서 npc를 isactive=false; 시키고, 벡터는 매니저에서 지움
 }

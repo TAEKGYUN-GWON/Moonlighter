@@ -1,2 +1,16 @@
 #include "stdafx.h"
 #include "ShopStandManager.h"
+
+void ShopStandManager::Init()
+{
+	//여기서 푸시백 네번 해줄거다..
+
+}
+
+void ShopStandManager::Release()
+{
+}
+
+void ShopStandManager::Update()
+{
+}
