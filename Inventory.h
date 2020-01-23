@@ -21,18 +21,14 @@ struct tagItemInfo
 class Inventory 
 {
 private:
-	
 	Graphic* _ui;
 	Graphic* _select;
 	Vector2 pos;
-
 	multimap<string, tagItemInfo> _inven;
 	multimap<string, tagItemInfo>::iterator iter;
 	bool _isActive;
 
 public:
-
-
 
 	Inventory();
 	~Inventory();
@@ -41,7 +37,6 @@ public:
 	void Update();
 	void Release();
 	void Render();
-
 	void Insert(Item* item);
 	void Remove(string name, int num);
 

@@ -17,13 +17,14 @@ void Inventory::Init()
 	_select = GRAPHICMANAGER->AddImage("invenSlot", L"resource/img/UI/invenSlot.png");
 	GRAPHICMANAGER->AddImage("Potion_S", L"resource/img/Items/Potion_S.png");
 	_isActive = false;
-	//_select = Object::CreateObject<Object>();
-	//_select->SetParent(nullptr);
+
+
 
 	pos = Vector2(154, 125);
 	Item* test = Object::CreateObject<Item>();
 	test->SetIsActive(false);
 	test->Init();
+	test->SetCameraAffect(false);
 	auto a = test->GetSprite();
 	a->Init();
 	a->SetImgName("Potion_S");
@@ -38,9 +39,8 @@ void Inventory::Init()
 void Inventory::Update()
 {
 	KeyCon();
-
 	if (!_isActive) return;
-
+	
 	Quantity();
 }
 

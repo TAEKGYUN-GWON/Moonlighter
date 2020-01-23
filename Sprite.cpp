@@ -29,7 +29,6 @@ void Sprite::Render()
 {
 	if (KEYMANAGER->isToggleKey(VK_F1))
 	{
-
 		GRAPHICMANAGER->DrawRect(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _color, _pivot, _strokeWidth);
 	}
 

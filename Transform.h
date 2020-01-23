@@ -30,7 +30,7 @@ public:
 	virtual void Update() override;
 
 	//Vector2 타입 좌표 가져오기
-	inline Vector2 GetPos() { return pos; }
+	Vector2 GetPos();
 
 	//월드좌표 가져오기
 	Vector2 GetWorldPosition();
@@ -66,7 +66,7 @@ public:
 	//디그리 값으로 회전값 세팅
 	inline void SetRotateToDegree(float rotate) { _rotate = rotate * RadToDeg; }
 
-	inline RECT GetRect() { return _rc; }
+	RECT GetRect();
 
 	inline void SetRect(RECT rc) { _rc = rc; }
 

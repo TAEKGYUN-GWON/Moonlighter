@@ -47,19 +47,24 @@ void Transform::Init()
 void Transform::Update()
 {
 	SetRect();
-	UpdateMatrix();
+	UpdateMatrix();	 
+}
+
+Vector2 Transform::GetPos()
+{
+	if (!_object->GetCameraAffect()) return pos + CAMERA->GetPosition();
+	return pos;
 }
 
 void Transform::SetPos(Vector2 pos)
 {
-	if (_object->GetCameraAffect()) this->pos = pos;
-	else this->pos = pos + CAMERA->GetPosition();
+	this->pos = pos;
 }
 void Transform::SetPos(float x, float y)
 {
-	if (_object->GetCameraAffect()) pos = Vector2(x, y);
-	else pos = Vector2(x, y) + CAMERA->GetPosition();
+	pos = Vector2(x, y);
 }
+
 void Transform::SetWorldPos(Vector2 pos)
 {
 	Object* parent = _object->GetParent();
@@ -73,11 +78,19 @@ void Transform::SetWorldPos(Vector2 pos)
 	this->pos = pos - worldPos;
 }
 
+RECT Transform::GetRect()
+{
+	if(!_object->GetCameraAffect())
+		return  RectMakeCenter(pos.x + CAMERA->GetPosition().x, pos.y + CAMERA->GetPosition().y, scale.x, scale.y);
+	return _rc;
+}
+
 void Transform::SetRect()
 {
 	_rc = RectMakeCenter(pos.x, pos.y, scale.x, scale.y);
 	bottomPos = Vector2(pos.x, pos.y + scale.y / 2);
 }
+
 
 Vector2 Transform::GetWorldPosition()
 {
