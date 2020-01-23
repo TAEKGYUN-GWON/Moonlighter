@@ -37,6 +37,9 @@ private:
 	Tile* _parent;
 
 	string _attribute;	//鸥老加己
+
+	string _imgName;	//鸥老加己
+
 	ColorF::Enum _color;
 	RECT _rc;
 
@@ -89,5 +92,8 @@ public:
 
 	void SetId(int id) { _id = id; }
 	int GetId() { return _id; }
+
+	void SetImgName(string name) { _imgName = name; }
+	string GetImgName() { return _imgName; }
 };
 

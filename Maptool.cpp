@@ -287,23 +287,16 @@ void Maptool::Render()
 
 void Maptool::Save()
 {
-	HANDLE file;
-	DWORD write;
-	
-	//GetWindowText(_btnSaveName, titleSave, 256);
-	
-	//string str = titleSave;
-	//str += ".map";
-	string str = "Town.map";
-	
-	file = CreateFile(str.c_str(), GENERIC_WRITE, 0, NULL,
-		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-	
-	//WriteFile(file, _tiles, sizeof(Tile) * TILEWIDTH * TILEHEIGHT, &write, NULL);
-	WriteFile(file, _tiles, sizeof(Tile) * TILENUMX * TILENUMY, &write, NULL);
-	CloseHandle(file);
-
-	MessageBox(_hWnd, "저장 되었을지도..?", str.c_str(), MB_OK);
+	for (int i = 0; i < TILENUMX * TILENUMY; i++)
+	{
+		char index[128];
+		sprintf(index, "%d", i);
+		char* attribute;
+		strcpy(attribute, _tiles[i]->GetAttribute().c_str());
+		char* imgName;//(대충 지각해서 지금 개 쫄리는 사람)
+		strcpy(imgName, _tiles[i]->GetImgName().c_str());
+		INIDATAMANAGER->addData(index, attribute, imgName);
+	}
 }
 
 void Maptool::Load()
