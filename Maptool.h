@@ -12,16 +12,6 @@
 
 #pragma region 잠시보류
 
-enum OBJECT
-{
-	OBJ_WALL,
-	OBJ_BLOCK1, OBJ_BLOCK3, OBJ_BLOCKS,	//벽돌 등 오브젝트
-	OBJ_PLAYER,
-	OBJ_ENEMY1, OBJ_ENEMY2,
-	OBJ_ENEMY3, OBJ_ENEMY4,
-	OBJ_NONE,							//나중에 지울용도
-};
-
 enum CTRL
 {
 	CTRL_SAVE,
@@ -71,6 +61,12 @@ enum Attribute
 	CLIFF,
 	TERRAIN_DESTRUCTION,
 	NONE,
+};
+
+enum class EraserType
+{
+	Single,
+	Image,
 };
 
 //typedef struct tagCoordinate
@@ -184,6 +180,7 @@ private:
 	mapTileList _mTileList;
 
 	SamplePage _page;
+	EraserType _eraser;
 
 	int _ctrSelect;
 	int _curFrameX;
@@ -211,11 +208,10 @@ public:
 
 	void SetUp();
 	void SetMap();
+	void ClickSetTile();
 	void RemoveObject();
 	//void FindIndex(int curIdx, Vector2 size);
 	void SetAttribute(int curIdx, Vector2 StartPos, Vector2 size, Vector2 StartPos2, Vector2 size2, string attribute);
-
-	int FindId();
 
 	tagTile* FindTile(string imgKey);
 

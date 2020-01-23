@@ -64,6 +64,9 @@ public:
 	void SetMaxFrameX(int maxFrameX) { _maxFrameX = maxFrameX - 1; }
 	inline void SetRectColor(ColorF::Enum color) { _color = color; }
 	inline void SetPivot(PIVOT pivot) { _pivot = pivot; }
+	void SetIsFrame(bool isFrame) { _isFrame = isFrame; }
+	void SetIsLoop(bool isLoop) { _isLoop = isLoop; }
+
 
 	bool IsFrameEnd();
 	inline Graphic* GetGraphic() { return _graphic; }

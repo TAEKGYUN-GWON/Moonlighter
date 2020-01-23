@@ -16,8 +16,6 @@ void Tile::Init(int idX, int idY)
 	_idX = idX;
 	_idY = idY;
 
-	_id = 0;
-
 	_f = -1;
 	_g = _h = _isOpen = _isClose = 0;
 	_parent = nullptr;

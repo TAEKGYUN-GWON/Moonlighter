@@ -1,6 +1,9 @@
 #pragma once
 #include "singletonBase.h"
 
+#define ZOOM_MIN 0.01f
+#define ZOOM_MAX 2.5f
+
 class Camera :public singletonBase<Camera>
 {
 private:

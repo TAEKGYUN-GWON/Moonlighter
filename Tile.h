@@ -24,8 +24,6 @@ private:
 	int _idX;
 	int _idY;
 
-	int _id;
-
 	//F = G + H
 	float _f;		//총 비용
 	float _g;	//시작위치로부터 현재 노드
@@ -86,8 +84,5 @@ public:
 
 	void SetRect(RECT rc) { _rc = rc; }
 	RECT GetRect() { return _rc; }
-
-	void SetId(int id) { _id = id; }
-	int GetId() { return _id; }
 };
 
