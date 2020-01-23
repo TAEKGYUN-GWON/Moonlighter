@@ -1,14 +1,24 @@
 #pragma once
 #include "Scene.h"
 #include "Player.h"
+#include "NpcManager.h"
+#include "CheckStand.h"
+#include "NpcShopState.h"
+#include "ShopStandManager.h"
 
 class ShopScene : public Scene
 {
 private:
 	Player* _player;
+	NpcManager* _npcMgr;			 //npc 매니저
+	CheckStand* _checkStand;		 //계산대
+	NpcShopState* _npcShopState;	 //Npc 상태
+	ShopStandManager* _shopStandMgr; //가판대 매니저
+
 
 public:
 	virtual void Init();
 	virtual void Update();
+	virtual void Render();
 };
 

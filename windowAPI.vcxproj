@@ -148,6 +148,7 @@
     <ClInclude Include="Astar.h" />
     <ClInclude Include="BoxWorldManager.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CheckStand.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="Component.h" />
@@ -163,6 +164,9 @@
     <ClInclude Include="JsonManager.h" />
     <ClInclude Include="loadingScene.h" />
     <ClInclude Include="Maptool.h" />
+    <ClInclude Include="Npc.h" />
+    <ClInclude Include="NpcManager.h" />
+    <ClInclude Include="NpcShopState.h" />
     <ClInclude Include="omega.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Potion.h" />
@@ -171,6 +175,8 @@
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="ShopScene.h" />
+    <ClInclude Include="ShopStand.h" />
+    <ClInclude Include="ShopStandManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="keyManager.h" />
@@ -205,6 +211,7 @@
     <ClCompile Include="Astar.cpp" />
     <ClCompile Include="BoxWorldManager.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CheckStand.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="DrawComponent.cpp" />
@@ -218,6 +225,9 @@
     <ClCompile Include="JsonManager.cpp" />
     <ClCompile Include="loadingScene.cpp" />
     <ClCompile Include="Maptool.cpp" />
+    <ClCompile Include="Npc.cpp" />
+    <ClCompile Include="NpcManager.cpp" />
+    <ClCompile Include="NpcShopState.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Potion.cpp" />
     <ClCompile Include="Potions.cpp" />
@@ -225,6 +235,8 @@
     <ClCompile Include="Graphic.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="ShopScene.cpp" />
+    <ClCompile Include="ShopStand.cpp" />
+    <ClCompile Include="ShopStandManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="keyManager.cpp" />

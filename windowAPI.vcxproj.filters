@@ -91,11 +91,11 @@
     <Filter Include="playGround\Item">
       <UniqueIdentifier>{77c1421c-a7e0-4770-97b1-e405843461d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\Item\Potion">
-      <UniqueIdentifier>{92a066e4-a9c8-4748-b3ec-b9fabbd27be3}</UniqueIdentifier>
+    <Filter Include="playGround\Shop\Npc">
+      <UniqueIdentifier>{0a0724a8-d624-45bd-9848-e35ab53c5fe1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\Item\etc">
-      <UniqueIdentifier>{ae23bdad-6afe-437b-b56e-48793ae8bbea}</UniqueIdentifier>
+    <Filter Include="playGround\Shop\ShopStand">
+      <UniqueIdentifier>{a8f5da20-97c4-47a4-b981-fb523187115d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +109,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="windowAPI.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="commonMacroFunction.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="singletonBase.h">
@@ -243,26 +246,23 @@
     <ClInclude Include="Player.h">
       <Filter>playGround\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Item.hpp">
-      <Filter>playGround\Item</Filter>
+    <ClInclude Include="Npc.h">
+      <Filter>playGround\Shop\Npc</Filter>
     </ClInclude>
-    <ClInclude Include="Potion.h">
-      <Filter>playGround\Item\Potion</Filter>
+    <ClInclude Include="NpcManager.h">
+      <Filter>playGround\Shop\Npc</Filter>
     </ClInclude>
-    <ClInclude Include="Potions.h">
-      <Filter>playGround\Item\Potion</Filter>
+    <ClInclude Include="NpcShopState.h">
+      <Filter>playGround\Shop\Npc</Filter>
     </ClInclude>
-    <ClInclude Include="ETC.h">
-      <Filter>playGround\Item\etc</Filter>
+    <ClInclude Include="CheckStand.h">
+      <Filter>playGround\Shop</Filter>
     </ClInclude>
-    <ClInclude Include="ETCS.h">
-      <Filter>playGround\Item\etc</Filter>
+    <ClInclude Include="ShopStand.h">
+      <Filter>playGround\Shop\ShopStand</Filter>
     </ClInclude>
-    <ClInclude Include="commonMacroFunction.h">
-      <Filter>playGround\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Item_Bass_Collider.h">
-      <Filter>playGround\Item</Filter>
+    <ClInclude Include="ShopStandManager.h">
+      <Filter>playGround\Shop\ShopStand</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -389,20 +389,23 @@
     <ClCompile Include="Player.cpp">
       <Filter>playGround\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Potion.cpp">
-      <Filter>playGround\Item\Potion</Filter>
+    <ClCompile Include="Npc.cpp">
+      <Filter>playGround\Shop\Npc</Filter>
     </ClCompile>
-    <ClCompile Include="Potions.cpp">
-      <Filter>playGround\Item\Potion</Filter>
+    <ClCompile Include="NpcManager.cpp">
+      <Filter>playGround\Shop\Npc</Filter>
     </ClCompile>
-    <ClCompile Include="ETC.cpp">
-      <Filter>playGround\Item\etc</Filter>
+    <ClCompile Include="NpcShopState.cpp">
+      <Filter>playGround\Shop\Npc</Filter>
     </ClCompile>
-    <ClCompile Include="ETCS.cpp">
-      <Filter>playGround\Item\etc</Filter>
+    <ClCompile Include="CheckStand.cpp">
+      <Filter>playGround\Shop</Filter>
     </ClCompile>
-    <ClCompile Include="Item_Bass_Collider.cpp">
-      <Filter>playGround\Item</Filter>
+    <ClCompile Include="ShopStand.cpp">
+      <Filter>playGround\Shop\ShopStand</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopStandManager.cpp">
+      <Filter>playGround\Shop\ShopStand</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
