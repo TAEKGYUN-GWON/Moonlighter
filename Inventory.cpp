@@ -17,24 +17,6 @@ void Inventory::Init()
 	_select = GRAPHICMANAGER->AddImage("invenSlot", L"resource/img/UI/invenSlot.png");
 	GRAPHICMANAGER->AddImage("Potion_S", L"resource/img/Items/Potion_S.png");
 	_isActive = false;
-
-
-
-	pos = Vector2(154, 125);
-	Item* test = Object::CreateObject<Item>();
-	test->SetIsActive(false);
-	test->Init();
-	test->SetCameraAffect(false);
-	auto a = test->GetSprite();
-	a->Init();
-	a->SetImgName("Potion_S");
-	test->SetName("test");
-	test->SetMaxCount(5);
-
-	for (int i = 0; i < 3; i++)
-		Insert(test);
-
-	cout << _inven.size() << endl;
 }
 void Inventory::Update()
 {
