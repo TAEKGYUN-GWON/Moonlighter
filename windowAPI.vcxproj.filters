@@ -111,9 +111,6 @@
     <ClInclude Include="windowAPI.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="commonMacroFunction.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="singletonBase.h">
       <Filter>2DGameFramework\SingletonBase</Filter>
     </ClInclude>
@@ -258,14 +255,14 @@
     <ClInclude Include="ETC.h">
       <Filter>playGround\Item\etc</Filter>
     </ClInclude>
-    <ClInclude Include="Vine.h">
+    <ClInclude Include="ETCS.h">
       <Filter>playGround\Item\etc</Filter>
     </ClInclude>
-    <ClInclude Include="Crystal_Energy.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="commonMacroFunction.h">
+      <Filter>playGround\Item</Filter>
     </ClInclude>
-    <ClInclude Include="loadingScene.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="Item_Bass_Collider.h">
+      <Filter>playGround\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -401,14 +398,11 @@
     <ClCompile Include="ETC.cpp">
       <Filter>playGround\Item\etc</Filter>
     </ClCompile>
-    <ClCompile Include="Vine.cpp">
+    <ClCompile Include="ETCS.cpp">
       <Filter>playGround\Item\etc</Filter>
     </ClCompile>
-    <ClCompile Include="Crystal_Energy.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="loadingScene.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="Item_Bass_Collider.cpp">
+      <Filter>playGround\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

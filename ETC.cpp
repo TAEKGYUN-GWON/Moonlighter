@@ -7,4 +7,10 @@ void ETC::Init()
 
 	_tag = "ETC";
 	_type = EItemType::etc;
+	_maxCount = 10;
+}
+
+void ETC::Update()
+{
+	super::Update();
 }
