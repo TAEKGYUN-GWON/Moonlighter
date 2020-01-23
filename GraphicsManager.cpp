@@ -162,16 +162,22 @@ void GraphicsManager::DrawImage(string key, Vector2 pos, float alpha, PIVOT pivo
 	if (graphic) graphic->Render(pos, alpha, pivot, cameraAffect);
 }
 
-void GraphicsManager::DrawImage(string key, Vector2 pos, Vector2 scale, float angle, bool flipX, float alpha, PIVOT pivot)
+void GraphicsManager::DrawImage(string key, Vector2 pos, Vector2 scale, float angle, bool flipX, float alpha, PIVOT pivot, bool cameraAffect)
 {
 	Graphic* graphic = FindImage(key);
-	if (graphic) graphic->Render(pos, scale, angle, flipX, alpha, pivot);
+	if (graphic) graphic->Render(pos, scale, angle, flipX, alpha, pivot, cameraAffect);
 }
 
 void GraphicsManager::DrawFrameImage(string key, Vector2 pos, float curFrameX, float curFrameY, float alpha, PIVOT pivot, bool cameraAffect)
 {
 	Graphic* graphic = FindImage(key);
 	if (graphic) graphic->FrameRender(pos, curFrameX, curFrameY, alpha, pivot, cameraAffect);
+}
+
+void GraphicsManager::DrawFrameImage(string key, Vector2 pos, float curFrameX, float curFrameY, Vector2 scale, float angle, bool flipX, float alpha, PIVOT pivot, bool cameraAffect)
+{
+	Graphic* graphic = FindImage(key);
+	if (graphic) graphic->FrameRender(pos, curFrameX, curFrameY, scale, angle, flipX, alpha, pivot, cameraAffect);
 }
 
 ID2D1Bitmap* GraphicsManager::CreateD2DBitmap(wstring file)

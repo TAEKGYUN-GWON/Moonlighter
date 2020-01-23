@@ -71,9 +71,10 @@ public:
 
 	void DrawImage(string key, float x, float y, PIVOT pivot = PIVOT::CENTER);
 	void DrawImage(string key, Vector2 pos, float alpha = 1.0f, PIVOT pivot = PIVOT::CENTER, bool cameraAffect = true);
-	void DrawImage(string key, Vector2 pos, Vector2 scale, float angle, bool flipX = false, float alpha = 1.0f, PIVOT pivot = PIVOT::CENTER);
+	void DrawImage(string key, Vector2 pos, Vector2 scale, float angle, bool flipX = false, float alpha = 1.0f, PIVOT pivot = PIVOT::CENTER, bool cameraAffect = true);
 
 	void DrawFrameImage(string key, Vector2 pos, float curFrameX, float curFrameY, float alpha = 1.0f, PIVOT pivot = PIVOT::CENTER, bool cameraAffect = true);
+	void DrawFrameImage(string key, Vector2 pos, float curFrameX, float curFrameY, Vector2 scale, float angle = 0.0f, bool flipX = false, float alpha = 1.0f, PIVOT pivot = PIVOT::CENTER, bool cameraAffect = true);
 
 	void DrawLine(int startX, int startY, int destX, int destY, ColorF::Enum color = ColorF::Black, float strokeWidth = 1.0f);
 	void DrawLine(float startX, float startY, float destX, float destY, ColorF::Enum color = ColorF::Black, float strokeWidth = 1.0f);

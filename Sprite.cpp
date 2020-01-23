@@ -61,12 +61,13 @@ void Sprite::Render()
 			}
 		}
 		//GRAPHICMANAGER->DrawFrameImage(_imgKey, _object->GetTrans()->GetPos(), _curFrameX, _curFrameY, _alpha, _pivot);
-		_graphic->FrameRender(_object->GetTrans()->GetPos(), _curFrameX, _curFrameY, _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot);
+		//_graphic->FrameRender(_object->GetTrans()->GetPos(), _curFrameX, _curFrameY, _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot, _isCameraAffect);
+		GRAPHICMANAGER->DrawFrameImage(_imgKey, _object->GetTrans()->GetPos(), _curFrameX, _curFrameY, _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot, _isCameraAffect);
 	}
 	else
 	{
 		//GRAPHICMANAGER->DrawImage(_imgKey, _object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot);
-		_graphic->Render(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot);
+		_graphic->Render(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot, _isCameraAffect);
 	}
 
 	//if (KEYMANAGER->isToggleKey(VK_F1))
