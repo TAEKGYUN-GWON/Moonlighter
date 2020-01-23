@@ -14,20 +14,30 @@ Inventory::~Inventory()
 void Inventory::Init()
 {
 	_ui = GRAPHICMANAGER->AddImage("inventory", L"resource/img/UI/Inventory.png");
-	 GRAPHICMANAGER->AddImage("inventory", L"resource/img/UI/Inventory.png");
+	 GRAPHICMANAGER->AddImage("invenSlot", L"resource/img/UI/invenSlot.png");
 	_isActive = false;
 	//_select = Object::CreateObject<Object>();
 	//_select->SetParent(nullptr);
 
-	//_select->
-	//auto a = _select->AddComponent<Sprite>();
+	_select = Object::CreateObject<Object>();
+	_select->Init();
+	_select->GetTrans()->SetPos(154, 125);
+	_select->GetTrans()->SetScale(68,68);
+	auto a = _select->AddComponent<Sprite>();
+	a->Init();
+	a->SetImgName("invenSlot");
+	_select->SetIsActive(false);
+
+
 }
 
 void Inventory::Update()
 {
-	if (KEYMANAGER->isOnceKeyDown('I'))_isActive = !_isActive;
+	_select->GetTrans()->SetPos(_select->GetTrans()->pos - CAMERA->GetPosition());
+	KeyCon();
+
 	if (!_isActive) return;
-	
+
 	Quantity();
 }
 
@@ -40,6 +50,7 @@ void Inventory::Render()
 	if (!_isActive) return;
 
 	_ui->RenderUI(Vector2(WINSIZEX / 2, WINSIZEY / 2));
+	_select->Render();
 }
 
 void Inventory::Insert(Item* item)
@@ -54,17 +65,11 @@ void Inventory::Insert(Item* item)
 				iter->second.some++;
 				return;
 			}
-			else
-			{
-				if (_inven.size() == 15) return;
-				_inven.insert(make_pair(item->GetName(), tagItemInfo(item)));
-			}
 		}
 	}
-	if (_inven.size() == 15) return;
+	if (_inven.size() >= 15) return;
 
 	_inven.insert(make_pair(item->GetName(), tagItemInfo(item)));
-	return;
 }
 
 void Inventory::Remove(string name, int num)
@@ -84,9 +89,6 @@ void Inventory::Remove(string name, int num)
 		}
 	}
 
-	//맵을 돌아서 카운트를 아이템 갯수만큼 증가시켜준다
-	//그 이후에 삭제 
-	//공무원 패턴 생각해 봐야함
 }
 
 void Inventory::Quantity()
@@ -99,4 +101,32 @@ void Inventory::Quantity()
 			break;
 		}
 	}
-} 
+}
+void Inventory::KeyCon()
+{
+
+	if (KEYMANAGER->isOnceKeyDown('I'))
+	{
+		_isActive = !_isActive;
+		_select->SetIsActive(!_select->GetIsActive());
+		_select->GetTrans()->SetPos(Vector2(154, 125));
+	}
+
+	if (KEYMANAGER->isOnceKeyDown('W'))
+	{
+
+	}
+	if (KEYMANAGER->isOnceKeyDown('A'))
+	{
+
+	}
+	if (KEYMANAGER->isOnceKeyDown('S'))
+	{
+
+	}
+	if (KEYMANAGER->isOnceKeyDown('D'))
+	{
+		_select->GetTrans()->SetPos(154, 125);
+	}
+}
+

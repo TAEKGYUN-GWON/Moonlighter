@@ -47,4 +47,5 @@ public:
 	void Quantity();
 	bool GetActive() { return _isActive; }
 	void SetActive(bool active) { _isActive = active; }
+	void KeyCon();
 };
