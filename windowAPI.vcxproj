@@ -160,6 +160,7 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Item.hpp" />
+    <ClInclude Include="Item_Bass_Collider.h" />
     <ClInclude Include="JsonManager.h" />
     <ClInclude Include="Maptool.h" />
     <ClInclude Include="omega.h" />
@@ -214,6 +215,7 @@
     <ClCompile Include="iniDataManager.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Item_Bass_Collider.cpp" />
     <ClCompile Include="JsonManager.cpp" />
     <ClCompile Include="Maptool.cpp" />
     <ClCompile Include="Player.cpp" />

@@ -14,5 +14,6 @@ public:
 	~ETC() {}
 
 	virtual void Init();
-};
+	virtual void Update();
 
+}

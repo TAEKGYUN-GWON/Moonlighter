@@ -111,9 +111,6 @@
     <ClInclude Include="windowAPI.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="commonMacroFunction.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="singletonBase.h">
       <Filter>2DGameFramework\SingletonBase</Filter>
     </ClInclude>
@@ -261,6 +258,12 @@
     <ClInclude Include="ETCS.h">
       <Filter>playGround\Item\etc</Filter>
     </ClInclude>
+    <ClInclude Include="commonMacroFunction.h">
+      <Filter>playGround\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item_Bass_Collider.h">
+      <Filter>playGround\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -397,6 +400,9 @@
     </ClCompile>
     <ClCompile Include="ETCS.cpp">
       <Filter>playGround\Item\etc</Filter>
+    </ClCompile>
+    <ClCompile Include="Item_Bass_Collider.cpp">
+      <Filter>playGround\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

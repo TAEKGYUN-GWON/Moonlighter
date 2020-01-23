@@ -23,6 +23,12 @@ protected:
 	//아이템이 사용할 이미지를 저장
 	Sprite* _image;
 
+	//아이템이 던전안에서 존재한다면 플에이어를 따라가야함
+	bool _isDungeon;
+
+	//선형보간을 위한 변수
+	float _followingMovement;
+
 public:
 	Item() {}
 	~Item() {}
@@ -30,6 +36,9 @@ public:
 	virtual void Init();
 	virtual void Init(Vector2 pos) = 0;
 	virtual void Update();
+
+	//던전 내에서의 아이템의 움직임
+	void FollowPlayer(Vector2 playerPos);
 
 	//Get Something
 	int GetMaxCount() { return _maxCount; }
