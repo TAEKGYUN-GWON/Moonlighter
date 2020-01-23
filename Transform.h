@@ -46,10 +46,10 @@ public:
 	inline float GetRotateRadian() { return _rotate; }
 
 	//Vector2 타입으로 좌표 설정하기
-	inline void SetPos(Vector2 pos) { this->pos = pos; }
+	void SetPos(Vector2 pos);
 
 	//float 타입으로 좌표 설정하기
-	inline void SetPos(float x, float y) { pos = Vector2(x, y); }
+	void SetPos(float x, float y);
 
 	//월드좌표 세팅
 	void SetWorldPos(Vector2 pos);

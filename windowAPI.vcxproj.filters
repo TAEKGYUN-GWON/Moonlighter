@@ -267,6 +267,9 @@
     <ClInclude Include="loadingScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="BackBuffer.h">
+      <Filter>2DGameFramework\image</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -409,6 +412,9 @@
     </ClCompile>
     <ClCompile Include="loadingScene.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BackBuffer.cpp">
+      <Filter>2DGameFramework\image</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

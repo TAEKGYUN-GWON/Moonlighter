@@ -50,6 +50,16 @@ void Transform::Update()
 	UpdateMatrix();
 }
 
+void Transform::SetPos(Vector2 pos)
+{
+	if (_object->GetCameraAffect()) this->pos = pos;
+	else this->pos = pos + CAMERA->GetPosition();
+}
+void Transform::SetPos(float x, float y)
+{
+	if (_object->GetCameraAffect()) pos = Vector2(x, y);
+	else pos = Vector2(x, y) + CAMERA->GetPosition();
+}
 void Transform::SetWorldPos(Vector2 pos)
 {
 	Object* parent = _object->GetParent();

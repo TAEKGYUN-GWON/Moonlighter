@@ -23,7 +23,8 @@ class Inventory
 private:
 	
 	Graphic* _ui;
-	Object* _select;
+	Graphic* _select;
+	Vector2 pos;
 
 	multimap<string, tagItemInfo> _inven;
 	multimap<string, tagItemInfo>::iterator iter;

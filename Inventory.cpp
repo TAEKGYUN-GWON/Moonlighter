@@ -14,26 +14,16 @@ Inventory::~Inventory()
 void Inventory::Init()
 {
 	_ui = GRAPHICMANAGER->AddImage("inventory", L"resource/img/UI/Inventory.png");
-	 GRAPHICMANAGER->AddImage("invenSlot", L"resource/img/UI/invenSlot.png");
+	_select = GRAPHICMANAGER->AddImage("invenSlot", L"resource/img/UI/invenSlot.png");
 	_isActive = false;
 	//_select = Object::CreateObject<Object>();
 	//_select->SetParent(nullptr);
 
-	_select = Object::CreateObject<Object>();
-	_select->Init();
-	_select->GetTrans()->SetPos(154, 125);
-	_select->GetTrans()->SetScale(68,68);
-	auto a = _select->AddComponent<Sprite>();
-	a->Init();
-	a->SetImgName("invenSlot");
-	_select->SetIsActive(false);
-
+	pos = Vector2(154, 125);
 
 }
-
 void Inventory::Update()
 {
-	_select->GetTrans()->SetPos(_select->GetTrans()->pos - CAMERA->GetPosition());
 	KeyCon();
 
 	if (!_isActive) return;
@@ -50,7 +40,7 @@ void Inventory::Render()
 	if (!_isActive) return;
 
 	_ui->RenderUI(Vector2(WINSIZEX / 2, WINSIZEY / 2));
-	_select->Render();
+	_select->RenderUI(pos);
 }
 
 void Inventory::Insert(Item* item)
@@ -108,8 +98,7 @@ void Inventory::KeyCon()
 	if (KEYMANAGER->isOnceKeyDown('I'))
 	{
 		_isActive = !_isActive;
-		_select->SetIsActive(!_select->GetIsActive());
-		_select->GetTrans()->SetPos(Vector2(154, 125));
+		pos = Vector2(154, 125);
 	}
 
 	if (KEYMANAGER->isOnceKeyDown('W'))
@@ -118,7 +107,7 @@ void Inventory::KeyCon()
 	}
 	if (KEYMANAGER->isOnceKeyDown('A'))
 	{
-
+		pos = Vector2(pos.x - 87.5, pos.y);
 	}
 	if (KEYMANAGER->isOnceKeyDown('S'))
 	{
@@ -126,7 +115,7 @@ void Inventory::KeyCon()
 	}
 	if (KEYMANAGER->isOnceKeyDown('D'))
 	{
-		_select->GetTrans()->SetPos(154, 125);
+		pos = Vector2(pos.x + 87.5, pos.y);
 	}
 }
 

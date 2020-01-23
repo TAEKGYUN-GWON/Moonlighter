@@ -62,6 +62,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmd
 	TXTDATA->init();
 	TIMEMANAGER->init();
 	INIDATAMANAGER->init();
+	BACKBUFFER->init();
 	//SetTimer(_hWnd, 1, 10, NULL);
 	//메시지 루프 돌기이전에
 	//sceneManager::getSingleton()->GetNowScene()->Init();

@@ -20,6 +20,7 @@ protected:
 	bool _allowsUpdate = true;
 	bool _allowInit = true;
 	bool _allowRender = true;
+	bool _cameraAffect = true;
 	Object* _parent;
 	vector<Object*> _children;
 
@@ -59,6 +60,9 @@ public:
 
 	inline bool GetAllowInit() { return _allowInit; }
 	
+	inline void SetCameraAffect(bool active) { _cameraAffect = active; }
+	inline bool GetCameraAffect() { return _cameraAffect; }
+
 	void AddChild(Object* child);
 	void RemoveComponent(Component* component);
 	void RemoveChild(Object* child);
