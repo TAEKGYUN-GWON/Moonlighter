@@ -4,14 +4,16 @@
 #include "NpcManager.h"
 #include "CheckStand.h"
 #include "NpcShopState.h"
+#include "ShopStandManager.h"
 
 class ShopScene : public Scene
 {
 private:
 	Player* _player;
-	NpcManager* _npcMgr;
-	CheckStand* _checkStand; //계산대
-	NpcShopState* _npcShopState;
+	NpcManager* _npcMgr;			 //npc 매니저
+	CheckStand* _checkStand;		 //계산대
+	NpcShopState* _npcShopState;	 //Npc 상태
+	ShopStandManager* _shopStandMgr; //가판대 매니저
 
 
 public:

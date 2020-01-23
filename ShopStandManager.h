@@ -6,7 +6,8 @@ class ShopStandManager
 {
 private:
 	
-	vector<ShopStand> _vShopStand;
+	ShopStand* _shopStand;
+	vector<ShopStand*> _vShopStand;
 
 
 public:

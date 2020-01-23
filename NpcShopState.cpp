@@ -215,7 +215,6 @@ NpcExit* NpcExit::GetInstance()
 //==================나가기=====================
 void NpcExit::StateIn(Npc* npc)
 {
-	//_isFunctionDone = true;
 	StateStay(npc);
 
 }
@@ -223,16 +222,13 @@ void NpcExit::StateIn(Npc* npc)
 void NpcExit::StateStay(Npc* npc)
 {
 	StateOut(npc);
-	//★
-	//cout << "NpdExit:statestay 엔피씨 집에갔다" << endl; //이거 무한으로 찍힘..
-	//이렇게 지웠다간 무한으로 지워지겠음..
-	//해당 엔피씨 벡터를 지운다.. 들어온 npc를 지워..
 }
 
 void NpcExit::StateOut(Npc* npc)
 {
-	//여긴 암거도 없어도 될듯..
 	if (npc->GetIsActive())	cout << "★★집에 간다★★" << endl;
+	//좌표를 여기서 문밖으로 이동시켜줌
+	//문밖으로 이동끝나서 화면에서 사라지면 isactive 를 false시킨다.
 	npc->SetIsActive(false);
 	//여기서 npc를 isactive=false; 시키고, 벡터는 매니저에서 지움
 }
