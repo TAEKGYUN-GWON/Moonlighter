@@ -4,5 +4,11 @@
 
 void Item_Bass_Collider::CollisionBegin(void* obj)
 {
-	//Object 
+	Object* _crashedObj = (Object*)obj;
+	Object* _crasherObj = (Object*)_object;
+
+	if (_crashedObj->GetName() == "Will")
+	{
+		_crasherObj->SetIsActive(false);
+	}
 }

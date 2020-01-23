@@ -14,10 +14,10 @@ void Item::Update()
 {
 	super::Update();
 
-	if (_isDungeon) ;
+	if (_isDungeon)
 		//플레이어가 만들어지면 플레이어의 좌표를 얻어올꺼임
-		//FollowPlayer();
-
+		FollowPlayer(_parent->GetChildFromName("Will")->GetTrans()->GetPos());
+	
 }
 
 void Item::FollowPlayer(Vector2 playerPos)

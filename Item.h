@@ -55,7 +55,8 @@ public:
 		_price = price;
 	}
 
-	void setPos(Vector2 pos) { _trans->SetPos(pos); }
+	void SetPos(Vector2 pos) { _trans->SetPos(pos); }
+	void SetInDG(bool _isTrue) { _isDungeon = _isTrue; }
 
 	template <typename T>
 	static T* CreateItem(Vector2 pos);
