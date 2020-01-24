@@ -23,7 +23,6 @@ void Player::Init()
 	_sprite->SetImgName("will_dungeon");
 	_sprite->SetMaxFrameX(7);
 	_sprite->SetFrameY(1);
-	_sprite->SetFPS(10.f);
 	//_sprite->GetGraphic()->SetScale(Vector2(100, 100));
 	_sprite->GetGraphic()->SetSize(Vector2(100, 100));
 
@@ -34,7 +33,6 @@ void Player::Init()
 	_physics->Init(BodyType::DYNAMIC, 1.0f);
 
 	_speed = 3.0f;
-
 }
 
 void Player::Update()

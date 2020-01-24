@@ -555,67 +555,6 @@ void GraphicsManager::Text(Vector2 pos, wstring txt, int txtSize, float maxWidth
 	_txtLayout->Release();
 }
 
-void GraphicsManager::Text(Vector2 pos, const char* txt, int txtSize, float maxWidth, float maxHeight, ColorF::Enum color, float alpha, TextPivot point, wstring font, bool cameraAffect)
-{
-	string buffer = txt;
-	wstring str;
-	str.assign(buffer.begin(), buffer.end());
-
-	_wFactory->CreateTextLayout(str.c_str(), str.length(), _txtFormatList[font], maxWidth, maxHeight, &_txtLayout);
-
-	_txtLayout->SetFontSize(txtSize, { (UINT)0, (UINT)str.length() });
-
-	switch (point)
-	{
-	case TextPivot::LEFT_TOP:
-		_txtLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
-		_txtLayout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_NEAR);
-		break;
-	case TextPivot::LEFT_CENTER:
-		_txtLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
-		_txtLayout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
-		break;
-	case TextPivot::LEFT_BOTTOM:
-		_txtLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
-		_txtLayout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_FAR);
-		break;
-	case TextPivot::CENTER_TOP:
-		_txtLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-		_txtLayout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_NEAR);
-		break;
-	case TextPivot::CENTER:
-		_txtLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-		_txtLayout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
-		break;
-	case TextPivot::CENTER_BOTTOM:
-		_txtLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-		_txtLayout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_FAR);
-		break;
-	case TextPivot::RIGHT_TOP:
-		_txtLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_TRAILING);
-		_txtLayout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_NEAR);
-		break;
-	case TextPivot::RIGHT_CENTER:
-		_txtLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_TRAILING);
-		_txtLayout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
-		break;
-	case TextPivot::RIGHT_BOTTOM:
-		_txtLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_TRAILING);
-		_txtLayout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_FAR);
-		break;
-	}
-
-	ID2D1SolidColorBrush* brush;
-	_renderTarget->CreateSolidColorBrush(ColorF(color, alpha), &brush);
-
-	_renderTarget->SetTransform(Matrix3x2F::Identity());
-	if (cameraAffect) _renderTarget->SetTransform(Matrix3x2F::Identity() * CAMERA->GetMatrix());
-	_renderTarget->DrawTextLayout(Point2F(pos.x, pos.y), _txtLayout, brush);
-
-	brush->Release();
-	_txtLayout->Release();
-}
-
 void GraphicsManager::DrawTextField(Vector2 pos, wstring txt, int txtSize, int width, int height, float alpha, ColorF::Enum color, DWRITE_TEXT_ALIGNMENT alig, wstring font)
 {
 	_wFactory->CreateTextLayout(txt.c_str(), txt.length(), _txtFormatList[font], width, height, &_txtLayout);

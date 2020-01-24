@@ -61,36 +61,19 @@ void Maptool::Init()
 
 	SetUp();
 
-	_isDown = false;
+	//obj = Object::CreateObject<Object>();
+	//obj->GetTrans()->SetPos(100, 50);
+	//obj->SetCameraAffect(false);
+	//obj->AddComponent<Text>()->CreateText(L"test word hellow", 20, 100, 30, ColorF::Red);
 
-	_curFrameX = _curFrameY = 0;
-
-	p = Object::CreateObject<Player>();
-	p->Init();
-
-	obj = Object::CreateObject<Object>();
-	obj->GetTrans()->SetPos(100, 50);
-	obj->SetCameraAffect(false);
-	obj->AddComponent<Text>()->CreateText(L"test word hellow", 20, 100, 30, ColorF::Red);
-
-	obj2 = Object::CreateObject<Object>();
-	obj2->GetTrans()->SetPos(300, 50);
-	obj2->SetCameraAffect(false);
-	obj2->AddComponent<Text>()->CreateText(L"test word hellow", 20, 100, 30, ColorF::Blue);
-
-	_rcLoad = RectMakeCenter(WINSIZEX - 100, WINSIZEY - 100, 100, 34);
-	_rcSave = RectMakeCenter(WINSIZEX - 100, WINSIZEY - 150, 100, 34);
-	_rcEraserType = RectMakeCenter(WINSIZEX - 100, WINSIZEY - 200, 100, 34);
+	_rcLoad = RectMakeCenter(WINSIZEX - 100, WINSIZEY - 100, 130, 34);
+	_rcSave = RectMakeCenter(WINSIZEX - 100, WINSIZEY - 150, 130, 34);
+	_rcEraserType = RectMakeCenter(WINSIZEX - 100, WINSIZEY - 200, 130, 34);
 }
 
 void Maptool::Update()
 {
 	Scene::Update();
-	
-	if (KEYMANAGER->isOnceKeyDown('I'))
-	{
-		obj->GetComponent<Text>()->SetFontSize(40.f, 2, 2);
-	}
 
 	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
@@ -134,34 +117,36 @@ void Maptool::Update()
 		if (PtInRect(&_rcSave, _ptMouse))
 		{
 #pragma region FileSaveTest
-			//OPENFILENAME ofn;
-			//char filePathSize[1028] = "";
-			////TCHAR filter[] = "Every file(*.*) \0*.*\0TextFile\0*.txt;*.doc\0";
-			//char filter[1028] = "Every file(*.*) \0*.*\0TextFile\0*.txt;*.doc\0맵(.map)\0*.map*\0";
-			//
-			//ZeroMemory(&ofn, sizeof(OPENFILENAME));
-			//
-			//ofn.lStructSize = sizeof(OPENFILENAME);
-			//ofn.hwndOwner = NULL;
-			////ofn.lpstrFile = filePathSize;
-			//ofn.lpstrFile = filter;
-			//ofn.nMaxFile = sizeof(filePathSize);
-			//ofn.nFilterIndex = true;
-			//ofn.lpstrFileTitle = NULL;
-			//ofn.nMaxFileTitle = NULL;
-			//ofn.lpstrInitialDir = NULL;
-			//ofn.lpstrFilter = filter;
-			//ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
-			//
-			////if (GetSaveFileName(&ofn) == FALSE) return;
-			//if (GetSaveFileName(&ofn) != FALSE)
-			//{
-			//	wsprintf(filePathSize, "%s 파일", ofn.lpstrFile);
-			//	MessageBox(_hWnd, filePathSize, "저장", MB_OK);
-			//}
+			OPENFILENAME ofn;
+			char filePathSize[1028] = "";
+			//TCHAR filter[] = "Every file(*.*) \0*.*\0TextFile\0*.txt;*.doc\0";
+			char filter[1028] = "Every file(*.*) \0*.*\0TextFile\0*.txt;*.doc\0맵(.map)\0*.map*\0";
+			
+			ZeroMemory(&ofn, sizeof(OPENFILENAME));
+			
+			ofn.lStructSize = sizeof(OPENFILENAME);
+			ofn.hwndOwner = NULL;
+			//ofn.lpstrFile = filePathSize;
+			ofn.lpstrFile = filePathSize;
+			ofn.nMaxFile = sizeof(filePathSize);
+			ofn.nFilterIndex = true;
+			ofn.lpstrFileTitle = NULL;
+			ofn.nMaxFileTitle = NULL;
+			ofn.lpstrInitialDir = NULL;
+			ofn.lpstrFilter = filter;
+			ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_OVERWRITEPROMPT;
+			
+			//if (GetSaveFileName(&ofn) == FALSE) return;
+			if (GetSaveFileName(&ofn) != FALSE)
+			{
+				wsprintf(filePathSize, "%s 파일", ofn.lpstrFile);
+				MessageBox(_hWnd, filePathSize, "저장", MB_OK);
+			}
+			else return;
+
 #pragma endregion
 
-			Save();
+			//Save();
 		}
 		if (PtInRect(&_rcEraserType, _ptMouse))
 		{
@@ -216,7 +201,8 @@ void Maptool::Render()
 {
 	GRAPHICMANAGER->DrawImage("town_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
 
-	char buffer[128];
+	//char buffer[128];
+	wchar_t buffer[128];
 	for (int i = 0; i < 25; ++i)
 	{
 		for (int j = 0; j < 33; ++j)
@@ -228,7 +214,8 @@ void Maptool::Render()
 			if (_tiles[index]->GetAttribute() == "Wall") _tiles[index]->GetComponent<Sprite>()->SetFillRect(true);
 			else if(_tiles[index]->GetAttribute() != "Wall") _tiles[index]->GetComponent<Sprite>()->SetFillRect(false);
 	
-			sprintf_s(buffer, "%d", index);
+			//sprintf_s(buffer, "%d", index);
+			swprintf(buffer, 128, L"%d", index);
 			GRAPHICMANAGER->DrawTextD2D(_tiles[index]->GetTrans()->GetPos() + Vector2(-(TILEWIDTH / 2) + 2, TILEHEIGHT / 7), buffer, 10, 1.0f, ColorF::Yellow, TextPivot::LEFT_TOP, L"맑은고딕", true);
 		}
 	}
@@ -249,32 +236,29 @@ void Maptool::Render()
 	case SamplePage::DUNGEON: GRAPHICMANAGER->DrawImage("set_tile_dungeon", Vector2(WINSIZEX - 150, 30), 1.0f, PIVOT::TOP, false); break;
 	}
 
-	if (_currentTile.isFrame)
-	{
-		GRAPHICMANAGER->DrawFrameImage(_currentTile.imgKey, _ptMouse, 0, 0, 0.85f, _currentTile.pivot, false);
-		
-		// FIXME : 다시 보자
-		GRAPHICMANAGER->DrawRect(_ptMouse, Vector2(_currentTile.size.x * TILEWIDTH, _currentTile.size.y * TILEHEIGHT), 0.0f, ColorF::Red, _currentTile.pivot, 1.0f, false);
-		//GRAPHICMANAGER->DrawRect(_ptMouse, Vector2(_currentTile.vSize[0].x * TILEWIDTH, _currentTile.vSize[0].y * TILEHEIGHT), 0.0f, ColorF::Red, _currentTile.pivot, 1.0f, false);
-	}
-	else
-	{
-		GRAPHICMANAGER->DrawImage(_currentTile.imgKey, _ptMouse, 0.85f, _currentTile.pivot, false);
-		
-		// FIXME : 다시 보자
-		GRAPHICMANAGER->DrawRect(_ptMouse, Vector2(_currentTile.size.x * TILEWIDTH, _currentTile.size.y * TILEHEIGHT), 0.0f, ColorF::Red, _currentTile.pivot, 1.0f, false);
-		//GRAPHICMANAGER->DrawRect(_ptMouse, Vector2(_currentTile.vSize[0].x * TILEWIDTH, _currentTile.vSize[0].y * TILEHEIGHT), 0.0f, ColorF::Red, _currentTile.pivot, 1.0f, false);
-	}
+	// is the sample image a frame?
+	if (_currentTile.isFrame) GRAPHICMANAGER->DrawFrameImage(_currentTile.imgKey, _ptMouse, 0, 0, 0.85f, _currentTile.pivot, false);
+	else GRAPHICMANAGER->DrawImage(_currentTile.imgKey, _ptMouse, 0.85f, _currentTile.pivot, false);
 
+	// draw a square for attributes
+	if (_currentTile.pivot == RIGHT_BOTTOM) GRAPHICMANAGER->DrawRect(Vector2(_ptMouse.x, _ptMouse.y) - Vector2(FindTile(_currentTile.imgKey)->startPos.x * TILEWIDTH, FindTile(_currentTile.imgKey)->startPos.y * TILEHEIGHT), Vector2(_currentTile.size.x * TILEWIDTH, _currentTile.size.y * TILEHEIGHT), 0.0f, ColorF::Red, PIVOT::LEFT_TOP, 1.0f, false);
+	else if (_currentTile.pivot == BOTTOM) GRAPHICMANAGER->DrawRect(_ptMouse, Vector2(_currentTile.size.x * TILEWIDTH, _currentTile.size.y * TILEHEIGHT), 0.0f, ColorF::Red, _currentTile.pivot, 1.0f, false);
+	else GRAPHICMANAGER->DrawRect(_ptMouse, Vector2(_currentTile.size.x * TILEWIDTH, _currentTile.size.y * TILEHEIGHT), 0.0f, ColorF::Red, _currentTile.pivot, 1.0f, false);
+
+	// draw load button
 	GRAPHICMANAGER->DrawRect(Vector2(_rcLoad.left, _rcLoad.top), Vector2((_rcLoad.right - _rcLoad.left), (_rcLoad.bottom - _rcLoad.top)), 0.0f, ColorF::Blue, PIVOT::LEFT_TOP, 1.0f, false);
-	GRAPHICMANAGER->DrawTextD2D(Vector2(_rcLoad.left + 10, _rcLoad.top + 8), L"Load Buttom", 14);
+	GRAPHICMANAGER->Text(Vector2(_rcLoad.left, _rcLoad.top), L"Load Buttom", 14, _rcLoad.right - _rcLoad.left, _rcLoad.bottom - _rcLoad.top, ColorF::Black, 1.0f, TextPivot::CENTER);
 
+	// draw save button
 	GRAPHICMANAGER->DrawRect(Vector2(_rcSave.left, _rcSave.top), Vector2((_rcSave.right - _rcSave.left), (_rcSave.bottom - _rcSave.top)), 0.0f, ColorF::Red, PIVOT::LEFT_TOP, 1.0f, false);
-	GRAPHICMANAGER->DrawTextD2D(Vector2(_rcSave.left + 10, _rcSave.top + 7), L"Save Buttom", 14);
+	GRAPHICMANAGER->Text(Vector2(_rcSave.left, _rcSave.top), L"Save Buttom", 14, _rcSave.right - _rcSave.left, _rcSave.bottom - _rcSave.top, ColorF::Black, 1.0f, TextPivot::CENTER);
 
+	// draw eraser button
 	GRAPHICMANAGER->DrawRect(Vector2(_rcEraserType.left, _rcEraserType.top), Vector2((_rcEraserType.right - _rcEraserType.left), (_rcEraserType.bottom - _rcEraserType.top)), 0.0f, ColorF::Green, PIVOT::LEFT_TOP, 1.0f, false);
-	if (_eraser == EraserType::Single) GRAPHICMANAGER->DrawTextD2D(Vector2(_rcEraserType.left + 10, _rcEraserType.top - 4), L"eraser type\n : Single", 14);
-	else if (_eraser == EraserType::Image) GRAPHICMANAGER->DrawTextD2D(Vector2(_rcEraserType.left + 10, _rcEraserType.top - 4), L"eraser type\n : Image", 14);
+	if (_eraser == EraserType::Single) GRAPHICMANAGER->DrawTextD2D(Vector2(_rcEraserType.left + 8, _rcEraserType.top - 4), L"eraser type\n : Single", 14);
+	else if (_eraser == EraserType::Group) GRAPHICMANAGER->DrawTextD2D(Vector2(_rcEraserType.left + 8, _rcEraserType.top - 4), L"eraser type\n : Group", 14);
+	else if (_eraser == EraserType::NoDeleteImage) GRAPHICMANAGER->DrawTextD2D(Vector2(_rcEraserType.left + 8, _rcEraserType.top - 4), L"eraser type\n : NoDeleteImage", 14);
+	else if (_eraser == EraserType::OnlyDeleteImage) GRAPHICMANAGER->DrawTextD2D(Vector2(_rcEraserType.left + 8, _rcEraserType.top - 4), L"eraser type\n : OnlyDeleteImage", 14);
 
 	//sprintf_s(buffer, "%d, %d", _ptMouse.x, _ptMouse.y);
 	//sprintf_s(buffer, "%d, %d", (int)CAMERA->GetPosition().x + (int)(_ptMouse.x / CAMERA->GetScale().x), (int)CAMERA->GetPosition().y + (int)(_ptMouse.y / CAMERA->GetScale().y));
@@ -285,16 +269,15 @@ void Maptool::Render()
 	//sprintf_s(buffer, "%f, %f", CAMERA->GetPosition().x, CAMERA->GetPosition().y);
 
 	// 화면 중앙이 중점인 수식
-	sprintf_s(buffer, "%f, %f", CAMERA->GetPosition().x - (WINSIZEX / CAMERA->GetScale().x / 2) + (_ptMouse.x / CAMERA->GetScale().x), 
+	//sprintf_s(buffer, "%f, %f", CAMERA->GetPosition().x - (WINSIZEX / CAMERA->GetScale().x / 2) + (_ptMouse.x / CAMERA->GetScale().x), 
+	//	CAMERA->GetPosition().y - (WINSIZEY / CAMERA->GetScale().y / 2) + (_ptMouse.y / CAMERA->GetScale().y));
+	swprintf(buffer, 128, L"%1.f %1.f", CAMERA->GetPosition().x - (WINSIZEX / CAMERA->GetScale().x / 2) + (_ptMouse.x / CAMERA->GetScale().x),
 		CAMERA->GetPosition().y - (WINSIZEY / CAMERA->GetScale().y / 2) + (_ptMouse.y / CAMERA->GetScale().y));
-	
+
 	//sprintf_s(buffer, "%f, %f", CAMERA->GetPosition().x - (WINSIZEX / CAMERA->GetScale().x / 2) + (_ptMouse.x / CAMERA->GetScale().x) + (WINSIZEX / 2),
 	//	CAMERA->GetPosition().y - (WINSIZEY / CAMERA->GetScale().y / 2) + (_ptMouse.y / CAMERA->GetScale().y) + (WINSIZEY / 2));
 
-
-	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 200), buffer, 20, 1.0f, ColorF::Red);
-
-	GRAPHICMANAGER->DrawRect(CAMERA->GetPosition(), Vector2(10, 10));
+	GRAPHICMANAGER->Text(Vector2(100, 200), buffer, 20, 200, 50, ColorF::Red);
 }
 
 void Maptool::Save()
@@ -335,7 +318,7 @@ void Maptool::Load()
 
 		for (int i = 0; i < TILENUMX * TILENUMY; i++)
 		{
-			// initialization
+			// _tiles[] initialization
 			_tiles[i]->SetImgName("None");
 			_tiles[i]->SetAttribute("None");
 			_tiles[i]->SetIsFrame(false);
@@ -376,9 +359,9 @@ void Maptool::Load()
 			}
 		}
 	}
-	else MessageBox(_hWnd, "없쒀", str.c_str(), MB_OK);
+	else MessageBox(_hWnd, "can not found the file.", str.c_str(), MB_OK);
 
-	MessageBox(_hWnd, "File Load!", str.c_str(), MB_OK);
+	MessageBox(_hWnd, "File load!", str.c_str(), MB_OK);
 }
 
 void Maptool::SetUp()
@@ -477,7 +460,7 @@ void Maptool::RemoveObject()
 
 	int index = ((_ptMouse.x + (int)CAMERA->GetPosition().x) / TILEWIDTH) + TILENUMX * ((_ptMouse.y + (int)CAMERA->GetPosition().y) / TILEHEIGHT);
 
-	if (_eraser == EraserType::Image)
+	if (_eraser == EraserType::Group)
 	{
 		for (int i = 0; i < TILENUMX * TILENUMY; ++i)
 		{
@@ -500,6 +483,12 @@ void Maptool::RemoveObject()
 	{
 		_tiles[index]->SetAttribute("None");
 
+		if (_tiles[index]->GetChildren().size() <= 0) return;
+		_tiles[index]->RemoveChild(_tiles[index]->GetChildren()[0]);
+	}
+	else if (_eraser == EraserType::NoDeleteImage) _tiles[index]->SetAttribute("None");
+	else if (_eraser == EraserType::OnlyDeleteImage)
+	{
 		if (_tiles[index]->GetChildren().size() <= 0) return;
 		_tiles[index]->RemoveChild(_tiles[index]->GetChildren()[0]);
 	}

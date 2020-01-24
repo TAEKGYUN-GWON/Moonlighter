@@ -66,7 +66,9 @@ enum Attribute
 enum class EraserType
 {
 	Single,
-	Image,
+	Group,
+	NoDeleteImage,
+	OnlyDeleteImage,
 	End,
 };
 
@@ -188,10 +190,6 @@ private:
 	EraserType _eraser;
 
 	int _ctrSelect;
-	int _curFrameX;
-	int _curFrameY;
-
-	bool _isDown;
 
 	POINT _prevMouse;
 
