@@ -18,7 +18,8 @@ void ProgressBar::Update()
 
 void ProgressBar::Render()
 {
-	_progressBar->Render(pos, 1, PIVOT::LEFT_TOP, false);
+	//progressBar->Render(pos,1,PIVOT::LEFT_TOP,false);
+	_progressBar->FrameRender(pos,0,1,1,PIVOT::LEFT_TOP,false);
 }
 
 void ProgressBar::SetGauge(float currentGauge, float maxGauge)

@@ -130,7 +130,7 @@ void Inventory::Insert(Item* item)
 	}
 
 #pragma endregion
-
+	item->SetInDG(false);
 	_inven.insert(make_pair(item->GetName(), tagItemInfo(item)));
 }
 
@@ -150,7 +150,6 @@ void Inventory::Remove(string name, int num)
 			}
 		}
 	}
-
 }
 
 void Inventory::Quantity()
