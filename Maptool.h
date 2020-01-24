@@ -67,6 +67,7 @@ enum class EraserType
 {
 	Single,
 	Image,
+	End,
 };
 
 //typedef struct tagCoordinate
@@ -98,7 +99,8 @@ struct tagTile
 
 	tagTile()
 	{
-		imgKey.clear();
+		//imgKey.clear();
+		imgKey = "empty";
 		attribute = "None";
 		isFrame = false;
 		frameX = 1;
@@ -188,8 +190,6 @@ private:
 	int _curFrameX;
 	int _curFrameY;
 
-	Object* _btn1;
-
 	bool _isDown;
 
 	POINT _prevMouse;
@@ -199,6 +199,8 @@ private:
 	HWND _saveName;
 	RECT _rcLoad;
 	RECT _rcSave;
+
+	RECT _rcEraserType;
 
 public:
 	virtual void Init();

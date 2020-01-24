@@ -380,7 +380,7 @@ HRESULT GraphicsManager::AddTextFormat(wstring fontName, float size)
 	return hr;
 }
 
-void GraphicsManager::DrawTextD2D(Vector2 pos, wstring txt, int txtSize, float alpha, ColorF::Enum color, DWRITE_TEXT_ALIGNMENT alig, wstring font)
+void GraphicsManager::DrawTextD2D(Vector2 pos, wstring txt, int txtSize, float alpha, ColorF::Enum color, DWRITE_TEXT_ALIGNMENT alig, wstring font, bool cameraAffect)
 {
 	_wFactory->CreateTextLayout(txt.c_str(), txt.length(), _txtFormatList[font], txt.length() * txtSize, txtSize, &_txtLayout);
 
