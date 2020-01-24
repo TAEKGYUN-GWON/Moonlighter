@@ -204,6 +204,8 @@ private:
 
 	RECT _rcEraserType;
 
+	Object* obj, * obj2;
+
 public:
 	virtual void Init();
 	virtual void Update();

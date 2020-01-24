@@ -14,12 +14,6 @@ void StartScene::Init()
 	SCENEMANAGER->addScene("Entrance", new EntranceScene);
 	SCENEMANAGER->addScene("Shop", new ShopScene);
 	SCENEMANAGER->addScene("Maptool", new Maptool);
-
-	Object* obj = Object::CreateObject<Object>();
-	obj->GetTrans()->SetPos(100, 500);
-	obj->SetCameraAffect(false);
-	obj->AddComponent<Text>()->CreateText(L"test", 20, 200, 500, ColorF::Red);
-	//obj->GetComponent<Text>()->SetCameraEffected(obj->GetCameraAffect());
 }
 
 void StartScene::Update()
@@ -34,11 +28,12 @@ void StartScene::Update()
 
 void StartScene::Render()
 {
-	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 200), "fhdkdkkfk", 20, 1.0f, ColorF::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
-	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 300), "fhdkdkkfk", 20, 1.0f, ColorF::Red, DWRITE_TEXT_ALIGNMENT_TRAILING, L"¸¼Àº°íµñ", false);
-	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 400), "fhdkdkkfk", 20, 1.0f, ColorF::Red, DWRITE_TEXT_ALIGNMENT_CENTER, L"¸¼Àº°íµñ", false);
-	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 500), "camera No!", 20, 1.0f, ColorF::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", true);
+	Scene::Render();
 
-	
+	GRAPHICMANAGER->Text(Vector2(100, 100), "1) Dungeon Scene", 20, 300, 50, ColorF::AliceBlue);
+	GRAPHICMANAGER->Text(Vector2(100, 150), "2) Town Scene", 20, 300, 50, ColorF::AntiqueWhite);
+	GRAPHICMANAGER->Text(Vector2(100, 200), "3) Entrance Scene", 20, 300, 50, ColorF::Aqua);
+	GRAPHICMANAGER->Text(Vector2(100, 250), "4) Shop Scene", 20, 300, 50, ColorF::Aquamarine);
+	GRAPHICMANAGER->Text(Vector2(100, 300), "5) Maptool Scene", 20, 300, 50, ColorF::Azure);
 }
 
