@@ -172,6 +172,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Potion.h" />
     <ClInclude Include="Potions.h" />
+    <ClInclude Include="ProgressBar.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="ObjectManager.h" />
@@ -204,6 +205,7 @@
     <ClInclude Include="TownScene.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="txtData.h" />
+    <ClInclude Include="UiManager.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
@@ -234,6 +236,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Potion.cpp" />
     <ClCompile Include="Potions.cpp" />
+    <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Graphic.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
@@ -265,6 +268,7 @@
     <ClCompile Include="TownScene.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="txtData.cpp" />
+    <ClCompile Include="UiManager.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />

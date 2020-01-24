@@ -282,6 +282,18 @@
     <ClInclude Include="Potion.h">
       <Filter>playGround\Item</Filter>
     </ClInclude>
+    <ClInclude Include="Direct2D.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="UiManager.h">
+      <Filter>playGround\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgressBar.h">
+      <Filter>playGround\Inventory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -439,6 +451,18 @@
     </ClCompile>
     <ClCompile Include="Potions.cpp">
       <Filter>playGround\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Direct2D.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="UiManager.cpp">
+      <Filter>playGround\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgressBar.cpp">
+      <Filter>playGround\Inventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
