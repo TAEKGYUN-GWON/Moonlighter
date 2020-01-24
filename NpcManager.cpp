@@ -21,18 +21,6 @@ void NpcManager::Update()
 	
 	cout << _vNpc.size() << endl;
 
-	//isactive가 false인 npc벡터를 찾아서
-	//false인 애가 있으면 지워버려
-	for (int i = 0; i < _vNpc.size(); ++i)
-	{
-		if (!_vNpc[i]->GetIsActive())
-		{
-			_vNpc.erase(_vNpc.begin() + i);
-		}
-
-	}
-	cout << _vNpc.size() << endl;
-
 	//4마리 될 때까지 새로 만들기
 	//_counter++;
 	//if (_counter > RND->getFromIntTo(10, 100))
@@ -63,15 +51,22 @@ void NpcManager::Update()
 
 			_vNpc.push_back(_npc);
 			_counter = 0;
-			//cout << _vNpc.size() << endl;
 		}
-
 	}
-
 }
 
 void NpcManager::Release()
 {
+	//isactive가 false인 npc벡터를 찾아서
+	//false인 애가 있으면 지워버려
+	for (int i = 0; i < _vNpc.size(); ++i)
+	{
+		if (!_vNpc[i]->GetIsActive())
+		{
+			_vNpc.erase(_vNpc.begin() + i);
+		}
+
+	}
 }
 
 void NpcManager::Render()
