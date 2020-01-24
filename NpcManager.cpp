@@ -18,6 +18,17 @@ void NpcManager::Init()
 
 void NpcManager::Update()
 {
+
+	//isactive가 false인 npc벡터를 찾아서
+//false인 애가 있으면 지워버려
+	for (int i = 0; i < _vNpc.size(); ++i)
+	{
+		if (!_vNpc[i]->GetIsActive())
+		{
+			_vNpc.erase(_vNpc.begin() + i);
+		}
+
+	}
 	
 	cout << _vNpc.size() << endl;
 
@@ -57,16 +68,7 @@ void NpcManager::Update()
 
 void NpcManager::Release()
 {
-	//isactive가 false인 npc벡터를 찾아서
-	//false인 애가 있으면 지워버려
-	for (int i = 0; i < _vNpc.size(); ++i)
-	{
-		if (!_vNpc[i]->GetIsActive())
-		{
-			_vNpc.erase(_vNpc.begin() + i);
-		}
 
-	}
 }
 
 void NpcManager::Render()

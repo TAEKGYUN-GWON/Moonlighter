@@ -22,6 +22,13 @@ void ShopScene::Init()
 	//_npcShopState->SetCheckStandLink(_checkStand);
 }
 
+void ShopScene::Release()
+{
+	_npcMgr->Release();
+
+	Scene::Release();
+}
+
 void ShopScene::Update()
 {
 	_npcMgr->Update();
@@ -32,4 +39,6 @@ void ShopScene::Render()
 {
 	GRAPHICMANAGER->FindImage("ShopBg")->Render(WINSIZEX/2, WINSIZEY/2, CENTER);
 	_player->Render();
+
+	Scene::Render();
 }
