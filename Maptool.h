@@ -50,7 +50,7 @@ struct tagSampleTile
 enum class SamplePage
 {
 	TOWN,
-	DONGEON,
+	DUNGEON,
 	PAGE_END,
 };
 
@@ -67,6 +67,7 @@ enum class EraserType
 {
 	Single,
 	Image,
+	End,
 };
 
 //typedef struct tagCoordinate
@@ -98,11 +99,13 @@ struct tagTile
 
 	tagTile()
 	{
-		imgKey.clear();
+		//imgKey.clear();
+		imgKey = "empty";
 		attribute = "None";
 		isFrame = false;
 		frameX = 1;
 		frameY = 1;
+		//pivot = PIVOT::RIGHT_BOTTOM;
 		pivot = PIVOT::CENTER;
 
 		//vStartPos.clear();
@@ -162,6 +165,7 @@ struct tagTile
 		tile->size = size;
 		tile->startPos2 = Vector2(1, 1);
 		tile->size2 = Vector2(1, 1);
+
 		return tile;
 	}
 };
@@ -176,6 +180,7 @@ private:
 	tagCurrentTile _currentTile;
 	tagSampleTile _sampleTile[SAMPLE_TILE_X_NUM * SAMPLE_TILE_Y_NUM];
 	Tile* _tiles[TILENUMX * TILENUMY];
+	tagTile _tagTiles[TILENUMX * TILENUMY];
 
 	mapTileList _mTileList;
 
@@ -186,17 +191,18 @@ private:
 	int _curFrameX;
 	int _curFrameY;
 
-	Object* _btn1;
-
 	bool _isDown;
 
 	POINT _prevMouse;
 
 	Player* p;
+	Player* e;
 
 	HWND _saveName;
 	RECT _rcLoad;
 	RECT _rcSave;
+
+	RECT _rcEraserType;
 
 public:
 	virtual void Init();
