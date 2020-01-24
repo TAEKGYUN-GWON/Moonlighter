@@ -50,7 +50,7 @@ struct tagSampleTile
 enum class SamplePage
 {
 	TOWN,
-	DONGEON,
+	DUNGEON,
 	PAGE_END,
 };
 
@@ -196,6 +196,7 @@ private:
 	POINT _prevMouse;
 
 	Player* p;
+	Player* e;
 
 	HWND _saveName;
 	RECT _rcLoad;

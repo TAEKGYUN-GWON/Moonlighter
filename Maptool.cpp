@@ -68,12 +68,6 @@ void Maptool::Init()
 
 	p = Object::CreateObject<Player>();
 	p->Init();
-	p->GetTrans()->SetPos(p->GetTrans()->GetPos() - CAMERA->GetPosition());
-	p->GetSprite()->Init(true);
-	p->GetSprite()->SetImgName("will_dungeon");
-	p->GetSprite()->SetFrameY(1);
-	p->GetSprite()->Stop();
-	//p->GetSprite()->SetCameraAffect(false);
 
 	_rcLoad = RectMakeCenter(WINSIZEX - 100, WINSIZEY - 100, 100, 34);
 	_rcSave = RectMakeCenter(WINSIZEX - 100, WINSIZEY - 150, 100, 34);
@@ -199,7 +193,7 @@ void Maptool::Update()
 	}
 	if (KEYMANAGER->isOnceKeyUp('2'))
 	{
-		_page = SamplePage::DONGEON;
+		_page = SamplePage::DUNGEON;
 		SetPage();
 	}
 }
@@ -238,7 +232,7 @@ void Maptool::Render()
 	switch (_page)
 	{
 	case SamplePage::TOWN: GRAPHICMANAGER->DrawImage("set_tile", Vector2(WINSIZEX - 150, 30), 1.0f, PIVOT::TOP, false); break;
-	case SamplePage::DONGEON: GRAPHICMANAGER->DrawImage("set_tile_dungeon", Vector2(WINSIZEX - 150, 30), 1.0f, PIVOT::TOP, false); break;
+	case SamplePage::DUNGEON: GRAPHICMANAGER->DrawImage("set_tile_dungeon", Vector2(WINSIZEX - 150, 30), 1.0f, PIVOT::TOP, false); break;
 	}
 
 	if (_currentTile.isFrame)
@@ -267,6 +261,26 @@ void Maptool::Render()
 	GRAPHICMANAGER->DrawRect(Vector2(_rcEraserType.left, _rcEraserType.top), Vector2((_rcEraserType.right - _rcEraserType.left), (_rcEraserType.bottom - _rcEraserType.top)), 0.0f, ColorF::Green, PIVOT::LEFT_TOP, 1.0f, false);
 	if (_eraser == EraserType::Single) GRAPHICMANAGER->DrawTextD2D(Vector2(_rcEraserType.left + 10, _rcEraserType.top + 8), L"eraser type\n : Single", 14, 1.0f, ColorF::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
 	else if (_eraser == EraserType::Image) GRAPHICMANAGER->DrawTextD2D(Vector2(_rcEraserType.left + 10, _rcEraserType.top + 8), L"eraser type\n : Image", 14, 1.0f, ColorF::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
+
+	//sprintf_s(buffer, "%d, %d", _ptMouse.x, _ptMouse.y);
+	//sprintf_s(buffer, "%d, %d", (int)CAMERA->GetPosition().x + (int)(_ptMouse.x / CAMERA->GetScale().x), (int)CAMERA->GetPosition().y + (int)(_ptMouse.y / CAMERA->GetScale().y));
+	//GRAPHICMANAGER->DrawTextD2D(Vector2(100, 100), buffer, 20, 1.0f, ColorF::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
+
+	//sprintf_s(buffer, "%f, %f", CAMERA->GetScale().x, CAMERA->GetScale().y);
+
+	//sprintf_s(buffer, "%f, %f", CAMERA->GetPosition().x, CAMERA->GetPosition().y);
+
+	// È­¸é Áß¾ÓÀÌ ÁßÁ¡ÀÎ ¼ö½Ä
+	sprintf_s(buffer, "%f, %f", CAMERA->GetPosition().x - (WINSIZEX / CAMERA->GetScale().x / 2) + (_ptMouse.x / CAMERA->GetScale().x), 
+		CAMERA->GetPosition().y - (WINSIZEY / CAMERA->GetScale().y / 2) + (_ptMouse.y / CAMERA->GetScale().y));
+	
+	//sprintf_s(buffer, "%f, %f", CAMERA->GetPosition().x - (WINSIZEX / CAMERA->GetScale().x / 2) + (_ptMouse.x / CAMERA->GetScale().x) + (WINSIZEX / 2),
+	//	CAMERA->GetPosition().y - (WINSIZEY / CAMERA->GetScale().y / 2) + (_ptMouse.y / CAMERA->GetScale().y) + (WINSIZEY / 2));
+
+
+	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 200), buffer, 20, 1.0f, ColorF::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
+
+	GRAPHICMANAGER->DrawRect(CAMERA->GetPosition(), Vector2(10, 10));
 }
 
 void Maptool::Save()
@@ -410,11 +424,6 @@ void Maptool::SetMap()
 		_tiles[index]->GetChildren()[0]->GetTrans()->SetRect();
 
 		_tagTiles[index] = *FindTile(_currentTile.imgKey);
-
-		//_tagTiles[index].attribute = FindTile(_currentTile.imgKey)->attribute;
-		//_tagTiles[index].isFrame = FindTile(_currentTile.imgKey)->isFrame;
-		//_tagTiles[index].pivot = FindTile(_currentTile.imgKey)->pivot;
-		//_tagTiles[index].imgKey = FindTile(_currentTile.imgKey)->imgKey;
 
 		if (_currentTile.isFrame)
 		{
@@ -610,7 +619,7 @@ void Maptool::SetPage()
 		_sampleTile[23].imgKey = _mTileList.find("empty")->second->imgKey;
 	}
 	break;
-	case SamplePage::DONGEON:
+	case SamplePage::DUNGEON:
 	{
 		_sampleTile[0].imgKey = _mTileList.find("smallRock")->second->imgKey;
 		_sampleTile[1].imgKey = _mTileList.find("smallRock_slime")->second->imgKey;
