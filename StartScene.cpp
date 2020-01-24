@@ -41,11 +41,14 @@ void StartScene::Update()
 void StartScene::Render()
 {
 	Scene::Render();
+	char buffer[128];
+
+	sprintf_s(buffer, "%f, %f", CAMERA->GetPosition().x, CAMERA->GetPosition().y);
+	GRAPHICMANAGER->DrawTextD2D(Vector2(WINSIZEX / 2, 100), buffer, 20 ,1,ColorF::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
+	sprintf_s(buffer, "1¹øÀº ´øÀü¾À", t->GetTrans()->GetScale().x, t->GetTrans()->GetScale().y);
+	GRAPHICMANAGER->DrawTextD2D(Vector2(WINSIZEX / 2, WINSIZEY/2), buffer, 20 ,1,ColorF::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
+	//GRAPHICMANAGER->DrawTextD2D(Vector2(-300, 0), buffer, 20, 1.0f, ColorF::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
 	test->Render();
 	UiManager::getSingleton()->Render();
-	char buffer[128];
-	sprintf_s(buffer, "%f, %f", t->GetTrans()->GetScale().x, t->GetTrans()->GetScale().y);
-	//GRAPHICMANAGER->DrawTextD2D(Vector2(WINSIZEX / 2, 100), buffer, 20 ,1,ColorF::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
-	GRAPHICMANAGER->DrawTextD2D(Vector2(-300, 0), buffer, 20, 1.0f, ColorF::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
 }
 
