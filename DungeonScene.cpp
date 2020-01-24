@@ -12,6 +12,4 @@ void DungeonScene::Init()
 void DungeonScene::Update()
 {
 	Scene::Update();
-
-	//GRAPHICMANAGER->DrawTextD2D(Vector2(WINSIZEX / 2, 30), )
 }

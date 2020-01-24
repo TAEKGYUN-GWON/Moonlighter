@@ -68,6 +68,12 @@ void Maptool::Init()
 	p = Object::CreateObject<Player>();
 	p->Init();
 
+	Object* obj = Object::CreateObject<Object>();
+	obj->GetTrans()->SetPos(100, 50);
+	obj->SetCameraAffect(false);
+	obj->AddComponent<Text>()->CreateText(L"test", 20, 100, 30, ColorF::Red);
+	//obj->GetComponent<Text>()->SetCameraEffected(obj->GetCameraAffect());
+
 	_rcLoad = RectMakeCenter(WINSIZEX - 100, WINSIZEY - 100, 100, 34);
 	_rcSave = RectMakeCenter(WINSIZEX - 100, WINSIZEY - 150, 100, 34);
 	_rcEraserType = RectMakeCenter(WINSIZEX - 100, WINSIZEY - 200, 100, 34);
@@ -214,7 +220,7 @@ void Maptool::Render()
 			else if(_tiles[index]->GetAttribute() != "Wall") _tiles[index]->GetComponent<Sprite>()->SetFillRect(false);
 	
 			sprintf_s(buffer, "%d", index);
-			GRAPHICMANAGER->DrawTextD2D(_tiles[index]->GetTrans()->GetPos() + Vector2(-(TILEWIDTH / 2) + 2, TILEHEIGHT / 7), buffer, 10, 1.0f, ColorF::Yellow);
+			GRAPHICMANAGER->DrawTextD2D(_tiles[index]->GetTrans()->GetPos() + Vector2(-(TILEWIDTH / 2) + 2, TILEHEIGHT / 7), buffer, 10, 1.0f, ColorF::Yellow, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", true);
 		}
 	}
 
@@ -252,14 +258,14 @@ void Maptool::Render()
 	}
 
 	GRAPHICMANAGER->DrawRect(Vector2(_rcLoad.left, _rcLoad.top), Vector2((_rcLoad.right - _rcLoad.left), (_rcLoad.bottom - _rcLoad.top)), 0.0f, ColorF::Blue, PIVOT::LEFT_TOP, 1.0f, false);
-	GRAPHICMANAGER->DrawTextD2D(Vector2(_rcLoad.left + 10, _rcLoad.top + 8), L"Load Buttom", 14, 1.0f, ColorF::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
+	GRAPHICMANAGER->DrawTextD2D(Vector2(_rcLoad.left + 10, _rcLoad.top + 8), L"Load Buttom", 14);
 
 	GRAPHICMANAGER->DrawRect(Vector2(_rcSave.left, _rcSave.top), Vector2((_rcSave.right - _rcSave.left), (_rcSave.bottom - _rcSave.top)), 0.0f, ColorF::Red, PIVOT::LEFT_TOP, 1.0f, false);
-	GRAPHICMANAGER->DrawTextD2D(Vector2(_rcSave.left + 10, _rcSave.top + 8), L"Save Buttom", 14, 1.0f, ColorF::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
+	GRAPHICMANAGER->DrawTextD2D(Vector2(_rcSave.left + 10, _rcSave.top + 8), L"Save Buttom", 14);
 
 	GRAPHICMANAGER->DrawRect(Vector2(_rcEraserType.left, _rcEraserType.top), Vector2((_rcEraserType.right - _rcEraserType.left), (_rcEraserType.bottom - _rcEraserType.top)), 0.0f, ColorF::Green, PIVOT::LEFT_TOP, 1.0f, false);
-	if (_eraser == EraserType::Single) GRAPHICMANAGER->DrawTextD2D(Vector2(_rcEraserType.left + 10, _rcEraserType.top + 8), L"eraser type\n : Single", 14, 1.0f, ColorF::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
-	else if (_eraser == EraserType::Image) GRAPHICMANAGER->DrawTextD2D(Vector2(_rcEraserType.left + 10, _rcEraserType.top + 8), L"eraser type\n : Image", 14, 1.0f, ColorF::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
+	if (_eraser == EraserType::Single) GRAPHICMANAGER->DrawTextD2D(Vector2(_rcEraserType.left + 10, _rcEraserType.top + 8), L"eraser type\n : Single", 14);
+	else if (_eraser == EraserType::Image) GRAPHICMANAGER->DrawTextD2D(Vector2(_rcEraserType.left + 10, _rcEraserType.top + 8), L"eraser type\n : Image", 14);
 
 	//sprintf_s(buffer, "%d, %d", _ptMouse.x, _ptMouse.y);
 	//sprintf_s(buffer, "%d, %d", (int)CAMERA->GetPosition().x + (int)(_ptMouse.x / CAMERA->GetScale().x), (int)CAMERA->GetPosition().y + (int)(_ptMouse.y / CAMERA->GetScale().y));
@@ -277,7 +283,7 @@ void Maptool::Render()
 	//	CAMERA->GetPosition().y - (WINSIZEY / CAMERA->GetScale().y / 2) + (_ptMouse.y / CAMERA->GetScale().y) + (WINSIZEY / 2));
 
 
-	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 200), buffer, 20, 1.0f, ColorF::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
+	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 200), buffer, 20, 1.0f, ColorF::Red);
 
 	GRAPHICMANAGER->DrawRect(CAMERA->GetPosition(), Vector2(10, 10));
 }

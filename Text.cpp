@@ -38,7 +38,15 @@ void Text::CreateText(wstring text, float fontSize, float maxWidth, float maxHei
 	_trans = _object->GetTrans();
 	_trans->SetScale(Vector2(maxWidth, maxHeight));
 
-	Direct2D::GetInstance()->GetRenderTarger()->CreateSolidColorBrush(ColorF(color, alpha), &_brush);
+	//Direct2D::GetInstance()->GetRenderTarger()->CreateSolidColorBrush(ColorF(color, alpha), &_brush);
+	GRAPHICMANAGER->GetRenderTarget()->CreateSolidColorBrush(ColorF(color, alpha), &_brush);
+}
+
+void Text::ChangeText(wstring text)
+{
+	if (_text == text) return;
+	_text = text;
+	SetLayout();
 }
 
 void Text::Init()
@@ -48,18 +56,13 @@ void Text::Init()
 
 void Text::Render()
 {
-	auto renderTarger = Direct2D::GetInstance()->GetRenderTarger();
+	//auto renderTarger = Direct2D::GetInstance()->GetRenderTarger();
+	ID2D1HwndRenderTarget* renderTarger = GRAPHICMANAGER->GetRenderTarget();
 
-	//Matrix3x3 trans = _trans->GetLocalToWorldMatrix();
-	//if(_isCameraAffect) 
-	//Matrix3x3 trans = { _object->GetTrans()->GetPos().x, 0, 0,
-	//					0, _object->GetTrans()->GetPos().y, 0,
-	//					0, 0, 1};
-
-	//renderTarger->SetTransform(trans.To_D2D1_Matrix_3x2_F());
-	renderTarger->SetTransform(Matrix3x2F::Identity());
-	//renderTarger->DrawTextLayout(Point2F(_trans->GetPos().x, _trans->GetPos().y), _layout, _brush);
+	Matrix3x2F trans = Matrix3x2F::Translation(_trans->GetPos().x, _trans->GetPos().y);
+	
+	if (_isCameraEffect) renderTarger->SetTransform(Matrix3x2F::Identity() * trans * CAMERA->GetMatrix());
+	else renderTarger->SetTransform(Matrix3x2F::Identity() * trans);
 
 	renderTarger->DrawTextLayout(Point2F(_trans->GetPos().x, _trans->GetPos().y), _layout, _brush);
-	//renderTarger->DrawTextLayout(Point2F(100, 100), _layout, _brush);
 }

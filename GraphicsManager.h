@@ -96,8 +96,9 @@ public:
 	HRESULT AddTextFormat(wstring fontName, float size);
 
 	// txtSize : ±Û¾¾ Å©±â (±Û¾¾ ±æÀÌ X)
-	void DrawTextD2D(Vector2 pos, wstring txt, int txtSize, float alpha = 1.0f, ColorF::Enum color = ColorF::Black, DWRITE_TEXT_ALIGNMENT alig = DWRITE_TEXT_ALIGNMENT_LEADING, wstring font = L"¸¼Àº°íµñ", bool cameraAffect = true);
-	void DrawTextD2D(Vector2 pos, const char* txt, int txtSize, float alpha = 1.0f, ColorF::Enum color = ColorF::Black, DWRITE_TEXT_ALIGNMENT alig = DWRITE_TEXT_ALIGNMENT_LEADING, wstring font = L"¸¼Àº°íµñ", bool cameraAffect = true);
+	void DrawTextD2D(Vector2 pos, wstring txt, int txtSize, float alpha = 1.0f, ColorF::Enum color = ColorF::Black, DWRITE_TEXT_ALIGNMENT alig = DWRITE_TEXT_ALIGNMENT_LEADING, wstring font = L"¸¼Àº°íµñ", bool cameraAffect = false);
+	//void DrawTextD2D(Vector2 pos, wstring txt, int txtSize, float alpha = 1.0f, ColorF::Enum color = ColorF::Black, DWRITE_TEXT_ALIGNMENT alig = DWRITE_TEXT_ALIGNMENT_LEADING, wstring font = L"¸¼Àº°íµñ", bool cameraAffect = false);
+	void DrawTextD2D(Vector2 pos, const char* txt, int txtSize, float alpha = 1.0f, ColorF::Enum color = ColorF::Black, DWRITE_TEXT_ALIGNMENT alig = DWRITE_TEXT_ALIGNMENT_LEADING, wstring font = L"¸¼Àº°íµñ", bool cameraAffect = false);
 
 	void DrawTextField(Vector2 pos, wstring txt, int txtSize, int width, int height, float alpha, ColorF::Enum color = ColorF::Black, DWRITE_TEXT_ALIGNMENT alig = DWRITE_TEXT_ALIGNMENT_LEADING, wstring font = L"¸¼Àº°íµñ");
 

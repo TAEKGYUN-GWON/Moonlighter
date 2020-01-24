@@ -397,18 +397,45 @@ void GraphicsManager::DrawTextD2D(Vector2 pos, wstring txt, int txtSize, float a
 
 
 	_renderTarget->SetTransform(Matrix3x2F::Identity());
+	if (cameraAffect) _renderTarget->SetTransform(Matrix3x2F::Identity() * CAMERA->GetMatrix());
 	_renderTarget->DrawTextLayout(Point2F(pos.x, pos.y), _txtLayout, brush);
 
 	brush->Release();
 	_txtLayout->Release();
 }
 
+//void GraphicsManager::DrawTextD2D(Vector2 pos, wstring txt, int txtSize, float alpha, ColorF::Enum color, DWRITE_TEXT_ALIGNMENT alig, wstring font, bool cameraAffect)
+//{
+//	//_layout = Direct2D::GetInstance()->CreateTextLayout(_text, _fontName, _fontSize, _maxWidth, _maxHeight);
+//	// auto b = _wFactory->CreateTextLayout(txt.c_str(), txt.length(), format, maxWidth, maxHeight, &layout);
+//	_wFactory->CreateTextLayout(txt.c_str(), txt.length(), _txtFormatList[font], txt.length() * txtSize, txtSize, &_txtLayout);
+//
+//	DWRITE_TEXT_RANGE range;
+//	range.startPosition = 0;
+//	range.length = txt.length();
+//
+//	_txtLayout->SetFontSize(txtSize, range);
+//	_txtLayout->SetTextAlignment(alig);
+//	_txtLayout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
+//
+//	ID2D1SolidColorBrush* brush;
+//	_renderTarget->CreateSolidColorBrush(ColorF(color, alpha), &brush);
+//
+//
+//	_renderTarget->SetTransform(Matrix3x2F::Identity());
+//	if (cameraAffect) _renderTarget->SetTransform(Matrix3x2F::Identity() * CAMERA->GetMatrix());
+//	_renderTarget->DrawTextLayout(Point2F(pos.x, pos.y), _txtLayout, brush);
+//
+//	brush->Release();
+//	_txtLayout->Release();
+//}
+
 void GraphicsManager::DrawTextD2D(Vector2 pos, const char * txt, int txtSize, float alpha, ColorF::Enum color, DWRITE_TEXT_ALIGNMENT alig, wstring font, bool cameraAffect)
 {
 	string buffer = txt;
 	wstring str;
 	str.assign(buffer.begin(), buffer.end());
-
+	
 	_wFactory->CreateTextLayout(str.c_str(), str.length(), _txtFormatList[font], str.length() * txtSize, txtSize, &_txtLayout);
 
 	DWRITE_TEXT_RANGE range;
@@ -422,7 +449,7 @@ void GraphicsManager::DrawTextD2D(Vector2 pos, const char * txt, int txtSize, fl
 	ID2D1SolidColorBrush* brush;
 	_renderTarget->CreateSolidColorBrush(ColorF(color, alpha), &brush);
 
-	//_renderTarget->SetTransform(Matrix3x2F::Identity());
+	_renderTarget->SetTransform(Matrix3x2F::Identity());
 	if (cameraAffect) _renderTarget->SetTransform(Matrix3x2F::Identity() * CAMERA->GetMatrix());
 	_renderTarget->DrawTextLayout(Point2F(pos.x, pos.y), _txtLayout, brush);
 

@@ -27,6 +27,7 @@ private:
 
 public:
 	void CreateText(wstring text, float fontSize, float maxWidth, float maxHeight, ColorF::Enum color = ColorF::Black, float alpha = 1.0f, wstring fontName = L"µ¸¿ò", wstring localeName = L"ko");
+	void ChangeText(wstring text);
 	void SetAnchor(ANCHORS anchor);
 
 	virtual void Init();
