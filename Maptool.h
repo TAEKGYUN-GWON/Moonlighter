@@ -165,6 +165,7 @@ struct tagTile
 		tile->size = size;
 		tile->startPos2 = Vector2(1, 1);
 		tile->size2 = Vector2(1, 1);
+
 		return tile;
 	}
 };
