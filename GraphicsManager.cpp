@@ -394,6 +394,8 @@ void GraphicsManager::DrawTextD2D(Vector2 pos, wstring txt, int txtSize, float a
 
 	ID2D1SolidColorBrush* brush;
 	_renderTarget->CreateSolidColorBrush(ColorF(color, alpha), &brush);
+
+
 	_renderTarget->SetTransform(Matrix3x2F::Identity());
 	_renderTarget->DrawTextLayout(Point2F(pos.x, pos.y), _txtLayout, brush);
 

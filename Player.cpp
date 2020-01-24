@@ -13,6 +13,8 @@ void Player::Init()
 {
 	Object::Init();
 
+	GRAPHICMANAGER->AddFrameImage("will_dungeon", L"will_dungeon.png", 10, 13);
+
 	_tag = "Player";
 	_name = "Will";
 

@@ -55,7 +55,6 @@ void Maptool::Init()
 	GRAPHICMANAGER->AddImage("town_map", L"resource/img/Map/map.png");
 	GRAPHICMANAGER->AddFrameImage("set_tile", L"set_tile3.png", 4, 6);
 	GRAPHICMANAGER->AddFrameImage("set_tile_dungeon", L"set_tile_dungeon.png", 4, 6);
-	GRAPHICMANAGER->AddFrameImage("will_dungeon", L"will_dungeon.png", 10, 13);
 
 	_page = SamplePage::TOWN;
 	_eraser = EraserType::Single;
