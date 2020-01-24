@@ -1,12 +1,48 @@
 #pragma once
 #include "Item.h"
-class Inventory
+#include "Object.h"
+#include "Component.h"
+struct tagItemInfo
+{
+	tagItemInfo(Item* item, int some)
+	{
+		this->item = item;
+		this->some = some;
+	}
+	tagItemInfo(Item* item)
+	{
+		this->item = item;
+		this->some = 1;
+	}
+	Item* item;
+	int some;
+};
+
+class Inventory 
 {
 private:
-	vector<Item*> _itemList;
-
+	Graphic* _ui;
+	Graphic* _select;
+	Vector2 pos;
+	multimap<string, tagItemInfo> _inven;
+	multimap<string, tagItemInfo>::iterator iter;
+	bool _isActive;
 
 public:
+
 	Inventory();
 	~Inventory();
+
+	void Init();
+	void Update();
+	void Release();
+	void Render();
+	void Insert(Item* item);
+	void Remove(string name, int num);
+
+	void Quantity();
+	bool GetActive() { return _isActive; }
+	void SetActive(bool active) { _isActive = active; }
+	void KeyCon();
+	void PosCorrection();
 };

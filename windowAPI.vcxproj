@@ -23,7 +23,7 @@
     <ProjectGuid>{28B4DAE8-5578-4957-B006-3CD8EAE245FC}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>windowAPI</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -152,19 +152,26 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Direct2D.h" />
     <ClInclude Include="DrawComponent.h" />
     <ClInclude Include="DungeonScene.h" />
     <ClInclude Include="EntranceScene.h" />
+    <ClInclude Include="ETC.h" />
     <ClInclude Include="iniDataManager.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Item.hpp" />
+    <ClInclude Include="Item_Bass_Collider.h" />
     <ClInclude Include="JsonManager.h" />
+    <ClInclude Include="loadingScene.h" />
     <ClInclude Include="Maptool.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="NpcManager.h" />
     <ClInclude Include="NpcShopState.h" />
     <ClInclude Include="omega.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Potion.h" />
+    <ClInclude Include="Potions.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="ObjectManager.h" />
@@ -190,6 +197,7 @@
     <ClInclude Include="StartScene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="timeManager.h" />
     <ClInclude Include="timer.h" />
@@ -208,18 +216,24 @@
     <ClCompile Include="CheckStand.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Direct2D.cpp" />
     <ClCompile Include="DrawComponent.cpp" />
     <ClCompile Include="DungeonScene.cpp" />
     <ClCompile Include="EntranceScene.cpp" />
+    <ClCompile Include="ETC.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Item_Bass_Collider.cpp" />
     <ClCompile Include="JsonManager.cpp" />
+    <ClCompile Include="loadingScene.cpp" />
     <ClCompile Include="Maptool.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="NpcManager.cpp" />
     <ClCompile Include="NpcShopState.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Potion.cpp" />
+    <ClCompile Include="Potions.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Graphic.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
@@ -244,6 +258,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />

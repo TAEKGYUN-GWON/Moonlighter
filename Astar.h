@@ -5,8 +5,7 @@
 //ㅇ
 class Astar
 {
-private:
-
+public:
 	enum dir
 	{
 		Left = -1,
@@ -15,6 +14,8 @@ private:
 		Down = 1,
 
 	};
+private:
+
 	vector<Tile*>_vTotalList;
 	vector<Tile*>::iterator _viTotalList;
 
@@ -29,8 +30,6 @@ private:
 	Tile* _startTile;
 	Tile* _endTile;
 	Tile* _currentTile;
-
-
 
 	//요건 나중에 테스트할때 쓸것.
 	bool _start;

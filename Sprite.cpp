@@ -10,6 +10,10 @@ Sprite::Sprite()
 	_strokeWidth = 1.0f;
 
 	_isFlipX = false;
+	_isFillRect = false;
+	_isShowRect = false;
+	_isCameraAffect = true;
+
 	_alpha = 1.0f;
 }
 
@@ -29,8 +33,8 @@ void Sprite::Render()
 {
 	if (KEYMANAGER->isToggleKey(VK_F1))
 	{
-
-		GRAPHICMANAGER->DrawRect(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _color, _pivot, _strokeWidth);
+		if (_isFillRect) GRAPHICMANAGER->DrawFillRect(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _color, _alpha, _pivot, _isCameraAffect);
+		else GRAPHICMANAGER->DrawRect(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _color, _pivot, _strokeWidth, _isCameraAffect);
 	}
 
 	if (_imgKey.empty()) return;
@@ -56,14 +60,20 @@ void Sprite::Render()
 				}
 			}
 		}
-		//GRAPHICMANAGER->DrawFrameImage(_imgKey, _object->GetTrans()->GetPos(), _curFrameX, _curFrameY, _pivot);
-		_graphic->FrameRender(_object->GetTrans()->GetPos(), _curFrameX, _curFrameY, _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot);
+		//GRAPHICMANAGER->DrawFrameImage(_imgKey, _object->GetTrans()->GetPos(), _curFrameX, _curFrameY, _alpha, _pivot);
+		//_graphic->FrameRender(_object->GetTrans()->GetPos(), _curFrameX, _curFrameY, _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot, _isCameraAffect);
+		GRAPHICMANAGER->DrawFrameImage(_imgKey, _object->GetTrans()->GetPos(), _curFrameX, _curFrameY, _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot, _isCameraAffect);
 	}
 	else
 	{
 		//GRAPHICMANAGER->DrawImage(_imgKey, _object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot);
-		_graphic->Render(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot);
+		_graphic->Render(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot, _isCameraAffect);
 	}
+
+	//if (KEYMANAGER->isToggleKey(VK_F1))
+	//{
+	//	GRAPHICMANAGER->DrawRect(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _color, _pivot, _strokeWidth);
+	//}
 }
 
 void Sprite::Update()
@@ -97,12 +107,12 @@ void Sprite::Resume()
 
 void Sprite::SetImgName(string key)
 {
-	 _imgKey = key; 
-	 _graphic = GRAPHICMANAGER->FindImage(_imgKey); 
-	 _maxFrameX = _graphic->GetMaxFrameX();
-	 _curFrameX = 0;
+	_imgKey = key;
+	_graphic = GRAPHICMANAGER->FindImage(_imgKey);
+	_maxFrameX = _graphic->GetMaxFrameX();
+	_curFrameX = 0;
 
-	 if (_isFrame) _isPlay = true;
+	if (_isFrame) _isPlay = true;
 }
 
 bool Sprite::IsFrameEnd()

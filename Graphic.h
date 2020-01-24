@@ -5,6 +5,8 @@ enum PIVOT
 	LEFT_TOP,
 	CENTER,
 	BOTTOM,
+	RIGHT_BOTTOM,
+	LEFT_BOTTOM,
 	TOP,
 };
 
@@ -33,6 +35,7 @@ public:
 		string						imgKey;
 		wstring						imgPath;
 		bool						isFlipX;
+		bool						isCameraAffect;
 
 		tagGraphicInfo()
 		{
@@ -68,19 +71,20 @@ public:
 	void Release();
 	//void Render(float x, float y);
 	void Render(float x, float y, PIVOT pivot = PIVOT::CENTER);
-	void Render(Vector2 pos, PIVOT pivot = PIVOT::CENTER);
-	void Render(Vector2 pos, Vector2 scale, float angle, bool flipX = false, float alpha = 1.0f, PIVOT pivot = PIVOT::CENTER);
+	void Render(Vector2 pos, float alpha = 1.0f, PIVOT pivot = PIVOT::CENTER, bool cameraAffect = true);
+	void Render(Vector2 pos, Vector2 scale, float angle, bool flipX = false, float alpha = 1.0f, PIVOT pivot = PIVOT::CENTER, bool cameraAffect = true);
 	void RenderUI(float x, float y, PIVOT pivot = PIVOT::CENTER);
 	void RenderUI(Vector2 pos, PIVOT pivot = PIVOT::CENTER);
 	void FrameRender(float x, float y, int curFrameX, int curFrameY, PIVOT pivot = PIVOT::CENTER);
-	void FrameRender(Vector2 pos, int curFrameX, int curFrameY, PIVOT pivot = PIVOT::CENTER);
-	void FrameRender(Vector2 pos, int curFrameX, int curFrameY, Vector2 scale, float angle, bool flipX = false, float alpha = 1.0f, PIVOT pivot = PIVOT::CENTER);
-	
+	void FrameRender(Vector2 pos, int curFrameX, int curFrameY, float alpha = 1.0f, PIVOT pivot = PIVOT::CENTER, bool cameraAffect = true);
+	void FrameRender(Vector2 pos, int curFrameX, int curFrameY, Vector2 scale, float angle, bool flipX = false, float alpha = 1.0f, PIVOT pivot = PIVOT::CENTER, bool cameraAffect = true);
+
 	void SetFlipX(bool isFlip) { _graphicInfo->isFlipX = isFlip; }
 	void SetSize(Vector2 size) { _graphicInfo->size = size; }
 	void SetAngle(float angle) { _graphicInfo->angle = angle; }
 	void SetScale(Vector2 scale) { _graphicInfo->scale = scale; }
 	void SetAlpha(float alpha) { _graphicInfo->alpha = alpha; }
+	void SetCameraAffect(bool affect) { _graphicInfo->isCameraAffect = affect; }
 
 	void SetCurrentFrameX(int frame) { _graphicInfo->curFrameX = frame; }
 	void SetCurrentFrameY(int frame) { _graphicInfo->curFrameY = frame; }

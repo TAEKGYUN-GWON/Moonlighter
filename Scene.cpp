@@ -86,11 +86,19 @@ bool Compare(Object* a, Object* b)
 
 void Scene::Render()
 {
-	//if (_allowRelease) return;
 
+	//if (_allowRelease) return;
 	sort(_children.begin(), _children.end(), Compare);
 
 	for (Object* child : _children)
+	{
+
+		if (child->GetTrans()->pos.x < CAMERA->GetPosition().x || child->GetTrans()->pos.x > CAMERA->GetPosition().x + WINSIZEX ||
+			child->GetTrans()->pos.y < CAMERA->GetPosition().y || child->GetTrans()->pos.y > CAMERA->GetPosition().y + WINSIZEY) child->SetAllowsRender(false);
+		else child->SetAllowsRender(true);
+
 		child->Render();
+
+	}
 }
 

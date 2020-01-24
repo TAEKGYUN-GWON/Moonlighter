@@ -5,147 +5,609 @@ void Maptool::Init()
 {
 	Scene::Init();
 
-	GRAPHICMANAGER->AddImage("eagle", L"eagle.png");
-	GRAPHICMANAGER->AddFrameImage("idle", L"idle.png", 8, 1);
-	GRAPHICMANAGER->AddFrameImage("fall_right", L"fall_right.png", 10, 1);
+#pragma region SetTilePage1
+	GRAPHICMANAGER->AddImage("build_fountain", L"resource/img/Object/build_fountain.png");
+	GRAPHICMANAGER->AddImage("build_Retaile", L"resource/img/Object/build_Retaile.png");
+	GRAPHICMANAGER->AddImage("build_Shop", L"resource/img/Object/build_Shop.png");
+	GRAPHICMANAGER->AddImage("build_Top1", L"resource/img/Object/build_Top1.png");
+	GRAPHICMANAGER->AddImage("build_Well", L"resource/img/Object/build_Well.png");
 
-	GRAPHICMANAGER->AddFrameImage("1", L"1.png", 9, 1);
-	GRAPHICMANAGER->AddFrameImage("2", L"2.png", 9, 1);
-	GRAPHICMANAGER->AddFrameImage("3", L"3.png", 9, 1);
-	GRAPHICMANAGER->AddFrameImage("4", L"4.png", 9, 1);
+	GRAPHICMANAGER->AddFrameImage("door", L"resource/img/Object/door.png", 5, 1);
+	GRAPHICMANAGER->AddFrameImage("doordown", L"resource/img/Object/doordown.png", 5, 1);
 
+	GRAPHICMANAGER->AddImage("dungeonLobby_entryStructure", L"resource/img/Object/dungeonLobby_entryStructure.png");
+	GRAPHICMANAGER->AddImage("dungeonLobby_entryStructureLeft", L"resource/img/Object/dungeonLobby_entryStructureLeft.png");
+	GRAPHICMANAGER->AddImage("dungeonLobby_entryStructureRight", L"resource/img/Object/dungeonLobby_entryStructureRight.png");
+	GRAPHICMANAGER->AddImage("build_Bottom3", L"resource/img/Object/build_Bottom3.png");
+	GRAPHICMANAGER->AddImage("bench", L"resource/img/Object/bench.png");
+	GRAPHICMANAGER->AddImage("build_Board", L"resource/img/Object/build_Board.png");
+	GRAPHICMANAGER->AddImage("build_Bottom1", L"resource/img/Object/build_Bottom1.png");
+	GRAPHICMANAGER->AddImage("build_Bottom2", L"resource/img/Object/build_Bottom2.png");
+	GRAPHICMANAGER->AddImage("Village_OilLamps_1", L"resource/img/Object/Village_OilLamps_1.png");
+	GRAPHICMANAGER->AddImage("build_Enchant", L"resource/img/Object/build_Enchant.png");
+	GRAPHICMANAGER->AddImage("Village_OilLamps_2", L"resource/img/Object/Village_OilLamps_2.png");
 
-	GRAPHICMANAGER->AddFrameImage("5", L"5.png", 10, 1);
-	GRAPHICMANAGER->AddFrameImage("6", L"6.png", 8, 1);
+	GRAPHICMANAGER->AddFrameImage("tree", L"resource/img/Object/tree.png", 4, 1);
 
-	GRAPHICMANAGER->AddFrameImage("test", L"pacman_sprite_2.png", 32, 20);
+	GRAPHICMANAGER->AddImage("build_Forge", L"resource/img/Object/build_Forge.png");
+	GRAPHICMANAGER->AddImage("dungeonLobby_middleRighttRock", L"resource/img/Object/dungeonLobby_middleRighttRock.png");
+	GRAPHICMANAGER->AddImage("forgeBoard", L"resource/img/Object/forgeBoard.png");
+	GRAPHICMANAGER->AddImage("potionBoard", L"resource/img/Object/potionBoard.png");
+	GRAPHICMANAGER->AddImage("empty", L"resource/img/empty.png");
+#pragma endregion
 
-	obj = Object::CreateObject<Object>();
-	obj->GetTrans()->SetPos(Vector2(WINSIZEX / 2 - 300, WINSIZEY / 2));
-	//obj->AddComponent<Sprite>()->SetImgName("eagle");
-	auto a = obj->AddComponent<Sprite>();
-	a->SetImgName("eagle");
-	a->SetFlipX(true);
-	a->GetGraphic()->SetFlipX(obj->GetComponent<Sprite>()->GetFlipX());
-	//obj->GetComponent<Sprite>()->GetGraphic()->SetFlipX(obj->GetComponent<Sprite>()->GetF);
-	//obj->GetGraphic()->SetImgName("eagle");
-	//obj->GetTrans()->SetScale(Vector2(obj->GetGraphic()->GetGraphic()->GetFrameWidth(), obj->GetGraphic()->GetGraphic()->GetFrameHeight()));
-	obj->GetTrans()->SetScale(Vector2(a->GetGraphic()->GetFrameWidth(), a->GetGraphic()->GetFrameHeight()));
+#pragma region SetTilePage2
+	GRAPHICMANAGER->AddImage("smallRock", L"resource/img/Object/smallRock.png");
+	GRAPHICMANAGER->AddImage("smallRock_slime", L"resource/img/Object/smallRock_slime.png");
+	GRAPHICMANAGER->AddImage("bigRock", L"resource/img/Object/bigRock.png");
+	GRAPHICMANAGER->AddImage("book", L"resource/img/Object/book.png");
+	GRAPHICMANAGER->AddImage("pot", L"resource/img/Object/pot.png");
+	GRAPHICMANAGER->AddImage("pot_slime", L"resource/img/Object/pot_slime.png");
+	GRAPHICMANAGER->AddImage("lathe", L"resource/img/Object/lathe.png");
+	GRAPHICMANAGER->AddImage("fountain", L"resource/img/Object/fountain.png");
+	GRAPHICMANAGER->AddImage("pillar", L"resource/img/Object/pillar.png");
+	GRAPHICMANAGER->AddImage("skull1", L"resource/img/Object/skull1.png");
+	GRAPHICMANAGER->AddImage("skull2", L"resource/img/Object/skull2.png");
+	GRAPHICMANAGER->AddImage("skull3", L"resource/img/Object/skull3.png");
+	GRAPHICMANAGER->AddImage("brokenPillar", L"resource/img/Object/brokenPillar.png");
+#pragma endregion
 
-	Object* obj2 = Object::CreateObject<Object>();
-	obj2->GetTrans()->SetPos(Vector2(WINSIZEX / 2 + 300, WINSIZEY / 2));
-	obj2->AddComponent<Sprite>()->SetImgName("eagle");
-	obj2->GetTrans()->SetScale(Vector2(50, 100));
-	obj2->GetComponent<Sprite>()->SetAlpha(0.3f);
+	GRAPHICMANAGER->AddImage("town_map", L"resource/img//Map/map.png");
+	GRAPHICMANAGER->AddFrameImage("set_tile", L"set_tile3.png", 4, 6);
+	GRAPHICMANAGER->AddFrameImage("set_tile_dungeon", L"set_tile_dungeon.png", 4, 6);
+	GRAPHICMANAGER->AddFrameImage("will_dungeon", L"will_dungeon.png", 10, 13);
 
-	obj3 = Object::CreateObject<Object>();
-	obj3->GetTrans()->SetPos(Vector2(WINSIZEX / 2, WINSIZEY / 2 + 200));
-	Sprite* s = obj3->AddComponent<Sprite>();
-	s->Init(true, true);
-	s->SetImgName("idle");
-	//s->SetFlipX(true);
-	obj3->GetTrans()->SetScale(Vector2(s->GetGraphic()->GetFrameWidth() - 10, s->GetGraphic()->GetFrameHeight() - 10));
+	_page = SamplePage::TOWN;
+	//_eraser = EraserType::Single;
+	_eraser = EraserType::Image;
 
-	//SetUp();
+	SetUp();
+
+	_isDown = false;
+
+	_curFrameX = _curFrameY = 0;
+
+	p = Object::CreateObject<Player>();
+	p->Init();
+	p->GetTrans()->SetPos(p->GetTrans()->GetPos() - CAMERA->GetPosition());
+	p->GetSprite()->Init(true);
+	p->GetSprite()->SetImgName("will_dungeon");
+	p->GetSprite()->SetFrameY(1);
+	p->GetSprite()->Stop();
+	//p->GetSprite()->SetCameraAffect(false);
+
+	_rcLoad = RectMakeCenter(WINSIZEX - 100, WINSIZEY - 100, 100, 30);
+	_rcSave = RectMakeCenter(WINSIZEX - 100, WINSIZEY - 150, 100, 30);
 }
 
 void Maptool::Update()
 {
 	Scene::Update();
-
+	
 	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
-		//if (PtInRect(&_btn1->GetTrans()->GetRect(), _ptMouse))
-		//{
-		//	_btn1->GetComponent<Sprite>()->SetRectColor(ColorF::Red);
-		//}
-		//if (PtInRect(&_STGround->GetTrans()->GetRect(), _ptMouse))
-		//{
-		//	_STGround->GetComponent<Sprite>()->SetRectColor(ColorF::Red);
-		//}
+		if (PtInRect(&_rcLoad, _ptMouse))
+		{
+#pragma region FileLoadTest
+			//OPENFILENAME ofn;
+			//char filePathSize[1028] = "";
+			//ZeroMemory(&ofn, sizeof(OPENFILENAME));
+			//
+			//ofn.lStructSize = sizeof(OPENFILENAME);
+			//ofn.hwndOwner = NULL;
+			//ofn.lpstrFile = filePathSize;
+			//ofn.nMaxFile = sizeof(filePathSize);
+			//ofn.nFilterIndex = true;
+			//ofn.lpstrFileTitle = NULL;
+			//ofn.nMaxFileTitle = NULL;
+			//ofn.lpstrInitialDir = NULL;
+			//ofn.lpstrFilter = ("음악파일만넣어줘라");
+			//ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+			//
+			//if (GetOpenFileName(&ofn) == FALSE) return;
+			//
+			//char temp[1028];
+			//strncpy_s(temp, strlen(ofn.lpstrFile) + 1, ofn.lpstrFile, strlen(ofn.lpstrFile));
+			//
+			//char* context = NULL;
+			//char* token = strtok_s(temp, "\\", &context);
+			//
+			//while (strlen(context))
+			//{
+			//	token = strtok_s(NULL, "\\", &context);
+			//}
+			//
+			//char* title = token;
+			//token = strtok_s(title, ".", &context);
+#pragma endregion
+
+			Load();
+			
+		}
+		if (PtInRect(&_rcSave, _ptMouse))
+		{
+#pragma region FileSaveTest
+			//OPENFILENAME ofn;
+			//char filePathSize[1028] = "";
+			////TCHAR filter[] = "Every file(*.*) \0*.*\0TextFile\0*.txt;*.doc\0";
+			//char filter[1028] = "Every file(*.*) \0*.*\0TextFile\0*.txt;*.doc\0맵(.map)\0*.map*\0";
+			//
+			//ZeroMemory(&ofn, sizeof(OPENFILENAME));
+			//
+			//ofn.lStructSize = sizeof(OPENFILENAME);
+			//ofn.hwndOwner = NULL;
+			////ofn.lpstrFile = filePathSize;
+			//ofn.lpstrFile = filter;
+			//ofn.nMaxFile = sizeof(filePathSize);
+			//ofn.nFilterIndex = true;
+			//ofn.lpstrFileTitle = NULL;
+			//ofn.nMaxFileTitle = NULL;
+			//ofn.lpstrInitialDir = NULL;
+			//ofn.lpstrFilter = filter;
+			//ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+			//
+			////if (GetSaveFileName(&ofn) == FALSE) return;
+			//if (GetSaveFileName(&ofn) != FALSE)
+			//{
+			//	wsprintf(filePathSize, "%s 파일", ofn.lpstrFile);
+			//	MessageBox(_hWnd, filePathSize, "저장", MB_OK);
+			//}
+#pragma endregion
+
+			Save();
+		}
+		if (PtInRect(&_btn1->GetTrans()->GetRect(), _ptMouse))
+		{
+			_currentTile.imgKey = "empty";
+			_currentTile.isFrame = false;
+			_currentTile.size = Vector2(1, 1);
+			//_currentTile.vSize[0] = Vector2(1, 1);
+			_ctrSelect = Attribute::NONE_MOVE;
+			//return;
+		}
+		ClickSetTile();
 	}
 
-	if (KEYMANAGER->isOnceKeyDown('U')) obj->GetComponent<Sprite>()->SetFlipX(!obj->GetComponent<Sprite>()->GetFlipX());
-	if (KEYMANAGER->isOnceKeyDown('P'))
+	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
 	{
-		obj3->GetComponent<Sprite>()->SetImgName("fall_right");
-		//Sprite* s = obj3->AddComponent<Sprite>();
-		//obj3->GetTrans()->SetScale(Vector2(s->GetGraphic()->GetFrameWidth(), s->GetGraphic()->GetFrameHeight()));
+		SetMap();
+	}
 
-	}
-	if (KEYMANAGER->isOnceKeyDown('O'))
+	//// 렉트 충돌부분 색 변하게 해주는 거
+	//RECT temp;
+	//for (int i = 0; i < TILENUMX * TILENUMY; ++i)
+	//{
+	//	//if ((_ptMouse.x <= WINSIZEX - 300) && PtInRect(&RectMakeCenter(_tiles[i]->GetTrans()->GetPos().x - CAMERA->GetPosition().x, _tiles[i]->GetTrans()->GetPos().y - CAMERA->GetPosition().y, TILEWIDTH, TILEHEIGHT), _ptMouse))
+	//	if ((_ptMouse.x <= WINSIZEX - 300) && IntersectRect(&temp, &RectMakeCenter(_tiles[i]->GetTrans()->GetPos().x - CAMERA->GetPosition().x, _tiles[i]->GetTrans()->GetPos().y - CAMERA->GetPosition().y, TILEWIDTH, TILEHEIGHT), &RectMakeBottomCenter(_ptMouse.x, _ptMouse.y, _currentTile.colSize.x, _currentTile.colSize.y)))
+	//	{
+	//		//if (_tiles[i]->GetChildren().size() > 0) return;
+	//
+	//		_tiles[i]->GetComponent<Sprite>()->SetFillRect(true);
+	//
+	//		continue;
+	//	}
+	//	else
+	//	{
+	//		_tiles[i]->GetComponent<Sprite>()->SetFillRect(false);
+	//	}
+	//}
+
+	//RECT temp;
+	//for (int i = 0; i < TILENUMX * TILENUMY; ++i)
+	//{
+	//	if ((_ptMouse.x <= WINSIZEX - 300) && PtInRect(&RectMakeCenter(_tiles[i]->GetTrans()->GetPos().x - CAMERA->GetPosition().x, _tiles[i]->GetTrans()->GetPos().y - CAMERA->GetPosition().y, TILEWIDTH, TILEHEIGHT), _ptMouse))
+	//	//if ((_ptMouse.x <= WINSIZEX - 300) && IntersectRect(&temp, &RectMakeCenter(_tiles[i]->GetTrans()->GetPos().x - CAMERA->GetPosition().x, _tiles[i]->GetTrans()->GetPos().y - CAMERA->GetPosition().y, TILEWIDTH, TILEHEIGHT), &RectMakeBottomCenter(_ptMouse.x, _ptMouse.y, _currentTile.colSize.x, _currentTile.colSize.y)))
+	//	{
+	//		//if (_tiles[i]->GetChildren().size() > 0) return;
+	//
+	//		_tiles[i]->GetComponent<Sprite>()->SetFillRect(true);
+	//
+	//		continue;
+	//	}
+	//	else
+	//	{
+	//		_tiles[i]->GetComponent<Sprite>()->SetFillRect(false);
+	//	}
+	//}
+
+	if (KEYMANAGER->isStayKeyDown(VK_RBUTTON))
 	{
-		obj3->GetComponent<Sprite>()->SetImgName("idle");
-		//Sprite* s = obj3->AddComponent<Sprite>();
-		//obj3->GetTrans()->SetScale(Vector2(s->GetGraphic()->GetFrameWidth(), s->GetGraphic()->GetFrameHeight()));
+		RemoveObject();
 	}
-	if (KEYMANAGER->isOnceKeyDown('4'))
+
+	if (KEYMANAGER->isOnceKeyUp('1'))
 	{
-		obj3->GetComponent<Sprite>()->SetImgName("4");
-		//Sprite* s = obj3->AddComponent<Sprite>();
-		//obj3->GetTrans()->SetScale(Vector2(s->GetGraphic()->GetFrameWidth(), s->GetGraphic()->GetFrameHeight()));
+		_page = SamplePage::TOWN;
+		SetPage();
 	}
-	if (KEYMANAGER->isOnceKeyDown('1'))
+	if (KEYMANAGER->isOnceKeyUp('2'))
 	{
-		obj3->GetComponent<Sprite>()->SetImgName("1");
-		//Sprite* s = obj3->AddComponent<Sprite>();
-		//obj3->GetTrans()->SetScale(Vector2(s->GetGraphic()->GetFrameWidth(), s->GetGraphic()->GetFrameHeight()));
+		_page = SamplePage::DONGEON;
+		SetPage();
 	}
-	if (KEYMANAGER->isOnceKeyDown('2'))
+}
+
+void Maptool::Render()
+{
+	GRAPHICMANAGER->DrawImage("town_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
+	
+	Scene::Render();
+
+	char buffer[128];
+	for (int i = 0; i < 25; ++i)
 	{
-		obj3->GetComponent<Sprite>()->SetImgName("2");
-		//Sprite* s = obj3->AddComponent<Sprite>();
-		//obj3->GetTrans()->SetScale(Vector2(s->GetGraphic()->GetFrameWidth(), s->GetGraphic()->GetFrameHeight()));
+		for (int j = 0; j < 33; ++j)
+		{
+			int index = (i + (int)CAMERA->GetPosition().y / TILEHEIGHT) * TILENUMX + (j + (int)CAMERA->GetPosition().x / TILEWIDTH);
+
+			if (index < 0 || index >= TILENUMX * TILENUMY) continue;
+
+			if (_tiles[index]->GetAttribute() == "Wall") _tiles[index]->GetComponent<Sprite>()->SetFillRect(true);
+			else if(_tiles[index]->GetAttribute() != "Wall") _tiles[index]->GetComponent<Sprite>()->SetFillRect(false);
+
+			if (_tiles[index]->GetChildren().size() > 0) _tiles[index]->GetChildren()[0]->Render();
+			sprintf_s(buffer, "%d", index);
+			GRAPHICMANAGER->DrawTextD2D(_tiles[index]->GetTrans()->GetPos() + Vector2(-(TILEWIDTH / 2) + 2, TILEHEIGHT / 7), buffer, 10, 1.0f, ColorF::Yellow);
+		}
 	}
-	if (KEYMANAGER->isOnceKeyDown('3'))
+
+	// sample tile image background
+	GRAPHICMANAGER->DrawFillRect(Vector2(WINSIZEX - 150, WINSIZEY / 2), Vector2(300, WINSIZEY), 0.0f, ColorF::Aquamarine, 1.0f, CENTER, false);
+	
+	for (int i = 0; i < SAMPLE_TILE_X_NUM * SAMPLE_TILE_Y_NUM; ++i)
 	{
-		obj3->GetComponent<Sprite>()->SetImgName("3");
-		//Sprite* s = obj3->AddComponent<Sprite>();
-		//obj3->GetTrans()->SetScale(Vector2(s->GetGraphic()->GetFrameWidth(), s->GetGraphic()->GetFrameHeight()));
+		GRAPHICMANAGER->DrawRect(Vector2(_sampleTile[i].pos.x, _sampleTile[i].pos.y), Vector2(SET_TILEWIDTH, SET_TILEHEIGHT), 0.0f, ColorF::White, PIVOT::CENTER, 1.0f, false);
 	}
-	if (KEYMANAGER->isOnceKeyDown('5'))
+
+	switch (_page)
 	{
-		obj3->GetComponent<Sprite>()->SetImgName("5");
-		//Sprite* s = obj3->AddComponent<Sprite>();
-		//obj3->GetTrans()->SetScale(Vector2(s->GetGraphic()->GetFrameWidth(), s->GetGraphic()->GetFrameHeight()));
+	case SamplePage::TOWN: GRAPHICMANAGER->DrawImage("set_tile", Vector2(WINSIZEX - 150, 30), 1.0f, PIVOT::TOP, false); break;
+	case SamplePage::DONGEON: GRAPHICMANAGER->DrawImage("set_tile_dungeon", Vector2(WINSIZEX - 150, 30), 1.0f, PIVOT::TOP, false); break;
 	}
-	if (KEYMANAGER->isOnceKeyDown('6'))
+
+	_btn1->Render();
+
+	if (_currentTile.isFrame)
 	{
-		obj3->GetComponent<Sprite>()->SetImgName("6");
-		//Sprite* s = obj3->AddComponent<Sprite>();
-		//obj3->GetTrans()->SetScale(Vector2(s->GetGraphic()->GetFrameWidth(), s->GetGraphic()->GetFrameHeight()));
+		GRAPHICMANAGER->DrawFrameImage(_currentTile.imgKey, _ptMouse, 0, 0, 0.85f, _currentTile.pivot, false);
+		
+		// FIXME : 다시 보자
+		GRAPHICMANAGER->DrawRect(_ptMouse, Vector2(_currentTile.size.x * TILEWIDTH, _currentTile.size.y * TILEHEIGHT), 0.0f, ColorF::Red, _currentTile.pivot, 1.0f, false);
+		//GRAPHICMANAGER->DrawRect(_ptMouse, Vector2(_currentTile.vSize[0].x * TILEWIDTH, _currentTile.vSize[0].y * TILEHEIGHT), 0.0f, ColorF::Red, _currentTile.pivot, 1.0f, false);
 	}
+	else
+	{
+		GRAPHICMANAGER->DrawImage(_currentTile.imgKey, _ptMouse, 0.85f, _currentTile.pivot, false);
+		
+		// FIXME : 다시 보자
+		GRAPHICMANAGER->DrawRect(_ptMouse, Vector2(_currentTile.size.x * TILEWIDTH, _currentTile.size.y * TILEHEIGHT), 0.0f, ColorF::Red, _currentTile.pivot, 1.0f, false);
+		//GRAPHICMANAGER->DrawRect(_ptMouse, Vector2(_currentTile.vSize[0].x * TILEWIDTH, _currentTile.vSize[0].y * TILEHEIGHT), 0.0f, ColorF::Red, _currentTile.pivot, 1.0f, false);
+	}
+
+	GRAPHICMANAGER->DrawRect(Vector2(_rcLoad.left, _rcLoad.top), Vector2((_rcLoad.right - _rcLoad.left), (_rcLoad.bottom - _rcLoad.top)), 0.0f, ColorF::Blue, PIVOT::LEFT_TOP, 1.0f, false);
+	GRAPHICMANAGER->DrawRect(Vector2(_rcSave.left, _rcSave.top), Vector2((_rcSave.right - _rcSave.left), (_rcSave.bottom - _rcSave.top)), 0.0f, ColorF::Red, PIVOT::LEFT_TOP, 1.0f, false);
+}
+
+void Maptool::Save()
+{
+	//HANDLE file;
+	//DWORD write;
+	//
+	////GetWindowText(_btnSaveName, titleSave, 256);
+	//
+	////string str = titleSave;
+	////str += ".map";
+	//string str = "Town.map";
+	//
+	//file = CreateFile(str.c_str(), GENERIC_WRITE, 0, NULL,
+	//	CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	//
+	////WriteFile(file, _tiles, sizeof(Tile) * TILEWIDTH * TILEHEIGHT, &write, NULL);
+	//WriteFile(file, _tiles, sizeof(Tile*) * TILENUMX * TILENUMY, &write, NULL);
+	//CloseHandle(file);
+
+	//MessageBox(_hWnd, "저장 되었을지도..?", str.c_str(), MB_OK);
+}
+
+void Maptool::Load()
+{
+	HANDLE file;
+	DWORD read;
+	
+	//GetWindowText(_btnLoadName, titleLoad, 256);
+	
+	//string str = titleLoad;
+	//str += ".map";
+	string str = "Town.map";
+	
+	//file = CreateFile(titleLoad, GENERIC_READ, 0, NULL,
+	file = CreateFile(str.c_str(), GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	if (file != INVALID_HANDLE_VALUE)
+	{
+		ReadFile(file, _tiles, sizeof(Tile*) * TILENUMX * TILENUMY, &read, NULL);
+		CloseHandle(file);
+		InvalidateRect(_hWnd, NULL, false);
+	}
+	else
+	{
+		MessageBox(_hWnd, "없쒀", str.c_str(), MB_OK);
+	}
+
+	MessageBox(_hWnd, "불러와져라", str.c_str(), MB_OK);
 }
 
 void Maptool::SetUp()
 {
 	// TODO : button role?
-	//_btn1 = Object::CreateObject<Object>();
-	//_btn1->GetTrans()->SetPos(Vector2(WINSIZEX / 2, 200));
-	//_btn1->GetTrans()->SetScale(Vector2(100.0f, 50.0f));
-	//_btn1->AddComponent<Sprite>();
+	_btn1 = Object::CreateObject<Object>();
+	_btn1->GetTrans()->SetPos(Vector2(WINSIZEX - 200, WINSIZEY - 200));
+	_btn1->GetTrans()->SetScale(Vector2(100.0f, 50.0f));
+	_btn1->AddComponent<Sprite>();
+	_btn1->GetComponent<Sprite>()->SetFillRect(true);
+	_btn1->GetComponent<Sprite>()->SetCameraAffect(false);
+
+	_ctrSelect = NONE_MOVE;
+	_currentTile.imgKey = "empty";
 
 	for (int i = 0; i < TILENUMY; ++i)
 	{
 		for (int j = 0; j < TILENUMX; ++j)
 		{
-			_tiles[i * TILENUMX + j] = Object::CreateObject<Tile>();
-			_tiles[i * TILENUMX + j]->Init(j, i);
+			int index = j + TILENUMX * i;
 
-			SetRect(&_tiles[i * TILENUMX + j]->GetTrans()->GetRect(),
-				j * TILEWIDTH,
-				i * TILEHEIGHT,
-				j * TILEWIDTH + TILEHEIGHT,
-				i * TILEWIDTH + TILEHEIGHT);
+			_tiles[index] = Object::CreateObject<Tile>();
+			_tiles[index]->Init(j, i);
+			_tiles[index]->AddComponent<Sprite>();
+			_tiles[index]->SetAttribute("None");
+		}
+	}
+	for (int i = 0; i < SAMPLE_TILE_Y_NUM; ++i)
+	{
+		for (int j = 0; j < SAMPLE_TILE_X_NUM; ++j)
+		{
+			//Vector2((i % SAMPLE_TILE_X_NUM) * (100 / SAMPLE_TILE_X_NUM), (i / SAMPLE_TILE_X_NUM) * (100 / SAMPLE_TILE_Y_NUM);
+			_sampleTile[i * SAMPLE_TILE_X_NUM + j].pos = { (WINSIZEX - 240) + j * SET_TILEWIDTH, 60 + i * SET_TILEHEIGHT };
+			_sampleTile[i * SAMPLE_TILE_X_NUM + j].imgKey.clear();
 		}
 	}
 
-	_STGround = Object::CreateObject<Object>();
-	_STGround->GetTrans()->SetPos(Vector2(WINSIZEX / 2, 200));
-	_STGround->GetTrans()->SetScale(Vector2(300, 200));
-	_STGround->AddComponent<Sprite>();
+	TileSetting();
 }
 
 void Maptool::SetMap()
 {
+	if (_ptMouse.x > WINSIZEX - 300) return;
+	
+	int index = ((_ptMouse.x + (int)CAMERA->GetPosition().x) / TILEWIDTH) + TILENUMX * ((_ptMouse.y + (int)CAMERA->GetPosition().y) / TILEHEIGHT);
+
+	if (_tiles[index]->GetChildren().size() > 0) return;
+
+	if (_currentTile.imgKey == "empty" && _ctrSelect == Attribute::NONE_MOVE) _tiles[index]->SetAttribute("Wall");
+	else
+	{
+		SetAttribute(index, _currentTile.startPos, _currentTile.size, _currentTile.startPos2, _currentTile.size2, FindTile(_currentTile.imgKey)->attribute);
+
+		_tiles[index]->AddChild(Object::CreateObject<Object>());
+
+		_tiles[index]->GetChildren()[0]->GetTrans()->SetPos(_tiles[index]->GetTrans()->GetPos() + Vector2(0, TILEHEIGHT / 2));
+		if (_currentTile.pivot == RIGHT_BOTTOM) _tiles[index]->GetChildren()[0]->GetTrans()->SetPos(_tiles[index]->GetTrans()->GetPos() + Vector2(TILEWIDTH / 2, TILEHEIGHT / 2));
+
+		_tiles[index]->GetChildren()[0]->GetTrans()->SetScale(GRAPHICMANAGER->FindImage(_currentTile.imgKey)->GetFrameWidth(), GRAPHICMANAGER->FindImage(_currentTile.imgKey)->GetFrameHeight());
+		_tiles[index]->GetChildren()[0]->GetTrans()->SetRect();
+
+		if (_currentTile.isFrame)
+		{
+			_tiles[index]->GetChildren()[0]->AddComponent<Sprite>()->Init(true, true);
+			_tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->SetImgName(_currentTile.imgKey);
+			_tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->SetFPS(0.5f);
+		}
+		else _tiles[index]->GetChildren()[0]->AddComponent<Sprite>()->SetImgName(_currentTile.imgKey);
+		
+		_tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(_currentTile.pivot);
+	}
+}
+
+void Maptool::ClickSetTile()
+{
+	if (_ptMouse.x < WINSIZEX - 270 || _ptMouse.x >(WINSIZEX - 270) + (SET_TILEWIDTH * SAMPLE_TILE_X_NUM) ||
+		_ptMouse.y < 30 || _ptMouse.y > 30 + (SET_TILEHEIGHT * SAMPLE_TILE_Y_NUM)) return;
+
+	int index = ((_ptMouse.x - (WINSIZEX - 270) + (int)CAMERA->GetPosition().x) / SET_TILEWIDTH) + SAMPLE_TILE_X_NUM * ((_ptMouse.y - 30 + (int)CAMERA->GetPosition().y) / SET_TILEHEIGHT);
+
+	_currentTile.imgKey = FindTile(_sampleTile[index].imgKey)->imgKey;
+	_currentTile.isFrame = FindTile(_sampleTile[index].imgKey)->isFrame;
+
+	//_currentTile.vStartPos = FindTile(_sampleTile[i].imgKey)->vStartPos;
+	//_currentTile.vSize = FindTile(_sampleTile[i].imgKey)->vSize;
+	_currentTile.startPos = FindTile(_sampleTile[index].imgKey)->startPos;
+	_currentTile.size = FindTile(_sampleTile[index].imgKey)->size;
+	_currentTile.startPos2 = FindTile(_sampleTile[index].imgKey)->startPos2;
+	_currentTile.size2 = FindTile(_sampleTile[index].imgKey)->size2;
+
+	_currentTile.pivot = FindTile(_sampleTile[index].imgKey)->pivot;
+}
+
+void Maptool::RemoveObject()
+{
+	if (_ptMouse.x > WINSIZEX - 300) return;
+
+	int index = ((_ptMouse.x + (int)CAMERA->GetPosition().x) / TILEWIDTH) + TILENUMX * ((_ptMouse.y + (int)CAMERA->GetPosition().y) / TILEHEIGHT);
+
+	if (_eraser == EraserType::Image)
+	{
+		if (_tiles[index]->GetChildren().size())
+		{
+			string s = _tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->GetImgKey();
+			SetAttribute(index, FindTile(s)->startPos, FindTile(s)->size, FindTile(s)->startPos2, FindTile(s)->size2, "None");
+
+			if (_tiles[index]->GetChildren().size() <= 0) return;
+			_tiles[index]->RemoveChild(_tiles[index]->GetChildren()[0]);
+		}
+	}
+	else if (_eraser == EraserType::Single)
+	{
+		_tiles[index]->SetAttribute("None");
+
+		if (_tiles[index]->GetChildren().size() <= 0) return;
+		_tiles[index]->RemoveChild(_tiles[index]->GetChildren()[0]);
+	}
+}
+
+void Maptool::SetAttribute(int curIdx, Vector2 StartPos, Vector2 size, Vector2 StartPos2, Vector2 size2, string attribute)
+{
+	int start = ( curIdx- (TILENUMX * (StartPos.y - 1))) - (StartPos.x - 1);
+
+	for (int i = 0; i < size.y; ++i)
+	{
+		for (int j = 0; j < size.x; ++j)
+		{
+			if (start + j + (TILENUMX * i) < 0)continue;
+
+			_tiles[start + j + (TILENUMX * i)]->SetAttribute(attribute);
+		}
+	}
+
+	start = (curIdx - (TILENUMX * (StartPos2.y - 1))) - (StartPos2.x - 1);
+
+	for (int i = 0; i < size2.y; ++i)
+	{
+		for (int j = 0; j < size2.x; ++j)
+		{
+			if (start + j + (TILENUMX * i) < 0)continue;
+
+			_tiles[start + j + (TILENUMX * i)]->SetAttribute(attribute);
+		}
+	}
+}
+
+tagTile* Maptool::FindTile(string imgKey)
+{
+	mapTileIter key = _mTileList.find(imgKey);
+
+	if (key != _mTileList.end()) return key->second;
+	return nullptr;
+}
+
+void Maptool::TileSetting()
+{
+#pragma region Town
+	_mTileList.insert(make_pair(("build_fountain"), tagTile().Clone("build_fountain", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(3, 1), Vector2(3, 1))));
+	_mTileList.insert(make_pair(("build_Retaile"), tagTile().Clone("build_Retaile", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(12, 14), Vector2(12, 12), Vector2(10, 2), Vector2(3, 2))));
+	//_mTileList.insert(make_pair(("build_Retaile"), tagTile().Clone("build_Retaile", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM)));
+
+	//Vector2 v[] = { Vector2(12, 14), Vector2(10, 2) };
+	//Vector2 s[] = {Vector2(12, 12), Vector2(3, 2)};
+	//_mTileList.find("build_Retaile")->second->Setting(v, s, 2);
+
+	_mTileList.insert(make_pair(("build_Shop"), tagTile().Clone("build_Shop", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(17, 12), Vector2(17, 12))));
+	_mTileList.insert(make_pair(("build_Top1"), tagTile().Clone("build_Top1", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(11, 10), Vector2(11, 10))));
+	_mTileList.insert(make_pair(("build_Well"), tagTile().Clone("build_Well", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(4, 3), Vector2(4, 3))));
+
+	_mTileList.insert(make_pair(("door"), tagTile().Clone("door", "Wall", true, 5, 1, PIVOT::RIGHT_BOTTOM, Vector2(5, 1), Vector2(2, 1), Vector2(2, 1), Vector2(2, 1))));
+	_mTileList.insert(make_pair(("doordown"), tagTile().Clone("doordown", "Wall", true, 5, 1, PIVOT::RIGHT_BOTTOM, Vector2(5, 3), Vector2(2, 1), Vector2(2, 3), Vector2(2, 1))));
+	_mTileList.insert(make_pair(("dungeonLobby_entryStructure"), tagTile().Clone("dungeonLobby_entryStructure", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(12, 1), Vector2(4, 1), Vector2(4, 1), Vector2(4, 1))));
+	_mTileList.insert(make_pair(("dungeonLobby_entryStructureLeft"), tagTile().Clone("dungeonLobby_entryStructureLeft", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(4, 2), Vector2(4, 2))));
+	_mTileList.insert(make_pair(("dungeonLobby_entryStructureRight"), tagTile().Clone("dungeonLobby_entryStructureRight", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(4, 2), Vector2(4, 2))));
+
+	_mTileList.insert(make_pair(("build_Bottom3"), tagTile().Clone("build_Bottom3", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("bench"), tagTile().Clone("bench", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(5, 3), Vector2(5, 3))));
+	_mTileList.insert(make_pair(("build_Board"), tagTile().Clone("build_Board", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(7, 1), Vector2(7, 1))));
+	_mTileList.insert(make_pair(("build_Bottom1"), tagTile().Clone("build_Bottom1", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(11, 10), Vector2(11, 10), Vector2(16, 3), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("build_Bottom2"), tagTile().Clone("build_Bottom2", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(11, 10), Vector2(11, 10))));
+
+	_mTileList.insert(make_pair(("Village_OilLamps_1"), tagTile().Clone("Village_OilLamps_1", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("build_Enchant"), tagTile().Clone("build_Enchant", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(20, 6), Vector2(20, 6), Vector2(11, 16), Vector2(8, 10))));
+	_mTileList.insert(make_pair(("build_Forge"), tagTile().Clone("build_Forge", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("tree"), tagTile().Clone("tree", "Wall", true, 4, 1, PIVOT::RIGHT_BOTTOM, Vector2(5, 1), Vector2(3, 1), Vector2(5, 1), Vector2(3, 1))));
+	_mTileList.insert(make_pair(("Village_OilLamps_2"), tagTile().Clone("Village_OilLamps_2", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("dungeonLobby_middleRighttRock"), tagTile().Clone("dungeonLobby_middleRighttRock", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(2, 1), Vector2(2, 1))));
+
+	_mTileList.insert(make_pair(("forgeBoard"), tagTile().Clone("forgeBoard", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(2, 1), Vector2(2, 1))));
+	_mTileList.insert(make_pair(("potionBoard"), tagTile().Clone("potionBoard", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(2, 1), Vector2(2, 1))));
+
+	_mTileList.insert(make_pair(("empty"), tagTile().Clone("empty", "None", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+#pragma endregion
+
+#pragma region Dungeon
+	_mTileList.insert(make_pair(("bigRock"), tagTile().Clone("bigRock", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("book"), tagTile().Clone("book", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("brokenPillar"), tagTile().Clone("brokenPillar", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("fountain"), tagTile().Clone("fountain", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("lathe"), tagTile().Clone("lathe", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("pillar"), tagTile().Clone("pillar", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("pot"), tagTile().Clone("pot", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("pot_slime"), tagTile().Clone("pot_slime", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("skull1"), tagTile().Clone("skull1", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("skull2"), tagTile().Clone("skull2", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("skull3"), tagTile().Clone("skull3", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("smallRock"), tagTile().Clone("smallRock", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("smallRock_slime"), tagTile().Clone("smallRock_slime", "Wall", false, 1, 1, PIVOT::BOTTOM, Vector2(1, 1), Vector2(1, 1))));
+#pragma endregion
+
+	SetPage();
+}
+
+void Maptool::SetPage()
+{
+	switch (_page)
+	{
+	case SamplePage::TOWN:
+	{
+		_sampleTile[0].imgKey = _mTileList.find("build_fountain")->second->imgKey;
+		_sampleTile[1].imgKey = _mTileList.find("build_Retaile")->second->imgKey;
+		_sampleTile[2].imgKey = _mTileList.find("build_Shop")->second->imgKey;
+		_sampleTile[3].imgKey = _mTileList.find("build_Top1")->second->imgKey;
+		_sampleTile[4].imgKey = _mTileList.find("build_Well")->second->imgKey;
+		_sampleTile[5].imgKey = _mTileList.find("door")->second->imgKey;
+		_sampleTile[6].imgKey = _mTileList.find("doordown")->second->imgKey;
+		_sampleTile[7].imgKey = _mTileList.find("dungeonLobby_entryStructure")->second->imgKey;
+		_sampleTile[8].imgKey = _mTileList.find("dungeonLobby_entryStructureLeft")->second->imgKey;
+		_sampleTile[9].imgKey = _mTileList.find("dungeonLobby_entryStructureRight")->second->imgKey;
+		_sampleTile[10].imgKey = _mTileList.find("build_Bottom3")->second->imgKey;
+		_sampleTile[11].imgKey = _mTileList.find("bench")->second->imgKey;
+		_sampleTile[12].imgKey = _mTileList.find("build_Board")->second->imgKey;
+		_sampleTile[13].imgKey = _mTileList.find("build_Bottom1")->second->imgKey;
+		_sampleTile[14].imgKey = _mTileList.find("build_Bottom2")->second->imgKey;
+		_sampleTile[15].imgKey = _mTileList.find("Village_OilLamps_1")->second->imgKey;
+		_sampleTile[16].imgKey = _mTileList.find("build_Enchant")->second->imgKey;
+		_sampleTile[17].imgKey = _mTileList.find("build_Forge")->second->imgKey;
+		_sampleTile[18].imgKey = _mTileList.find("tree")->second->imgKey;
+		_sampleTile[19].imgKey = _mTileList.find("Village_OilLamps_2")->second->imgKey;
+		_sampleTile[20].imgKey = _mTileList.find("dungeonLobby_middleRighttRock")->second->imgKey;
+		_sampleTile[21].imgKey = _mTileList.find("forgeBoard")->second->imgKey;
+		_sampleTile[22].imgKey = _mTileList.find("potionBoard")->second->imgKey;
+		_sampleTile[23].imgKey = _mTileList.find("empty")->second->imgKey;
+	}
+	break;
+	case SamplePage::DONGEON:
+	{
+		_sampleTile[0].imgKey = _mTileList.find("smallRock")->second->imgKey;
+		_sampleTile[1].imgKey = _mTileList.find("smallRock_slime")->second->imgKey;
+		_sampleTile[2].imgKey = _mTileList.find("bigRock")->second->imgKey;
+		_sampleTile[3].imgKey = _mTileList.find("book")->second->imgKey;
+		_sampleTile[4].imgKey = _mTileList.find("pot")->second->imgKey;
+		_sampleTile[5].imgKey = _mTileList.find("pot_slime")->second->imgKey;
+		_sampleTile[6].imgKey = _mTileList.find("lathe")->second->imgKey;
+		_sampleTile[7].imgKey = _mTileList.find("fountain")->second->imgKey;
+		_sampleTile[8].imgKey = _mTileList.find("pillar")->second->imgKey;
+		_sampleTile[9].imgKey = _mTileList.find("skull1")->second->imgKey;
+		_sampleTile[10].imgKey = _mTileList.find("skull2")->second->imgKey;
+		_sampleTile[11].imgKey = _mTileList.find("skull3")->second->imgKey;
+		_sampleTile[12].imgKey = _mTileList.find("brokenPillar")->second->imgKey;
+		_sampleTile[13].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[14].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[15].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[16].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[17].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[18].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[19].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[20].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[21].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[22].imgKey = _mTileList.find("empty")->second->imgKey;
+		_sampleTile[23].imgKey = _mTileList.find("empty")->second->imgKey;
+	}
+	break;
+	case SamplePage::PAGE_END: break;
+	}
 }

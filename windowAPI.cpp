@@ -7,8 +7,7 @@
 HINSTANCE	_hInstance;
 HWND		_hWnd;
 
-POINT _ptMouse;		//마우스 용 POINT
-
+POINT		_ptMouse;
 
 //함수의 프로토타입 선언
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -38,7 +37,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmd
 	_hWnd = CreateWindow(
 		WINNAME,
 		WINNAME,
-		WS_OVERLAPPEDWINDOW,
+		WS_OVERLAPPEDWINDOW | WS_THICKFRAME,
 		WINSTARTX,
 		WINSTARTY,
 		WINSIZEX,
@@ -98,11 +97,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmd
 
 	//루프문이 다돌면 씬 해제
 	//sceneManager::getSingleton()->GetNowScene()->Release();
-	INIDATAMANAGER->release();
 
 	return message.wParam;
 }
-
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
@@ -111,12 +108,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	PAINTSTRUCT ps;
 	HDC			hdc;
 
+	char str[128];
+	int len;
+
 	switch (iMessage)
 	{
 	case WM_CREATE:
 
 		break;
-
 	case WM_MOUSEMOVE:
 		_ptMouse.x = static_cast<float>(LOWORD(lParam));
 		_ptMouse.y = static_cast<float>(HIWORD(lParam));
@@ -138,8 +137,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		}
 	}
 	break;
-
-
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
