@@ -194,15 +194,14 @@ private:
 	POINT _prevMouse;
 
 	Player* p;
-	Player* e;
 
-	HWND _saveName;
+	//HWND _saveName;
 	RECT _rcLoad;
 	RECT _rcSave;
 
 	RECT _rcEraserType;
 
-	Object* obj, * obj2;
+	Object* obj;
 
 public:
 	virtual void Init();

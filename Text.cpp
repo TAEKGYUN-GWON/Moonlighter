@@ -4,7 +4,7 @@
 void Text::SetLayout()
 {
 	if (_layout) _layout->Release();
-	_layout = Direct2D::GetInstance()->CreateTextLayout(_text, _fontName, _fontSize, _maxWidth, _maxHeight);
+	_layout = Direct2D::GetInstance()->CreateTextLayout(_text, _fontName, _fontSize, _maxWidth, _maxHeight, _locale);
 }
 
 void Text::CreateText(wstring text, float fontSize, float maxWidth, float maxHeight, ColorF::Enum color, float alpha, wstring fontName, wstring localeName)
@@ -53,6 +53,31 @@ void Text::Render()
 void Text::SetFontSize(float fontSize, int startPoint, int length)
 {
 	_layout->SetFontSize(fontSize, { (UINT32)startPoint, (UINT32)length });
+}
+
+void Text::SetSize(Vector2 size)
+{
+	_maxWidth = size.x;
+	_maxHeight = size.y;
+	SetLayout();
+}
+
+void Text::SetColor(ColorF color, int startPoint, int length)
+{
+	ID2D1SolidColorBrush* brush;
+	//Direct2D::GetInstance()->GetRenderTarger()->CreateSolidColorBrush(ColorF(color.r, color.b, color.g, color.a), &brush);
+	GRAPHICMANAGER->GetRenderTarget()->CreateSolidColorBrush(ColorF(color.r, color.b, color.g, color.a), &brush);
+	_layout->SetDrawingEffect((IUnknown*)brush, { (UINT32)startPoint, (UINT32)length });
+	brush->Release();
+}
+
+void Text::SetColor(ColorF::Enum color, int startPoint, int length, float alpha)
+{
+	ID2D1SolidColorBrush* brush;
+	//Direct2D::GetInstance()->GetRenderTarger()->CreateSolidColorBrush(ColorF(color.r, color.b, color.g, color.a), &brush);
+	GRAPHICMANAGER->GetRenderTarget()->CreateSolidColorBrush(ColorF(color, alpha), &brush);
+	_layout->SetDrawingEffect((IUnknown*)brush, { (UINT32)startPoint, (UINT32)length });
+	brush->Release();
 }
 
 void Text::SetUnderline(bool isUnderline, int startPoint, int length)
