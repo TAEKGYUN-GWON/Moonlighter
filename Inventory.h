@@ -41,6 +41,8 @@ public:
 	void Insert(Item* item);
 	void Remove(string name, int num);
 
+	int FindItemSome(string name);
+
 	void Quantity();
 	bool GetActive() { return _isActive; }
 	void SetActive(bool active) { _isActive = active; }

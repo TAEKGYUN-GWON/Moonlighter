@@ -160,6 +160,20 @@ void Inventory::Remove(string name, int num)
 	}
 }
 
+int Inventory::FindItemSome(string name)
+{
+	int count = 0;
+
+	for (iter = _inven.begin(); iter != _inven.end(); ++iter)
+	{
+		if (iter->first == name)
+		{
+			count += iter->second.some;
+		}
+	}
+	return count;
+}
+
 void Inventory::Quantity()
 {
 	for (iter = _inven.begin(); iter != _inven.end(); ++iter)
