@@ -22,7 +22,7 @@ void Inventory::Update()
 {
 	KeyCon();
 	if (!_isActive) return;
-	
+
 	Quantity();
 }
 
@@ -165,7 +165,10 @@ void Inventory::Quantity()
 }
 void Inventory::KeyCon()
 {
-
+	if (KEYMANAGER->isOnceKeyDown('P'))
+	{
+		AddMoney(100);
+	}
 	if (KEYMANAGER->isOnceKeyDown('I'))
 	{
 		_isActive = !_isActive;
@@ -195,5 +198,14 @@ void Inventory::KeyCon()
 void Inventory::PosCorrection()
 {
 	
+}
+
+bool Inventory::DeductionMoney(int money)
+{
+	if (_money < money) return false;
+
+	_money -= money;
+
+	return true;
 }
 
