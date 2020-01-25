@@ -17,12 +17,24 @@ void StartScene::Init()
 	GraphicsManager::getSingleton()->AddImage("dd", L"eagle.png");
 	GraphicsManager::getSingleton()->AddFrameImage("d2", L"fatkachu.png",4,1);
 
+	GRAPHICMANAGER->AddImage("coin", L"resource/img/UI/coin.png");
+	GRAPHICMANAGER->AddImage("moneyBag", L"resource/img/UI/moneyBag.png");
+	GRAPHICMANAGER->AddImage("UI_Bag", L"resource/img/UI/UI_Bag.png");
+	GRAPHICMANAGER->AddImage("UI_Potion", L"resource/img/UI/UI_Potion.png");
+	GRAPHICMANAGER->AddImage("heart", L"resource/img/UI/heart.png");
+	GRAPHICMANAGER->AddImage("heart", L"resource/img/UI/heart.png");
+	GRAPHICMANAGER->AddFrameImage("UI_WeaponSwap", L"resource/img/UI/UI_WeaponSwap.png", 4, 2);
+
 	test = UiObject::CreateUiObject<UiObject>();
 	test->Init();
 	test->GetTrans()->SetPos(WINSIZEX / 2, WINSIZEY / 2);
 	test->SetSprite("d2");
 	//test->SetSprite("dd");
-
+	ui = new UiManager;
+	ui->Init();
+	inven = new Inventory;
+	inven->Init();
+	ui->SetInvenLink(inven);
 }
 
 void StartScene::Update()
@@ -36,6 +48,7 @@ void StartScene::Update()
 	if (KEYMANAGER->isOnceKeyDown('3')) SCENEMANAGER->changeScene("Town");
 	if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
 	if (KEYMANAGER->isOnceKeyDown('5')) SCENEMANAGER->changeScene("Maptool");
+	inven->Update();
 }
 
 void StartScene::Render()
@@ -56,6 +69,7 @@ void StartScene::Render()
 	swprintf(buffer, 128, L"test X : %f\test Y : %f", test->GetTrans()->GetPos().x, test->GetTrans()->GetPos().y);
 
 	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 400), buffer, 20, 300, 50, ColorF::Azure);
-
+	inven->Render();
+	ui->Render();
 }
 
