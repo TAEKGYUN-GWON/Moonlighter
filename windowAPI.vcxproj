@@ -149,7 +149,6 @@
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BoxWorldManager.h" />
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="bullets.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CheckStand.h" />
     <ClInclude Include="Collider.h" />
@@ -184,6 +183,7 @@
     <ClInclude Include="ShopScene.h" />
     <ClInclude Include="ShopStand.h" />
     <ClInclude Include="ShopStandManager.h" />
+    <ClInclude Include="SlimeEnemy.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="keyManager.h" />
@@ -220,7 +220,6 @@
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BoxWorldManager.cpp" />
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="bullets.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CheckStand.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -252,6 +251,7 @@
     <ClCompile Include="ShopScene.cpp" />
     <ClCompile Include="ShopStand.cpp" />
     <ClCompile Include="ShopStandManager.cpp" />
+    <ClCompile Include="SlimeEnemy.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="keyManager.cpp" />

@@ -97,6 +97,12 @@
     <Filter Include="playGround\Shop\ShopStand">
       <UniqueIdentifier>{a8f5da20-97c4-47a4-b981-fb523187115d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\HP">
+      <UniqueIdentifier>{d649f8a6-dd46-4811-9899-cd714899015a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Bullet">
+      <UniqueIdentifier>{606b9db6-d611-446c-afb2-7ae3da391c30}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -291,12 +297,6 @@
     <ClInclude Include="Boss.h">
       <Filter>playGround\Dungeon</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>playGround\Dungeon</Filter>
-    </ClInclude>
-    <ClInclude Include="bullets.h">
-      <Filter>playGround\Dungeon</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>playGround\Dungeon</Filter>
     </ClInclude>
@@ -304,6 +304,12 @@
       <Filter>playGround\Dungeon</Filter>
     </ClInclude>
     <ClInclude Include="Hp.h">
+      <Filter>playGround\HP</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>playGround\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="SlimeEnemy.h">
       <Filter>playGround\Dungeon</Filter>
     </ClInclude>
   </ItemGroup>
@@ -473,12 +479,6 @@
     <ClCompile Include="Boss.cpp">
       <Filter>playGround\Dungeon</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>playGround\Dungeon</Filter>
-    </ClCompile>
-    <ClCompile Include="bullets.cpp">
-      <Filter>playGround\Dungeon</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>playGround\Dungeon</Filter>
     </ClCompile>
@@ -486,6 +486,12 @@
       <Filter>playGround\Dungeon</Filter>
     </ClCompile>
     <ClCompile Include="Hp.cpp">
+      <Filter>playGround\HP</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>playGround\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="SlimeEnemy.cpp">
       <Filter>playGround\Dungeon</Filter>
     </ClCompile>
   </ItemGroup>
