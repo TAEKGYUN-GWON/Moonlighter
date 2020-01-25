@@ -18,7 +18,7 @@ struct tagItemInfo
 	int some;
 };
 
-class Inventory 
+class Inventory
 {
 private:
 	Graphic* _ui;
@@ -27,6 +27,7 @@ private:
 	multimap<string, tagItemInfo> _inven;
 	multimap<string, tagItemInfo>::iterator iter;
 	bool _isActive;
+	int _money=0;
 
 public:
 
@@ -45,4 +46,7 @@ public:
 	void SetActive(bool active) { _isActive = active; }
 	void KeyCon();
 	void PosCorrection();
+	void AddMoney(int money) { _money += money; }
+	bool DeductionMoney(int money);
+	int GetMoney() { return _money; }
 };

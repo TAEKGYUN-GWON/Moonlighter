@@ -81,6 +81,8 @@ public:
 
 	void SetFlipX(bool isFlip) { _graphicInfo->isFlipX = isFlip; }
 	void SetSize(Vector2 size) { _graphicInfo->size = size; }
+	void SetFrameWidth(float w) { _graphicInfo->frameWidth = w; }
+	void SetFrameHeight(float h) { _graphicInfo->frameHeight = h; }
 	void SetAngle(float angle) { _graphicInfo->angle = angle; }
 	void SetScale(Vector2 scale) { _graphicInfo->scale = scale; }
 	void SetAlpha(float alpha) { _graphicInfo->alpha = alpha; }

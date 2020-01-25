@@ -4,8 +4,6 @@
 class StartScene : public Scene
 {
 private:
-	RECT _rc[3];
-
 
 public:
 	virtual void Init();

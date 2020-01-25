@@ -22,7 +22,7 @@ void Inventory::Update()
 {
 	KeyCon();
 	if (!_isActive) return;
-	
+
 	Quantity();
 }
 
@@ -130,7 +130,7 @@ void Inventory::Insert(Item* item)
 	}
 
 #pragma endregion
-
+	item->SetInDG(false);
 	_inven.insert(make_pair(item->GetName(), tagItemInfo(item)));
 }
 
@@ -150,7 +150,6 @@ void Inventory::Remove(string name, int num)
 			}
 		}
 	}
-
 }
 
 void Inventory::Quantity()
@@ -166,7 +165,10 @@ void Inventory::Quantity()
 }
 void Inventory::KeyCon()
 {
-
+	if (KEYMANAGER->isOnceKeyDown('P'))
+	{
+		AddMoney(100);
+	}
 	if (KEYMANAGER->isOnceKeyDown('I'))
 	{
 		_isActive = !_isActive;
@@ -196,5 +198,14 @@ void Inventory::KeyCon()
 void Inventory::PosCorrection()
 {
 	
+}
+
+bool Inventory::DeductionMoney(int money)
+{
+	if (_money < money) return false;
+
+	_money -= money;
+
+	return true;
 }
 

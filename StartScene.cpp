@@ -14,12 +14,16 @@ void StartScene::Init()
 	SCENEMANAGER->addScene("Entrance", new EntranceScene);
 	SCENEMANAGER->addScene("Shop", new ShopScene);
 	SCENEMANAGER->addScene("Maptool", new Maptool);
+	GraphicsManager::getSingleton()->AddImage("dd", L"eagle.png");
+	GraphicsManager::getSingleton()->AddFrameImage("d2", L"fatkachu.png",4,1);
+
+
 }
 
 void StartScene::Update()
 {
 	Scene::Update();
-	if (KEYMANAGER->isOnceKeyDown('1')) SCENEMANAGER->changeScene("Dungeon");
+	if (KEYMANAGER->isOnceKeyDown('1'))	SCENEMANAGER->changeScene("Dungeon");
 	if (KEYMANAGER->isOnceKeyDown('2')) SCENEMANAGER->changeScene("Entrance");
 	if (KEYMANAGER->isOnceKeyDown('3')) SCENEMANAGER->changeScene("Town");
 	if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");

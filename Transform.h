@@ -36,7 +36,7 @@ public:
 	Vector2 GetWorldPosition();
 
 	//Vector2 타입 사이즈 가져오기
-	inline Vector2 GetScale() { return scale; }
+	inline Vector2 GetScale() { return Vector2(scale.x * CAMERA->GetScale().x, scale.y * CAMERA->GetScale().y); }
 
 
 	//디그리 값으로 회전값 가져오기

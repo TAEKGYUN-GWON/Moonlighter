@@ -10,3 +10,4 @@
 #include "Matrix3x3.h"
 #include "Matrix2x2.h"
 #include "Text.h"
+#include"UiObject.h"
