@@ -2,6 +2,7 @@
 #include "DungeonScene.h"
 #include "EntranceScene.h"
 #include "TownScene.h"
+#include "Hp.h"
 
 void DungeonScene::Init()
 {
@@ -14,6 +15,7 @@ void DungeonScene::Init()
 
 	_player = Object::CreateObject<Player>();
 	_player->Init();
+	//_player->GetHP()->GetCurrentHP();
 
 	_enemy = Object:: CreateObject<Enemy>();
 	_enemy->Init();
@@ -23,4 +25,11 @@ void DungeonScene::Update()
 {
 	Scene::Update();
 	//if (KEYMANAGER->isOnceKeyDown())
+}
+
+void DungeonScene::Render()
+{
+	Scene::Render();
+
+	GRAPHICMANAGER->Text(Vector2(10, 6), L"Dungeon Scene", 20, 200, 30, ColorF::AliceBlue);
 }

@@ -10,7 +10,7 @@ void Hp::DamageHP(float value)
 {
 	_curHP -= value;
 
-	if (_curHP <= 0)	_curHP = 0;
+	if (_curHP <= 0) _curHP = 0;
 }
 
 void Hp::HealHP(float value)
@@ -25,9 +25,14 @@ void Hp::HealHP(float value)
 
 bool Hp::IsDead()
 {
-	if (_curHP <= 0)	isDead = true;
+	if (_curHP <= 0)
+	{
+		_curHP = 0;
+		return true;
+	}
 	
-	float getHP();  //먼가...먼가 부족한 느낌....
+	//float getHP();  //먼가...먼가 부족한 느낌....
+					  //함께 채워가요★ㅋㅋㅋㅋㅋ
 
-	return _curHP;
+	return false;
 }
