@@ -4,7 +4,7 @@
 class StartScene : public Scene
 {
 private:
-
+	UiObject* test;
 
 public:
 	virtual void Init();
