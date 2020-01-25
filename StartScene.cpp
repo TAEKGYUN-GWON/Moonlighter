@@ -69,7 +69,7 @@ void StartScene::Render()
 	swprintf(buffer, 128, L"test X : %f\test Y : %f", test->GetTrans()->GetPos().x, test->GetTrans()->GetPos().y);
 
 	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 400), buffer, 20, 300, 50, ColorF::Azure);
-	inven->Render();
 	ui->Render();
+	inven->Render();
 }
 

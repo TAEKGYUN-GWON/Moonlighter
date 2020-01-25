@@ -1,5 +1,6 @@
 #pragma once
-class Inventory;
+#include"Player.h"
+#include "Inventory.h"
 class UiManager
 {
 private:
@@ -18,6 +19,7 @@ private:
 	UiObject* _heart;
 	UiObject* _weapon;
 	Inventory* inven;
+	Player* player;
 
 public:
 	void Init();
