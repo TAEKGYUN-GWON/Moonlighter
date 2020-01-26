@@ -12,6 +12,8 @@ void ShopScene::Init()
 	GRAPHICMANAGER->AddFrameImage("Kid", L"resource/img/Shop/Kids.png", 6, 4);
 	GRAPHICMANAGER->AddFrameImage("Lunk", L"resource/img/Shop/Lunk.png", 9, 4);
 
+	GRAPHICMANAGER->AddFrameImage("Door", L"resource/img/Shop/shop_door.png", 5, 1);
+
 	_player = Object::CreateObject<Player>();
 	_player->Init();
 
@@ -22,7 +24,7 @@ void ShopScene::Init()
 	_npcMgr->SetCheckStandLink(_checkStand);
 	_npcMgr->Init();
 
-	_shopStandMgr = new ShopStandManager;
+	_shopStandMgr = new ShopStandManager; //가판대
 	_shopStandMgr->Init();
 
 	//_npcShopState = new NpcShopState;
@@ -31,15 +33,13 @@ void ShopScene::Init()
 
 void ShopScene::Release()
 {
-	_npcMgr->Release();
+	_npcMgr->Release(); //비어있음
 
 	Scene::Release();
 }
 
 void ShopScene::Update()
 {
-	Scene::Update();
-	
 	_npcMgr->Update();
 
 	if (KEYMANAGER->isOnceKeyDown('1')) SCENEMANAGER->changeScene("Dungeon");
@@ -47,6 +47,8 @@ void ShopScene::Update()
 	if (KEYMANAGER->isOnceKeyDown('3')) SCENEMANAGER->changeScene("Town");
 	if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
 	if (KEYMANAGER->isOnceKeyDown('5')) SCENEMANAGER->changeScene("Maptool");
+	
+	Scene::Update();
 }
 
 void ShopScene::Render()
@@ -55,6 +57,7 @@ void ShopScene::Render()
 
 	//GRAPHICMANAGER->FindImage("Girl")->FrameRender(WINSIZEX / 2, WINSIZEY / 2, 0, 0, CENTER);
 	//GRAPHICMANAGER->FindImage("Guy")->FrameRender(WINSIZEX / 2 + 100, WINSIZEY / 2, 0, 0, CENTER);
+	
 
 	Scene::Render();
 }

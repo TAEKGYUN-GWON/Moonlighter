@@ -30,8 +30,7 @@ public:
 	virtual void Init(string imgkey) ;
 	virtual void Release() override;
 	virtual void Update() override;
-	virtual void Render() override;
-
+	
 	void SetCheckStandLink(CheckStand* checkstand) { _checkStand = checkstand; }
 	CheckStand* GetCheckStand() { return _checkStand; }
 	void SetNpcState(NpcShopState* npcshopstate);

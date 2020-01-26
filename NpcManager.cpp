@@ -5,17 +5,22 @@ void NpcManager::Init()
 {
 	_counter = 0;
 
+	//_name 넣어준것은..
+	//상점 나가서 벡터 삭제되면 다시 넣어줘야하는데
+	//어떤애가 없는지 찾아서 넣어주려고..
 	{
 		_npc = Object::CreateObject<Npc>();
 		_npc->SetCheckStandLink(_checkStand);
 		_npc->Init("Girl");
-
+		_npc->SetName("girl");
+		
 		_vNpc.push_back(_npc);
 	}
 	{
 		_npc = Object::CreateObject<Npc>();
 		_npc->SetCheckStandLink(_checkStand);
 		_npc->Init("Guy");
+		_npc->SetName("guy");
 
 		_vNpc.push_back(_npc);
 	}
@@ -23,6 +28,7 @@ void NpcManager::Init()
 		_npc = Object::CreateObject<Npc>();
 		_npc->SetCheckStandLink(_checkStand);
 		_npc->Init("Kid");
+		_npc->SetName("kid");
 
 		_vNpc.push_back(_npc);
 	}
@@ -30,6 +36,7 @@ void NpcManager::Init()
 		_npc = Object::CreateObject<Npc>();
 		_npc->SetCheckStandLink(_checkStand);
 		_npc->Init("Lunk");
+		_npc->SetName("lunk");
 
 		_vNpc.push_back(_npc);
 	}
