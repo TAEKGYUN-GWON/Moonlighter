@@ -25,6 +25,8 @@ void Npc::Init(string imgkey)
 
 	AddComponent<Sprite>();
 	_sprite->SetImgName(imgkey);
+	_sprite->Init(true, true);
+
 	
 }
 
@@ -35,6 +37,7 @@ void Npc::Release()
 
 void Npc::Update()
 {
+	
 	//In();
 	//아래 함수들은 In에서 조건주고 보내기로..
 	Stay();

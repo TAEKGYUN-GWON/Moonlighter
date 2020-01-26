@@ -53,8 +53,8 @@ void ShopScene::Render()
 {
 	GRAPHICMANAGER->FindImage("ShopBg")->Render(WINSIZEX/2, WINSIZEY/2, CENTER);
 
-	GRAPHICMANAGER->FindImage("Girl")->FrameRender(WINSIZEX / 2, WINSIZEY / 2, 0, 0, CENTER);
-	GRAPHICMANAGER->FindImage("Guy")->FrameRender(WINSIZEX / 2 + 100, WINSIZEY / 2, 0, 0, CENTER);
+	//GRAPHICMANAGER->FindImage("Girl")->FrameRender(WINSIZEX / 2, WINSIZEY / 2, 0, 0, CENTER);
+	//GRAPHICMANAGER->FindImage("Guy")->FrameRender(WINSIZEX / 2 + 100, WINSIZEY / 2, 0, 0, CENTER);
 
 	Scene::Render();
 }
