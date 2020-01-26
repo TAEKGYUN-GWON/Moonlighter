@@ -22,7 +22,6 @@ public:
 	virtual void Render();
 
 	Sprite* GetSprite() { return _sprite; }
-
 	Inventory* GetInventory() { return _inven; }
 	Hp* GetHP() { return _hp; }
 };
