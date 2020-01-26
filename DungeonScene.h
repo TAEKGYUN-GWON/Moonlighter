@@ -3,13 +3,14 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "EnemyManeger.h"
+#include "Dungeon.h"
 
 class DungeonScene : public Scene
 {
 private:
 	Player* _player;
 	Enemy* _enemy;	//나중에 enemymaneger로 바꿔줘야 할걸...?
-
+	Dungeon* _dungeon;
 
 
 public:
