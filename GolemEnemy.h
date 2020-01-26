@@ -1,14 +1,13 @@
 #pragma once
 #include "Enemy.h"
 
-
-class SlimeEnemy : public Enemy
+class GolemEnemy : public Enemy
 {
 protected:
-	
+
 public:
-	SlimeEnemy();
-	~SlimeEnemy();
+	GolemEnemy();
+	~GolemEnemy();
 
 	void Init();
 	void Update();

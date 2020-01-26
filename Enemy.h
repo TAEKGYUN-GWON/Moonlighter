@@ -2,6 +2,7 @@
 #include "Object.h"
 
 
+
 enum DIRECTION
 {
 	LEFT,
@@ -18,6 +19,10 @@ class EnemyAttack;
 class EnemyHit;
 class EnemyDead;
 
+//hp, bullet
+class Hp;
+//class Bullet;
+
 class Enemy : public Object
 {
 protected:
@@ -26,12 +31,10 @@ protected:
 	//■■■■■■■ 상태패턴 틀이 되는 EnemyBasic를 Enemy에게 알려줌 ■■■■■■■
 	EnemyBasic* state;
 	float _speed;
-	float _hp;
+	Hp* _hp;
 
-	//타임
+	//타임도 줘야 하나?
 
-	//unordered_map<string, class EnemyBasic*> enemystates;
-	//EnemyBasic* currentState;
 public:
 	Enemy();
 	virtual~Enemy(); //상속
@@ -43,14 +46,13 @@ public:
 
 	//상태패턴을 만들어서 Enemy에게 알려주기 위한 함수
 	void SetState(EnemyBasic* state);
-
+	//hp 생성시 정해주는거, hp 다 똑같이 할까?
 	virtual void Init();
-	virtual void Update();
-	virtual void Render();
-	virtual void Release();
+	virtual void Update();	//방향지정해줘야함->겟앵글로...
+	virtual void Attack() {};
 //get,set함수 만들어야 함
-	void SetHP() {};
-	void GetHP() {};
+	Hp* GetHP() { return _hp; }
+	PhysicsBody* GetPhysics() { return _physics; }
 //아이템 떨굴 갯수 만들어야함
 
 };
@@ -67,8 +69,8 @@ protected:
 	}
 public:
 	//basic이라서 다 초기화 해준다.
-	virtual void Init(Enemy* _sEnemy) = 0;
-	virtual void Update(Enemy* _sEnemy) = 0;
+	virtual void Init(Enemy* _sEnemy) {};
+	virtual void Update(Enemy* _sEnemy);
 	virtual void Release(Enemy* _sEnemy) {};
 };
 //■■■■■■■■■■■■ Idle ■■■■■■■■■■■■■■
@@ -110,16 +112,6 @@ public:
 	virtual void Init(Enemy* _sEnemy);
 	virtual void Update(Enemy* _sEnemy);
 	virtual void Release(Enemy* _sEnemy);
-};
-// ■■■■■■■■■■■■ 슬라임 공격  ■■■■■■■■■■■■
-
-class SlimeAtk : public EnemyAttack
-{
-	static SlimeAtk* instance;
-
-public:
-	static SlimeAtk* GetInstance();
-	virtual void Update(Enemy* _sEnemy);
 };
 
 //■■■■■■■■■■■■ Hit ■■■■■■■■■■■■■

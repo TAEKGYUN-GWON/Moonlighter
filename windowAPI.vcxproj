@@ -161,6 +161,7 @@
     <ClInclude Include="EnemyManeger.h" />
     <ClInclude Include="EntranceScene.h" />
     <ClInclude Include="ETC.h" />
+    <ClInclude Include="GolemEnemy.h" />
     <ClInclude Include="Hp.h" />
     <ClInclude Include="iniDataManager.h" />
     <ClInclude Include="Inventory.h" />
@@ -235,6 +236,7 @@
     <ClCompile Include="EnemyManeger.cpp" />
     <ClCompile Include="EntranceScene.cpp" />
     <ClCompile Include="ETC.cpp" />
+    <ClCompile Include="GolemEnemy.cpp" />
     <ClCompile Include="Hp.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
     <ClCompile Include="Inventory.cpp" />
