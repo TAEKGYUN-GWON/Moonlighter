@@ -4,14 +4,14 @@
 
 
 
-void Npc::Init()
+void Npc::Init(string imgkey)
 {
+	
+	Object::Init();
 
 	_tag = "Npc";
 
 	SetNpcState(NpcIdle::GetInstance());
-	
-	
 	
 	_trans->SetPos(WINSIZEX / 2, WINSIZEY / 2);
 	_trans->SetWorldPos(Vector2(30, 50)); //나중에 그림 크기대로 바꿔주기, framewidth
@@ -23,7 +23,9 @@ void Npc::Init()
 
 	_speed = 3.0f;
 
-	Object::Init();
+	AddComponent<Sprite>();
+	_sprite->SetImgName(imgkey);
+	
 }
 
 void Npc::Release()
