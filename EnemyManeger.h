@@ -11,7 +11,7 @@ class EnemyManeger
 private:
 
 public:
-
+	//백터에 담아야 하ㅁ......
 	Enemy* _slime;
 	Enemy* _Gollem;
 	Enemy* _ShotMinion;
