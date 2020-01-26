@@ -1,6 +1,6 @@
 #pragma once
 #include "Object.h"
-#include "Sprite.h"
+#include "Item.h"
 
 class ShopStand :public Object
 {
@@ -9,8 +9,7 @@ private:
 	string _itemImgName; //올라갈 아이템 이미지 네임
 	//bool _isActive; //부모꺼 사용, 이미지 올라가면 true 상태
 
-	Sprite* _sprite;
-
+	Item* _item;
 
 public:
 
