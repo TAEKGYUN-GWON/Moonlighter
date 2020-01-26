@@ -106,6 +106,15 @@
     <Filter Include="playGround\Shop\ShopObject\ShopStand">
       <UniqueIdentifier>{a8f5da20-97c4-47a4-b981-fb523187115d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\Shop\ShopObject\ShopWall">
+      <UniqueIdentifier>{fb8bd0dd-7a2f-488a-83a7-8d98d40994f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Shop\ShopObject\CheckStand">
+      <UniqueIdentifier>{d0389b76-cc76-4f33-920e-767e0f957944}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Shop\ShopObject\ShopDoor">
+      <UniqueIdentifier>{6e4e893b-7ccc-4a5b-a5ba-50de7b78cc3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -324,11 +333,17 @@
     <ClInclude Include="Text.h">
       <Filter>2DGameFramework\Object\Component\header</Filter>
     </ClInclude>
+    <ClInclude Include="ShopWall.h">
+      <Filter>playGround\Shop\ShopObject\ShopWall</Filter>
+    </ClInclude>
+    <ClInclude Include="WallManager.h">
+      <Filter>playGround\Shop\ShopObject\ShopWall</Filter>
+    </ClInclude>
     <ClInclude Include="CheckStand.h">
-      <Filter>playGround\Shop\ShopObject</Filter>
+      <Filter>playGround\Shop\ShopObject\CheckStand</Filter>
     </ClInclude>
     <ClInclude Include="ShopDoor.h">
-      <Filter>playGround\Shop\ShopObject</Filter>
+      <Filter>playGround\Shop\ShopObject\ShopDoor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -518,11 +533,17 @@
     <ClCompile Include="Text.cpp">
       <Filter>2DGameFramework\Object\Component\cpp</Filter>
     </ClCompile>
+    <ClCompile Include="ShopWall.cpp">
+      <Filter>playGround\Shop\ShopObject\ShopWall</Filter>
+    </ClCompile>
+    <ClCompile Include="WallManager.cpp">
+      <Filter>playGround\Shop\ShopObject\ShopWall</Filter>
+    </ClCompile>
     <ClCompile Include="CheckStand.cpp">
-      <Filter>playGround\Shop\ShopObject</Filter>
+      <Filter>playGround\Shop\ShopObject\CheckStand</Filter>
     </ClCompile>
     <ClCompile Include="ShopDoor.cpp">
-      <Filter>playGround\Shop\ShopObject</Filter>
+      <Filter>playGround\Shop\ShopObject\ShopDoor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
