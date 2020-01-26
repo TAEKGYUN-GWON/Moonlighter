@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "UiManager.h"
-#include "Inventory.h"
 
 void UiManager::Init()
 {
@@ -33,6 +32,8 @@ void UiManager::Init()
 	_heart->SetSprite("heart");
 	_weapon->SetSprite("UI_WeaponSwap",true);
 	_weapon->GetSprite()->Stop();
+	//player = (Player*) SCENEMANAGER->GetNowScene()->GetChildFromName("will");
+	//inven = player->GetInventory();
 }
 
 void UiManager::Update()

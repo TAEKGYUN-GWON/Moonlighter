@@ -53,6 +53,7 @@ void Maptool::Init()
 #pragma endregion
 
 	GRAPHICMANAGER->AddImage("town_map", L"resource/img/Map/map.png");
+	GRAPHICMANAGER->AddImage("Shop_map", L"resource/img/Shop/shop_background.png");
 	GRAPHICMANAGER->AddFrameImage("set_tile", L"set_tile3.png", 4, 6);
 	GRAPHICMANAGER->AddFrameImage("set_tile_dungeon", L"set_tile_dungeon.png", 4, 6);
 
@@ -198,7 +199,7 @@ void Maptool::Update()
 
 void Maptool::Render()
 {
-	GRAPHICMANAGER->DrawImage("town_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
+	GRAPHICMANAGER->DrawImage("Shop_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
 
 	//char buffer[128];
 	wchar_t buffer[128];
@@ -287,7 +288,7 @@ void Maptool::Save()
 	HANDLE file;
 	DWORD write;
 
-	string str = "Town.map";
+	string str = "shop.map";
 
 	//GetWindowText(_saveName, titleSave, 256);
 
@@ -310,7 +311,7 @@ void Maptool::Load()
 
 	//string str = titleLoad;
 	//str += ".map";
-	string str = "Town.map";
+	string str = "shop.map";
 
 	//file = CreateFile(titleLoad, GENERIC_READ, 0, NULL,
 	file = CreateFile(str.c_str(), GENERIC_READ, 0, NULL,
