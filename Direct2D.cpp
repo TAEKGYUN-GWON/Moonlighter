@@ -55,13 +55,13 @@ ID2D1Bitmap* Direct2D::CreateBitmap(wstring imgPath)
 	return bitmap;
 }
 
-IDWriteTextLayout* Direct2D::CreateTextLayout(wstring txt, wstring fontName, float fontSize, float maxWidth, float maxHeight)
+IDWriteTextLayout* Direct2D::CreateTextLayout(wstring txt, wstring fontName, float fontSize, float maxWidth, float maxHeight, wstring locale)
 {
 	IDWriteTextFormat* format = nullptr;
-	auto a = _wFactory->CreateTextFormat(fontName.c_str(), 0, DWRITE_FONT_WEIGHT_REGULAR, DWRITE_FONT_STYLE_NORMAL, DWRITE_FONT_STRETCH_NORMAL, fontSize, L"en-us", &format);
+	_wFactory->CreateTextFormat(fontName.c_str(), 0, DWRITE_FONT_WEIGHT_REGULAR, DWRITE_FONT_STYLE_NORMAL, DWRITE_FONT_STRETCH_NORMAL, fontSize, locale.c_str(), &format);
 
 	IDWriteTextLayout* layout = nullptr;
-	auto b = _wFactory->CreateTextLayout(txt.c_str(), txt.length(), format, maxWidth, maxHeight, &layout);
+	_wFactory->CreateTextLayout(txt.c_str(), txt.length(), format, maxWidth, maxHeight, &layout);
 
 	return layout;
 }

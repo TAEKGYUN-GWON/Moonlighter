@@ -63,7 +63,6 @@ void Maptool::Init()
 
 	//obj = Object::CreateObject<Object>();
 	//obj->GetTrans()->SetPos(100, 50);
-	//obj->SetCameraAffect(false);
 	//obj->AddComponent<Text>()->CreateText(L"test word hellow", 20, 100, 30, ColorF::Red);
 
 	_rcLoad = RectMakeCenter(WINSIZEX - 100, WINSIZEY - 100, 130, 34);
@@ -117,36 +116,36 @@ void Maptool::Update()
 		if (PtInRect(&_rcSave, _ptMouse))
 		{
 #pragma region FileSaveTest
-			OPENFILENAME ofn;
-			char filePathSize[1028] = "";
-			//TCHAR filter[] = "Every file(*.*) \0*.*\0TextFile\0*.txt;*.doc\0";
-			char filter[1028] = "Every file(*.*) \0*.*\0TextFile\0*.txt;*.doc\0¸Ê(.map)\0*.map*\0";
-			
-			ZeroMemory(&ofn, sizeof(OPENFILENAME));
-			
-			ofn.lStructSize = sizeof(OPENFILENAME);
-			ofn.hwndOwner = NULL;
+			//OPENFILENAME ofn;
+			//char filePathSize[1028] = "";
+			////TCHAR filter[] = "Every file(*.*) \0*.*\0TextFile\0*.txt;*.doc\0";
+			//char filter[1028] = "Every file(*.*) \0*.*\0TextFile\0*.txt;*.doc\0¸Ê(.map)\0*.map*\0";
+			//
+			//ZeroMemory(&ofn, sizeof(OPENFILENAME));
+			//
+			//ofn.lStructSize = sizeof(OPENFILENAME);
+			//ofn.hwndOwner = NULL;
+			////ofn.lpstrFile = filePathSize;
 			//ofn.lpstrFile = filePathSize;
-			ofn.lpstrFile = filePathSize;
-			ofn.nMaxFile = sizeof(filePathSize);
-			ofn.nFilterIndex = true;
-			ofn.lpstrFileTitle = NULL;
-			ofn.nMaxFileTitle = NULL;
-			ofn.lpstrInitialDir = NULL;
-			ofn.lpstrFilter = filter;
-			ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_OVERWRITEPROMPT;
-			
-			//if (GetSaveFileName(&ofn) == FALSE) return;
-			if (GetSaveFileName(&ofn) != FALSE)
-			{
-				wsprintf(filePathSize, "%s ÆÄÀÏ", ofn.lpstrFile);
-				MessageBox(_hWnd, filePathSize, "ÀúÀå", MB_OK);
-			}
-			else return;
+			//ofn.nMaxFile = sizeof(filePathSize);
+			//ofn.nFilterIndex = true;
+			//ofn.lpstrFileTitle = NULL;
+			//ofn.nMaxFileTitle = NULL;
+			//ofn.lpstrInitialDir = NULL;
+			//ofn.lpstrFilter = filter;
+			//ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_OVERWRITEPROMPT;
+			//
+			////if (GetSaveFileName(&ofn) == FALSE) return;
+			//if (GetSaveFileName(&ofn) != FALSE)
+			//{
+			//	wsprintf(filePathSize, "%s ÆÄÀÏ", ofn.lpstrFile);
+			//	MessageBox(_hWnd, filePathSize, "ÀúÀå", MB_OK);
+			//}
+			//else return;
 
 #pragma endregion
 
-			//Save();
+			Save();
 		}
 		if (PtInRect(&_rcEraserType, _ptMouse))
 		{
@@ -260,6 +259,7 @@ void Maptool::Render()
 	else if (_eraser == EraserType::NoDeleteImage) GRAPHICMANAGER->DrawTextD2D(Vector2(_rcEraserType.left + 8, _rcEraserType.top - 4), L"eraser type\n : NoDeleteImage", 14);
 	else if (_eraser == EraserType::OnlyDeleteImage) GRAPHICMANAGER->DrawTextD2D(Vector2(_rcEraserType.left + 8, _rcEraserType.top - 4), L"eraser type\n : OnlyDeleteImage", 14);
 
+#pragma region CoordinatesTest
 	//sprintf_s(buffer, "%d, %d", _ptMouse.x, _ptMouse.y);
 	//sprintf_s(buffer, "%d, %d", (int)CAMERA->GetPosition().x + (int)(_ptMouse.x / CAMERA->GetScale().x), (int)CAMERA->GetPosition().y + (int)(_ptMouse.y / CAMERA->GetScale().y));
 	//GRAPHICMANAGER->DrawTextD2D(Vector2(100, 100), buffer, 20, 1.0f, ColorF::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
@@ -271,13 +271,15 @@ void Maptool::Render()
 	// È­¸é Áß¾ÓÀÌ ÁßÁ¡ÀÎ ¼ö½Ä
 	//sprintf_s(buffer, "%f, %f", CAMERA->GetPosition().x - (WINSIZEX / CAMERA->GetScale().x / 2) + (_ptMouse.x / CAMERA->GetScale().x), 
 	//	CAMERA->GetPosition().y - (WINSIZEY / CAMERA->GetScale().y / 2) + (_ptMouse.y / CAMERA->GetScale().y));
-	swprintf(buffer, 128, L"%1.f %1.f", CAMERA->GetPosition().x - (WINSIZEX / CAMERA->GetScale().x / 2) + (_ptMouse.x / CAMERA->GetScale().x),
-		CAMERA->GetPosition().y - (WINSIZEY / CAMERA->GetScale().y / 2) + (_ptMouse.y / CAMERA->GetScale().y));
+	
+	//swprintf(buffer, 128, L"%1.f %1.f", CAMERA->GetPosition().x - (WINSIZEX / CAMERA->GetScale().x / 2) + (_ptMouse.x / CAMERA->GetScale().x),
+	//	CAMERA->GetPosition().y - (WINSIZEY / CAMERA->GetScale().y / 2) + (_ptMouse.y / CAMERA->GetScale().y));
 
 	//sprintf_s(buffer, "%f, %f", CAMERA->GetPosition().x - (WINSIZEX / CAMERA->GetScale().x / 2) + (_ptMouse.x / CAMERA->GetScale().x) + (WINSIZEX / 2),
 	//	CAMERA->GetPosition().y - (WINSIZEY / CAMERA->GetScale().y / 2) + (_ptMouse.y / CAMERA->GetScale().y) + (WINSIZEY / 2));
 
-	GRAPHICMANAGER->Text(Vector2(100, 200), buffer, 20, 200, 50, ColorF::Red);
+	//GRAPHICMANAGER->Text(Vector2(100, 200), buffer, 20, 200, 50, ColorF::Red);
+#pragma endregion
 }
 
 void Maptool::Save()
@@ -286,6 +288,11 @@ void Maptool::Save()
 	DWORD write;
 
 	string str = "Town.map";
+
+	//GetWindowText(_saveName, titleSave, 256);
+
+	//string str = titleSave;
+	//str += ".map";
 
 	file = CreateFile(str.c_str(), GENERIC_WRITE, 0, NULL,
 		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
