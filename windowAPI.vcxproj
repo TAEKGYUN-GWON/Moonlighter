@@ -146,7 +146,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Astar.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="BoxWorldManager.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="commonMacroFunction.h" />
@@ -154,8 +156,9 @@
     <ClInclude Include="DrawComponent.h" />
     <ClInclude Include="DungeonScene.h" />
     <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Enemystate.h" />
+    <ClInclude Include="EnemyManeger.h" />
     <ClInclude Include="EntranceScene.h" />
+    <ClInclude Include="Hp.h" />
     <ClInclude Include="iniDataManager.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
@@ -167,6 +170,7 @@
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="ShopScene.h" />
+    <ClInclude Include="SlimeEnemy.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="keyManager.h" />
@@ -199,15 +203,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Astar.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BoxWorldManager.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="DrawComponent.cpp" />
     <ClCompile Include="DungeonScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="Enemystate.cpp" />
+    <ClCompile Include="EnemyManeger.cpp" />
     <ClCompile Include="EntranceScene.cpp" />
+    <ClCompile Include="Hp.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -218,6 +225,7 @@
     <ClCompile Include="Graphic.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="ShopScene.cpp" />
+    <ClCompile Include="SlimeEnemy.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="keyManager.cpp" />

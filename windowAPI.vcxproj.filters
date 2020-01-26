@@ -91,6 +91,12 @@
     <Filter Include="playGround\Item">
       <UniqueIdentifier>{77c1421c-a7e0-4770-97b1-e405843461d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\Bullet">
+      <UniqueIdentifier>{d73b3ec6-21e0-425a-80b1-cd8b27202970}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\HP">
+      <UniqueIdentifier>{26e9f323-2502-43e1-a0b6-c55a3d0a8728}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -240,6 +246,24 @@
     <ClInclude Include="Player.h">
       <Filter>playGround\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>playGround\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManeger.h">
+      <Filter>playGround\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>playGround\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="SlimeEnemy.h">
+      <Filter>playGround\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>playGround\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Hp.h">
+      <Filter>playGround\HP</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -341,9 +365,6 @@
     <ClCompile Include="JsonManager.cpp">
       <Filter>2DGameFramework\Manager\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="DungeonScene.cpp">
-      <Filter>playGround\Dungeon</Filter>
-    </ClCompile>
     <ClCompile Include="TownScene.cpp">
       <Filter>playGround\Town</Filter>
     </ClCompile>
@@ -364,6 +385,27 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>playGround\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>playGround\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManeger.cpp">
+      <Filter>playGround\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>playGround\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonScene.cpp">
+      <Filter>playGround\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="SlimeEnemy.cpp">
+      <Filter>playGround\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>playGround\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Hp.cpp">
+      <Filter>playGround\HP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
