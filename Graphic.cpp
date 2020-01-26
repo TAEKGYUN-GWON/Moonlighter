@@ -419,12 +419,28 @@ void Graphic::FrameRender(Vector2 pos, int curFrameX, int curFrameY, Vector2 sca
 
 	int frame = _graphicInfo->curFrameY * _graphicInfo->maxFrameX + _graphicInfo->curFrameX;
 
+	// TODO : 이미지 크기 실험
+	_graphicInfo->size.x = scale.x;
+	_graphicInfo->size.y = scale.y;
+
+	_vFrameRect.clear();
+
+	WICRect rc;
+	for (int i = 0; i < _graphicInfo->maxFrameY; ++i)
+	{
+		for (int j = 0; j < _graphicInfo->maxFrameX; ++j)
+		{
+			rc.X = _graphicInfo->frameWidth * j;
+			rc.Y = _graphicInfo->frameHeight * i;
+			rc.Width = _graphicInfo->frameWidth;
+			rc.Height = _graphicInfo->frameHeight;
+			_vFrameRect.push_back(rc);
+		}
+	}
+
 	_graphicInfo->size = GetFrameSize(frame);
 
 
-	// TODO : 이미지 크기 실험
-	//_graphicInfo->size.x = scale.x;
-	//_graphicInfo->size.y = scale.y;
 
 
 

@@ -16,8 +16,6 @@ void StartScene::Init()
 	SCENEMANAGER->addScene("Maptool", new Maptool);
 	GraphicsManager::getSingleton()->AddImage("dd", L"eagle.png");
 	GraphicsManager::getSingleton()->AddFrameImage("d2", L"fatkachu.png",4,1);
-
-
 }
 
 void StartScene::Update()
