@@ -30,11 +30,11 @@ void StartScene::Init()
 	test->GetTrans()->SetPos(WINSIZEX / 2, WINSIZEY / 2);
 	test->SetSprite("d2");
 	//test->SetSprite("dd");
-	ui = new UiManager;
-	ui->Init();
+	//ui = new UiManager;
+	//ui->Init();
 	inven = new Inventory;
 	inven->Init();
-	ui->SetInvenLink(inven);
+	//ui->SetInvenLink(inven);
 }
 
 void StartScene::Update()
@@ -69,7 +69,7 @@ void StartScene::Render()
 	swprintf(buffer, 128, L"test X : %f\test Y : %f", test->GetTrans()->GetPos().x, test->GetTrans()->GetPos().y);
 
 	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 400), buffer, 20, 300, 50, ColorF::Azure);
-	ui->Render();
+	//ui->Render();
 	inven->Render();
 }
 
