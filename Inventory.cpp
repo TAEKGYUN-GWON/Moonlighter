@@ -22,7 +22,7 @@ void Inventory::Update()
 {
 	KeyCon();
 	if (!_isActive) return;
-	
+
 	Quantity();
 }
 
@@ -32,16 +32,24 @@ void Inventory::Release()
 
 void Inventory::Render()
 {
+
+
 	if (!_isActive) return;
 
-	_ui->RenderUI(Vector2(WINSIZEX / 2, WINSIZEY / 2));
+	//_ui->RenderUI(Vector2(WINSIZEX / 2, WINSIZEY / 2));
+	_ui->Render(Vector2(WINSIZEX / 2, WINSIZEY / 2),1,PIVOT::CENTER,false);
 	for (iter = _inven.begin(); iter != _inven.end(); iter++)
 	{
 		iter->second.item->GetComponent<Sprite>()->GetGraphic()->RenderUI(iter->second.item->GetTrans()->GetPos());
-		char buffer[128];
-		sprintf_s(buffer, "%d",iter->second.some);
+		//char buffer[128];
+		//sprintf_s(buffer, "%d",iter->second.some);
 		Vector2 pos = Vector2(iter->second.item->GetTrans()->GetPos().x + 20, iter->second.item->GetTrans()->GetPos().y + 20);
-		GRAPHICMANAGER->DrawTextD2D(pos, buffer, 15);
+		//GRAPHICMANAGER->DrawTextD2D(pos, buffer, 15);
+
+		wchar_t buffer[128];
+		swprintf(buffer, 128, L"%d", iter->second.some);
+		GRAPHICMANAGER->Text(pos, buffer, 15, 300, 50, ColorF::White);
+
 	}
 	_select->RenderUI(pos);
 
@@ -130,7 +138,7 @@ void Inventory::Insert(Item* item)
 	}
 
 #pragma endregion
-
+	item->SetInDG(false);
 	_inven.insert(make_pair(item->GetName(), tagItemInfo(item)));
 }
 
@@ -150,7 +158,20 @@ void Inventory::Remove(string name, int num)
 			}
 		}
 	}
+}
 
+int Inventory::FindItemSome(string name)
+{
+	int count = 0;
+
+	for (iter = _inven.begin(); iter != _inven.end(); ++iter)
+	{
+		if (iter->first == name)
+		{
+			count += iter->second.some;
+		}
+	}
+	return count;
 }
 
 void Inventory::Quantity()
@@ -166,7 +187,10 @@ void Inventory::Quantity()
 }
 void Inventory::KeyCon()
 {
-
+	if (KEYMANAGER->isOnceKeyDown('P'))
+	{
+		AddMoney(100);
+	}
 	if (KEYMANAGER->isOnceKeyDown('I'))
 	{
 		_isActive = !_isActive;
@@ -196,5 +220,14 @@ void Inventory::KeyCon()
 void Inventory::PosCorrection()
 {
 	
+}
+
+bool Inventory::DeductionMoney(int money)
+{
+	if (_money < money) return false;
+
+	_money -= money;
+
+	return true;
 }
 

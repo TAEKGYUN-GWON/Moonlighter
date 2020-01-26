@@ -18,6 +18,19 @@
 
 using namespace D2D1;
 
+enum class TextPivot
+{
+	LEFT_TOP,
+	LEFT_CENTER,
+	LEFT_BOTTOM,
+	CENTER_TOP,
+	CENTER,
+	CENTER_BOTTOM,
+	RIGHT_TOP,
+	RIGHT_CENTER,
+	RIGHT_BOTTOM,
+};
+
 class GraphicsManager : public singletonBase<GraphicsManager>
 {
 private:
@@ -96,8 +109,9 @@ public:
 	HRESULT AddTextFormat(wstring fontName, float size);
 
 	// txtSize : ±Û¾¾ Å©±â (±Û¾¾ ±æÀÌ X)
-	void DrawTextD2D(Vector2 pos, wstring txt, int txtSize, float alpha = 1.0f, ColorF::Enum color = ColorF::Black, DWRITE_TEXT_ALIGNMENT alig = DWRITE_TEXT_ALIGNMENT_LEADING, wstring font = L"¸¼Àº°íµñ");
-	void DrawTextD2D(Vector2 pos, const char* txt, int txtSize, float alpha = 1.0f, ColorF::Enum color = ColorF::Black, DWRITE_TEXT_ALIGNMENT alig = DWRITE_TEXT_ALIGNMENT_LEADING, wstring font = L"¸¼Àº°íµñ", bool cameraAffect = true);
+	void DrawTextD2D(Vector2 pos, wstring txt, int txtSize, float alpha = 1.0f, ColorF::Enum color = ColorF::Black, TextPivot point = TextPivot::LEFT_TOP, wstring font = L"¸¼Àº°íµñ", bool cameraAffect = false);
+	void DrawTextD2D(Vector2 pos, const char* txt, int txtSize, float alpha = 1.0f, ColorF::Enum color = ColorF::Black, TextPivot point = TextPivot::LEFT_TOP, wstring font = L"¸¼Àº°íµñ", bool cameraAffect = false);
+	void Text(Vector2 pos, wstring txt, int txtSize, float maxWidth, float maxHeight, ColorF::Enum color = ColorF::Black, float alpha = 1.0f, TextPivot point = TextPivot::LEFT_TOP, wstring font = L"¸¼Àº°íµñ", bool cameraEffect = false);
 
 	void DrawTextField(Vector2 pos, wstring txt, int txtSize, int width, int height, float alpha, ColorF::Enum color = ColorF::Black, DWRITE_TEXT_ALIGNMENT alig = DWRITE_TEXT_ALIGNMENT_LEADING, wstring font = L"¸¼Àº°íµñ");
 
