@@ -181,6 +181,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="ObjectManager.h" />
+    <ClInclude Include="ShopDoor.h" />
     <ClInclude Include="ShopScene.h" />
     <ClInclude Include="ShopStand.h" />
     <ClInclude Include="ShopStandManager.h" />
@@ -253,6 +254,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Graphic.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
+    <ClCompile Include="ShopDoor.cpp" />
     <ClCompile Include="ShopScene.cpp" />
     <ClCompile Include="ShopStand.cpp" />
     <ClCompile Include="ShopStandManager.cpp" />

@@ -8,7 +8,7 @@ private:
 
 public:
 
-	virtual void Init() override;
+	virtual void Init(Vector2 pos, Vector2 scale);
 	virtual void Release() override;
 	virtual void Update() override;
 	virtual void Render() override;
