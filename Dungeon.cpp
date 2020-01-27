@@ -36,24 +36,26 @@ void Dungeon::Update()
 	Scene::Update();
 
 
-	if (!_isAllowInit && Vector2::Distance(pos, CAMERA->GetPosition()) < 10)
+	if (!_isAllowInit && Vector2::Distance(pos, CAMERA->GetPosition()) < 100)
 	{
 		SetUp();
 		_isAllowInit = true;
 	}
 
-	if (Vector2::Distance(pos, CAMERA->GetPosition()) > 100)
+	if (Vector2::Distance(pos, CAMERA->GetPosition()) > 500)
 	{
 		for (Object* c : _children)
 			c->SetIsActive(false);
 		_isAllowInit = false;
+		tiles.clear();
 	}
 
 	
 	for (Object* c : _children)
 	{
 		if (!c->GetIsActive())
-			RemoveChild(c);
+			c->Release();
+
 	}
 	//if (_isAllowInit)
 		//_eMgr->Update();
@@ -62,13 +64,15 @@ void Dungeon::Update()
 
 void Dungeon::Render()
 {
-	GRAPHICMANAGER->FindImage("Dungeon")->Render(pos.x, pos.y, PIVOT::LEFT_TOP);
+	if (!_isAllowInit) return;
 
+	GRAPHICMANAGER->FindImage("Dungeon")->Render(pos.x, pos.y, PIVOT::LEFT_TOP);
 	Scene::Render();
 }
 
 void Dungeon::SetUp()
 {
+	int aaa;
 	for (int i = 0; i < Dungeon_Y; ++i)
 	{
 		for (int j = 0; j < Dungeon_X; ++j)
@@ -133,7 +137,6 @@ void Dungeon::SetUp()
 			tiles[i]->SetPivot(PIVOT::CENTER);
 
 
-
 			if (tiles[i]->GetChildren().size() > 0) tiles[i]->RemoveChild(tiles[i]->GetChildren()[0]);
 
 
@@ -146,7 +149,7 @@ void Dungeon::SetUp()
 
 			if (tiles[i]->GetImgName() != "None")
 			{
-				tiles[i]->AddChild(Object::CreateObject<Object>(tiles[i]));
+				tiles[i]->AddChild(Object::CreateObject<Object>());
 
 				tiles[i]->GetChildren()[0]->GetTrans()->SetPos(tiles[i]->GetTrans()->GetPos() + Vector2(0, TILEHEIGHT / 2));
 				if (tiles[i]->GetPivot() == RIGHT_BOTTOM) tiles[i]->GetChildren()[0]->GetTrans()->SetPos(tiles[i]->GetTrans()->GetPos() + Vector2(TILEWIDTH / 2, TILEHEIGHT / 2));
