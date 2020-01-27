@@ -9,13 +9,11 @@
 class EnemyManeger
 {
 private:
+	Enemy* _enemy;
+	Boss* _boss;
+	vector<Enemy*> _vEnemy;
 
 public:
-	//백터에 담아야 하ㅁ......
-	Enemy* _slime;
-	Enemy* _Gollem;
-	Enemy* _ShotMinion;
-
 
 	//뭘 해줘야 하지?
 	//enemy를 여기서 관리해 줘야 하긴 함
@@ -23,5 +21,13 @@ public:
 	//그래서 던전에서는 에너미메니저와 플레이어만 걸려 있어야 하나?
 	//
 	//으아아아아아ㅏㅏㄷ
+
+	void Init();
+	void Update();
+	void Release();
+	void Render();
+
+	//hp
+	//여기서 아이템?
 };
 

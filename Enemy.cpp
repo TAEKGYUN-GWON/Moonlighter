@@ -2,7 +2,7 @@
 #include "Enemy.h"
 #include "Hp.h"
 #include "Bullet.h"
-
+//#include "Player.h"
 //전방선언 같은 거...?
 EnemyIdle* EnemyIdle::instance;	
 EnemyMove* EnemyMove::instance;
@@ -86,7 +86,7 @@ void EnemyIdle::Update(Enemy* _sEnemy)
 
 	//getAngle(float x1, float y1, float x2, float y2);
 	//로 방향 구해야함...
-
+	
 	//처음 본인 위치에서?
 	if (KEYMANAGER->isOnceKeyDown('0'))
 		//if () 플에이어가 있으면 
@@ -98,6 +98,7 @@ void EnemyIdle::Update(Enemy* _sEnemy)
 void EnemyIdle::Release(Enemy* _sEnemy)
 {
 	cout << "move로 가!!!" << endl;
+	
 	//if 플레이어가 있으면
 	SetEnemyState(_sEnemy, EnemyMove::GetInstance());
 	// else if 체력이 0 이면 죽어라!

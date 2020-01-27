@@ -27,14 +27,18 @@ void Boss::Init()
 {
 	Object::Init();
 
+	_tag = "enemy";
+	_name = "Boss";
 
-	
+
 
 }
 
 void Boss::Update()
 {
 	Object::Update();
+
+	state->Update(this);
 }
 
 void Boss::Render()
@@ -44,6 +48,14 @@ void Boss::Render()
 
 void Boss::Release()
 {
+}
+
+void BossBasic::Update(Boss* _sBoss)
+{
+	if (_sBoss->GetHP()->IsDead())
+	{
+		SetBossState(_sBoss, BossDead::GetInstance());
+	}
 }
 
 //■■■■■■■■■■■■ Idle ■■■■■■■■■■■■■■
@@ -62,6 +74,8 @@ void BossIdle::Init(Boss* _sBoss)
 
 void BossIdle::Update(Boss* _sBoss)
 {
+	BossBasic::Update(_sBoss);
+	Release(_sBoss);
 }
 
 void BossIdle::Release(Boss* _sBoss)
@@ -87,6 +101,8 @@ void BossAttack::Init(Boss* _sBoss)
 
 void BossAttack::Update(Boss* _sBoss)
 {
+	BossBasic::Update(_sBoss);
+	Release(_sBoss);
 }
 
 void BossAttack::Release(Boss* _sBoss)
@@ -113,6 +129,8 @@ void BossHit::Init(Boss* _sBoss)
 
 void BossHit::Update(Boss* _sBoss)
 {
+	BossBasic::Update(_sBoss);
+	Release(_sBoss);
 }
 
 void BossHit::Release(Boss* _sBoss)
@@ -138,9 +156,12 @@ void BossDead::Init(Boss* _sBoss)
 
 void BossDead::Update(Boss* _sBoss)
 {
+	if (_sBoss->GetHP()->IsDead());
+	Release(_sBoss);
 }
 
 void BossDead::Release(Boss* _sBoss)
 {
 	//아예 릴리즈 시켜줘야 함
 }
+

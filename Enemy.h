@@ -1,7 +1,7 @@
 #pragma once
 #include "Object.h"
-
-
+//#include "Astar.h"
+//#include "Player.h" //h에서? cpp에서?
 
 enum DIRECTION
 {
@@ -38,7 +38,8 @@ protected:
 public:
 	Enemy();
 	virtual~Enemy(); //상속
-
+	
+	
 	DIRECTION _dir;	//방향
 	//플레이어가 있냐 없냐 bool 값으루 해줘야 하나?
 
