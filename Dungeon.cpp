@@ -25,6 +25,7 @@ void Dungeon::Init()
 	//_player = Object::CreateObject<Player>();
 	//_player->Init(this);
 	SetUp();
+	_eMgr = new EnemyManeger;
 	_eMgr->Init(this);
 }
 

@@ -7,6 +7,8 @@ void EnemyManeger::Init(Dungeon* parent)
 	//해당 던전씬에 물려주기
 	_enemy = Object::CreateObject<Enemy>(parent);
 	_enemy->Init();
+	_astar = new Astar;
+	_astar->Init();
 
 	//강제형변환으로 플레이어 가져오기
 	_player = (Player*) SCENEMANAGER->GetNowScene()->GetChildFromName("Will");

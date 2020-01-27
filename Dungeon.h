@@ -6,6 +6,7 @@
 #include "EnemyManeger.h"
 #define Dungeon_X 39
 #define Dungeon_Y 24
+class EnemyManeger;
 class Dungeon : public Scene
 {
 private:
