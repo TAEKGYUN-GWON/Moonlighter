@@ -4,6 +4,9 @@
 void Dungeon::Init()
 {
 	Scene::Init();
+	_name = "Dungeon";
+	SetParent(SCENEMANAGER->GetNowScene());
+
 	GRAPHICMANAGER->AddImage("smallRock", L"resource/img/Object/smallRock.png");
 	GRAPHICMANAGER->AddImage("smallRock_slime", L"resource/img/Object/smallRock_slime.png");
 	GRAPHICMANAGER->AddImage("bigRock", L"resource/img/Object/bigRock.png");
@@ -20,13 +23,15 @@ void Dungeon::Init()
 	GRAPHICMANAGER->AddImage("Dungeon", L"resource/img/Dungeon/background.png");
 	GRAPHICMANAGER->AddImage("empty", L"resource/img/empty.png");
 	//_player = Object::CreateObject<Player>();
-	//_player->Init();
+	//_player->Init(this);
 	SetUp();
+	_eMgr->Init(this);
 }
 
 void Dungeon::Update()
 {
 	Scene::Update();
+	_eMgr->Update();
 }
 
 void Dungeon::Render()

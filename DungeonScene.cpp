@@ -20,6 +20,8 @@ void DungeonScene::Init()
 
 	_enemy = Object:: CreateObject<Enemy>();
 	_enemy->Init();
+
+	_player = (Player*)SCENEMANAGER->GetNowScene()->GetChildFromName("will");
 }
 
 void DungeonScene::Update()
