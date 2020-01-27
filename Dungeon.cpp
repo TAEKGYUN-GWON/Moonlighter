@@ -25,10 +25,8 @@ void Dungeon::Init(Vector2 start)
 	//_player = Object::CreateObject<Player>();
 	//_player->Init(this);
 
-	//SetUp();
 	pos = start;
 	_trans->SetPos(pos);
-	//_isAllowInit = true;
 	_eMgr = new EnemyManeger;
 	//_eMgr->Init(this);
 }
@@ -44,21 +42,18 @@ void Dungeon::Update()
 		_isAllowInit = true;
 	}
 
-	if (_isAllowInit && Vector2::Distance(pos, CAMERA->GetPosition()) > 100)
+	if (Vector2::Distance(pos, CAMERA->GetPosition()) > 100)
 	{
-		for (Tile* t : tiles)
-		{
-			t->SetIsActive(false);
-		}
+		for (Object* c : _children)
+			c->SetIsActive(false);
 		_isAllowInit = false;
 	}
 
-	if (_isAllowInit)
+	
+	for (Object* c : _children)
 	{
-		for (Tile* t : tiles)
-		{
-			if (!t->GetIsActive())t->Release();
-		}
+		if (!c->GetIsActive())
+			RemoveChild(c);
 	}
 	//if (_isAllowInit)
 		//_eMgr->Update();
@@ -74,7 +69,6 @@ void Dungeon::Render()
 
 void Dungeon::SetUp()
 {
-
 	for (int i = 0; i < Dungeon_Y; ++i)
 	{
 		for (int j = 0; j < Dungeon_X; ++j)
@@ -88,6 +82,7 @@ void Dungeon::SetUp()
 			tile->AddComponent<Sprite>();
 			tile->SetAttribute("None");
 
+			tiles.push_back(tile);
 
 			//tiles[index] = Object::CreateObject<Tile>(this);
 			//tiles[index]->Init(j , i );
@@ -95,7 +90,6 @@ void Dungeon::SetUp()
 			//	pos.y + i * TILEHEIGHT + (TILEHEIGHT / 2));
 			//tiles[index]->AddComponent<Sprite>();
 			//tiles[index]->SetAttribute("None");
-			tiles.push_back(tile);
 
 			_tagTiles[index].attribute = "None";
 			_tagTiles[index].imgKey = "None";
@@ -152,7 +146,7 @@ void Dungeon::SetUp()
 
 			if (tiles[i]->GetImgName() != "None")
 			{
-				tiles[i]->AddChild(Object::CreateObject<Object>());
+				tiles[i]->AddChild(Object::CreateObject<Object>(tiles[i]));
 
 				tiles[i]->GetChildren()[0]->GetTrans()->SetPos(tiles[i]->GetTrans()->GetPos() + Vector2(0, TILEHEIGHT / 2));
 				if (tiles[i]->GetPivot() == RIGHT_BOTTOM) tiles[i]->GetChildren()[0]->GetTrans()->SetPos(tiles[i]->GetTrans()->GetPos() + Vector2(TILEWIDTH / 2, TILEHEIGHT / 2));
@@ -172,6 +166,8 @@ void Dungeon::SetUp()
 					tiles[i]->GetChildren()[0]->AddComponent<Sprite>()->SetImgName(tiles[i]->GetImgName());
 					tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(tiles[i]->GetPivot());
 				}
+
+				tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPosition(tiles[i]->GetChildren()[0]->GetTrans()->GetPos());
 			}
 		}
 	}
