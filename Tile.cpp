@@ -22,10 +22,6 @@ void Tile::Init(int idX, int idY)
 
 }
 
-void Tile::Release()
-{
-}
-
 void Tile::SetFrameXY(int x, int y)
 {
 }

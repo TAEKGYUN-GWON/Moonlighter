@@ -9,6 +9,6 @@ public:
 	void Init();
 	void Update();
 	void Render();
-
+	vector<Dungeon*> GetRoom() { return _rooms; }
 };
 
