@@ -156,11 +156,14 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Direct2D.h" />
     <ClInclude Include="DrawComponent.h" />
+    <ClInclude Include="Dungeon.h" />
+    <ClInclude Include="DungeonMgr.h" />
     <ClInclude Include="DungeonScene.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManeger.h" />
     <ClInclude Include="EntranceScene.h" />
     <ClInclude Include="ETC.h" />
+    <ClInclude Include="GolemEnemy.h" />
     <ClInclude Include="Hp.h" />
     <ClInclude Include="iniDataManager.h" />
     <ClInclude Include="Inventory.h" />
@@ -207,6 +210,7 @@
     <ClInclude Include="StartScene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TestScene.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="timeManager.h" />
@@ -233,11 +237,14 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Direct2D.cpp" />
     <ClCompile Include="DrawComponent.cpp" />
+    <ClCompile Include="Dungeon.cpp" />
+    <ClCompile Include="DungeonMgr.cpp" />
     <ClCompile Include="DungeonScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManeger.cpp" />
     <ClCompile Include="EntranceScene.cpp" />
     <ClCompile Include="ETC.cpp" />
+    <ClCompile Include="GolemEnemy.cpp" />
     <ClCompile Include="Hp.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
     <ClCompile Include="Inventory.cpp" />
@@ -281,6 +288,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="timeManager.cpp" />

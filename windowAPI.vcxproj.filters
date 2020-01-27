@@ -106,6 +106,9 @@
     <Filter Include="playGround\Shop\ShopObject\ShopStand">
       <UniqueIdentifier>{a8f5da20-97c4-47a4-b981-fb523187115d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\Test">
+      <UniqueIdentifier>{b2e24c08-1686-43c3-90dd-d5c395430b65}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -330,6 +333,21 @@
     <ClInclude Include="ShopDoor.h">
       <Filter>playGround\Shop\ShopObject</Filter>
     </ClInclude>
+    <ClInclude Include="Dungeon.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>playGround\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="GolemEnemy.h">
+      <Filter>playGround\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="GolemEnemy.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonMgr.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -523,6 +541,21 @@
     </ClCompile>
     <ClCompile Include="ShopDoor.cpp">
       <Filter>playGround\Shop\ShopObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Dungeon.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>playGround\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="GolemEnemy.cpp">
+      <Filter>playGround\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="GolemEnemy.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonMgr.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
