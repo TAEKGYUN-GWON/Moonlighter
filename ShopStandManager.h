@@ -14,6 +14,8 @@ public:
 	void Release();
 	void Update();
 
+	vector<ShopStand*> GetShopStandVector() { return _vShopStand; }
+
 
 };
 

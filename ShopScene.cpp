@@ -16,6 +16,7 @@ void ShopScene::Init()
 	_player = Object::CreateObject<Player>();
 	_player->Init();
 
+	//계산대
 	_checkStand = Object::CreateObject<CheckStand>();
 	_checkStand->Init();
 	
@@ -23,11 +24,11 @@ void ShopScene::Init()
 	_npcMgr->SetCheckStandLink(_checkStand);
 	_npcMgr->Init();
 
+	//가판대 쇼케이스
 	_shopStandMgr = new ShopStandManager; //가판대
 	_shopStandMgr->Init();
 
-	//_npcShopState = new NpcShopState;
-	//_npcShopState->SetCheckStandLink(_checkStand);
+	_npcMgr->SetShopStandMgrLink(_shopStandMgr);
 
 	_shopDoor = Object::CreateObject<ShopDoor>();
 	_shopDoor->Init();

@@ -24,6 +24,8 @@ void Npc::Init(string imgkey)
 
 	_speed = 3.0f;
 
+
+
 	int a;
 
 	
@@ -44,6 +46,8 @@ void Npc::Update()
 	//상태
 	Stay();
 
+	//Move();
+
 	Object::Update();
 }
 
@@ -54,6 +58,21 @@ void Npc::Render()
 	Object::Render();
 }
 
+//void Npc::Move()
+//{
+//
+//	//움직이는 방법 move or update에
+//	if (_lPath.size())
+//	{
+//		Vector2 a = *_lPath.begin() - _trans->pos;
+//		_trans->pos += a.Nomalized() * 70 * TIMEMANAGER->getElapsedTime();
+//
+//		if ((int)Vector2::Distance(*_lPath.begin(), _trans->pos) < (int)20)
+//			_lPath.erase(_lPath.begin());
+//
+//	}
+//}
+
 void Npc::SetNpcState(NpcShopState* npcshopstate)
 {
 	_npcShopState = npcshopstate;
@@ -61,11 +80,11 @@ void Npc::SetNpcState(NpcShopState* npcshopstate)
 	
 }
 
-void Npc::SetPath(list<Vector2> lpath)
-{
-	this->_lPath.clear();
-	this->_lPath = lpath;
-}
+//void Npc::SetPath(list<Vector2> lpath)
+//{
+//	this->_lPath.clear();
+//	this->_lPath = lpath;
+//}
 
 //상태 정의
 void Npc::In()
