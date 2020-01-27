@@ -28,6 +28,7 @@ void Dungeon::Init(Vector2 start)
 	pos = start;
 	_trans->SetPos(pos);
 
+
 	_eMgr = new EnemyManeger;
 }
 
@@ -64,6 +65,8 @@ void Dungeon::Update()
 
 void Dungeon::Render()
 {
+	if (_isAllowInit)
+	_eMgr->Render();
 	if (!_isAllowInit) return;
 
 	GRAPHICMANAGER->FindImage("Dungeon")->Render(pos.x, pos.y, PIVOT::LEFT_TOP);
