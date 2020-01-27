@@ -121,15 +121,21 @@ void NpcManager::MakeNpc()
 				_vNpc.push_back(_npc);
 				return;
 			}
-
 		}
-
 	}
+}
 
-	
+//void NpcManager::Astar()
+//{
+//	//vector2(0,0) 여기가 내가 가고싶은 자리임
+//	//_npc->SetPath(_ast->pathFinder(_npc->GetTrans()->pos, Vector2(0,0)));//좌표 계산해서 넣어주는 법 _ast는 A*객체
+//}
 
+void NpcManager::CheckStandCollision()
+{
+}
 
-
-
+void NpcManager::ShopStandCollision()
+{
 }
 
