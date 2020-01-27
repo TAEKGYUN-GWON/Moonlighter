@@ -37,7 +37,7 @@ void Enemy::Init()
 	//매니저를 던전씬에 걸어줘야함.
 	_tag = "enemy";
 	_speed = 30.0f;
-	
+
 
 }
 
