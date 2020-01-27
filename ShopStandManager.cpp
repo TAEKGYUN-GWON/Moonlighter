@@ -3,7 +3,8 @@
 
 void ShopStandManager::Init()
 {
-	//여기서 푸시백 네번 해줄거다..
+
+	//1사분면부터 반시계 방향으로 1, 2, 3, 4순서로 들어감.
 	{
 		_shopStand = Object::CreateObject<ShopStand>();
 		_shopStand->Init(Vector2(263, 573), Vector2(25, 25));

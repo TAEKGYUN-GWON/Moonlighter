@@ -26,7 +26,7 @@ void ShopScene::Init()
 
 	_npcMgr = new NpcManager; //NPC CreateObject는 NpcManager에서 해준다.
 	_npcMgr->SetCheckStandLink(_checkStand); //이게 npcmanager를 거쳐서 state로 간다
-	_npcMgr->SetShopStandMgrLink(_shopStandMgr);
+	_npcMgr->SetShopStandMgrLink(_shopStandMgr); //엔피씨가 충돌할 스탠드는 이것이다
 	_npcMgr->Init();
 
 	_shopDoor = Object::CreateObject<ShopDoor>();

@@ -164,22 +164,18 @@ NpcInline* NpcInline::GetInstance()
 //==================줄서기=====================
 void NpcInline::StateIn(Npc* npc)
 {
-	SetCheckStandLink (npc->GetCheckStand());
-	//★여긴 고심해서 내용을 추가해라..
-	//책상이 _isActivated 상태면 (앞사람이 접촉중) 앞에 사람이 있는 것
-	//if (앞에 사람이 있으면) return;
-	//if (앞에 사람이 없으면)
-	//{
+	//SetCheckStandLink (npc->GetCheckStand()); //이거 없어도 되는거같애 엔피씨매니저 콜리전에서 해줌
 	cout << "Inline 들어왔음." << endl;
-	//if (_checkStand)
-	//{
-	//	cout << "기다리는 중" << endl;
-	//	return;
-	//} //사용중이면 대기해
-	cout << "계산대를 내가 사용" << endl;
-	_checkStand->SetStandisInUse(true); //계산대를 사용중으로 만듦
+	
+	//지금 움직이게 하기가 어려워서.. 일단 체크 안하고 넘어가겠음
+	if (npc->GetIsCheckSOn() == true)return;//계산대랑 충돌중이면 리턴, 앞에 사람있는것임
+	else if (npc->GetIsCheckSOn() == false) //계산대가 비어있으면
+	{
+		cout << "계산대를 내가 사용" << endl;
+		_checkStand->SetStandisInUse(true); //계산대를 사용중으로 만듦
 		StateStay(npc);
-	//}
+
+	}
 }
 
 void NpcInline::StateStay(Npc* npc)

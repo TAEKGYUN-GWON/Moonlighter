@@ -33,9 +33,13 @@ void NpcManager::Update()
 	cout << _vNpc.size() << endl;
 	   
 
-	//지우기
+	//집에가면 지우기
 	Release();
 	
+	//충돌
+	CheckStandCollision(); //계산대
+	ShopStandCollision(); //가판대
+
 	//Astar
 	//AstarFunction();
 
@@ -141,7 +145,20 @@ void NpcManager::MakeNpc()
 //계산대랑 충돌
 void NpcManager::CheckStandCollision()
 {
-
+	for (int i = 0; i < _vNpc.size(); i++)
+	{
+		int D = getDistance(
+			_vNpc[i]->GetTrans()->GetPos().x, //엔피씨 위치랑
+			_vNpc[i]->GetTrans()->GetPos().y,
+			_checkStand->GetTrans()->GetPos().x,// 계산대 위치
+			_checkStand->GetTrans()->GetPos().y); 
+		//거리가 반지름 더한거보다 작아야 충돌임
+		if (D < _vNpc[i]->GetTrans()->GetScale().x / 2 + _checkStand->GetTrans()->GetScale().x / 2)
+		{
+			_vNpc[i]->SetIsCheckSOn(true); //NPC가 계산대랑 충돌중 On!!!!!!!!!
+			_checkStand->SetStandisInUse(true); //계산대가 사용중 ON!!!!!!!!!
+		}
+	}
 }
 
 //가판대랑 충돌
@@ -156,12 +173,13 @@ void NpcManager::ShopStandCollision()
 	{
 		for (int j = 0; j < _shopStandMgr->GetShopStandVector().size(); j++)
 		{
-			int D = getDistance(
-				_vNpc[i]->GetTrans()->GetPos().x,
-				_vNpc[i]->GetTrans()->GetPos().y,
-				_shopStandMgr->GetShopStandVector()[j]->GetTrans()->GetPos().x,
-				_shopStandMgr->GetShopStandVector()[j]->GetTrans()->GetPos().y);
 
+			int D = getDistance(
+				_vNpc[i]->GetTrans()->GetPos().x, //엔피씨 위치랑
+				_vNpc[i]->GetTrans()->GetPos().y,
+				_shopStandMgr->GetShopStandVector()[j]->GetTrans()->GetPos().x, //테이블위치
+				_shopStandMgr->GetShopStandVector()[j]->GetTrans()->GetPos().y);
+			//거리가 반지름 더한거보다 작아야 충돌임
 			if (D < _vNpc[i]->GetTrans()->GetScale().x / 2 + _shopStandMgr->GetShopStandVector()[j]->GetTrans()->GetScale().x / 2)
 			{
 				_vNpc[i]->SetIsShopSOn(true); //NPC가 가판대랑 충돌중 On!!!!!!!!!
