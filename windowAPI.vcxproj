@@ -175,6 +175,8 @@
     <ClInclude Include="NpcShopState.h" />
     <ClInclude Include="omega.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerIdle.h" />
+    <ClInclude Include="PlayerState.h" />
     <ClInclude Include="Potion.h" />
     <ClInclude Include="Potions.h" />
     <ClInclude Include="ProgressBar.h" />
@@ -248,6 +250,8 @@
     <ClCompile Include="NpcManager.cpp" />
     <ClCompile Include="NpcShopState.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerIdle.cpp" />
+    <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="Potion.cpp" />
     <ClCompile Include="Potions.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
