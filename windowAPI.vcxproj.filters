@@ -342,6 +342,12 @@
     <ClInclude Include="GolemEnemy.h">
       <Filter>playGround\Dungeon</Filter>
     </ClInclude>
+    <ClInclude Include="GolemEnemy.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonMgr.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -544,6 +550,12 @@
     </ClCompile>
     <ClCompile Include="GolemEnemy.cpp">
       <Filter>playGround\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="GolemEnemy.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonMgr.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

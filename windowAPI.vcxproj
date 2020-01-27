@@ -157,6 +157,7 @@
     <ClInclude Include="Direct2D.h" />
     <ClInclude Include="DrawComponent.h" />
     <ClInclude Include="Dungeon.h" />
+    <ClInclude Include="DungeonMgr.h" />
     <ClInclude Include="DungeonScene.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManeger.h" />
@@ -177,6 +178,8 @@
     <ClInclude Include="NpcShopState.h" />
     <ClInclude Include="omega.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerIdle.h" />
+    <ClInclude Include="PlayerState.h" />
     <ClInclude Include="Potion.h" />
     <ClInclude Include="Potions.h" />
     <ClInclude Include="ProgressBar.h" />
@@ -235,6 +238,7 @@
     <ClCompile Include="Direct2D.cpp" />
     <ClCompile Include="DrawComponent.cpp" />
     <ClCompile Include="Dungeon.cpp" />
+    <ClCompile Include="DungeonMgr.cpp" />
     <ClCompile Include="DungeonScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManeger.cpp" />
@@ -253,6 +257,8 @@
     <ClCompile Include="NpcManager.cpp" />
     <ClCompile Include="NpcShopState.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerIdle.cpp" />
+    <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="Potion.cpp" />
     <ClCompile Include="Potions.cpp" />
     <ClCompile Include="ProgressBar.cpp" />

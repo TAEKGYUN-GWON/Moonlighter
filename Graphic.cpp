@@ -343,7 +343,7 @@ void Graphic::FrameRender(float x, float y, int curFrameX, int curFrameY, PIVOT 
 
 	_RT->SetTransform(Matrix3x2F::Identity() * rotation * trans* CAMERA->GetMatrix());
 
-	if (_graphicInfo->bitmap) _RT->DrawBitmap(_graphicInfo->bitmap, &dxArea, _graphicInfo->alpha, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, &dxSrc);
+	if (_graphicInfo->bitmap) _RT->DrawBitmap(_graphicInfo->bitmap, dxArea, _graphicInfo->alpha, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, dxSrc);
 }
 
 void Graphic::FrameRender(Vector2 pos, int curFrameX, int curFrameY, float alpha, PIVOT pivot, bool cameraAffect)
@@ -406,25 +406,26 @@ void Graphic::FrameRender(Vector2 pos, int curFrameX, int curFrameY, float alpha
 	_RT->SetTransform(scale * rotation * trans);
 	if (cameraAffect) _RT->SetTransform(scale * rotation * trans * CAMERA->GetMatrix());
 
-	if (_graphicInfo->bitmap) _RT->DrawBitmap(_graphicInfo->bitmap, &dxArea, alpha, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, &dxSrc);
+	if (_graphicInfo->bitmap) _RT->DrawBitmap(_graphicInfo->bitmap, dxArea, alpha, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, dxSrc);
 }
 
 void Graphic::FrameRender(Vector2 pos, int curFrameX, int curFrameY, Vector2 scale, float angle, bool flipX, float alpha, PIVOT pivot, bool cameraAffect)
 {
+#pragma region Origin
 	_graphicInfo->curFrameX = curFrameX;
 	_graphicInfo->curFrameY = curFrameY;
-
+	
 	if (_graphicInfo->curFrameX > _graphicInfo->maxFrameX - 1) _graphicInfo->curFrameX = _graphicInfo->maxFrameX - 1;
 	if (_graphicInfo->curFrameY > _graphicInfo->maxFrameY - 1) _graphicInfo->curFrameY = _graphicInfo->maxFrameY - 1;
-
+	
 	int frame = _graphicInfo->curFrameY * _graphicInfo->maxFrameX + _graphicInfo->curFrameX;
-
+	
 	// TODO : 이미지 크기 실험
 	_graphicInfo->size.x = scale.x;
 	_graphicInfo->size.y = scale.y;
-
+	
 	_vFrameRect.clear();
-
+	
 	WICRect rc;
 	for (int i = 0; i < _graphicInfo->maxFrameY; ++i)
 	{
@@ -437,21 +438,17 @@ void Graphic::FrameRender(Vector2 pos, int curFrameX, int curFrameY, Vector2 sca
 			_vFrameRect.push_back(rc);
 		}
 	}
-
+	
 	_graphicInfo->size = GetFrameSize(frame);
-
-
-
-
-
+	
 	Matrix3x2F scale_;
 	scale_ = Matrix3x2F::Scale(1, 1);
 	if (flipX) scale_ = scale_ * Matrix3x2F::Scale(-1, 1);
 	Matrix3x2F rotation = Matrix3x2F::Rotation(angle, Point2F());
 	Matrix3x2F trans = Matrix3x2F::Translation(pos.x, pos.y);
-
+	
 	D2D1_RECT_F dxArea;
-
+	
 	switch (pivot)
 	{
 	case LEFT_TOP:
@@ -473,10 +470,34 @@ void Graphic::FrameRender(Vector2 pos, int curFrameX, int curFrameY, Vector2 sca
 		dxArea = RectF(0, -_graphicInfo->size.y, _graphicInfo->size.x, 0);
 		break;
 	}
-
+	
 	D2D1_RECT_F dxSrc = RectF(_vFrameRect[frame].X, _vFrameRect[frame].Y, _vFrameRect[frame].X + _vFrameRect[frame].Width, _vFrameRect[frame].Y + _vFrameRect[frame].Height);
-
+	
 	_RT->SetTransform(scale_ * rotation * trans);
 	if (cameraAffect) _RT->SetTransform(scale_ * rotation * trans * CAMERA->GetMatrix());
 	if (_graphicInfo->bitmap) _RT->DrawBitmap(_graphicInfo->bitmap, &dxArea, alpha, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, &dxSrc);
+#pragma endregion
+}
+
+void Graphic::SetSize(Vector2 size)
+{
+	_graphicInfo->size = size;
+
+	//_graphicInfo->frameWidth = size.x / _graphicInfo->maxFrameX;
+	//_graphicInfo->frameHeight = size.y / _graphicInfo->maxFrameY;
+	//
+	//_vFrameRect.clear();
+	//
+	//WICRect rc;
+	//for (int i = 0; i < _graphicInfo->maxFrameY; ++i)
+	//{
+	//	for (int j = 0; j < _graphicInfo->maxFrameX; ++j)
+	//	{
+	//		rc.X = _graphicInfo->frameWidth * j;
+	//		rc.Y = _graphicInfo->frameHeight * i;
+	//		rc.Width = _graphicInfo->frameWidth;
+	//		rc.Height = _graphicInfo->frameHeight;
+	//		_vFrameRect.push_back(rc);
+	//	}
+	//}
 }

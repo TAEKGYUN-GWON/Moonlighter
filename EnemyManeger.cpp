@@ -8,7 +8,7 @@ void EnemyManeger::Init(Dungeon* parent)
 	_enemy = Object::CreateObject<Enemy>(parent);
 	_enemy->Init();
 	_astar = new Astar;
-	_astar->Init();
+	_astar->Init(parent->GetTiles(), Dungeon_X, Dungeon_Y);
 
 	//강제형변환으로 플레이어 가져오기
 	_player = (Player*) SCENEMANAGER->GetNowScene()->GetChildFromName("Will");
