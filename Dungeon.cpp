@@ -135,3 +135,13 @@ void Dungeon::SetUp()
 	else MessageBox(_hWnd, "can not found the file.", str.c_str(), MB_OK);
 
 }
+
+vector<Tile*> Dungeon::GetTiles()
+{
+	vector<Tile*> tiles;
+
+	for (int i = 0; i < Dungeon_X * Dungeon_Y; i++)
+		tiles.push_back(_tiles[i]);
+
+	return tiles;
+}

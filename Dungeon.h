@@ -18,5 +18,6 @@ public:
 	virtual void Update();
 	virtual void Render();
 	void SetUp();
+	vector<Tile*> GetTiles();
 };
 

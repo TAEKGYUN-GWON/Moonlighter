@@ -44,7 +44,7 @@ void SlimeEnemy::Init()
 void SlimeEnemy::Update()
 {
 	Enemy::Update();
-	if(_path.size())
+	//if(_path.size())
 }
 
 void SlimeEnemy::Attack()
