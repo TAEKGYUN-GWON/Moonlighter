@@ -13,3 +13,10 @@ void EntranceScene::Update()
 {
 	Scene::Update();
 }
+
+void EntranceScene::Render()
+{
+	Scene::Render();
+
+	GRAPHICMANAGER->Text(Vector2(10, 6), L"Entrance Scene", 20, 200, 30, ColorF::Aqua);
+}

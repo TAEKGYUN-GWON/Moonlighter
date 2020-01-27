@@ -3,6 +3,7 @@
 #include "Hp.h"
 #include "Inventory.h"
 #include "PlayerState.h"
+#include "PlayerIdle.h"
 
 Player::Player()
 {
@@ -28,8 +29,8 @@ void Player::Init()
 	_sprite->Init(true, true);
 	_sprite->SetImgName("will_dungeon");
 	_sprite->SetPosition(_trans->GetPos() + Vector2(0, 2));
-	_sprite->SetMaxFrameX(7);
-	_sprite->SetFrameY(1);
+	//_sprite->SetMaxFrameX(7);
+	//_sprite->SetFrameY(1);
 
 	//_sprite->GetGraphic()->SetSize(Vector2(200, 200));
 
@@ -40,6 +41,9 @@ void Player::Init()
 	_hp = new Hp(100, 100);
 
 	_speed = 300.0f;
+
+	_state = new PlayerIdle(this);
+	_state->Enter();
 }
 
 void Player::Update()
@@ -52,6 +56,8 @@ void Player::Update()
 	if (!_hp->IsDead())
 	{
 		Object::Update();
+
+		_state->Update();
 
 		if (KEYMANAGER->isStayKeyDown(VK_LEFT))
 		{
