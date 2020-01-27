@@ -333,11 +333,14 @@
     <ClInclude Include="ShopDoor.h">
       <Filter>playGround\Shop\ShopObject</Filter>
     </ClInclude>
+    <ClInclude Include="Dungeon.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
     <ClInclude Include="TestScene.h">
       <Filter>playGround\Test</Filter>
     </ClInclude>
-    <ClInclude Include="Dungeon.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="GolemEnemy.h">
+      <Filter>playGround\Dungeon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -533,11 +536,14 @@
     <ClCompile Include="ShopDoor.cpp">
       <Filter>playGround\Shop\ShopObject</Filter>
     </ClCompile>
+    <ClCompile Include="Dungeon.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="TestScene.cpp">
       <Filter>playGround\Test</Filter>
     </ClCompile>
-    <ClCompile Include="Dungeon.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="GolemEnemy.cpp">
+      <Filter>playGround\Dungeon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -13,7 +13,9 @@ class Hp;
 //보스 공격 패턴
 enum PHASE
 {
-
+	ONE,
+	TWO,
+	TREE
 };
 
 class Boss : public Object

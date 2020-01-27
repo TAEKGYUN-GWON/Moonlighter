@@ -1,6 +1,6 @@
 #pragma once
 #include "Object.h"
-
+#include "Player.h"
 //#include "Player.h" //h에서? cpp에서?
 
 enum DIRECTION
@@ -28,6 +28,7 @@ class Enemy : public Object
 protected:
 	Sprite* _sprite;
 	PhysicsBody* _physics;
+	Player* _player;
 	//■■■■■■■ 상태패턴 틀이 되는 EnemyBasic를 Enemy에게 알려줌 ■■■■■■■
 	EnemyBasic* state;
 	float _speed;
@@ -44,11 +45,8 @@ public:
 	DIRECTION _dir;	//방향
 	//플레이어가 있냐 없냐 bool 값으루 해줘야 하나?
 
-	//string _tag = "",pos 어디서 해주지?
-
 	//상태패턴을 만들어서 Enemy에게 알려주기 위한 함수
 	void SetState(EnemyBasic* state);
-	//hp 생성시 정해주는거, hp 다 똑같이 할까?
 	virtual void Init();
 	virtual void Update();	//방향지정해줘야함->겟앵글로...
 	virtual void Attack() {};
@@ -76,6 +74,7 @@ public:
 	virtual void Init(Enemy* _sEnemy) {};
 	virtual void Update(Enemy* _sEnemy);
 	virtual void Release(Enemy* _sEnemy) {};
+	
 };
 //■■■■■■■■■■■■ Idle ■■■■■■■■■■■■■■
 class EnemyIdle : public EnemyBasic
@@ -94,7 +93,6 @@ public:
 //■■■■■■■■■■■■ Move ■■■■■■■■■■■■■
 class EnemyMove : public EnemyBasic
 {
-	//상태를 객체화 해줌
 	static EnemyMove* instance;
 
 public:
@@ -107,7 +105,6 @@ public:
 //■■■■■■■■■■■ Attack ■■■■■■■■■■■■
 class EnemyAttack : public EnemyBasic
 {
-	//상태를 객체화 해줌
 	static EnemyAttack* instance;
 
 public:
@@ -121,7 +118,6 @@ public:
 //■■■■■■■■■■■■ Hit ■■■■■■■■■■■■■
 class EnemyHit : public EnemyBasic
 {
-	//상태를 객체화 해줌
 	static EnemyHit* instance;
 
 public:
@@ -135,7 +131,6 @@ public:
 
 class EnemyDead : public EnemyBasic
 {
-	//상태를 객체화 해줌
 	static EnemyDead* instance;
 
 public:

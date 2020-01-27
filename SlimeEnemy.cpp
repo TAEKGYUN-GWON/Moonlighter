@@ -36,7 +36,7 @@ void SlimeEnemy::Init()
 
 	_physics = AddComponent<PhysicsBody>();
 	_physics->Init(BodyType::DYNAMIC, 1.0f);	//플레이어한테 뚫림 왜 그러지?
-	////가상세계의 렉트 뒤틀리는거 고정
+	//가상세계의 렉트 뒤틀리는거 고정
 	_physics->GetBody()->SetFixedRotation(true);	
 	
 }
@@ -44,13 +44,27 @@ void SlimeEnemy::Init()
 void SlimeEnemy::Update()
 {
 	Enemy::Update();
-	if(_path.size())
+	
+	if (_path.size())
+	{
+		Vector2 _astar = *_path.begin() - _trans->GetPos();
+		_trans->SetPos(_trans->GetPos() + _astar.Nomalized() * 70 * TIMEMANAGER->getElapsedTime());
+		
+		if ((int)Vector2::Distance(*_path.begin(), _trans->GetPos()) < (int)20)_path.erase(_path.begin());
+	}
+	//_sprite->set
 }
 
 void SlimeEnemy::Attack()
 {
-	//공격 하는 함수 인데 일정 범위 안에 있으면 때리는거...
-	// a*로 가는거...?
-	
+	//여기에 범위 원 렉트?
+	//그리고...........데미지 주는거?
+	//GRAPHICMANAGER->DrawEllipse
+		//(float x, float y, float radiusX, float radiusY, ColorF::Enum color, float strokeWidth)
+	//원 랙트 안에 센서 on이면 떄리고 off면 안 때리고
+	//이미지 바꿔줘야 하나 여기서?
+	//길바떄 센서처럼 하면 될까??
+
+
 }
 

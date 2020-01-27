@@ -17,7 +17,6 @@ void EnemyManeger::Init(Dungeon* parent)
 void EnemyManeger::Update()
 {
 	//vector 만큼 돌아야 겠지...생성해줘야 하니까?
-	//아마 일단 렌더 걸어줄듯
 	//A* pos 가져오기
 	_enemy->SetPath(_astar->pathFinder(_enemy->GetTrans()->GetPos(),
 		_player->GetTrans()->GetPos()));
