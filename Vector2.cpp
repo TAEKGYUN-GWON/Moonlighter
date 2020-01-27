@@ -170,3 +170,33 @@ Vector2 Vector2::Lerp(Vector2 a, Vector2 b, float i)
 
 	return Vector2(x, y);
 }
+
+float Vector2::GetAngle(Vector2 a, Vector2 b)
+{
+
+	float x = b.x - a.x;
+	float y = b.y - a.y;
+
+	//저는 아크코싸인을 원해요 하면 이 주석을 풀고 쓰세요
+	/*
+	float distance = sqrtf(x * x + y * y);
+
+	float angle = acosf(x / distance);
+
+	if (y2 > y1)
+	{
+		angle = PI2 - angle;
+
+		if (angle >= PI2) angle -= PI2;
+	}
+	*/
+
+
+	//아크탄젠트를 원하는 그대여 이걸 쓰세여
+	float angle = -atan2f(y, x);
+
+
+	return angle;
+
+
+}
