@@ -28,7 +28,7 @@ void Dungeon::Init(Vector2 start)
 	pos = start;
 	_trans->SetPos(pos);
 	_eMgr = new EnemyManeger;
-	//_eMgr->Init(this);
+	_eMgr->Init(this);
 }
 
 void Dungeon::Update()
@@ -59,7 +59,7 @@ void Dungeon::Update()
 	}
 	//if (_isAllowInit)
 		//_eMgr->Update();
-	//_eMgr->Update();
+	_eMgr->Update();
 }
 
 void Dungeon::Render()
@@ -185,7 +185,7 @@ vector<Tile*> Dungeon::GetTiles()
 	vector<Tile*> tiles;
 
 	for (int i = 0; i < Dungeon_X * Dungeon_Y; i++)
-		tiles.push_back(tiles[i]);
+		tiles.push_back(this->tiles[i]);
 
 	return tiles;
 }
