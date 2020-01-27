@@ -10,7 +10,7 @@
 void StartScene::Init()
 {
 	Scene::Init();
-	//SCENEMANAGER->addScene("Dungeon", new DungeonScene);
+	SCENEMANAGER->addScene("Dungeon", new DungeonScene);
 	SCENEMANAGER->addScene("Town", new TownScene);
 	SCENEMANAGER->addScene("Entrance", new EntranceScene);
 	SCENEMANAGER->addScene("Shop", new ShopScene);

@@ -22,20 +22,8 @@ void DungeonMgr::Update()
 
 void DungeonMgr::Render()
 {
-	wchar_t buffer[128];
-	int a = 0;
+
 	for (Dungeon* d : _rooms)
-	{
-		if (d->GetTrans()->GetPos().x < CAMERA->GetPosition().x || d->GetTrans()->GetPos().x > CAMERA->GetPosition().x + WINSIZEX ||
-			d->GetTrans()->GetPos().y < CAMERA->GetPosition().y || d->GetTrans()->GetPos().y > CAMERA->GetPosition().y + WINSIZEY) 
 			d->Render();
-	}
-	for (int i = 0; i < _rooms.size(); i++)
-	{
-		a++;
-		swprintf(buffer, 128, L"c : %d", _rooms[i]->GetChildren().size());
 
-		GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 50 + a * 50), buffer, 10, 300, 50, ColorF::Azure);
-
-	}
 }
