@@ -29,6 +29,8 @@ void Player::Init()
 	_sprite->SetMaxFrameX(7);
 	_sprite->SetFrameY(1);
 
+	_sprite->GetGraphic()->SetSize(Vector2(200, 200));
+
 	_physics = AddComponent<PhysicsBody>();
 	_physics->Init(BodyType::DYNAMIC, 1.0f);
 

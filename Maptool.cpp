@@ -53,6 +53,7 @@ void Maptool::Init()
 #pragma endregion
 
 	GRAPHICMANAGER->AddImage("town_map", L"resource/img/Map/map.png");
+	GRAPHICMANAGER->AddImage("Shop_map", L"resource/img/Shop/shop_background.png");
 	GRAPHICMANAGER->AddFrameImage("set_tile", L"set_tile3.png", 4, 6);
 	GRAPHICMANAGER->AddFrameImage("set_tile_dungeon", L"set_tile_dungeon.png", 4, 6);
 
@@ -198,7 +199,7 @@ void Maptool::Update()
 
 void Maptool::Render()
 {
-	GRAPHICMANAGER->DrawImage("town_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
+	GRAPHICMANAGER->DrawImage("Shop_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
 
 	//char buffer[128];
 	wchar_t buffer[128];
@@ -287,7 +288,7 @@ void Maptool::Save()
 	HANDLE file;
 	DWORD write;
 
-	string str = "Town.map";
+	string str = "shop.map";
 
 	//GetWindowText(_saveName, titleSave, 256);
 
@@ -310,7 +311,7 @@ void Maptool::Load()
 
 	//string str = titleLoad;
 	//str += ".map";
-	string str = "Town.map";
+	string str = "shop.map";
 
 	//file = CreateFile(titleLoad, GENERIC_READ, 0, NULL,
 	file = CreateFile(str.c_str(), GENERIC_READ, 0, NULL,
@@ -414,31 +415,27 @@ void Maptool::SetMap()
 
 	if (_tiles[index]->GetChildren().size() > 0) return;
 
-	if (_currentTile.imgKey == "empty" && _ctrSelect == Attribute::NONE_MOVE) _tiles[index]->SetAttribute("Wall");
-	else
+	SetAttribute(index, _currentTile.startPos, _currentTile.size, _currentTile.startPos2, _currentTile.size2, FindTile(_currentTile.imgKey)->attribute);
+
+	_tiles[index]->AddChild(Object::CreateObject<Object>());
+
+	_tiles[index]->GetChildren()[0]->GetTrans()->SetPos(_tiles[index]->GetTrans()->GetPos() + Vector2(0, TILEHEIGHT / 2));
+	if (_currentTile.pivot == RIGHT_BOTTOM) _tiles[index]->GetChildren()[0]->GetTrans()->SetPos(_tiles[index]->GetTrans()->GetPos() + Vector2(TILEWIDTH / 2, TILEHEIGHT / 2));
+
+	_tiles[index]->GetChildren()[0]->GetTrans()->SetScale(GRAPHICMANAGER->FindImage(_currentTile.imgKey)->GetFrameWidth(), GRAPHICMANAGER->FindImage(_currentTile.imgKey)->GetFrameHeight());
+	_tiles[index]->GetChildren()[0]->GetTrans()->SetRect();
+
+	_tagTiles[index] = *FindTile(_currentTile.imgKey);
+
+	if (_currentTile.isFrame)
 	{
-		SetAttribute(index, _currentTile.startPos, _currentTile.size, _currentTile.startPos2, _currentTile.size2, FindTile(_currentTile.imgKey)->attribute);
-
-		_tiles[index]->AddChild(Object::CreateObject<Object>());
-
-		_tiles[index]->GetChildren()[0]->GetTrans()->SetPos(_tiles[index]->GetTrans()->GetPos() + Vector2(0, TILEHEIGHT / 2));
-		if (_currentTile.pivot == RIGHT_BOTTOM) _tiles[index]->GetChildren()[0]->GetTrans()->SetPos(_tiles[index]->GetTrans()->GetPos() + Vector2(TILEWIDTH / 2, TILEHEIGHT / 2));
-
-		_tiles[index]->GetChildren()[0]->GetTrans()->SetScale(GRAPHICMANAGER->FindImage(_currentTile.imgKey)->GetFrameWidth(), GRAPHICMANAGER->FindImage(_currentTile.imgKey)->GetFrameHeight());
-		_tiles[index]->GetChildren()[0]->GetTrans()->SetRect();
-
-		_tagTiles[index] = *FindTile(_currentTile.imgKey);
-
-		if (_currentTile.isFrame)
-		{
-			_tiles[index]->GetChildren()[0]->AddComponent<Sprite>()->Init(true, true);
-			_tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->SetImgName(_currentTile.imgKey);
-			_tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->SetFPS(0.5f);
-		}
-		else _tiles[index]->GetChildren()[0]->AddComponent<Sprite>()->SetImgName(_currentTile.imgKey);
-		
-		_tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(_currentTile.pivot);
+		_tiles[index]->GetChildren()[0]->AddComponent<Sprite>()->Init(true, true);
+		_tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->SetImgName(_currentTile.imgKey);
+		_tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->SetFPS(0.5f);
 	}
+	else _tiles[index]->GetChildren()[0]->AddComponent<Sprite>()->SetImgName(_currentTile.imgKey);
+
+	_tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(_currentTile.pivot);
 }
 
 void Maptool::ClickSetTile()
@@ -575,7 +572,7 @@ void Maptool::TileSetting()
 	_mTileList.insert(make_pair(("forgeBoard"), tagTile().Clone("forgeBoard", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(2, 1), Vector2(2, 1))));
 	_mTileList.insert(make_pair(("potionBoard"), tagTile().Clone("potionBoard", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(2, 1), Vector2(2, 1))));
 
-	_mTileList.insert(make_pair(("empty"), tagTile().Clone("empty", "Wall", false, 1, 1, PIVOT::CENTER, Vector2(1, 1), Vector2(1, 1))));
+	_mTileList.insert(make_pair(("empty"), tagTile().Clone("empty", "Wall", false, 1, 1, PIVOT::RIGHT_BOTTOM, Vector2(1, 1), Vector2(1, 1))));
 #pragma endregion
 
 #pragma region Dungeon
