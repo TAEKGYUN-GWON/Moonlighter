@@ -1,77 +1,45 @@
 #include "stdafx.h"
-#include "ShopScene.h"
+#include "Dungeon.h"
 
-void ShopScene::Init()
+void Dungeon::Init()
 {
-	Scene::Init();
-
-	GRAPHICMANAGER->AddImage("ShopBg", L"resource/img/Shop/shop_background.png");
+	GRAPHICMANAGER->AddImage("smallRock", L"resource/img/Object/smallRock.png");
+	GRAPHICMANAGER->AddImage("smallRock_slime", L"resource/img/Object/smallRock_slime.png");
+	GRAPHICMANAGER->AddImage("bigRock", L"resource/img/Object/bigRock.png");
+	GRAPHICMANAGER->AddImage("book", L"resource/img/Object/book.png");
+	GRAPHICMANAGER->AddImage("pot", L"resource/img/Object/pot.png");
+	GRAPHICMANAGER->AddImage("pot_slime", L"resource/img/Object/pot_slime.png");
+	GRAPHICMANAGER->AddImage("lathe", L"resource/img/Object/lathe.png");
+	GRAPHICMANAGER->AddImage("fountain", L"resource/img/Object/fountain.png");
+	GRAPHICMANAGER->AddImage("pillar", L"resource/img/Object/pillar.png");
+	GRAPHICMANAGER->AddImage("skull1", L"resource/img/Object/skull1.png");
+	GRAPHICMANAGER->AddImage("skull2", L"resource/img/Object/skull2.png");
+	GRAPHICMANAGER->AddImage("skull3", L"resource/img/Object/skull3.png");
+	GRAPHICMANAGER->AddImage("brokenPillar", L"resource/img/Object/brokenPillar.png");
+	GRAPHICMANAGER->AddImage("Dungeon", L"resource/img/Dungeon/background.png");
 	GRAPHICMANAGER->AddImage("empty", L"resource/img/empty.png");
-	GRAPHICMANAGER->AddFrameImage("Girl", L"resource/img/Shop/Girl.png", 9, 4);
-	GRAPHICMANAGER->AddFrameImage("Guy", L"resource/img/Shop/Guy.png", 9, 4);
-	GRAPHICMANAGER->AddFrameImage("Kid", L"resource/img/Shop/Kids.png", 6, 4);
-	GRAPHICMANAGER->AddFrameImage("Lunk", L"resource/img/Shop/Lunk.png", 9, 4);
 
-	GRAPHICMANAGER->AddFrameImage("Door", L"resource/img/Shop/shop_door.png", 5, 1);
-
-	_player = Object::CreateObject<Player>();
-	_player->Init();
-
-	_checkStand = Object::CreateObject<CheckStand>();
-	_checkStand->Init(Vector2(0,0), Vector2(0,0));
-	
-	_npcMgr = new NpcManager; //NPC CreateObject는 NpcManager에서 해준다.
-	_npcMgr->SetCheckStandLink(_checkStand);
-	_npcMgr->Init();
-
-	_shopStandMgr = new ShopStandManager; //가판대
-	_shopStandMgr->Init();
-
-	//_npcShopState = new NpcShopState;
-	//_npcShopState->SetCheckStandLink(_checkStand);
 	SetUp();
 }
 
-void ShopScene::Release()
+void Dungeon::Update()
 {
-	_npcMgr->Release(); //비어있음
-
-	Scene::Release();
 }
 
-void ShopScene::Update()
+void Dungeon::Render()
 {
-	_npcMgr->Update();
+	GRAPHICMANAGER->FindImage("Dungeon")->Render(0,0, PIVOT::LEFT_TOP);
 
-	if (KEYMANAGER->isOnceKeyDown('1')) SCENEMANAGER->changeScene("Dungeon");
-	if (KEYMANAGER->isOnceKeyDown('2')) SCENEMANAGER->changeScene("Entrance");
-	if (KEYMANAGER->isOnceKeyDown('3')) SCENEMANAGER->changeScene("Town");
-	if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
-	if (KEYMANAGER->isOnceKeyDown('5')) SCENEMANAGER->changeScene("Maptool");
-	
-	Scene::Update();
 }
 
-void ShopScene::Render()
-{
-	GRAPHICMANAGER->FindImage("ShopBg")->Render(WINSIZEX/2, WINSIZEY/2, CENTER);
-
-	//GRAPHICMANAGER->FindImage("Girl")->FrameRender(WINSIZEX / 2, WINSIZEY / 2, 0, 0, CENTER);
-	//GRAPHICMANAGER->FindImage("Guy")->FrameRender(WINSIZEX / 2 + 100, WINSIZEY / 2, 0, 0, CENTER);
-	
-
-	Scene::Render();
-}
-
-void ShopScene::SetUp()
+void Dungeon::SetUp()
 {
 
-
-	for (int i = 0; i < TILENUMY; ++i)
+	for (int i = 0; i < Dungeon_Y; ++i)
 	{
-		for (int j = 0; j < TILENUMX; ++j)
+		for (int j = 0; j < Dungeon_X; ++j)
 		{
-			int index = j + TILENUMX * i;
+			int index = j + Dungeon_X * i;
 
 			_tiles[index] = Object::CreateObject<Tile>();
 			_tiles[index]->Init(j, i);
@@ -91,7 +59,7 @@ void ShopScene::SetUp()
 
 	//string str = titleLoad;
 	//str += ".map";
-	string str = "shop.map";
+	string str = "Dungeon.map";
 
 	//file = CreateFile(titleLoad, GENERIC_READ, 0, NULL,
 	file = CreateFile(str.c_str(), GENERIC_READ, 0, NULL,
@@ -101,10 +69,10 @@ void ShopScene::SetUp()
 	{
 		//MessageBox(_hWnd, "load 한다", str.c_str(), MB_OK);
 
-		ReadFile(file, _tagTiles, sizeof(tagTile) * TILENUMX * TILENUMY, &read, NULL);
+		ReadFile(file, _tagTiles, sizeof(tagTile) * Dungeon_X * Dungeon_Y, &read, NULL);
 		CloseHandle(file);
 
-		for (int i = 0; i < TILENUMX * TILENUMY; i++)
+		for (int i = 0; i < Dungeon_X * Dungeon_Y; i++)
 		{
 			// _tiles[] initialization
 			_tiles[i]->SetImgName("None");
@@ -150,4 +118,3 @@ void ShopScene::SetUp()
 	else MessageBox(_hWnd, "can not found the file.", str.c_str(), MB_OK);
 
 }
-

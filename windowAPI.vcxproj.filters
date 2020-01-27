@@ -94,14 +94,20 @@
     <Filter Include="playGround\Shop\Npc">
       <UniqueIdentifier>{0a0724a8-d624-45bd-9848-e35ab53c5fe1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\Shop\ShopStand">
-      <UniqueIdentifier>{a8f5da20-97c4-47a4-b981-fb523187115d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="playGround\HP">
       <UniqueIdentifier>{d649f8a6-dd46-4811-9899-cd714899015a}</UniqueIdentifier>
     </Filter>
     <Filter Include="playGround\Bullet">
       <UniqueIdentifier>{606b9db6-d611-446c-afb2-7ae3da391c30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Shop\ShopObject">
+      <UniqueIdentifier>{6bb3f218-2077-4982-9bb3-17c827fe5561}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Shop\ShopObject\ShopStand">
+      <UniqueIdentifier>{a8f5da20-97c4-47a4-b981-fb523187115d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Test">
+      <UniqueIdentifier>{b2e24c08-1686-43c3-90dd-d5c395430b65}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -261,14 +267,11 @@
     <ClInclude Include="NpcShopState.h">
       <Filter>playGround\Shop\Npc</Filter>
     </ClInclude>
-    <ClInclude Include="CheckStand.h">
-      <Filter>playGround\Shop</Filter>
-    </ClInclude>
     <ClInclude Include="ShopStand.h">
-      <Filter>playGround\Shop\ShopStand</Filter>
+      <Filter>playGround\Shop\ShopObject\ShopStand</Filter>
     </ClInclude>
     <ClInclude Include="ShopStandManager.h">
-      <Filter>playGround\Shop\ShopStand</Filter>
+      <Filter>playGround\Shop\ShopObject\ShopStand</Filter>
     </ClInclude>
     <ClInclude Include="loadingScene.h">
       <Filter>헤더 파일</Filter>
@@ -324,8 +327,17 @@
     <ClInclude Include="Text.h">
       <Filter>2DGameFramework\Object\Component\header</Filter>
     </ClInclude>
-    <ClInclude Include="GolemEnemy.h">
-      <Filter>playGround\Dungeon</Filter>
+    <ClInclude Include="CheckStand.h">
+      <Filter>playGround\Shop\ShopObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopDoor.h">
+      <Filter>playGround\Shop\ShopObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Dungeon.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>playGround\Test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -461,14 +473,11 @@
     <ClCompile Include="NpcShopState.cpp">
       <Filter>playGround\Shop\Npc</Filter>
     </ClCompile>
-    <ClCompile Include="CheckStand.cpp">
-      <Filter>playGround\Shop</Filter>
-    </ClCompile>
     <ClCompile Include="ShopStand.cpp">
-      <Filter>playGround\Shop\ShopStand</Filter>
+      <Filter>playGround\Shop\ShopObject\ShopStand</Filter>
     </ClCompile>
     <ClCompile Include="ShopStandManager.cpp">
-      <Filter>playGround\Shop\ShopStand</Filter>
+      <Filter>playGround\Shop\ShopObject\ShopStand</Filter>
     </ClCompile>
     <ClCompile Include="loadingScene.cpp">
       <Filter>소스 파일</Filter>
@@ -518,8 +527,17 @@
     <ClCompile Include="Text.cpp">
       <Filter>2DGameFramework\Object\Component\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="GolemEnemy.cpp">
-      <Filter>playGround\Dungeon</Filter>
+    <ClCompile Include="CheckStand.cpp">
+      <Filter>playGround\Shop\ShopObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopDoor.cpp">
+      <Filter>playGround\Shop\ShopObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Dungeon.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>playGround\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

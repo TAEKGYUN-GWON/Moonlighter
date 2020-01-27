@@ -12,7 +12,8 @@ void DungeonScene::Init()
 	SCENEMANAGER->addScene("Entrance", new EntranceScene);
 	SCENEMANAGER->addScene("Town", new TownScene);
 
-
+	_dungeon = new Dungeon;
+	_dungeon->Init();
 	_player = Object::CreateObject<Player>();
 	_player->Init();
 	//_player->GetHP()->GetCurrentHP();
@@ -29,7 +30,7 @@ void DungeonScene::Update()
 
 void DungeonScene::Render()
 {
+	_dungeon->Render();
 	Scene::Render();
-
 	GRAPHICMANAGER->Text(Vector2(10, 6), L"Dungeon Scene", 20, 200, 30, ColorF::AliceBlue);
 }
