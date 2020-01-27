@@ -58,12 +58,12 @@ void SlimeEnemy::Update()
 void SlimeEnemy::Attack()
 {
 	//여기에 범위 원 렉트?
-	//그리고...........데미지 주는거?
+	//데미지 주는거?
 	//GRAPHICMANAGER->DrawEllipse
 		//(float x, float y, float radiusX, float radiusY, ColorF::Enum color, float strokeWidth)
 	//원 랙트 안에 센서 on이면 떄리고 off면 안 때리고
-	//이미지 바꿔줘야 하나 여기서?
-	//길바떄 센서처럼 하면 될까??
+	//이미지 바꿔줘야 하나 여기서?->골렘만.....
+	//길바떄 센서처럼 하면 될까??->bool player?
 
 
 }
