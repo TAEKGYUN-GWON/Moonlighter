@@ -27,8 +27,8 @@ void Dungeon::Init(Vector2 start)
 
 	pos = start;
 	_trans->SetPos(pos);
+
 	_eMgr = new EnemyManeger;
-	_eMgr->Init(this);
 }
 
 void Dungeon::Update()
@@ -40,6 +40,7 @@ void Dungeon::Update()
 	{
 		SetUp();
 		_isAllowInit = true;
+		_eMgr->Init(this);
 	}
 
 	if (Vector2::Distance(pos, CAMERA->GetPosition()) > 500)
@@ -57,9 +58,8 @@ void Dungeon::Update()
 			c->Release();
 
 	}
-	//if (_isAllowInit)
-		//_eMgr->Update();
-	_eMgr->Update();
+	if (_isAllowInit)
+		_eMgr->Update();
 }
 
 void Dungeon::Render()
@@ -182,10 +182,10 @@ void Dungeon::SetUp()
 
 vector<Tile*> Dungeon::GetTiles()
 {
-	vector<Tile*> tiles;
+	vector<Tile*> t;
 
 	for (int i = 0; i < Dungeon_X * Dungeon_Y; i++)
-		tiles.push_back(this->tiles[i]);
+		t.push_back(tiles[i]);
 
 	return tiles;
 }
