@@ -1,6 +1,5 @@
 #pragma once
 #include "ShopStand.h"
-#include <vector>
 
 class ShopStandManager
 {

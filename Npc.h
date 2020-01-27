@@ -1,10 +1,10 @@
 #pragma once
 #include "Object.h"
 #include "ShopStand.h"
-#include <list>
 #include "CheckStand.h"
 #include "Sprite.h"
 
+class ShopStand;
 class CheckStand;
 class NpcShopState;
 
@@ -18,6 +18,7 @@ private:
 	ShopStand* _shopStand;
 	NpcShopState* _npcShopState;
 	CheckStand* _checkStand;
+	list<Vector2> _lPath;
 
 	Sprite* _sprite;
 
@@ -35,6 +36,7 @@ public:
 	void SetCheckStandLink(CheckStand* checkstand) { _checkStand = checkstand; }
 	CheckStand* GetCheckStand() { return _checkStand; }
 	void SetNpcState(NpcShopState* npcshopstate);
+	void SetPath(list<Vector2> lpath);
 
 	//void SetImgKey(string imgkey) { _sprite->SetImgName(imgkey); }
 

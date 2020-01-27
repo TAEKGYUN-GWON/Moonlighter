@@ -61,6 +61,12 @@ void Npc::SetNpcState(NpcShopState* npcshopstate)
 	
 }
 
+void Npc::SetPath(list<Vector2> lpath)
+{
+	this->_lPath.clear();
+	this->_lPath = lpath;
+}
+
 //상태 정의
 void Npc::In()
 {
