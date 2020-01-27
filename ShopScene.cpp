@@ -20,18 +20,18 @@ void ShopScene::Init()
 	_checkStand = Object::CreateObject<CheckStand>();
 	_checkStand->Init();
 	
-	_npcMgr = new NpcManager; //NPC CreateObject는 NpcManager에서 해준다.
-	_npcMgr->SetCheckStandLink(_checkStand);
-	_npcMgr->Init();
-
 	//가판대 쇼케이스
 	_shopStandMgr = new ShopStandManager; //가판대
 	_shopStandMgr->Init();
 
+	_npcMgr = new NpcManager; //NPC CreateObject는 NpcManager에서 해준다.
+	_npcMgr->SetCheckStandLink(_checkStand); //이게 npcmanager를 거쳐서 state로 간다
 	_npcMgr->SetShopStandMgrLink(_shopStandMgr);
+	_npcMgr->Init();
 
 	_shopDoor = Object::CreateObject<ShopDoor>();
 	_shopDoor->Init();
+	
 
 	SetUp();
 }
