@@ -15,6 +15,7 @@ void NpcManager::Init()
 
 void NpcManager::Update()
 {
+
 	//NPC가 4명 미만이면 더 넣어줘라	
 	if (_vNpc.size() < 4)
 	{
@@ -28,8 +29,21 @@ void NpcManager::Update()
 	}
 	cout << _vNpc.size() << endl;
 	   
+
+	//지우기
+	Release();
+	
+	//Astar
+	AstarFunction();
+
+
+
+}
+
+void NpcManager::Release()
+{
 	//isactive가 false인 npc벡터를 찾아서
-	//false인 애가 있으면 지워버려
+//false인 애가 있으면 지워버려
 	for (int i = 0; i < _vNpc.size(); ++i)
 	{
 		if (!_vNpc[i]->GetIsActive())
@@ -38,12 +52,6 @@ void NpcManager::Update()
 		}
 
 	}
-	
-}
-
-void NpcManager::Release()
-{
-
 }
 
 void NpcManager::Render()
@@ -125,11 +133,15 @@ void NpcManager::MakeNpc()
 	}
 }
 
-//void NpcManager::Astar()
-//{
-//	//vector2(0,0) 여기가 내가 가고싶은 자리임
-//	//_npc->SetPath(_ast->pathFinder(_npc->GetTrans()->pos, Vector2(0,0)));//좌표 계산해서 넣어주는 법 _ast는 A*객체
-//}
+void NpcManager::AstarFunction()
+{
+	for (int i = 0; i < _vNpc.size(); i++)
+	{
+		_vNpc[i]->SetPath(_ast->pathFinder(
+			_vNpc[i]->GetTrans()->GetPos(), //NPC의 위치
+			Vector2(0, 0))); //가야할 위치
+	}
+}
 
 void NpcManager::CheckStandCollision()
 {

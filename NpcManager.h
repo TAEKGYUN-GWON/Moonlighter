@@ -24,7 +24,7 @@ public:
 	void Render();
 
 	void MakeNpc();
-
+	void AstarFunction();
 	void CheckStandCollision(); //계산대랑 충돌
 	void ShopStandCollision(); //가판대랑 충돌
 
