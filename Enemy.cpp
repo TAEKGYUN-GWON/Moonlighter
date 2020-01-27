@@ -29,7 +29,6 @@ void Enemy::SetState(EnemyBasic* state)
 	this->state->Init(this);
 }
 
-
 void Enemy::Init()
 {
 	Object::Init();
@@ -47,12 +46,7 @@ void Enemy::Update()
 	Object::Update();
 	//»óÅÂ Update °É¾îÁÜ
 	state->Update(this);
-
-
 }
-
-
-
 
 void EnemyBasic::Update(Enemy* _sEnemy)
 {

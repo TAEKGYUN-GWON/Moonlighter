@@ -1,6 +1,5 @@
 #pragma once
 #include "Object.h"
-//#include "Astar.h"
 //#include "Player.h" //h에서? cpp에서?
 
 enum DIRECTION

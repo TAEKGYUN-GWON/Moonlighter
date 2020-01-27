@@ -4,6 +4,8 @@
 #include "SlimeEnemy.h"
 #include "GolemEnemy.h"
 #include "Boss.h"
+#include "Astar.h"
+#include "Player.h"
 
 
 class EnemyManeger
@@ -14,7 +16,11 @@ private:
 	vector<Enemy*> _vEnemy;
 
 public:
-
+	//a* 
+	Astar* _astar;
+	list<Vector2> pathFinder(Vector2 start, Vector2 end);
+	
+	Player* _player;
 	//뭘 해줘야 하지?
 	//enemy를 여기서 관리해 줘야 하긴 함
 	//상태라던가 배치라던가 던전룸이 생성되면 세팅하는거를 여기서 해줘야 하나?
