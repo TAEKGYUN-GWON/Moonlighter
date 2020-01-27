@@ -185,7 +185,6 @@
     <ClInclude Include="ShopScene.h" />
     <ClInclude Include="ShopStand.h" />
     <ClInclude Include="ShopStandManager.h" />
-    <ClInclude Include="ShopWall.h" />
     <ClInclude Include="SlimeEnemy.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="GraphicsManager.h" />
@@ -219,7 +218,6 @@
     <ClInclude Include="utils.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
-    <ClInclude Include="WallManager.h" />
     <ClInclude Include="windowAPI.h" />
   </ItemGroup>
   <ItemGroup>
@@ -260,7 +258,6 @@
     <ClCompile Include="ShopScene.cpp" />
     <ClCompile Include="ShopStand.cpp" />
     <ClCompile Include="ShopStandManager.cpp" />
-    <ClCompile Include="ShopWall.cpp" />
     <ClCompile Include="SlimeEnemy.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
@@ -292,7 +289,6 @@
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />
-    <ClCompile Include="WallManager.cpp" />
     <ClCompile Include="windowAPI.cpp" />
   </ItemGroup>
   <ItemGroup>

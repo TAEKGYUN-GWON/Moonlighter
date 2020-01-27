@@ -106,9 +106,6 @@
     <Filter Include="playGround\Shop\ShopObject\ShopStand">
       <UniqueIdentifier>{a8f5da20-97c4-47a4-b981-fb523187115d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\Shop\ShopObject\ShopWall">
-      <UniqueIdentifier>{fb8bd0dd-7a2f-488a-83a7-8d98d40994f5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="playGround\Shop\ShopObject\CheckStand">
       <UniqueIdentifier>{d0389b76-cc76-4f33-920e-767e0f957944}</UniqueIdentifier>
     </Filter>
@@ -333,12 +330,6 @@
     <ClInclude Include="Text.h">
       <Filter>2DGameFramework\Object\Component\header</Filter>
     </ClInclude>
-    <ClInclude Include="ShopWall.h">
-      <Filter>playGround\Shop\ShopObject\ShopWall</Filter>
-    </ClInclude>
-    <ClInclude Include="WallManager.h">
-      <Filter>playGround\Shop\ShopObject\ShopWall</Filter>
-    </ClInclude>
     <ClInclude Include="CheckStand.h">
       <Filter>playGround\Shop\ShopObject\CheckStand</Filter>
     </ClInclude>
@@ -532,12 +523,6 @@
     </ClCompile>
     <ClCompile Include="Text.cpp">
       <Filter>2DGameFramework\Object\Component\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="ShopWall.cpp">
-      <Filter>playGround\Shop\ShopObject\ShopWall</Filter>
-    </ClCompile>
-    <ClCompile Include="WallManager.cpp">
-      <Filter>playGround\Shop\ShopObject\ShopWall</Filter>
     </ClCompile>
     <ClCompile Include="CheckStand.cpp">
       <Filter>playGround\Shop\ShopObject\CheckStand</Filter>
