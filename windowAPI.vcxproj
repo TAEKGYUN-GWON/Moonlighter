@@ -175,7 +175,10 @@
     <ClInclude Include="NpcShopState.h" />
     <ClInclude Include="omega.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerAttack.h" />
     <ClInclude Include="PlayerIdle.h" />
+    <ClInclude Include="PlayerMove.h" />
+    <ClInclude Include="PlayerRoll.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="Potion.h" />
     <ClInclude Include="Potions.h" />
@@ -249,7 +252,10 @@
     <ClCompile Include="NpcManager.cpp" />
     <ClCompile Include="NpcShopState.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerAttack.cpp" />
     <ClCompile Include="PlayerIdle.cpp" />
+    <ClCompile Include="PlayerMove.cpp" />
+    <ClCompile Include="PlayerRoll.cpp" />
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="Potion.cpp" />
     <ClCompile Include="Potions.cpp" />

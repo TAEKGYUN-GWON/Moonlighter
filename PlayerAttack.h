@@ -2,12 +2,12 @@
 #include "PlayerState.h"
 #include "Player.h"
 
-class PlayerIdle : public PlayerState
+class PlayerAttack : public PlayerState
 {
 private:
 
 public:
-	PlayerIdle(Player* obj) : PlayerState(obj) {}
+	PlayerAttack(Player* obj) : PlayerState(obj) {}
 
 	virtual void Enter() override;
 	virtual void Update() override;
