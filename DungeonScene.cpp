@@ -44,12 +44,19 @@ void DungeonScene::Render()
 	wchar_t buffer[128];
 	swprintf(buffer, 128, L"Fps : %f", TIMEMANAGER->GetFps());
 
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 100), buffer, 20, 300, 50, ColorF::Azure);
-	//wchar_t buffer[128];
-	//swprintf(buffer, 128, L"c : %d", GetChildren().size());
-
-	//GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 200), buffer, 20, 300, 50, ColorF::Azure);
+	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 0), buffer, 20, 300, 50, ColorF::Azure);
 
 
 	GRAPHICMANAGER->Text(Vector2(10, 6), L"Dungeon Scene", 20, 200, 30, ColorF::AliceBlue);
+
+	//wchar_t buffer[128];
+	int a = 0;
+	for (int i = 0; i < _dMgr->GetRoom().size(); i++)
+	{
+		a++;
+		swprintf(buffer, 128, L"c : %d", _dMgr->GetRoom()[i]->GetChildren().size());
+
+		GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 50 + a * 50), buffer, 20, 300, 50, ColorF::Azure);
+
+	}
 }
