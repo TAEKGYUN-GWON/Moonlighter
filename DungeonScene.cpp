@@ -18,18 +18,12 @@ void DungeonScene::Init()
 	_player->Init();
 	//_player->GetHP()->GetCurrentHP();
 
-	_enemy = Object:: CreateObject<Enemy>();
-	_enemy->Init();
-
 	_player = (Player*)SCENEMANAGER->GetNowScene()->GetChildFromName("will");
 }
 
 void DungeonScene::Update()
 {
 	Scene::Update();
-
-
-
 	if (KEYMANAGER->isOnceKeyDown('T'))
 	{
 		_dungeon->Release();
