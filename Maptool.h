@@ -103,7 +103,7 @@ struct tagTile
     {
         //imgKey.clear();
         imgKey = "empty";
-        attribute = "None";
+        //attribute = "None";
         isFrame = false;
         frameX = 1;
         frameY = 1;

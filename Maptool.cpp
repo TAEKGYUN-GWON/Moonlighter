@@ -398,8 +398,8 @@ void Maptool::SetUp()
             _tiles[index]->AddComponent<Sprite>();
             _tiles[index]->SetAttribute("None");
 
-            _tagTiles[index].attribute = "None";
             _tagTiles[index].imgKey = "None";
+            _tagTiles[index].attribute = "None";
             _tagTiles[index].isFrame = false;
             _tagTiles[index].pivot = PIVOT::CENTER;
         }
