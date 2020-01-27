@@ -157,6 +157,7 @@
     <ClInclude Include="Direct2D.h" />
     <ClInclude Include="DrawComponent.h" />
     <ClInclude Include="Dungeon.h" />
+    <ClInclude Include="DungeonMgr.h" />
     <ClInclude Include="DungeonScene.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManeger.h" />
@@ -235,6 +236,7 @@
     <ClCompile Include="Direct2D.cpp" />
     <ClCompile Include="DrawComponent.cpp" />
     <ClCompile Include="Dungeon.cpp" />
+    <ClCompile Include="DungeonMgr.cpp" />
     <ClCompile Include="DungeonScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManeger.cpp" />
