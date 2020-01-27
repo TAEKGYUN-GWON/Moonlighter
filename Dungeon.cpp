@@ -3,6 +3,7 @@
 
 void Dungeon::Init()
 {
+	Scene::Init();
 	GRAPHICMANAGER->AddImage("smallRock", L"resource/img/Object/smallRock.png");
 	GRAPHICMANAGER->AddImage("smallRock_slime", L"resource/img/Object/smallRock_slime.png");
 	GRAPHICMANAGER->AddImage("bigRock", L"resource/img/Object/bigRock.png");
@@ -18,18 +19,21 @@ void Dungeon::Init()
 	GRAPHICMANAGER->AddImage("brokenPillar", L"resource/img/Object/brokenPillar.png");
 	GRAPHICMANAGER->AddImage("Dungeon", L"resource/img/Dungeon/background.png");
 	GRAPHICMANAGER->AddImage("empty", L"resource/img/empty.png");
-
+	//_player = Object::CreateObject<Player>();
+	//_player->Init();
 	SetUp();
 }
 
 void Dungeon::Update()
 {
+	Scene::Update();
 }
 
 void Dungeon::Render()
 {
 	GRAPHICMANAGER->FindImage("Dungeon")->Render(0,0, PIVOT::LEFT_TOP);
 
+	Scene::Render();
 }
 
 void Dungeon::SetUp()
@@ -41,7 +45,7 @@ void Dungeon::SetUp()
 		{
 			int index = j + Dungeon_X * i;
 
-			_tiles[index] = Object::CreateObject<Tile>();
+			_tiles[index] = Object::CreateObject<Tile>(this);
 			_tiles[index]->Init(j, i);
 			_tiles[index]->AddComponent<Sprite>();
 			_tiles[index]->SetAttribute("None");
@@ -59,7 +63,14 @@ void Dungeon::SetUp()
 
 	//string str = titleLoad;
 	//str += ".map";
-	string str = "Dungeon.map";
+	
+	string a = "Dungeon";
+
+	char buffer[128];
+	sprintf_s(buffer, "%d.map", RND->getFromIntTo(1, 8));
+	string b = buffer;
+
+	string str = a + b;
 
 	//file = CreateFile(titleLoad, GENERIC_READ, 0, NULL,
 	file = CreateFile(str.c_str(), GENERIC_READ, 0, NULL,

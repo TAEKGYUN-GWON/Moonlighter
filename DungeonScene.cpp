@@ -25,7 +25,18 @@ void DungeonScene::Init()
 void DungeonScene::Update()
 {
 	Scene::Update();
-	//if (KEYMANAGER->isOnceKeyDown())
+
+
+
+	if (KEYMANAGER->isOnceKeyDown('T'))
+	{
+		_dungeon->Release();
+		_dungeon = new Dungeon;
+		_dungeon->Init();
+		_player->GetTrans()->SetPos(Vector2(WINSIZEX / 2, WINSIZEY - 100));
+		_player->GetComponent<PhysicsBody>()->SetBodyPosition();
+	}
+	_dungeon->Update();
 }
 
 void DungeonScene::Render()
