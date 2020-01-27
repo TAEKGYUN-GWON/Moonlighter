@@ -5,15 +5,17 @@
 #include "ShopScene.h"
 #include "TownScene.h"
 #include "Maptool.h"
+#include "TestScene.h"
 
 void StartScene::Init()
 {
 	Scene::Init();
-	SCENEMANAGER->addScene("Dungeon", new DungeonScene);
+	//SCENEMANAGER->addScene("Dungeon", new DungeonScene);
 	SCENEMANAGER->addScene("Town", new TownScene);
 	SCENEMANAGER->addScene("Entrance", new EntranceScene);
 	SCENEMANAGER->addScene("Shop", new ShopScene);
 	SCENEMANAGER->addScene("Maptool", new Maptool);
+	SCENEMANAGER->addScene("test", new TestScene);
 	GraphicsManager::getSingleton()->AddImage("dd", L"eagle.png");
 	GraphicsManager::getSingleton()->AddFrameImage("d2", L"fatkachu.png",4,1);
 	GRAPHICMANAGER->AddFrameImage("bn", L"blueNumber.png", 4, 1);
@@ -54,6 +56,7 @@ void StartScene::Update()
 	if (KEYMANAGER->isOnceKeyDown('3')) SCENEMANAGER->changeScene("Entrance");
 	if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
 	if (KEYMANAGER->isOnceKeyDown('5')) SCENEMANAGER->changeScene("Maptool");
+	if (KEYMANAGER->isOnceKeyDown('0')) SCENEMANAGER->changeScene("test");
 	inven->Update();
 }
 

@@ -1,8 +1,5 @@
 #pragma once
 #include"Tile.h"
-#define TILENUMX (1335 / TILEWIDTH)
-#define TILENUMY (1100 / TILEHEIGHT)
-//¤·
 class Astar
 {
 public:
@@ -15,6 +12,9 @@ public:
 
 	};
 private:
+
+	int maxX;
+	int maxY;
 
 	vector<Tile*>_vTotalList;
 	vector<Tile*>::iterator _viTotalList;
@@ -39,8 +39,8 @@ public:
 	Astar();
 	~Astar();
 
-	void Init();
-	void SetTiles();
+	void Init(vector<Tile*> tiles, int x, int y);
+	void SetTiles(vector<Tile*> tiles);
 
 	void InitTotalList();
 
