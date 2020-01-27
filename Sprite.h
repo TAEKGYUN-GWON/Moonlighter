@@ -32,6 +32,8 @@ private:
 	ColorF::Enum _color;
 	PIVOT _pivot;
 
+	Vector2 _pos;
+
 public:
 	Sprite();
 	virtual void Init(BOOL isFrame = false, BOOL isLoop = false);
@@ -47,6 +49,7 @@ public:
 	inline void SetFillRect(bool fillRect) { _isFillRect = fillRect; }
 	inline void SetShowRect(bool show) { _isShowRect = show; }
 	inline void SetCameraAffect(bool isAffect) { _isCameraAffect = isAffect; }
+	inline void SetPosition(Vector2 pos) { _pos = pos; }
 
 	inline string GetImgKey() { return _imgKey; }
 	inline float GetAlpha() { return _alpha; }

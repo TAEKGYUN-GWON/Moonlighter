@@ -15,6 +15,8 @@ Sprite::Sprite()
 	_isCameraAffect = true;
 
 	_alpha = 1.0f;
+
+	_pos = Vector2::zero;
 }
 
 void Sprite::Init(BOOL isFrame, BOOL isLoop)
@@ -67,7 +69,8 @@ void Sprite::Render()
 	else
 	{
 		//GRAPHICMANAGER->DrawImage(_imgKey, _object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot);
-		_graphic->Render(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot, _isCameraAffect);
+		//_graphic->Render(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot, _isCameraAffect);
+		_graphic->Render(_pos, _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot, _isCameraAffect);
 	}
 
 	//if (KEYMANAGER->isToggleKey(VK_F1))

@@ -13,9 +13,10 @@
 #include <tchar.h>
 #include <iostream>
 #include <functional>
-#include<list>
+#include <list>
 #include <map>
-#include<fstream>
+#include <fstream>
+#include <string>
 
 using namespace std;
 #include "Box2D/Box2D.h"
