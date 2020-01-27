@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+
 //#include "Player.h" //h에서? cpp에서?
 
 enum DIRECTION
@@ -32,6 +33,7 @@ protected:
 	float _speed;
 	Hp* _hp;
 
+	list<Vector2> _path;
 	//타임도 줘야 하나?
 
 public:
@@ -53,6 +55,8 @@ public:
 //get,set함수 만들어야 함
 	Hp* GetHP() { return _hp; }
 	PhysicsBody* GetPhysics() { return _physics; }
+//A*
+	void SetPath(list<Vector2> _path);
 //아이템 떨굴 갯수 만들어야함
 
 };

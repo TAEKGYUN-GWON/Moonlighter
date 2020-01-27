@@ -48,6 +48,12 @@ void Enemy::Update()
 	state->Update(this);
 }
 
+void Enemy::SetPath(list<Vector2> _path)
+{
+	this->_path.clear();
+	this->_path = _path;
+}
+
 void EnemyBasic::Update(Enemy* _sEnemy)
 {
 	if (_sEnemy->GetHP()->IsDead())
