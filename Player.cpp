@@ -17,7 +17,9 @@ void Player::Init()
 {
 	Object::Init();
 
-	GRAPHICMANAGER->AddFrameImage("will_dungeon", L"will_dungeon.png", 10, 13);
+	GRAPHICMANAGER->AddFrameImage("will_dungeon", L"resource/img/Player/will_dungeon.png", 10, 13);
+	GRAPHICMANAGER->AddFrameImage("will_sword", L"resource/img/Player/will_sword.png", 11, 4);
+	GRAPHICMANAGER->AddFrameImage("will_bow", L"resource/img/Player/will_bow.png", 9, 4);
 
 	_tag = "Player";
 	_name = "Will";
@@ -29,6 +31,7 @@ void Player::Init()
 	_sprite->Init(true, true);
 	_sprite->SetImgName("will_dungeon");
 	_sprite->SetPosition(_trans->GetPos() + Vector2(0, 2));
+	_sprite->SetSize(Vector2(GRAPHICMANAGER->FindImage("will_dungeon")->GetFrameWidth(), GRAPHICMANAGER->FindImage("will_dungeon")->GetFrameHeight()));
 
 	_physics = AddComponent<PhysicsBody>();
 	_physics->Init(BodyType::DYNAMIC, 1.0f);
@@ -39,6 +42,7 @@ void Player::Init()
 	_speed = 300.0f;
 
 	_dir = Dir::Down;
+	_atkType = AttackType::Sword;
 
 	_state = new PlayerIdle(this);
 	_state->Enter();

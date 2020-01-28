@@ -5,6 +5,8 @@
 class PlayerAttack : public PlayerState
 {
 private:
+	int _count;
+	bool _isAtk;
 
 public:
 	PlayerAttack(Player* obj) : PlayerState(obj) {}
