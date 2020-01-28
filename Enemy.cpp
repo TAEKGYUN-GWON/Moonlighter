@@ -157,13 +157,15 @@ void EnemyMove::Update(Enemy* _sEnemy)
 	}
 	_sEnemy->GetPhysics()->SetBodyPosition();
 	//cout << "여기는 무브 오예 두둠칫" << endl;
-	//Release(_sEnemy);
+	//float a = RND->getFloat(10000000);
+	//if(a<30)
+		Release(_sEnemy);
 }
 
 void EnemyMove::Release(Enemy* _sEnemy)
 {
 	//if 범위에 플레이어가 있으면 공격하고
-	SetEnemyState(_sEnemy, EnemyAttack::GetInstance());
+	//SetEnemyState(_sEnemy, EnemyAttack::GetInstance());
 	// else if 범위에 플레이어가 없으면 다시 무브
 	//SetEnemyState(_sEnemy, EnemyMove::GetInstance());
 	// else if 체력이 0 이면 죽어라!
@@ -171,6 +173,7 @@ void EnemyMove::Release(Enemy* _sEnemy)
 	{
 		SetEnemyState(_sEnemy, EnemyDead::GetInstance());
 	}
+	else SetEnemyState(_sEnemy, EnemyAttack::GetInstance());
 }
 //■■■■■■■■■■■ Attack ■■■■■■■■■■■■
 EnemyAttack* EnemyAttack::GetInstance()
