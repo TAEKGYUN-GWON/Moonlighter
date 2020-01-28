@@ -3,6 +3,7 @@
 
 class Hp;
 class Inventory;
+class PlayerState;
 
 class Player : public Object
 {
@@ -11,6 +12,9 @@ private:
 	Hp* _hp;
 	Sprite* _sprite;
 	PhysicsBody* _physics;
+
+	PlayerState* _state;
+
 	float _speed;
 
 public:
@@ -21,8 +25,11 @@ public:
 	virtual void Update();
 	virtual void Render();
 
+	void ChangeState(PlayerState* state);
+
 	Sprite* GetSprite() { return _sprite; }
 	Inventory* GetInventory() { return _inven; }
 	Hp* GetHP() { return _hp; }
+	PlayerState* GetState() { return _state; }
 };
 

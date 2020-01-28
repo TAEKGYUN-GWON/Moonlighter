@@ -55,5 +55,6 @@ public:
 	bool IsMoving();
 
 	D2D1_MATRIX_3X2_F GetMatrix() { return _matrix; }
+	Matrix3x2F GetScaleMatrix() { return _scaleMatrix; }
 };
 

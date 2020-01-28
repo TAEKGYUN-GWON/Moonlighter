@@ -12,7 +12,7 @@ class Npc :	public Object
 {
 private:
 	//Sprite* _sprite;
-	PhysicsBody* _physics;
+
 	float _speed;
 
 	ShopStand* _shopStand;
@@ -30,6 +30,7 @@ public:
 	virtual void Init(string imgkey) ;
 	virtual void Release() override;
 	virtual void Update() override;
+	virtual void Render() override;
 	
 	void SetCheckStandLink(CheckStand* checkstand) { _checkStand = checkstand; }
 	CheckStand* GetCheckStand() { return _checkStand; }

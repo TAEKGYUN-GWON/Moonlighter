@@ -107,12 +107,12 @@ void EnemyIdle::Update(Enemy* _sEnemy)
 		EnemyBasic::Update(_sEnemy);
 		Release(_sEnemy);
 	
-	cout << "들어오냐?" << endl;
+	//cout << "들어오냐?" << endl;
 }
 
 void EnemyIdle::Release(Enemy* _sEnemy)
 {
-	cout << "move로 가!!!" << endl;
+	//cout << "move로 가!!!" << endl;
 
 	//if 플레이어가 있으면
 	SetEnemyState(_sEnemy, EnemyMove::GetInstance());
@@ -135,7 +135,7 @@ EnemyMove* EnemyMove::GetInstance()
 
 void EnemyMove::Init(Enemy* _sEnemy)
 {
-	cout << "move 들어옴?" << endl;
+	//cout << "move 들어옴?" << endl;
 
 }
 
@@ -144,7 +144,7 @@ void EnemyMove::Update(Enemy* _sEnemy)
 
 	EnemyBasic::Update(_sEnemy);
 	_sEnemy->GetPhysics()->SetBodyPosition();
-	cout << "여기는 무브 오예 두둠칫" << endl;
+	//cout << "여기는 무브 오예 두둠칫" << endl;
 	Release(_sEnemy);
 }
 
@@ -173,14 +173,14 @@ EnemyAttack* EnemyAttack::GetInstance()
 
 void EnemyAttack::Init(Enemy* _sEnemy)
 {
-	cout << "공격 들어왔니?" << endl;
+	//cout << "공격 들어왔니?" << endl;
 }
 
 void EnemyAttack::Update(Enemy* _sEnemy)
 {
 	EnemyBasic::Update(_sEnemy);
 	_sEnemy->Attack();
-	cout << "여기는 공격!" << endl;
+	//cout << "여기는 공격!" << endl;
 	Release(_sEnemy);
 }
 
@@ -210,13 +210,13 @@ EnemyHit* EnemyHit::GetInstance()
 
 void EnemyHit::Init(Enemy* _sEnemy)
 {
-	cout << "여기는 맞았다고 하는 부분" << endl;
+	//cout << "여기는 맞았다고 하는 부분" << endl;
 }
 
 void EnemyHit::Update(Enemy* _sEnemy)
 {
 	EnemyBasic::Update(_sEnemy);
-	cout << "플레이어한테 맞았나?" << endl;
+	//cout << "플레이어한테 맞았나?" << endl;
 	Release(_sEnemy);
 }
 
@@ -245,18 +245,18 @@ EnemyDead* EnemyDead::GetInstance()
 
 void EnemyDead::Init(Enemy* _sEnemy)
 {
-	cout << "여기는 죽은 상태" << endl;
+	//cout << "여기는 죽은 상태" << endl;
 }
 
 void EnemyDead::Update(Enemy* _sEnemy)
 {
-	cout << "죽었니?" << endl;
+//	cout << "죽었니?" << endl;
 	Release(_sEnemy);
 }
 
 void EnemyDead::Release(Enemy* _sEnemy)
 {
-	if (_sEnemy->GetHP()->IsDead())
-	cout << "죽었다 ㅠㅠ" << endl;
-
+	//if (_sEnemy->GetHP()->IsDead())
+	//cout << "죽었다 ㅠㅠ" << endl;
+//	_sEnemy->Release();
 }

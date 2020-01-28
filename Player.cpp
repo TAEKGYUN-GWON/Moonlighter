@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Hp.h"
 #include "Inventory.h"
+#include "PlayerState.h"
 
 Player::Player()
 {
@@ -26,17 +27,19 @@ void Player::Init()
 	_sprite = AddComponent<Sprite>();
 	_sprite->Init(true, true);
 	_sprite->SetImgName("will_dungeon");
+	_sprite->SetPosition(_trans->GetPos() + Vector2(0, 2));
 	_sprite->SetMaxFrameX(7);
 	_sprite->SetFrameY(1);
 
-	_sprite->GetGraphic()->SetSize(Vector2(200, 200));
+	//_sprite->GetGraphic()->SetSize(Vector2(200, 200));
 
 	_physics = AddComponent<PhysicsBody>();
 	_physics->Init(BodyType::DYNAMIC, 1.0f);
+	_physics->GetBody()->SetFixedRotation(true);
 
 	_hp = new Hp(100, 100);
 
-	_speed = 3.0f;
+	_speed = 300.0f;
 }
 
 void Player::Update()
@@ -50,11 +53,24 @@ void Player::Update()
 	{
 		Object::Update();
 
-		if (KEYMANAGER->isStayKeyDown(VK_LEFT)) _trans->SetPos(_trans->GetPos() + Vector2::left * _speed);
-		else if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) _trans->SetPos(_trans->GetPos() + Vector2::right * _speed);
-		if (KEYMANAGER->isStayKeyDown(VK_UP)) _trans->SetPos(_trans->GetPos() + Vector2::up * _speed);
-		else if (KEYMANAGER->isStayKeyDown(VK_DOWN)) _trans->SetPos(_trans->GetPos() + Vector2::down * _speed);
+		if (KEYMANAGER->isStayKeyDown(VK_LEFT))
+		{
+			_trans->SetPos(_trans->GetPos() + Vector2::left * _speed * TIMEMANAGER->getElapsedTime());
+		}
+		else if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
+		{
+			_trans->SetPos(_trans->GetPos() + Vector2::right * _speed * TIMEMANAGER->getElapsedTime());
+		}
+		if (KEYMANAGER->isStayKeyDown(VK_UP))
+		{
+			_trans->SetPos(_trans->GetPos() + Vector2::up * _speed * TIMEMANAGER->getElapsedTime());
+		}
+		else if (KEYMANAGER->isStayKeyDown(VK_DOWN))
+		{
+			_trans->SetPos(_trans->GetPos() + Vector2::down * _speed * TIMEMANAGER->getElapsedTime());
+		}
 		_physics->SetBodyPosition();
+		_sprite->SetPosition(_trans->GetPos() + Vector2(0, 2));
 	}
 }
 
@@ -67,4 +83,11 @@ void Player::Render()
 	GRAPHICMANAGER->Text(_trans->GetPos() + Vector2(-(_trans->GetScale().x + 10.0f), 32.f), buffer, 20, 90, 30, ColorF::LawnGreen, 1.0f, TextPivot::RIGHT_TOP);
 
 	if (_hp->IsDead()) GRAPHICMANAGER->Text(_trans->GetPos() + Vector2(-(_trans->GetScale().x - (_trans->GetScale().x * 0.5f) + 4.0f), -62.f), L"Dead", 20, 100, 30, ColorF::Red);
+}
+
+void Player::ChangeState(PlayerState* state)
+{
+	_state->Exit();
+	_state = state;
+	_state->Enter();
 }

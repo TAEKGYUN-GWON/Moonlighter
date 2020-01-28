@@ -5,9 +5,12 @@
 class StartScene : public Scene
 {
 private:
-	UiObject* test;
+	//UiObject* test;
 	UiManager* ui;
 	Inventory* inven;
+
+	Object* obj;
+
 public:
 	virtual void Init();
 	virtual void Update();

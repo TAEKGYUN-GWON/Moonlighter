@@ -1,10 +1,12 @@
 #pragma once
 #include "Object.h"
+#include "Sprite.h"
 
 class ShopDoor :public Object
 {
 private:
 
+	Sprite* _sprite;
 
 //얘는 Npc가 문이랑 닿았는지 알려줘야함
 //닿으면 문을 열고 몇초후에 다시 닫아줘야 함
@@ -18,7 +20,8 @@ private:
 	//충돌시 여기다가 문열어주는거 SetDoor해도 될듯
 
 public:
-	   
+	virtual void Init() override;
+	virtual void Update() override;
 
 };
 

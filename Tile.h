@@ -59,7 +59,6 @@ public:
 
 
     virtual void Init(int idX, int idY);
-    virtual void Release();
     void SetParentNode(Tile* p) { _parent = p; }
     Tile* GetParentNode() { return _parent; }
 

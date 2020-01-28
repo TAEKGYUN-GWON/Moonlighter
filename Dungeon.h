@@ -7,16 +7,20 @@
 #define Dungeon_X 39
 #define Dungeon_Y 24
 class EnemyManeger;
-class Dungeon : public Scene
+class Dungeon : public Object
 {
 private:
 	Tile* _tiles[Dungeon_X * Dungeon_Y];
+	vector<Tile*> tiles;
 	tagTile _tagTiles[Dungeon_X * Dungeon_Y];
 	EnemyManeger* _eMgr;
+	Vector2 pos;
+	bool _isAllowInit = false;
 public:
-	virtual void Init();
+	virtual void Init(Vector2 start);
 	virtual void Update();
 	virtual void Render();
 	void SetUp();
+	vector<Tile*> GetTiles();
 };
 
