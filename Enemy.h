@@ -3,12 +3,12 @@
 #include "Player.h"
 //#include "Player.h" //h에서? cpp에서?
 
-enum DIRECTION
+enum class DIRECTION
 {
 	LEFT,
 	RIGHT,
-	UP,
-	DOWN
+	TOP,
+	BOTTOM
 };
 
 //상태패턴을 위한 전방선언
@@ -30,10 +30,11 @@ protected:
 	PhysicsBody* _physics;
 	Player* _player;
 	//■■■■■■■ 상태패턴 틀이 되는 EnemyBasic를 Enemy에게 알려줌 ■■■■■■■
+	DIRECTION _dir;	//방향
 	EnemyBasic* state;
 	float _speed;
 	Hp* _hp;
-
+	float _angle;
 	list<Vector2> _path;
 	//타임도 줘야 하나?
 
@@ -42,9 +43,9 @@ public:
 	virtual~Enemy(); //상속
 	
 	
-	DIRECTION _dir;	//방향
-	//플레이어가 있냐 없냐 bool 값으루 해줘야 하나?
-
+	int maxFrameX;
+	int frameY;
+	
 	//상태패턴을 만들어서 Enemy에게 알려주기 위한 함수
 	void SetState(EnemyBasic* state);
 	virtual void Init();
@@ -53,6 +54,9 @@ public:
 //get,set함수 만들어야 함
 	Hp* GetHP() { return _hp; }
 	PhysicsBody* GetPhysics() { return _physics; }
+	DIRECTION GetDir() { return _dir; }
+	Sprite* GetSprite() { return _sprite; }
+	float GetAngle() { return _angle; }
 //A*
 	void SetPath(list<Vector2> _path);
 //아이템 떨굴 갯수 만들어야함

@@ -18,7 +18,7 @@ void GolemEnemy::Init()
 	_tag = "enemy";
 	_name = "Golem";
 
-	_hp = new Hp(100, 100);
+	_hp = new Hp(50, 50);
 
 	_trans->SetScale(Vector2(_sprite->GetGraphic()->GetFrameWidth(),
 		_sprite->GetGraphic()->GetFrameHeight()));

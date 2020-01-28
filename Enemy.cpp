@@ -36,26 +36,21 @@ void Enemy::Init()
 	_tag = "enemy";
 	_speed = 30.0f;
 	_hp = new Hp;
+	_sprite->SetMaxFrameX(maxFrameX);
+	_sprite->SetFrameY(frameY);
 	
-
 }
 
 void Enemy::Update()
 {
 	Object::Update();
 	
-	//getAngle(float x1, float y1, float x2, float y2);
-	//로 방향 구해야함..
-	//Vector2::
-	/*if (getAngle(_trans->GetPos().x, _trans->GetPos().y
-		, _player->GetTrans()->GetPos().x, _player->GetTrans()->GetPos().y))
-	{
-		//left 일떄 _dir = LEFT 이런식...?
-		// rigt 일떄
-		// up 일때
-		// down 일때?
-		//해서 이미지 바꿔 주고? 
-	}*/
+	 float angle = Vector2::GetAngle(_trans->GetPos(), _player->GetTrans()->GetPos());
+	 if (angle > (3 * PI) / 4 && angle < (5 * PI) / 4) _dir = DIRECTION::LEFT;
+	 //이미지를 바꿔주는데 뭐...currentimg(y) 이런거?
+	 if (angle > (4 * PI) / 4 && angle < (7 * PI) / 4) _dir = DIRECTION::RIGHT;
+	 if (angle > PI / 4 && angle < (3 * PI) / 4) _dir = DIRECTION::TOP;
+	 if (angle > PI / 4 && angle < (7 * PI) / 4) _dir = DIRECTION::BOTTOM;
 	
 	
 	//상태 Update 걸어줌
@@ -101,9 +96,10 @@ void EnemyIdle::Init(Enemy* _sEnemy)
 
 void EnemyIdle::Update(Enemy* _sEnemy)
 {
+
 	
 	if (KEYMANAGER->isOnceKeyDown('0'))
-		
+		//hp 가 0이면
 		EnemyBasic::Update(_sEnemy);
 		Release(_sEnemy);
 	
