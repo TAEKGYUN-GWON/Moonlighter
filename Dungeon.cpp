@@ -189,5 +189,5 @@ vector<Tile*> Dungeon::GetTiles()
 	for (int i = 0; i < Dungeon_X * Dungeon_Y; i++)
 		t.push_back(tiles[i]);
 
-	return tiles;
+	return t;
 }
