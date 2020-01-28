@@ -194,6 +194,7 @@
     <ClInclude Include="ShopStand.h" />
     <ClInclude Include="ShopStandManager.h" />
     <ClInclude Include="SlimeEnemy.h" />
+    <ClInclude Include="Smithy.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="keyManager.h" />
@@ -276,6 +277,7 @@
     <ClCompile Include="ShopStand.cpp" />
     <ClCompile Include="ShopStandManager.cpp" />
     <ClCompile Include="SlimeEnemy.cpp" />
+    <ClCompile Include="Smithy.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="keyManager.cpp" />

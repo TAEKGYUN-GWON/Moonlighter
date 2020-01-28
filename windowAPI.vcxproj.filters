@@ -109,6 +109,9 @@
     <Filter Include="playGround\Test">
       <UniqueIdentifier>{b2e24c08-1686-43c3-90dd-d5c395430b65}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\Smithy">
+      <UniqueIdentifier>{a35f991b-c06f-44cd-9291-2de74b101e97}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -357,6 +360,15 @@
     <ClInclude Include="PlayerRoll.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerIdle.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Smithy.h">
+      <Filter>playGround\Smithy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -574,6 +586,15 @@
     </ClCompile>
     <ClCompile Include="PlayerRoll.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerIdle.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Smithy.cpp">
+      <Filter>playGround\Smithy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
