@@ -31,6 +31,7 @@ public:
 
 	//Vector2 타입 좌표 가져오기
 	Vector2 GetPos();
+	Vector2 GetBottomPos();
 
 	//월드좌표 가져오기
 	Vector2 GetWorldPosition();

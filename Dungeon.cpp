@@ -34,43 +34,27 @@ void Dungeon::Init(Vector2 start)
 
 void Dungeon::Update()
 {
-	//Scene::Update();
-	Object::Update();
-
-	if (!_isAllowInit && Vector2::Distance(pos, CAMERA->GetPosition()) < 100)
-	{
-		SetUp();
-		_isAllowInit = true;
-		_eMgr->Init(this);
-	}
-
-	if (Vector2::Distance(pos, CAMERA->GetPosition()) > 500)
-	{
-		for (Object* c : _children)
-			c->SetIsActive(false);
-		_isAllowInit = false;
-		tiles.clear();
-	}
-
-	
 	for (Object* c : _children)
 	{
 		if (!c->GetIsActive())
 			c->Release();
-
 	}
-	if (_isAllowInit)
-		_eMgr->Update();
+
+	if (!_roomActive)return;
+
+	Object::Update();
+
+	_eMgr->Update();
 }
 
 void Dungeon::Render()
 {
-	if (_isAllowInit)
-		_eMgr->Render();
-	if (!_isAllowInit) return;
+	if (!_roomActive)return;
 
 	GRAPHICMANAGER->FindImage("Dungeon")->Render(pos.x, pos.y, PIVOT::LEFT_TOP);
 	Object::Render();
+
+	_eMgr->Render();
 }
 
 void Dungeon::SetUp()
@@ -180,6 +164,22 @@ void Dungeon::SetUp()
 
 	
 
+}
+
+void Dungeon::SetRoom()
+{
+	_roomActive = true;
+	SetUp();
+	_eMgr->Init(this);
+}
+
+void Dungeon::CloseRoom()
+{
+	_roomActive = false;
+	for (Object* c : _children)
+		c->SetIsActive(false);
+
+	tiles.clear();
 }
 
 vector<Tile*> Dungeon::GetTiles()

@@ -56,6 +56,12 @@ Vector2 Transform::GetPos()
 	return pos;
 }
 
+Vector2 Transform::GetBottomPos()
+{
+	if (!_object->GetCameraAffect()) return bottomPos + CAMERA->GetPosition();
+	return bottomPos;
+}
+
 void Transform::SetPos(Vector2 pos)
 {
 	this->pos = pos;
