@@ -34,7 +34,7 @@ void Player::Init()
 	//_sprite->GetGraphic()->SetSize(Vector2(200, 200));
 
 	_physics = AddComponent<PhysicsBody>();
-	_physics->Init(BodyType::DYNAMIC, 1.0f);
+	_physics->Init(BodyType::DYNAMIC, 1.0f,0.3f);
 	_physics->GetBody()->SetFixedRotation(true);
 
 	_hp = new Hp(100, 100);

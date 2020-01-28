@@ -2,6 +2,7 @@
 #include "Enemy.h"
 #include "Hp.h"
 #include "Bullet.h"
+#include "Item.h"
 //#include "Player.h"
 //전방선언 같은 거...?
 EnemyIdle* EnemyIdle::instance;	
@@ -244,6 +245,7 @@ EnemyDead* EnemyDead::GetInstance()
 
 void EnemyDead::Init(Enemy* _sEnemy)
 {
+	//Item::CreateItem(_sEnemy->GetTrans()->GetPos());
 	//cout << "여기는 죽은 상태" << endl;
 }
 

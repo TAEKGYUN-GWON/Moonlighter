@@ -178,7 +178,7 @@ void Dungeon::CloseRoom()
 	_roomActive = false;
 	for (Object* c : _children)
 		c->SetIsActive(false);
-
+	_eMgr->Release();
 	tiles.clear();
 }
 

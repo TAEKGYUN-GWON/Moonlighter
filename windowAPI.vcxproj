@@ -173,6 +173,7 @@
     <ClInclude Include="JsonManager.h" />
     <ClInclude Include="loadingScene.h" />
     <ClInclude Include="Maptool.h" />
+    <ClInclude Include="MintPotEnemy.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="NpcManager.h" />
     <ClInclude Include="NpcShopState.h" />
@@ -256,6 +257,7 @@
     <ClCompile Include="JsonManager.cpp" />
     <ClCompile Include="loadingScene.cpp" />
     <ClCompile Include="Maptool.cpp" />
+    <ClCompile Include="MintPotEnemy.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="NpcManager.cpp" />
     <ClCompile Include="NpcShopState.cpp" />

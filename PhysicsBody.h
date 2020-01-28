@@ -13,6 +13,7 @@ class PhysicsBody : public DrawComponent
 private:
 	b2Body *_body;
 	BodyType _type;
+	Vector2 scale;
 
 public:
 	PhysicsBody() { _name = "PhysicsBody"; }

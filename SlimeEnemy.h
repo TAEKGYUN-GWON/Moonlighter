@@ -11,8 +11,7 @@ public:
 	~SlimeEnemy();
 
 	//Sprite* SetSprite() { return _sprite; }
-	void Init();
+	void Init(Vector2 pos);
 	void Update();
-	void Attack();
 };
 
