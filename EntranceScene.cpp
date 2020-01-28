@@ -7,6 +7,8 @@ void EntranceScene::Init()
 
 	_player = Object::CreateObject<Player>();
 	_player->Init();
+	_player->GetTrans()->SetPos(1249, 2020);
+	_player->GetComponent<PhysicsBody>()->SetBodyPosition();
 
 #pragma region SetTilePage1
 	GRAPHICMANAGER->AddImage("build_fountain", L"resource/img/Object/build_fountain.png");
@@ -49,6 +51,7 @@ void EntranceScene::Init()
 void EntranceScene::Update()
 {
 	Scene::Update();
+	CAMERA->SetPosition(_player->GetTrans()->GetPos(),"loby");
 }
 
 
