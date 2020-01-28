@@ -29,10 +29,6 @@ void Player::Init()
 	_sprite->Init(true, true);
 	_sprite->SetImgName("will_dungeon");
 	_sprite->SetPosition(_trans->GetPos() + Vector2(0, 2));
-	//_sprite->SetMaxFrameX(7);
-	//_sprite->SetFrameY(1);
-
-	//_sprite->GetGraphic()->SetSize(Vector2(200, 200));
 
 	_physics = AddComponent<PhysicsBody>();
 	_physics->Init(BodyType::DYNAMIC, 1.0f);
@@ -41,6 +37,8 @@ void Player::Init()
 	_hp = new Hp(100, 100);
 
 	_speed = 300.0f;
+
+	_dir = Dir::Down;
 
 	_state = new PlayerIdle(this);
 	_state->Enter();
@@ -58,25 +56,6 @@ void Player::Update()
 		Object::Update();
 
 		_state->Update();
-
-		//if (KEYMANAGER->isStayKeyDown(VK_LEFT))
-		//{
-		//	_trans->SetPos(_trans->GetPos() + Vector2::left * _speed * TIMEMANAGER->getElapsedTime());
-		//}
-		//else if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
-		//{
-		//	_trans->SetPos(_trans->GetPos() + Vector2::right * _speed * TIMEMANAGER->getElapsedTime());
-		//}
-		//if (KEYMANAGER->isStayKeyDown(VK_UP))
-		//{
-		//	_trans->SetPos(_trans->GetPos() + Vector2::up * _speed * TIMEMANAGER->getElapsedTime());
-		//}
-		//else if (KEYMANAGER->isStayKeyDown(VK_DOWN))
-		//{
-		//	_trans->SetPos(_trans->GetPos() + Vector2::down * _speed * TIMEMANAGER->getElapsedTime());
-		//}
-		//_physics->SetBodyPosition();
-		//_sprite->SetPosition(_trans->GetPos() + Vector2(0, 2));
 	}
 }
 

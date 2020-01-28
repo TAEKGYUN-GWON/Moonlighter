@@ -61,6 +61,9 @@ public:
 	inline bool GetCameraAffect() { return _isCameraAffect; }
 	inline Vector2 GetSize() { return _scale; }
 	inline Vector2 GetPosition() { return _pos; }
+	inline int GetCurrentFrameX() { return _curFrameX; }
+	inline int GetCurrentFrameY() { return _curFrameY; }
+	inline int GetMaxFrameX() { return _maxFrameX; }
 
 	void Start();
 	void Stop();
