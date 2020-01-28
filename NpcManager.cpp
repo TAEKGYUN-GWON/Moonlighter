@@ -7,8 +7,8 @@ void NpcManager::Init()
 	_counter = 0;
 	_timer = RND->getFromIntTo(30, 100);
 
-//	_ast = new Astar;
-	//_ast->Init();
+	_ast = new Astar;
+	_ast->Init();
 	//_name 넣어준것은..
 	//상점 나가서 벡터 삭제되면 다시 넣어줘야하는데
 	//어떤애가 없는지 찾아서 넣어주려고..
@@ -164,11 +164,6 @@ void NpcManager::CheckStandCollision()
 //가판대랑 충돌
 void NpcManager::ShopStandCollision()
 {
-	//벡터 엔피씨랑
-	//벡터 가판대를 비교해야한다
-	//그래서 거리를 구해서
-	//닿으면 On시켜줘야함
-
 	for (int i = 0; i < _vNpc.size(); i++)
 	{
 		for (int j = 0; j < _shopStandMgr->GetShopStandVector().size(); j++)

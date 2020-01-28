@@ -1,7 +1,6 @@
 #pragma once
 #include "Npc.h"
-//#include "Astar.h"
-//astar를 include하자마자 터진다.. xmemory 뜨는거..
+#include "Astar.h"
 
 class ShopStandManager;
 class CheckStand;
@@ -16,7 +15,7 @@ private:
 
 
 
-	//Astar* _ast;
+	Astar* _ast;
 
 	int _counter; //이 시간만큼 흐른 뒤 새로운 엔피씨 입장함
 	int _timer;
@@ -35,5 +34,7 @@ public:
 
 	void SetCheckStandLink(CheckStand* checkstand) { _checkStand = checkstand; }
 	void SetShopStandMgrLink(ShopStandManager* shopstsandmgr) { _shopStandMgr = shopstsandmgr; }
+	vector<Npc*> GetNpcVector() { return _vNpc; }
+
 };
 

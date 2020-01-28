@@ -21,6 +21,9 @@ void NpcIdle::StateIn(Npc* npc)
 {
 	//여긴 들어와짐
 	//Npc상태를 IDLE로 두고 In()에서 StateIn()을 불러줘서 들어옴
+
+	//★여기서 npc의 ast 값에 매개변수로 좌표를 넣어줘야하는거같음
+
 	//if (창가자리에 도착함)
 	//{
 		cout << "NPCIDLE:stateIn 가게 입장상태" << endl;
@@ -52,12 +55,12 @@ void NpcIdle::StateStay(Npc* npc)
 void NpcIdle::StateOut(Npc* npc)
 {
 	//이제 EXIT랑 DECIDE 중 어느 상태로 갈지 정해야함
-	int a = RND->getInt(4);
+	int a = RND->getInt(4); // 75%확률로 가판대로 감
 	cout << "NpcIdle: StateOut 들어옴" << endl;
 	if (a < 3 && a >= 0) //0, 1, 2일 때
 	{
-	cout << "NpcIdle:StateOut:계산대로 이동, decide로 가" << endl;
-	npc->SetNpcState(NpcDecide::GetInstance());//NpcDecide 상태로 만듦
+		cout << "NpcIdle:StateOut:판매대로 이동, decide로 가" << endl;
+		npc->SetNpcState(NpcDecide::GetInstance());//NpcDecide 상태로 만듦
 	}
 	else if (a == 3) //3일 때
 	{
@@ -164,8 +167,8 @@ NpcInline* NpcInline::GetInstance()
 //==================줄서기=====================
 void NpcInline::StateIn(Npc* npc)
 {
-	//SetCheckStandLink (npc->GetCheckStand()); //이거 없어도 되는거같애 엔피씨매니저 콜리전에서 해줌
-	cout << "Inline 들어왔음." << endl;
+	SetCheckStandLink (npc->GetCheckStand()); //이거 안쓰면 큰일남 npcmanager의 collision에서 해주는데 다른듯
+	cout << "Inline 상태 들어왔음." << endl;
 	
 	//지금 움직이게 하기가 어려워서.. 일단 체크 안하고 넘어가겠음
 	if (npc->GetIsCheckSOn() == true)return;//계산대랑 충돌중이면 리턴, 앞에 사람있는것임
@@ -181,14 +184,24 @@ void NpcInline::StateIn(Npc* npc)
 void NpcInline::StateStay(Npc* npc)
 {
 	cout << "줄서서 기다리는 중" << endl;
+	if (npc->GetIsCheckSOn() == true) //충돌중일떄
+	{
+		if (KEYMANAGER->isOnceKeyDown('J')) //제이를 누르면
+		{
+			_checkStand->SetStandisInUse(false); //비활시키고
+			npc->SetIsCheckSOn(false); //충돌도 아닌걸로 처리
+			//★여기서 아이템값 판매액을 받아야함
+		}
+
+	}
 	//플레이어가 J를 누르기를 기다려야 한다..
-	//아마 이렇게 직접 처리하지는 않을거고
-	//플레이어가 J를 누르면 계산대의 Activated가 false가 되어야하고
-	//if(!_checkStand->GetStandState()) //계산대 비활성화 상태면 (플레이어가 J눌렀다면)
-	//{
+	if(_checkStand->GetStandisInUse() == false) //계산대 비활성화 상태면 (플레이어가 J눌렀다면)
+	{
 		cout << "물건 샀다" << endl;
 		StateOut(npc);
-	//}
+	}
+	//아마 이렇게 직접 처리하지는 않을거고
+	//플레이어가 J를 누르면 계산대의  되어야하고
 }
 
 void NpcInline::StateOut(Npc* npc)
@@ -222,6 +235,7 @@ void NpcExit::StateStay(Npc* npc)
 
 void NpcExit::StateOut(Npc* npc)
 {
+	//조건 왜검?
 	if (npc->GetIsActive())	cout << "★★집에 간다★★" << endl;
 	//좌표를 여기서 문밖으로 이동시켜줌
 	//문밖으로 이동끝나서 화면에서 사라지면 isactive 를 false시킨다.

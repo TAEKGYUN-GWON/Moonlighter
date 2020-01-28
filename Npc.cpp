@@ -53,9 +53,9 @@ void Npc::Update()
 
 void Npc::Render()
 {
+	Object::Render();
 	GRAPHICMANAGER->DrawEllipse(_trans->GetPos().x, _trans->GetPos().y, _trans->GetScale().x/2, _trans->GetScale().y/2);
 
-	Object::Render();
 }
 
 //void Npc::Move()

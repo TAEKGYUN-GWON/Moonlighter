@@ -17,7 +17,7 @@ private:
 	NpcShopState* _npcShopState;	 //Npc 상태
 	ShopStandManager* _shopStandMgr; //가판대 매니저
 	ShopDoor* _shopDoor;			 //상점 출입문
-	Tile* _tiles[TILENUMX * TILENUMY];
+	vector<Tile*> _tiles[TILENUMX * TILENUMY];
 	tagTile _tagTiles[TILENUMX * TILENUMY];
 
 
@@ -28,6 +28,7 @@ public:
 	virtual void Render()override;
 	void SetUp();
 
-
+	vector<Tile*>GetTiles() { return _tiles[TILENUMX * TILENUMY]; }
+	
 };
 

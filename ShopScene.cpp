@@ -29,6 +29,7 @@ void ShopScene::Init()
 	_npcMgr->SetShopStandMgrLink(_shopStandMgr); //엔피씨가 충돌할 스탠드는 이것이다
 	_npcMgr->Init();
 
+	//_checkStand->SetNpc(_npcMgr->GetNpcVector());
 	_shopDoor = Object::CreateObject<ShopDoor>();
 	_shopDoor->Init();
 	
@@ -63,14 +64,12 @@ void ShopScene::Render()
 	GRAPHICMANAGER->FindImage("ShopBg")->Render(0, 0, LEFT_TOP);
 
 
-
 	Scene::Render();
 }
 
 void ShopScene::SetUp()
 {
-
-
+	
 	for (int i = 0; i < TILENUMY; ++i)
 	{
 		for (int j = 0; j < TILENUMX; ++j)
