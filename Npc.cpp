@@ -63,6 +63,8 @@ void Npc::SetPath(list<Vector2> lpath)
 	this->_lPath.clear();
 	this->_lPath = lpath;
 }
+
+
 void Npc::Move()
 {
 

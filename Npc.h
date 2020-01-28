@@ -26,6 +26,8 @@ private:
 
 	list<Vector2> _lPath;
 
+	Vector2 _destination; //astar 목적지임
+
 	Sprite* _sprite;
 
 
@@ -56,6 +58,9 @@ public:
 	bool GetIsShopSOn() { return _isShopSOn; }
 	void SetIsCheckSOn(bool check) { _isCheckSOn = check; }
 	bool GetIsCheckSOn() { return _isCheckSOn; }
+	void SetDestination(Vector2 destination) { _destination = destination; }
+	Vector2 GetDestination() { return _destination; }
 
+	NpcShopState* GetState() {	return _npcShopState; }
 };
 

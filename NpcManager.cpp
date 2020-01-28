@@ -13,6 +13,8 @@ void NpcManager::Init(ShopScene* parent)
 void NpcManager::Update()
 {
 
+
+
 	//NPC가 4명 미만이면 더 넣어줘라	
 	if (_vNpc.size() < 4)
 	{
@@ -35,7 +37,7 @@ void NpcManager::Update()
 	ShopStandCollision(); //가판대
 
 	//Astar
-	//AstarFunction();
+	AstarFunction();
 
 
 
@@ -180,13 +182,15 @@ void NpcManager::ShopStandCollision()
 
 }
 
-void NpcManager::AstarFunction(Vector2 destination)
+void NpcManager::AstarFunction()
 {
 	for (int i = 0; i < _vNpc.size(); i++)
 	{
-		_vNpc[i]->SetPath(_ast->pathFinder(
-			_vNpc[i]->GetTrans()->GetPos(), //NPC의 위치
-			Vector2(destination))); //가야할 위치
+
+		if(_vNpc[i]->GetState() == (NpcShopState*)NpcIdle::GetInstance) //idle상태일떄
+		_vNpc[i]->SetPath(_ast->pathFinder( //길찾기 함수를 부른다
+			_vNpc[i]->GetTrans()->GetPos(), //NPC의 위치를 찾고
+			_vNpc[i]->GetDestination())); //가야할 위치를 받아옴
 	}
 }
 

@@ -29,7 +29,7 @@ public:
 	void Render();
 
 	void MakeNpc();
-	void AstarFunction(Vector2 destination);
+	void AstarFunction();
 
 	void CheckStandCollision(); //계산대랑 충돌
 	void ShopStandCollision(); //가판대랑 충돌
