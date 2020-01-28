@@ -3,7 +3,7 @@
 
 void Dungeon::Init(Vector2 start)
 {
-	Scene::Init();
+	Object::Init();
 	_name = "Dungeon";
 	SetParent(SCENEMANAGER->GetNowScene());
 
@@ -34,8 +34,8 @@ void Dungeon::Init(Vector2 start)
 
 void Dungeon::Update()
 {
-	Scene::Update();
-
+	//Scene::Update();
+	Object::Update();
 
 	if (!_isAllowInit && Vector2::Distance(pos, CAMERA->GetPosition()) < 100)
 	{
@@ -66,16 +66,15 @@ void Dungeon::Update()
 void Dungeon::Render()
 {
 	if (_isAllowInit)
-	_eMgr->Render();
+		_eMgr->Render();
 	if (!_isAllowInit) return;
 
 	GRAPHICMANAGER->FindImage("Dungeon")->Render(pos.x, pos.y, PIVOT::LEFT_TOP);
-	Scene::Render();
+	Object::Render();
 }
 
 void Dungeon::SetUp()
 {
-	int aaa;
 	for (int i = 0; i < Dungeon_Y; ++i)
 	{
 		for (int j = 0; j < Dungeon_X; ++j)
