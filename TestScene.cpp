@@ -17,13 +17,8 @@ void TestScene::Update()
 			obj->GetComponent<PhysicsBody>()->SetSensor(false);
 	}
 
-	if (KEYMANAGER->isOnceKeyDown('D'))
-	{
-		for (Object* obj : test)
-			obj->GetComponent<PhysicsBody>()->SetSensor(true);
-	}
 	_timer += TIMEMANAGER->getElapsedTime();
-	if (_count < 100)
+	if (_count < 200)
 	{
 		//if (_timer > 0.1f)
 		//{

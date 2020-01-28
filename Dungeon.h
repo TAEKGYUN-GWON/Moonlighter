@@ -7,7 +7,7 @@
 #define Dungeon_X 39
 #define Dungeon_Y 24
 class EnemyManeger;
-class Dungeon : public Scene
+class Dungeon : public Object
 {
 private:
 	Tile* _tiles[Dungeon_X * Dungeon_Y];
