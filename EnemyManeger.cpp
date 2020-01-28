@@ -22,12 +22,13 @@ void EnemyManeger::Init(Dungeon* room)
 void EnemyManeger::Update()
 {
 	//vector 만큼 돌아야 겠지...생성해줘야 하니까?
-	//A* pos 가져오기
-	float dis = Vector2::Distance(_player->GetTrans()->GetPos(), _enemy->GetTrans()->GetPos());
-	if (dis > 100 && dis < 400)
-		_enemy->SetPath(_astar->pathFinder(_enemy->GetTrans()->GetPos(),
-			_player->GetTrans()->GetPos()));
 	//각각의 enemy의 state를 변경? slime 은 slime 어택 골렘은 골렘어택?
+
+	for (Enemy* e : _vEnemy)
+	{
+		if (e->GetMove())
+			e->SetPath(_astar->pathFinder(e->GetTrans()->GetPos() - _room->GetTrans()->GetPos(), _player->GetTrans()->GetPos() - _room->GetTrans()->GetPos()));
+	}
 }
 
 void EnemyManeger::Release()

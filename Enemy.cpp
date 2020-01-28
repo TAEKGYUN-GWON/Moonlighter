@@ -56,7 +56,6 @@ void Enemy::Update()
 	 if (angle > PI / 4 && angle < (3 * PI) / 4) _dir = DIRECTION::TOP;
 	 if (angle > PI / 4 && angle < (7 * PI) / 4) _dir = DIRECTION::BOTTOM;
 	
-	
 	//상태 Update 걸어줌
 	state->Update(this);
 
@@ -68,6 +67,8 @@ void Enemy::SetPath(list<Vector2> _path)
 	this->_path.clear();
 	this->_path = _path;
 }
+
+
 
 //hp가 0이면 죽어라
 void EnemyBasic::Update(Enemy* _sEnemy)
@@ -95,32 +96,31 @@ EnemyIdle* EnemyIdle::GetInstance()
 
 void EnemyIdle::Init(Enemy* _sEnemy)
 {
+	//sprite 세팅?
 	//cout << "왜 안들어와?" << endl;
 }
 
 void EnemyIdle::Update(Enemy* _sEnemy)
 {
-
-	
 	if (KEYMANAGER->isOnceKeyDown('0'))
 		//hp 가 0이면
 		EnemyBasic::Update(_sEnemy);
-		Release(_sEnemy);
-	
-	//cout << "들어오냐?" << endl;
-}
+	Release(_sEnemy);
+	cout << "들어오냐?" << endl;
 
+}
 void EnemyIdle::Release(Enemy* _sEnemy)
 {
-	//cout << "move로 가!!!" << endl;
+	cout << "move로 가!!!" << endl;
 
 	//if 플레이어가 있으면
-	SetEnemyState(_sEnemy, EnemyMove::GetInstance());
 	// else if 체력이 0 이면 죽어라!
 	if (_sEnemy->GetHP()->IsDead())
 	{
 		SetEnemyState(_sEnemy, EnemyDead::GetInstance());
 	}
+	else 
+	SetEnemyState(_sEnemy, EnemyMove::GetInstance());
 }
 //■■■■■■■■■■■■ Move ■■■■■■■■■■■■■
 EnemyMove* EnemyMove::GetInstance()
@@ -136,16 +136,28 @@ EnemyMove* EnemyMove::GetInstance()
 void EnemyMove::Init(Enemy* _sEnemy)
 {
 	//cout << "move 들어옴?" << endl;
+	//a*? bool값조정.?
+	_sEnemy->SetMove(true);
 
 }
 
 void EnemyMove::Update(Enemy* _sEnemy)
 {
-
 	EnemyBasic::Update(_sEnemy);
+	_sEnemy->SetMove(false);
+
+	if (_sEnemy->GetPath().size())
+	{
+		Vector2 dir = *_sEnemy->GetPath().begin() - _sEnemy->GetTrans()->GetPos();
+		Vector2 pos = _sEnemy->GetTrans()->GetPos();
+		_sEnemy->SetAngle(Vector2::GetAngle(pos, *_sEnemy->GetPath().begin()));
+		_sEnemy->GetTrans()->SetPos(pos + dir.Nomalized() * _sEnemy->GetSpeed() * TIMEMANAGER->getElapsedTime());
+
+
+	}
 	_sEnemy->GetPhysics()->SetBodyPosition();
 	//cout << "여기는 무브 오예 두둠칫" << endl;
-	Release(_sEnemy);
+	//Release(_sEnemy);
 }
 
 void EnemyMove::Release(Enemy* _sEnemy)

@@ -36,6 +36,8 @@ protected:
 	Hp* _hp;
 	float _angle;
 	list<Vector2> _path;
+
+	bool move;
 	//타임도 줘야 하나?
 
 public:
@@ -57,8 +59,14 @@ public:
 	DIRECTION GetDir() { return _dir; }
 	Sprite* GetSprite() { return _sprite; }
 	float GetAngle() { return _angle; }
+	void SetAngle(float angle) { _angle = angle; }
+	float GetSpeed() { return _speed; }
 //A*
 	void SetPath(list<Vector2> _path);
+	list<Vector2> GetPath() { return _path; }
+	void SetMove(bool active) { move = active; }
+	bool GetMove() { return move; }
+
 //아이템 떨굴 갯수 만들어야함
 
 };
