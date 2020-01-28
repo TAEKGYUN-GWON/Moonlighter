@@ -16,7 +16,7 @@ void DungeonScene::Init()
 	_player->Init();
 	//_player->GetHP()->GetCurrentHP();
 
-	_player = (Player*)SCENEMANAGER->GetNowScene()->GetChildFromName("will");
+	_player = (Player*)SCENEMANAGER->GetNowScene()->GetChildFromName("Will");
 	_dMgr = new DungeonMgr;
 	_dMgr->Init();
 	//test = new Dungeon;

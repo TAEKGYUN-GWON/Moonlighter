@@ -27,7 +27,9 @@ public:
 
 	void ChangeState(PlayerState* state);
 
+	float GetSpeed() { return _speed; }
 	Sprite* GetSprite() { return _sprite; }
+	PhysicsBody* GetPhysics() { return _physics; }
 	Inventory* GetInventory() { return _inven; }
 	Hp* GetHP() { return _hp; }
 	PlayerState* GetState() { return _state; }

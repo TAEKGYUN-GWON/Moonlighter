@@ -262,11 +262,22 @@ void Maptool::Render()
 	else if (_eraser == EraserType::OnlyDeleteImage) GRAPHICMANAGER->DrawTextD2D(Vector2(_rcEraserType.left + 8, _rcEraserType.top - 4), L"eraser type\n : OnlyDeleteImage", 14);
 
 #pragma region CoordinatesTest
+	
+	char str[128];
 	//sprintf_s(buffer, "%d, %d", _ptMouse.x, _ptMouse.y);
-	//sprintf_s(buffer, "%d, %d", (int)CAMERA->GetPosition().x + (int)(_ptMouse.x / CAMERA->GetScale().x), (int)CAMERA->GetPosition().y + (int)(_ptMouse.y / CAMERA->GetScale().y));
+
+	// Ä«¸Þ¶ó ºñÀ² ½Ä
+	sprintf_s(str, "%d, %d", (int)CAMERA->GetPosition().x + (int)(_ptMouse.x / CAMERA->GetScale().x), (int)CAMERA->GetPosition().y + (int)(_ptMouse.y / CAMERA->GetScale().y));
 	//GRAPHICMANAGER->DrawTextD2D(Vector2(100, 100), buffer, 20, 1.0f, ColorF::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
+	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 100), str, 20, 1.0f, ColorF::Red);
 
 	//sprintf_s(buffer, "%f, %f", CAMERA->GetScale().x, CAMERA->GetScale().y);
+	sprintf_s(str, "%f, %f", CAMERA->GetScale().x, CAMERA->GetScale().y);
+	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 70), str, 20, 1.0f, ColorF::Red);
+
+	// ? °¡·Î Ä­ ¼ö¸¸ ³ª¿À´Â °Å °°Àºµ¥ ÁÜ ÀÎ ÁÜ ¾Æ¿ô ÇÏ¸é ¾È ¸ÂÀ½
+	sprintf_s(str, "%d", ((int)CAMERA->GetPosition().x + (int)(_ptMouse.x / CAMERA->GetScale().x) / TILEWIDTH)) + TILENUMX * (((int)CAMERA->GetPosition().y + (int)(_ptMouse.y / CAMERA->GetScale().y) / TILEHEIGHT));
+	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 130), str, 20, 1.0f, ColorF::Blue);
 
 	//sprintf_s(buffer, "%f, %f", CAMERA->GetPosition().x, CAMERA->GetPosition().y);
 
@@ -277,10 +288,11 @@ void Maptool::Render()
 	//swprintf(buffer, 128, L"%1.f %1.f", CAMERA->GetPosition().x - (WINSIZEX / CAMERA->GetScale().x / 2) + (_ptMouse.x / CAMERA->GetScale().x),
 	//	CAMERA->GetPosition().y - (WINSIZEY / CAMERA->GetScale().y / 2) + (_ptMouse.y / CAMERA->GetScale().y));
 
-	//sprintf_s(buffer, "%f, %f", CAMERA->GetPosition().x - (WINSIZEX / CAMERA->GetScale().x / 2) + (_ptMouse.x / CAMERA->GetScale().x) + (WINSIZEX / 2),
+	//sprintf_s(str, "%1.f, %1.f", CAMERA->GetPosition().x - (WINSIZEX / CAMERA->GetScale().x / 2) + (_ptMouse.x / CAMERA->GetScale().x) + (WINSIZEX / 2),
 	//	CAMERA->GetPosition().y - (WINSIZEY / CAMERA->GetScale().y / 2) + (_ptMouse.y / CAMERA->GetScale().y) + (WINSIZEY / 2));
 
 	//GRAPHICMANAGER->Text(Vector2(100, 200), buffer, 20, 200, 50, ColorF::Red);
+	//GRAPHICMANAGER->DrawTextD2D(Vector2(100, 100), str, 20, 1.0f, ColorF::Red);
 #pragma endregion
 }
 
