@@ -25,6 +25,7 @@ void EnemyManeger::Update()
 	if (dis > 100 && dis < 400)
 		_enemy->SetPath(_astar->pathFinder(_enemy->GetTrans()->GetPos(),
 			_player->GetTrans()->GetPos()));
+	//각각의 enemy의 state를 변경? slime 은 slime 어택 골렘은 골렘어택?
 }
 
 void EnemyManeger::Release()

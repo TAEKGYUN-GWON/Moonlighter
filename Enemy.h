@@ -30,8 +30,8 @@ protected:
 	PhysicsBody* _physics;
 	Player* _player;
 	//■■■■■■■ 상태패턴 틀이 되는 EnemyBasic를 Enemy에게 알려줌 ■■■■■■■
-	DIRECTION _dir;	//방향
 	EnemyBasic* state;
+	DIRECTION _dir;	//방향
 	float _speed;
 	Hp* _hp;
 	float _angle;

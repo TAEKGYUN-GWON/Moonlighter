@@ -25,8 +25,7 @@ void SlimeEnemy::Init()
 	_hp = new Hp(1, 1); 
 	
 	////이미지 크기, pos는 어떻게 하지 생성될때 방안에 랜덤으로 해야 할거 같음
-	_trans->SetPos(WINSIZEX / 2, WINSIZEY / 2 - 200); //->셋포스는 나중에 사라질 예정
-	//_trans->SetScale(Vector2(100, 100));	
+	_trans->SetPos(WINSIZEX / 2, WINSIZEY / 2); //->위치 어떻게?
 	_trans->SetScale(Vector2(_sprite->GetGraphic()->GetFrameWidth(), 
 		_sprite->GetGraphic()->GetFrameHeight()));
 

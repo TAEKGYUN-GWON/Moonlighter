@@ -36,9 +36,12 @@ void Enemy::Init()
 	_tag = "enemy";
 	_speed = 30.0f;
 	_hp = new Hp;
+	maxFrameX = 0;
+	frameY = 0;
+	_sprite = AddComponent<Sprite>();
 	_sprite->SetMaxFrameX(maxFrameX);
 	_sprite->SetFrameY(frameY);
-	
+	_player = (Player*)SCENEMANAGER->GetNowScene()->GetChildFromName("Will");
 }
 
 void Enemy::Update()
