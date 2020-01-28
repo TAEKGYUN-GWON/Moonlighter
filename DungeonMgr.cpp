@@ -25,8 +25,9 @@ void DungeonMgr::Update()
 			if (!d->GetRoomActive())
 			{
 				d->SetRoom();
-				CAMERA->MoveTo(d->GetTrans()->GetPos() - Vector2(55,0), 1,false);
 			}
+			if(CAMERA->GetPosition() != d->GetTrans()->GetPos() - Vector2(55, 0))
+				CAMERA->MoveTo(d->GetTrans()->GetPos() - Vector2(55,0), 1,false);
 			
 		}
 		else d->CloseRoom();
