@@ -10,7 +10,7 @@ void Hp::DamageHP(float value)
 {
 	_curHP -= value;
 
-	if (_curHP <= 0) _curHP = 0;
+	//if (_curHP <= 0) _curHP = 0;
 }
 
 void Hp::HealHP(float value)

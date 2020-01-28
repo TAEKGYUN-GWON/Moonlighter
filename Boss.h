@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+#include "Hp.h"
 
 class BossBasic;
 class BossIdle;
@@ -7,10 +8,14 @@ class BossAttack;
 class BossHit;
 class BossDead;
 
+class Hp;
+
 //보스 공격 패턴
 enum PHASE
 {
-
+	ONE,
+	TWO,
+	TREE
 };
 
 class Boss : public Object
@@ -19,7 +24,9 @@ protected:
 	Sprite* _sprite;
 	PhysicsBody* _physics;
 	BossBasic* state;
-	float _speed;
+	float _speed; //굳이 있어야 하나?
+
+	Hp* _hp;
 
 public:
 	Boss();
@@ -33,25 +40,29 @@ public:
 	void Update();
 	void Render();
 	void Release();
+
+	Hp* GetHP() { return _hp; }
+	PhysicsBody* GetPhysics() { return _physics; }
+
 };
 
 class BossBasic
 {
 protected:
-	
+
 	void SetBossState(Boss* _sBoss, BossBasic* _BossState)
 	{
 		_sBoss->SetState(_BossState);
 	}
 public:
-	virtual void Init(Boss* _sBoss) = 0;
-	virtual void Update(Boss* _sBoss) = 0;
+	virtual void Init(Boss* _sBoss) {};
+	virtual void Update(Boss* _sBoss);
 	virtual void Release(Boss* _sBoss) {};
 };
 //■■■■■■■■■■■■ Idle ■■■■■■■■■■■■■■
 class BossIdle : public BossBasic
 {
-	
+
 	static BossIdle* instance;
 
 public:
@@ -79,7 +90,7 @@ public:
 //■■■■■■■■■■■ Attack ■■■■■■■■■■■■
 class BossAttack : public BossBasic
 {
-	
+
 	static BossAttack* instance;
 
 public:
@@ -93,7 +104,7 @@ public:
 //■■■■■■■■■■■■ Hit ■■■■■■■■■■■■■
 class BossHit : public BossBasic
 {
-	
+
 	static BossHit* instance;
 
 public:
@@ -107,7 +118,7 @@ public:
 
 class BossDead : public BossBasic
 {
-	
+
 	static BossDead* instance;
 
 public:

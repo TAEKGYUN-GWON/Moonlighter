@@ -199,7 +199,8 @@ void Maptool::Update()
 
 void Maptool::Render()
 {
-	GRAPHICMANAGER->DrawImage("Shop_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
+	//GRAPHICMANAGER->DrawImage("Shop_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
+	GRAPHICMANAGER->DrawImage("town_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
 
 	//char buffer[128];
 	wchar_t buffer[128];
@@ -288,7 +289,9 @@ void Maptool::Save()
 	HANDLE file;
 	DWORD write;
 
-	string str = "shop.map";
+	//string str = "shop.map";
+	//string str = "Town.map";
+	string str = "Test.map";
 
 	//GetWindowText(_saveName, titleSave, 256);
 
@@ -312,6 +315,8 @@ void Maptool::Load()
 	//string str = titleLoad;
 	//str += ".map";
 	string str = "shop.map";
+	//string str = "Town.map";
+	//string str = "Test.map";
 
 	//file = CreateFile(titleLoad, GENERIC_READ, 0, NULL,
 	file = CreateFile(str.c_str(), GENERIC_READ, 0, NULL,
@@ -364,6 +369,7 @@ void Maptool::Load()
 					_tiles[i]->GetChildren()[0]->AddComponent<Sprite>()->SetImgName(_tiles[i]->GetImgName());
 					_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(_tiles[i]->GetPivot());
 				}
+				_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPosition(_tiles[i]->GetChildren()[0]->GetTrans()->GetPos());
 			}
 		}
 	}
@@ -435,6 +441,7 @@ void Maptool::SetMap()
 	}
 	else _tiles[index]->GetChildren()[0]->AddComponent<Sprite>()->SetImgName(_currentTile.imgKey);
 
+	_tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->SetPosition(_tiles[index]->GetChildren()[0]->GetTrans()->GetPos());
 	_tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(_currentTile.pivot);
 }
 

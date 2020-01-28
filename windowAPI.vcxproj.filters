@@ -106,11 +106,8 @@
     <Filter Include="playGround\Shop\ShopObject\ShopStand">
       <UniqueIdentifier>{a8f5da20-97c4-47a4-b981-fb523187115d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\Shop\ShopObject\CheckStand">
-      <UniqueIdentifier>{d0389b76-cc76-4f33-920e-767e0f957944}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="playGround\Shop\ShopObject\ShopDoor">
-      <UniqueIdentifier>{6e4e893b-7ccc-4a5b-a5ba-50de7b78cc3f}</UniqueIdentifier>
+    <Filter Include="playGround\Test">
+      <UniqueIdentifier>{b2e24c08-1686-43c3-90dd-d5c395430b65}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -331,10 +328,34 @@
       <Filter>2DGameFramework\Object\Component\header</Filter>
     </ClInclude>
     <ClInclude Include="CheckStand.h">
-      <Filter>playGround\Shop\ShopObject\CheckStand</Filter>
+      <Filter>playGround\Shop\ShopObject</Filter>
     </ClInclude>
     <ClInclude Include="ShopDoor.h">
-      <Filter>playGround\Shop\ShopObject\ShopDoor</Filter>
+      <Filter>playGround\Shop\ShopObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Dungeon.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>playGround\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="GolemEnemy.h">
+      <Filter>playGround\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="GolemEnemy.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonMgr.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMove.h">
+      <Filter>playGround\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttack.h">
+      <Filter>playGround\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerRoll.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -525,10 +546,34 @@
       <Filter>2DGameFramework\Object\Component\cpp</Filter>
     </ClCompile>
     <ClCompile Include="CheckStand.cpp">
-      <Filter>playGround\Shop\ShopObject\CheckStand</Filter>
+      <Filter>playGround\Shop\ShopObject</Filter>
     </ClCompile>
     <ClCompile Include="ShopDoor.cpp">
-      <Filter>playGround\Shop\ShopObject\ShopDoor</Filter>
+      <Filter>playGround\Shop\ShopObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Dungeon.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>playGround\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="GolemEnemy.cpp">
+      <Filter>playGround\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="GolemEnemy.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonMgr.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMove.cpp">
+      <Filter>playGround\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttack.cpp">
+      <Filter>playGround\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerRoll.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

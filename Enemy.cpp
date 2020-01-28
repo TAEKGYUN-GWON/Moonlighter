@@ -1,13 +1,14 @@
 #include "stdafx.h"
 #include "Enemy.h"
-
+#include "Hp.h"
+#include "Bullet.h"
+//#include "Player.h"
 //전방선언 같은 거...?
 EnemyIdle* EnemyIdle::instance;	
 EnemyMove* EnemyMove::instance;
 EnemyAttack* EnemyAttack::instance;
 EnemyHit* EnemyHit::instance;
 EnemyDead* EnemyDead::instance;
-SlimeAtk* SlimeAtk::instance;
 
 Enemy::Enemy()
 {
@@ -28,54 +29,60 @@ void Enemy::SetState(EnemyBasic* state)
 	this->state->Init(this);
 }
 
-
 void Enemy::Init()
 {
 	Object::Init();
 
-	//enemy를 enemymaneger에 걸어주고 
-	//매니저를 던전씬에 걸어줘야함.
 	_tag = "enemy";
-	_name = "minion1";
+	_speed = 30.0f;
+	_hp = new Hp;
 	
-	//이미지 크기, pos는 어떻게 하지 생성될때 방안에 랜덤으로 해야 할거 같음
-	_trans->SetPos(WINSIZEX / 2, WINSIZEY / 2 - 200); //->셋포스는 나중에 사라질 예정
-	_trans->SetScale(Vector2(100, 100));	
-	//_trans->SetScale(Vector2(_sprite->GetGraphic()->GetFrameWidth(), 
-	//	_sprite->GetGraphic()->GetFrameHeight()));
-
-	_sprite = AddComponent<Sprite>();
-	_sprite->SetRectColor(ColorF::Cornsilk);
-
-	_physics = AddComponent<PhysicsBody>();
-	_physics->Init(BodyType::DYNAMIC, 1.0f);	//플레이어한테 뚫림 왜 그러지?
-	//가상세계의 렉트 뒤틀리는거 고정
-	_physics->GetBody()->SetFixedRotation(true);	
 
 }
 
 void Enemy::Update()
 {
 	Object::Update();
-	_physics->SetBodyPosition();
+	
+	//getAngle(float x1, float y1, float x2, float y2);
+	//로 방향 구해야함..
+	//Vector2::
+	/*if (getAngle(_trans->GetPos().x, _trans->GetPos().y
+		, _player->GetTrans()->GetPos().x, _player->GetTrans()->GetPos().y))
+	{
+		//left 일떄 _dir = LEFT 이런식...?
+		// rigt 일떄
+		// up 일때
+		// down 일때?
+		//해서 이미지 바꿔 주고? 
+	}*/
+	
+	
 	//상태 Update 걸어줌
 	state->Update(this);
+
+
 }
 
-void Enemy::Render()
+void Enemy::SetPath(list<Vector2> _path)
 {
-	Object::Render();
+	this->_path.clear();
+	this->_path = _path;
 }
 
-void Enemy::Release()
+//hp가 0이면 죽어라
+void EnemyBasic::Update(Enemy* _sEnemy)
 {
-	Object::Release();
+	if (_sEnemy->GetHP()->IsDead())
+	{
+		SetEnemyState(_sEnemy, EnemyDead::GetInstance());
+	}
 }
-
 
 //■■■■■■■■■■■■ Idle ■■■■■■■■■■■■■■
 EnemyIdle* EnemyIdle::GetInstance()
 {
+
 	//instance가 null이면 
 	if (instance == nullptr)
 	{
@@ -89,25 +96,31 @@ EnemyIdle* EnemyIdle::GetInstance()
 
 void EnemyIdle::Init(Enemy* _sEnemy)
 {
-	cout << "왜 안들어와?" << endl;
+	//cout << "왜 안들어와?" << endl;
 }
 
 void EnemyIdle::Update(Enemy* _sEnemy)
 {
-	//처음 본인 위치에서?
+	
 	if (KEYMANAGER->isOnceKeyDown('0'))
-		//if () 플에이어가 있으면 
+		
+		EnemyBasic::Update(_sEnemy);
 		Release(_sEnemy);
+	
 	cout << "들어오냐?" << endl;
 }
 
 void EnemyIdle::Release(Enemy* _sEnemy)
 {
 	cout << "move로 가!!!" << endl;
+
 	//if 플레이어가 있으면
 	SetEnemyState(_sEnemy, EnemyMove::GetInstance());
 	// else if 체력이 0 이면 죽어라!
-	//SetEnemyState(_sEnemy, EnemyDead::GetInstance());
+	if (_sEnemy->GetHP()->IsDead())
+	{
+		SetEnemyState(_sEnemy, EnemyDead::GetInstance());
+	}
 }
 //■■■■■■■■■■■■ Move ■■■■■■■■■■■■■
 EnemyMove* EnemyMove::GetInstance()
@@ -128,6 +141,9 @@ void EnemyMove::Init(Enemy* _sEnemy)
 
 void EnemyMove::Update(Enemy* _sEnemy)
 {
+
+	EnemyBasic::Update(_sEnemy);
+	_sEnemy->GetPhysics()->SetBodyPosition();
 	cout << "여기는 무브 오예 두둠칫" << endl;
 	Release(_sEnemy);
 }
@@ -139,6 +155,10 @@ void EnemyMove::Release(Enemy* _sEnemy)
 	// else if 범위에 플레이어가 없으면 다시 무브
 	//SetEnemyState(_sEnemy, EnemyMove::GetInstance());
 	// else if 체력이 0 이면 죽어라!
+	if (_sEnemy->GetHP()->IsDead())
+	{
+		SetEnemyState(_sEnemy, EnemyDead::GetInstance());
+	}
 }
 //■■■■■■■■■■■ Attack ■■■■■■■■■■■■
 EnemyAttack* EnemyAttack::GetInstance()
@@ -158,18 +178,8 @@ void EnemyAttack::Init(Enemy* _sEnemy)
 
 void EnemyAttack::Update(Enemy* _sEnemy)
 {
-
-	
-	if (_sEnemy->GetName() == "minion1")
-	{
-		SetEnemyState(_sEnemy, SlimeAtk::GetInstance());
-		return;
-	}
-	else if (_sEnemy->GetName() == "minion2")
-	{
-		cout << "미니언2 공격" << endl;
-		return;
-	}
+	EnemyBasic::Update(_sEnemy);
+	_sEnemy->Attack();
 	cout << "여기는 공격!" << endl;
 	Release(_sEnemy);
 }
@@ -181,6 +191,10 @@ void EnemyAttack::Release(Enemy* _sEnemy)
 	// else if 아니면 idle로 가라
 	//SetEnemyState(_sEnemy, EnemyIdle::GetInstance());
 	// else if 체력이 0 이면 죽어라!
+	if (_sEnemy->GetHP()->IsDead())
+	{
+		SetEnemyState(_sEnemy, EnemyDead::GetInstance());
+	}
 }
 //■■■■■■■■■■■■ Hit ■■■■■■■■■■■■■
 
@@ -201,6 +215,7 @@ void EnemyHit::Init(Enemy* _sEnemy)
 
 void EnemyHit::Update(Enemy* _sEnemy)
 {
+	EnemyBasic::Update(_sEnemy);
 	cout << "플레이어한테 맞았나?" << endl;
 	Release(_sEnemy);
 }
@@ -210,7 +225,10 @@ void EnemyHit::Release(Enemy* _sEnemy)
 	// if 맞았으면 idle로 가라
 	// else if 안맞았으면 다시 때려라
 	// else if 체력이 0 이면 죽어라!
-	SetEnemyState(_sEnemy, EnemyDead::GetInstance());
+	if (_sEnemy->GetHP()->IsDead())
+	{
+		SetEnemyState(_sEnemy, EnemyDead::GetInstance());
+	}
 
 }
 //■■■■■■■■■■■■ Dead ■■■■■■■■■■■■
@@ -238,24 +256,7 @@ void EnemyDead::Update(Enemy* _sEnemy)
 
 void EnemyDead::Release(Enemy* _sEnemy)
 {
+	if (_sEnemy->GetHP()->IsDead())
 	cout << "죽었다 ㅠㅠ" << endl;
 
-}
-//  ■■■■■■■■■■■■ 슬라임 공격 ■■■■■■■■■■■■
-SlimeAtk* SlimeAtk::GetInstance()
-{
-	if (instance == nullptr)
-	{
-		instance = new SlimeAtk();
-	}
-
-	return instance;
-}
-
-void SlimeAtk::Update(Enemy* _sEnemy)
-{
-	cout << "미니언1 공격" << endl;
-	//slime* a = (slime*)_sEnemy;
-	//a->
-	Release(_sEnemy);
 }
