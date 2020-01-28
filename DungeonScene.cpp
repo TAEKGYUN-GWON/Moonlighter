@@ -14,8 +14,12 @@ void DungeonScene::Init()
 
 	_player = Object::CreateObject<Player>();
 	_player->Init();
+	_player->GetTrans()->SetPos(Vector2(1170,1440)+ Vector2((TILEWIDTH * Dungeon_X)/2, (TILEHEIGHT * Dungeon_Y)-150));
+	_player->GetComponent<PhysicsBody>()->SetBodyPosition();
+	CAMERA->SetPos(Vector2(1170, 1440));
+	//_player-;
 	//_player->GetHP()->GetCurrentHP();
-
+	
 	_dMgr = new DungeonMgr;
 	_dMgr->Init(_player);
 	//test = new Dungeon;
