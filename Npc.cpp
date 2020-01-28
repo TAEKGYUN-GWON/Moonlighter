@@ -2,8 +2,6 @@
 #include "Npc.h"
 #include "NpcShopState.h"
 
-
-
 void Npc::Init(string imgkey)
 {
 	
@@ -25,7 +23,6 @@ void Npc::Init(string imgkey)
 	_speed = 3.0f;
 
 
-
 	int a;
 
 	
@@ -43,10 +40,13 @@ void Npc::Update()
 	//if (_trans->GetPos() >= Vector2(392, 500))
 	//_trans->SetPos(Vector2(_trans->GetPos()+Vector2::up));
 
-	//상태
+	//상태패턴용 함수
 	Stay();
 
-	//Move();
+	//Astar 용 함수
+	
+	Move();
+	_sprite->SetPosition(_trans->GetPos());
 
 	Object::Update();
 }
@@ -58,20 +58,24 @@ void Npc::Render()
 
 }
 
-//void Npc::Move()
-//{
-//
-//	//움직이는 방법 move or update에
-//	if (_lPath.size())
-//	{
-//		Vector2 a = *_lPath.begin() - _trans->pos;
-//		_trans->pos += a.Nomalized() * 70 * TIMEMANAGER->getElapsedTime();
-//
-//		if ((int)Vector2::Distance(*_lPath.begin(), _trans->pos) < (int)20)
-//			_lPath.erase(_lPath.begin());
-//
-//	}
-//}
+void Npc::SetPath(list<Vector2> lpath)
+{
+	this->_lPath.clear();
+	this->_lPath = lpath;
+}
+void Npc::Move()
+{
+
+	if (_lPath.size())
+	{
+		Vector2 a = *_lPath.begin() - _trans->pos; // 가야할위치에서 내위치를 빼면, 가야되는 다음 노드가 나옴
+		_trans->pos += a.Nomalized() * 70 * TIMEMANAGER->getElapsedTime(); //조건 느슨하게 예외처리 해주는 부분
+
+		if ((int)Vector2::Distance(*_lPath.begin(), _trans->pos) < (int)20)//바로 직후 노드에 도착하면 
+			_lPath.erase(_lPath.begin()); //가장 첫번째 목적지 지우기, 다음 노드를 넣기 위해
+
+	}
+}
 
 void Npc::SetNpcState(NpcShopState* npcshopstate)
 {
@@ -80,11 +84,6 @@ void Npc::SetNpcState(NpcShopState* npcshopstate)
 	
 }
 
-//void Npc::SetPath(list<Vector2> lpath)
-//{
-//	this->_lPath.clear();
-//	this->_lPath = lpath;
-//}
 
 //상태 정의
 void Npc::In()

@@ -27,7 +27,7 @@ void ShopScene::Init()
 	_npcMgr = new NpcManager; //NPC CreateObject는 NpcManager에서 해준다.
 	_npcMgr->SetCheckStandLink(_checkStand); //이게 npcmanager를 거쳐서 state로 간다
 	_npcMgr->SetShopStandMgrLink(_shopStandMgr); //엔피씨가 충돌할 스탠드는 이것이다
-	_npcMgr->Init();
+	_npcMgr->Init(this);
 
 	//_checkStand->SetNpc(_npcMgr->GetNpcVector());
 	_shopDoor = Object::CreateObject<ShopDoor>();
@@ -76,10 +76,16 @@ void ShopScene::SetUp()
 		{
 			int index = j + TILENUMX * i;
 
-			_tiles[index] = Object::CreateObject<Tile>();
+			/*_tiles[index] = Object::CreateObject<Tile>();
 			_tiles[index]->Init(j, i);
 			_tiles[index]->AddComponent<Sprite>();
-			_tiles[index]->SetAttribute("None");
+			_tiles[index]->SetAttribute("None");*/
+
+			Tile* tile = Object::CreateObject<Tile>();
+			tile->Init(j, i);
+			tile->AddComponent<Sprite>();
+			tile->SetAttribute("None");
+			_tiles.push_back(tile);
 
 			_tagTiles[index].attribute = "None";
 			_tagTiles[index].imgKey = "None";

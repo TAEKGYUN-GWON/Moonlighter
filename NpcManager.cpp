@@ -1,18 +1,12 @@
 #include "stdafx.h"
 #include "NpcManager.h"
 #include "ShopStandManager.h"
-
-void NpcManager::Init()
+void NpcManager::Init(ShopScene* parent)
 {
 	_counter = 0;
 	_timer = RND->getFromIntTo(30, 100);
 
-	_ast = new Astar;
-	_ast->Init();
-	//_name 넣어준것은..
-	//상점 나가서 벡터 삭제되면 다시 넣어줘야하는데
-	//어떤애가 없는지 찾아서 넣어주려고..
-
+	
 
 }
 
@@ -71,6 +65,7 @@ void NpcManager::MakeNpc()
 	_npc->SetCheckStandLink(_checkStand);
 	_npc->SetIsCheckSOn(false);
 	_npc->SetIsShopSOn(false);
+	_npc->Move(); //astar 일단 여기다가 담아놓음
 
 	if (_vNpc.size() <= 0)
 	{
@@ -185,15 +180,15 @@ void NpcManager::ShopStandCollision()
 
 }
 
-//void NpcManager::AstarFunction()
-//{
-//	for (int i = 0; i < _vNpc.size(); i++)
-//	{
-//		_vNpc[i]->SetPath(_ast->pathFinder(
-//			_vNpc[i]->GetTrans()->GetPos(), //NPC의 위치
-//			Vector2(0, 0))); //가야할 위치
-//	}
-//}
+void NpcManager::AstarFunction(Vector2 destination)
+{
+	for (int i = 0; i < _vNpc.size(); i++)
+	{
+		_vNpc[i]->SetPath(_ast->pathFinder(
+			_vNpc[i]->GetTrans()->GetPos(), //NPC의 위치
+			Vector2(destination))); //가야할 위치
+	}
+}
 
 
 

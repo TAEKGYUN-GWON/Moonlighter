@@ -1,9 +1,11 @@
 #pragma once
 #include "Npc.h"
 #include "Astar.h"
+#include "ShopScene.h"
 
 class ShopStandManager;
 class CheckStand;
+class ShopScene;
 
 class NpcManager
 {
@@ -21,13 +23,13 @@ private:
 	int _timer;
 
 public:
-	void Init();
+	void Init(ShopScene* parent);
 	void Update();
 	void Release();
 	void Render();
 
 	void MakeNpc();
-	//void AstarFunction();
+	void AstarFunction(Vector2 destination);
 
 	void CheckStandCollision(); //계산대랑 충돌
 	void ShopStandCollision(); //가판대랑 충돌

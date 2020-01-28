@@ -23,10 +23,13 @@ void NpcIdle::StateIn(Npc* npc)
 	//Npc상태를 IDLE로 두고 In()에서 StateIn()을 불러줘서 들어옴
 
 	//★여기서 npc의 ast 값에 매개변수로 좌표를 넣어줘야하는거같음
+	
 
 	//if (창가자리에 도착함)
 	//{
 		cout << "NPCIDLE:stateIn 가게 입장상태" << endl;
+		//★여기서 StateStay가 주석인데 Stay로 어떻게 넘어가는거지
+		//ㄴ 
 	//	StateStay(npc);
 	//}
 	//else if (창가자리에 도착 안했으면)
