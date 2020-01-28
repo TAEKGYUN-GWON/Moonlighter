@@ -27,7 +27,7 @@ void Sprite::Init(BOOL isFrame, BOOL isLoop)
 
 	_curFrameX = _curFrameY = 0;
 	_count = 0.0f;
-	_FPS = 1.0f / 1;
+	_FPS = 1.0f;
 }
 
 void Sprite::Render()

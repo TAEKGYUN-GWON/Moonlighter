@@ -59,24 +59,24 @@ void Player::Update()
 
 		_state->Update();
 
-		if (KEYMANAGER->isStayKeyDown(VK_LEFT))
-		{
-			_trans->SetPos(_trans->GetPos() + Vector2::left * _speed * TIMEMANAGER->getElapsedTime());
-		}
-		else if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
-		{
-			_trans->SetPos(_trans->GetPos() + Vector2::right * _speed * TIMEMANAGER->getElapsedTime());
-		}
-		if (KEYMANAGER->isStayKeyDown(VK_UP))
-		{
-			_trans->SetPos(_trans->GetPos() + Vector2::up * _speed * TIMEMANAGER->getElapsedTime());
-		}
-		else if (KEYMANAGER->isStayKeyDown(VK_DOWN))
-		{
-			_trans->SetPos(_trans->GetPos() + Vector2::down * _speed * TIMEMANAGER->getElapsedTime());
-		}
-		_physics->SetBodyPosition();
-		_sprite->SetPosition(_trans->GetPos() + Vector2(0, 2));
+		//if (KEYMANAGER->isStayKeyDown(VK_LEFT))
+		//{
+		//	_trans->SetPos(_trans->GetPos() + Vector2::left * _speed * TIMEMANAGER->getElapsedTime());
+		//}
+		//else if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
+		//{
+		//	_trans->SetPos(_trans->GetPos() + Vector2::right * _speed * TIMEMANAGER->getElapsedTime());
+		//}
+		//if (KEYMANAGER->isStayKeyDown(VK_UP))
+		//{
+		//	_trans->SetPos(_trans->GetPos() + Vector2::up * _speed * TIMEMANAGER->getElapsedTime());
+		//}
+		//else if (KEYMANAGER->isStayKeyDown(VK_DOWN))
+		//{
+		//	_trans->SetPos(_trans->GetPos() + Vector2::down * _speed * TIMEMANAGER->getElapsedTime());
+		//}
+		//_physics->SetBodyPosition();
+		//_sprite->SetPosition(_trans->GetPos() + Vector2(0, 2));
 	}
 }
 
