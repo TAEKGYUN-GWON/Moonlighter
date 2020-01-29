@@ -9,6 +9,7 @@ void PlayerIdle::Enter()
 	_obj->GetSprite()->SetImgName("will_dungeon");
 	_obj->GetSprite()->SetMaxFrameX(10);
 	_obj->GetSprite()->SetFrameX(0);
+	_obj->GetSprite()->SetIsLoop(true);
 	
 	switch (_obj->GetDirection())
 	{

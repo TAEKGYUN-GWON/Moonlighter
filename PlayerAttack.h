@@ -6,7 +6,10 @@ class PlayerAttack : public PlayerState
 {
 private:
 	int _count;
-	bool _isAtk;
+	float _timer;
+	float _delay;
+
+	//bool _isAtk;
 
 public:
 	PlayerAttack(Player* obj) : PlayerState(obj) {}
