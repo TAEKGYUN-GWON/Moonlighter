@@ -16,23 +16,25 @@ void ShopScene::Init()
 	_player = Object::CreateObject<Player>();
 	_player->Init();
 
+	//계산대
 	_checkStand = Object::CreateObject<CheckStand>();
 	_checkStand->Init();
 	
-	_npcMgr = new NpcManager; //NPC CreateObject는 NpcManager에서 해준다.
-	_npcMgr->SetCheckStandLink(_checkStand);
-	_npcMgr->Init();
-
+	//가판대 쇼케이스
 	_shopStandMgr = new ShopStandManager; //가판대
 	_shopStandMgr->Init();
 
-	//_npcShopState = new NpcShopState;
-	//_npcShopState->SetCheckStandLink(_checkStand);
+	SetUp();
+	_npcMgr = new NpcManager; //NPC CreateObject는 NpcManager에서 해준다.
+	_npcMgr->SetCheckStandLink(_checkStand); //이게 npcmanager를 거쳐서 state로 간다
+	_npcMgr->SetShopStandMgrLink(_shopStandMgr); //엔피씨가 충돌할 스탠드는 이것이다
+	_npcMgr->Init(this);
 
+	//_checkStand->SetNpc(_npcMgr->GetNpcVector());
 	_shopDoor = Object::CreateObject<ShopDoor>();
 	_shopDoor->Init();
+	
 
-	SetUp();
 }
 
 void ShopScene::Release()
@@ -68,18 +70,23 @@ void ShopScene::Render()
 
 void ShopScene::SetUp()
 {
-
-
-	for (int i = 0; i < TILENUMY; ++i)
+	
+	for (int i = 0; i < SHOPTILEMAXY; ++i)
 	{
-		for (int j = 0; j < TILENUMX; ++j)
+		for (int j = 0; j < SHOPTILEMAXX; ++j)
 		{
-			int index = j + TILENUMX * i;
+			int index = j + SHOPTILEMAXX * i;
 
-			_tiles[index] = Object::CreateObject<Tile>();
+			/*_tiles[index] = Object::CreateObject<Tile>();
 			_tiles[index]->Init(j, i);
 			_tiles[index]->AddComponent<Sprite>();
-			_tiles[index]->SetAttribute("None");
+			_tiles[index]->SetAttribute("None");*/
+
+			Tile* tile = Object::CreateObject<Tile>();
+			tile->Init(j, i);
+			tile->AddComponent<Sprite>();
+			tile->SetAttribute("None");
+			_tiles.push_back(tile);
 
 			_tagTiles[index].attribute = "None";
 			_tagTiles[index].imgKey = "None";
@@ -104,10 +111,10 @@ void ShopScene::SetUp()
 	{
 		//MessageBox(_hWnd, "load 한다", str.c_str(), MB_OK);
 
-		ReadFile(file, _tagTiles, sizeof(tagTile) * TILENUMX * TILENUMY, &read, NULL);
+		ReadFile(file, _tagTiles, sizeof(tagTile) * SHOPTILEMAXX * SHOPTILEMAXY, &read, NULL);
 		CloseHandle(file);
 
-		for (int i = 0; i < TILENUMX * TILENUMY; i++)
+		for (int i = 0; i < SHOPTILEMAXX * SHOPTILEMAXY; i++)
 		{
 			// _tiles[] initialization
 			_tiles[i]->SetImgName("None");

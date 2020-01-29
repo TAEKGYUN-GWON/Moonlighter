@@ -1,19 +1,19 @@
 #include "stdafx.h"
-#include "Hp.h"
+#include "Ability.h"
 
-void Hp::setHP(float value)
+void Ability::setHP(float value)
 {
 	_curHP = value;
 }
 
-void Hp::DamageHP(float value)
+void Ability::DamageHP(float value)
 {
 	_curHP -= value;
 
-	//if (_curHP <= 0) _curHP = 0;
+	if (_curHP <= 0) _curHP = 0;
 }
 
-void Hp::HealHP(float value)
+void Ability::HealHP(float value)
 {
 	_curHP += value;
 
@@ -23,7 +23,7 @@ void Hp::HealHP(float value)
 	}
 }
 
-bool Hp::IsDead()
+bool Ability::IsDead()
 {
 	if (_curHP <= 0)
 	{

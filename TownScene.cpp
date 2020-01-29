@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "TownScene.h"
-
+#include"Inventory.h"
 void TownScene::Init()
 {
 	Scene::Init();
@@ -39,6 +39,8 @@ void TownScene::Init()
 	GRAPHICMANAGER->AddImage("town_map", L"resource/img/Map/map.png");
 	GRAPHICMANAGER->AddFrameImage("set_tile", L"set_tile3.png", 4, 6);
 	GRAPHICMANAGER->AddFrameImage("set_tile_dungeon", L"set_tile_dungeon.png", 4, 6);
+
+
 
 
 	_player = Object::CreateObject<Player>();
@@ -145,4 +147,5 @@ void TownScene::Render()
 {
 	GRAPHICMANAGER->DrawImage("town_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
 	Scene::Render();
+	_player->GetInventory()->Render();
 }
