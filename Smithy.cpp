@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Smithy.h"
+#include "Component.h"
 
 void Smithy::Init()
 {
@@ -16,9 +17,23 @@ void Smithy::Init()
 	_pocketCircle = GRAPHICMANAGER->AddImage("pocketCicle", L"resource/img/Smithy/Pocket_Circle.png");
 
 
+	_material1 = GRAPHICMANAGER->AddImage("material1", L"resource/img/Smithy/material1.png");
+	_material2 = GRAPHICMANAGER->AddImage("material2", L"resource/img/Smithy/material2.png");
+	_material3 = GRAPHICMANAGER->AddImage("material3", L"resource/img/Smithy/material3.png");
+
 	_coin = GRAPHICMANAGER->AddImage("coin", L"resource/img/Smithy/Coin.png");
 
-	
+	_recipePrice = 100;
+	_upgradeGap = 10;
+
+	_player = (Player*)SCENEMANAGER->GetNowScene()->GetChildFromName("Will");
+
+	_inven = new Inventory();
+	_inven->Init();
+	_inven->AddMoney(135948);
+	_inven->SetATK(30);
+
+
 
 	_isShow = false;
 }
@@ -37,34 +52,8 @@ void Smithy::Render()
 {
 	if (_isShow)
 	{
-		_blackSmith->Render(Vector2(250, WINSIZEY / 2), 1, PIVOT::CENTER, false);
-		_anvil->Render(Vector2(WINSIZEX / 2, WINSIZEY - 150), 1, PIVOT::CENTER, false);
-		_title->Render(Vector2(WINSIZEX / 2, 50), 1, PIVOT::CENTER, false);
-		_itemName->Render(Vector2(WINSIZEX - 200, 40), 1, PIVOT::CENTER, false);
-		_upgradeRecipe->Render(Vector2(WINSIZEX - 200, WINSIZEY / 2 + 30), 1, PIVOT::CENTER, false);
-		_itemList->Render(Vector2(WINSIZEX / 2, WINSIZEY / 2 - 80), 1, PIVOT::CENTER, false);
-		_pSword->Render(Vector2(WINSIZEX - 115, 110), 1, PIVOT::CENTER, false);
-		_pocketCircle->Render(Vector2(60, 60), 1, PIVOT::CENTER, false);
-		_pocket	->Render(Vector2(60, 60), 1, PIVOT::CENTER, false);
-
-		_coin->Render(Vector2(60, 140), 1, PIVOT::CENTER, false);
-
-		
-
-		ColorF* color = new ColorF(0x9135dd, 1.0f);
-		GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2 - 80, 30), L"¹úÄÁÀÇ ´ëÀå°£", 25, 200, 50, *color, TextPivot::LEFT_TOP, L"³ª´®½ºÄù¾î¶ó¿îµå", false);
-
-
-		string increaseValue = "+30";
-		wstring print;
-
-		print.assign(increaseValue.begin(), increaseValue.end());
-		
-		color = new ColorF(0xecddc0, 1.0f);
-		//GRAPHICMANAGER->Text(Vector2(WINSIZEX - 120, 200), print, 25, 200, 50, *color, TextPivot::LEFT_TOP, L"³ª´®½ºÄù¾î¶ó¿îµå", false);
-
-		//GRAPHICMANAGER->DrawTextD2D(Vector2(WINSIZEX - 120, 200), increaseValue.c_str(), 50, 1.f, ColorF::Black, TextPivot::LEFT_TOP, L"³ª´®½ºÄù¾î¶ó¿îµå", false);
-		GRAPHICMANAGER->DrawTextD2D(Vector2(WINSIZEX - 120, 190), increaseValue.c_str(), 30);
+		ShowImage();
+		ShowUI();
 	}
 
 }
@@ -75,4 +64,72 @@ void Smithy::KeyInput()
 	{
 		_isShow = !_isShow;
 	}
+
+	if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
+	{
+		_inven->DeductionMoney(5000);
+	}
+}
+
+void Smithy::ShowImage()
+{
+	_blackSmith->Render(Vector2(250, WINSIZEY / 2), 1, PIVOT::CENTER, false);
+	_anvil->Render(Vector2(WINSIZEX / 2, WINSIZEY - 150), 1, PIVOT::CENTER, false);
+	_title->Render(Vector2(WINSIZEX / 2, 50), 1, PIVOT::CENTER, false);
+	_itemName->Render(Vector2(WINSIZEX - 200, 40), 1, PIVOT::CENTER, false);
+	_upgradeRecipe->Render(Vector2(WINSIZEX - 200, WINSIZEY / 2 + 30), 1, PIVOT::CENTER, false);
+	_itemList->Render(Vector2(WINSIZEX / 2, WINSIZEY / 2 - 80), 1, PIVOT::CENTER, false);
+	_pSword->Render(Vector2(WINSIZEX - 115, 110), 1, PIVOT::CENTER, false);
+	_pocketCircle->Render(Vector2(60, 60), 1, PIVOT::CENTER, false);
+	_pocket->Render(Vector2(60, 60), 1, PIVOT::CENTER, false);
+
+	_coin->Render(Vector2(110, 140), 1, PIVOT::CENTER, false);
+
+	_material1->Render(Vector2(WINSIZEX - 300, WINSIZEY - 260), 1, PIVOT::CENTER, false);
+	_material2->Render(Vector2(WINSIZEX - 300, WINSIZEY - 170), 1, PIVOT::CENTER, false);
+	_material3->Render(Vector2(WINSIZEX - 300, WINSIZEY - 80), 1, PIVOT::CENTER, false);
+}
+
+void Smithy::ShowUI()
+{
+	string standardStr;
+	wstring printStr;
+
+	ColorF* color = new ColorF(0xecddc0, 1.0f);
+
+	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2 - 80, 30), L"¹úÄÁÀÇ ´ëÀå°£", 25, 200, 50, *color, TextPivot::LEFT_TOP, L"³ª´®½ºÄù¾î¶ó¿îµå");
+
+	standardStr = to_string(_inven->GetATK());
+	standardStr += " -> ";
+	standardStr += to_string(_upgradeGap + _inven->GetATK());
+	printStr.assign(standardStr.begin(), standardStr.end());
+
+	GRAPHICMANAGER->DrawTextD2D(Vector2(WINSIZEX - 180, 190), standardStr.c_str(), 30, *color);
+
+	color = new ColorF(0x191919, 1.f);
+	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2 - 40, WINSIZEY / 2 - 100), L"°­È­ÇÏ±â", 50, 100, 50, *color, TextPivot::CENTER, L"³ª´®½ºÄù¾î¶ó¿îµå");
+
+	GRAPHICMANAGER->Text(Vector2(WINSIZEX - 350, WINSIZEY / 2 + 10), L"·¹½ÃÇÇ", 25, 100, 50, *color, TextPivot::CENTER, L"³ª´®½ºÄù¾î¶ó¿îµå");
+
+	for (int i = 1; i <= 3; i++)
+	{
+		GRAPHICMANAGER->Text(Vector2(WINSIZEX - 280, WINSIZEY - 30 - (i * 90)), L"ÇÊ¿ä:", 20, 100, 50, *color, TextPivot::CENTER, L"³ª´®½ºÄù¾î¶ó¿îµå");
+		GRAPHICMANAGER->Text(Vector2(WINSIZEX - 280, WINSIZEY - (i * 90)), L"¼ÒÁö:", 20, 100, 50, *color, TextPivot::CENTER, L"³ª´®½ºÄù¾î¶ó¿îµå");
+	}
+
+
+	standardStr = to_string(_inven->GetMoney());
+	printStr.assign(standardStr.begin(), standardStr.end());
+	color = new ColorF(0xffffff, 1.f);
+	GRAPHICMANAGER->Text(Vector2(10, 125), printStr, 15, 100, 25, *color, TextPivot::CENTER, L"³ª´®½ºÄù¾î¶ó¿îµå");
+
+
+	
+}
+
+string Smithy::PrintPrice(string price)
+{
+	string a = "a";
+
+	return a;
 }

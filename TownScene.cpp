@@ -41,6 +41,8 @@ void TownScene::Init()
 	GRAPHICMANAGER->AddFrameImage("set_tile_dungeon", L"set_tile_dungeon.png", 4, 6);
 
 
+
+
 	_player = Object::CreateObject<Player>();
 	_player->Init();
 	SetUp();
