@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Maptool.h"
-
+//병합을 위해 주석 단다 헿
 void Maptool::Init()
 {
 	Scene::Init();
