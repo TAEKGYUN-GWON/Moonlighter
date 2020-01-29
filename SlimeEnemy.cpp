@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "SlimeEnemy.h"
-#include "Hp.h"
+#include "Ability.h"
 
 
 SlimeEnemy::SlimeEnemy()
@@ -22,7 +22,7 @@ void SlimeEnemy::Init(Vector2 pos)
 	_tag = "enemy";
 	_name = "Slime";
 	_speed = 20.f;
-	_hp = new Hp(1, 1); 
+	_hp = new Ability(1, 1, 1);
 	_sprite = AddComponent<Sprite>();
 	_sprite->Init(true, true);
 	_sprite->SetImgName("slime");

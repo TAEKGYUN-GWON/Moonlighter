@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Enemy.h"
-#include "Hp.h"
+#include "Ability.h"
 #include "Bullet.h"
 #include "Item.h"
 //#include "Player.h"
@@ -42,7 +42,7 @@ void Enemy::Init()
 
 	_tag = "enemy";
 
-	_hp = new Hp;
+	_hp = new Ability;
 	maxFrameX = 0;
 	frameY = 0;
 	_sprite = AddComponent<Sprite>();

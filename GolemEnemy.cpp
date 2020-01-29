@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "GolemEnemy.h"
-#include "Hp.h"
+#include "Ability.h"
 
 GolemEnemy::GolemEnemy()
 {
@@ -19,7 +19,7 @@ void GolemEnemy::Init(Vector2 pos)
 	_tag = "enemy";
 	_name = "Golem";
 
-	_hp = new Hp(50, 50);
+	_hp = new Ability(50, 50, 1);
 
 	_speed = 30.f;
 

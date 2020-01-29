@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "MintPotEnemy.h"
-#include "Hp.h"
+#include "Ability.h"
 #include "Bullet.h"
 
 MintPotEnemy::MintPotEnemy()
@@ -20,7 +20,7 @@ void MintPotEnemy::Init(Vector2 pos)
 	_tag = "enemy";
 	_name = "Pot";
 
-	_hp = new Hp(30, 30);
+	_hp = new Ability(30, 30, 1);
 
 	_speed = 0.f;
 
