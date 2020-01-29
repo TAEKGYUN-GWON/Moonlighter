@@ -24,6 +24,7 @@ void ShopScene::Init()
 	_shopStandMgr = new ShopStandManager; //가판대
 	_shopStandMgr->Init();
 
+	SetUp();
 	_npcMgr = new NpcManager; //NPC CreateObject는 NpcManager에서 해준다.
 	_npcMgr->SetCheckStandLink(_checkStand); //이게 npcmanager를 거쳐서 state로 간다
 	_npcMgr->SetShopStandMgrLink(_shopStandMgr); //엔피씨가 충돌할 스탠드는 이것이다
@@ -34,7 +35,6 @@ void ShopScene::Init()
 	_shopDoor->Init();
 	
 
-	SetUp();
 }
 
 void ShopScene::Release()
@@ -70,11 +70,11 @@ void ShopScene::Render()
 void ShopScene::SetUp()
 {
 	
-	for (int i = 0; i < TILENUMY; ++i)
+	for (int i = 0; i < SHOPTILEMAXY; ++i)
 	{
-		for (int j = 0; j < TILENUMX; ++j)
+		for (int j = 0; j < SHOPTILEMAXX; ++j)
 		{
-			int index = j + TILENUMX * i;
+			int index = j + SHOPTILEMAXX * i;
 
 			/*_tiles[index] = Object::CreateObject<Tile>();
 			_tiles[index]->Init(j, i);
@@ -110,10 +110,10 @@ void ShopScene::SetUp()
 	{
 		//MessageBox(_hWnd, "load 한다", str.c_str(), MB_OK);
 
-		ReadFile(file, _tagTiles, sizeof(tagTile) * TILENUMX * TILENUMY, &read, NULL);
+		ReadFile(file, _tagTiles, sizeof(tagTile) * SHOPTILEMAXX * SHOPTILEMAXY, &read, NULL);
 		CloseHandle(file);
 
-		for (int i = 0; i < TILENUMX * TILENUMY; i++)
+		for (int i = 0; i < SHOPTILEMAXX * SHOPTILEMAXY; i++)
 		{
 			// _tiles[] initialization
 			_tiles[i]->SetImgName("None");

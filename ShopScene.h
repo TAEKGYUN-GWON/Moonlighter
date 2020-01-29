@@ -7,6 +7,8 @@
 #include "ShopStandManager.h"
 #include "Maptool.h"
 #include "ShopDoor.h"
+#define SHOPTILEMAXX 22
+#define SHOPTILEMAXY 28
 
 class NpcManager;
 
@@ -20,7 +22,7 @@ private:
 	ShopStandManager* _shopStandMgr; //가판대 매니저
 	ShopDoor* _shopDoor;			 //상점 출입문
 	vector<Tile*> _tiles;
-	tagTile _tagTiles[TILENUMX * TILENUMY];
+	tagTile _tagTiles[SHOPTILEMAXX * SHOPTILEMAXY];
 
 
 public:

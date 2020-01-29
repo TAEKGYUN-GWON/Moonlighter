@@ -6,15 +6,13 @@ void NpcManager::Init(ShopScene* parent)
 	_counter = 0;
 	_timer = RND->getFromIntTo(30, 100);
 
-	
-
-}
+	_ast = new Astar;
+	_ast->Init(parent->GetTiles(), SHOPTILEMAXX, SHOPTILEMAXY);
+	//int a;
+}								  
 
 void NpcManager::Update()
 {
-
-
-
 	//NPC가 4명 미만이면 더 넣어줘라	
 	if (_vNpc.size() < 4)
 	{
@@ -38,9 +36,6 @@ void NpcManager::Update()
 
 	//Astar
 	AstarFunction();
-
-
-
 }
 
 void NpcManager::Release()
@@ -53,12 +48,7 @@ void NpcManager::Release()
 		{
 			_vNpc.erase(_vNpc.begin() + i);
 		}
-
 	}
-}
-
-void NpcManager::Render()
-{
 }
 
 void NpcManager::MakeNpc()
@@ -67,7 +57,9 @@ void NpcManager::MakeNpc()
 	_npc->SetCheckStandLink(_checkStand);
 	_npc->SetIsCheckSOn(false);
 	_npc->SetIsShopSOn(false);
-	_npc->Move(); //astar 일단 여기다가 담아놓음
+	_npc->SetIsAstarOn(true); //ast 받을지말지
+	_npc->SetDestination(Vector2(392, 700)); //시작하면 문으로 들어가라고
+	//_npc->Move(); //astar 일단 여기다가 담아놓음
 
 	if (_vNpc.size() <= 0)
 	{
@@ -179,18 +171,19 @@ void NpcManager::ShopStandCollision()
 			}
 		}
 	}
-
 }
 
 void NpcManager::AstarFunction()
 {
-	for (int i = 0; i < _vNpc.size(); i++)
+	for (int i = 0; i < _vNpc.size(); i++) //npc숫자만큼 검사한다
 	{
 
-		if(_vNpc[i]->GetState() == (NpcShopState*)NpcIdle::GetInstance) //idle상태일떄
-		_vNpc[i]->SetPath(_ast->pathFinder( //길찾기 함수를 부른다
-			_vNpc[i]->GetTrans()->GetPos(), //NPC의 위치를 찾고
-			_vNpc[i]->GetDestination())); //가야할 위치를 받아옴
+		if (_vNpc[i]->GetState() == (NpcShopState*)NpcIdle::GetInstance()) //idle상태일떄
+		{
+			_vNpc[i]->SetPath(_ast->pathFinder( //길찾기 함수를 부른다 //여기까지 들어옴
+				_vNpc[i]->GetTrans()->GetPos(), //NPC의 위치를 찾고 //여기서 터지는거같음
+				_vNpc[i]->GetDestination())); //가야할 위치를 받아옴
+		}
 	}
 }
 

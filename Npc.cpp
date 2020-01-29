@@ -15,12 +15,13 @@ void Npc::Init(string imgkey)
 
 	SetNpcState(NpcIdle::GetInstance()); //기본 상태
 	
-	_trans->SetPos(392, 850); //문 밖에 생성
+	_trans->SetPos(392, 800); //문 밖에 생성
 	_trans->SetScale(Vector2(
 		GRAPHICMANAGER->FindImage(imgkey)->GetFrameWidth(),
 		GRAPHICMANAGER->FindImage(imgkey)->GetFrameHeight()));
 
 	_speed = 3.0f;
+	//_destination = Vector2(0, 0);
 
 
 	int a;
@@ -44,9 +45,11 @@ void Npc::Update()
 	Stay();
 
 	//Astar 용 함수
-	
+	//SetPath(list<Vector2> lpath);
 	Move();
-	_sprite->SetPosition(_trans->GetPos());
+
+	//npc 그림 띄우기
+	_sprite->SetPosition(_trans->GetPos()); 
 
 	Object::Update();
 }
@@ -68,7 +71,7 @@ void Npc::SetPath(list<Vector2> lpath)
 void Npc::Move()
 {
 
-	if (_lPath.size())
+	if (_lPath.size()) //이 속으로 들어가지 못함
 	{
 		Vector2 a = *_lPath.begin() - _trans->pos; // 가야할위치에서 내위치를 빼면, 가야되는 다음 노드가 나옴
 		_trans->pos += a.Nomalized() * 70 * TIMEMANAGER->getElapsedTime(); //조건 느슨하게 예외처리 해주는 부분

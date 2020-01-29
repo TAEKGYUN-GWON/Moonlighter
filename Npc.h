@@ -11,13 +11,12 @@ class NpcShopState;
 class Npc :	public Object
 {
 private:
-	//Sprite* _sprite;
+	Sprite* _sprite;
 
 	float _speed;
 	bool _isShopSOn;	//가판대랑 충돌중인지
 	bool _isCheckSOn;	//계산대랑 충돌중인지
-
-
+	bool _isAstarOn;	//astar 받아야하는 상태인지
 
 	NpcShopState* _npcShopState;
 
@@ -28,7 +27,6 @@ private:
 
 	Vector2 _destination; //astar 목적지임
 
-	Sprite* _sprite;
 
 
 public:
@@ -58,8 +56,10 @@ public:
 	bool GetIsShopSOn() { return _isShopSOn; }
 	void SetIsCheckSOn(bool check) { _isCheckSOn = check; }
 	bool GetIsCheckSOn() { return _isCheckSOn; }
+	void SetIsAstarOn(bool ast) { _isAstarOn = ast; }
+	bool GetIsAstarOn() { return _isAstarOn; }
 	void SetDestination(Vector2 destination) { _destination = destination; }
-	Vector2 GetDestination() { return _destination; }
+	Vector2 GetDestination() { return _destination; } //★여기 못들어옴
 
 	NpcShopState* GetState() {	return _npcShopState; }
 };
