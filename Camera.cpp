@@ -55,7 +55,6 @@ void Camera::Update()
 void Camera::UpdateMatrix()
 {
 	_matrix = Matrix3x2F::Identity();
-
 	_matrix = _matrix * _scaleMatrix * Matrix3x2F::Translation(-_pos.x, -_pos.y);
 }
 

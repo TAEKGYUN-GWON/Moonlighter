@@ -23,12 +23,8 @@ Vector2 Vector2::operator-(Vector2 to)
 
 bool Vector2::operator<(const Vector2& to) const
 {
-	int a =to.x - to.y;
-	int b = x - y;
-	float32 me = x*x*x + y*y*y;
-	float32 other = to.x*to.x*to.x + to.y*to.y*to.y;
 
-	return me*a < other*b;
+	return x < to.x&& y < to.y;
 
 }
 

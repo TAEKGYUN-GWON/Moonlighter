@@ -4,6 +4,7 @@ class TestScene :	public Scene
 {
 	vector<Object*> test;
 	list<Object*>test2;
+	Object* bullet;
 	int _count=0;
 	float _timer=0;
 public:
