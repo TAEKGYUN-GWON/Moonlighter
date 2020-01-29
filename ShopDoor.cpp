@@ -22,6 +22,7 @@ void ShopDoor::Update()
 {
 	Object::Update();
 
+	_sprite->SetPosition(_trans->GetPos()); //스프라이트가 자신의 포지션을 가지고 있어야함
 
 }
 

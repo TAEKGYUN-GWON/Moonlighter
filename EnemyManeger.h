@@ -8,6 +8,7 @@
 #include "Astar.h"
 #include "Player.h"
 #include "Dungeon.h"
+
 class Dungeon;
 
 class EnemyManeger

@@ -13,6 +13,8 @@ private:
 	tagTile _tagTiles[TILENUMX * TILENUMY];
 	Item* _item;
 
+	bool _isInUse;
+
 public:
 
 	virtual void Init(Vector2 pos, Vector2 scale);
@@ -26,6 +28,9 @@ public:
 	bool GetActive() { return _isActive; }
 	void SetActive(bool isActive) { _isActive = isActive; }
 	Vector2 GetItemPos() { return _itemPos; }
+
+	bool GetIsInUse() { return _isInUse; }
+	void SetIsInUse(bool isinuse) { _isInUse = isinuse; }
 
 	//이미지 네임은 인벤토리에서 줘야 할 것 같음..
 	void SetImgName(string itemImgName) { _itemImgName = itemImgName; }

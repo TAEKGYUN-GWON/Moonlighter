@@ -1,17 +1,15 @@
 #include "stdafx.h"
 #include "NpcManager.h"
-
-void NpcManager::Init()
+#include "ShopStandManager.h"
+void NpcManager::Init(ShopScene* parent)
 {
 	_counter = 0;
 	_timer = RND->getFromIntTo(30, 100);
 
-	//_name 넣어준것은..
-	//상점 나가서 벡터 삭제되면 다시 넣어줘야하는데
-	//어떤애가 없는지 찾아서 넣어주려고..
-
-
-}
+	_ast = new Astar;
+	_ast->Init(parent->GetTiles(), SHOPTILEMAXX, SHOPTILEMAXY);
+	//int a;
+}								  
 
 void NpcManager::Update()
 {
@@ -28,6 +26,20 @@ void NpcManager::Update()
 	}
 	cout << _vNpc.size() << endl;
 	   
+
+	//집에가면 지우기
+	Release();
+	
+	//충돌
+	CheckStandCollision(); //계산대
+	ShopStandCollision(); //가판대
+
+	//Astar
+	AstarFunction();
+}
+
+void NpcManager::Release()
+{
 	//isactive가 false인 npc벡터를 찾아서
 	//false인 애가 있으면 지워버려
 	for (int i = 0; i < _vNpc.size(); ++i)
@@ -36,26 +48,20 @@ void NpcManager::Update()
 		{
 			_vNpc.erase(_vNpc.begin() + i);
 		}
-
 	}
-	
-}
-
-void NpcManager::Release()
-{
-
-}
-
-void NpcManager::Render()
-{
 }
 
 void NpcManager::MakeNpc()
 {
 	_npc = Object::CreateObject<Npc>();
 	_npc->SetCheckStandLink(_checkStand);
+	_npc->SetIsCheckSOn(false);
+	_npc->SetIsShopSOn(false);
+	_npc->SetIsAstarOn(true); //ast 받을지말지
+	//_npc->SetDestination(Vector2(392, 700)); //시작하면 문으로 들어가라고
+	//_npc->Move(); //astar 일단 여기다가 담아놓음
 
-	if (_vNpc.size() <= 0)
+	if (_vNpc.size() < 4)
 	{
 		int a = RND->getInt(4);
 
@@ -100,21 +106,21 @@ void NpcManager::MakeNpc()
 				_vNpc.push_back(_npc);
 				return;
 			}
-			if (_vNpc[i]->GetName() != "guy")
+			else if (_vNpc[i]->GetName() != "guy")
 			{
 				_npc->Init("Guy");
 				_npc->SetName("guy");
 				_vNpc.push_back(_npc);
 				return;
 			}
-			if (_vNpc[i]->GetName() != "kid")
+			else if (_vNpc[i]->GetName() != "kid")
 			{
 				_npc->Init("Kid");
 				_npc->SetName("kid");
 				_vNpc.push_back(_npc);
 				return;
 			}
-			if (_vNpc[i]->GetName() != "lunk")
+			else if (_vNpc[i]->GetName() != "lunk")
 			{
 				_npc->Init("Lunk");
 				_npc->SetName("lunk");
@@ -125,17 +131,61 @@ void NpcManager::MakeNpc()
 	}
 }
 
-//void NpcManager::Astar()
-//{
-//	//vector2(0,0) 여기가 내가 가고싶은 자리임
-//	//_npc->SetPath(_ast->pathFinder(_npc->GetTrans()->pos, Vector2(0,0)));//좌표 계산해서 넣어주는 법 _ast는 A*객체
-//}
-
+//계산대랑 충돌
 void NpcManager::CheckStandCollision()
 {
+	for (int i = 0; i < _vNpc.size(); i++)
+	{
+		int D = getDistance(
+			_vNpc[i]->GetTrans()->GetPos().x, //엔피씨 위치랑
+			_vNpc[i]->GetTrans()->GetPos().y,
+			_checkStand->GetTrans()->GetPos().x,// 계산대 위치
+			_checkStand->GetTrans()->GetPos().y); 
+		//거리가 반지름 더한거보다 작아야 충돌임
+		if (D < _vNpc[i]->GetTrans()->GetScale().x / 2 + _checkStand->GetTrans()->GetScale().x / 2)
+		{
+			_vNpc[i]->SetIsCheckSOn(true); //NPC가 계산대랑 충돌중 On!!!!!!!!!
+			_checkStand->SetStandisInUse(true); //계산대가 사용중 ON!!!!!!!!!
+		}
+	}
 }
 
+//가판대랑 충돌
 void NpcManager::ShopStandCollision()
 {
+	for (int i = 0; i < _vNpc.size(); i++)
+	{
+		for (int j = 0; j < _shopStandMgr->GetShopStandVector().size(); j++)
+		{
+
+			int D = getDistance(
+				_vNpc[i]->GetTrans()->GetPos().x, //엔피씨 위치랑
+				_vNpc[i]->GetTrans()->GetPos().y,
+				_shopStandMgr->GetShopStandVector()[j]->GetTrans()->GetPos().x, //테이블위치
+				_shopStandMgr->GetShopStandVector()[j]->GetTrans()->GetPos().y);
+			//거리가 반지름 더한거보다 작아야 충돌임
+			if (D < _vNpc[i]->GetTrans()->GetScale().x / 2 + _shopStandMgr->GetShopStandVector()[j]->GetTrans()->GetScale().x / 2)
+			{
+				_vNpc[i]->SetIsShopSOn(true); //NPC가 가판대랑 충돌중 On!!!!!!!!!
+				_shopStandMgr->GetShopStandVector()[j]->SetIsInUse(true); //가판대가 사용중 ON!!!!!!!!!
+			}
+		}
+	}
 }
+
+void NpcManager::AstarFunction()
+{
+	for (int i = 0; i < _vNpc.size(); i++) //npc숫자만큼 검사한다
+	{
+
+		if (_vNpc[i]->GetState() == (NpcShopState*)NpcIdle::GetInstance()) //idle상태일떄
+		{
+			_vNpc[i]->SetPath(_ast->pathFinder( //길찾기 함수를 부른다 //여기까지 들어옴
+				_vNpc[i]->GetTrans()->GetPos(), //NPC의 위치를 찾고 //여기서 터지는거같음
+				_vNpc[i]->GetDestination())); //가야할 위치를 받아옴
+		}
+	}
+}
+
+
 

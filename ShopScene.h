@@ -7,6 +7,10 @@
 #include "ShopStandManager.h"
 #include "Maptool.h"
 #include "ShopDoor.h"
+#define SHOPTILEMAXX 22
+#define SHOPTILEMAXY 28
+
+class NpcManager;
 
 class ShopScene : public Scene
 {
@@ -17,8 +21,8 @@ private:
 	NpcShopState* _npcShopState;	 //Npc 상태
 	ShopStandManager* _shopStandMgr; //가판대 매니저
 	ShopDoor* _shopDoor;			 //상점 출입문
-	Tile* _tiles[TILENUMX * TILENUMY];
-	tagTile _tagTiles[TILENUMX * TILENUMY];
+	vector<Tile*> _tiles;
+	tagTile _tagTiles[SHOPTILEMAXX * SHOPTILEMAXY];
 
 
 public:
@@ -27,5 +31,8 @@ public:
 	virtual void Update()override;
 	virtual void Render()override;
 	void SetUp();
+
+	vector<Tile*>GetTiles() { return _tiles; }
+	
 };
 
