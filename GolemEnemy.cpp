@@ -21,7 +21,7 @@ void GolemEnemy::Init(Vector2 pos)
 
 	_hp = new Hp(50, 50);
 
-
+	_speed = 30.f;
 
 	_sprite = AddComponent<Sprite>();
 	_sprite->Init(true, true);
@@ -80,6 +80,10 @@ void GolemEnemy::Init(Vector2 pos)
 	_rAtk->GetComponent<PhysicsBody>()->SetBodyActive(false);
 	_tAtk->GetComponent<PhysicsBody>()->SetBodyActive(false);
 	_bAtk->GetComponent<PhysicsBody>()->SetBodyActive(false);
+	_atks.push_back(_lAtk);
+	_atks.push_back(_rAtk);
+	_atks.push_back(_tAtk);
+	_atks.push_back(_bAtk);
 
 #pragma endregion
 
@@ -90,47 +94,56 @@ void GolemEnemy::Update()
 {
 	Enemy::Update();
 
-	if (_path.size())
-	{
-		Vector2 _astar = *_path.begin() - _trans->GetPos();
-		_trans->SetPos(_trans->GetPos() + _astar.Nomalized() * 70 * TIMEMANAGER->getElapsedTime());
-
-		if ((int)Vector2::Distance(*_path.begin(), _trans->GetPos()) < (int)20)_path.erase(_path.begin());
-	}
 	_sprite->SetPosition(_trans->GetPos()+Vector2::up*30);
 	AtkPosUpdate();
 	if (KEYMANAGER->isOnceKeyDown('8'))GetLeftAtk()->SetBodyActive(true);
+
+
 }
 
 void GolemEnemy::Attack()
 {
+	
+	_sprite->SetImgName("Golem_Atk");
+	_sprite->SetFPS(1.4f);
 	switch (_dir)
 	{
 	case DIRECTION::LEFT:
 	{
+		_sprite->SetFrameY(0);
 		if (!GetLeftAtk()->GetBodyActive())
 			GetLeftAtk()->SetBodyActive(true);
 	}
 		break;
 	case DIRECTION::RIGHT:
 	{
+		_sprite->SetFrameY(1);
 		if(!GetRightAtk()->GetBodyActive())
 			GetRightAtk()->SetBodyActive(true);
 	}
 		break;
 	case DIRECTION::TOP:
 	{
+		_sprite->SetFrameY(2);
 		if(!GetTopAtk()->GetBodyActive())
 			GetTopAtk()->SetBodyActive(true);
 	}
 		break;
 	case DIRECTION::BOTTOM:
 	{
+		_sprite->SetFrameY(3);
 		if (!GetBottomAtk()->GetBodyActive())
 			GetBottomAtk()->SetBodyActive(true);
 	}
 		break;
 	}
+}
+
+void GolemEnemy::AttackEnd()
+{
+	for (Object* atk : _atks)
+		if (atk->GetComponent<PhysicsBody>()->GetBodyActive())
+			atk->GetComponent<PhysicsBody>()->SetBodyActive(false);
 }
 
 

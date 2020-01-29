@@ -21,7 +21,7 @@ void SlimeEnemy::Init(Vector2 pos)
 	
 	_tag = "enemy";
 	_name = "Slime";
-	
+	_speed = 20.f;
 	_hp = new Hp(1, 1); 
 	_sprite = AddComponent<Sprite>();
 	_sprite->Init(true, true);
@@ -45,13 +45,7 @@ void SlimeEnemy::Update()
 {
 	Enemy::Update();
 	
-	if (_path.size())
-	{
-		Vector2 _astar = *_path.begin() - _trans->GetPos();
-		_trans->SetPos(_trans->GetPos() + _astar.Nomalized() * 70 * TIMEMANAGER->getElapsedTime());
-		
-		if ((int)Vector2::Distance(*_path.begin(), _trans->GetPos()) < (int)20)_path.erase(_path.begin());
-	}
+
 	_sprite->SetPosition(_trans->GetPos());
 	//_sprite->set
 }
