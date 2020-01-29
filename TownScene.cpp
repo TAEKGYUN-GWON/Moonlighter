@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "TownScene.h"
-
+#include"Inventory.h"
 void TownScene::Init()
 {
 	Scene::Init();
@@ -145,4 +145,5 @@ void TownScene::Render()
 {
 	GRAPHICMANAGER->DrawImage("town_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
 	Scene::Render();
+	_player->GetInventory()->Render();
 }

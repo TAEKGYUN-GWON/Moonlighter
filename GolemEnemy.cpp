@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "GolemEnemy.h"
-#include "Hp.h"
+#include "Ability.h"
 
 GolemEnemy::GolemEnemy()
 {
@@ -18,7 +18,7 @@ void GolemEnemy::Init()
 	_tag = "enemy";
 	_name = "Golem";
 
-	_hp = new Hp(100, 100);
+	_hp = new Ability(100, 100, 1);
 
 	_trans->SetScale(Vector2(_sprite->GetGraphic()->GetFrameWidth(),
 		_sprite->GetGraphic()->GetFrameHeight()));

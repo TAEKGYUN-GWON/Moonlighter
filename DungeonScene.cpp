@@ -2,7 +2,8 @@
 #include "DungeonScene.h"
 #include "EntranceScene.h"
 #include "TownScene.h"
-#include "Hp.h"
+#include "Ability.h"
+#include "Inventory.h"
 
 void DungeonScene::Init()
 {
@@ -44,6 +45,7 @@ void DungeonScene::Render()
 
 
 	GRAPHICMANAGER->Text(Vector2(10, 6), L"Dungeon Scene", 20, 200, 30, ColorF::AliceBlue);
+
 
 	//wchar_t buffer[128];
 	//int a = 0;

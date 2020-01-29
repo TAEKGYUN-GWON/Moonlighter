@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Enemy.h"
-#include "Hp.h"
+#include "Ability.h"
 #include "Bullet.h"
 //#include "Player.h"
 //전방선언 같은 거...?
@@ -35,7 +35,7 @@ void Enemy::Init()
 
 	_tag = "enemy";
 	_speed = 30.0f;
-	_hp = new Hp;
+	_hp = new Ability;
 	
 
 }

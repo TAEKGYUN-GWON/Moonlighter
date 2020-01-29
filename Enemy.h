@@ -20,7 +20,7 @@ class EnemyHit;
 class EnemyDead;
 
 //hp, bullet
-class Hp;
+class Ability;
 //class Bullet;
 
 class Enemy : public Object
@@ -32,7 +32,7 @@ protected:
 	//■■■■■■■ 상태패턴 틀이 되는 EnemyBasic를 Enemy에게 알려줌 ■■■■■■■
 	EnemyBasic* state;
 	float _speed;
-	Hp* _hp;
+	Ability* _hp;
 
 	list<Vector2> _path;
 	//타임도 줘야 하나?
@@ -51,7 +51,7 @@ public:
 	virtual void Update();	//방향지정해줘야함->겟앵글로...
 	virtual void Attack() {};
 //get,set함수 만들어야 함
-	Hp* GetHP() { return _hp; }
+	Ability* GetHP() { return _hp; }
 	PhysicsBody* GetPhysics() { return _physics; }
 //A*
 	void SetPath(list<Vector2> _path);

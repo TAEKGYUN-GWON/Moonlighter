@@ -76,12 +76,12 @@ void PlayerMove::Update()
 	}
 
 	_obj->GetTrans()->SetPos(_obj->GetTrans()->GetPos() + Vector2(cosf((int)_obj->GetDirection() * 45 * Deg2Rad), -sinf((int)_obj->GetDirection() * 45 * Deg2Rad)) * _obj->GetSpeed() * TIMEMANAGER->getElapsedTime());
-	_obj->GetSprite()->SetPosition(_obj->GetTrans()->GetPos() + Vector2(0, 2));
+	_obj->GetSprite()->SetPosition(_obj->GetTrans()->GetPos() + Vector2(0, -14));
 	_obj->GetPhysics()->SetBodyPosition();
 }
 
 void PlayerMove::Exit()
 {
-	_obj->GetSprite()->SetPosition(_obj->GetTrans()->GetPos() + Vector2(0, 2));
+	_obj->GetSprite()->SetPosition(_obj->GetTrans()->GetPos() + Vector2(0, -14));
 	_obj->GetPhysics()->SetBodyPosition();
 }
