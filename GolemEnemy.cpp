@@ -2,7 +2,6 @@
 #include "GolemEnemy.h"
 #include "Hp.h"
 
-
 GolemEnemy::GolemEnemy()
 {
 }
@@ -16,6 +15,7 @@ void GolemEnemy::Init(Vector2 pos)
 	Enemy::Init();
 
 	GRAPHICMANAGER->AddFrameImage("Golem", L"resource/img/Enemy/GolemMove.png", 8, 4);
+	GRAPHICMANAGER->AddFrameImage("Golem_Atk", L"resource/img/Enemy/GolemAttack.png", 13, 4);
 	_tag = "enemy";
 	_name = "Golem";
 
@@ -38,7 +38,7 @@ void GolemEnemy::Init(Vector2 pos)
 	_physics->GetBody()->SetFixedRotation(true);
 	_physics->SetBodyActive(false);
 
-	_atkRange = 100;
+	_atkRange = GolemEnemy::GetAtkRange();
 
 
 #pragma region 공격 오브젝트
@@ -47,6 +47,10 @@ void GolemEnemy::Init(Vector2 pos)
 	_tAtk = Object::CreateObject<Object>(this);
 	_bAtk = Object::CreateObject<Object>(this);
 
+	 _lAtk->SetTag("GolemAtk");
+	 _rAtk->SetTag("GolemAtk");
+	 _tAtk->SetTag("GolemAtk");
+	 _bAtk->SetTag("GolemAtk");
 
 	_lAtk->GetTrans()->SetPos(_trans->GetPos()+Vector2::left*50);
 	_rAtk->GetTrans()->SetPos(_trans->GetPos()+Vector2::right*50);
@@ -67,6 +71,10 @@ void GolemEnemy::Init(Vector2 pos)
 	_rAtk->GetComponent<PhysicsBody>()->GetBody()->SetFixedRotation(true);
 	_tAtk->GetComponent<PhysicsBody>()->GetBody()->SetFixedRotation(true);
 	_bAtk->GetComponent<PhysicsBody>()->GetBody()->SetFixedRotation(true);
+	_lAtk->GetComponent<PhysicsBody>()->SetSensor(true);
+	_rAtk->GetComponent<PhysicsBody>()->SetSensor(true);
+	_tAtk->GetComponent<PhysicsBody>()->SetSensor(true);
+	_bAtk->GetComponent<PhysicsBody>()->SetSensor(true);
 
 	_lAtk->GetComponent<PhysicsBody>()->SetBodyActive(false);
 	_rAtk->GetComponent<PhysicsBody>()->SetBodyActive(false);
@@ -94,6 +102,37 @@ void GolemEnemy::Update()
 	if (KEYMANAGER->isOnceKeyDown('8'))GetLeftAtk()->SetBodyActive(true);
 }
 
+void GolemEnemy::Attack()
+{
+	switch (_dir)
+	{
+	case DIRECTION::LEFT:
+	{
+		if (!GetLeftAtk()->GetBodyActive())
+			GetLeftAtk()->SetBodyActive(true);
+	}
+		break;
+	case DIRECTION::RIGHT:
+	{
+		if(!GetRightAtk()->GetBodyActive())
+			GetRightAtk()->SetBodyActive(true);
+	}
+		break;
+	case DIRECTION::TOP:
+	{
+		if(!GetTopAtk()->GetBodyActive())
+			GetTopAtk()->SetBodyActive(true);
+	}
+		break;
+	case DIRECTION::BOTTOM:
+	{
+		if (!GetBottomAtk()->GetBodyActive())
+			GetBottomAtk()->SetBodyActive(true);
+	}
+		break;
+	}
+}
+
 
 
 void GolemEnemy::AtkPosUpdate()
@@ -108,10 +147,11 @@ void GolemEnemy::AtkPosUpdate()
 	_tAtk->GetComponent<PhysicsBody>()->SetBodyPosition();
 	_bAtk->GetComponent<PhysicsBody>()->SetBodyPosition();
 
+
 }
 
-void GolemEnemy::Attack()
-{
+//void GolemEnemy::Attack()
+
 	//여기에 범위 원 렉트?
 	//GRAPHICMANAGER->DrawEllipse
 		//(float x, float y, float radiusX, float radiusY, ColorF::Enum color, float strokeWidth)
@@ -121,7 +161,7 @@ void GolemEnemy::Attack()
 	//길바떄 센서처럼 하면 될까??->bool player?
 
 
-}
+
 
 void GolemEnemy::Release()
 {

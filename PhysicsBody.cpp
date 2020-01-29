@@ -6,6 +6,7 @@ void PhysicsBody::Init(BodyType type, float32 friction, float32 density, float32
 	_trans = _object->GetTrans();
 	scale = _object->GetTrans()->GetScale();
 	_type = type;
+	_bodyActive = true;
 	switch (_type)
 	{
 		case DYNAMIC:
@@ -107,7 +108,7 @@ void PhysicsBody::SetBodyPosition()
 
 void PhysicsBody::Render()
 {
-	if (KEYMANAGER->isToggleKey(VK_F1))
+	if (KEYMANAGER->isToggleKey(VK_F1) && _bodyActive)
 		GRAPHICMANAGER->DrawRect(_object->GetTrans()->GetPos(), scale, _body->GetAngle() * RadToDeg, ColorF::Enum::Green, PIVOT::CENTER, 2.5f);
 }
 
@@ -120,6 +121,18 @@ Vector2 PhysicsBody::GetBodyPosition()
 Vector2 PhysicsBody::GetBodyScale()
 {
 	return scale;
+}
+
+void PhysicsBody::SetBodyActive(bool sleep)
+{
+	_body->SetActive(sleep);
+	_bodyActive = sleep;
+}
+
+void PhysicsBody::SetSensor(bool sensor)
+{
+
+	_body->GetFixtureList()->SetSensor(sensor);
 }
 
 Vector2 PhysicsBody::Convert(Vector2 origin)

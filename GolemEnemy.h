@@ -9,17 +9,18 @@ protected:
 	Object* _rAtk;
 	Object* _tAtk;
 	Object* _bAtk;
+	
 
 	void AtkPosUpdate();
 public:
 	GolemEnemy();
 	~GolemEnemy();
-
-	void Init(Vector2 pos);
-	void Update();
-	void Attack();
-	void Release() ;
-	void Render();
+	static float GetAtkRange() { return 100; }
+	virtual void Init(Vector2 pos);
+	virtual void Update();
+	virtual void Attack() override;
+	virtual void Release();
+	virtual void Render();
 
 
 	PhysicsBody* GetLeftAtk() {		return _lAtk->GetComponent<PhysicsBody>(); }

@@ -27,8 +27,19 @@ void EnemyManeger::Update()
 	for (Enemy* e : _vEnemy)
 	{
 		if (e->GetMove())
+		{
+		//	if(Vector2::Distance(_player->GetTrans()->GetPos(), e->GetTrans()->GetPos()) > 300)
 			e->SetPath(_astar->pathFinder(e->GetTrans()->GetPos() - _room->GetTrans()->GetPos(), _player->GetTrans()->GetPos() - _room->GetTrans()->GetPos()));
+		}
+		if (dynamic_cast<GolemEnemy*>(e))
+		{
+			if (Vector2::Distance(_player->GetTrans()->GetPos(), e->GetTrans()->GetPos()) <= GolemEnemy::GetAtkRange() && !e->GetAtk())
+				e->SetAtk(true);
+		}
 	}
+	//_enemy->SetMove(false);
+	//에너미가 탐색하는거 실시간으로 해야해..............
+
 }
 
 void EnemyManeger::Release()

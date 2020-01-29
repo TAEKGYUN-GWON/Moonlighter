@@ -39,6 +39,7 @@ protected:
 
 	bool move;
 	//타임도 줘야 하나?
+	bool _isAtk;
 
 public:
 	Enemy();
@@ -66,13 +67,15 @@ public:
 	list<Vector2> GetPath() { return _path; }
 	void SetMove(bool active) { move = active; }
 	bool GetMove() { return move; }
-
+	bool GetAtk() { return _isAtk; }
+	void SetAtk(bool active) { _isAtk = active; }
 //아이템 떨굴 갯수 만들어야함
 
 };
 
-//■■■■■■■■■■■■■■ 상태 ■■■■■■■■■■■■■■■■
 
+
+//■■■■■■■■■■■■■■ 상태 ■■■■■■■■■■■■■■■■
 class EnemyBasic
 {
 protected:
@@ -86,13 +89,13 @@ public:
 	virtual void Init(Enemy* _sEnemy) {};
 	virtual void Update(Enemy* _sEnemy);
 	virtual void Release(Enemy* _sEnemy) {};
-	
+
 };
 //■■■■■■■■■■■■ Idle ■■■■■■■■■■■■■■
 class EnemyIdle : public EnemyBasic
 {
 	//상태를 객체화 해줌
-static EnemyIdle* instance;
+	static EnemyIdle* instance;
 
 public:
 	//Idle이 아닌 다른 상태들한테 보내줄 인스턴스
@@ -106,6 +109,7 @@ public:
 class EnemyMove : public EnemyBasic
 {
 	static EnemyMove* instance;
+	float timer;
 
 public:
 	static EnemyMove* GetInstance();
