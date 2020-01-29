@@ -5,9 +5,12 @@
 void PlayerRoll::Enter()
 {
 	_state = "Roll";
+
 	_obj->GetSprite()->SetMaxFrameX(8);
 	_obj->GetSprite()->SetFrameX(0);
 	_obj->GetSprite()->SetFPS(2.5f);
+	_obj->GetSprite()->SetPosition(_obj->GetTrans()->GetPos() + Vector2(0, -14));
+
 	_rollSpeed = 800.0f;
 }
 
@@ -78,12 +81,9 @@ void PlayerRoll::Update()
 		}
 	}
 
-	_obj->GetSprite()->SetPosition(_obj->GetTrans()->GetPos() + Vector2(0, 2));
+	_obj->GetSprite()->SetPosition(_obj->GetTrans()->GetPos() + Vector2(0, -14));
 
-	if (_obj->GetSprite()->GetCurrentFrameX() >= _obj->GetSprite()->GetMaxFrameX())
-	{
-		_obj->ChangeState(new PlayerIdle(_obj));
-	}
+	if (_obj->GetSprite()->GetCurrentFrameX() >= _obj->GetSprite()->GetMaxFrameX()) _obj->ChangeState(new PlayerIdle(_obj));
 }
 
 void PlayerRoll::Exit()
