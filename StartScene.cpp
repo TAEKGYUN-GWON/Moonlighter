@@ -65,6 +65,7 @@ void StartScene::Update()
 	inven->Update();
 
 	_smithy->Update();
+	
 }
 
 void StartScene::Render()

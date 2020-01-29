@@ -29,6 +29,8 @@ private:
 	bool _isActive;
 	int _money=0;
 
+	int _atk;
+
 public:
 
 	Inventory();
@@ -51,4 +53,8 @@ public:
 	void AddMoney(int money) { _money += money; }
 	bool DeductionMoney(int money);
 	int GetMoney() { return _money; }
+
+
+	int GetATK() { return _atk; }
+	void SetATK(int atk) { _atk = atk; }
 };
