@@ -270,15 +270,15 @@ void Maptool::Render()
 	// Ä«¸Þ¶ó ºñÀ² ½Ä
 	sprintf_s(str, "%d, %d", (int)CAMERA->GetPosition().x + (int)(_ptMouse.x / CAMERA->GetScale().x), (int)CAMERA->GetPosition().y + (int)(_ptMouse.y / CAMERA->GetScale().y));
 	//GRAPHICMANAGER->DrawTextD2D(Vector2(100, 100), buffer, 20, 1.0f, ColorF::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
-	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 100), str, 20, 1.0f, ColorF::Red);
+	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 100), str, 20, ColorF::Red);
 
 	//sprintf_s(buffer, "%f, %f", CAMERA->GetScale().x, CAMERA->GetScale().y);
 	sprintf_s(str, "%f, %f", CAMERA->GetScale().x, CAMERA->GetScale().y);
-	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 70), str, 20, 1.0f, ColorF::Red);
+	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 70), str, 20, ColorF::Red);
 
 	// ? °¡·Î Ä­ ¼ö¸¸ ³ª¿À´Â °Å °°Àºµ¥ ÁÜ ÀÎ ÁÜ ¾Æ¿ô ÇÏ¸é ¾È ¸ÂÀ½
 	sprintf_s(str, "%d", ((int)CAMERA->GetPosition().x + (int)(_ptMouse.x / CAMERA->GetScale().x) / TILEWIDTH)) + TILENUMX * (((int)CAMERA->GetPosition().y + (int)(_ptMouse.y / CAMERA->GetScale().y) / TILEHEIGHT));
-	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 130), str, 20, 1.0f, ColorF::Blue);
+	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 130), str, 20, ColorF::Blue);
 
 	//sprintf_s(buffer, "%f, %f", CAMERA->GetPosition().x, CAMERA->GetPosition().y);
 

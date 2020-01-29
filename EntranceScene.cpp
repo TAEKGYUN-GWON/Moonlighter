@@ -60,6 +60,8 @@ void EntranceScene::Render()
 	GRAPHICMANAGER->DrawImage("loby", Vector2(0, 0), 1.0f, LEFT_TOP, true);
 
 	Scene::Render();
+
+	GRAPHICMANAGER->Text(Vector2(10, 6), L"Entrance Scene", 20, 200, 30, ColorF::Aqua);
 }
 
 void EntranceScene::SetUp()
@@ -160,14 +162,4 @@ void EntranceScene::SetUp()
 		}
 	}
 	else MessageBox(_hWnd, "can not found the file.", str.c_str(), MB_OK);
-
-
-
-}
-
-void EntranceScene::Render()
-{
-	Scene::Render();
-
-	GRAPHICMANAGER->Text(Vector2(10, 6), L"Entrance Scene", 20, 200, 30, ColorF::Aqua);
 }
