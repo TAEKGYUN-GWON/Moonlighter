@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "SlimeEnemy.h"
 #include "GolemEnemy.h"
+#include "MintPotEnemy.h"
 #include "Boss.h"
 #include "Astar.h"
 #include "Player.h"
@@ -17,7 +18,7 @@ private:
 	Astar* _astar;
 	Boss* _boss;
 	vector<Enemy*> _vEnemy;
-
+	Dungeon* _room;
 public:
 	
 	
@@ -26,12 +27,12 @@ public:
 	//그래서 던전에서는 에너미메니저와 플레이어만 걸려 있어야 하나?
 	//으아아아아아ㅏㅏㄷ
 
-	void Init(Dungeon* parent);
+	void Init(Dungeon* room);
 	void Update();
 	void Release();
 	void Render();
 
-
+	void SetEnemy();
 	//hp
 	//여기서 아이템?
 };

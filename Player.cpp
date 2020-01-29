@@ -34,7 +34,7 @@ void Player::Init()
 	_sprite->SetSize(Vector2(GRAPHICMANAGER->FindImage("will_dungeon")->GetFrameWidth(), GRAPHICMANAGER->FindImage("will_dungeon")->GetFrameHeight()));
 
 	_physics = AddComponent<PhysicsBody>();
-	_physics->Init(BodyType::DYNAMIC, 1.0f);
+	_physics->Init(BodyType::DYNAMIC, 1.0f,0.3f);
 	_physics->GetBody()->SetFixedRotation(true);
 
 	_hp = new Hp(100, 100);

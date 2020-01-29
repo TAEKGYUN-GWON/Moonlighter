@@ -3,12 +3,12 @@
 #include "Player.h"
 //#include "Player.h" //h에서? cpp에서?
 
-enum DIRECTION
+enum class DIRECTION
 {
 	LEFT,
 	RIGHT,
-	UP,
-	DOWN
+	TOP,
+	BOTTOM
 };
 
 //상태패턴을 위한 전방선언
@@ -31,36 +31,53 @@ protected:
 	Player* _player;
 	//■■■■■■■ 상태패턴 틀이 되는 EnemyBasic를 Enemy에게 알려줌 ■■■■■■■
 	EnemyBasic* state;
+	DIRECTION _dir;	//방향
 	float _speed;
 	Hp* _hp;
-
+	float _angle;
 	list<Vector2> _path;
+
+	bool move;
 	//타임도 줘야 하나?
+	bool _isAtk;
 
 public:
 	Enemy();
 	virtual~Enemy(); //상속
 	
 	
-	DIRECTION _dir;	//방향
-	//플레이어가 있냐 없냐 bool 값으루 해줘야 하나?
-
+	int maxFrameX;
+	int frameY;
+	
 	//상태패턴을 만들어서 Enemy에게 알려주기 위한 함수
 	void SetState(EnemyBasic* state);
 	virtual void Init();
 	virtual void Update();	//방향지정해줘야함->겟앵글로...
+	virtual void Render();
 	virtual void Attack() {};
 //get,set함수 만들어야 함
 	Hp* GetHP() { return _hp; }
 	PhysicsBody* GetPhysics() { return _physics; }
+	DIRECTION GetDir() { return _dir; }
+	Sprite* GetSprite() { return _sprite; }
+	float GetAngle() { return _angle; }
+	void SetAngle(float angle) { _angle = angle; }
+	float GetSpeed() { return _speed; }
+
 //A*
 	void SetPath(list<Vector2> _path);
+	list<Vector2> GetPath() { return _path; }
+	void SetMove(bool active) { move = active; }
+	bool GetMove() { return move; }
+	bool GetAtk() { return _isAtk; }
+	void SetAtk(bool active) { _isAtk = active; }
 //아이템 떨굴 갯수 만들어야함
 
 };
 
-//■■■■■■■■■■■■■■ 상태 ■■■■■■■■■■■■■■■■
 
+
+//■■■■■■■■■■■■■■ 상태 ■■■■■■■■■■■■■■■■
 class EnemyBasic
 {
 protected:
@@ -74,13 +91,13 @@ public:
 	virtual void Init(Enemy* _sEnemy) {};
 	virtual void Update(Enemy* _sEnemy);
 	virtual void Release(Enemy* _sEnemy) {};
-	
+
 };
 //■■■■■■■■■■■■ Idle ■■■■■■■■■■■■■■
 class EnemyIdle : public EnemyBasic
 {
 	//상태를 객체화 해줌
-static EnemyIdle* instance;
+	static EnemyIdle* instance;
 
 public:
 	//Idle이 아닌 다른 상태들한테 보내줄 인스턴스
@@ -94,6 +111,7 @@ public:
 class EnemyMove : public EnemyBasic
 {
 	static EnemyMove* instance;
+	float timer;
 
 public:
 	static EnemyMove* GetInstance();
