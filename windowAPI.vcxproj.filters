@@ -336,9 +336,6 @@
     <ClInclude Include="ShopDoor.h">
       <Filter>playGround\Shop\ShopObject</Filter>
     </ClInclude>
-    <ClInclude Include="Dungeon.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="TestScene.h">
       <Filter>playGround\Test</Filter>
     </ClInclude>
@@ -346,9 +343,6 @@
       <Filter>playGround\Dungeon</Filter>
     </ClInclude>
     <ClInclude Include="GolemEnemy.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="DungeonMgr.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="PlayerMove.h">
@@ -374,6 +368,15 @@
     </ClInclude>
     <ClInclude Include="PlayerIdle.h">
       <Filter>playGround\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="MintPotEnemy.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonMgr.h">
+      <Filter>playGround\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Dungeon.h">
+      <Filter>playGround\Dungeon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -569,9 +572,6 @@
     <ClCompile Include="ShopDoor.cpp">
       <Filter>playGround\Shop\ShopObject</Filter>
     </ClCompile>
-    <ClCompile Include="Dungeon.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="TestScene.cpp">
       <Filter>playGround\Test</Filter>
     </ClCompile>
@@ -579,9 +579,6 @@
       <Filter>playGround\Dungeon</Filter>
     </ClCompile>
     <ClCompile Include="GolemEnemy.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="DungeonMgr.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="PlayerMove.cpp">
@@ -607,6 +604,15 @@
     </ClCompile>
     <ClCompile Include="PlayerIdle.cpp">
       <Filter>playGround\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MintPotEnemy.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Dungeon.cpp">
+      <Filter>playGround\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonMgr.cpp">
+      <Filter>playGround\Dungeon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

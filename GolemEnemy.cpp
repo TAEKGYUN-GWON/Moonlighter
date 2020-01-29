@@ -21,11 +21,12 @@ void GolemEnemy::Init(Vector2 pos)
 
 	_hp = new Hp(50, 50);
 
-
+	
 
 	_sprite = AddComponent<Sprite>();
 	_sprite->Init(true, true);
 	_sprite->SetImgName("Golem");
+
 	_trans->SetScale(Vector2(_sprite->GetGraphic()->GetFrameWidth(),
 		_sprite->GetGraphic()->GetFrameHeight()));
 	_trans->SetPos(pos);
@@ -34,7 +35,7 @@ void GolemEnemy::Init(Vector2 pos)
 	_trans->SetScale(Vector2(62, 25));
 	_physics = AddComponent<PhysicsBody>();
 	_physics->Init(BodyType::DYNAMIC, 1.0f);
-	////가상세계의 렉트 뒤틀리는거 고정
+	//가상세계의 렉트 뒤틀리는거 고정
 	_physics->GetBody()->SetFixedRotation(true);
 	_physics->SetBodyActive(false);
 
@@ -110,24 +111,29 @@ void GolemEnemy::Attack()
 	{
 		if (!GetLeftAtk()->GetBodyActive())
 			GetLeftAtk()->SetBodyActive(true);
+		_sprite->SetFrameY(0);
 	}
+		//_sprite->Set
 		break;
 	case DIRECTION::RIGHT:
 	{
 		if(!GetRightAtk()->GetBodyActive())
 			GetRightAtk()->SetBodyActive(true);
+		_sprite->SetFrameY(1);
 	}
 		break;
 	case DIRECTION::TOP:
 	{
 		if(!GetTopAtk()->GetBodyActive())
 			GetTopAtk()->SetBodyActive(true);
+		_sprite->SetFrameY(2);
 	}
 		break;
 	case DIRECTION::BOTTOM:
 	{
 		if (!GetBottomAtk()->GetBodyActive())
 			GetBottomAtk()->SetBodyActive(true);
+		_sprite->SetFrameY(4);
 	}
 		break;
 	}

@@ -125,25 +125,19 @@ EnemyIdle* EnemyIdle::GetInstance()
 
 void EnemyIdle::Init(Enemy* _sEnemy)
 {
-	//sprite 세팅?
 	cout << "왜 안들어와?" << endl;
 }
 
 void EnemyIdle::Update(Enemy* _sEnemy)
 {
-	//if (KEYMANAGER->isOnceKeyDown('0'))
-		//hp 가 0이면
 	EnemyBasic::Update(_sEnemy);
 	Release(_sEnemy);
 	cout << "들어오냐?" << endl;
-
 }
 void EnemyIdle::Release(Enemy* _sEnemy)
 {
 	cout << "move로 가!!!" << endl;
-
-	//if 플레이어가 있으면
-	// else if 체력이 0 이면 죽어라!
+	//  체력이 0 이면 죽어라
 	if (_sEnemy->GetHP()->IsDead())
 	{
 		SetEnemyState(_sEnemy, EnemyDead::GetInstance());
@@ -165,7 +159,6 @@ EnemyMove* EnemyMove::GetInstance()
 void EnemyMove::Init(Enemy* _sEnemy)
 {
 	cout << "move 들어옴?" << endl;
-	//a*? bool값조정.?
 	_sEnemy->SetMove(true);
 	timer = 0;
 }
@@ -202,13 +195,7 @@ void EnemyMove::Release(Enemy* _sEnemy)
 	//SetEnemyState(_sEnemy, EnemyMove::GetInstance());
 	cout << "다시 무브?" << endl;
 	SetEnemyState(_sEnemy, EnemyIdle::GetInstance());
-	// else if 체력이 0 이면 죽어라!
-
-	//if (_sEnemy->GetHP()->IsDead())
-	//{
-	//	SetEnemyState(_sEnemy, EnemyDead::GetInstance());
-	//}
-	//else SetEnemyState(_sEnemy, EnemyAttack::GetInstance());
+	
 }
 //■■■■■■■■■■■ Attack ■■■■■■■■■■■■
 EnemyAttack* EnemyAttack::GetInstance()

@@ -15,6 +15,8 @@ protected:
 public:
 	GolemEnemy();
 	~GolemEnemy();
+	int maxFrameX;
+	int frameY;
 	static float GetAtkRange() { return 100; }
 	virtual void Init(Vector2 pos);
 	virtual void Update();
