@@ -14,11 +14,14 @@ void DungeonScene::Init()
 
 	_player = Object::CreateObject<Player>();
 	_player->Init();
+	_player->GetTrans()->SetPos(Vector2(1170,1440)+ Vector2((TILEWIDTH * Dungeon_X)/2, (TILEHEIGHT * Dungeon_Y)-150));
+	_player->GetComponent<PhysicsBody>()->SetBodyPosition();
+	CAMERA->SetPos(Vector2(1170, 1440));
+	//_player-;
 	//_player->GetHP()->GetCurrentHP();
-
-	_player = (Player*)SCENEMANAGER->GetNowScene()->GetChildFromName("Will");
+	
 	_dMgr = new DungeonMgr;
-	_dMgr->Init();
+	_dMgr->Init(_player);
 	//test = new Dungeon;
 	//test->Init(Vector2::zero);
 }
@@ -42,6 +45,10 @@ void DungeonScene::Render()
 
 	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 0), buffer, 20, 300, 50, ColorF::Azure);
 
+	//swprintf(buffer, 128, L"x : %d \n y : %d ", _ptMouse.x, _ptMouse.y);
+	swprintf(buffer, 128, L"x : %d \n y : %d ", (55 + _ptMouse.x) / TILEWIDTH,_ptMouse.y);
+
+	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2-200, 0), buffer, 20, 300, 50, ColorF::Azure);
 
 	GRAPHICMANAGER->Text(Vector2(10, 6), L"Dungeon Scene", 20, 200, 30, ColorF::AliceBlue);
 
