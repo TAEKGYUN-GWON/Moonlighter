@@ -43,6 +43,6 @@ void DungeonMgr::Render()
 	{
 		d->Render();
 		swprintf(buffer, 128, L"X : %f\nY : %f", d->GetTrans()->GetPos().x, d->GetTrans()->GetPos().y);
-		GRAPHICMANAGER->Text(d->GetTrans()->GetPos(), buffer, 40, 300, 50, ColorF::Azure,1, TextPivot::LEFT_TOP, L"¸¼Àº°íµñ",true);
+		GRAPHICMANAGER->Text(d->GetTrans()->GetPos(), buffer, 40, 300, 50, ColorF::Azure, TextPivot::LEFT_TOP, L"¸¼Àº°íµñ",true);
 	}
 }

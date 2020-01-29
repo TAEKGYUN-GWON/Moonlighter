@@ -8,7 +8,7 @@ void PlayerRoll::Enter()
 	_obj->GetSprite()->SetMaxFrameX(8);
 	_obj->GetSprite()->SetFrameX(0);
 	_obj->GetSprite()->SetFPS(2.5f);
-	_rollSpeed = 2800.0f;
+	_rollSpeed = 800.0f;
 }
 
 void PlayerRoll::Update()

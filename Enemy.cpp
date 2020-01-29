@@ -82,7 +82,7 @@ void Enemy::Render()
 	Object::Render();
 	wchar_t buffer[128];
 	swprintf(buffer, 128, L"Angle : %f", Vector2::GetAngle(_trans->GetPos(), _player->GetTrans()->GetPos()) * Rad2Deg);
-	GRAPHICMANAGER->Text(_trans->GetPos() - Vector2::down * 20, buffer, 20, 300, 50, ColorF::Azure, 1, TextPivot::CENTER, L"¸¼Àº°íµñ", true);
+	GRAPHICMANAGER->Text(_trans->GetPos() - Vector2::down * 20, buffer, 20, 300, 50, ColorF::Azure, TextPivot::CENTER, L"¸¼Àº°íµñ", true);
 
 }
 
