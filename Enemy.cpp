@@ -32,7 +32,7 @@ void Enemy::SetState(EnemyBasic* state)
 {
 
 	state->Init(this);
-	if (dynamic_cast<EnemyMove*>(this->state)) delete this->state;
+	if (dynamic_cast<EnemyMove*>(this->state) || dynamic_cast<EnemyAttack*>(this->state)) delete this->state;
 	this->state = state;
 }
 
@@ -218,12 +218,11 @@ EnemyAttack* EnemyAttack::GetInstance()
 		instance = new EnemyAttack();
 	}
 
-	return instance;
+	return new EnemyAttack();
 }
 
 void EnemyAttack::Init(Enemy* _sEnemy)
 {
-	if (_sEnemy->GetName() == "Golem") _sEnemy->GetSprite()->SetImgName("Golem_Atk");
 	//cout << "공격 들어왔니?" << endl;
 }
 
@@ -233,11 +232,18 @@ void EnemyAttack::Update(Enemy* _sEnemy)
 	{
 		SetEnemyState(_sEnemy, EnemyDead::GetInstance());
 	}
-	_sEnemy->Attack();
+
+	if (_sEnemy->GetAtk())
+	{
+		_sEnemy->Attack();
+		_sEnemy->SetAtk(false);
+	}
+
 	//cout << "여기는 공격!" << endl;
 	if (_sEnemy->GetName() == "Golem")
 	{
-		//if(_sEnemy->GetSprite()->get)
+		if(_sEnemy->GetSprite()->GetCurrentFrameX()>=_sEnemy->GetSprite()->GetMaxFrameX())
+			Release(_sEnemy);
 	}
 	else
 		Release(_sEnemy);
@@ -245,10 +251,13 @@ void EnemyAttack::Update(Enemy* _sEnemy)
 
 void EnemyAttack::Release(Enemy* _sEnemy)
 {
-	_sEnemy->SetAtk(false);
+	_sEnemy->AttackEnd();
 	//if 플레이어한테 맞으면 맞는 상태로 가라
 	SetEnemyState(_sEnemy, EnemyIdle::GetInstance());
-
+	if (_sEnemy->GetName() == "Golem")
+	{
+		_sEnemy->GetSprite()->SetImgName("Golem");
+	}
 	// else if 아니면 idle로 가라
 	//SetEnemyState(_sEnemy, EnemyIdle::GetInstance());
 	// else if 체력이 0 이면 죽어라!

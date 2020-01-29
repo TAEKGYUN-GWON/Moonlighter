@@ -55,6 +55,7 @@ public:
 	virtual void Update();	//방향지정해줘야함->겟앵글로...
 	virtual void Render();
 	virtual void Attack() {};
+	virtual void AttackEnd() {};
 //get,set함수 만들어야 함
 	Hp* GetHP() { return _hp; }
 	PhysicsBody* GetPhysics() { return _physics; }
@@ -63,6 +64,7 @@ public:
 	float GetAngle() { return _angle; }
 	void SetAngle(float angle) { _angle = angle; }
 	float GetSpeed() { return _speed; }
+	EnemyBasic* GetState() { return state; }
 
 //A*
 	void SetPath(list<Vector2> _path);

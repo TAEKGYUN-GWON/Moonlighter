@@ -33,7 +33,7 @@ void EnemyManeger::Update()
 		}
 		if (dynamic_cast<GolemEnemy*>(e))
 		{
-			if (Vector2::Distance(_player->GetTrans()->GetPos(), e->GetTrans()->GetPos()) <= GolemEnemy::GetAtkRange() && !e->GetAtk())
+			if (Vector2::Distance(_player->GetTrans()->GetPos(), e->GetTrans()->GetPos()) <= GolemEnemy::GetAtkRange() && !dynamic_cast<EnemyAttack*>(e->GetState()))
 				e->SetAtk(true);
 		}
 	}
