@@ -55,9 +55,11 @@ void Player::Update()
 	if (KEYMANAGER->isStayKeyDown('P')) _hp->DamageHP(10);
 	else if (KEYMANAGER->isStayKeyDown('O')) _hp->HealHP(10);
 
+	if (_state->GetState() != "Attack" && KEYMANAGER->isOnceKeyDown('Z')) _atkType = (AttackType)(((int)_atkType + 1) % 2);
+
 	if (!_hp->IsDead())
 	{
-		Object::Update();
+		Object:: Update();
 
 		_state->Update();
 	}
@@ -72,6 +74,15 @@ void Player::Render()
 	GRAPHICMANAGER->Text(_trans->GetPos() + Vector2(-(_trans->GetScale().x + 10.0f), 32.f), buffer, 20, 90, 30, ColorF::LawnGreen, TextPivot::RIGHT_TOP);
 
 	if (_hp->IsDead()) GRAPHICMANAGER->Text(_trans->GetPos() + Vector2(-(_trans->GetScale().x - (_trans->GetScale().x * 0.5f) + 4.0f), -62.f), L"Dead", 20, 100, 30, ColorF::Red);
+
+	int a = (int)_dir;
+	Vector2 test(_trans->GetPos() + Vector2(cosf(a * 45.0f * Deg2Rad), -sinf(a * 45.0f * Deg2Rad)) * 100);
+	GRAPHICMANAGER->DrawLine(_trans->GetPos(), test, ColorF::AntiqueWhite);
+
+	char str[128];
+	if(_atkType == AttackType::Sword) sprintf_s(str, "Attack Type : Sword\nState Type : %s", _state->GetState().c_str());
+	else if (_atkType == AttackType::Bow) sprintf_s(str, "Attack Type : Bow\nState Type : %s", _state->GetState().c_str());
+	GRAPHICMANAGER->DrawTextD2D(Vector2(WINSIZEX - 230, 2), str, 20, 200, 70, ColorF::AntiqueWhite, TextPivot::RIGHT_BOTTOM);
 }
 
 void Player::ChangeState(PlayerState* state)

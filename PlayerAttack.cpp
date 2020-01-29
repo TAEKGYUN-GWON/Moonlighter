@@ -4,6 +4,8 @@
 
 void PlayerAttack::Enter()
 {
+	_state = "Attack";
+
 	_obj->GetSprite()->SetFrameX(0);
 	_obj->GetSprite()->SetFPS(2.5f);
 	_obj->GetSprite()->SetIsLoop(false);
