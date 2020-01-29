@@ -21,7 +21,7 @@ void GolemEnemy::Init(Vector2 pos)
 
 	_hp = new Hp(50, 50);
 
-
+	_speed = 30.f;
 
 	_sprite = AddComponent<Sprite>();
 	_sprite->Init(true, true);
@@ -94,23 +94,18 @@ void GolemEnemy::Update()
 {
 	Enemy::Update();
 
-	if (_path.size())
-	{
-		Vector2 _astar = *_path.begin() - _trans->GetPos();
-		_trans->SetPos(_trans->GetPos() + _astar.Nomalized() * 70 * TIMEMANAGER->getElapsedTime());
-
-		if ((int)Vector2::Distance(*_path.begin(), _trans->GetPos()) < (int)20)_path.erase(_path.begin());
-	}
 	_sprite->SetPosition(_trans->GetPos()+Vector2::up*30);
 	AtkPosUpdate();
 	if (KEYMANAGER->isOnceKeyDown('8'))GetLeftAtk()->SetBodyActive(true);
+
+
 }
 
 void GolemEnemy::Attack()
 {
-
+	
 	_sprite->SetImgName("Golem_Atk");
-	_sprite->SetFPS(2);
+	_sprite->SetFPS(1.4f);
 	switch (_dir)
 	{
 	case DIRECTION::LEFT:

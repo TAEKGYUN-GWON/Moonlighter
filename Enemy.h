@@ -34,12 +34,14 @@ protected:
 	DIRECTION _dir;	//방향
 	float _speed;
 	Hp* _hp;
-	float _angle;
+	int _angle;
 	list<Vector2> _path;
 
 	bool move;
 	//타임도 줘야 하나?
 	bool _isAtk;
+
+	bool _changePos = true;
 
 public:
 	Enemy();
@@ -65,6 +67,7 @@ public:
 	void SetAngle(float angle) { _angle = angle; }
 	float GetSpeed() { return _speed; }
 	EnemyBasic* GetState() { return state; }
+	Player* GetPlayer() { return _player; }
 
 //A*
 	void SetPath(list<Vector2> _path);
