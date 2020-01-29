@@ -22,7 +22,7 @@ void MintPotEnemy::Init(Vector2 pos)
 
 	_hp = new Hp(30, 30);
 
-	
+	_speed = 0.f;
 
 	////이미지 크기, pos는 어떻게 하지 생성될때 방안에 랜덤으로 해야 할거 같음
 	_sprite = AddComponent<Sprite>();

@@ -5,11 +5,6 @@
 void EnemyManeger::Init(Dungeon* room)
 {
 	//해당 던전씬에 물려주기
-	_enemy = Object::CreateObject<Enemy>();
-	_enemy->Init();
-	_enemy->GetTrans()->SetPos(WINSIZEX / 2, 0);
-	_enemy->GetTrans()->SetScale(50, 50);
-	_enemy->AddComponent<Sprite>();
 	_astar = new Astar;
 	_astar->Init(room->GetTiles(), Dungeon_X, Dungeon_Y);
 
@@ -28,13 +23,16 @@ void EnemyManeger::Update()
 	{
 		if (e->GetMove())
 		{
-			if(Vector2::Distance(_player->GetTrans()->GetPos(), e->GetTrans()->GetPos()) > 80)
-			e->SetPath(_astar->pathFinder(e->GetTrans()->GetPos() - _room->GetTrans()->GetPos(), _player->GetTrans()->GetPos() - _room->GetTrans()->GetPos()));
+			if(Vector2::Distance(_player->GetTrans()->GetPos(), e->GetTrans()->GetPos()) > 80 &&
+				Vector2::Distance(_player->GetTrans()->GetPos(), e->GetTrans()->GetPos()) < 600)
+				e->SetPath(_astar->pathFinder(e->GetTrans()->GetPos() - _room->GetTrans()->GetPos(), _player->GetTrans()->GetPos() - _room->GetTrans()->GetPos()));
 		}
 		if (dynamic_cast<GolemEnemy*>(e))
 		{
-			if (Vector2::Distance(_player->GetTrans()->GetPos(), e->GetTrans()->GetPos()) <= GolemEnemy::GetAtkRange() && !e->GetAtk())
+			if (Vector2::Distance(_player->GetTrans()->GetPos(), e->GetTrans()->GetPos()) <= GolemEnemy::GetAtkRange() && !dynamic_cast<EnemyAttack*>(e->GetState()))
+			{ 
 				e->SetAtk(true);
+			}
 		}
 	}
 	//_enemy->SetMove(false);
@@ -55,10 +53,7 @@ void EnemyManeger::Release()
 
 void EnemyManeger::Render()
 {
-	wchar_t buffer[128];
-	swprintf(buffer, 128, L"거리 : %f", Vector2::Distance(_player->GetTrans()->GetPos(), _enemy->GetTrans()->GetPos()));
 
-	GRAPHICMANAGER->Text(Vector2(300, 200), buffer, 20, 300, 50, ColorF::Azure);
 }
 
 void EnemyManeger::SetEnemy()

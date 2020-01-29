@@ -32,7 +32,7 @@ void Enemy::SetState(EnemyBasic* state)
 {
 
 	state->Init(this);
-	if (dynamic_cast<EnemyMove*>(this->state)) delete this->state;
+	if (dynamic_cast<EnemyMove*>(this->state) || dynamic_cast<EnemyAttack*>(this->state)) delete this->state;
 	this->state = state;
 }
 
@@ -41,7 +41,7 @@ void Enemy::Init()
 	Object::Init();
 
 	_tag = "enemy";
-	_speed = 30.0f;
+
 	_hp = new Hp;
 	maxFrameX = 0;
 	frameY = 0;
@@ -55,24 +55,62 @@ void Enemy::Update()
 {
 	Object::Update();
 	
-	float angle = Vector2::GetAngle(_trans->GetPos(), _player->GetTrans()->GetPos());
 	 //이미지를 바꿔주는데 뭐...currentimg(y) 이런거?
 	 //if (angle > (3 * PI) / 4 && angle < (5 * PI) / 4) _dir = DIRECTION::LEFT;
 	 //if (angle > (4 * PI) / 4 && angle < (7 * PI) / 4) _dir = DIRECTION::RIGHT;
 	 //if (angle > PI / 4 && angle < (3 * PI) / 4) _dir = DIRECTION::TOP;
 	 //if (angle > PI / 4 && angle < (7 * PI) / 4) _dir = DIRECTION::BOTTOM;
-	if (angle >= 45 * DegToRad && angle < 135 * DegToRad)_dir = DIRECTION::TOP;
-	else if (angle >= 135 * DegToRad && angle < 180 * DegToRad)_dir = DIRECTION::LEFT;
-	else if (angle <= -135 * DegToRad && angle > -180 * DegToRad)_dir = DIRECTION::LEFT;
 
-	else if (angle <= -45 * DegToRad && angle > -135 * DegToRad)_dir = DIRECTION::BOTTOM;
-
-	else if (angle <= 0 * DegToRad && angle >= -45 * DegToRad)_dir = DIRECTION::RIGHT;
-	else if (angle >= 0 * DegToRad && angle < 45 * DegToRad)_dir = DIRECTION::RIGHT;
-
-	
 	//상태 Update 걸어줌
 	state->Update(this);
+	if (_angle >= 45 * DegToRad && _angle < 135 * DegToRad)_dir = DIRECTION::TOP;
+	else if (_angle >= 135 * DegToRad && _angle < 180 * DegToRad)_dir = DIRECTION::LEFT;
+	else if (_angle <= -135 * DegToRad && _angle > -180 * DegToRad)_dir = DIRECTION::LEFT;
+
+	else if (_angle <= -45 * DegToRad && _angle > -135 * DegToRad)_dir = DIRECTION::BOTTOM;
+
+	else if (_angle <= 0 * DegToRad && _angle > -45 * DegToRad)_dir = DIRECTION::RIGHT;
+	else if (_angle >= 0 * DegToRad && _angle < 45 * DegToRad)_dir = DIRECTION::RIGHT;
+
+
+	if (!dynamic_cast<EnemyAttack*>(state))
+	{
+		if (GetPath().size())
+		{
+			if (_changePos)
+			{
+				_changePos = false;
+				_angle = (int)  Vector2::GetAngle(_trans->GetPos(), *_path.begin());
+			}
+			Vector2 dir = *_path.begin() - _trans->GetPos();
+			Vector2 pos = _trans->GetPos();
+			_trans->SetPos(pos + dir.Nomalized() * _speed * TIMEMANAGER->getElapsedTime());
+
+			if (Vector2::Distance(*_path.begin(), _trans->GetPos()) <= 15.5f)
+			{
+				_changePos = true;
+				_path.erase(_path.begin());
+			}
+		}
+		switch (_dir)
+		{
+		case DIRECTION::LEFT:
+			_sprite->SetFrameY(0);
+			break;
+		case DIRECTION::RIGHT:
+			_sprite->SetFrameY(1);
+			break;
+		case DIRECTION::TOP:
+			_sprite->SetFrameY(2);
+			break;
+		case DIRECTION::BOTTOM:
+			_sprite->SetFrameY(3);
+			break;
+		}
+	}
+	_physics->SetBodyPosition();
+
+
 
 
 }
@@ -167,22 +205,34 @@ void EnemyMove::Update(Enemy* _sEnemy)
 {
 	EnemyBasic::Update(_sEnemy);
 
-	if (_sEnemy->GetMove())
-		_sEnemy->SetMove(false);
-	if (_sEnemy->GetPath().size())
-	{
-		Vector2 dir = *_sEnemy->GetPath().begin() - _sEnemy->GetTrans()->GetPos();
-		Vector2 pos = _sEnemy->GetTrans()->GetPos();
-		_sEnemy->SetAngle(Vector2::GetAngle(pos, *_sEnemy->GetPath().begin()));
-		_sEnemy->GetTrans()->SetPos(pos + dir.Nomalized() * _sEnemy->GetSpeed() * TIMEMANAGER->getElapsedTime());
-	}
-	_sEnemy->GetPhysics()->SetBodyPosition();
+
+	//switch (_sEnemy->GetDir())
+	//{
+	//case DIRECTION::LEFT:
+	//	_sEnemy->GetSprite()->SetFrameY(0);
+	//	break;
+	//case DIRECTION::RIGHT:
+	//	_sEnemy->GetSprite()->SetFrameY(1);
+	//	break;
+	//case DIRECTION::TOP:
+	//	_sEnemy->GetSprite()->SetFrameY(2);
+	//	break;
+	//case DIRECTION::BOTTOM:
+	//	_sEnemy->GetSprite()->SetFrameY(3);
+	//	break;
+	//}
+	
 	//cout << "여기는 무브 오예 두둠칫" << endl;
 	//loat a = RND->getFloat(10000000);
 	//if(a<30)
+	_sEnemy->SetMove(false);
+
 	timer += TIMEMANAGER->getElapsedTime();
-	if (timer > 3)
-		Release(_sEnemy);
+
+	if (timer >0.5f) {
+		_sEnemy->SetMove(true);
+		timer = 0;
+	}
 
 }
 
@@ -205,12 +255,11 @@ EnemyAttack* EnemyAttack::GetInstance()
 		instance = new EnemyAttack();
 	}
 
-	return instance;
+	return new EnemyAttack();
 }
 
 void EnemyAttack::Init(Enemy* _sEnemy)
 {
-	if (_sEnemy->GetName() == "Golem") _sEnemy->GetSprite()->SetImgName("Golem_Atk");
 	//cout << "공격 들어왔니?" << endl;
 }
 
@@ -220,11 +269,18 @@ void EnemyAttack::Update(Enemy* _sEnemy)
 	{
 		SetEnemyState(_sEnemy, EnemyDead::GetInstance());
 	}
-	_sEnemy->Attack();
+
+	if (_sEnemy->GetAtk())
+	{
+		_sEnemy->Attack();
+		_sEnemy->SetAtk(false);
+	}
+	_sEnemy->SetAngle(Vector2::GetAngle(_sEnemy->GetTrans()->GetPos(), _sEnemy->GetPlayer()->GetTrans()->GetPos()));
 	//cout << "여기는 공격!" << endl;
 	if (_sEnemy->GetName() == "Golem")
 	{
-		//if(_sEnemy->GetSprite()->get)
+		if(_sEnemy->GetSprite()->GetCurrentFrameX() >= _sEnemy->GetSprite()->GetMaxFrameX())
+			Release(_sEnemy);
 	}
 	else
 		Release(_sEnemy);
@@ -232,10 +288,13 @@ void EnemyAttack::Update(Enemy* _sEnemy)
 
 void EnemyAttack::Release(Enemy* _sEnemy)
 {
-	_sEnemy->SetAtk(false);
+	_sEnemy->AttackEnd();
 	//if 플레이어한테 맞으면 맞는 상태로 가라
 	SetEnemyState(_sEnemy, EnemyIdle::GetInstance());
-
+	if (_sEnemy->GetName() == "Golem")
+	{
+		_sEnemy->GetSprite()->SetImgName("Golem");
+	}
 	// else if 아니면 idle로 가라
 	//SetEnemyState(_sEnemy, EnemyIdle::GetInstance());
 	// else if 체력이 0 이면 죽어라!

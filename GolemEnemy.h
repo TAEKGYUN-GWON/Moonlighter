@@ -9,6 +9,7 @@ protected:
 	Object* _rAtk;
 	Object* _tAtk;
 	Object* _bAtk;
+	vector<Object*> _atks;
 	
 
 	void AtkPosUpdate();
@@ -21,6 +22,7 @@ public:
 	virtual void Init(Vector2 pos);
 	virtual void Update();
 	virtual void Attack() override;
+	virtual void AttackEnd() override;
 	virtual void Release();
 	virtual void Render();
 

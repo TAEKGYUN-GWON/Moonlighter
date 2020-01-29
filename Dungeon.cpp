@@ -34,7 +34,7 @@ void Dungeon::Init(Vector2 start)
 
 void Dungeon::Update()
 {
-	for (Object* c : _children)
+	for (Object* c : tiles)
 	{
 		if (!c->GetIsActive())
 			c->Release();
@@ -65,7 +65,7 @@ void Dungeon::SetUp()
 		{
 			int index = j + Dungeon_X * i;
 
-			Tile* tile = Object::CreateObject<Tile>(this);
+			Tile* tile = Object::CreateObject<Tile>();
 			tile->Init(j, i);
 			tile->GetTrans()->SetPos(pos.x + j * TILEWIDTH + (TILEWIDTH / 2),
 				pos.y + i * TILEHEIGHT + (TILEHEIGHT / 2));
@@ -176,7 +176,7 @@ void Dungeon::SetRoom()
 void Dungeon::CloseRoom()
 {
 	_roomActive = false;
-	for (Object* c : _children)
+	for (Object* c : tiles)
 		c->SetIsActive(false);
 	_eMgr->Release();
 	tiles.clear();
