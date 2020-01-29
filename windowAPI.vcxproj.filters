@@ -357,20 +357,17 @@
     <ClInclude Include="PlayerAttack.h">
       <Filter>playGround\Player</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerRoll.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerIdle.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerState.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Smithy.h">
-      <Filter>playGround\Smithy</Filter>
+    <ClInclude Include="PlayerRoll.h">
+      <Filter>playGround\Player</Filter>
     </ClInclude>
     <ClInclude Include="ETCS.h">
       <Filter>playGround\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>playGround\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -587,20 +584,17 @@
     <ClCompile Include="PlayerAttack.cpp">
       <Filter>playGround\Player</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerRoll.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerIdle.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerState.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Smithy.cpp">
-      <Filter>playGround\Smithy</Filter>
+    <ClCompile Include="PlayerRoll.cpp">
+      <Filter>playGround\Player</Filter>
     </ClCompile>
     <ClCompile Include="ETCS.cpp">
       <Filter>playGround\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>playGround\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
