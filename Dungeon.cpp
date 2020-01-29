@@ -34,11 +34,7 @@ void Dungeon::Init(Vector2 start)
 
 void Dungeon::Update()
 {
-	for (Object* c : tiles)
-	{
-		if (!c->GetIsActive())
-			c->Release();
-	}
+
 
 	if (!_roomActive)return;
 
@@ -176,9 +172,9 @@ void Dungeon::SetRoom()
 void Dungeon::CloseRoom()
 {
 	_roomActive = false;
-	for (Object* c : tiles)
-		c->SetIsActive(false);
 	_eMgr->Release();
+	for (Object* c : tiles)
+		c->Release();
 	tiles.clear();
 }
 
