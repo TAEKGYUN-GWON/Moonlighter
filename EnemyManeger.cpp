@@ -28,7 +28,7 @@ void EnemyManeger::Update()
 	{
 		if (e->GetMove())
 		{
-		//	if(Vector2::Distance(_player->GetTrans()->GetPos(), e->GetTrans()->GetPos()) > 300)
+			if(Vector2::Distance(_player->GetTrans()->GetPos(), e->GetTrans()->GetPos()) > 80)
 			e->SetPath(_astar->pathFinder(e->GetTrans()->GetPos() - _room->GetTrans()->GetPos(), _player->GetTrans()->GetPos() - _room->GetTrans()->GetPos()));
 		}
 		if (dynamic_cast<GolemEnemy*>(e))

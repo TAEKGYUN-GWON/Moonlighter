@@ -61,16 +61,28 @@ void Enemy::Update()
 	 //if (angle > (4 * PI) / 4 && angle < (7 * PI) / 4) _dir = DIRECTION::RIGHT;
 	 //if (angle > PI / 4 && angle < (3 * PI) / 4) _dir = DIRECTION::TOP;
 	 //if (angle > PI / 4 && angle < (7 * PI) / 4) _dir = DIRECTION::BOTTOM;
-	if (angle >= 45*DegToRad && angle < 135 * DegToRad)_dir = DIRECTION::TOP;
-	else if (angle >= 135*DegToRad && angle < 225 * DegToRad)_dir = DIRECTION::LEFT;
-	else if (angle >= 225*DegToRad && angle < 315 * DegToRad)_dir = DIRECTION::BOTTOM;
-	else if (angle >= 315*DegToRad && angle <= 360 * DegToRad)_dir = DIRECTION::RIGHT;
+	if (angle >= 45 * DegToRad && angle < 135 * DegToRad)_dir = DIRECTION::TOP;
+	else if (angle >= 135 * DegToRad && angle < 180 * DegToRad)_dir = DIRECTION::LEFT;
+	else if (angle <= -135 * DegToRad && angle > -180 * DegToRad)_dir = DIRECTION::LEFT;
+
+	else if (angle <= -45 * DegToRad && angle > -135 * DegToRad)_dir = DIRECTION::BOTTOM;
+
+	else if (angle <= 0 * DegToRad && angle >= -45 * DegToRad)_dir = DIRECTION::RIGHT;
 	else if (angle >= 0 * DegToRad && angle < 45 * DegToRad)_dir = DIRECTION::RIGHT;
 
 	
 	//상태 Update 걸어줌
 	state->Update(this);
 
+
+}
+
+void Enemy::Render()
+{
+	Object::Render();
+	wchar_t buffer[128];
+	swprintf(buffer, 128, L"Angle : %f", Vector2::GetAngle(_trans->GetPos(), _player->GetTrans()->GetPos()) * Rad2Deg);
+	GRAPHICMANAGER->Text(_trans->GetPos() - Vector2::down * 20, buffer, 20, 300, 50, ColorF::Azure, 1, TextPivot::CENTER, L"맑은고딕", true);
 
 }
 
@@ -211,7 +223,7 @@ EnemyAttack* EnemyAttack::GetInstance()
 
 void EnemyAttack::Init(Enemy* _sEnemy)
 {
-
+	if (_sEnemy->GetName() == "Golem") _sEnemy->GetSprite()->SetImgName("Golem_Atk");
 	//cout << "공격 들어왔니?" << endl;
 }
 
@@ -223,8 +235,12 @@ void EnemyAttack::Update(Enemy* _sEnemy)
 	}
 	_sEnemy->Attack();
 	//cout << "여기는 공격!" << endl;
-
-	Release(_sEnemy);
+	if (_sEnemy->GetName() == "Golem")
+	{
+		//if(_sEnemy->GetSprite()->get)
+	}
+	else
+		Release(_sEnemy);
 }
 
 void EnemyAttack::Release(Enemy* _sEnemy)
