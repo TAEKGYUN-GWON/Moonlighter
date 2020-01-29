@@ -33,6 +33,8 @@ void PlayerAttack::Enter()
 		_obj->GetSprite()->SetMaxFrameX(9);
 	}
 
+	_obj->GetSprite()->SetPosition(_obj->GetTrans()->GetPos() + Vector2(0, -14));
+
 	//_isAtk = false;
 	_timer = _count = 0;
 	_delay = 0.4f;

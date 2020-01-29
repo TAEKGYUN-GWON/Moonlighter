@@ -1,7 +1,7 @@
 #pragma once
 #include "Object.h"
 
-class Hp;
+class Ability;
 class Inventory;
 class PlayerState;
 
@@ -27,7 +27,7 @@ class Player : public Object
 {
 private:
 	Inventory* _inven;
-	Hp* _hp;
+	Ability* _ability;
 	Sprite* _sprite;
 	PhysicsBody* _physics;
 
@@ -36,6 +36,8 @@ private:
 	AttackType _atkType;
 
 	float _speed;
+
+	b2ChainShape* chain;
 
 public:
 	Player();
@@ -55,7 +57,7 @@ public:
 	Inventory* GetInventory() { return _inven; }
 	Direction GetDirection() { return _dir; }
 	AttackType GetAttackType() { return _atkType; }
-	Hp* GetHP() { return _hp; }
+	Ability* GetAbility() { return _ability; }
 	PlayerState* GetState() { return _state; }
 };
 
