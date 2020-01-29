@@ -58,10 +58,10 @@ void NpcManager::MakeNpc()
 	_npc->SetIsCheckSOn(false);
 	_npc->SetIsShopSOn(false);
 	_npc->SetIsAstarOn(true); //ast 받을지말지
-	_npc->SetDestination(Vector2(392, 700)); //시작하면 문으로 들어가라고
+	//_npc->SetDestination(Vector2(392, 700)); //시작하면 문으로 들어가라고
 	//_npc->Move(); //astar 일단 여기다가 담아놓음
 
-	if (_vNpc.size() <= 0)
+	if (_vNpc.size() < 4)
 	{
 		int a = RND->getInt(4);
 
@@ -106,21 +106,21 @@ void NpcManager::MakeNpc()
 				_vNpc.push_back(_npc);
 				return;
 			}
-			if (_vNpc[i]->GetName() != "guy")
+			else if (_vNpc[i]->GetName() != "guy")
 			{
 				_npc->Init("Guy");
 				_npc->SetName("guy");
 				_vNpc.push_back(_npc);
 				return;
 			}
-			if (_vNpc[i]->GetName() != "kid")
+			else if (_vNpc[i]->GetName() != "kid")
 			{
 				_npc->Init("Kid");
 				_npc->SetName("kid");
 				_vNpc.push_back(_npc);
 				return;
 			}
-			if (_vNpc[i]->GetName() != "lunk")
+			else if (_vNpc[i]->GetName() != "lunk")
 			{
 				_npc->Init("Lunk");
 				_npc->SetName("lunk");

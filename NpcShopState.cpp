@@ -19,29 +19,34 @@ NpcIdle* NpcIdle::GetInstance()
 //==================대기=====================
 void NpcIdle::StateIn(Npc* npc)
 {
-	//여긴 들어와짐
-	//Npc상태를 IDLE로 두고 In()에서 StateIn()을 불러줘서 들어옴
-
-	//★여기서 npc의 ast 값에 매개변수로 좌표를 넣어줘야하는거같음
 	if (npc->GetIsAstarOn() == true)
 	{
-		npc->SetDestination(Vector2(392, 600)); //창가 위치 좌표 넣어줌
+		//npc->SetDestination(Vector2(392, 600)); //창가 위치 좌표 넣어줌
+		//npc->SetDestination(Vector2(320, 620)); //왼쪽으로 가기
+		npc->SetDestination(Vector2(340, 200)); //난로앞으로 가기
+		if (npc->GetTrans()->GetPos().y > 0)
+		{
+			npc->SetIsAstarOn(false);
+		}
 	}
 
+
+
+	
 	//if (창가자리에 도착함) //560, 607 창가자리 좌표
 	//{
 		cout << "NPCIDLE:stateIn 가게 입장상태" << endl;
 		//★여기서 StateStay가 주석인데 Stay로 어떻게 넘어가는거지
 		//ㄴ npc::update에 걸려있기떄문에 돌아가는것임
 		//npc->SetIsAstarOn(false);
-	//	StateStay(npc);
+		//StateStay(npc);
 	//}
 	//else if (창가자리에 도착 안했으면)
 	//{
 		//길을 찾는다(창가를 찾음)
 		//창가가 비었으면 거기로 가고 
 		//창가에 사람이 있으면 옆칸으로 보낸다
-		//굳이 옆으로 안가도 됨 어차피 충돌 안해서 같은자리에 설수있음
+		//굳이 옆으로 안가도 됨
 	
 	//}
 }
@@ -49,14 +54,21 @@ void NpcIdle::StateIn(Npc* npc)
 void NpcIdle::StateStay(Npc* npc)
 {
 
-	_counter++; //시작해서
-	if (_counter > RND->getFromIntTo(60, 100)) //대기시간 거쳐서 //이게 StateIn 유지시간에 영향줌
+	if (npc->GetIsAstarOn() == false) //테스트용
 	{
-		cout << "NPCIDLE:statestay중" << endl;
-		_counter = 0;
-
+		//★여기를 못들어오는 이유 알았음 이미 state가 idle이 아니기때문
+		//★statestay 에서 out으로 보내주고 다음 상태로 이미 넘어갔다
+		npc->SetDestination(Vector2(392, 600)); //난로앞으로 가기
 		StateOut(npc); //IDLE상태에서 내보낸다
 	}
+	//_counter++; //시작해서
+	//if (_counter > RND->getFromIntTo(60, 100)) //대기시간 거쳐서 //이게 StateIn 유지시간에 영향줌
+	//{
+	//	cout << "NPCIDLE:statestay중" << endl;
+	//	_counter = 0;
+
+
+//}
 
 }
 
@@ -104,7 +116,7 @@ void NpcDecide::StateOut(Npc* npc)
 	//가격 판단을 여기서 한다
 	//if (가격이 생각한거 * 1.1 보다 크다)
 	_counter++;
-	
+
 	//테스트용
 	int a = RND->getInt(2);
 	switch (a)
@@ -175,9 +187,9 @@ NpcInline* NpcInline::GetInstance()
 //==================줄서기=====================
 void NpcInline::StateIn(Npc* npc)
 {
-	SetCheckStandLink (npc->GetCheckStand()); //이거 안쓰면 큰일남 npcmanager의 collision에서 해주는데 다른듯
+	SetCheckStandLink(npc->GetCheckStand()); //이거 안쓰면 큰일남 npcmanager의 collision에서 해주는데 다른듯
 	cout << "Inline 상태 들어왔음." << endl;
-	
+
 	//지금 움직이게 하기가 어려워서.. 일단 체크 안하고 넘어가겠음
 	if (npc->GetIsCheckSOn() == true)return;//계산대랑 충돌중이면 리턴, 앞에 사람있는것임
 	else if (npc->GetIsCheckSOn() == false) //계산대가 비어있으면
@@ -203,7 +215,7 @@ void NpcInline::StateStay(Npc* npc)
 
 	}
 	//플레이어가 J를 누르기를 기다려야 한다..
-	if(_checkStand->GetStandisInUse() == false) //계산대 비활성화 상태면 (플레이어가 J눌렀다면)
+	if (_checkStand->GetStandisInUse() == false) //계산대 비활성화 상태면 (플레이어가 J눌렀다면)
 	{
 		cout << "물건 샀다" << endl;
 		StateOut(npc);

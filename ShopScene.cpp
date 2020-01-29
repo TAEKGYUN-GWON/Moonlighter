@@ -64,6 +64,7 @@ void ShopScene::Render()
 	GRAPHICMANAGER->FindImage("ShopBg")->Render(0, 0, LEFT_TOP);
 
 
+
 	Scene::Render();
 }
 

@@ -59,7 +59,7 @@ public:
 	void SetIsAstarOn(bool ast) { _isAstarOn = ast; }
 	bool GetIsAstarOn() { return _isAstarOn; }
 	void SetDestination(Vector2 destination) { _destination = destination; }
-	Vector2 GetDestination() { return _destination; } //★여기 못들어옴
+	Vector2 GetDestination() { return _destination; }
 
 	NpcShopState* GetState() {	return _npcShopState; }
 };

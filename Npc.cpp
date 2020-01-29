@@ -15,12 +15,12 @@ void Npc::Init(string imgkey)
 
 	SetNpcState(NpcIdle::GetInstance()); //기본 상태
 	
-	_trans->SetPos(392, 800); //문 밖에 생성
+	_trans->SetPos(400, 800); //문 밖에 생성
 	_trans->SetScale(Vector2(
 		GRAPHICMANAGER->FindImage(imgkey)->GetFrameWidth(),
 		GRAPHICMANAGER->FindImage(imgkey)->GetFrameHeight()));
 
-	_speed = 3.0f;
+	_speed = 70.0f;
 	//_destination = Vector2(0, 0);
 
 
@@ -42,6 +42,7 @@ void Npc::Update()
 	//_trans->SetPos(Vector2(_trans->GetPos()+Vector2::up));
 
 	//상태패턴용 함수
+	//In(); //이거하면 애들이 지멋대로 움직임
 	Stay();
 
 	//Astar 용 함수
@@ -71,10 +72,10 @@ void Npc::SetPath(list<Vector2> lpath)
 void Npc::Move()
 {
 
-	if (_lPath.size()) //이 속으로 들어가지 못함
+	if (_lPath.size()) 
 	{
 		Vector2 a = *_lPath.begin() - _trans->pos; // 가야할위치에서 내위치를 빼면, 가야되는 다음 노드가 나옴
-		_trans->pos += a.Nomalized() * 70 * TIMEMANAGER->getElapsedTime(); //조건 느슨하게 예외처리 해주는 부분
+		_trans->pos += a.Nomalized() * _speed * TIMEMANAGER->getElapsedTime(); //조건 느슨하게 예외처리 해주는 부분
 
 		if ((int)Vector2::Distance(*_lPath.begin(), _trans->pos) < (int)20)//바로 직후 노드에 도착하면 
 			_lPath.erase(_lPath.begin()); //가장 첫번째 목적지 지우기, 다음 노드를 넣기 위해
