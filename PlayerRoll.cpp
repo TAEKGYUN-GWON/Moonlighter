@@ -4,6 +4,7 @@
 
 void PlayerRoll::Enter()
 {
+	_state = "Roll";
 	_obj->GetSprite()->SetMaxFrameX(8);
 	_obj->GetSprite()->SetFrameX(0);
 	_obj->GetSprite()->SetFPS(2.5f);
