@@ -5,19 +5,19 @@ class Hp;
 class Inventory;
 class PlayerState;
 
-typedef enum class Direction
+typedef enum class Direction : byte
 {
-	Left,
-	Left_Up,
-	Left_Down,
-	Up,
-	Right,
+	Right = 0,
 	Right_Up,
-	Right_Down,
+	Up,
+	Left_Up,
+	Left,
+	Left_Down,
 	Down,
+	Right_Down,
 }Dir;
 
-enum class AttackType
+enum class AttackType : byte
 {
 	Sword,
 	Bow,

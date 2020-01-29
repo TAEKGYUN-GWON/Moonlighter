@@ -110,6 +110,9 @@ void Sprite::SetImgName(string key)
 	_maxFrameX = _graphic->GetMaxFrameX();
 	_curFrameX = 0;
 
+	_pos = _object->GetTrans()->GetPos();
+	_scale = _object->GetTrans()->GetScale();
+
 	if (_isFrame) _isPlay = true;
 }
 

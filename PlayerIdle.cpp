@@ -6,6 +6,8 @@
 
 void PlayerIdle::Enter()
 {
+	_state = "Idle";
+
 	_obj->GetSprite()->SetImgName("will_dungeon");
 	_obj->GetSprite()->SetMaxFrameX(10);
 	_obj->GetSprite()->SetFrameX(0);
