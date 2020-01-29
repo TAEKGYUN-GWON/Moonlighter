@@ -16,6 +16,7 @@ void StartScene::Init()
 	SCENEMANAGER->addScene("Shop", new ShopScene);
 	SCENEMANAGER->addScene("Maptool", new Maptool);
 	SCENEMANAGER->addScene("test", new TestScene);
+
 	GraphicsManager::getSingleton()->AddImage("dd", L"eagle.png");
 	GraphicsManager::getSingleton()->AddFrameImage("d2", L"fatkachu.png",4,1);
 	GRAPHICMANAGER->AddFrameImage("bn", L"blueNumber.png", 4, 1);
@@ -33,6 +34,9 @@ void StartScene::Init()
 	inven = new Inventory;
 	inven->Init();
 	//ui->SetInvenLink(inven);
+
+	_smithy = new Smithy;
+	_smithy->Init();
 
 	obj = Object::CreateObject<Object>();
 	obj->GetTrans()->SetPos(Vector2(WINSIZEX / 2, 200));
@@ -57,7 +61,10 @@ void StartScene::Update()
 	if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
 	if (KEYMANAGER->isOnceKeyDown('5')) SCENEMANAGER->changeScene("Maptool");
 	if (KEYMANAGER->isOnceKeyDown('0')) SCENEMANAGER->changeScene("test");
+
 	inven->Update();
+
+	_smithy->Update();
 }
 
 void StartScene::Render()
@@ -88,5 +95,7 @@ void StartScene::Render()
 	//GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 400), buffer, 20, 300, 50, ColorF::Azure);
 	//ui->Render();
 	inven->Render();
+
+	_smithy->Render();
 }
 

@@ -156,7 +156,7 @@ void Dungeon::SetUp()
 					tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(tiles[i]->GetPivot());
 				}
 
-				tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPosition(tiles[i]->GetChildren()[0]->GetTrans()->GetPos());
+				
 			}
 		}
 	}

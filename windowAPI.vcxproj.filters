@@ -109,6 +109,9 @@
     <Filter Include="playGround\Test">
       <UniqueIdentifier>{b2e24c08-1686-43c3-90dd-d5c395430b65}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\Smithy">
+      <UniqueIdentifier>{a35f991b-c06f-44cd-9291-2de74b101e97}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -355,16 +358,22 @@
       <Filter>playGround\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerRoll.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>playGround\Player</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerIdle.h">
+    <ClInclude Include="ETCS.h">
+      <Filter>playGround\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>playGround\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Smithy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="PlayerState.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>playGround\Player</Filter>
     </ClInclude>
-    <ClInclude Include="MintPotEnemy.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="PlayerIdle.h">
+      <Filter>playGround\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -582,16 +591,22 @@
       <Filter>playGround\Player</Filter>
     </ClCompile>
     <ClCompile Include="PlayerRoll.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>playGround\Player</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerIdle.cpp">
+    <ClCompile Include="ETCS.cpp">
+      <Filter>playGround\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>playGround\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Smithy.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="PlayerState.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>playGround\Player</Filter>
     </ClCompile>
-    <ClCompile Include="MintPotEnemy.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="PlayerIdle.cpp">
+      <Filter>playGround\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
