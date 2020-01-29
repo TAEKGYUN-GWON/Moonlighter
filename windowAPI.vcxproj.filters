@@ -369,6 +369,9 @@
     <ClInclude Include="Smithy.h">
       <Filter>playGround\Smithy</Filter>
     </ClInclude>
+    <ClInclude Include="ETCS.h">
+      <Filter>playGround\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -595,6 +598,9 @@
     </ClCompile>
     <ClCompile Include="Smithy.cpp">
       <Filter>playGround\Smithy</Filter>
+    </ClCompile>
+    <ClCompile Include="ETCS.cpp">
+      <Filter>playGround\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

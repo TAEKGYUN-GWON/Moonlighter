@@ -383,7 +383,7 @@ HRESULT GraphicsManager::AddTextFormat(wstring fontName, float size)
 	return hr;
 }
 
-void GraphicsManager::DrawTextD2D(Vector2 pos, wstring txt, int txtSize, float alpha, ColorF::Enum color, TextPivot point, wstring font, bool cameraAffect)
+void GraphicsManager::DrawTextD2D(Vector2 pos, wstring txt, int txtSize, ColorF color, TextPivot point, wstring font, bool cameraAffect)
 {
 	_wFactory->CreateTextLayout(txt.c_str(), txt.length(), _txtFormatList[font], txt.length() * txtSize, txtSize, &_txtLayout);
 
@@ -430,7 +430,7 @@ void GraphicsManager::DrawTextD2D(Vector2 pos, wstring txt, int txtSize, float a
 	}
 
 	ID2D1SolidColorBrush* brush;
-	_renderTarget->CreateSolidColorBrush(ColorF(color, alpha), &brush);
+	_renderTarget->CreateSolidColorBrush(color, &brush);
 
 	_renderTarget->SetTransform(Matrix3x2F::Identity());
 	if (cameraAffect) _renderTarget->SetTransform(Matrix3x2F::Identity() * CAMERA->GetMatrix());
@@ -440,7 +440,7 @@ void GraphicsManager::DrawTextD2D(Vector2 pos, wstring txt, int txtSize, float a
 	_txtLayout->Release();
 }
 
-void GraphicsManager::DrawTextD2D(Vector2 pos, const char * txt, int txtSize, float alpha, ColorF::Enum color, TextPivot point, wstring font, bool cameraAffect)
+void GraphicsManager::DrawTextD2D(Vector2 pos, const char * txt, int txtSize, ColorF color, TextPivot point, wstring font, bool cameraAffect)
 {
 	string buffer = txt;
 	wstring str;
@@ -491,7 +491,7 @@ void GraphicsManager::DrawTextD2D(Vector2 pos, const char * txt, int txtSize, fl
 	}
 
 	ID2D1SolidColorBrush* brush;
-	_renderTarget->CreateSolidColorBrush(ColorF(color, alpha), &brush);
+	_renderTarget->CreateSolidColorBrush(color, &brush);
 
 	_renderTarget->SetTransform(Matrix3x2F::Identity());
 	if (cameraAffect) _renderTarget->SetTransform(Matrix3x2F::Identity() * CAMERA->GetMatrix());
@@ -501,11 +501,15 @@ void GraphicsManager::DrawTextD2D(Vector2 pos, const char * txt, int txtSize, fl
 	_txtLayout->Release();
 }
 
-void GraphicsManager::Text(Vector2 pos, wstring txt, int txtSize, float maxWidth, float maxHeight, ColorF::Enum color, float alpha, TextPivot point, wstring font, bool cameraEffect)
+void GraphicsManager::Text(Vector2 pos, const char* txt, int txtSize, float maxWidth, float maxHeight, ColorF color, TextPivot point, wstring font, bool cameraEffect)
 {
-	_wFactory->CreateTextLayout(txt.c_str(), txt.length(), _txtFormatList[font], maxWidth, maxHeight, &_txtLayout);
+	string buffer = txt;
+	wstring str;
+	str.assign(buffer.begin(), buffer.end());
 
-	_txtLayout->SetFontSize(txtSize, { (UINT)0, (UINT)txt.length() });
+	_wFactory->CreateTextLayout(str.c_str(), str.length(), _txtFormatList[font], str.length() * txtSize, txtSize, &_txtLayout);
+
+	_txtLayout->SetFontSize(txtSize, { (UINT)0, (UINT)str.length() });
 
 	switch (point)
 	{
@@ -548,7 +552,7 @@ void GraphicsManager::Text(Vector2 pos, wstring txt, int txtSize, float maxWidth
 	}
 
 	ID2D1SolidColorBrush* brush;
-	_renderTarget->CreateSolidColorBrush(ColorF(color, alpha), &brush);
+	_renderTarget->CreateSolidColorBrush(color, &brush);
 
 	_renderTarget->SetTransform(Matrix3x2F::Identity());
 	if (cameraEffect) _renderTarget->SetTransform(Matrix3x2F::Identity() * CAMERA->GetMatrix());
