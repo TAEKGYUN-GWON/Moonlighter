@@ -201,7 +201,7 @@ void Astar::Render()
 		t->Render();
 		if (t->GetAttribute() == "Wall")
 		{
-			GRAPHICMANAGER->DrawTextD2D(t->GetCenter(), L"1", 10, 1.0f, ColorF::Aquamarine);
+			GRAPHICMANAGER->DrawTextD2D(t->GetCenter(), L"1", 10, ColorF::Aquamarine);
 			t->GetComponent<Sprite>()->SetRectColor(ColorF::Red);
 		}
 		else if (t->GetAttribute() == "start")

@@ -14,7 +14,10 @@ HRESULT GraphicsManager::init()
 	initRenderTarget();
 
 	DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, __uuidof(*&_wFactory), (IUnknown**)&_wFactory);
+
 	AddTextFormat(L"¸¼Àº°íµñ", 20);
+	AddTextFormat(L"³ª´®½ºÄù¾î¶ó¿îµå", 20);
+	AddTextFormat(L"±Ã¼­Ã¼", 20);
 
 	return S_OK;
 }
@@ -380,7 +383,7 @@ HRESULT GraphicsManager::AddTextFormat(wstring fontName, float size)
 	return hr;
 }
 
-void GraphicsManager::DrawTextD2D(Vector2 pos, wstring txt, int txtSize, float alpha, ColorF::Enum color, TextPivot point, wstring font, bool cameraAffect)
+void GraphicsManager::DrawTextD2D(Vector2 pos, wstring txt, int txtSize, ColorF color, TextPivot point, wstring font, bool cameraAffect)
 {
 	_wFactory->CreateTextLayout(txt.c_str(), txt.length(), _txtFormatList[font], txt.length() * txtSize, txtSize, &_txtLayout);
 
@@ -427,7 +430,7 @@ void GraphicsManager::DrawTextD2D(Vector2 pos, wstring txt, int txtSize, float a
 	}
 
 	ID2D1SolidColorBrush* brush;
-	_renderTarget->CreateSolidColorBrush(ColorF(color, alpha), &brush);
+	_renderTarget->CreateSolidColorBrush(color, &brush);
 
 	_renderTarget->SetTransform(Matrix3x2F::Identity());
 	if (cameraAffect) _renderTarget->SetTransform(Matrix3x2F::Identity() * CAMERA->GetMatrix());
@@ -437,7 +440,7 @@ void GraphicsManager::DrawTextD2D(Vector2 pos, wstring txt, int txtSize, float a
 	_txtLayout->Release();
 }
 
-void GraphicsManager::DrawTextD2D(Vector2 pos, const char * txt, int txtSize, float alpha, ColorF::Enum color, TextPivot point, wstring font, bool cameraAffect)
+void GraphicsManager::DrawTextD2D(Vector2 pos, const char * txt, int txtSize, ColorF color, TextPivot point, wstring font, bool cameraAffect)
 {
 	string buffer = txt;
 	wstring str;
@@ -488,7 +491,7 @@ void GraphicsManager::DrawTextD2D(Vector2 pos, const char * txt, int txtSize, fl
 	}
 
 	ID2D1SolidColorBrush* brush;
-	_renderTarget->CreateSolidColorBrush(ColorF(color, alpha), &brush);
+	_renderTarget->CreateSolidColorBrush(color, &brush);
 
 	_renderTarget->SetTransform(Matrix3x2F::Identity());
 	if (cameraAffect) _renderTarget->SetTransform(Matrix3x2F::Identity() * CAMERA->GetMatrix());
@@ -498,7 +501,68 @@ void GraphicsManager::DrawTextD2D(Vector2 pos, const char * txt, int txtSize, fl
 	_txtLayout->Release();
 }
 
-void GraphicsManager::Text(Vector2 pos, wstring txt, int txtSize, float maxWidth, float maxHeight, ColorF::Enum color, float alpha, TextPivot point, wstring font, bool cameraEffect)
+void GraphicsManager::Text(Vector2 pos, const char* txt, int txtSize, float maxWidth, float maxHeight, ColorF color, TextPivot point, wstring font, bool cameraEffect)
+{
+	string buffer = txt;
+	wstring str;
+	str.assign(buffer.begin(), buffer.end());
+
+	_wFactory->CreateTextLayout(str.c_str(), str.length(), _txtFormatList[font], str.length() * txtSize, txtSize, &_txtLayout);
+
+	_txtLayout->SetFontSize(txtSize, { (UINT)0, (UINT)str.length() });
+
+	switch (point)
+	{
+	case TextPivot::LEFT_TOP:
+		_txtLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
+		_txtLayout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_NEAR);
+		break;
+	case TextPivot::LEFT_CENTER:
+		_txtLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
+		_txtLayout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
+		break;
+	case TextPivot::LEFT_BOTTOM:
+		_txtLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
+		_txtLayout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_FAR);
+		break;
+	case TextPivot::CENTER_TOP:
+		_txtLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+		_txtLayout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_NEAR);
+		break;
+	case TextPivot::CENTER:
+		_txtLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+		_txtLayout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
+		break;
+	case TextPivot::CENTER_BOTTOM:
+		_txtLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+		_txtLayout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_FAR);
+		break;
+	case TextPivot::RIGHT_TOP:
+		_txtLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_TRAILING);
+		_txtLayout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_NEAR);
+		break;
+	case TextPivot::RIGHT_CENTER:
+		_txtLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_TRAILING);
+		_txtLayout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
+		break;
+	case TextPivot::RIGHT_BOTTOM:
+		_txtLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_TRAILING);
+		_txtLayout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_FAR);
+		break;
+	}
+
+	ID2D1SolidColorBrush* brush;
+	_renderTarget->CreateSolidColorBrush(color, &brush);
+
+	_renderTarget->SetTransform(Matrix3x2F::Identity());
+	if (cameraEffect) _renderTarget->SetTransform(Matrix3x2F::Identity() * CAMERA->GetMatrix());
+	_renderTarget->DrawTextLayout(Point2F(pos.x, pos.y), _txtLayout, brush);
+
+	brush->Release();
+	_txtLayout->Release();
+}
+
+void GraphicsManager::Text(Vector2 pos, wstring txt, int txtSize, float maxWidth, float maxHeight, ColorF color, TextPivot point, wstring font, bool cameraEffect)
 {
 	_wFactory->CreateTextLayout(txt.c_str(), txt.length(), _txtFormatList[font], maxWidth, maxHeight, &_txtLayout);
 
@@ -545,7 +609,7 @@ void GraphicsManager::Text(Vector2 pos, wstring txt, int txtSize, float maxWidth
 	}
 
 	ID2D1SolidColorBrush* brush;
-	_renderTarget->CreateSolidColorBrush(ColorF(color, alpha), &brush);
+	_renderTarget->CreateSolidColorBrush(D2D1::ColorF(color.r, color.g, color.b, color.a), &brush);
 
 	_renderTarget->SetTransform(Matrix3x2F::Identity());
 	if (cameraEffect) _renderTarget->SetTransform(Matrix3x2F::Identity() * CAMERA->GetMatrix());
