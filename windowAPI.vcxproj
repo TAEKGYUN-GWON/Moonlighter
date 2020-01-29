@@ -163,6 +163,7 @@
     <ClInclude Include="EnemyManeger.h" />
     <ClInclude Include="EntranceScene.h" />
     <ClInclude Include="ETC.h" />
+    <ClInclude Include="ETCS.h" />
     <ClInclude Include="GolemEnemy.h" />
     <ClInclude Include="Hp.h" />
     <ClInclude Include="iniDataManager.h" />
@@ -194,6 +195,7 @@
     <ClInclude Include="ShopStand.h" />
     <ClInclude Include="ShopStandManager.h" />
     <ClInclude Include="SlimeEnemy.h" />
+    <ClInclude Include="Smithy.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="keyManager.h" />
@@ -247,6 +249,7 @@
     <ClCompile Include="EnemyManeger.cpp" />
     <ClCompile Include="EntranceScene.cpp" />
     <ClCompile Include="ETC.cpp" />
+    <ClCompile Include="ETCS.cpp" />
     <ClCompile Include="GolemEnemy.cpp" />
     <ClCompile Include="Hp.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
@@ -276,6 +279,7 @@
     <ClCompile Include="ShopStand.cpp" />
     <ClCompile Include="ShopStandManager.cpp" />
     <ClCompile Include="SlimeEnemy.cpp" />
+    <ClCompile Include="Smithy.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="keyManager.cpp" />
