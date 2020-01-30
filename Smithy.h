@@ -3,8 +3,12 @@
 #include "Item.h"
 #include "Object.h"
 
+#include <vector>
+
 #include "Inventory.h"
 #include "Player.h"
+
+#include <tuple>
 
 
 class Smithy
@@ -29,7 +33,9 @@ private:
 	Graphic* _material2;
 	Graphic* _material3;
 
-
+	Graphic* _mOn1;
+	Graphic* _mOn2;
+	Graphic* _mOn3;
 
 	//대장간이 켜졌습니까?
 	bool _isShow;
@@ -39,12 +45,19 @@ private:
 	
 	int _recipePrice;
 	int _upgradeGap;
-
+	
 	/*재료
 	크리스탈 에너지
 	초록 강철
 	골렘의 코어
 	*/
+
+	//map<Graphic*, int> _mRecipe;
+
+	tuple<string, int, int> a;
+
+	vector<tuple<string, string, int, int>> _vMaterialCount;
+	
 
 public:
 
@@ -59,8 +72,12 @@ public:
 	void ShowImage();
 	void ShowUI();
 
+	void Buy();
+	void Upgrade();
 
-	string PrintPrice(string price);
+
+
+	void PrintRecipe();
 
 };
 
