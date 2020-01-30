@@ -232,11 +232,13 @@ void GraphicsManager::DrawLine(float startX, float startY, float destX, float de
 	brush->Release();
 }
 
-void GraphicsManager::DrawLine(Vector2 start, Vector2 dest, ColorF color, float strokeWidth)
+void GraphicsManager::DrawLine(Vector2 start, Vector2 dest, ColorF color, float strokeWidth, bool isCameraEffect)
 {
 	ID2D1SolidColorBrush* brush;
 	_renderTarget->CreateSolidColorBrush(color, &brush);
 
+	if(isCameraEffect) _renderTarget->SetTransform(Matrix3x2F::Identity() * CAMERA->GetMatrix());
+	else _renderTarget->SetTransform(Matrix3x2F::Identity());
 	_renderTarget->DrawLine(Point2F(start.x, start.y), Point2F(dest.x, dest.y), brush, strokeWidth);
 
 	brush->Release();
@@ -332,7 +334,7 @@ void GraphicsManager::DrawFillRect(Vector2 pos, Vector2 size, float angle, Color
 	D2D1_MATRIX_3X2_F rotation = Matrix3x2F::Rotation(angle, Point2F(pos.x, pos.y));
 
 	ID2D1SolidColorBrush* brush;
-	_renderTarget->CreateSolidColorBrush(color, &brush);
+	_renderTarget->CreateSolidColorBrush(ColorF(color.r, color.g, color.b, alpha) , &brush);
 
 	_renderTarget->SetTransform(Matrix3x2F::Identity() * rotation);
 	if (isCameraAffect) _renderTarget->SetTransform(Matrix3x2F::Identity() * rotation * CAMERA->GetMatrix());

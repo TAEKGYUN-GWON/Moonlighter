@@ -9,7 +9,7 @@ class Camera :public singletonBase<Camera>
 private:
 	D2D1_MATRIX_3X2_F	_matrix;
 
-	Matrix3x2F			_scaleMatrix;
+	D2D1_MATRIX_3X2_F			_scaleMatrix;
 
 	Vector2				_scale;
 	Vector2				_pos;
@@ -25,6 +25,7 @@ private:
 	float				_moveTime;
 	float				_prevDistance;
 	bool				_isMoving;
+	float				s;
 
 public:
 	Camera()
@@ -44,7 +45,7 @@ public:
 	//void release();
 
 	void UpdateMatrix();
-
+	void setS(float a) { s = a; }
 	void SetScale(Vector2 scale);// { _scale = scale; };
 	//void SetAngle(float angle) { _angle = angle; };
 	void SetPosition(Vector2 pos, string key);
@@ -52,10 +53,15 @@ public:
 	void MoveTo(Vector2 endPos, float time, bool isCenter = true);
 
 	Vector2 GetPosition() { return _pos; }
+	Vector2 GetP() { return _pos/s; }
 	Vector2 GetScale() { return _scale; }
+
+	Vector2 GetWorldToCamera(Vector2 pos);
+	Vector2 GetCameraToWorld(Vector2 pos);
+
 	bool IsMoving();
 
 	D2D1_MATRIX_3X2_F GetMatrix() { return _matrix; }
-	Matrix3x2F GetScaleMatrix() { return _scaleMatrix; }
+	D2D1_MATRIX_3X2_F GetScaleMatrix() { return _scaleMatrix; }
 };
 

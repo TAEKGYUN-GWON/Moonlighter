@@ -34,8 +34,8 @@ void Sprite::Render()
 {
 	if (KEYMANAGER->isToggleKey(VK_F1))
 	{
-		if (_isFillRect) GRAPHICMANAGER->DrawFillRect(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _color, _alpha, _pivot, _isCameraAffect);
-		else GRAPHICMANAGER->DrawRect(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _color, _pivot, _strokeWidth, _isCameraAffect);
+		if (_isFillRect) GRAPHICMANAGER->DrawFillRect(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateDegree(), _color, _alpha, _pivot, _isCameraAffect);
+		else GRAPHICMANAGER->DrawRect(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateDegree(), _color, _pivot, _strokeWidth, _isCameraAffect);
 	}
 
 	if (_imgKey.empty()) return;
@@ -64,13 +64,13 @@ void Sprite::Render()
 		//GRAPHICMANAGER->DrawFrameImage(_imgKey, _object->GetTrans()->GetPos(), _curFrameX, _curFrameY, _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot, _isCameraAffect);
 		//_graphic->FrameRender(_object->GetTrans()->GetPos(), _curFrameX, _curFrameY, _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot, _isCameraAffect);
 		//_graphic->FrameRender(_pos, _curFrameX, _curFrameY, _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot, _isCameraAffect);
-		_graphic->FrameRender(_pos, _curFrameX, _curFrameY, _scale, _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot, _isCameraAffect);
+		_graphic->FrameRender(_pos, _curFrameX, _curFrameY, _scale, _object->GetTrans()->GetRotateDegree(), _isFlipX, _alpha, _pivot, _isCameraAffect);
 	}
 	else
 	{
 		//GRAPHICMANAGER->DrawImage(_imgKey, _object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot);
 		//_graphic->Render(_pos, _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot, _isCameraAffect);
-		_graphic->Render(_pos, _scale, _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot, _isCameraAffect);
+		_graphic->Render(_pos, _scale, _object->GetTrans()->GetRotateDegree(), _isFlipX, _alpha, _pivot, _isCameraAffect);
 	}
 }
 

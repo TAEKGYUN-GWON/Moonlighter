@@ -91,7 +91,7 @@ public:
 
 	void DrawLine(int startX, int startY, int destX, int destY, ColorF color = ColorF::Black, float strokeWidth = 1.0f);
 	void DrawLine(float startX, float startY, float destX, float destY, ColorF color = ColorF::Black, float strokeWidth = 1.0f);
-	void DrawLine(Vector2 start, Vector2 dest, ColorF color = ColorF::Black, float strokeWidth = 1.0f);
+	void DrawLine(Vector2 start, Vector2 dest, ColorF color = ColorF::Black, float strokeWidth = 1.0f, bool isCameraEffect = false);
 
 	void DrawRect(float x, float y, float width, float height, float angle = 0.0f, ColorF color = ColorF::Black);
 	void DrawRect(Vector2 pos, Vector2 size, float angle = 0.0f, ColorF color = ColorF::Black, PIVOT pivot = PIVOT::CENTER, float strokeWidth = 1.0f, bool cameraAffect = true);
