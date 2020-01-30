@@ -2,7 +2,8 @@
 #include "PlayerMove.h"
 #include "PlayerIdle.h"
 #include "PlayerRoll.h"
-#include "PlayerAttack.h"
+#include "SwordAttack.h"
+#include "BowAttack.h"
 
 void PlayerMove::Enter()
 {
@@ -66,7 +67,13 @@ void PlayerMove::Update()
 	if (KEYMANAGER->isOnceKeyDown(VK_SPACE)) _obj->ChangeState(new PlayerRoll(_obj));
 
 	// Attack
-	if (KEYMANAGER->isOnceKeyDown('J')) _obj->ChangeState(new PlayerAttack(_obj));
+	if (KEYMANAGER->isOnceKeyDown('J'))
+	{
+		if (_obj->GetAttackType() == AttackType::Sword)
+			_obj->ChangeState(new SwordAttack(_obj));
+		else if (_obj->GetAttackType() == AttackType::Bow)
+			_obj->ChangeState(new BowAttack(_obj));
+	}
 
 	// 방향키를 누르지 않았을 때
 	if (!KEYMANAGER->isStayKeyDown(VK_LEFT) && !KEYMANAGER->isStayKeyDown(VK_RIGHT) &&

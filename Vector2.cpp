@@ -59,14 +59,51 @@ Vector2 Vector2::operator+(Vector2 to)
 	return Vector2(x + to.x, y + to.y);
 }
 
-Vector2 Vector2::operator*(float to)
+Vector2 Vector2::operator*(Vector2 to)
 {
-	return Vector2(x *to, y*to);
+	return Vector2(x * to.x, y * to.y);
 }
 
-Vector2 Vector2::operator/(int to)
+Vector2 Vector2::operator/(Vector2 to)
 {
-	return Vector2(x/to,y/to);
+	return Vector2(x / to.x, y / to.y);
+}
+
+Vector2 Vector2::operator*(float to)
+{
+	return Vector2(x * to, y * to);
+}
+
+Vector2 Vector2::operator/(float to)
+{
+	const float RScale = 1.f / to;
+	return Vector2(x * RScale, y * RScale);
+}
+
+Vector2 Vector2::operator*=(Vector2 to)
+{
+	x *= to.x; y *= to.y;
+	return *this;
+}
+
+Vector2 Vector2::operator/=(Vector2 to)
+{
+	x /= to.x; y /= to.y;
+	return *this;
+}
+
+Vector2 Vector2::operator*=(float to)
+{
+	x *= to; y *= to;
+	return *this;
+}
+
+Vector2 Vector2::operator/=(float to)
+{
+	const float RV = 1.f / to;
+	x *= RV; y *= RV;
+
+	return *this;
 }
 
 void Vector2::operator+=(Vector2 to)

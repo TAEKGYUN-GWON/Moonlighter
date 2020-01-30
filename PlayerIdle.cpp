@@ -3,6 +3,8 @@
 #include "PlayerMove.h"
 #include "PlayerRoll.h"
 #include "PlayerAttack.h"
+#include "SwordAttack.h"
+#include "BowAttack.h"
 
 void PlayerIdle::Enter()
 {
@@ -55,7 +57,10 @@ void PlayerIdle::Update()
 
 	if (KEYMANAGER->isOnceKeyDown('J'))
 	{
-		_obj->ChangeState(new PlayerAttack(_obj));
+		if(_obj->GetAttackType() == AttackType::Sword)
+			_obj->ChangeState(new SwordAttack(_obj));
+		else if (_obj->GetAttackType() == AttackType::Bow)
+			_obj->ChangeState(new BowAttack(_obj));
 	}
 }
 

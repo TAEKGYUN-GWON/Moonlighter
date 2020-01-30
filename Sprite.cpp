@@ -34,8 +34,8 @@ void Sprite::Render()
 {
 	if (KEYMANAGER->isToggleKey(VK_F1))
 	{
-		if (_isFillRect) GRAPHICMANAGER->DrawFillRect(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _color, _alpha, _pivot, _isCameraAffect);
-		else GRAPHICMANAGER->DrawRect(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _color, _pivot, _strokeWidth, _isCameraAffect);
+		if (_isFillRect) GRAPHICMANAGER->DrawFillRect(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateDegree(), _color, _alpha, _pivot, _isCameraAffect);
+		else GRAPHICMANAGER->DrawRect(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateDegree(), _color, _pivot, _strokeWidth, _isCameraAffect);
 	}
 
 	if (_imgKey.empty()) return;

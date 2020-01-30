@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="Astar.h" />
     <ClInclude Include="Boss.h" />
+    <ClInclude Include="BowAttack.h" />
     <ClInclude Include="BoxWorldManager.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Camera.h" />
@@ -215,6 +216,7 @@
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="StartScene.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SwordAttack.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="Text.h" />
@@ -235,6 +237,7 @@
   <ItemGroup>
     <ClCompile Include="Astar.cpp" />
     <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="BowAttack.cpp" />
     <ClCompile Include="BoxWorldManager.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -300,6 +303,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SwordAttack.cpp" />
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Tile.cpp" />

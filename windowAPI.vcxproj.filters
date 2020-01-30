@@ -112,6 +112,9 @@
     <Filter Include="playGround\Smithy">
       <UniqueIdentifier>{a35f991b-c06f-44cd-9291-2de74b101e97}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\Player\Attack">
+      <UniqueIdentifier>{58331030-dd94-49af-add6-c8f91c3e3d53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -351,9 +354,6 @@
     <ClInclude Include="PlayerMove.h">
       <Filter>playGround\Player</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerAttack.h">
-      <Filter>playGround\Player</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerRoll.h">
       <Filter>playGround\Player</Filter>
     </ClInclude>
@@ -374,6 +374,18 @@
     </ClInclude>
     <ClInclude Include="Ability.h">
       <Filter>playGround\HP</Filter>
+    </ClInclude>
+    <ClInclude Include="MintPotEnemy.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SwordAttack.h">
+      <Filter>playGround\Player\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttack.h">
+      <Filter>playGround\Player\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="BowAttack.h">
+      <Filter>playGround\Player\Attack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -584,9 +596,6 @@
     <ClCompile Include="PlayerMove.cpp">
       <Filter>playGround\Player</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerAttack.cpp">
-      <Filter>playGround\Player</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerRoll.cpp">
       <Filter>playGround\Player</Filter>
     </ClCompile>
@@ -607,6 +616,18 @@
     </ClCompile>
     <ClCompile Include="Ability.cpp">
       <Filter>playGround\HP</Filter>
+    </ClCompile>
+    <ClCompile Include="MintPotEnemy.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SwordAttack.cpp">
+      <Filter>playGround\Player\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttack.cpp">
+      <Filter>playGround\Player\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="BowAttack.cpp">
+      <Filter>playGround\Player\Attack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

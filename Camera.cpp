@@ -55,7 +55,18 @@ void Camera::Update()
 void Camera::UpdateMatrix()
 {
 	_matrix = Matrix3x2F::Identity();
+	//_matrix = Matrix3x3::identity;
+
 	_matrix = _matrix * _scaleMatrix * Matrix3x2F::Translation(-_pos.x, -_pos.y);
+
+	//_translationMatrix = Matrix3x3(-_pos.x, 0, 0, 0, -_pos.y, 0, 0, 0, 1);
+	//_rotationMatrix = Matrix3x3(cosf(0.0f), -sinf(0.0f), 0, sinf(0.0f), cosf(0.0f), 0, 0, 0, 1);
+	//_scaleMatrix = Matrix3x3(_scale.x, 0, 0, 0, _scale.y, 0, 0, 0, 1);
+	//_originTransMatrix = Matrix3x3(_origin.x, 0, 0, 0, _origin.y, 0, 0, 0, 1);
+	//
+	//_matrix = _translationMatrix * _rotationMatrix * _scaleMatrix * _originTransMatrix;
+	//
+	//_inverseMatrix = _matrix.GetInverseMatrix();
 }
 
 void Camera::SetPosition(Vector2 pos, string key)
@@ -79,8 +90,12 @@ void Camera::SetScale(Vector2 scale)
 	float a = Clamp(_scale.x, ZOOM_MIN, ZOOM_MAX);
 
 	_scale = Vector2(a, a);
+	
+	//_scaleMatrix = Matrix3x3(_scale.x,  0,		0,
+	//							0,	_scale.y,	0,
+	//							0,		0,		1);
 
-	_scaleMatrix = Matrix3x2F::Scale(_scale.x, _scale.y, Point2F(WINSIZEX / 2, WINSIZEY / 2));
+	_scaleMatrix = Matrix3x2F::Scale(_scale.x, _scale.y, Point2F(_pos.x + WINSIZEX / 2, _pos.y + WINSIZEY / 2));
 
 	UpdateMatrix();
 }
@@ -101,4 +116,20 @@ bool Camera::IsMoving()
 {
 	if (_isMoving) return true;
 	else return false;
+}
+
+Vector2 Camera::GetWorldToCamera(Vector2 pos)
+{
+	pos *= _scale;
+	pos.x -= _pos.x;
+	pos.y -= _pos.y;
+	return std::move(pos);
+}
+
+Vector2 Camera::GetCameraToWorld(Vector2 pos)
+{
+	pos.x += _pos.x;
+	pos.y += _pos.y;
+	pos /= _scale.x;
+	return std::move(pos);
 }

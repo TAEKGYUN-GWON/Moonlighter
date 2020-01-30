@@ -4,10 +4,12 @@
 
 class PlayerAttack : public PlayerState
 {
-private:
+protected:
 	int _count;
 	float _timer;
 	float _delay;
+
+	Object* _atkArea;
 
 	//bool _isAtk;
 

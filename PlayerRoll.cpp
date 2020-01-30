@@ -11,7 +11,7 @@ void PlayerRoll::Enter()
 	_obj->GetSprite()->SetFPS(2.5f);
 	_obj->GetSprite()->SetPosition(_obj->GetTrans()->GetPos() + Vector2(0, -14));
 
-	_rollSpeed = 800.0f;
+	_rollSpeed = 400.0f;
 }
 
 void PlayerRoll::Update()

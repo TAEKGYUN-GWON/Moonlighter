@@ -43,7 +43,6 @@ public:
 	Vector2 RotateToDegree(float angle);
 	Vector2 RotateToRadian(float angle);
 
-
 	Vector2 operator-(Vector2 to);
 	bool operator<(const Vector2& to) const;
 	bool operator>(const Vector2& to) const;
@@ -53,8 +52,14 @@ public:
 	float operator^(const Vector2& to) const;
 
 	Vector2 operator+(Vector2 to);
+	Vector2 operator*(Vector2 to);
+	Vector2 operator/(Vector2 to);
 	Vector2 operator*(float to);
-	Vector2 operator/(int to);
+	Vector2 operator/(float to);
+	Vector2 operator*=(Vector2 to);
+	Vector2 operator/=(Vector2 to);
+	Vector2 operator*=(float to);
+	Vector2 operator/=(float to);
 	void operator+=(Vector2 to);
 	void operator-=(Vector2 to);
 	bool operator==(Vector2 to)const;
