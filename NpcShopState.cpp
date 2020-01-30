@@ -19,16 +19,7 @@ NpcIdle* NpcIdle::GetInstance()
 //==================대기=====================
 void NpcIdle::StateIn(Npc* npc)
 {
-	if (npc->GetIsAstarOn() == true)
-	{
-		//npc->SetDestination(Vector2(392, 600)); //창가 위치 좌표 넣어줌
-		//npc->SetDestination(Vector2(320, 620)); //왼쪽으로 가기
-		npc->SetDestination(Vector2(340, 200)); //난로앞으로 가기
-		if (npc->GetTrans()->GetPos().y > 0)
-		{
-			npc->SetIsAstarOn(false);
-		}
-	}
+
 
 
 
@@ -53,22 +44,15 @@ void NpcIdle::StateIn(Npc* npc)
 
 void NpcIdle::StateStay(Npc* npc)
 {
+		//npc->SetIsAstarOn(false);
+	//if (npc->GetIsAstarOn())
+		//npc->SetDestination(Vector2(340, 200)); //난로앞으로 가기
 
-	if (npc->GetIsAstarOn() == false) //테스트용
-	{
-		//★여기를 못들어오는 이유 알았음 이미 state가 idle이 아니기때문
-		//★statestay 에서 out으로 보내주고 다음 상태로 이미 넘어갔다
-		npc->SetDestination(Vector2(392, 600)); //난로앞으로 가기
-		StateOut(npc); //IDLE상태에서 내보낸다
-	}
-	//_counter++; //시작해서
-	//if (_counter > RND->getFromIntTo(60, 100)) //대기시간 거쳐서 //이게 StateIn 유지시간에 영향줌
-	//{
-	//	cout << "NPCIDLE:statestay중" << endl;
-	//	_counter = 0;
+			StateOut(npc);//못움직임
+			
+		
+		int a;
 
-
-//}
 
 }
 
@@ -203,7 +187,7 @@ void NpcInline::StateIn(Npc* npc)
 
 void NpcInline::StateStay(Npc* npc)
 {
-	cout << "줄서서 기다리는 중" << endl;
+	//cout << "계산대 앞에서 기다리는 중" << endl;
 	if (npc->GetIsCheckSOn() == true) //충돌중일떄
 	{
 		if (KEYMANAGER->isOnceKeyDown('J')) //제이를 누르면

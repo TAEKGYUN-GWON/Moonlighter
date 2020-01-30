@@ -9,6 +9,13 @@ void NpcManager::Init(ShopScene* parent)
 	_ast = new Astar;
 	_ast->Init(parent->GetTiles(), SHOPTILEMAXX, SHOPTILEMAXY);
 	//int a;
+
+	Positions[0] = Vector2(500, 640); //창문앞
+	Positions[1] = Vector2(254,515); //1번(1사분면)
+	Positions[2] = Vector2(210,515); //2번
+	Positions[3] = Vector2(156,625); //3번
+	Positions[4] = Vector2(320,620); //4번
+	Positions[5] = Vector2(430,620); //계산대
 }								  
 
 void NpcManager::Update()
@@ -35,7 +42,8 @@ void NpcManager::Update()
 	ShopStandCollision(); //가판대
 
 	//Astar
-	AstarFunction();
+	SetAstar();
+	//AstarFunction(); //이건 일단 치워..
 }
 
 void NpcManager::Release()
@@ -131,6 +139,7 @@ void NpcManager::MakeNpc()
 	}
 }
 
+
 //계산대랑 충돌
 void NpcManager::CheckStandCollision()
 {
@@ -173,18 +182,51 @@ void NpcManager::ShopStandCollision()
 	}
 }
 
-void NpcManager::AstarFunction()
+//상태 조건을 여기다가 걸어줘서 위치를 옮겨줘야함
+void NpcManager::SetAstar()
 {
+
+	//지금보다 조건 더 걸어줘야 함
+	// if 속에서 다시 state에 있는 npc의 bool중에 받아와서 조건걸어야될거 있음
+	
 	for (int i = 0; i < _vNpc.size(); i++) //npc숫자만큼 검사한다
 	{
-
-		if (_vNpc[i]->GetState() == (NpcShopState*)NpcIdle::GetInstance()) //idle상태일떄
+		if (_vNpc[i]->GetState() == NpcIdle::GetInstance())
 		{
-			_vNpc[i]->SetPath(_ast->pathFinder( //길찾기 함수를 부른다 //여기까지 들어옴
-				_vNpc[i]->GetTrans()->GetPos(), //NPC의 위치를 찾고 //여기서 터지는거같음
-				_vNpc[i]->GetDestination())); //가야할 위치를 받아옴
+			AstarFunction(i, DESTINATION::WINDOW ); //for문 돌아간 i와, 목적지 ㅇ
+		}
+		else if (_vNpc[i]->GetState() == NpcDecide::GetInstance())
+		{
+			AstarFunction(i, DESTINATION::WINDOW);
+		}
+		else if (_vNpc[i]->GetState() == NpcInline::GetInstance())
+		{
+			AstarFunction(i, DESTINATION::WINDOW);
+		}
+		else if (_vNpc[i]->GetState() == NpcExit::GetInstance())
+		{
+			AstarFunction(i, DESTINATION::WINDOW);
 		}
 	}
+
+}
+void NpcManager::AstarFunction(int i, int asttar)
+{
+
+
+	//if (_vNpc[i]->GetState() == (NpcShopState*)NpcIdle::GetInstance()) //idle상태일떄
+	if (_vNpc[i]->GetIsAstarOn())
+	{
+		_vNpc[i]->SetPath(_ast->pathFinder( //길찾기 함수를 부른다 //여기까지 들어옴 
+			_vNpc[i]->GetTrans()->GetPos(), //NPC의 위치를 찾고 //여기서 터지는거같음
+			Positions[asttar])); //가야할 위치를 받아옴 //이 숫자 일단 랜덤넣어둠
+
+		_vNpc[i]->SetIsAstarOn(false);
+	}
+		
+	
+
+	
 }
 
 
