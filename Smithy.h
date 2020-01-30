@@ -37,6 +37,9 @@ private:
 	Graphic* _mOn2;
 	Graphic* _mOn3;
 
+	string standardStr;
+	wstring printStr;
+
 	//대장간이 켜졌습니까?
 	bool _isShow;
 
@@ -61,7 +64,7 @@ private:
 
 public:
 
-	void Init();
+	void Init(Inventory* inven);
 	void Update();
 	void Release();
 	void Render();

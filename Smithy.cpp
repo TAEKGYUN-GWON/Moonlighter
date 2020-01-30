@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "Smithy.h"
 #include "Component.h"
+#include "ETCS.h"
 
-void Smithy::Init()
+void Smithy::Init(Inventory* inven)
 {
 	_blackSmith = GRAPHICMANAGER->AddImage("blackSmith", L"resource/img/Smithy/BlackSmith.png");
 	_anvil = GRAPHICMANAGER->AddImage("anvil", L"resource/img/Smithy/Anvil.png");
@@ -32,12 +33,15 @@ void Smithy::Init()
 
 	_player = (Player*)SCENEMANAGER->GetNowScene()->GetChildFromName("Will");
 
-	_inven = new Inventory();
-	_inven->Init();
-	_inven->AddMoney(135948788);
-	_inven->SetATK(30);
+	//_inven = new Inventory();
+	_inven = inven;
+	//_inven->Init();
+	//_inven->AddMoney(135948788);
+	//_inven->SetATK(30);
 
 	_recipePrice = _inven->GetATK() / 10 * 0.4 * 2316;
+
+
 
 
 
@@ -46,10 +50,9 @@ void Smithy::Init()
 		_mRecipe.insert(make_pair(new Graphic(), 2));
 	}*/
 
-	_vMaterialCount.push_back(make_tuple(_material3->GetImageKey(), _mOn3->GetImageKey(), 2, _inven->FindItemSome(_mOn1->GetImageKey())));
-
-	_vMaterialCount.push_back(make_tuple(_material2->GetImageKey(), _mOn2->GetImageKey(), 2, _inven->FindItemSome(_mOn1->GetImageKey())));
-	_vMaterialCount.push_back(make_tuple(_material1->GetImageKey(), _mOn1->GetImageKey(), 2, _inven->FindItemSome(_mOn1->GetImageKey())));
+	_vMaterialCount.push_back(make_tuple(_material3->GetImageKey(), _mOn3->GetImageKey(), 2, _inven->FindItemSome(_material1->GetImageKey())));
+	_vMaterialCount.push_back(make_tuple(_material2->GetImageKey(), _mOn2->GetImageKey(), 2, _inven->FindItemSome(_material2->GetImageKey())));
+	_vMaterialCount.push_back(make_tuple(_material1->GetImageKey(), _mOn1->GetImageKey(), 2, _inven->FindItemSome(_material3->GetImageKey())));
 
 
 	_isShow = false;
@@ -116,29 +119,30 @@ void Smithy::ShowImage()
 		GRAPHICMANAGER->FindImage(get<0>(_vMaterialCount[i]))->Render(Vector2(WINSIZEX - 300, WINSIZEY - (-10 + (i + 1) * 90)), 1, PIVOT::CENTER, false);
 	}
 
-	/*_material1->Render(Vector2(WINSIZEX - 300, WINSIZEY - 260), 1, PIVOT::CENTER, false);
-	_material2->Render(Vector2(WINSIZEX - 300, WINSIZEY - 170), 1, PIVOT::CENTER, false);
-	_material3->Render(Vector2(WINSIZEX - 300, WINSIZEY - 80), 1, PIVOT::CENTER, false);*/
-
-	/*if (_inven->FindItemSome("Crystal_Energy") >= _cristal)
+	//Å©¸®½ºÅ»
+	if (get<2>(_vMaterialCount[0]) <= get<3>(_vMaterialCount[0]))
 	{
-		_mOn1->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 262.5), 1, PIVOT::CENTER, false);
+		GRAPHICMANAGER->FindImage(get<1>(_vMaterialCount[0]))->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 262.5), 1, PIVOT::CENTER, false);
 	}
-	if (_inven->FindItemSome("Reinforced_Steel_G") >= _iron)
+
+	//°­Ã¶
+	if (get<2>(_vMaterialCount[1]) <= get<3>(_vMaterialCount[1]))
 	{
+		GRAPHICMANAGER->FindImage(get<1>(_vMaterialCount[1]))->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 262.5), 1, PIVOT::CENTER, false);
 		_mOn2->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 176.5), 1, PIVOT::CENTER, false);
 	}
-	if (_inven->FindItemSome("Golem_Core") >= _core)
+
+	//ÄÚ¾î
+	if (get<2>(_vMaterialCount[2]) <= get<3>(_vMaterialCount[2]))
 	{
+		GRAPHICMANAGER->FindImage(get<1>(_vMaterialCount[2]))->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 262.5), 1, PIVOT::CENTER, false);
 		_mOn3->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 90.5), 1, PIVOT::CENTER, false);
-	}*/
+	}
 
 }
 
 void Smithy::ShowUI()
 {
-	string standardStr;
-	wstring printStr;
 
 	ColorF* color = new ColorF(0xecddc0, 1.0f);
 
@@ -201,7 +205,17 @@ void Smithy::PrintRecipe()
 		GRAPHICMANAGER->Text(Vector2(WINSIZEX - 280, WINSIZEY - 30 - ((i+1) * 90)), L"ÇÊ¿ä:", 20, 100, 50, *color, TextPivot::CENTER, L"³ª´®½ºÄù¾î¶ó¿îµå");
 		GRAPHICMANAGER->Text(Vector2(WINSIZEX - 280, WINSIZEY - ((i+1) * 90)), L"¼ÒÁö:", 20, 100, 50, *color, TextPivot::CENTER, L"³ª´®½ºÄù¾î¶ó¿îµå");
 
-	//	_vMaterialCount[i]
+		standardStr = to_string(get<2>(_vMaterialCount[i]));
+		printStr.assign(standardStr.begin(), standardStr.end());
+		GRAPHICMANAGER->Text(Vector2(WINSIZEX - 230, WINSIZEY - (-10 + (i + 1) * 90)), printStr, 20, 100, 25, *color, TextPivot::RIGHT_CENTER, L"³ª´®½ºÄù¾î¶ó¿îµå");
+		
+		standardStr = to_string(get<3>(_vMaterialCount[i]));
+		printStr.assign(standardStr.begin(), standardStr.end());
+		GRAPHICMANAGER->Text(Vector2(WINSIZEX - 230, WINSIZEY - (20 + (i + 1) *90)), printStr, 20, 100, 25, *color, TextPivot::RIGHT_CENTER, L"³ª´®½ºÄù¾î¶ó¿îµå");
+
+
+
+
 
 	}
 }

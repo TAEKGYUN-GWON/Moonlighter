@@ -16,6 +16,7 @@ void Inventory::Init()
 	_ui = GRAPHICMANAGER->AddImage("inventory", L"resource/img/UI/Inventory.png");
 	_select = GRAPHICMANAGER->AddImage("invenSlot", L"resource/img/UI/invenSlot.png");
 	GRAPHICMANAGER->AddImage("Potion_S", L"resource/img/Items/Potion_S.png");
+
 	_isActive = false;
 }
 void Inventory::Update()
