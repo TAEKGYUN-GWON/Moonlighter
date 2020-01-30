@@ -48,7 +48,7 @@ void NpcIdle::StateStay(Npc* npc)
 	//if (npc->GetIsAstarOn())
 		//npc->SetDestination(Vector2(340, 200)); //난로앞으로 가기
 
-			StateOut(npc);//못움직임
+			//StateOut(npc);//못움직임
 			
 		
 		int a;

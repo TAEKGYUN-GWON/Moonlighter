@@ -10,7 +10,7 @@ void NpcManager::Init(ShopScene* parent)
 	_ast->Init(parent->GetTiles(), SHOPTILEMAXX, SHOPTILEMAXY);
 	//int a;
 
-	Positions[0] = Vector2(500, 640); //창문앞
+	Positions[0] = Vector2(320, 200); //창문앞
 	Positions[1] = Vector2(254,515); //1번(1사분면)
 	Positions[2] = Vector2(210,515); //2번
 	Positions[3] = Vector2(156,625); //3번
