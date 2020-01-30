@@ -22,7 +22,7 @@ void SlimeEnemy::Init(Vector2 pos)
 	_tag = "enemy";
 	_name = "Slime";
 	_speed = 20.f;
-	_hp = new Ability(1, 1, 1);
+	_ability = new Ability(1, 1, 4);
 	_sprite = AddComponent<Sprite>();
 	_sprite->Init(true, true);
 	_sprite->SetImgName("slime");

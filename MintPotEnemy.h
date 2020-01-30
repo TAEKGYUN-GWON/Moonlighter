@@ -4,6 +4,7 @@
 class MintPotEnemy : public Enemy
 {
 protected:
+	float _fireCount;
 
 public:
 	MintPotEnemy();
@@ -12,5 +13,6 @@ public:
 	void Init(Vector2 pos);
 	void Update();
 	void Attack();
+	bool IsFire();
 };
 

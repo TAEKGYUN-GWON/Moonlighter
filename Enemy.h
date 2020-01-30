@@ -33,7 +33,7 @@ protected:
 	EnemyBasic* state;
 	DIRECTION _dir;	//방향
 	float _speed;
-	Ability* _hp;
+	Ability* _ability;
 	int _angle;
 	list<Vector2> _path;
 
@@ -59,7 +59,7 @@ public:
 	virtual void Attack() {};
 	virtual void AttackEnd() {};
 //get,set함수 만들어야 함
-	Ability* GetHP() { return _hp; }
+	Ability* GetHP() { return _ability; }
 	PhysicsBody* GetPhysics() { return _physics; }
 	DIRECTION GetDir() { return _dir; }
 	Sprite* GetSprite() { return _sprite; }

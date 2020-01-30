@@ -42,7 +42,7 @@ void Enemy::Init()
 
 	_tag = "enemy";
 
-	_hp = new Ability;
+	_ability = new Ability;
 	maxFrameX = 0;
 	frameY = 0;
 	_sprite = AddComponent<Sprite>();
@@ -63,6 +63,7 @@ void Enemy::Update()
 
 	//상태 Update 걸어줌
 	state->Update(this);
+
 	if (_angle >= 45 * DegToRad && _angle < 135 * DegToRad)_dir = DIRECTION::TOP;
 	else if (_angle >= 135 * DegToRad && _angle < 180 * DegToRad)_dir = DIRECTION::LEFT;
 	else if (_angle <= -135 * DegToRad && _angle > -180 * DegToRad)_dir = DIRECTION::LEFT;
@@ -206,21 +207,21 @@ void EnemyMove::Update(Enemy* _sEnemy)
 	EnemyBasic::Update(_sEnemy);
 
 
-	//switch (_sEnemy->GetDir())
-	//{
-	//case DIRECTION::LEFT:
-	//	_sEnemy->GetSprite()->SetFrameY(0);
-	//	break;
-	//case DIRECTION::RIGHT:
-	//	_sEnemy->GetSprite()->SetFrameY(1);
-	//	break;
-	//case DIRECTION::TOP:
-	//	_sEnemy->GetSprite()->SetFrameY(2);
-	//	break;
-	//case DIRECTION::BOTTOM:
-	//	_sEnemy->GetSprite()->SetFrameY(3);
-	//	break;
-	//}
+	switch (_sEnemy->GetDir())
+	{
+	case DIRECTION::LEFT:
+		_sEnemy->GetSprite()->SetFrameY(0);
+		break;
+	case DIRECTION::RIGHT:
+		_sEnemy->GetSprite()->SetFrameY(1);
+		break;
+	case DIRECTION::TOP:
+		_sEnemy->GetSprite()->SetFrameY(2);
+		break;
+	case DIRECTION::BOTTOM:
+		_sEnemy->GetSprite()->SetFrameY(3);
+		break;
+	}
 	
 	//cout << "여기는 무브 오예 두둠칫" << endl;
 	//loat a = RND->getFloat(10000000);
@@ -282,6 +283,12 @@ void EnemyAttack::Update(Enemy* _sEnemy)
 		if(_sEnemy->GetSprite()->GetCurrentFrameX() >= _sEnemy->GetSprite()->GetMaxFrameX())
 			Release(_sEnemy);
 	}
+	//여기서 민트항아리 공격
+	if (_sEnemy->GetName() == "Pot")
+	{
+		if(_sEnemy->GetSprite()->GetCurrentFrameX() >= _sEnemy->GetSprite()->GetMaxFrameX())
+			Release(_sEnemy);
+	}
 	else
 		Release(_sEnemy);
 }
@@ -294,6 +301,10 @@ void EnemyAttack::Release(Enemy* _sEnemy)
 	if (_sEnemy->GetName() == "Golem")
 	{
 		_sEnemy->GetSprite()->SetImgName("Golem");
+	}
+	if (_sEnemy->GetName() == "Pot")
+	{
+		_sEnemy->GetSprite()->SetImgName("Pot");
 	}
 	// else if 아니면 idle로 가라
 	//SetEnemyState(_sEnemy, EnemyIdle::GetInstance());

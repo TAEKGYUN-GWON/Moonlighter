@@ -30,7 +30,7 @@ void Boss::Init()
 	_tag = "enemy";
 	_name = "Boss";
 	//GRAPHICMANAGER->AddFrameImage("", L"resource/img/Enemy", , );
-	_hp = new Ability(100, 100, 10); //더 크게 줘야 하나?
+	_ability = new Ability(100, 100, 10); //더 크게 줘야 하나?
 
 	_trans->SetScale(Vector2(_sprite->GetGraphic()->GetFrameWidth(),
 		_sprite->GetGraphic()->GetFrameHeight()));

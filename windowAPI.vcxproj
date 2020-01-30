@@ -149,6 +149,7 @@
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BoxWorldManager.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletScript.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CheckStand.h" />
     <ClInclude Include="Collider.h" />
@@ -237,6 +238,7 @@
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BoxWorldManager.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletScript.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CheckStand.cpp" />
     <ClCompile Include="Collider.cpp" />

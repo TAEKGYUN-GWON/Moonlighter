@@ -24,7 +24,7 @@ protected:
 	BossBasic* state;
 	float _speed; //굳이 있어야 하나?
 
-	Ability* _hp;
+	Ability* _ability;
 
 public:
 	Boss();
@@ -39,7 +39,7 @@ public:
 	void Render();
 	void Release();
 
-	Ability* GetHP() { return _hp; }
+	Ability* GetHP() { return _ability; }
 	PhysicsBody* GetPhysics() { return _physics; }
 
 };
