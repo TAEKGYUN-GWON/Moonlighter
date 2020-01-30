@@ -18,9 +18,9 @@ void Smithy::Init(Inventory* inven)
 	_pocketCircle = GRAPHICMANAGER->AddImage("pocketCicle", L"resource/img/Smithy/Pocket_Circle.png");
 
 
-	_material1 = GRAPHICMANAGER->AddImage("material1", L"resource/img/Smithy/material1.png");
-	_material2 = GRAPHICMANAGER->AddImage("material2", L"resource/img/Smithy/material2.png");
-	_material3 = GRAPHICMANAGER->AddImage("material3", L"resource/img/Smithy/material3.png");
+	_material1 = GRAPHICMANAGER->AddImage("crystal_Energy", L"resource/img/Smithy/material1.png");
+	_material2 = GRAPHICMANAGER->AddImage("reinforced_Steel_G", L"resource/img/Smithy/material2.png");
+	_material3 = GRAPHICMANAGER->AddImage("golem_Core", L"resource/img/Smithy/material3.png");
 	
 	_mOn1 = GRAPHICMANAGER->AddImage("onCheck1", L"resource/img/Smithy/Upgradable.png");
 	_mOn2 = GRAPHICMANAGER->AddImage("onCheck2", L"resource/img/Smithy/Upgradable.png");
@@ -41,7 +41,7 @@ void Smithy::Init(Inventory* inven)
 
 	_recipePrice = _inven->GetATK() / 10 * 0.4 * 2316;
 
-
+	int a = _inven->FindItemSome("Golem_Core");
 
 
 
@@ -205,11 +205,11 @@ void Smithy::PrintRecipe()
 		GRAPHICMANAGER->Text(Vector2(WINSIZEX - 280, WINSIZEY - 30 - ((i+1) * 90)), L"ÇÊ¿ä:", 20, 100, 50, *color, TextPivot::CENTER, L"³ª´®½ºÄù¾î¶ó¿îµå");
 		GRAPHICMANAGER->Text(Vector2(WINSIZEX - 280, WINSIZEY - ((i+1) * 90)), L"¼ÒÁö:", 20, 100, 50, *color, TextPivot::CENTER, L"³ª´®½ºÄù¾î¶ó¿îµå");
 
-		standardStr = to_string(get<2>(_vMaterialCount[i]));
+		standardStr = to_string(get<3>(_vMaterialCount[i]));
 		printStr.assign(standardStr.begin(), standardStr.end());
 		GRAPHICMANAGER->Text(Vector2(WINSIZEX - 230, WINSIZEY - (-10 + (i + 1) * 90)), printStr, 20, 100, 25, *color, TextPivot::RIGHT_CENTER, L"³ª´®½ºÄù¾î¶ó¿îµå");
 		
-		standardStr = to_string(get<3>(_vMaterialCount[i]));
+		standardStr = to_string(get<2>(_vMaterialCount[i]));
 		printStr.assign(standardStr.begin(), standardStr.end());
 		GRAPHICMANAGER->Text(Vector2(WINSIZEX - 230, WINSIZEY - (20 + (i + 1) *90)), printStr, 20, 100, 25, *color, TextPivot::RIGHT_CENTER, L"³ª´®½ºÄù¾î¶ó¿îµå");
 

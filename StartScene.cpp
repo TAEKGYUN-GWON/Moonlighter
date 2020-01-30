@@ -55,10 +55,16 @@ void StartScene::Init()
 	inven->Init();
 	//ui->SetInvenLink(inven);
 
+	inven->Insert(Item::CreateItem<Golem_Core>(Vector2(0, 0)));
+	inven->Insert(Item::CreateItem<Golem_Core>(Vector2(0, 0)));
+	inven->Insert(Item::CreateItem<Crystal_Energy>(Vector2(0, 0)));
+
+
 	_smithy = new Smithy;
 	_smithy->Init(inven);
-	inven->Insert(Item::CreateItem<Golem_Core>(Vector2(0, 0)));
-	inven->Insert(Item::CreateItem<Golem_Core>(Vector2(0, 0)));
+
+
+
 	obj = Object::CreateObject<Object>();
 	obj->GetTrans()->SetPos(Vector2(WINSIZEX / 2, 200));
 	obj->AddComponent<Sprite>()->Init();
