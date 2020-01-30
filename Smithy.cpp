@@ -41,8 +41,6 @@ void Smithy::Init(Inventory* inven)
 
 	_recipePrice = _inven->GetATK() / 10 * 0.4 * 2316;
 
-	int a = _inven->FindItemSome("Golem_Core");
-
 
 
 	/*for (int i = 0; i < 3; i++)
@@ -50,9 +48,6 @@ void Smithy::Init(Inventory* inven)
 		_mRecipe.insert(make_pair(new Graphic(), 2));
 	}*/
 
-	_vMaterialCount.push_back(make_tuple(_material3->GetImageKey(), _mOn3->GetImageKey(), 2, _inven->FindItemSome(_material1->GetImageKey())));
-	_vMaterialCount.push_back(make_tuple(_material2->GetImageKey(), _mOn2->GetImageKey(), 2, _inven->FindItemSome(_material2->GetImageKey())));
-	_vMaterialCount.push_back(make_tuple(_material1->GetImageKey(), _mOn1->GetImageKey(), 2, _inven->FindItemSome(_material3->GetImageKey())));
 
 
 	_isShow = false;
@@ -61,6 +56,10 @@ void Smithy::Init(Inventory* inven)
 void Smithy::Update()
 {
 	KeyInput();
+
+	_vMaterialCount.push_back(make_tuple(_material3->GetImageKey(), _mOn3->GetImageKey(), 2, _inven->FindItemSome(_material1->GetImageKey())));
+	_vMaterialCount.push_back(make_tuple(_material2->GetImageKey(), _mOn2->GetImageKey(), 2, _inven->FindItemSome(_material2->GetImageKey())));
+	_vMaterialCount.push_back(make_tuple(_material1->GetImageKey(), _mOn1->GetImageKey(), 2, _inven->FindItemSome(_material3->GetImageKey())));
 }
 
 void Smithy::Release()
