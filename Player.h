@@ -57,7 +57,6 @@ public:
 
 	void SetAngle(float angle) { this->angle = angle; }
 
-
 	float GetSpeed() { return _speed; }
 	Sprite* GetSprite() { return _sprite; }
 	PhysicsBody* GetPhysics() { return _physics; }

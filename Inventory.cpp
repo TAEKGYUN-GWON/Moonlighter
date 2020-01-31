@@ -40,10 +40,11 @@ void Inventory::Render()
 	_ui->Render(Vector2(WINSIZEX / 2, WINSIZEY / 2),1,PIVOT::CENTER,false);
 	for (iter = _inven.begin(); iter != _inven.end(); iter++)
 	{
-		iter->second.item->GetComponent<Sprite>()->GetGraphic()->RenderUI(iter->second.item->GetTrans()->GetPos());
+		//iter->second.item->GetComponent<Sprite>()->GetGraphic()->RenderUI(iter->second.item->GetTrans()->GetPos());
+		GRAPHICMANAGER->FindImage(iter->second.item)->Render(iter->second.pos,1,PIVOT::CENTER,false);
 		//char buffer[128];
 		//sprintf_s(buffer, "%d",iter->second.some);
-		Vector2 pos = Vector2(iter->second.item->GetTrans()->GetPos().x + 20, iter->second.item->GetTrans()->GetPos().y + 20);
+		Vector2 pos = Vector2(iter->second.pos.x + 20, iter->second.pos.y + 20);
 		//GRAPHICMANAGER->DrawTextD2D(pos, buffer, 15);
 
 		wchar_t buffer[128];
@@ -60,7 +61,7 @@ void Inventory::Insert(Item* item)
 
 	for (iter = _inven.begin(); iter != _inven.end(); iter++)
 	{
-		if (iter->second.item->GetName() == item->GetName())
+		if (iter->first == item->GetName())
 		{
 			if (iter->second.some < item->GetMaxCount())
 			{
@@ -138,8 +139,8 @@ void Inventory::Insert(Item* item)
 	}
 
 #pragma endregion
-	item->SetInDG(false);
-	_inven.insert(make_pair(item->GetName(), tagItemInfo(item)));
+	_inven.insert(make_pair(item->GetName(), tagItemInfo(item,item->GetTrans()->GetPos())));
+	item->Release();
 }
 
 void Inventory::Remove(string name, int num)
@@ -149,7 +150,7 @@ void Inventory::Remove(string name, int num)
 	for (iter = _inven.begin(); iter != _inven.end(); ++iter)
 	{
 		if (count <= 0) break;
-		if (iter->second.item->GetName() == name)
+		if (iter->first == name)
 		{
 			if (iter->second.some > 0)
 			{

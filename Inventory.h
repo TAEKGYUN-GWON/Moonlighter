@@ -4,18 +4,20 @@
 #include "Component.h"
 struct tagItemInfo
 {
-	tagItemInfo(Item* item, int some)
+	tagItemInfo(string name, int some)
 	{
 		this->item = item;
 		this->some = some;
 	}
-	tagItemInfo(Item* item)
+	tagItemInfo(Item* item,Vector2 pos)
 	{
-		this->item = item;
+		this->item = item->GetComponent<Sprite>()->GetImgKey();
 		this->some = 1;
+		this->pos = pos;
 	}
-	Item* item;
+	string item;
 	int some;
+	Vector2 pos;
 };
 
 class Inventory
