@@ -15,6 +15,7 @@ enum DESTINATION
 	STAND3,
 	STAND4,
 	CHECKSTAND,
+	EXIT,
 	END
 };
 class NpcManager
@@ -25,9 +26,9 @@ private:
 	ShopStandManager* _shopStandMgr;
 	CheckStand* _checkStand;
 
-	Vector2 Positions[(int)DESTINATION::END];
+	Vector2 _positions[(int)DESTINATION::END];
 
-	DESTINATION _destination;
+	//DESTINATION _destination;
 
 
 	Astar* _ast;

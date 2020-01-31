@@ -27,7 +27,7 @@ private:
 
 	list<Vector2> _lPath;
 
-	Vector2 _destination; //astar 格利瘤烙
+	//Vector2 _destination; //astar 格利瘤烙
 
 
 
@@ -61,8 +61,8 @@ public:
 	bool GetIsCheckSOn() { return _isCheckSOn; }
 	void SetIsAstarOn(bool ast) { _isAstarOn = ast; }
 	bool GetIsAstarOn() { return _isAstarOn; }
-	void SetDestination(Vector2 destination) { _destination = destination; }
-	Vector2 GetDestination() { return _destination; }
+	//void SetDestination(Vector2 destination) { _destination = destination; }
+	//Vector2 GetDestination() { return _destination; }
 
 	NpcShopState* GetState() {	return _npcShopState; }
 };

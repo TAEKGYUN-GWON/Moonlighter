@@ -19,40 +19,25 @@ NpcIdle* NpcIdle::GetInstance()
 //==================대기=====================
 void NpcIdle::StateIn(Npc* npc)
 {
-
-
-
-
-	
-	//if (창가자리에 도착함) //560, 607 창가자리 좌표
-	//{
 		cout << "NPCIDLE:stateIn 가게 입장상태" << endl;
-		//★여기서 StateStay가 주석인데 Stay로 어떻게 넘어가는거지
-		//ㄴ npc::update에 걸려있기떄문에 돌아가는것임
-		//npc->SetIsAstarOn(false);
-		//StateStay(npc);
-	//}
-	//else if (창가자리에 도착 안했으면)
-	//{
-		//길을 찾는다(창가를 찾음)
-		//창가가 비었으면 거기로 가고 
-		//창가에 사람이 있으면 옆칸으로 보낸다
-		//굳이 옆으로 안가도 됨
-	
-	//}
 }
 
 void NpcIdle::StateStay(Npc* npc)
 {
-		//npc->SetIsAstarOn(false);
-	//if (npc->GetIsAstarOn())
-		//npc->SetDestination(Vector2(340, 200)); //난로앞으로 가기
+	if (npc->GetTrans()->GetPos().x) //창가에 도착하면
+	{
 
-			//StateOut(npc);//못움직임
-			
-		
-		int a;
+		//StateOut(npc); //다음상태로 넘겨야함
+	}
+	int a;
 
+	//_positions[0] = Vector2(320, 200); //창문앞
+	//_positions[1] = Vector2(254, 515); //1번(1사분면)
+	//_positions[2] = Vector2(210, 515); //2번
+	//_positions[3] = Vector2(156, 625); //3번
+	//_positions[4] = Vector2(320, 620); //4번
+	//_positions[5] = Vector2(430, 620); //계산대
+	//_positions[6] = Vector2(0, 0); //문밖으로나가기
 
 }
 
@@ -85,45 +70,15 @@ NpcDecide* NpcDecide::GetInstance()
 //==================살말=====================
 void NpcDecide::StateIn(Npc* npc)
 {
-	//들어와서 할거 없음.. 바로 stay 불러
-	StateStay(npc); //이러면 무한대로 부르고있나?
+	StateStay(npc); 
 }
 
 void NpcDecide::StateStay(Npc* npc)
 {
-	//머무르면서도 할거 없음.. 그냥 나가
-	StateOut(npc);//이러면 무한대로 부르고있나?
-}
-
-void NpcDecide::StateOut(Npc* npc)
-{
 	//가격 판단을 여기서 한다
-	//if (가격이 생각한거 * 1.1 보다 크다)
-	_counter++;
 
-	//테스트용
-	int a = RND->getInt(2);
-	switch (a)
-	{
-	case 0:
-		//화난 얼굴 이미지  띄우기
-		if (_counter > 500)
-		{
-			cout << "안사기로 결심, Idle로 돌아감" << endl;
-			_counter = 0;
-			npc->SetNpcState(NpcIdle::GetInstance());
-		}
-		break;
-	case 1:
-		//눈에 동전뜬 얼굴 표정 띄우기
-		if (_counter > 500)
-		{
-			cout << "사기로 결심, Inline으로 감" << endl;
-			_counter = 0;
-			npc->SetNpcState(NpcInline::GetInstance());
-		}
-		break;
-	}
+	//if (가격이 생각한거 * 1.1 보다 크다)
+
 	//{
 	//	//화난 얼굴 이미지  띄우기
 	//	if (_counter > 500)
@@ -157,6 +112,39 @@ void NpcDecide::StateOut(Npc* npc)
 	//		npc->SetNpcState(NpcInline::GetInstance());
 	//	}
 	//}
+
+	_counter++;
+
+	//테스트용
+	int a = RND->getInt(2);
+	switch (a)
+	{
+	case 0:
+		//화난 얼굴 이미지  띄우기
+		if (_counter > 500)
+		{
+			cout << "안사기로 결심, Idle로 돌아감" << endl;
+			_counter = 0;
+			npc->SetNpcState(NpcIdle::GetInstance());
+		}
+		break;
+	case 1:
+		//눈에 동전뜬 얼굴 표정 띄우기
+		if (_counter > 500)
+		{
+			cout << "사기로 결심, Inline으로 감" << endl;
+			_counter = 0;
+			npc->SetNpcState(NpcInline::GetInstance());
+		}
+		break;
+	}
+
+	// StateOut(npc);//얜 부를 필요가 없는듯
+}
+
+void NpcDecide::StateOut(Npc* npc)
+{
+	//할거 없어서 비워둠
 }
 
 NpcInline* NpcInline::GetInstance()

@@ -3,8 +3,7 @@
 #include "NpcShopState.h"
 
 void Npc::Init(string imgkey)
-{
-	
+{	
 	Object::Init();
 
 	_tag = "Npc";
@@ -20,18 +19,6 @@ void Npc::Init(string imgkey)
 		GRAPHICMANAGER->FindImage(imgkey)->GetFrameWidth(),
 		GRAPHICMANAGER->FindImage(imgkey)->GetFrameHeight()));
 
-	
-	
-	
-	
-	
-	
-
-	//_destination = Vector2(340, 200);
-
-	int a;
-
-	
 }
 
 void Npc::Release()
@@ -50,8 +37,6 @@ void Npc::Update()
 	//In(); //in, stay 둘다 해두면 애들이 다 다르게 지멋대로 움직임
 	Stay(); //이렇게 두면 랜덤으로 한두명 돌아옴
 
-	//Astar 용 함수
-	//SetPath(list<Vector2> lpath);
 	Move();
 
 	//npc 그림 띄우기
