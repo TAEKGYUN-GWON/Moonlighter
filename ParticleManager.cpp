@@ -7,6 +7,9 @@
 void ParticlePool::InssertPool(int num)
 {
 	ActivePool[num]->SetIsActive(false);
+	ActivePool[num]->GetPhysics()->SetBodyActive(false);
+	ActivePool[num]->GetPhysics()->GetBody()->SetLinearVelocity(b2Vec2(0,0));
+	ActivePool[num]->GetPhysics()->SetSensor(true);
 	pool.push(ActivePool[num]);
 	ActivePool.erase(ActivePool.begin() + num);
 }
@@ -14,6 +17,8 @@ void ParticlePool::InssertPool(int num)
 void ParticlePool::InssertActiveObject()
 {
 	pool.top()->SetIsActive(true);
+	pool.top()->GetPhysics()->SetBodyActive(true);
+	pool.top()->GetPhysics()->SetBodyPosition();
 	ActivePool.push_back(pool.top());
 	pool.pop();
 }
@@ -52,11 +57,51 @@ void ParticleManager::Init(int size, ParticleType type, Vector2 pos, Vector2 sca
 	_pool.SetLink(this);
 	_pool.Init(size, imgKey, isFrame, FPS);
 
+	//pop = GRAPHICMANAGER->FindImage("pop");
+
 }
 
 void ParticleManager::Update()
 {
+	switch (_type)
+	{
+	case TRIANGLE:
+	{
+		Triangle();
+	}
+		break;
+	case CIRCLE:
+	{
+		Circle();
+	}
+		break;
+	}
+	KeyCon();
+}
 
+void ParticleManager::Render()
+{
+
+	for (int i = 0; i < _pool.GetActivePool().size(); i++)
+	{
+		if (KEYMANAGER->isToggleKey(VK_F6))
+			GRAPHICMANAGER->DrawRect(_pool.GetActivePool()[i]->GetTrans()->GetPos(), _pool.GetActivePool()[i]->GetTrans()->GetScale(), _pool.GetActivePool()[i]->GetTrans()->GetRotateDegree(), ColorF::Red);
+	}
+	GRAPHICMANAGER->DrawLine(_pos, _pos +Vector2(cosf(_minAngle), -sinf(_minAngle)) * 200, D2D1::ColorF::Red,1.f,true);
+	GRAPHICMANAGER->DrawLine(_pos, _pos +Vector2(cosf(_maxAngle), -sinf(_maxAngle)) * 200, D2D1::ColorF::Red,1.f,true);
+
+	//pop->Render(_pos+Vector2::down*40, Vector2(120,150),PIVOT::BOTTOM);
+	wchar_t buffer[1024];
+	swprintf(buffer, 128, L"minAngle : %f  maxAngle : %f", _minAngle * RadToDeg, _maxAngle * RadToDeg);
+	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 0), buffer, 20, 300, 50, ColorF::Azure);
+
+	swprintf(buffer, 128, L"minSpeed : %f  maxSpeed : %f", _minSpeed, _maxSpeed);
+	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 50), buffer, 20, 300, 50, ColorF::Azure);
+
+}
+
+void ParticleManager::Triangle()
+{
 	if (_pool.GetPool().size())
 	{
 		_pool.GetPoolObject()->SetPos(_pos);
@@ -77,64 +122,69 @@ void ParticleManager::Update()
 		}
 	}
 
-	if(KEYMANAGER->isStayKeyDown(VK_UP))	_pos += Vector2::up * 10;
-	if(KEYMANAGER->isStayKeyDown(VK_LEFT))	_pos += Vector2::left * 10;
-	if(KEYMANAGER->isStayKeyDown(VK_RIGHT))	_pos += Vector2::right * 10;
-	if(KEYMANAGER->isStayKeyDown(VK_DOWN))	_pos += Vector2::down * 10;
-
 	
-	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD1))
-	{
-		if (_maxAngle > MAX_ANGLE_MAX) _maxAngle = MAX_ANGLE_MAX;
-		else if (_maxAngle< MAX_ANGLE_MIN) _maxAngle = MAX_ANGLE_MIN;
 
-		if (_minAngle > MIN_ANGLE_MAX) _minAngle = MIN_ANGLE_MAX;
-		else if (_minAngle < MIN_ANGLE_MIN) _minAngle = MIN_ANGLE_MIN;
 
-		_maxAngle += 0.03;
-		_minAngle -= 0.03;
-	}
-	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD2))
-	{
-		if (_maxAngle > MAX_ANGLE_MAX) _maxAngle = MAX_ANGLE_MAX;
-		else if (_maxAngle < MAX_ANGLE_MIN) _maxAngle = MAX_ANGLE_MIN;
-
-		if (_minAngle > MIN_ANGLE_MAX) _minAngle = MIN_ANGLE_MAX;
-		else if (_minAngle < MIN_ANGLE_MIN) _minAngle = MIN_ANGLE_MIN;
-		_maxAngle -= 0.03;
-		_minAngle += 0.03;
-	}
-
-	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD3))
-	{
-		_maxSpeed += 1;
-		_minSpeed += 1;
-	}
-	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD4))
-	{
-		_maxSpeed -= 1;
-		_minSpeed -= 1;
-	}
-
-	
 }
 
-void ParticleManager::Render()
+void ParticleManager::Circle()
 {
+}
 
-	for (int i = 0; i < _pool.GetActivePool().size(); i++)
+void ParticleManager::KeyCon()
+{
+	switch (_type)
 	{
-		if (KEYMANAGER->isToggleKey(VK_F6))
-			GRAPHICMANAGER->DrawRect(_pool.GetActivePool()[i]->GetTrans()->GetPos(), _pool.GetActivePool()[i]->GetTrans()->GetScale(), _pool.GetActivePool()[i]->GetTrans()->GetRotateDegree(), ColorF::Red);
+	case TRIANGLE:
+	{
+
+		if (KEYMANAGER->isStayKeyDown(VK_UP))	_pos += Vector2::up * 10;
+		if (KEYMANAGER->isStayKeyDown(VK_LEFT))	_pos += Vector2::left * 10;
+		if (KEYMANAGER->isStayKeyDown(VK_RIGHT))	_pos += Vector2::right * 10;
+		if (KEYMANAGER->isStayKeyDown(VK_DOWN))	_pos += Vector2::down * 10;
+
+
+		if (KEYMANAGER->isStayKeyDown(VK_NUMPAD1))
+		{
+			if (_maxAngle > MAX_ANGLE_MAX) _maxAngle = MAX_ANGLE_MAX;
+			else if (_maxAngle < MAX_ANGLE_MIN) _maxAngle = MAX_ANGLE_MIN;
+
+			if (_minAngle > MIN_ANGLE_MAX) _minAngle = MIN_ANGLE_MAX;
+			else if (_minAngle < MIN_ANGLE_MIN) _minAngle = MIN_ANGLE_MIN;
+
+			_maxAngle += 0.03;
+			_minAngle -= 0.03;
+		}
+		if (KEYMANAGER->isStayKeyDown(VK_NUMPAD2))
+		{
+			if (_maxAngle > MAX_ANGLE_MAX) _maxAngle = MAX_ANGLE_MAX;
+			else if (_maxAngle < MAX_ANGLE_MIN) _maxAngle = MAX_ANGLE_MIN;
+
+			if (_minAngle > MIN_ANGLE_MAX) _minAngle = MIN_ANGLE_MAX;
+			else if (_minAngle < MIN_ANGLE_MIN) _minAngle = MIN_ANGLE_MIN;
+			_maxAngle -= 0.03;
+			_minAngle += 0.03;
+		}
+
+		if (KEYMANAGER->isStayKeyDown(VK_NUMPAD3))
+		{
+			_maxSpeed += 1;
+			_minSpeed += 1;
+		}
+		if (KEYMANAGER->isStayKeyDown(VK_NUMPAD4))
+		{
+			_maxSpeed -= 1;
+			_minSpeed -= 1;
+		}
+
 	}
-	GRAPHICMANAGER->DrawLine(_pos, _pos +Vector2(cosf(_minAngle), -sinf(_minAngle)) * 200, D2D1::ColorF::Red,1.f,true);
-	GRAPHICMANAGER->DrawLine(_pos, _pos +Vector2(cosf(_maxAngle), -sinf(_maxAngle)) * 200, D2D1::ColorF::Red,1.f,true);
+	break;
+	case CIRCLE:
+	{
 
-	wchar_t buffer[1024];
-	swprintf(buffer, 128, L"minAngle : %f  maxAngle : %f", _minAngle * RadToDeg, _maxAngle * RadToDeg);
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 0), buffer, 20, 300, 50, ColorF::Azure);
 
-	swprintf(buffer, 128, L"minSpeed : %f  maxSpeed : %f", _minSpeed, _maxSpeed);
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 50), buffer, 20, 300, 50, ColorF::Azure);
+	}
+	break;
+	}
 
 }

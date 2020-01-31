@@ -13,8 +13,16 @@ void TestScene::Init()
 	////p->GetBody()->GetFixtureList()->GetShape()->
 	//p->GetBody()->SetFixedRotation(true);
 	//GRAPHICMANAGER->AddFrameImage("fatkachu", L"resource/img/Object/maple.png", 4, 1);
+	GRAPHICMANAGER->AddImage("fatkachu", L"resource/img/Object/popcorn.png");
+	GRAPHICMANAGER->AddImage("pop", L"resource/img/Object/pop.png");
 	mgr = new ParticleManager;
-	mgr->Init(300,ParticleType::TRIANGLE, Vector2(WINSIZEX / 2, WINSIZEY / 2), Vector2(50, 20));
+	mgr->Init(500,ParticleType::TRIANGLE, Vector2(WINSIZEX / 2, WINSIZEY / 2), Vector2(10, 10),"fatkachu");
+	Object* floor = Object::CreateObject<Object>();
+	floor->GetTrans()->SetScale(1280, 30);
+	floor->GetTrans()->SetPos(WINSIZEX / 2, WINSIZEY);
+	auto a = floor->AddComponent<PhysicsBody>();
+	a->Init(BodyType::STATIC, 1, 1);
+	GetWorld()->SetGravity(b2Vec2(0, 10));
 }
 
 
@@ -67,11 +75,11 @@ void TestScene::Update()
 
 void TestScene::Render()
 {
+	mgr->Render();
 	for (Object* child : _children)
 	{
 		child->Render();
 
 	}
-	mgr->Render();
 
 }

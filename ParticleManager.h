@@ -47,6 +47,7 @@ private:
 	float _minSpeed;
 	Vector2 _pos;
 	Vector2 _scale;
+	Graphic* pop;
 public:
 	ParticleManager();
 	~ParticleManager() {};
@@ -54,6 +55,12 @@ public:
 
 	void Update();
 	void Render();
+
+	void Triangle();
+
+	void Circle();
+
+	void KeyCon();
 	//제발 라디안으로.... 주세요 
 	void SetMaxAngle(float radian) { _maxAngle = radian; }
 	//제발 라디안으로.... 주세요

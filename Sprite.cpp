@@ -111,7 +111,7 @@ void Sprite::SetImgName(string key)
 	_curFrameX = 0;
 
 	_pos = _object->GetTrans()->GetPos();
-	_scale = _object->GetTrans()->GetScale();
+	_scale = Vector2(_graphic->GetFrameWidth(), _graphic->GetFrameHeight());
 
 	if (_isFrame) _isPlay = true;
 }
