@@ -54,9 +54,11 @@ void Maptool::Init()
 
 	GRAPHICMANAGER->AddImage("town_map", L"resource/img/Map/map.png");
 	GRAPHICMANAGER->AddImage("loby", L"resource/img/Map/Dungeon_Lobby.png");
+	GRAPHICMANAGER->AddImage("bossRoom", L"resource/img/Dungeon/bossRoom.png");
 	GRAPHICMANAGER->AddImage("Shop_map", L"resource/img/Shop/shop_background.png");
 	GRAPHICMANAGER->AddFrameImage("set_tile", L"set_tile3.png", 4, 6);
 	GRAPHICMANAGER->AddFrameImage("set_tile_dungeon", L"set_tile_dungeon.png", 4, 6);
+
 
 	_page = SamplePage::TOWN;
 	_eraser = EraserType::Single;
@@ -201,7 +203,7 @@ void Maptool::Update()
 void Maptool::Render()
 {
 	//GRAPHICMANAGER->DrawImage("Shop_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
-	GRAPHICMANAGER->DrawImage("loby", Vector2(0, 0), 1.0f, LEFT_TOP, true);
+	GRAPHICMANAGER->DrawImage("bossRoom", Vector2(0, 0), 1.0f, LEFT_TOP, true);
 
 	//char buffer[128];
 	wchar_t buffer[128];
@@ -304,7 +306,7 @@ void Maptool::Save()
 
 	//string str = "shop.map";
 	//string str = "Town.map";
-	string str = "loby.map";
+	string str = "bossRoom.map";
 
 	//GetWindowText(_saveName, titleSave, 256);
 

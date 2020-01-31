@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Boss.h"
+#include "Ability.h"
 
 
 Boss::Boss()
@@ -15,9 +16,9 @@ void Boss::Init(Vector2 pos)
 {
 	Object::Init();
 
-	GRAPHICMANAGER->AddFrameImage("Open Boss", L"resource/img/Enemy/createBoss.png", 32, 1);
+	GRAPHICMANAGER->AddFrameImage("Open_Boss", L"resource/img/Enemy/createBoss.png", 32, 1);
 
-	_tag = "enemy";
+	_tag = "boss";
 	_name = "Boss";
 
 	_ability = new Ability(100, 100, 10); //더 크게 줘야 하나?
@@ -26,33 +27,39 @@ void Boss::Init(Vector2 pos)
 	frameY = 0;
 	_sprite = AddComponent<Sprite>();
 	_sprite->Init(true, true);
-	//_sprite->SetImgName();
+	_sprite->SetImgName("Open_Boss");
 	_sprite->SetRectColor(ColorF::Cornsilk);
 	_trans->SetScale(Vector2(_sprite->GetGraphic()->GetFrameWidth(),
 		_sprite->GetGraphic()->GetFrameHeight()));
 	_trans->SetScale(Vector2(50, 50)); //보스 범위
 	_trans->SetPos(pos);
+	_sprite->SetPosition(_trans->GetPos());
 	_physics = AddComponent<PhysicsBody>();
 	_physics->Init(BodyType::DYNAMIC, 1.0f);
 	////가상세계의 렉트 뒤틀리는거 고정
 	_physics->GetBody()->SetFixedRotation(true);
 	
 
+	
 }
 
 void Boss::Update()
 {
 	Object::Update();
 
+	//_sprite->GetCurrentFrameX();
 }
 
 void Boss::Render()
 {
 	Object::Render();
+
+	
 }
 
 void Boss::Release()
 {
+	Object::Release();
 }
 
 void Boss::Attack()
