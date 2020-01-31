@@ -17,8 +17,8 @@ void Npc::Init(string imgkey)
 	
 	_trans->SetPos(400, 700); //문 밖에 생성
 	_trans->SetScale(Vector2(
-		GRAPHICMANAGER->FindImage(imgkey)->GetFrameWidth()-15,
-		GRAPHICMANAGER->FindImage(imgkey)->GetFrameHeight()-15));
+		GRAPHICMANAGER->FindImage(imgkey)->GetFrameWidth()+15,
+		GRAPHICMANAGER->FindImage(imgkey)->GetFrameHeight()+15));
 
 	
 	
@@ -73,6 +73,10 @@ void Npc::Render()
 			_trans->GetScale().x / 2, 
 			_trans->GetScale().y / 2);
 	}
+
+	wchar_t buffer[128];
+	swprintf(buffer, 128, L"x: %f, y:%f", _trans->GetPos().x , _trans->GetPos().y);
+	GRAPHICMANAGER->Text(Vector2(_trans->GetPos().x, _trans->GetPos().y), buffer, 10, 500, 300, ColorF::White);
 
 
 }

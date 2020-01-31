@@ -63,8 +63,15 @@ void ShopScene::Render()
 {
 	GRAPHICMANAGER->FindImage("ShopBg")->Render(0, 0, LEFT_TOP);
 
-	//가야하는 곳 동그라미
+	//창가 동그라미
 	GRAPHICMANAGER->DrawEllipse(520, 615, 30, 30);
+
+	//마우스 좌표
+	wchar_t buffer[128];
+	swprintf(buffer, 128, L"x: %d, y:%d", 
+		(int)(_ptMouse.x+CAMERA->GetPosition().x) / TILEWIDTH, 
+		(int)(_ptMouse.y+CAMERA->GetPosition().y) / TILEHEIGHT);
+	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2), buffer, 20, 500, 300, ColorF::White);
 
 	Scene::Render();
 }

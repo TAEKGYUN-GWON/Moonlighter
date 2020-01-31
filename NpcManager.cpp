@@ -11,7 +11,8 @@ void NpcManager::Init(ShopScene* parent)
 	//int a;
 
 	Positions[0] = Vector2(520, 615); //창문앞
-	Positions[1] = Vector2(200,515); //1번(1사분면)
+	//Positions[1] = Vector2(200,515); //1번(1사분면)
+	Positions[1] = Vector2(200,450); //1번(1사분면)
 	Positions[2] = Vector2(210,515); //2번
 	Positions[3] = Vector2(156,625); //3번
 	Positions[4] = Vector2(320,620); //4번
@@ -21,7 +22,7 @@ void NpcManager::Init(ShopScene* parent)
 void NpcManager::Update()
 {
 	//NPC가 4명 미만이면 더 넣어줘라	
-	if (_vNpc.size() < 4)
+	if (_vNpc.size() < 1)
 	{
 		_counter++;
 		if (_counter == _timer)
@@ -194,7 +195,7 @@ void NpcManager::SetAstar()
 		if (_vNpc[i]->GetIsAstarOn())
 		{
 			int a = RND->getInt(6);
-			AstarFunction(i,a); //for문 돌아간 i와, 목적지 ㅇ
+			AstarFunction(i,1); //for문 돌아간 i와, 목적지 ㅇ
 		}
 		//else if (_vNpc[i]->GetState() == NpcDecide::GetInstance())
 		//{
