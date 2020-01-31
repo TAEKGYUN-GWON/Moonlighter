@@ -63,7 +63,8 @@ void ShopScene::Render()
 {
 	GRAPHICMANAGER->FindImage("ShopBg")->Render(0, 0, LEFT_TOP);
 
-
+	//가야하는 곳 동그라미
+	GRAPHICMANAGER->DrawEllipse(520, 615, 30, 30);
 
 	Scene::Render();
 }

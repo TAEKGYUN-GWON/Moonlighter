@@ -10,8 +10,8 @@ void NpcManager::Init(ShopScene* parent)
 	_ast->Init(parent->GetTiles(), SHOPTILEMAXX, SHOPTILEMAXY);
 	//int a;
 
-	Positions[0] = Vector2(320, 200); //창문앞
-	Positions[1] = Vector2(254,515); //1번(1사분면)
+	Positions[0] = Vector2(520, 615); //창문앞
+	Positions[1] = Vector2(200,515); //1번(1사분면)
 	Positions[2] = Vector2(210,515); //2번
 	Positions[3] = Vector2(156,625); //3번
 	Positions[4] = Vector2(320,620); //4번
@@ -191,22 +191,23 @@ void NpcManager::SetAstar()
 	
 	for (int i = 0; i < _vNpc.size(); i++) //npc숫자만큼 검사한다
 	{
-		if (_vNpc[i]->GetState() == NpcIdle::GetInstance())
+		if (_vNpc[i]->GetIsAstarOn())
 		{
-			AstarFunction(i, DESTINATION::WINDOW ); //for문 돌아간 i와, 목적지 ㅇ
+			int a = RND->getInt(6);
+			AstarFunction(i,a); //for문 돌아간 i와, 목적지 ㅇ
 		}
-		else if (_vNpc[i]->GetState() == NpcDecide::GetInstance())
-		{
-			AstarFunction(i, DESTINATION::WINDOW);
-		}
-		else if (_vNpc[i]->GetState() == NpcInline::GetInstance())
-		{
-			AstarFunction(i, DESTINATION::WINDOW);
-		}
-		else if (_vNpc[i]->GetState() == NpcExit::GetInstance())
-		{
-			AstarFunction(i, DESTINATION::WINDOW);
-		}
+		//else if (_vNpc[i]->GetState() == NpcDecide::GetInstance())
+		//{
+		//	AstarFunction(i, DESTINATION::WINDOW);
+		//}
+		//else if (_vNpc[i]->GetState() == NpcInline::GetInstance())
+		//{
+		//	AstarFunction(i, DESTINATION::WINDOW);
+		//}
+		//else if (_vNpc[i]->GetState() == NpcExit::GetInstance())
+		//{
+		//	AstarFunction(i, DESTINATION::WINDOW);
+		//}
 	}
 
 }
@@ -223,9 +224,6 @@ void NpcManager::AstarFunction(int i, int asttar)
 
 		_vNpc[i]->SetIsAstarOn(false);
 	}
-		
-	
-
 	
 }
 
