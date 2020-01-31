@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ShopScene.h"
+#include "Inventory.h"
 
 void ShopScene::Init()
 {
@@ -51,10 +52,10 @@ void ShopScene::Update()
 	_shopDoor->Update();
 
 	if (KEYMANAGER->isOnceKeyDown('1')) SCENEMANAGER->changeScene("Dungeon");
-	//if (KEYMANAGER->isOnceKeyDown('2')) SCENEMANAGER->changeScene("Entrance");
-	//if (KEYMANAGER->isOnceKeyDown('3')) SCENEMANAGER->changeScene("Town");
-	//if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
-	//if (KEYMANAGER->isOnceKeyDown('5')) SCENEMANAGER->changeScene("Maptool");
+	if (KEYMANAGER->isOnceKeyDown('2')) SCENEMANAGER->changeScene("Entrance");
+	if (KEYMANAGER->isOnceKeyDown('3')) SCENEMANAGER->changeScene("Town");
+	if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
+	if (KEYMANAGER->isOnceKeyDown('5')) SCENEMANAGER->changeScene("Maptool");
 	
 	Scene::Update();
 }
@@ -64,8 +65,9 @@ void ShopScene::Render()
 	GRAPHICMANAGER->FindImage("ShopBg")->Render(0, 0, LEFT_TOP);
 
 
-
 	Scene::Render();
+
+	_player->GetInventory()->Render();
 }
 
 void ShopScene::SetUp()

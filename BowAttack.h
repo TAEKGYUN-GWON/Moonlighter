@@ -1,6 +1,7 @@
 #pragma once
 #include "PlayerAttack.h"
 #include "Player.h"
+#include "Bullet.h"
 
 class BowAttack : public PlayerAttack
 {

@@ -6,12 +6,9 @@ void Vine::Init(Vector2 pos)
 	super::Init();
 
 	_trans->SetPos(pos);
-	_name = "Vine";
+	_name = "vine";
 
-	_image = AddComponent<Sprite>();
-	_image->SetImgName("\resource\img\Items\Items");
-	_image->SetFrameX(3);
-	_image->SetFrameY(2);
+	_image->SetImgName("Vine");
 }
 
 void Crystal_Energy::Init(Vector2 pos)
@@ -19,12 +16,10 @@ void Crystal_Energy::Init(Vector2 pos)
 	super::Init();
 
 	_trans->SetPos(pos);
-	_name = "Crystal_Energy";
+	_name = "crystal_Energy";
 
-	_image = AddComponent<Sprite>();
-	_image->SetImgName("\resource\img\Items\Items");
-	_image->SetFrameX(2);
-	_image->SetFrameY(2);
+
+	_image->SetImgName("Crystal_Energy");
 }
 
 void Treated_Wood::Init(Vector2 pos)
@@ -32,12 +27,9 @@ void Treated_Wood::Init(Vector2 pos)
 	super::Init();
 
 	_trans->SetPos(pos);
-	_name = "Treated_Wood";
+	_name = "treated_Wood";
+	_image->SetImgName("Treated_Wood");
 
-	_image = AddComponent<Sprite>();
-	_image->SetImgName("\resource\img\Items\Items");
-	_image->SetFrameX(1);
-	_image->SetFrameY(2);
 }
 
 void amulet_ring::Init(Vector2 pos)
@@ -46,11 +38,8 @@ void amulet_ring::Init(Vector2 pos)
 
 	_trans->SetPos(pos);
 	_name = "amulet_ring";
-
-	_image = AddComponent<Sprite>();
-	_image->SetImgName("\resource\img\Items\Items");
-	_image->SetFrameX(0);
-	_image->SetFrameY(2);
+	_image->SetImgName("Amulet_ring");
+	
 }
 
 void Broken_Sword::Init(Vector2 pos)
@@ -58,12 +47,9 @@ void Broken_Sword::Init(Vector2 pos)
 	super::Init();
 
 	_trans->SetPos(pos);
-	_name = "Broken_Sword";
+	_name = "broken_Sword";
 
-	_image = AddComponent<Sprite>();
-	_image->SetImgName("\resource\img\Items\Items");
-	_image->SetFrameX(3);
-	_image->SetFrameY(1);
+	_image->SetImgName("Broken_Sword");
 }
 
 void Energy_Crystal::Init(Vector2 pos)
@@ -71,12 +57,9 @@ void Energy_Crystal::Init(Vector2 pos)
 	super::Init();
 
 	_trans->SetPos(pos);
-	_name = "Energy_Crystal";
+	_name = "energy_Crystal";
 
-	_image = AddComponent<Sprite>();
-	_image->SetImgName("\resource\img\Items\Items");
-	_image->SetFrameX(2);
-	_image->SetFrameY(1);
+	_image->SetImgName("Energy_Crystal");
 }
 
 void Naja_Note::Init(Vector2 pos)
@@ -84,12 +67,9 @@ void Naja_Note::Init(Vector2 pos)
 	super::Init();
 
 	_trans->SetPos(pos);
-	_name = "Naja_Note";
+	_name = "naja_Note";
 
-	_image = AddComponent<Sprite>();
-	_image->SetImgName("\resource\img\Items\Items");
-	_image->SetFrameX(1);
-	_image->SetFrameY(1);
+	_image->SetImgName("Naja_Note");
 }
 
 void Reinforced_Steel_G::Init(Vector2 pos)
@@ -97,12 +77,9 @@ void Reinforced_Steel_G::Init(Vector2 pos)
 	super::Init();
 
 	_trans->SetPos(pos);
-	_name = "Reinforced_Steel_G";
+	_name = "reinforced_Steel_G";
 
-	_image = AddComponent<Sprite>();
-	_image->SetImgName("\resource\img\Items\Items");
-	_image->SetFrameX(0);
-	_image->SetFrameY(1);
+	_image->SetImgName("Reinforced_Steel_G");
 }
 
 void Golem_Core::Init(Vector2 pos)
@@ -110,12 +87,10 @@ void Golem_Core::Init(Vector2 pos)
 	super::Init();
 
 	_trans->SetPos(pos);
-	_name = "Golem_Core";
+	_name = "golem_Core";
 
-	_image = AddComponent<Sprite>();
-	_image->SetImgName("\resource\img\Items\Items");
-	_image->SetFrameX(3);
-	_image->SetFrameY(0);
+	_image->SetImgName("Golem_Core");
+
 }
 
 void Familiar_Egg::Init(Vector2 pos)
@@ -124,12 +99,9 @@ void Familiar_Egg::Init(Vector2 pos)
 	super::Init();
 
 	_trans->SetPos(pos);
-	_name = "Familiar_Egg";
+	_name = "familiar_Egg";
 
-	_image = AddComponent<Sprite>();
-	_image->SetImgName("\resource\img\Items\Items");
-	_image->SetFrameX(2);
-	_image->SetFrameY(0);
+	_image->SetImgName("Familiar_Egg");
 }
 
 void Reinforced_Steel_Y::Init(Vector2 pos)
@@ -137,12 +109,9 @@ void Reinforced_Steel_Y::Init(Vector2 pos)
 	super::Init();
 
 	_trans->SetPos(pos);
-	_name = "Reinforced_Steel_Y";
+	_name = "reinforced_Steel_Y";
 
-	_image = AddComponent<Sprite>();
-	_image->SetImgName("\resource\img\Items\Items");
-	_image->SetFrameX(1);
-	_image->SetFrameY(0);
+	_image->SetImgName("Reinforced_Steel_Y");
 }
 
 void Golem_King_Design::Init(Vector2 pos)
@@ -150,10 +119,7 @@ void Golem_King_Design::Init(Vector2 pos)
 	super::Init();
 
 	_trans->SetPos(pos); 
-	_name = "Golem_King_Design ";
+	_name = "golem_King_Design";
 
-	_image = AddComponent<Sprite>();
-	_image->SetImgName("\resource\img\Items\Items");
-	_image->SetFrameX(0);
-	_image->SetFrameY(0);
+	_image->SetImgName("Golem_King_Design");
 }

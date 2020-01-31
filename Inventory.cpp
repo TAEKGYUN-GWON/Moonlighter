@@ -16,6 +16,7 @@ void Inventory::Init()
 	_ui = GRAPHICMANAGER->AddImage("inventory", L"resource/img/UI/Inventory.png");
 	_select = GRAPHICMANAGER->AddImage("invenSlot", L"resource/img/UI/invenSlot.png");
 	GRAPHICMANAGER->AddImage("Potion_S", L"resource/img/Items/Potion_S.png");
+
 	_isActive = false;
 }
 void Inventory::Update()
@@ -147,7 +148,7 @@ void Inventory::Remove(string name, int num)
 {
 
 	int count = num;
-	for (iter = _inven.begin(); iter != _inven.end(); ++iter)
+	for (iter = _inven.begin(); iter != _inven.end();)
 	{
 		if (count <= 0) break;
 		if (iter->first == name)
@@ -156,8 +157,14 @@ void Inventory::Remove(string name, int num)
 			{
 				count--;
 				iter->second.some--;
+				iter = _inven.begin();
+				continue;
 			}
+			else
+				++iter;
 		}
+		else
+			++iter;
 	}
 }
 

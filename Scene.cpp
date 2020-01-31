@@ -87,7 +87,6 @@ bool Compare(Object* a, Object* b)
 
 void Scene::Render()
 {
-
 	//if (_allowRelease) return;
 	sort(_children.begin(), _children.end(), Compare);
 

@@ -5,11 +5,6 @@ void EntranceScene::Init()
 {
 	Scene::Init();
 
-	_player = Object::CreateObject<Player>();
-	_player->Init();
-	_player->GetTrans()->SetPos(1249, 2020);
-	_player->GetComponent<PhysicsBody>()->SetBodyPosition();
-
 #pragma region SetTilePage1
 	GRAPHICMANAGER->AddImage("build_fountain", L"resource/img/Object/build_fountain.png");
 	GRAPHICMANAGER->AddImage("build_Retaile", L"resource/img/Object/build_Retaile.png");
@@ -43,26 +38,18 @@ void EntranceScene::Init()
 
 	GRAPHICMANAGER->AddImage("loby", L"resource/img/Map/Dungeon_Lobby.png");
 
-
 	SetUp();
 
+	_player = Object::CreateObject<Player>();
+	_player->Init();
+	_player->GetTrans()->SetPos(1249, 2020);
 }
 
 void EntranceScene::Update()
 {
 	Scene::Update();
-	CAMERA->SetPosition(_player->GetTrans()->GetPos(),"loby");
 
-	for (Tile* t : tiles)
-	{
-		if (CAMERA->GetPosition() > t->GetTrans()->GetPos() || CAMERA->GetPosition() + Vector2(WINSIZEX, WINSIZEY) < t->GetTrans()->GetPos())
-			t->SetIsActive(false);
-		else
-		{
-			if(!t->GetIsActive())
-				t->SetIsActive(true);
-		}
-	}
+	CAMERA->SetPosition(_player->GetTrans()->GetPos(),"loby");
 }
 
 
@@ -71,6 +58,7 @@ void EntranceScene::Render()
 	GRAPHICMANAGER->DrawImage("loby", Vector2(0, 0), 1.0f, LEFT_TOP, true);
 
 	//Scene::Render();
+	_player->Render();
 	GRAPHICMANAGER->Text(Vector2(10, 6), L"Entrance Scene", 20, 200, 30, ColorF::Aqua);
 }
 
