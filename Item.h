@@ -24,13 +24,16 @@ protected:
 	Sprite* _image;
 
 	//아이템이 던전안에서 존재한다면 플에이어를 따라가야함
-	bool _isDungeon;
+	bool _isDungeon = true;
 
 	//선형보간을 위한 변수
 	float _followingMovement;
 
 public:
-	Item() {}
+	Item() {
+		_image = AddComponent<Sprite>();
+		_image->Init();
+	}
 	~Item() {}
 
 	virtual void Init();

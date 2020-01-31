@@ -36,7 +36,6 @@ void GolemEnemy::Init(Vector2 pos)
 	_physics->Init(BodyType::DYNAMIC, 1.0f);
 	////가상세계의 렉트 뒤틀리는거 고정
 	_physics->GetBody()->SetFixedRotation(true);
-	_physics->SetBodyActive(false);
 
 	_atkRange = GolemEnemy::GetAtkRange();
 

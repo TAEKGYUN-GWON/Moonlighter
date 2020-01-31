@@ -43,8 +43,6 @@ void Enemy::Init()
 	Object::Init();
 
 	_tag = "enemy";
-
-	_ability = new Ability;
 	maxFrameX = 0;
 	frameY = 0;
 	_sprite = AddComponent<Sprite>();
@@ -372,7 +370,7 @@ void EnemyDead::Release(Enemy* _sEnemy)
 
 	_sEnemy->SetIsActive(false);
 
-	int some = RND->getInt(5);
+	int some = RND->getInt(3);
 
 	for (int i = 0; i < some; i++)
 	{

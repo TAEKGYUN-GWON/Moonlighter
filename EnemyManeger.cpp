@@ -40,6 +40,7 @@ void EnemyManeger::Update()
 	{
 		if (!_vEnemy[i]->GetIsActive())
 		{
+			SCENEMANAGER->GetNowScene()->GetWorld()->DestroyBody(_vEnemy[i]->GetPhysics()->GetBody());
 			_vEnemy[i]->Release();
 			_vEnemy.erase(_vEnemy.begin() + i);
 			break;
