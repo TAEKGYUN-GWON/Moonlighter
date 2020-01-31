@@ -147,7 +147,7 @@ void Inventory::Remove(string name, int num)
 {
 
 	int count = num;
-	for (iter = _inven.begin(); iter != _inven.end(); ++iter)
+	for (iter = _inven.begin(); iter != _inven.end();)
 	{
 		if (count <= 0) break;
 		if (iter->second.item->GetName() == name)
@@ -156,8 +156,14 @@ void Inventory::Remove(string name, int num)
 			{
 				count--;
 				iter->second.some--;
+				iter = _inven.begin();
+				continue;
 			}
+			else
+				++iter;
 		}
+		else
+			++iter;
 	}
 }
 

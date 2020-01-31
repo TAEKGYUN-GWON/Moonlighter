@@ -36,11 +36,14 @@ void Smithy::Init(Inventory* inven)
 	//_inven = new Inventory();
 	_inven = inven;
 	//_inven->Init();
-	//_inven->AddMoney(135948788);
+	_inven->AddMoney(135948788);
 	//_inven->SetATK(30);
 
 	_recipePrice = _inven->GetATK() / 10 * 0.4 * 2316;
 
+	_m1Count = 2;
+	_m2Count = 2;
+	_m3Count = 2;
 
 
 	/*for (int i = 0; i < 3; i++)
@@ -56,10 +59,7 @@ void Smithy::Init(Inventory* inven)
 void Smithy::Update()
 {
 	KeyInput();
-
-	_vMaterialCount.push_back(make_tuple(_material3->GetImageKey(), _mOn3->GetImageKey(), 2, _inven->FindItemSome(_material1->GetImageKey())));
-	_vMaterialCount.push_back(make_tuple(_material2->GetImageKey(), _mOn2->GetImageKey(), 2, _inven->FindItemSome(_material2->GetImageKey())));
-	_vMaterialCount.push_back(make_tuple(_material1->GetImageKey(), _mOn1->GetImageKey(), 2, _inven->FindItemSome(_material3->GetImageKey())));
+	UpdateMaterial();
 }
 
 void Smithy::Release()
@@ -95,7 +95,22 @@ void Smithy::KeyInput()
 		{
 			Buy();
 		}
+
+		if (KEYMANAGER->isOnceKeyDown('Y'))
+		{
+			_inven->Insert(Item::CreateItem<Crystal_Energy>(Vector2(0, 0)));
+		}
 	}
+}
+
+void Smithy::UpdateMaterial()
+{
+	_vMaterialCount.clear();
+
+	//재료 이미지 키값, 체크 활성화 키값, 필요개수, 소지량
+	_vMaterialCount.push_back(make_tuple(_material3->GetImageKey(), _mOn3->GetImageKey(), _m3Count, _inven->FindItemSome(_material3->GetImageKey())));
+	_vMaterialCount.push_back(make_tuple(_material2->GetImageKey(), _mOn2->GetImageKey(), _m2Count, _inven->FindItemSome(_material2->GetImageKey())));
+	_vMaterialCount.push_back(make_tuple(_material1->GetImageKey(), _mOn1->GetImageKey(), _m1Count, _inven->FindItemSome(_material1->GetImageKey())));
 }
 
 void Smithy::ShowImage()
@@ -119,23 +134,24 @@ void Smithy::ShowImage()
 	}
 
 	//크리스탈
-	if (get<2>(_vMaterialCount[0]) <= get<3>(_vMaterialCount[0]))
+	if (get<2>(_vMaterialCount[2]) <= get<3>(_vMaterialCount[2]))
 	{
-		GRAPHICMANAGER->FindImage(get<1>(_vMaterialCount[0]))->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 262.5), 1, PIVOT::CENTER, false);
+		GRAPHICMANAGER->FindImage(get<1>(_vMaterialCount[2]))->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 262.5), 1, PIVOT::CENTER, false);
+		//_mOn1->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 216.5), 1, PIVOT::CENTER, false);
 	}
 
 	//강철
 	if (get<2>(_vMaterialCount[1]) <= get<3>(_vMaterialCount[1]))
 	{
-		GRAPHICMANAGER->FindImage(get<1>(_vMaterialCount[1]))->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 262.5), 1, PIVOT::CENTER, false);
-		_mOn2->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 176.5), 1, PIVOT::CENTER, false);
+		GRAPHICMANAGER->FindImage(get<1>(_vMaterialCount[1]))->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 176.5), 1, PIVOT::CENTER, false);
+		//_mOn2->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 176.5), 1, PIVOT::CENTER, false);
 	}
 
 	//코어
-	if (get<2>(_vMaterialCount[2]) <= get<3>(_vMaterialCount[2]))
+	if (get<2>(_vMaterialCount[0]) <= get<3>(_vMaterialCount[0]))
 	{
-		GRAPHICMANAGER->FindImage(get<1>(_vMaterialCount[2]))->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 262.5), 1, PIVOT::CENTER, false);
-		_mOn3->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 90.5), 1, PIVOT::CENTER, false);
+		GRAPHICMANAGER->FindImage(get<1>(_vMaterialCount[0]))->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 90.5), 1, PIVOT::CENTER, false);
+		//_mOn3->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 90.5), 1, PIVOT::CENTER, false);
 	}
 
 }
@@ -178,6 +194,13 @@ void Smithy::Buy()
 	{
 		_inven->DeductionMoney(_recipePrice);
 		_inven->SetATK(_inven->GetATK() + _upgradeGap);
+
+		for (int i = 0; i < _vMaterialCount.size(); i++)
+		{
+			//_inven->Remove(get<0>(_vMaterialCount[i]), get<2>(_vMaterialCount[i]));
+			_inven->Remove(get<0>(_vMaterialCount[i]), 2);
+		}
+
 		Upgrade();
 	}
 

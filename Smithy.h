@@ -48,6 +48,10 @@ private:
 	
 	int _recipePrice;
 	int _upgradeGap;
+
+	int _m1Count;
+	int _m2Count;
+	int _m3Count;
 	
 	/*재료
 	크리스탈 에너지
@@ -71,6 +75,8 @@ public:
 
 
 	void KeyInput();
+
+	void UpdateMaterial();
 
 	void ShowImage();
 	void ShowUI();
