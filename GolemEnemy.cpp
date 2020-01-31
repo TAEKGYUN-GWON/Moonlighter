@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GolemEnemy.h"
 #include "Ability.h"
-
+#include"GolemScript.h"
 GolemEnemy::GolemEnemy()
 {
 }
@@ -19,7 +19,7 @@ void GolemEnemy::Init(Vector2 pos)
 	_tag = "enemy";
 	_name = "Golem";
 
-	_hp = new Ability(50, 50, 1);
+	_ability = new Ability(50, 50, 8);
 
 	_speed = 30.f;
 
@@ -85,6 +85,11 @@ void GolemEnemy::Init(Vector2 pos)
 	_atks.push_back(_tAtk);
 	_atks.push_back(_bAtk);
 
+	_lAtk->AddComponent<GolemScript>();
+	_rAtk->AddComponent<GolemScript>();
+	_tAtk->AddComponent<GolemScript>();
+	_bAtk->AddComponent<GolemScript>();
+
 #pragma endregion
 
 
@@ -103,42 +108,40 @@ void GolemEnemy::Update()
 
 void GolemEnemy::Attack()
 {
-	if (_isAtk)
-	{
-		_sprite->SetImgName("Golem_Atk");
-		_sprite->SetFPS(1.4f);
-	}
+	_sprite->SetImgName("Golem_Atk");
+	_sprite->SetFPS(1.4f);
 	switch (_dir)
 	{
 	case DIRECTION::LEFT:
 	{
 		_sprite->SetFrameY(0);
-		if (!GetLeftAtk()->GetBodyActive()&& _sprite->GetCurrentFrameX()==6)
+		if (!GetLeftAtk()->GetBodyActive())
 			GetLeftAtk()->SetBodyActive(true);
 	}
 		break;
 	case DIRECTION::RIGHT:
 	{
 		_sprite->SetFrameY(1);
-		if(!GetRightAtk()->GetBodyActive() && _sprite->GetCurrentFrameX() == 6)
+		if(!GetRightAtk()->GetBodyActive())
 			GetRightAtk()->SetBodyActive(true);
 	}
 		break;
 	case DIRECTION::TOP:
 	{
 		_sprite->SetFrameY(2);
-		if(!GetTopAtk()->GetBodyActive() && _sprite->GetCurrentFrameX() == 6)
+		if(!GetTopAtk()->GetBodyActive())
 			GetTopAtk()->SetBodyActive(true);
 	}
 		break;
 	case DIRECTION::BOTTOM:
 	{
 		_sprite->SetFrameY(3);
-		if (!GetBottomAtk()->GetBodyActive() && _sprite->GetCurrentFrameX() == 6)
+		if (!GetBottomAtk()->GetBodyActive())
 			GetBottomAtk()->SetBodyActive(true);
 	}
 		break;
 	}
+	
 }
 
 void GolemEnemy::AttackEnd()
@@ -164,17 +167,6 @@ void GolemEnemy::AtkPosUpdate()
 
 
 }
-
-//void GolemEnemy::Attack()
-
-	//여기에 범위 원 렉트?
-	//GRAPHICMANAGER->DrawEllipse
-		//(float x, float y, float radiusX, float radiusY, ColorF::Enum color, float strokeWidth)
-		//데미지 주는거?
-	//원 랙트 안에 센서 on이면 떄리고 off면 안 때리고
-	//이미지 바꿔줘야 하나 여기서?->슬라임은 필요x
-	//길바떄 센서처럼 하면 될까??->bool player?
-
 
 
 

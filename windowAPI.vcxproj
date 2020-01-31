@@ -150,6 +150,7 @@
     <ClInclude Include="BowAttack.h" />
     <ClInclude Include="BoxWorldManager.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletScript.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CheckStand.h" />
     <ClInclude Include="Collider.h" />
@@ -162,11 +163,13 @@
     <ClInclude Include="DungeonScene.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManeger.h" />
+    <ClInclude Include="EnemyScript.h" />
     <ClInclude Include="EntranceScene.h" />
     <ClInclude Include="ETC.h" />
     <ClInclude Include="ETCS.h" />
     <ClInclude Include="GolemEnemy.h" />
     <ClInclude Include="Ability.h" />
+    <ClInclude Include="GolemScript.h" />
     <ClInclude Include="iniDataManager.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
@@ -243,6 +246,7 @@
     <ClCompile Include="BowAttack.cpp" />
     <ClCompile Include="BoxWorldManager.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletScript.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CheckStand.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -254,11 +258,13 @@
     <ClCompile Include="DungeonScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManeger.cpp" />
+    <ClCompile Include="EnemyScript.cpp" />
     <ClCompile Include="EntranceScene.cpp" />
     <ClCompile Include="ETC.cpp" />
     <ClCompile Include="ETCS.cpp" />
     <ClCompile Include="GolemEnemy.cpp" />
     <ClCompile Include="Ability.cpp" />
+    <ClCompile Include="GolemScript.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />

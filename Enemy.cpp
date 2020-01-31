@@ -3,6 +3,7 @@
 #include "Ability.h"
 #include "Bullet.h"
 #include "Item.h"
+#include "EnemyScript.h"
 //#include "Player.h"
 //전방선언 같은 거...?
 
@@ -42,13 +43,15 @@ void Enemy::Init()
 
 	_tag = "enemy";
 
-	_hp = new Ability;
+	_ability = new Ability;
 	maxFrameX = 0;
 	frameY = 0;
 	_sprite = AddComponent<Sprite>();
 	_sprite->SetMaxFrameX(maxFrameX);
 	_sprite->SetFrameY(frameY);
 	_player = (Player*)SCENEMANAGER->GetNowScene()->GetChildFromName("Will");
+
+	AddComponent<EnemyScript>();
 }
 
 void Enemy::Update()
@@ -63,6 +66,7 @@ void Enemy::Update()
 
 	//상태 Update 걸어줌
 	state->Update(this);
+
 	if (_angle >= 45 * DegToRad && _angle < 135 * DegToRad)_dir = DIRECTION::TOP;
 	else if (_angle >= 135 * DegToRad && _angle < 180 * DegToRad)_dir = DIRECTION::LEFT;
 	else if (_angle <= -135 * DegToRad && _angle > -180 * DegToRad)_dir = DIRECTION::LEFT;
@@ -163,25 +167,19 @@ EnemyIdle* EnemyIdle::GetInstance()
 
 void EnemyIdle::Init(Enemy* _sEnemy)
 {
-	//sprite 세팅?
 	cout << "왜 안들어와?" << endl;
 }
 
 void EnemyIdle::Update(Enemy* _sEnemy)
 {
-	//if (KEYMANAGER->isOnceKeyDown('0'))
-		//hp 가 0이면
 	EnemyBasic::Update(_sEnemy);
 	Release(_sEnemy);
 	cout << "들어오냐?" << endl;
-
 }
 void EnemyIdle::Release(Enemy* _sEnemy)
 {
 	cout << "move로 가!!!" << endl;
-
-	//if 플레이어가 있으면
-	// else if 체력이 0 이면 죽어라!
+	//  체력이 0 이면 죽어라
 	if (_sEnemy->GetHP()->IsDead())
 	{
 		SetEnemyState(_sEnemy, EnemyDead::GetInstance());
@@ -203,7 +201,6 @@ EnemyMove* EnemyMove::GetInstance()
 void EnemyMove::Init(Enemy* _sEnemy)
 {
 	cout << "move 들어옴?" << endl;
-	//a*? bool값조정.?
 	_sEnemy->SetMove(true);
 	timer = 0;
 }
@@ -213,21 +210,21 @@ void EnemyMove::Update(Enemy* _sEnemy)
 	EnemyBasic::Update(_sEnemy);
 
 
-	//switch (_sEnemy->GetDir())
-	//{
-	//case DIRECTION::LEFT:
-	//	_sEnemy->GetSprite()->SetFrameY(0);
-	//	break;
-	//case DIRECTION::RIGHT:
-	//	_sEnemy->GetSprite()->SetFrameY(1);
-	//	break;
-	//case DIRECTION::TOP:
-	//	_sEnemy->GetSprite()->SetFrameY(2);
-	//	break;
-	//case DIRECTION::BOTTOM:
-	//	_sEnemy->GetSprite()->SetFrameY(3);
-	//	break;
-	//}
+	switch (_sEnemy->GetDir())
+	{
+	case DIRECTION::LEFT:
+		_sEnemy->GetSprite()->SetFrameY(0);
+		break;
+	case DIRECTION::RIGHT:
+		_sEnemy->GetSprite()->SetFrameY(1);
+		break;
+	case DIRECTION::TOP:
+		_sEnemy->GetSprite()->SetFrameY(2);
+		break;
+	case DIRECTION::BOTTOM:
+		_sEnemy->GetSprite()->SetFrameY(3);
+		break;
+	}
 	
 	//cout << "여기는 무브 오예 두둠칫" << endl;
 	//loat a = RND->getFloat(10000000);
@@ -252,13 +249,7 @@ void EnemyMove::Release(Enemy* _sEnemy)
 	//SetEnemyState(_sEnemy, EnemyMove::GetInstance());
 	cout << "다시 무브?" << endl;
 	SetEnemyState(_sEnemy, EnemyIdle::GetInstance());
-	// else if 체력이 0 이면 죽어라!
-
-	//if (_sEnemy->GetHP()->IsDead())
-	//{
-	//	SetEnemyState(_sEnemy, EnemyDead::GetInstance());
-	//}
-	//else SetEnemyState(_sEnemy, EnemyAttack::GetInstance());
+	
 }
 //■■■■■■■■■■■ Attack ■■■■■■■■■■■■
 EnemyAttack* EnemyAttack::GetInstance()
@@ -296,8 +287,12 @@ void EnemyAttack::Update(Enemy* _sEnemy)
 		if(_sEnemy->GetSprite()->GetCurrentFrameX() >= _sEnemy->GetSprite()->GetMaxFrameX())
 			Release(_sEnemy);
 	}
-	else
-		Release(_sEnemy);
+	//여기서 민트항아리 공격
+	else if (_sEnemy->GetName() == "Pot")
+	{
+		if(_sEnemy->GetSprite()->GetCurrentFrameX() >= _sEnemy->GetSprite()->GetMaxFrameX())
+			Release(_sEnemy);
+	}
 }
 
 void EnemyAttack::Release(Enemy* _sEnemy)
@@ -308,6 +303,10 @@ void EnemyAttack::Release(Enemy* _sEnemy)
 	if (_sEnemy->GetName() == "Golem")
 	{
 		_sEnemy->GetSprite()->SetImgName("Golem");
+	}
+	if (_sEnemy->GetName() == "Pot")
+	{
+		_sEnemy->GetSprite()->SetImgName("enemyPot");
 	}
 	// else if 아니면 idle로 가라
 	//SetEnemyState(_sEnemy, EnemyIdle::GetInstance());
