@@ -412,7 +412,7 @@
       <Filter>playGround\Player\Attack</Filter>
     </ClInclude>
     <ClInclude Include="PlayerAttackScript.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>playGround\Player\Attack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -675,7 +675,7 @@
       <Filter>playGround\Player\Attack</Filter>
     </ClCompile>
     <ClCompile Include="PlayerAttackScript.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>playGround\Player\Attack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

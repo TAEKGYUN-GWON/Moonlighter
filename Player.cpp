@@ -3,7 +3,6 @@
 #include "Inventory.h"
 #include "PlayerState.h"
 #include "PlayerIdle.h"
-#include "PlayerAttackScript.h"
 #include "ETCS.h"
 
 Player::Player()
@@ -61,8 +60,6 @@ void Player::Init()
 
 	_pool = new BulletObjPool;
 	_pool->Init(20, "arrow_down", "Arrow", "Arrow", this, 3);
-
-	AddComponent<PlayerAttackScript>();
 }
 
 void Player::Update()
