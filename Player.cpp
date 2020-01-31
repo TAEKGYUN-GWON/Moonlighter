@@ -105,6 +105,7 @@ void Player::Render()
 	char str[128];
 	if(_atkType == AttackType::Sword) sprintf_s(str, "Attack Type : Sword\nState Type : %s", _state->GetState().c_str());
 	else if (_atkType == AttackType::Bow) sprintf_s(str, "Attack Type : Bow\nState Type : %s", _state->GetState().c_str());
+
 	GRAPHICMANAGER->DrawTextD2D(Vector2(WINSIZEX - 230, 2), str, 20, 200, 70, ColorF::AntiqueWhite, TextPivot::RIGHT_BOTTOM);
 }
 
