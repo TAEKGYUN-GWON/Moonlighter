@@ -50,7 +50,7 @@ void ShopScene::Update()
 	_npcMgr->Update();
 	_shopDoor->Update();
 
-	//if (KEYMANAGER->isOnceKeyDown('1')) SCENEMANAGER->changeScene("Dungeon");
+	if (KEYMANAGER->isOnceKeyDown('1')) SCENEMANAGER->changeScene("Dungeon");
 	//if (KEYMANAGER->isOnceKeyDown('2')) SCENEMANAGER->changeScene("Entrance");
 	//if (KEYMANAGER->isOnceKeyDown('3')) SCENEMANAGER->changeScene("Town");
 	//if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");

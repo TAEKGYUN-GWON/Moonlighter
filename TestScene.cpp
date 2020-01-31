@@ -30,6 +30,7 @@ void TestScene::Update()
 {
 	Scene::Update();
 	mgr->Update();
+	if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
 	//if (KEYMANAGER->isOnceKeyDown('S'))
 	//{
 	//	for (Object* obj : test)

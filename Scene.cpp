@@ -34,10 +34,11 @@ void Scene::Release()
 	//	return;
 	//}
 	//Object::Release();
-	for (Object* child : _children)
+	for (int i = _children.size(); i <= 0; i--)
 	{
-		child->Release();
+		_children[i]->Release();
 	}
+
 }
 
 void Scene::Update()

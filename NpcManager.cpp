@@ -46,9 +46,10 @@ void NpcManager::Release()
 	{
 		if (!_vNpc[i]->GetIsActive())
 		{
-			_vNpc.erase(_vNpc.begin() + i);
+			_vNpc[i]->Release();
 		}
 	}
+	_vNpc.clear();
 }
 
 void NpcManager::MakeNpc()
