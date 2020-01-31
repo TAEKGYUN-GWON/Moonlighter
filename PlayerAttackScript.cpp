@@ -8,7 +8,7 @@
 void PlayerAttackScript::CollisionBegin(void* obj)
 {
 	Object* to = (Object*)obj;
-	Player* me = (Player*)_object;
+	Player* me = (Player*)_object->GetParent();
 
 	if (to->GetTag() == "enemy")
 	{
