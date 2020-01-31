@@ -13,6 +13,7 @@ public:
 	void Init(Vector2 pos);
 	void Update();
 	void Attack();
-	bool IsFire();
+	void AttackEnd();
+	void IsFire();
 };
 

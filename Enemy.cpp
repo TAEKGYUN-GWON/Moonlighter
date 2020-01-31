@@ -3,6 +3,7 @@
 #include "Ability.h"
 #include "Bullet.h"
 #include "Item.h"
+#include "EnemyScript.h"
 //#include "Player.h"
 //전방선언 같은 거...?
 
@@ -49,6 +50,8 @@ void Enemy::Init()
 	_sprite->SetMaxFrameX(maxFrameX);
 	_sprite->SetFrameY(frameY);
 	_player = (Player*)SCENEMANAGER->GetNowScene()->GetChildFromName("Will");
+
+	AddComponent<EnemyScript>();
 }
 
 void Enemy::Update()
@@ -284,13 +287,11 @@ void EnemyAttack::Update(Enemy* _sEnemy)
 			Release(_sEnemy);
 	}
 	//여기서 민트항아리 공격
-	if (_sEnemy->GetName() == "Pot")
+	else if (_sEnemy->GetName() == "Pot")
 	{
 		if(_sEnemy->GetSprite()->GetCurrentFrameX() >= _sEnemy->GetSprite()->GetMaxFrameX())
 			Release(_sEnemy);
 	}
-	else
-		Release(_sEnemy);
 }
 
 void EnemyAttack::Release(Enemy* _sEnemy)
@@ -304,7 +305,7 @@ void EnemyAttack::Release(Enemy* _sEnemy)
 	}
 	if (_sEnemy->GetName() == "Pot")
 	{
-		_sEnemy->GetSprite()->SetImgName("Pot");
+		_sEnemy->GetSprite()->SetImgName("enemyPot");
 	}
 	// else if 아니면 idle로 가라
 	//SetEnemyState(_sEnemy, EnemyIdle::GetInstance());

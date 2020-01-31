@@ -157,7 +157,7 @@ void EnemyManeger::Fire()
 			if (e->GetName() == "Pot")
 			{
 				MintPotEnemy* pot = (MintPotEnemy*)e;
-				if (pot->IsFire())
+				if (pot->GetAtk())
 				{
 					if (_BobjPool->GetPool().size())
 					{ 

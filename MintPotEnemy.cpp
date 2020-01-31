@@ -48,11 +48,12 @@ void MintPotEnemy::Update()
 	Enemy::Update();
 	_sprite->SetPosition(_trans->GetPos()+Vector2::up*10);
 	IsFire();
-	Attack();
+	//Attack();
 }
 
 void MintPotEnemy::Attack()
 {
+	//_isAtk = true;
 	//_sprite->SetImgName("Ebullet");
 	//Bullet* _bullet;
 	switch (_dir)
@@ -74,15 +75,19 @@ void MintPotEnemy::Attack()
 	}
 }
 
-bool MintPotEnemy::IsFire()
+void MintPotEnemy::AttackEnd()
+{
+	_isAtk = false;
+}
+
+void MintPotEnemy::IsFire()
 {
 	_fireCount += TIMEMANAGER->getElapsedTime();
 
 	if (_fireCount >= 1.5f)
 	{
+		_isAtk = true;
+		SetState(EnemyAttack::GetInstance());
 		_fireCount = 0;
-		return true;
 	}
-
-	return false;
 }

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GolemEnemy.h"
 #include "Ability.h"
-
+#include"GolemScript.h"
 GolemEnemy::GolemEnemy()
 {
 }
@@ -84,6 +84,11 @@ void GolemEnemy::Init(Vector2 pos)
 	_atks.push_back(_rAtk);
 	_atks.push_back(_tAtk);
 	_atks.push_back(_bAtk);
+
+	_lAtk->AddComponent<GolemScript>();
+	_rAtk->AddComponent<GolemScript>();
+	_tAtk->AddComponent<GolemScript>();
+	_bAtk->AddComponent<GolemScript>();
 
 #pragma endregion
 

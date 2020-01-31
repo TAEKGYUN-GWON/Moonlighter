@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Boss.h"
 
+
 BossIdle* BossIdle::instance;
 //BossMove* BossMove::instance;
 BossAttack* BossAttack::instance;

@@ -14,6 +14,7 @@ void BulletScript::CollisionBegin(void* obj)
 	{
 		Player* player = (Player*)obj;
 
+		if (player->GetPhysics()->GetBody()->GetFixtureList()->IsSensor())return;
 		player->GetAbility()->DamageHP(me->GetAttackPoint());
 		me->SetCollision(true);
 	}
