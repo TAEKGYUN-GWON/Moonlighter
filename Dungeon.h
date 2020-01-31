@@ -17,6 +17,7 @@ private:
 	Vector2 pos;
 	bool _roomActive = false;
 public:
+
 	virtual void Init(Vector2 start);
 	virtual void Update();
 	virtual void Render();

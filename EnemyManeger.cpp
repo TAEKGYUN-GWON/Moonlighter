@@ -1,10 +1,22 @@
 #include "stdafx.h"
 #include "EnemyManeger.h"
+//#include "Bullet.h"
 
+EnemyManeger::EnemyManeger()
+{
+
+	GRAPHICMANAGER->AddFrameImage("Ebullet", L"resource/img/Enemy/enemy_bullet.png", 6, 1);
+	GRAPHICMANAGER->AddFrameImage("Ebullet_C", L"resource/img/Enemy/bullet_collision.png", 5, 1);
+	_BobjPool = new BulletObjPool;
+	_BobjPool->Init(100, "Ebullet", "bullet", "Ebullet", _room, 5);
+}
 
 void EnemyManeger::Init(Dungeon* room)
 {
+	//총알
+
 	//해당 던전씬에 물려주기
+	
 	_astar = new Astar;
 	_astar->Init(room->GetTiles(), Dungeon_X, Dungeon_Y);
 
@@ -12,6 +24,11 @@ void EnemyManeger::Init(Dungeon* room)
 	_player = (Player*) SCENEMANAGER->GetNowScene()->GetChildFromName("Will");
 	_room = room;
 	SetEnemy();
+
+	//Bullet* _bullet = new Bullet;
+	//_bullet->Init("Ebullet","bullet", "Ebullet");
+	
+	
 }
 
 void EnemyManeger::Update()
@@ -35,13 +52,27 @@ void EnemyManeger::Update()
 			}
 		}
 	}
-	//_enemy->SetMove(false);
-	//에너미가 탐색하는거 실시간으로 해야해..............
-
+	
+	for (int i = 0; i < _BobjPool->GetActivePoolSize(); i++)
+	{
+		if (_BobjPool->GetActivePool()[i]->GetCollision())
+		{
+			_BobjPool->GetActivePool()[i]->SetCollision(false);
+			_BobjPool->InssertPool(i);
+			break;
+		}
+	}
+	/*if (!_bullet->GetIsActive()) _BobjPool->InssertPool()*/
+	Fire();
 }
 
 void EnemyManeger::Release()
 {
+	for (int i = 0; i < _BobjPool->GetActivePoolSize(); i++)
+	{
+		_BobjPool->InssertPool(i);
+	}
+
 	for (Enemy* e : _vEnemy)
 	{
 		SCENEMANAGER->GetNowScene()->GetWorld()->DestroyBody(e->GetComponent<PhysicsBody>()->GetBody());
@@ -49,18 +80,28 @@ void EnemyManeger::Release()
 		e->Release();
 	}
 	_vEnemy.clear();
+
+	
+
 }
 
 void EnemyManeger::Render()
 {
+	for (Object* a : _BobjPool->GetActivePool()) a->Render();
 
+	wchar_t buffer[128];
+	swprintf(buffer, 128, L"%d", _BobjPool->GetActivePoolSize());
+	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2 - 200), buffer, 20, 200, 30, ColorF::Honeydew);
+	
 }
 
 void EnemyManeger::SetEnemy()
 {
-	int rand = RND->getFromIntTo(2, 10);
+	int rand = RND->getFromIntTo(2,10);
+	//int rand = 1;
 	for (int i = 0; i < rand; i++)
 	{
+		//int Ernad =2;
 		int Ernad = RND->getInt(3);
 		switch (Ernad)
 		{
@@ -106,3 +147,35 @@ void EnemyManeger::SetEnemy()
 		}
 	}
 }
+
+void EnemyManeger::Fire()
+{
+	if (_BobjPool->GetPool().size())
+	{
+		for (Enemy* e : _vEnemy)
+		{
+			if (e->GetName() == "Pot")
+			{
+				MintPotEnemy* pot = (MintPotEnemy*)e;
+				if (pot->GetAtk())
+				{
+					if (_BobjPool->GetPool().size())
+					{ 
+						_BobjPool->GetPoolObject()->Fire(Vector2(pot->GetTrans()->GetPos().x,
+							pot->GetTrans()->GetPos().y), (int)pot->GetDir()*90*DegToRad, 200);
+						_BobjPool->InssertActiveObject();
+					}
+				}
+			}
+		}
+	}
+	for (int i = 0; i < _BobjPool->GetActivePoolSize(); i++)
+	{
+		if (!_BobjPool->GetActivePool()[i]->GetIsActive())
+		{
+			_BobjPool->GetActivePool()[i]->GetComponent<PhysicsBody>()->GetBody()->SetActive(false);
+			_BobjPool->InssertPool(i);
+		}
+	}
+}
+
