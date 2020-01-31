@@ -44,6 +44,7 @@ using namespace std;
 #include "Camera.h"
 #include"ObjectManager.h"
 #include"rapidjson/document.h"
+#include"rapidjson/writer.h"
 #include"iniDataManager.h"
 using namespace rapidjson;
 using namespace SEVENTEEN_UTIL;
