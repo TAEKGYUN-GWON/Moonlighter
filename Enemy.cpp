@@ -292,6 +292,7 @@ void EnemyAttack::Update(Enemy* _sEnemy)
 	//cout << "여기는 공격!" << endl;
 	if (_sEnemy->GetName() == "Golem")
 	{
+		if (_sEnemy->GetSprite()->GetCurrentFrameX() == 6) _sEnemy->Attack();
 		if(_sEnemy->GetSprite()->GetCurrentFrameX() >= _sEnemy->GetSprite()->GetMaxFrameX())
 			Release(_sEnemy);
 	}

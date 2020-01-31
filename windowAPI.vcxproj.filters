@@ -112,8 +112,8 @@
     <Filter Include="playGround\Smithy">
       <UniqueIdentifier>{a35f991b-c06f-44cd-9291-2de74b101e97}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\Player\Attack">
-      <UniqueIdentifier>{58331030-dd94-49af-add6-c8f91c3e3d53}</UniqueIdentifier>
+    <Filter Include="2DGameFramework\Object\Particle">
+      <UniqueIdentifier>{fbab504b-552c-4043-83e9-4c0d931a68e6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -354,6 +354,9 @@
     <ClInclude Include="PlayerMove.h">
       <Filter>playGround\Player</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerAttack.h">
+      <Filter>playGround\Player</Filter>
+    </ClInclude>
     <ClInclude Include="PlayerRoll.h">
       <Filter>playGround\Player</Filter>
     </ClInclude>
@@ -378,14 +381,14 @@
     <ClInclude Include="MintPotEnemy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="SwordAttack.h">
-      <Filter>playGround\Player\Attack</Filter>
+    <ClInclude Include="Particle.h">
+      <Filter>2DGameFramework\Object\Particle</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerAttack.h">
-      <Filter>playGround\Player\Attack</Filter>
+    <ClInclude Include="Particle.hpp">
+      <Filter>2DGameFramework\Object\Particle</Filter>
     </ClInclude>
-    <ClInclude Include="BowAttack.h">
-      <Filter>playGround\Player\Attack</Filter>
+    <ClInclude Include="ParticleManager.h">
+      <Filter>2DGameFramework\Object\Particle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -596,6 +599,9 @@
     <ClCompile Include="PlayerMove.cpp">
       <Filter>playGround\Player</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerAttack.cpp">
+      <Filter>playGround\Player</Filter>
+    </ClCompile>
     <ClCompile Include="PlayerRoll.cpp">
       <Filter>playGround\Player</Filter>
     </ClCompile>
@@ -620,14 +626,11 @@
     <ClCompile Include="MintPotEnemy.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="SwordAttack.cpp">
-      <Filter>playGround\Player\Attack</Filter>
+    <ClCompile Include="Particle.cpp">
+      <Filter>2DGameFramework\Object\Particle</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerAttack.cpp">
-      <Filter>playGround\Player\Attack</Filter>
-    </ClCompile>
-    <ClCompile Include="BowAttack.cpp">
-      <Filter>playGround\Player\Attack</Filter>
+    <ClCompile Include="ParticleManager.cpp">
+      <Filter>2DGameFramework\Object\Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

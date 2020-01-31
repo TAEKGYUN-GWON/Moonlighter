@@ -180,6 +180,9 @@
     <ClInclude Include="NpcManager.h" />
     <ClInclude Include="NpcShopState.h" />
     <ClInclude Include="omega.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="Particle.hpp" />
+    <ClInclude Include="ParticleManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAttack.h" />
     <ClInclude Include="PlayerIdle.h" />
@@ -267,6 +270,8 @@
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="NpcManager.cpp" />
     <ClCompile Include="NpcShopState.cpp" />
+    <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="ParticleManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerAttack.cpp" />
     <ClCompile Include="PlayerIdle.cpp" />

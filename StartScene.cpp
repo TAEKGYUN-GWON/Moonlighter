@@ -77,9 +77,17 @@ void StartScene::Render()
 	GRAPHICMANAGER->Text(Vector2(100, 250), L"4) Shop Scene", 20, 300, 50, ColorF::Aquamarine);
 	GRAPHICMANAGER->Text(Vector2(100, 300), L"5) Maptool Scene", 20, 300, 50, ColorF::Azure);
 
-	wchar_t buffer[128];
+	wchar_t buffer[1024];
 	swprintf(buffer, 128, L"Camera X : %f\nCamera Y : %f", CAMERA->GetPosition().x, CAMERA->GetPosition().y);
 	GRAPHICMANAGER->Text(Vector2(WINSIZEX/2, 100), buffer, 20, 300, 50, ColorF::Azure);
+
+
+	string a = "None";
+	wstring b(a.begin(), a.end());
+	wchar_t* str;
+	str = &b[0];
+
+	GRAPHICMANAGER->Text(Vector2(WINSIZEX/2, 200), b, 20, 300, 50, ColorF::Azure);
 
 	GRAPHICMANAGER->DrawFrameImage("bn", Vector2(WINSIZEX / 2, 400), 0, 0, Vector2(320, 50));
 	GRAPHICMANAGER->DrawFrameImage("bn", Vector2(WINSIZEX / 2, 460), 1, 0, Vector2(320, 50));

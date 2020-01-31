@@ -2,11 +2,13 @@
 #include"singletonBase.h"
 class JsonManager : public singletonBase<JsonManager>
 {
+private:
+
+	rapidjson::Document document;
+	rapidjson::SizeType sizeType;
+	rapidjson::Value value; 
 
 public:
-	using document = rapidjson::Document;
-	using sizeType = rapidjson::SizeType;
-	using Value = rapidjson::Value;
-	
+	void foo();
 };
 
