@@ -336,9 +336,6 @@
     <ClInclude Include="ShopDoor.h">
       <Filter>playGround\Shop\ShopObject</Filter>
     </ClInclude>
-    <ClInclude Include="Dungeon.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="TestScene.h">
       <Filter>playGround\Test</Filter>
     </ClInclude>
@@ -346,9 +343,6 @@
       <Filter>playGround\Dungeon</Filter>
     </ClInclude>
     <ClInclude Include="GolemEnemy.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="DungeonMgr.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="PlayerMove.h">
@@ -389,6 +383,27 @@
     </ClInclude>
     <ClInclude Include="ParticleManager.h">
       <Filter>2DGameFramework\Object\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="BowAttack.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SwordAttack.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletScript.h">
+      <Filter>playGround\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="GolemScript.h">
+      <Filter>playGround\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyScript.h">
+      <Filter>playGround\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonMgr.h">
+      <Filter>playGround\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Dungeon.h">
+      <Filter>playGround\Dungeon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -581,9 +596,6 @@
     <ClCompile Include="ShopDoor.cpp">
       <Filter>playGround\Shop\ShopObject</Filter>
     </ClCompile>
-    <ClCompile Include="Dungeon.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="TestScene.cpp">
       <Filter>playGround\Test</Filter>
     </ClCompile>
@@ -591,9 +603,6 @@
       <Filter>playGround\Dungeon</Filter>
     </ClCompile>
     <ClCompile Include="GolemEnemy.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="DungeonMgr.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="PlayerMove.cpp">
@@ -631,6 +640,27 @@
     </ClCompile>
     <ClCompile Include="ParticleManager.cpp">
       <Filter>2DGameFramework\Object\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="BowAttack.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SwordAttack.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletScript.cpp">
+      <Filter>playGround\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="GolemScript.cpp">
+      <Filter>playGround\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyScript.cpp">
+      <Filter>playGround\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonMgr.cpp">
+      <Filter>playGround\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Dungeon.cpp">
+      <Filter>playGround\Dungeon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
