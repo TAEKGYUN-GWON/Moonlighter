@@ -6,7 +6,7 @@
 #include "TownScene.h"
 #include "Maptool.h"
 #include "TestScene.h"
-
+#include"ETCS.h"
 void StartScene::Init()
 {
 	Scene::Init();
@@ -18,7 +18,7 @@ void StartScene::Init()
 	SCENEMANAGER->addScene("test", new TestScene);
 
 	GraphicsManager::getSingleton()->AddImage("dd", L"eagle.png");
-	GraphicsManager::getSingleton()->AddFrameImage("d2", L"fatkachu.png",4,1);
+	GraphicsManager::getSingleton()->AddFrameImage("d2", L"fatkachu.png", 4, 1);
 	GRAPHICMANAGER->AddFrameImage("bn", L"blueNumber.png", 4, 1);
 
 	GRAPHICMANAGER->AddImage("coin", L"resource/img/UI/coin.png");
@@ -29,14 +29,41 @@ void StartScene::Init()
 	GRAPHICMANAGER->AddImage("heart", L"resource/img/UI/heart.png");
 	GRAPHICMANAGER->AddFrameImage("UI_WeaponSwap", L"resource/img/UI/UI_WeaponSwap.png", 4, 2);
 
+
+
+	GRAPHICMANAGER->AddImage("Vine", L"resource/img/Items/Vine.png");
+	GRAPHICMANAGER->AddImage("Crystal_Energy", L"resource/img/Items/Crystal_Energy.png");
+	GRAPHICMANAGER->AddImage("Treated_Wood", L"resource/img/Items/Treated_Wood.png");
+	GRAPHICMANAGER->AddImage("Amulet_ring", L"resource/img/Items/amulet_ring.png");
+	GRAPHICMANAGER->AddImage("Broken_Sword", L"resource/img/Items/Broken_Sword.png");
+	GRAPHICMANAGER->AddImage("Energy_Crystal", L"resource/img/Items/Energy_Crystal.png");
+	GRAPHICMANAGER->AddImage("Naja_Note", L"resource/img/Items/Naja_Note.png");
+	GRAPHICMANAGER->AddImage("Reinforced_Steel_G", L"resource/img/Items/Reinforced_Steel_G.png");
+	GRAPHICMANAGER->AddImage("Golem_Core", L"resource/img/Items/Golem_Core.png");
+	GRAPHICMANAGER->AddImage("Familiar_Egg", L"resource/img/Items/Familiar_Egg.png");
+	GRAPHICMANAGER->AddImage("Reinforced_Steel_Y", L"resource/img/Items/Reinforced_Steel_Y.png");
+	GRAPHICMANAGER->AddImage("Golem_King_Design ", L"resource/img/Items/Golem_King_Design.png");
+	//GRAPHICMANAGER->AddFrameImage("Items", L"resource/img/Items/Items.png",4,3);
+
+
+
+
+
 	//ui = new UiManager;
 	//ui->Init();
 	inven = new Inventory;
 	inven->Init();
 	//ui->SetInvenLink(inven);
 
+	//inven->Insert(Item::CreateItem<Golem_Core>(Vector2(0, 0)));
+	//inven->Insert(Item::CreateItem<Golem_Core>(Vector2(0, 0)));
+	//inven->Insert(Item::CreateItem<Crystal_Energy>(Vector2(0, 0)));
+	//
+
 	_smithy = new Smithy;
-	_smithy->Init();
+	_smithy->Init(inven);
+
+
 
 	obj = Object::CreateObject<Object>();
 	obj->GetTrans()->SetPos(Vector2(WINSIZEX / 2, 200));

@@ -189,6 +189,8 @@
     <ClInclude Include="ParticleManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAttack.h" />
+    <ClInclude Include="PlayerAttackScript.h" />
+    <ClInclude Include="PlayerDead.h" />
     <ClInclude Include="PlayerIdle.h" />
     <ClInclude Include="PlayerMove.h" />
     <ClInclude Include="PlayerRoll.h" />
@@ -282,6 +284,8 @@
     <ClCompile Include="ParticleManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerAttack.cpp" />
+    <ClCompile Include="PlayerAttackScript.cpp" />
+    <ClCompile Include="PlayerDead.cpp" />
     <ClCompile Include="PlayerIdle.cpp" />
     <ClCompile Include="PlayerMove.cpp" />
     <ClCompile Include="PlayerRoll.cpp" />

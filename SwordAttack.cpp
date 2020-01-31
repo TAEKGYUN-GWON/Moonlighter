@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SwordAttack.h"
 #include "PlayerIdle.h"
+#include "PlayerAttackScript.h"
 
 void SwordAttack::Enter()
 {
@@ -28,6 +29,7 @@ void SwordAttack::Enter()
 	_atkArea = Object::CreateObject<Object>(_obj);
 	_atkArea->GetTrans()->SetPos(_obj->GetTrans()->GetPos() + Vector2(cosf(d * 45 * Deg2Rad), -sinf(d * 45 * Deg2Rad)) * 20);
 	_atkArea->GetTrans()->SetScale(width, height);
+	_atkArea->AddComponent<PlayerAttackScript>();
 
 	switch (d)
 	{

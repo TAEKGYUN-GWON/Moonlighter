@@ -42,41 +42,19 @@ void Sprite::Render()
 
 	if (_isFrame)
 	{
-		if (_isPlay)
-		{
-			_count += TIMEMANAGER->getElapsedTime() * 5;
-
-			if (_count >= _FPS)
-			{
-				_count -= _FPS;
-				_curFrameX++;
-				if (_curFrameX > _maxFrameX)
-				{
-					if (_isLoop) _curFrameX = 0;
-					else
-					{
-						_curFrameX--;
-						_isPlay = false;
-					}
-				}
-			}
-		}
 		//GRAPHICMANAGER->DrawFrameImage(_imgKey, _object->GetTrans()->GetPos(), _curFrameX, _curFrameY, _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot, _isCameraAffect);
-		//_graphic->FrameRender(_object->GetTrans()->GetPos(), _curFrameX, _curFrameY, _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot, _isCameraAffect);
-		//_graphic->FrameRender(_pos, _curFrameX, _curFrameY, _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot, _isCameraAffect);
 		_graphic->FrameRender(_pos, _curFrameX, _curFrameY, _scale, _object->GetTrans()->GetRotateDegree(), _isFlipX, _alpha, _pivot, _isCameraAffect);
 	}
 	else
 	{
 		//GRAPHICMANAGER->DrawImage(_imgKey, _object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot);
-		//_graphic->Render(_pos, _object->GetTrans()->GetScale(), _object->GetTrans()->GetRotateRadian(), _isFlipX, _alpha, _pivot, _isCameraAffect);
 		_graphic->Render(_pos, _scale, _object->GetTrans()->GetRotateDegree(), _isFlipX, _alpha, _pivot, _isCameraAffect);
 	}
 }
 
 void Sprite::Update()
 {
-	return;
+	PlayAnimation();
 }
 
 void Sprite::Start()
@@ -101,6 +79,32 @@ void Sprite::Pause()
 void Sprite::Resume()
 {
 	_isPlay = true;
+}
+
+void Sprite::PlayAnimation()
+{
+	if (_isFrame)
+	{
+		if (_isPlay)
+		{
+			_count += TIMEMANAGER->getElapsedTime() * 5;
+
+			if (_count >= _FPS)
+			{
+				_count -= _FPS;
+				_curFrameX++;
+				if (_curFrameX > _maxFrameX)
+				{
+					if (_isLoop) _curFrameX = 0;
+					else
+					{
+						_curFrameX--;
+						_isPlay = false;
+					}
+				}
+			}
+		}
+	}
 }
 
 void Sprite::SetImgName(string key)

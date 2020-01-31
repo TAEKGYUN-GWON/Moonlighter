@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "Smithy.h"
 #include "Component.h"
+#include "ETCS.h"
 
-void Smithy::Init()
+void Smithy::Init(Inventory* inven)
 {
 	_blackSmith = GRAPHICMANAGER->AddImage("blackSmith", L"resource/img/Smithy/BlackSmith.png");
 	_anvil = GRAPHICMANAGER->AddImage("anvil", L"resource/img/Smithy/Anvil.png");
@@ -17,21 +18,38 @@ void Smithy::Init()
 	_pocketCircle = GRAPHICMANAGER->AddImage("pocketCicle", L"resource/img/Smithy/Pocket_Circle.png");
 
 
-	_material1 = GRAPHICMANAGER->AddImage("material1", L"resource/img/Smithy/material1.png");
-	_material2 = GRAPHICMANAGER->AddImage("material2", L"resource/img/Smithy/material2.png");
-	_material3 = GRAPHICMANAGER->AddImage("material3", L"resource/img/Smithy/material3.png");
+	_material1 = GRAPHICMANAGER->AddImage("crystal_Energy", L"resource/img/Smithy/material1.png");
+	_material2 = GRAPHICMANAGER->AddImage("reinforced_Steel_G", L"resource/img/Smithy/material2.png");
+	_material3 = GRAPHICMANAGER->AddImage("golem_Core", L"resource/img/Smithy/material3.png");
+	
+	_mOn1 = GRAPHICMANAGER->AddImage("onCheck1", L"resource/img/Smithy/Upgradable.png");
+	_mOn2 = GRAPHICMANAGER->AddImage("onCheck2", L"resource/img/Smithy/Upgradable.png");
+	_mOn3 = GRAPHICMANAGER->AddImage("onCheck3", L"resource/img/Smithy/Upgradable.png");
 
 	_coin = GRAPHICMANAGER->AddImage("coin", L"resource/img/Smithy/Coin.png");
 
-	_recipePrice = 100;
+	//_recipePrice = 100;
 	_upgradeGap = 10;
 
 	_player = (Player*)SCENEMANAGER->GetNowScene()->GetChildFromName("Will");
 
-	_inven = new Inventory();
-	_inven->Init();
-	_inven->AddMoney(135948);
-	_inven->SetATK(30);
+	//_inven = new Inventory();
+	_inven = inven;
+	//_inven->Init();
+	_inven->AddMoney(135948788);
+	//_inven->SetATK(30);
+
+	_recipePrice = _inven->GetATK() / 10 * 0.4 * 2316;
+
+	_m1Count = 2;
+	_m2Count = 2;
+	_m3Count = 2;
+
+
+	/*for (int i = 0; i < 3; i++)
+	{
+		_mRecipe.insert(make_pair(new Graphic(), 2));
+	}*/
 
 
 
@@ -41,11 +59,12 @@ void Smithy::Init()
 void Smithy::Update()
 {
 	KeyInput();
+	UpdateMaterial();
 }
 
 void Smithy::Release()
 {
-
+	
 }
 
 void Smithy::Render()
@@ -65,10 +84,33 @@ void Smithy::KeyInput()
 		_isShow = !_isShow;
 	}
 
-	if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
+	if (_isShow)
 	{
-		_inven->DeductionMoney(5000);
+		if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
+		{
+			_inven->DeductionMoney(5000);
+		}
+
+		if (KEYMANAGER->isOnceKeyDown('U'))
+		{
+			Buy();
+		}
+
+		if (KEYMANAGER->isOnceKeyDown('Y'))
+		{
+			_inven->Insert(Item::CreateItem<Crystal_Energy>(Vector2(0, 0)));
+		}
 	}
+}
+
+void Smithy::UpdateMaterial()
+{
+	_vMaterialCount.clear();
+
+	//재료 이미지 키값, 체크 활성화 키값, 필요개수, 소지량
+	_vMaterialCount.push_back(make_tuple(_material3->GetImageKey(), _mOn3->GetImageKey(), _m3Count, _inven->FindItemSome(_material3->GetImageKey())));
+	_vMaterialCount.push_back(make_tuple(_material2->GetImageKey(), _mOn2->GetImageKey(), _m2Count, _inven->FindItemSome(_material2->GetImageKey())));
+	_vMaterialCount.push_back(make_tuple(_material1->GetImageKey(), _mOn1->GetImageKey(), _m1Count, _inven->FindItemSome(_material1->GetImageKey())));
 }
 
 void Smithy::ShowImage()
@@ -85,15 +127,37 @@ void Smithy::ShowImage()
 
 	_coin->Render(Vector2(110, 140), 1, PIVOT::CENTER, false);
 
-	_material1->Render(Vector2(WINSIZEX - 300, WINSIZEY - 260), 1, PIVOT::CENTER, false);
-	_material2->Render(Vector2(WINSIZEX - 300, WINSIZEY - 170), 1, PIVOT::CENTER, false);
-	_material3->Render(Vector2(WINSIZEX - 300, WINSIZEY - 80), 1, PIVOT::CENTER, false);
+
+	for (int i = 2; i >= 0; i--)
+	{
+		GRAPHICMANAGER->FindImage(get<0>(_vMaterialCount[i]))->Render(Vector2(WINSIZEX - 300, WINSIZEY - (-10 + (i + 1) * 90)), 1, PIVOT::CENTER, false);
+	}
+
+	//크리스탈
+	if (get<2>(_vMaterialCount[2]) <= get<3>(_vMaterialCount[2]))
+	{
+		GRAPHICMANAGER->FindImage(get<1>(_vMaterialCount[2]))->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 262.5), 1, PIVOT::CENTER, false);
+		//_mOn1->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 216.5), 1, PIVOT::CENTER, false);
+	}
+
+	//강철
+	if (get<2>(_vMaterialCount[1]) <= get<3>(_vMaterialCount[1]))
+	{
+		GRAPHICMANAGER->FindImage(get<1>(_vMaterialCount[1]))->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 176.5), 1, PIVOT::CENTER, false);
+		//_mOn2->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 176.5), 1, PIVOT::CENTER, false);
+	}
+
+	//코어
+	if (get<2>(_vMaterialCount[0]) <= get<3>(_vMaterialCount[0]))
+	{
+		GRAPHICMANAGER->FindImage(get<1>(_vMaterialCount[0]))->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 90.5), 1, PIVOT::CENTER, false);
+		//_mOn3->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 90.5), 1, PIVOT::CENTER, false);
+	}
+
 }
 
 void Smithy::ShowUI()
 {
-	string standardStr;
-	wstring printStr;
 
 	ColorF* color = new ColorF(0xecddc0, 1.0f);
 
@@ -104,32 +168,76 @@ void Smithy::ShowUI()
 	standardStr += to_string(_upgradeGap + _inven->GetATK());
 	printStr.assign(standardStr.begin(), standardStr.end());
 
-	GRAPHICMANAGER->DrawTextD2D(Vector2(WINSIZEX - 180, 190), standardStr.c_str(), 30, *color);
+	GRAPHICMANAGER->Text(Vector2(WINSIZEX - 370, 180), printStr, 30, 300, 50, *color, TextPivot::RIGHT_BOTTOM);
 
 	color = new ColorF(0x191919, 1.f);
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2 - 40, WINSIZEY / 2 - 100), L"강화하기", 50, 100, 50, *color, TextPivot::CENTER, L"나눔스퀘어라운드");
+	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2 - 50, WINSIZEY / 2 - 100), L"강화하기", 50, 100, 50, *color, TextPivot::CENTER, L"나눔스퀘어라운드");
 
 	GRAPHICMANAGER->Text(Vector2(WINSIZEX - 350, WINSIZEY / 2 + 10), L"레시피", 25, 100, 50, *color, TextPivot::CENTER, L"나눔스퀘어라운드");
 
-	for (int i = 1; i <= 3; i++)
-	{
-		GRAPHICMANAGER->Text(Vector2(WINSIZEX - 280, WINSIZEY - 30 - (i * 90)), L"필요:", 20, 100, 50, *color, TextPivot::CENTER, L"나눔스퀘어라운드");
-		GRAPHICMANAGER->Text(Vector2(WINSIZEX - 280, WINSIZEY - (i * 90)), L"소지:", 20, 100, 50, *color, TextPivot::CENTER, L"나눔스퀘어라운드");
-	}
-
+	standardStr = to_string(_recipePrice);
+	printStr.assign(standardStr.begin(), standardStr.end());
+	GRAPHICMANAGER->Text(Vector2(WINSIZEX - 200, WINSIZEY / 2 + 10), printStr, 25, 100, 50, *color, TextPivot::CENTER, L"나눔스퀘어라운드");
 
 	standardStr = to_string(_inven->GetMoney());
 	printStr.assign(standardStr.begin(), standardStr.end());
 	color = new ColorF(0xffffff, 1.f);
 	GRAPHICMANAGER->Text(Vector2(10, 125), printStr, 15, 100, 25, *color, TextPivot::CENTER, L"나눔스퀘어라운드");
 
-
+	PrintRecipe();
 	
 }
 
-string Smithy::PrintPrice(string price)
+void Smithy::Buy()
 {
-	string a = "a";
+	if (_inven->GetMoney() >= _recipePrice)
+	{
+		_inven->DeductionMoney(_recipePrice);
+		_inven->SetATK(_inven->GetATK() + _upgradeGap);
 
-	return a;
+		for (int i = 0; i < _vMaterialCount.size(); i++)
+		{
+			//_inven->Remove(get<0>(_vMaterialCount[i]), get<2>(_vMaterialCount[i]));
+			_inven->Remove(get<0>(_vMaterialCount[i]), 2);
+		}
+
+		Upgrade();
+	}
+
+}
+
+void Smithy::Upgrade()
+{
+
+	_recipePrice = _inven->GetATK() / 10 * 0.4 * 2316;
+
+	//_recipePrice *= 1.6;
+	
+	_upgradeGap *= 1.15;
+}
+
+void Smithy::PrintRecipe()
+{
+	ColorF* color = new ColorF(0x191919, 1.f);
+
+	for (int i = 0; i <= 2; i++)
+	{
+		//GRAPHICMANAGER->FindImage(get<0>(_vMaterialCount[i]))->Render(Vector2(WINSIZEX - 300, WINSIZEY - (-10 + (i + 1) * 90)), 1, PIVOT::CENTER, false);
+
+		GRAPHICMANAGER->Text(Vector2(WINSIZEX - 280, WINSIZEY - 30 - ((i+1) * 90)), L"필요:", 20, 100, 50, *color, TextPivot::CENTER, L"나눔스퀘어라운드");
+		GRAPHICMANAGER->Text(Vector2(WINSIZEX - 280, WINSIZEY - ((i+1) * 90)), L"소지:", 20, 100, 50, *color, TextPivot::CENTER, L"나눔스퀘어라운드");
+
+		standardStr = to_string(get<3>(_vMaterialCount[i]));
+		printStr.assign(standardStr.begin(), standardStr.end());
+		GRAPHICMANAGER->Text(Vector2(WINSIZEX - 230, WINSIZEY - (-10 + (i + 1) * 90)), printStr, 20, 100, 25, *color, TextPivot::RIGHT_CENTER, L"나눔스퀘어라운드");
+		
+		standardStr = to_string(get<2>(_vMaterialCount[i]));
+		printStr.assign(standardStr.begin(), standardStr.end());
+		GRAPHICMANAGER->Text(Vector2(WINSIZEX - 230, WINSIZEY - (20 + (i + 1) *90)), printStr, 20, 100, 25, *color, TextPivot::RIGHT_CENTER, L"나눔스퀘어라운드");
+
+
+
+
+
+	}
 }
