@@ -11,28 +11,9 @@ HRESULT Camera::init()
 
 void Camera::Update()
 {
-	if (KEYMANAGER->isStayKeyDown('A'))
-	{
-		_pos += Vector2(-_speed, 0.f) * TIMEMANAGER->getElapsedTime();
-		UpdateMatrix();
-	}
-	else if (KEYMANAGER->isStayKeyDown('D'))
-	{
-		_pos += Vector2(_speed, 0.f) * TIMEMANAGER->getElapsedTime();
-		UpdateMatrix();
-	}
+	Control();
 
-	if (KEYMANAGER->isStayKeyDown('W'))
-	{
-		_pos += Vector2(0.f, -_speed) * TIMEMANAGER->getElapsedTime();
-		UpdateMatrix();
-
-	}
-	else if (KEYMANAGER->isStayKeyDown('S'))
-	{
-		_pos += Vector2(0.f, _speed) * TIMEMANAGER->getElapsedTime();
-		UpdateMatrix();
-	}
+	ShakingCamera();
 
 	if (!_isMoving)
 	{
@@ -49,7 +30,7 @@ void Camera::Update()
 		_lerpCount = 0;
 	}
 
-	UpdateMatrix();
+	UpdateMatrix(); 
 }
 
 void Camera::UpdateMatrix()
@@ -82,7 +63,81 @@ void Camera::SetPosition(Vector2 pos, string key)
 	UpdateMatrix();
 }
 
+void Camera::Control()
+{
+	if (KEYMANAGER->isStayKeyDown('A'))
+	{
+		_pos += Vector2(-_speed, 0.f) * TIMEMANAGER->getElapsedTime();
+		UpdateMatrix();
+	}
+	else if (KEYMANAGER->isStayKeyDown('D'))
+	{
+		_pos += Vector2(_speed, 0.f) * TIMEMANAGER->getElapsedTime();
+		UpdateMatrix();
+	}
 
+	if (KEYMANAGER->isStayKeyDown('W'))
+	{
+		_pos += Vector2(0.f, -_speed) * TIMEMANAGER->getElapsedTime();
+		UpdateMatrix();
+
+	}
+	else if (KEYMANAGER->isStayKeyDown('S'))
+	{
+		_pos += Vector2(0.f, _speed) * TIMEMANAGER->getElapsedTime();
+		UpdateMatrix();
+	}
+}
+
+void Camera::ShakingCamera()
+{
+#pragma region Shaking Way 1
+	/*if (!_isShaking) return;
+
+	if (_shakingTime >= 0)
+	{
+		_pos.x = RND->getFromFloatTo(-30.f, 30.f) * _amount + _prevPos.x;
+		_pos.y = RND->getFromFloatTo(-30.f, 30.f) * _amount + _prevPos.y;
+
+		_shakingTime -= TIMEMANAGER->getElapsedTime();
+	}
+	else
+	{
+		_isShaking = false;
+		_pos = _prevPos;
+	}*/
+#pragma endregion
+
+#pragma region Shaking Way 2
+	if (!_isShaking) return;
+
+	if (_shakingTime >= 0)
+	{
+		//_pos.x = RND->getFromFloatTo(-3.f, 3.f) * _amount + _prevPos.x;
+		//_pos.y = RND->getFromFloatTo(-3.f, 3.f) * _amount + _prevPos.y;
+
+		_lastPos.x = RND->getFromFloatTo(-1.f, 1.f) * _amount + _prevPos.x;
+		_lastPos.y = RND->getFromFloatTo(-1.f, 1.f) * _amount + _prevPos.y;
+		
+		_pos = Vector2::Lerp(_prevPos, _lastPos, 1.0f);
+		
+		_shakingTime -= TIMEMANAGER->getElapsedTime();
+	}
+	else
+	{
+		_isShaking = false;
+		_pos = _prevPos;
+	}
+#pragma endregion
+}
+
+void Camera::ShakingSetting(Vector2 prevPos, float time, float amount)
+{
+	_isShaking = true;
+	_prevPos = prevPos;
+	_shakingTime = time;
+	_amount = amount;
+}
 
 void Camera::SetScale(Vector2 scale)
 {
@@ -103,11 +158,8 @@ void Camera::SetScale(Vector2 scale)
 void Camera::MoveTo(Vector2 endPos, float time, bool isCenter)
 {
 	_startPos = _pos;
-	//_endPos = endPos;
-	if (isCenter)
-		_endPos = Vector2(endPos.x - WINSIZEX / 2, endPos.y - WINSIZEY / 2);
-	else
-		_endPos = endPos;
+	if (isCenter) _endPos = Vector2(endPos.x - WINSIZEX / 2, endPos.y - WINSIZEY / 2);
+	else _endPos = endPos;
 	_moveTime = time;
 	_isMoving = true;
 }

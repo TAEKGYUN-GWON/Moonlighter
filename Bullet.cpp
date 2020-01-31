@@ -37,14 +37,12 @@ void Bullet::Fire(Vector2 pos, float angle, float speed)
 	_speed = speed;
 	_trans->pos = pos;
 	_physics->SetBodyPosition();
-	//_trans->SetRotateToRadian(angle);
 	_trans->SetRotateToRadian(angle + (PI / 2));
 	
 	_physics->SetBodyActive(true);
 	_sprite->SetPosition(_trans->GetPos());
 	_isActive = true;
 	
-	//_physics->GetBody()->SetTransform(b2Vec2(_physics->GetBody()->GetPosition().x, _physics->GetBody()->GetPosition().y), _trans->GetRotateRadian() + (PI / 2));
 	_physics->GetBody()->SetTransform(b2Vec2(_physics->GetBody()->GetPosition().x, _physics->GetBody()->GetPosition().y), _trans->GetRotateRadian());
 }
 

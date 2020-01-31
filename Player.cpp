@@ -70,6 +70,11 @@ void Player::Update()
 	if (KEYMANAGER->isStayKeyDown('P')) _ability->DamageHP(10);
 	else if (KEYMANAGER->isStayKeyDown('O')) _ability->HealHP(10);
 
+	if (KEYMANAGER->isOnceKeyDown('M'))
+	{
+		CAMERA->ShakingSetting(CAMERA->GetPosition(), 0.3f, 2.0f);
+	}
+
 	if (_state->GetState() != "Attack")
 	{
 		if (KEYMANAGER->isOnceKeyDown('Z')) _atkType = (AttackType)(((int)_atkType + 1) % 2);
