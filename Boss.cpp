@@ -2,49 +2,41 @@
 #include "Boss.h"
 
 
-BossIdle* BossIdle::instance;
-//BossMove* BossMove::instance;
-BossAttack* BossAttack::instance;
-BossHit* BossHit::instance;
-BossDead* BossDead::instance;
-
-
 Boss::Boss()
 {
-	SetState(BossIdle::GetInstance());
+	
 }
 
 Boss::~Boss()
 {
 }
 
-void Boss::SetState(BossBasic* state)
-{
-	this->state = state;
-	this->state->Init(this);
-}
-
-void Boss::Init()
+void Boss::Init(Vector2 pos)
 {
 	Object::Init();
 
+	GRAPHICMANAGER->AddFrameImage("Open Boss", L"resource/img/Enemy/createBoss.png", 32, 1);
+
 	_tag = "enemy";
 	_name = "Boss";
-	//GRAPHICMANAGER->AddFrameImage("", L"resource/img/Enemy", , );
+
 	_ability = new Ability(100, 100, 10); //더 크게 줘야 하나?
 
-	_trans->SetScale(Vector2(_sprite->GetGraphic()->GetFrameWidth(),
-		_sprite->GetGraphic()->GetFrameHeight()));
-
+	maxFrameX = 0;
+	frameY = 0;
 	_sprite = AddComponent<Sprite>();
 	_sprite->Init(true, true);
+	//_sprite->SetImgName();
 	_sprite->SetRectColor(ColorF::Cornsilk);
-
+	_trans->SetScale(Vector2(_sprite->GetGraphic()->GetFrameWidth(),
+		_sprite->GetGraphic()->GetFrameHeight()));
+	_trans->SetScale(Vector2(50, 50)); //보스 범위
+	_trans->SetPos(pos);
 	_physics = AddComponent<PhysicsBody>();
 	_physics->Init(BodyType::DYNAMIC, 1.0f);
 	////가상세계의 렉트 뒤틀리는거 고정
 	_physics->GetBody()->SetFixedRotation(true);
-
+	
 
 }
 
@@ -52,7 +44,6 @@ void Boss::Update()
 {
 	Object::Update();
 
-	state->Update(this);
 }
 
 void Boss::Render()
@@ -64,119 +55,28 @@ void Boss::Release()
 {
 }
 
-void BossBasic::Update(Boss* _sBoss)
+void Boss::Attack()
 {
-	if (_sBoss->GetHP()->IsDead())
+	switch (_phase)
 	{
-		SetBossState(_sBoss, BossDead::GetInstance());
+	case ROCK:
+		break;
+	case HAND:
+		break;
+	case SLIME:
+		break;
 	}
 }
 
-//■■■■■■■■■■■■ Idle ■■■■■■■■■■■■■■
-BossIdle* BossIdle::GetInstance()
+
+void Boss::RockAtk()
 {
-	if (instance == nullptr)
-	{
-		instance = new BossIdle();
-	}
-	return instance;
+	//순차적으로 깔림..
+	//
 }
 
-void BossIdle::Init(Boss* _sBoss)
+void Boss::BslimeAtk()
 {
-}
-
-void BossIdle::Update(Boss* _sBoss)
-{
-
-	BossBasic::Update(_sBoss);
-	Release(_sBoss);
-}
-
-void BossIdle::Release(Boss* _sBoss)
-{
-	
-	SetBossState(_sBoss, BossAttack::GetInstance());
-	
-}
-//■■■■■■■■■■■ Attack ■■■■■■■■■■■■
-
-BossAttack* BossAttack::GetInstance()
-{
-	if (instance == nullptr)
-	{
-		instance = new BossAttack();
-	}
-	return instance;
-}
-
-void BossAttack::Init(Boss* _sBoss)
-{
-}
-
-void BossAttack::Update(Boss* _sBoss)
-{
-	BossBasic::Update(_sBoss);
-	Release(_sBoss);
-}
-
-void BossAttack::Release(Boss* _sBoss)
-{
-	//플레이어가 있으면 때리고
-	//플레이어가 없으면 아이들로 가고
-	//맞았으면 hit로 가고
-	//hp가 0이면 죽어라
-}
-//■■■■■■■■■■■■ Hit ■■■■■■■■■■■■■
-
-BossHit* BossHit::GetInstance()
-{
-	if (instance == nullptr)
-	{
-		instance = new BossHit();
-	}
-	return instance;
-}
-
-void BossHit::Init(Boss* _sBoss)
-{
-}
-
-void BossHit::Update(Boss* _sBoss)
-{
-	BossBasic::Update(_sBoss);
-	Release(_sBoss);
-}
-
-void BossHit::Release(Boss* _sBoss)
-{
-	//플레이어가 있으면 때리고
-	//플레이어가 없으면 아이들
-	//체력이 0이면 죽어라
-}
-//■■■■■■■■■■■■ Dead ■■■■■■■■■■■■
-
-BossDead* BossDead::GetInstance()
-{
-	if (instance == nullptr)
-	{
-		instance = new BossDead();
-	}
-	return instance;
-}
-
-void BossDead::Init(Boss* _sBoss)
-{
-}
-
-void BossDead::Update(Boss* _sBoss)
-{
-	if (_sBoss->GetHP()->IsDead());
-	Release(_sBoss);
-}
-
-void BossDead::Release(Boss* _sBoss)
-{
-	//아예 릴리즈 시켜줘야 함
+	//getangle 로 플레이어 향해서 이미지 늘어남
 }
 

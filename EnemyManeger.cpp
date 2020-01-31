@@ -36,19 +36,25 @@ void EnemyManeger::Update()
 	//vector 만큼 돌아야 겠지...생성해줘야 하니까?
 	//각각의 enemy의 state를 변경? slime 은 slime 어택 골렘은 골렘어택?
 
-	for (Enemy* e : _vEnemy)
+	for (int i = 0; i < _vEnemy.size(); i++)
 	{
-		if (e->GetMove())
+		if (!_vEnemy[i]->GetIsActive())
 		{
-			if(Vector2::Distance(_player->GetTrans()->GetPos(), e->GetTrans()->GetPos()) > 80 &&
-				Vector2::Distance(_player->GetTrans()->GetPos(), e->GetTrans()->GetPos()) < 600)
-				e->SetPath(_astar->pathFinder(e->GetTrans()->GetPos() - _room->GetTrans()->GetPos(), _player->GetTrans()->GetPos() - _room->GetTrans()->GetPos()));
+			_vEnemy[i]->Release();
+			_vEnemy.erase(_vEnemy.begin() + i);
+			break;
 		}
-		if (dynamic_cast<GolemEnemy*>(e))
+		if (_vEnemy[i]->GetMove())
 		{
-			if (Vector2::Distance(_player->GetTrans()->GetPos(), e->GetTrans()->GetPos()) <= GolemEnemy::GetAtkRange() && !dynamic_cast<EnemyAttack*>(e->GetState()))
+			if(Vector2::Distance(_player->GetTrans()->GetPos(), _vEnemy[i]->GetTrans()->GetPos()) > 80 &&
+				Vector2::Distance(_player->GetTrans()->GetPos(), _vEnemy[i]->GetTrans()->GetPos()) < 600)
+				_vEnemy[i]->SetPath(_astar->pathFinder(_vEnemy[i]->GetTrans()->GetPos() - _room->GetTrans()->GetPos(), _player->GetTrans()->GetPos() - _room->GetTrans()->GetPos()));
+		}
+		if (dynamic_cast<GolemEnemy*>(_vEnemy[i]))
+		{
+			if (Vector2::Distance(_player->GetTrans()->GetPos(), _vEnemy[i]->GetTrans()->GetPos()) <= GolemEnemy::GetAtkRange() && !dynamic_cast<EnemyAttack*>(_vEnemy[i]->GetState()))
 			{ 
-				e->SetAtk(true);
+				_vEnemy[i]->SetAtk(true);
 			}
 		}
 	}

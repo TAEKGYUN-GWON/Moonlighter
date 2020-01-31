@@ -4,6 +4,7 @@
 #include "Bullet.h"
 #include "Item.h"
 #include "EnemyScript.h"
+#include "ETCS.h"
 //#include "Player.h"
 //전방선언 같은 거...?
 
@@ -115,7 +116,10 @@ void Enemy::Update()
 	_physics->SetBodyPosition();
 
 
-
+	if (GetHP()->IsDead())
+	{
+		SetState(EnemyDead::GetInstance());
+	}
 
 }
 
@@ -143,10 +147,10 @@ void Enemy::SetPath(list<Vector2> _path)
 
 void EnemyBasic::Update(Enemy* _sEnemy)
 {
-	if (_sEnemy->GetHP()->IsDead())
+	/*if (_sEnemy->GetHP()->IsDead())
 	{
 		SetEnemyState(_sEnemy, EnemyDead::GetInstance());
-	}
+	}*/
 	if (_sEnemy->GetAtk()) SetEnemyState(_sEnemy, EnemyAttack::GetInstance());
 }
 
@@ -180,11 +184,8 @@ void EnemyIdle::Release(Enemy* _sEnemy)
 {
 	cout << "move로 가!!!" << endl;
 	//  체력이 0 이면 죽어라
-	if (_sEnemy->GetHP()->IsDead())
-	{
-		SetEnemyState(_sEnemy, EnemyDead::GetInstance());
-	}
-	else
+	
+	
 		SetEnemyState(_sEnemy, EnemyMove::GetInstance());
 }
 //■■■■■■■■■■■■ Move ■■■■■■■■■■■■■
@@ -269,11 +270,7 @@ void EnemyAttack::Init(Enemy* _sEnemy)
 
 void EnemyAttack::Update(Enemy* _sEnemy)
 {
-	if (_sEnemy->GetHP()->IsDead())
-	{
-		SetEnemyState(_sEnemy, EnemyDead::GetInstance());
-	}
-
+	
 	if (_sEnemy->GetAtk())
 	{
 		_sEnemy->Attack();
@@ -308,9 +305,6 @@ void EnemyAttack::Release(Enemy* _sEnemy)
 	{
 		_sEnemy->GetSprite()->SetImgName("enemyPot");
 	}
-	// else if 아니면 idle로 가라
-	//SetEnemyState(_sEnemy, EnemyIdle::GetInstance());
-	// else if 체력이 0 이면 죽어라!
 }
 //■■■■■■■■■■■■ Hit ■■■■■■■■■■■■■
 
@@ -341,10 +335,7 @@ void EnemyHit::Release(Enemy* _sEnemy)
 	// if 맞았으면 idle로 가라
 	// else if 안맞았으면 다시 때려라
 	// else if 체력이 0 이면 죽어라!
-	if (_sEnemy->GetHP()->IsDead())
-	{
-		SetEnemyState(_sEnemy, EnemyDead::GetInstance());
-	}
+	
 
 }
 //■■■■■■■■■■■■ Dead ■■■■■■■■■■■■
@@ -361,7 +352,8 @@ EnemyDead* EnemyDead::GetInstance()
 
 void EnemyDead::Init(Enemy* _sEnemy)
 {
-	//Item::CreateItem(_sEnemy->GetTrans()->GetPos());
+
+	
 	//cout << "여기는 죽은 상태" << endl;
 }
 
@@ -373,7 +365,31 @@ void EnemyDead::Update(Enemy* _sEnemy)
 
 void EnemyDead::Release(Enemy* _sEnemy)
 {
+	
+
 	//if (_sEnemy->GetHP()->IsDead())
 	//cout << "죽었다 ㅠㅠ" << endl;
-//	_sEnemy->Release();
+
+	_sEnemy->SetIsActive(false);
+
+	int some = RND->getInt(5);
+
+	for (int i = 0; i < some; i++)
+	{
+		int rand = RND->getInt(10);
+		switch (rand)
+		{
+		case 0: Item::CreateItem<Vine>(_sEnemy->GetTrans()->GetPos()); break;
+		case 1: Item::CreateItem<Crystal_Energy>(_sEnemy->GetTrans()->GetPos()); break;
+		case 2: Item::CreateItem<amulet_ring>(_sEnemy->GetTrans()->GetPos()); break;
+		case 3: Item::CreateItem<Treated_Wood>(_sEnemy->GetTrans()->GetPos()); break;
+		case 4: Item::CreateItem<Broken_Sword>(_sEnemy->GetTrans()->GetPos()); break;
+		case 5: Item::CreateItem<Energy_Crystal>(_sEnemy->GetTrans()->GetPos()); break;
+		case 6: Item::CreateItem<Naja_Note>(_sEnemy->GetTrans()->GetPos()); break;
+		case 7: Item::CreateItem<Reinforced_Steel_G>(_sEnemy->GetTrans()->GetPos()); break;
+		case 8: Item::CreateItem<Golem_Core>(_sEnemy->GetTrans()->GetPos()); break;
+		case 9: Item::CreateItem<Familiar_Egg>(_sEnemy->GetTrans()->GetPos()); break;
+		case 10: Item::CreateItem<Reinforced_Steel_Y>(_sEnemy->GetTrans()->GetPos()); break;
+		}
+	}
 }

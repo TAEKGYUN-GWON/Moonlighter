@@ -103,40 +103,42 @@ void GolemEnemy::Update()
 	AtkPosUpdate();
 	if (KEYMANAGER->isOnceKeyDown('8'))GetLeftAtk()->SetBodyActive(true);
 
-
 }
 
 void GolemEnemy::Attack()
 {
-	_sprite->SetImgName("Golem_Atk");
-	_sprite->SetFPS(1.4f);
+	if (_isAtk)
+	{
+		_sprite->SetImgName("Golem_Atk");
+		_sprite->SetFPS(1.4f);
+	}
 	switch (_dir)
 	{
 	case DIRECTION::LEFT:
 	{
 		_sprite->SetFrameY(0);
-		if (!GetLeftAtk()->GetBodyActive())
+		if (!GetLeftAtk()->GetBodyActive() && _sprite->GetCurrentFrameX() == 6)
 			GetLeftAtk()->SetBodyActive(true);
 	}
 		break;
 	case DIRECTION::RIGHT:
 	{
 		_sprite->SetFrameY(1);
-		if(!GetRightAtk()->GetBodyActive())
+		if(!GetRightAtk()->GetBodyActive() && _sprite->GetCurrentFrameX() == 6)
 			GetRightAtk()->SetBodyActive(true);
 	}
 		break;
 	case DIRECTION::TOP:
 	{
 		_sprite->SetFrameY(2);
-		if(!GetTopAtk()->GetBodyActive())
+		if(!GetTopAtk()->GetBodyActive() && _sprite->GetCurrentFrameX() == 6)
 			GetTopAtk()->SetBodyActive(true);
 	}
 		break;
 	case DIRECTION::BOTTOM:
 	{
 		_sprite->SetFrameY(3);
-		if (!GetBottomAtk()->GetBodyActive())
+		if (!GetBottomAtk()->GetBodyActive() && _sprite->GetCurrentFrameX() == 6)
 			GetBottomAtk()->SetBodyActive(true);
 	}
 		break;
