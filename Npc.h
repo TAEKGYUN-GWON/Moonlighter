@@ -3,6 +3,7 @@
 #include "ShopStand.h"
 #include "CheckStand.h"
 #include "Sprite.h"
+#define NPDSPEED 70
 
 class ShopStand;
 class CheckStand;
@@ -13,11 +14,12 @@ class Npc :	public Object
 private:
 	Sprite* _sprite;
 
-	float _speed;
+	//float _speed;
 	bool _isShopSOn;	//가판대랑 충돌중인지
 	bool _isCheckSOn;	//계산대랑 충돌중인지
-	bool _isAstarOn;	//astar 받아야하는 상태인지
+	bool _isAstarOn=true;	//astar 받아야하는 상태인지
 
+	
 	NpcShopState* _npcShopState;
 
 	ShopStand* _shopStand;
@@ -25,7 +27,7 @@ private:
 
 	list<Vector2> _lPath;
 
-	Vector2 _destination; //astar 목적지임
+	//Vector2 _destination; //astar 목적지임
 
 
 
@@ -41,6 +43,7 @@ public:
 	void SetPath(list<Vector2> lpath);
 	void Move();
 	void SetNpcState(NpcShopState* npcshopstate);
+	
 
 	//상태패턴 정의용 함수
 	void In();
@@ -58,8 +61,8 @@ public:
 	bool GetIsCheckSOn() { return _isCheckSOn; }
 	void SetIsAstarOn(bool ast) { _isAstarOn = ast; }
 	bool GetIsAstarOn() { return _isAstarOn; }
-	void SetDestination(Vector2 destination) { _destination = destination; }
-	Vector2 GetDestination() { return _destination; }
+	//void SetDestination(Vector2 destination) { _destination = destination; }
+	//Vector2 GetDestination() { return _destination; }
 
 	NpcShopState* GetState() {	return _npcShopState; }
 };
