@@ -83,7 +83,8 @@ void PlayerRoll::Update()
 		}
 	}
 
-	_obj->GetSprite()->SetPosition(_obj->GetTrans()->GetPos() + Vector2(0, -14));
+	//_obj->GetSprite()->SetPosition(_obj->GetTrans()->GetPos() + Vector2(0, -14));
+	_obj->GetSprite()->SetPosition(_obj->GetPhysics()->GetBodyPosition());
 
 	if (_obj->GetSprite()->GetCurrentFrameX() >= _obj->GetSprite()->GetMaxFrameX())
 	{
