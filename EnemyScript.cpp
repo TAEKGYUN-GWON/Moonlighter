@@ -6,20 +6,20 @@
 
 void EnemyScript::CollisionBegin(void* obj)
 {
-
-}
-
-void EnemyScript::CollisionPreSolve(void* obj)
-{
 	Object* to = (Object*)obj;
 	Enemy* me = (Enemy*)_object;
 
-	if (me->GetName()!= "Golem" && to->GetTag() == "Player")
+	if (me->GetName() != "Golem" && to->GetTag() == "Player")
 	{
 		Player* player = (Player*)obj;
 		if (player->GetPhysics()->GetBody()->GetFixtureList()->IsSensor())return;
 		player->GetAbility()->DamageHP(me->GetHP()->GetAttackPoint());
 	}
+}
+
+void EnemyScript::CollisionPreSolve(void* obj)
+{
+
 }
 
 void EnemyScript::CollisionEnd(void* obj)
