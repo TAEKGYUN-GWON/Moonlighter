@@ -13,7 +13,7 @@ private:
 	tagTile _tagTiles[TILENUMX * TILENUMY];
 	Item* _item;
 
-	bool _isInUse;
+	bool _isInUse; //npc가 충돌해서 계산중이면 사용중임
 
 public:
 
