@@ -11,7 +11,7 @@ void Potion_L::Init(Vector2 pos)
 	SetHealRate(30);
 
 	_image = AddComponent<Sprite>();
-	_image->SetImgName("Potion_L");
+	_image->SetImgName("/resource/img/Potion_L.png");
 }
 
 void Potion_S::Init(Vector2 pos)
@@ -23,7 +23,7 @@ void Potion_S::Init(Vector2 pos)
 	_name = "Potion_S";
 	SetHealRate(10);
 	_image = AddComponent<Sprite>();
-	_image->SetImgName("Potion_S");
+	_image->SetImgName("/resource/img/Potion_S.png");
 
 
 	_trans->SetScale(_image->GetGraphic()->GetWidth(), _image->GetGraphic()->GetHeight());
