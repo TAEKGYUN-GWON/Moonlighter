@@ -55,6 +55,9 @@ public:
 
     ~Tile() {};
 
+    virtual void Render() { return; }
+
+
     static Vector2 tileSize;
 
 

@@ -52,6 +52,17 @@ void EntranceScene::Update()
 {
 	Scene::Update();
 	CAMERA->SetPosition(_player->GetTrans()->GetPos(),"loby");
+
+	for (Tile* t : tiles)
+	{
+		if (CAMERA->GetPosition() > t->GetTrans()->GetPos() || CAMERA->GetPosition() + Vector2(WINSIZEX, WINSIZEY) < t->GetTrans()->GetPos())
+			t->SetIsActive(false);
+		else
+		{
+			if(!t->GetIsActive())
+				t->SetIsActive(true);
+		}
+	}
 }
 
 
@@ -59,8 +70,7 @@ void EntranceScene::Render()
 {
 	GRAPHICMANAGER->DrawImage("loby", Vector2(0, 0), 1.0f, LEFT_TOP, true);
 
-	Scene::Render();
-
+	//Scene::Render();
 	GRAPHICMANAGER->Text(Vector2(10, 6), L"Entrance Scene", 20, 200, 30, ColorF::Aqua);
 }
 

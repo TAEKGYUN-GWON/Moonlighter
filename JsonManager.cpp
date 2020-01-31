@@ -3,4 +3,6 @@
 
 void JsonManager::foo()
 {
+	assert(document.IsObject());
+
 }
