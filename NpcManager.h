@@ -7,6 +7,17 @@ class ShopStandManager;
 class CheckStand;
 class ShopScene;
 
+enum DESTINATION
+{
+	WINDOW,
+	STAND1,
+	STAND2,
+	STAND3,
+	STAND4,
+	CHECKSTAND,
+	EXIT,
+	END
+};
 class NpcManager
 {
 private:
@@ -15,6 +26,9 @@ private:
 	ShopStandManager* _shopStandMgr;
 	CheckStand* _checkStand;
 
+	Vector2 _positions[(int)DESTINATION::END];
+
+	//DESTINATION _destination;
 
 
 	Astar* _ast;
@@ -26,10 +40,11 @@ public:
 	void Init(ShopScene* parent);
 	void Update();
 	void Release();
-	void Render();
+	
 
 	void MakeNpc();
-	void AstarFunction();
+	void SetAstar(); //목적지 정해주는것임
+	void AstarFunction(int i, int asttar); //astar 돌아가는 곳
 
 	void CheckStandCollision(); //계산대랑 충돌
 	void ShopStandCollision(); //가판대랑 충돌
