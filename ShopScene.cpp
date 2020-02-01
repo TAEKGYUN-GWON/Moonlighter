@@ -84,11 +84,11 @@ void ShopScene::Render()
 	// npc 상태 표시
 	if (_npcMgr->GetNpcVector().size())
 	{
-		if (_npcMgr->GetNpcVector()[0]->GetState() == NpcIdle::GetInstance())
+		if (_npcMgr->GetNpcVector()[0]->GetStatePointer()->GetState() == "Idle")
 		{
 			GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 200), L"Idle", 20, 100, 30, ColorF::AntiqueWhite);
 		}
-		else if (_npcMgr->GetNpcVector()[0]->GetState() == NpcDecide::GetInstance())
+		else if (_npcMgr->GetNpcVector()[0]->GetStatePointer()->GetState() == "Move")
 		{
 			GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 200), L"Decide", 20, 100, 30, ColorF::AntiqueWhite);
 		}

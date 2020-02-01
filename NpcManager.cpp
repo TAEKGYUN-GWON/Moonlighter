@@ -213,30 +213,12 @@ void NpcManager::SetAstar()
 	
 	for (int i = 0; i < _vNpc.size(); i++) //npc숫자만큼 검사한다
 	{
-		//if (_vNpc[i]->GetIsAstarOn())
-		if (_vNpc[i]->GetState() == NpcIdle::GetInstance())
+
+		if (_vNpc[i]->GetStatePointer()->GetState() == "Move")
 		{
-			int a = RND->getInt(5);
-			AstarFunction(i, a); //for문 돌아간 i와, 목적지 ㅇ
+			AstarFunction(i, 5);
 		}
-		//else if (_vNpc[i]->GetState() == NpcDecide::GetInstance())
-		//{
-		//	int a = RND->getInt(5);
-		//	//AstarFunction(i, DESTINATION::WINDOW);
-		//	AstarFunction(i, a);
-		//}
-		//else if (_vNpc[i]->GetState() == NpcInline::GetInstance())
-		//{
-		//	int a = RND->getInt(5);
-		//	//AstarFunction(i, DESTINATION::WINDOW);
-		//	AstarFunction(i, a);
-		//}
-		//else if (_vNpc[i]->GetState() == NpcExit::GetInstance())
-		//{
-		//	int a = RND->getInt(5);
-		//	//AstarFunction(i, DESTINATION::WINDOW);
-		//	AstarFunction(i, a);
-		//}
+
 	}
 
 }
