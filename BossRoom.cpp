@@ -10,6 +10,20 @@ void BossRoom::Init()
 
 	GRAPHICMANAGER->AddImage("BossRoom_bg", L"resource/img/Dungeon/bossRoom.png");
 
+	GRAPHICMANAGER->AddFrameImage("Open_Boss", L"resource/img/Enemy/BossUp.png", 32, 1);
+	GRAPHICMANAGER->AddFrameImage("deadBoss1", L"resource/img/Enemy/dead1.png", 41, 1);
+	GRAPHICMANAGER->AddFrameImage("deadBoss2", L"resource/img/Enemy/dead2.png", 41, 1);
+	//GRAPHICMANAGER->AddFrameImage("lll", L"resource/img/Enemy/lll.png", 10, 5);
+	GRAPHICMANAGER->AddFrameImage("FistShoot", L"resource/img/Enemy/FistShoot.png", 41, 3);
+	GRAPHICMANAGER->AddFrameImage("Hand_Shoot_First", L"resource/img/Enemy/Hand_Shoot_First.png", 20, 1);
+	GRAPHICMANAGER->AddFrameImage("Hand_Shoot_Last", L"resource/img/Enemy/Hand_Shoot_Last.png", 11, 1);
+	GRAPHICMANAGER->AddFrameImage("idleBoss", L"resource/img/Enemy/idleBoss.png", 2, 1);
+
+	GRAPHICMANAGER->AddImage("Boss_Rock0", L"resource/img/Enemy/Boss_Rock0.png");
+	GRAPHICMANAGER->AddImage("Boss_Rock1", L"resource/img/Enemy/Boss_Rock1.png");
+	GRAPHICMANAGER->AddImage("Boss_Rock2", L"resource/img/Enemy/Boss_Rock2.png");
+	GRAPHICMANAGER->AddImage("Boss_Rock3", L"resource/img/Enemy/Boss_Rock3.png");
+	GRAPHICMANAGER->FindImage("Open_Boss");
 	_player = Object::CreateObject<Player>();
 	_player->Init();
 	//_player->GetTrans()->SetPos(Vector2(35, 37) + Vector2((TILEWIDTH * Bossroom_X) / 2, (TILEHEIGHT * Bossroom_Y) - 150));

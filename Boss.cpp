@@ -18,15 +18,6 @@ void Boss::Init(Vector2 pos)
 {
 	Object::Init();
 
-	GRAPHICMANAGER->AddFrameImage("Open_Boss", L"resource/img/Enemy/createBoss.png", 32, 1);
-	GRAPHICMANAGER->AddFrameImage("deadBoss1", L"resource/img/Enemy/deadBoss1.png", 41, 1);
-	GRAPHICMANAGER->AddFrameImage("deadBoss2", L"resource/img/Enemy/deadBoss21.png", 41, 1);
-	//GRAPHICMANAGER->AddFrameImage("lll", L"resource/img/Enemy/lll.png", 10, 5);
-	GRAPHICMANAGER->AddFrameImage("FistShoot", L"resource/img/Enemy/FistShoot.png", 41, 3);
-	GRAPHICMANAGER->AddFrameImage("Hand_Shoot_First", L"resource/img/Enemy/Hand_Shoot_First.png", 20, 1);
-	GRAPHICMANAGER->AddFrameImage("Hand_Shoot_Last", L"resource/img/Enemy/Hand_Shoot_Last.png", 11, 1);
-	GRAPHICMANAGER->AddFrameImage("idleBoss", L"resource/img/Enemy/idleBoss.png", 2, 1);
-
 	_tag = "boss";
 	_name = "Boss";
 
@@ -36,7 +27,7 @@ void Boss::Init(Vector2 pos)
 	//frameY = 0;
 	_sprite = AddComponent<Sprite>();
 	_sprite->Init(true, true);
-	_sprite->SetImgName("Open_Boss");
+	_sprite->SetImgName("deadBoss2");
 	_sprite->SetPosition(_trans->GetPos());
 //	_sprite->SetRectColor(ColorF::Cornsilk);
 	_trans->SetPos(pos);
@@ -62,12 +53,12 @@ void Boss::Init(Vector2 pos)
 	rock->GetTrans()->SetPos(759, 533);
 	auto s = rock->AddComponent<Sprite>();
 	s->Init();
-	s->SetImgName("");
+	s->SetImgName("Boss_Rock0");
 	auto p = rock->AddComponent<PhysicsBody>();
 	p->Init(BodyType::STATIC, 1, 1);
 	p->SetBodyPosition();
 	_rocks.push_back(rock);
-
+	/*
 	rock = Object::CreateObject<Object>(this);
 	rock->GetTrans()->SetScale(100, 109);
 	rock->GetTrans()->SetPos(896, 642);
@@ -260,7 +251,7 @@ void Boss::Init(Vector2 pos)
 
 
 
-
+	*/
 
 #pragma endregion
 
