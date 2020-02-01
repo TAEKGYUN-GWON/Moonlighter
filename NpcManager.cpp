@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "NpcManager.h"
 #include "ShopStandManager.h"
+
 void NpcManager::Init(ShopScene* parent)
 {
 	_counter = 0;
@@ -18,14 +19,17 @@ void NpcManager::Init(ShopScene* parent)
 	//Positions[4] = Vector2(320,620); //4번
 	//Positions[5] = Vector2(430,620); //계산대
 	
-	Positions[DESTINATION::WINDOW] = Vector2(520, 615); //창문앞
+	_positions[DESTINATION::WINDOW] = Vector2(520, 550); //창문앞
 	//Positions[1] = Vector2(200,515); //1번(1사분면)
-	//Positions[DESTINATION::STAND1] = Vector2(200, 450); //1번(1사분면)
-	Positions[DESTINATION::STAND1] = Vector2(350, 555); //1번(1사분면)
-	Positions[DESTINATION::STAND2] = Vector2(210, 515); //2번
-	Positions[DESTINATION::STAND3] = Vector2(156, 625); //3번
-	Positions[DESTINATION::STAND4] = Vector2(320, 620); //4번
-	Positions[DESTINATION::CHECKSTAND] = Vector2(430, 620); //계산대
+	_positions[DESTINATION::STAND1] = _shopStandMgr->GetShopStandVector()[0]->GetTrans()->GetPos()
+		+ Vector2(50.0f, 0.0f); //1번(1사분면)
+	_positions[DESTINATION::STAND2] = _shopStandMgr->GetShopStandVector()[1]->GetTrans()->GetPos() 
+		+ Vector2(-50.0f, 0); //2번
+	_positions[DESTINATION::STAND3] = _shopStandMgr->GetShopStandVector()[2]->GetTrans()->GetPos()
+		+ Vector2(-50.0f, 0.0f); //3번
+	_positions[DESTINATION::STAND4] = _shopStandMgr->GetShopStandVector()[0]->GetTrans()->GetPos()
+		+ Vector2(50.0f, 0.0f); //4번
+	_positions[DESTINATION::CHECKSTAND] = Vector2(430, 550); //계산대
 }								  
 
 void NpcManager::Update()
@@ -49,14 +53,17 @@ void NpcManager::Update()
 	Release();
 	
 	//충돌
-	CheckStandCollision(); //계산대
-	ShopStandCollision(); //가판대
+	//CheckStandCollision(); //계산대
+	//ShopStandCollision(); //가판대
 
 	//Astar
 	SetAstar();
 	//AstarFunction(); //이건 일단 치워..
 
-
+	for (int i = 0; i < _vNpc.size(); ++i)
+	{
+		_vNpc[i]->Update();
+	}
 
 	//if (_vNpc.size())
 	//{
@@ -83,13 +90,10 @@ void NpcManager::Release()
 
 void NpcManager::MakeNpc()
 {
-	_npc = Object::CreateObject<Npc>();
-	_npc->SetCheckStandLink(_checkStand);
-	_npc->SetIsCheckSOn(false);
-	_npc->SetIsShopSOn(false);
-	_npc->SetIsAstarOn(true); //ast 받을지말지
-	//_npc->SetDestination(Vector2(392, 700)); //시작하면 문으로 들어가라고
-	//_npc->Move(); //astar 일단 여기다가 담아놓음
+	Npc* npc = Object::CreateObject<Npc>();
+	npc->SetIsCheckSOn(false);
+	npc->SetIsShopSOn(false);
+	npc->SetIsAstarOn(true); //ast 받을지말지
 
 	if (_vNpc.size() < 4)
 	{
@@ -97,30 +101,30 @@ void NpcManager::MakeNpc()
 
 		if (a ==0)
 		{
-			_npc->Init("Girl");
-			_npc->SetName("girl");
-			_vNpc.push_back(_npc);
+			npc->Init("Girl");
+			npc->SetName("girl");
+			_vNpc.push_back(npc);
 			return;
 		}
 		if (a == 1)
 		{
-			_npc->Init("Guy");
-			_npc->SetName("guy");
-			_vNpc.push_back(_npc);
+			npc->Init("Guy");
+			npc->SetName("guy");
+			_vNpc.push_back(npc);
 			return;
 		}
 		if (a == 2)
 		{
-			_npc->Init("Kid");
-			_npc->SetName("kid");
-			_vNpc.push_back(_npc);
+			npc->Init("Kid");
+			npc->SetName("kid");
+			_vNpc.push_back(npc);
 			return;
 		}
 		if (a == 3)
 		{
-			_npc->Init("Lunk");
-			_npc->SetName("lunk");
-			_vNpc.push_back(_npc);
+			npc->Init("Lunk");
+			npc->SetName("lunk");
+			_vNpc.push_back(npc);
 			return;
 		}
 	}
@@ -131,30 +135,30 @@ void NpcManager::MakeNpc()
 		{
 			if (_vNpc[i]->GetName() != "girl")
 			{
-				_npc->Init("Girl");
-				_npc->SetName("girl");
-				_vNpc.push_back(_npc);
+				npc->Init("Girl");
+				npc->SetName("girl");
+				_vNpc.push_back(npc);
 				return;
 			}
 			else if (_vNpc[i]->GetName() != "guy")
 			{
-				_npc->Init("Guy");
-				_npc->SetName("guy");
-				_vNpc.push_back(_npc);
+				npc->Init("Guy");
+				npc->SetName("guy");
+				_vNpc.push_back(npc);
 				return;
 			}
 			else if (_vNpc[i]->GetName() != "kid")
 			{
-				_npc->Init("Kid");
-				_npc->SetName("kid");
-				_vNpc.push_back(_npc);
+				npc->Init("Kid");
+				npc->SetName("kid");
+				_vNpc.push_back(npc);
 				return;
 			}
 			else if (_vNpc[i]->GetName() != "lunk")
 			{
-				_npc->Init("Lunk");
-				_npc->SetName("lunk");
-				_vNpc.push_back(_npc);
+				npc->Init("Lunk");
+				npc->SetName("lunk");
+				_vNpc.push_back(npc);
 				return;
 			}
 		}
@@ -214,24 +218,25 @@ void NpcManager::SetAstar()
 	for (int i = 0; i < _vNpc.size(); i++) //npc숫자만큼 검사한다
 	{
 
-		if (_vNpc[i]->GetStatePointer()->GetState() == "Move")
+		if (_vNpc[i]->GetState()->GetStateType() == "Idle")
 		{
-			AstarFunction(i, 5);
+			int a = RND->getInt(DESTINATION::STAND4);
+			AstarFunction(i, a);
 		}
-
 	}
-
 }
-void NpcManager::AstarFunction(int i, int asttar)
+
+void NpcManager::AstarFunction(int i, int astar)
 {
 	//if (_vNpc[i]->GetState() == (NpcShopState*)NpcIdle::GetInstance()) //idle상태일떄
 	if (_vNpc[i]->GetIsAstarOn())
 	{
 		_vNpc[i]->SetPath(_ast->pathFinder( //길찾기 함수를 부른다 //여기까지 들어옴 
 			_vNpc[i]->GetTrans()->GetPos(), //NPC의 위치를 찾고 //여기서 터지는거같음
-			Positions[asttar])); //가야할 위치를 받아옴 //이 숫자 일단 랜덤넣어둠
+			_positions[astar])); //가야할 위치를 받아옴 //이 숫자 일단 랜덤넣어둠
 
 		_vNpc[i]->SetIsAstarOn(false);
+		_vNpc[i]->ChangeState(new NpcMove(_vNpc[i]));
 	}
 	
 }

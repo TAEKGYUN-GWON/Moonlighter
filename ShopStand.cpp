@@ -7,7 +7,6 @@
 void ShopStand::Init(Vector2 pos, Vector2 scale)
 {
 	_tag = "ShopObject";
-	_name = "ShopStand";
 
 	//가판대의 렉트 만들기
 	_trans->SetPos(pos);
@@ -29,7 +28,7 @@ void ShopStand::Release()
 void ShopStand::Update()
 {
 
-	BuyItem();
+	//BuyItem();
 
 	Object::Update();
 }

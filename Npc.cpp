@@ -11,10 +11,6 @@ void Npc::Init(string imgkey)
 	_sprite = AddComponent<Sprite>();
 	_sprite->Init(true, true);
 	_sprite->SetImgName(imgkey);
-
-	_npcShopState = new NpcIdle(this);
-	_npcShopState->Enter();
-
 	
 	_trans->SetPos(400, 700); //문 밖에 생성
 	_trans->SetScale(Vector2(
@@ -22,7 +18,9 @@ void Npc::Init(string imgkey)
 		GRAPHICMANAGER->FindImage(imgkey)->GetFrameHeight()));
 
 	_sprite->SetPosition(_trans->GetPos());
-	_timer = 0;
+
+	_npcShopState = new NpcIdle(this);
+	_npcShopState->Enter();
 
 	//_destination = Vector2(340, 200);
 }
@@ -43,7 +41,6 @@ void Npc::Update()
 
 	//Astar 용 함수
 	//SetPath(list<Vector2> lpath);
-	Move();
 
 	//npc 그림 띄우기
 	_sprite->SetPosition(_trans->GetPos()); 
@@ -69,39 +66,19 @@ void Npc::Render()
 	wchar_t buffer[128];
 	swprintf(buffer, 128, L"x: %1.f, y:%1.f", _trans->GetPos().x , _trans->GetPos().y);
 	GRAPHICMANAGER->Text(Vector2(_trans->GetPos().x - CAMERA->GetPosition().x, _trans->GetPos().y - CAMERA->GetPosition().y), buffer, 20, 500, 300, ColorF::White);
+
+	if(_npcShopState->GetStateType() == "Idle")
+		GRAPHICMANAGER->Text(Vector2(_trans->GetPos().x - 25 - CAMERA->GetPosition().x, _trans->GetPos().y + 25 - CAMERA->GetPosition().y), L"Idle", 20, 100, 30, ColorF::AntiqueWhite);
+	else if (_npcShopState->GetStateType() == "Move")
+		GRAPHICMANAGER->Text(Vector2(_trans->GetPos().x - 25 - CAMERA->GetPosition().x, _trans->GetPos().y + 25 - CAMERA->GetPosition().y), L"Move", 20, 100, 30, ColorF::AntiqueWhite);
+	else if (_npcShopState->GetStateType() == "Home")
+		GRAPHICMANAGER->Text(Vector2(_trans->GetPos().x - 25 - CAMERA->GetPosition().x, _trans->GetPos().y + 25 - CAMERA->GetPosition().y), L"Home", 20, 100, 30, ColorF::AntiqueWhite);
 }
 
 void Npc::SetPath(list<Vector2> lpath)
 {
 	this->_lPath.clear();
 	this->_lPath = lpath;
-}
-
-
-void Npc::Move()
-{
-	if (_lPath.size())
-	{
-		if (!_isAstarOn) //갈곳이 있으면 false 상태
-		{
-
-			Vector2 a = *_lPath.begin() - _trans->GetPos(); // 가야할위치에서 내위치를 빼면, 가야되는 다음 노드가 나옴
-			_trans->pos += a.Nomalized() * NPDSPEED * TIMEMANAGER->getElapsedTime();
-
-			if ((int)Vector2::Distance(*_lPath.begin(), _trans->GetPos()) < (int)10)//조건 느슨하게 예외처리 해주는 부분
-				_lPath.erase(_lPath.begin()); //가장 첫번째 목적지 지우기, 다음 노드를 넣기 위해
-		}
-
-	}
-	else //갈곳이 없으면 true 만들어
-	{
-		_timer += TIMEMANAGER->getElapsedTime();
-		if (_timer > 2)
-		{
-			_isAstarOn = true;
-			_timer = 0;
-		}
-	}
 }
 
 void Npc::ChangeState(NpcShopState* state)

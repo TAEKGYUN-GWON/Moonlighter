@@ -1,33 +1,34 @@
 #pragma once
 #include "ShopStand.h"
-#include "CheckStand.h"
-#include "ShopStandManager.h"
+//#include "CheckStand.h"
+//#include "ShopStandManager.h"
 
 class Npc;
 
 class NpcShopState
 {
 protected:
-	
 	string _state;
 	Npc* _npc;
 
-	ShopStandManager* _shopStandMgr; //써야될거같아서 넣어둠
-	CheckStand* _checkStand;
+	//ShopStandManager* _shopStandMgr; //써야될거같아서 넣어둠
+	//CheckStand* _checkStand;
+
+	float _timer;
 
 public :
 	NpcShopState() {}
 	NpcShopState(Npc* npc) : _npc(npc) {}
 
 	//void SetNpcLink(Npc* npc) { _npc = npc; }
-	void SetCheckStandLink(CheckStand* checkstand) { _checkStand = checkstand; }
-	void SetShopStandLink(ShopStandManager* shopstandmgr) { _shopStandMgr = shopstandmgr; }
+	//void SetCheckStandLink(CheckStand* checkstand) { _checkStand = checkstand; }
+	//void SetShopStandLink(ShopStandManager* shopstandmgr) { _shopStandMgr = shopstandmgr; }
 
 	virtual void Enter() {}
 	virtual void Update() {}
 	virtual void Exit() {}
 
-	string GetState() { return _state; }
+	string GetStateType() { return _state; }
 };
 
 class NpcIdle : public NpcShopState

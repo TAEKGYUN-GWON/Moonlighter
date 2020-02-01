@@ -505,14 +505,14 @@ void Graphic::FrameRender(Vector2 pos, int curFrameX, int curFrameY, Vector2 sca
 		}
 	}
 
-	if (_graphicInfo->imgKey.compare("fatkachu") == 0)
-	{
-		cout << "key : " << _graphicInfo->imgKey << endl;
-		cout << "size x : " << _graphicInfo->size.x << endl;
-		cout << "size y : " << _graphicInfo->size.y << endl;
-		cout << "frame X : " << _graphicInfo->frameWidth << endl;
-		cout << "frame Y : " << _graphicInfo->frameHeight << endl;
-	}
+	//if (_graphicInfo->imgKey.compare("fatkachu") == 0)
+	//{
+	//	cout << "key : " << _graphicInfo->imgKey << endl;
+	//	cout << "size x : " << _graphicInfo->size.x << endl;
+	//	cout << "size y : " << _graphicInfo->size.y << endl;
+	//	cout << "frame X : " << _graphicInfo->frameWidth << endl;
+	//	cout << "frame Y : " << _graphicInfo->frameHeight << endl;
+	//}
 
 	_graphicInfo->size = GetFrameSize(frame);
 
