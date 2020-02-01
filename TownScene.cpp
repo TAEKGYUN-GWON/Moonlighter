@@ -60,7 +60,7 @@ void TownScene::Init()
 
 	_player->GetPhysics()->SetBodyPosition();
 
-	_player->GetSprite()->SetPosition(_player->GetTrans()->GetPos());
+	_player->GetSprite()->SetPosition(_player->GetTrans()->GetPos() + Vector2(0,-14));
 
 	
 
