@@ -28,7 +28,14 @@ void StartScene::Init()
 	GRAPHICMANAGER->AddImage("heart", L"resource/img/UI/heart.png");
 	GRAPHICMANAGER->AddImage("heart", L"resource/img/UI/heart.png");
 	GRAPHICMANAGER->AddFrameImage("UI_WeaponSwap", L"resource/img/UI/UI_WeaponSwap.png", 4, 2);
-
+	GRAPHICMANAGER->AddFrameImage("num", L"number.png", 4, 1);
+	GRAPHICMANAGER->FindImage("num")->SetFrameSize(Vector2(10,10));
+	Object* obj = Object::CreateObject<Object>();
+	obj->GetTrans()->SetPos(WINSIZEX / 2+200, WINSIZEY - 200);
+	//obj->GetTrans()->SetScale(200,200);
+	auto n = obj->AddComponent<Sprite>();
+	n->Init(true, true);
+	n->SetImgName("num");
 
 
 	GRAPHICMANAGER->AddImage("Vine", L"resource/img/Items/Vine.png");
@@ -114,17 +121,17 @@ void StartScene::Render()
 	wchar_t* str;
 	str = &b[0];
 
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX/2, 200), b, 20, 300, 50, ColorF::Azure);
-
-	GRAPHICMANAGER->DrawFrameImage("bn", Vector2(WINSIZEX / 2, 400), 0, 0, Vector2(320, 50));
-	GRAPHICMANAGER->DrawFrameImage("bn", Vector2(WINSIZEX / 2, 460), 1, 0, Vector2(320, 50));
-	GRAPHICMANAGER->DrawFrameImage("bn", Vector2(WINSIZEX / 2, 520), 2, 0, Vector2(320, 50));
-	GRAPHICMANAGER->DrawFrameImage("bn", Vector2(WINSIZEX / 2, 580), 3, 0, Vector2(320, 50));
-
-	GRAPHICMANAGER->DrawRect(Vector2(WINSIZEX / 2, 400), Vector2(80, 50), 0.0f, ColorF::Red);
-	GRAPHICMANAGER->DrawRect(Vector2(WINSIZEX / 2, 460), Vector2(80, 50), 0.0f, ColorF::Red);
-	GRAPHICMANAGER->DrawRect(Vector2(WINSIZEX / 2, 520), Vector2(80, 50), 0.0f, ColorF::Red);
-	GRAPHICMANAGER->DrawRect(Vector2(WINSIZEX / 2, 580), Vector2(80, 50), 0.0f, ColorF::Red);
+	//GRAPHICMANAGER->Text(Vector2(WINSIZEX/2, 200), b, 20, 300, 50, ColorF::Azure);
+	//
+	//GRAPHICMANAGER->DrawFrameImage("bn", Vector2(WINSIZEX / 2, 400), 0, 0, Vector2(320, 50));
+	//GRAPHICMANAGER->DrawFrameImage("bn", Vector2(WINSIZEX / 2, 460), 1, 0, Vector2(320, 50));
+	//GRAPHICMANAGER->DrawFrameImage("bn", Vector2(WINSIZEX / 2, 520), 2, 0, Vector2(320, 50));
+	//GRAPHICMANAGER->DrawFrameImage("bn", Vector2(WINSIZEX / 2, 580), 3, 0, Vector2(320, 50));
+	//
+	//GRAPHICMANAGER->DrawRect(Vector2(WINSIZEX / 2, 400), Vector2(80, 50), 0.0f, ColorF::Red);
+	//GRAPHICMANAGER->DrawRect(Vector2(WINSIZEX / 2, 460), Vector2(80, 50), 0.0f, ColorF::Red);
+	//GRAPHICMANAGER->DrawRect(Vector2(WINSIZEX / 2, 520), Vector2(80, 50), 0.0f, ColorF::Red);
+	//GRAPHICMANAGER->DrawRect(Vector2(WINSIZEX / 2, 580), Vector2(80, 50), 0.0f, ColorF::Red);
 
 	//swprintf(buffer, 128, L"test X : %f\test Y : %f", test->GetTrans()->GetPos().x, test->GetTrans()->GetPos().y);
 	//GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 400), buffer, 20, 300, 50, ColorF::Azure);
