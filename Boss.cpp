@@ -2,6 +2,8 @@
 #include "Boss.h"
 #include "Ability.h"
 #include "SlimeEnemy.h"
+#include "BossState.h"
+#include "BossIdle.h"
 
 Boss::Boss()
 {
@@ -23,27 +25,35 @@ void Boss::Init(Vector2 pos)
 	GRAPHICMANAGER->AddFrameImage("FistShoot", L"resource/img/Enemy/FistShoot.png", 41, 3);
 	GRAPHICMANAGER->AddFrameImage("Hand_Shoot_First", L"resource/img/Enemy/Hand_Shoot_First.png", 20, 1);
 	GRAPHICMANAGER->AddFrameImage("Hand_Shoot_Last", L"resource/img/Enemy/Hand_Shoot_Last.png", 11, 1);
+	GRAPHICMANAGER->AddFrameImage("idleBoss", L"resource/img/Enemy/idleBoss.png", 2, 1);
 
 	_tag = "boss";
 	_name = "Boss";
 
 	_ability = new Ability(100, 100, 10); //더 크게 줘야 하나?
 
-	maxFrameX = 0;
-	frameY = 0;
+	//maxFrameX = 0;
+	//frameY = 0;
 	_sprite = AddComponent<Sprite>();
 	_sprite->Init(true, true);
 	_sprite->SetImgName("Open_Boss");
-	_sprite->SetRectColor(ColorF::Cornsilk);
+	_sprite->SetPosition(_trans->GetPos());
+//	_sprite->SetRectColor(ColorF::Cornsilk);
+	_trans->SetPos(pos);
 	_trans->SetScale(Vector2(_sprite->GetGraphic()->GetFrameWidth(),
 		_sprite->GetGraphic()->GetFrameHeight()));
-	_trans->SetScale(Vector2(100, 100)); //보스 범위
-	_trans->SetPos(pos);
-	_sprite->SetPosition(_trans->GetPos());
+	//_trans->SetScale(Vector2(100, 100)); //보스 범위
+
+
 	_physics = AddComponent<PhysicsBody>();
 	_physics->Init(BodyType::DYNAMIC, 1.0f);
 	////가상세계의 렉트 뒤틀리는거 고정
 	_physics->GetBody()->SetFixedRotation(true);
+
+	cout << "state 들어간당" << endl;
+	_Bstate = new BossIdle(this);
+	_Bstate->Enter();
+
 
 #pragma region 무덤
 
@@ -265,7 +275,8 @@ void Boss::Init(Vector2 pos)
 void Boss::Update()
 {
 	Object::Update();
-
+	
+	_Bstate->Update();
 	//_sprite->GetCurrentFrameX();
 }
 
@@ -280,6 +291,9 @@ void Boss::Release()
 {
 	for (Object* r : _rocks)
 		SCENEMANAGER->GetNowScene()->GetWorld()->DestroyBody(r->GetComponent<PhysicsBody>()->GetBody());
+	
+	for (Object* e : _enemys)
+		SCENEMANAGER->GetNowScene()->GetWorld()->DestroyBody(e->GetComponent<PhysicsBody>()->GetBody());
 
 	Object::Release();
 
@@ -294,8 +308,6 @@ void Boss::Attack()
 	case PHASE::HAND:
 		break;
 	case PHASE::SLIME:
-		break;
-	default:
 		break;
 	}
 }

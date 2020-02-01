@@ -53,11 +53,6 @@ public:
 	void Attack();
 	//void AttackEnd();
 	vector<Enemy*>* GetEnemys() { return &_enemys; }
-
-	//스킬(?)마다 함수로 뻬자
-	//그리고 어택에서 스위치문하고
-	//어택을 업데이트에 걸어주면 되나??
-
 	Ability* GetHP() { return _ability; }
 	PhysicsBody* GetPhysics() { return _physics; }
 	Sprite* GetSprite() { return _sprite; }

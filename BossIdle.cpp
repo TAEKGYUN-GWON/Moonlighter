@@ -14,12 +14,14 @@ void BossIdle::Enter()
 	_count = timer = 0;
 	ExitTime = RND->getFromIntTo(5,10);
 	
-
-	//_boss->GetSprite()->SetImgName("");
-	//_boss->GetSprite()->SetMaxFrameX();
-	//_boss->GetSprite()->SetFrameX(0);
+	cout << "들어왔나?" << endl;
+	_boss->GetSprite()->SetImgName("idleBoss");
+	_boss->GetSprite()->SetMaxFrameX(2);
+	_boss->GetSprite()->SetFrameX(0);
 	//_boss->GetSprite()->SetPosition()
-
+	//_boss->GetSprite()->SetFillRect(true);
+	_boss->GetSprite()->SetIsLoop(true);
+	_boss->GetSprite()->SetPosition(_boss->GetTrans()->GetPos());
 
 }
 
