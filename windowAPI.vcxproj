@@ -102,6 +102,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -147,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="Astar.h" />
     <ClInclude Include="Boss.h" />
+    <ClInclude Include="BossRoom.h" />
     <ClInclude Include="BowAttack.h" />
     <ClInclude Include="BoxWorldManager.h" />
     <ClInclude Include="Bullet.h" />
@@ -174,6 +176,7 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Item.hpp" />
+    <ClInclude Include="ItemScript.h" />
     <ClInclude Include="Item_Bass_Collider.h" />
     <ClInclude Include="JsonManager.h" />
     <ClInclude Include="loadingScene.h" />
@@ -188,6 +191,8 @@
     <ClInclude Include="ParticleManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAttack.h" />
+    <ClInclude Include="PlayerAttackScript.h" />
+    <ClInclude Include="PlayerDead.h" />
     <ClInclude Include="PlayerIdle.h" />
     <ClInclude Include="PlayerMove.h" />
     <ClInclude Include="PlayerRoll.h" />
@@ -243,6 +248,7 @@
   <ItemGroup>
     <ClCompile Include="Astar.cpp" />
     <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="BossRoom.cpp" />
     <ClCompile Include="BowAttack.cpp" />
     <ClCompile Include="BoxWorldManager.cpp" />
     <ClCompile Include="Bullet.cpp" />
@@ -268,6 +274,7 @@
     <ClCompile Include="iniDataManager.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemScript.cpp" />
     <ClCompile Include="Item_Bass_Collider.cpp" />
     <ClCompile Include="JsonManager.cpp" />
     <ClCompile Include="loadingScene.cpp" />
@@ -280,6 +287,8 @@
     <ClCompile Include="ParticleManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerAttack.cpp" />
+    <ClCompile Include="PlayerAttackScript.cpp" />
+    <ClCompile Include="PlayerDead.cpp" />
     <ClCompile Include="PlayerIdle.cpp" />
     <ClCompile Include="PlayerMove.cpp" />
     <ClCompile Include="PlayerRoll.cpp" />

@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+#include "Bullet.h"
 
 class Ability;
 class Inventory;
@@ -34,13 +35,9 @@ private:
 	PlayerState* _state;
 	Direction _dir;
 	AttackType _atkType;
+	BulletObjPool* _pool;
 
 	float _speed;
-
-	// test angle
-	float angle = 0.0f;
-
-	b2ChainShape* chain;
 
 public:
 	Player();
@@ -49,14 +46,11 @@ public:
 	virtual void Init();
 	virtual void Update();
 	virtual void Render();
+	virtual void Release()override;
 
 	void ChangeState(PlayerState* state);
 	void SetDirection(Direction dir) { _dir = dir; }
 	void SetAttackType(AttackType type) { _atkType = type; }
-
-
-	void SetAngle(float angle) { this->angle = angle; }
-
 
 	float GetSpeed() { return _speed; }
 	Sprite* GetSprite() { return _sprite; }
@@ -66,5 +60,6 @@ public:
 	AttackType GetAttackType() { return _atkType; }
 	Ability* GetAbility() { return _ability; }
 	PlayerState* GetState() { return _state; }
+	BulletObjPool* GetBulletPool() { return _pool; }
 };
 

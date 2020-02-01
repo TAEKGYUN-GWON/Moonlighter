@@ -54,7 +54,7 @@ public:
 	//상태패턴을 만들어서 Enemy에게 알려주기 위한 함수
 	void SetState(EnemyBasic* state);
 	virtual void Init();
-	virtual void Update();	//방향지정해줘야함->겟앵글로...
+	virtual void Update();	
 	virtual void Render();
 	virtual void Attack() {};
 	virtual void AttackEnd() {};
