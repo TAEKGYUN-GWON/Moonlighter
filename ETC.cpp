@@ -3,16 +3,10 @@
 
 void ETC::Init()
 {
-	super::Init();
+	Item::Init();
 
 	_tag = "ETC";
 	_type = EItemType::etc;
 	_maxCount = 10;
-	_image = AddComponent<Sprite>();
-	_image->Init();
 }
 
-void ETC::Update()
-{
-	super::Update();
-}

@@ -7,19 +7,23 @@ Particle::Particle()
 	_sprite = AddComponent<Sprite>();
 }
 
-void Particle::Init(float angle, float speed, Vector2 pos, Vector2 scale, string imgKey, bool isFrame, float FPS)
+void Particle::Init(float angle, float speed, Vector2 pos, Vector2 scale, string imgKey, bool isFrame, float FPS, bool isPhysics)
 {
 	Object::Init();
-	_physics = AddComponent<PhysicsBody>();
 	_angle = angle;
 	_speed = speed;
 	_trans->SetPos(pos);
 	_trans->SetScale(scale);
 	_alpha = 1.f;
 	_sprite->SetAlpha(_alpha);
+	_isPhysics = isPhysics;
+	if (isPhysics)
+	{
+	_physics = AddComponent<PhysicsBody>();
 	_physics->Init(BodyType::DYNAMIC, 0, 0, 0.6, true, true);
 	_physics->SetBodyActive(false);
 	_physics->GetBody()->SetFixedRotation(true);
+	}
 	if (imgKey != "None")
 	{
 		if (isFrame)
@@ -51,7 +55,7 @@ void Particle::Update()
 
 	if (_alpha <= 0.f) _isActive = false;
 
-	if (_alpha <= 0.5)_physics->SetSensor(false);
+	if (_alpha <= 0.5 && _isPhysics)_physics->SetSensor(false);
 
 	move();
 
@@ -65,21 +69,28 @@ void Particle::Render()
 	Object::Render();
 }
 
+void Particle::SetIsPhysics()
+{
+}
+
 void Particle::Setdepth()
 {
-	//_trans->bottomPos = Vector2(_trans->bottomPos.x, 99999);
+	_trans->bottomPos = Vector2(_trans->bottomPos.x, 99999);
 }
 
 void Particle::move()
 {
-	
-	//_trans->SetPos(_trans->GetPos() + Vector2(cosf(_angle), -sinf(_angle) * _speed * TIMEMANAGER->getElapsedTime()));
-	
-	if (_active)
+	if (_isPhysics)
 	{
-		Fire();
-		_active = false;
+		if (_active)
+		{
+			Fire();
+			_active = false;
+		}
 	}
+	else
+		_trans->SetPos(_trans->GetPos() + Vector2(cosf(_angle), -sinf(_angle)) * _speed * TIMEMANAGER->getElapsedTime());
+
 	_sprite->SetPosition(_trans->GetPos());
 
 	_sprite->SetAlpha(_alpha);

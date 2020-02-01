@@ -84,7 +84,7 @@ public:
 	//void SetFrameWidth(float w) { _graphicInfo->frameWidth = w; }
 	//void SetFrameHeight(float h) { _graphicInfo->frameHeight = h; }
 
-	void SetFrameSize(Vector2 size) { Vector2(_graphicInfo->frameWidth, _graphicInfo->frameHeight) = size; }
+	void SetFrameSize(Vector2 size); //{ Vector2(_graphicInfo->frameWidth, _graphicInfo->frameHeight) = size; }
 
 	void SetAngle(float angle) { _graphicInfo->angle = angle; }
 	void SetScale(Vector2 scale) { _graphicInfo->scale = scale; }

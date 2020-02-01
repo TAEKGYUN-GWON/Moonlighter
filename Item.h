@@ -24,18 +24,22 @@ protected:
 	Sprite* _image;
 
 	//아이템이 던전안에서 존재한다면 플에이어를 따라가야함
-	bool _isDungeon;
+	bool _isDungeon = true;
 
 	//선형보간을 위한 변수
 	float _followingMovement;
 
+	PhysicsBody* _physics;
+
 public:
-	Item() {}
+	Item();
 	~Item() {}
 
 	virtual void Init();
-	virtual void Init(Vector2 pos) = 0;
+	virtual void Init(Vector2 pos) {};
 	virtual void Update();
+	virtual void Render();
+	virtual void Release();
 
 	//던전 내에서의 아이템의 움직임
 	void FollowPlayer(Vector2 playerPos);
@@ -60,7 +64,7 @@ public:
 
 	template <typename T>
 	static T* CreateItem(Vector2 pos);
-
+	PhysicsBody* GetPhysics() { return _physics; }
 };
 
 #include"Item.hpp"
