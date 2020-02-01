@@ -53,7 +53,7 @@ using namespace SEVENTEEN_UTIL;
 //=========================================
 
 #define WINNAME (LPCTSTR)(TEXT("Team Ω"))
-#define WINSTARTX 50
+#define WINSTARTX 2000
 #define WINSTARTY 50
 #define WINSIZEX 1280
 #define WINSIZEY 720

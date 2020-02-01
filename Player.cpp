@@ -22,9 +22,7 @@ void Player::Init()
 	GRAPHICMANAGER->AddFrameImage("will_bow", L"resource/img/Player/will_bow.png", 9, 4);
 	
 	GRAPHICMANAGER->AddFrameImage("arrow_up", L"resource/img/Player/arrow_up.png", 1, 1);
-	GRAPHICMANAGER->AddFrameImage("arrow_right", L"resource/img/Player/arrow_right.png", 1, 1);
 	GRAPHICMANAGER->AddFrameImage("arrow_down", L"resource/img/Player/arrow_down.png", 1, 1);
-	GRAPHICMANAGER->AddFrameImage("arrow_left", L"resource/img/Player/arrow_left.png", 1, 1);
 
 	_tag = "Player";
 	_name = "Will";
@@ -35,7 +33,6 @@ void Player::Init()
 	_sprite = AddComponent<Sprite>();
 	_sprite->Init(true, true);
 	_sprite->SetImgName("will_dungeon");
-	_sprite->SetSize(Vector2(GRAPHICMANAGER->FindImage("will_dungeon")->GetFrameWidth(), GRAPHICMANAGER->FindImage("will_dungeon")->GetFrameHeight()));
 	_sprite->SetPosition(_trans->GetPos() + Vector2(0, -14));
 
 	_physics = AddComponent<PhysicsBody>();
@@ -52,14 +49,11 @@ void Player::Init()
 	_inven = new Inventory;
 	_inven->Init();
 
-	Item* item = Item::CreateItem<Golem_Core>(Vector2(100, 100));
-	_inven->Insert(item);
-
 	_state = new PlayerIdle(this);
 	_state->Enter();
 
 	_pool = new BulletObjPool;
-	_pool->Init(20, "arrow_down", "Arrow", "Arrow", this, 3);
+	_pool->Init(20, "arrow_down", "Arrow", "Arrow", this, 5);
 }
 
 void Player::Update()
@@ -113,9 +107,6 @@ void Player::Render()
 	wchar_t buffer[128];
 	swprintf(buffer, 128, L"%1.f / %1.f", _ability->GetCurrentHP(), _ability->GetMaxHP());
 	GRAPHICMANAGER->Text(_trans->GetPos() + Vector2(-(_trans->GetScale().x + 10.0f), 32.f), buffer, 20, 90, 30, ColorF::LawnGreen, TextPivot::RIGHT_TOP);
-
-	swprintf(buffer, 128, L"player arrow count : %d", _pool->GetActivePoolSize());
-	GRAPHICMANAGER->Text(Vector2(100, 100), buffer, 20, 400, 30, ColorF::BlanchedAlmond);
 
 	if (_ability->IsDead()) GRAPHICMANAGER->Text(_trans->GetPos() + Vector2(-(_trans->GetScale().x - (_trans->GetScale().x * 0.5f) + 4.0f), -62.f), L"Dead", 20, 100, 30, ColorF::Red);
 

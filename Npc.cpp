@@ -4,7 +4,6 @@
 
 void Npc::Init(string imgkey)
 {
-	
 	Object::Init();
 
 	_tag = "Npc";
@@ -17,21 +16,12 @@ void Npc::Init(string imgkey)
 	
 	_trans->SetPos(400, 700); //문 밖에 생성
 	_trans->SetScale(Vector2(
-		GRAPHICMANAGER->FindImage(imgkey)->GetFrameWidth()+15,
-		GRAPHICMANAGER->FindImage(imgkey)->GetFrameHeight()+15));
+		GRAPHICMANAGER->FindImage(imgkey)->GetFrameWidth(),
+		GRAPHICMANAGER->FindImage(imgkey)->GetFrameHeight()));
 
-	
-	
-	
-	
-	
+	_sprite->SetPosition(_trans->GetPos());
 
 	//_destination = Vector2(340, 200);
-	
-
-	int a;
-
-	
 }
 
 void Npc::Release()
@@ -75,10 +65,8 @@ void Npc::Render()
 	}
 
 	wchar_t buffer[128];
-	swprintf(buffer, 128, L"x: %f, y:%f", _trans->GetPos().x , _trans->GetPos().y);
-	GRAPHICMANAGER->Text(Vector2(_trans->GetPos().x, _trans->GetPos().y), buffer, 10, 500, 300, ColorF::White);
-
-
+	swprintf(buffer, 128, L"x: %1.f, y:%1.f", _trans->GetPos().x , _trans->GetPos().y);
+	GRAPHICMANAGER->Text(Vector2(_trans->GetPos().x, _trans->GetPos().y), buffer, 20, 500, 300, ColorF::White);
 }
 
 void Npc::SetPath(list<Vector2> lpath)
@@ -113,8 +101,6 @@ void Npc::SetNpcState(NpcShopState* npcshopstate)
 	_npcShopState->StateIn(this);
 	
 }
-
-
 
 //상태 정의
 void Npc::In()

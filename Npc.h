@@ -65,5 +65,7 @@ public:
 	Vector2 GetDestination() { return _destination; }
 
 	NpcShopState* GetState() {	return _npcShopState; }
+
+	list<Vector2> GetPath() { return _lPath; }
 };
 

@@ -19,11 +19,6 @@ NpcIdle* NpcIdle::GetInstance()
 //==================대기=====================
 void NpcIdle::StateIn(Npc* npc)
 {
-
-
-
-
-	
 	//if (창가자리에 도착함) //560, 607 창가자리 좌표
 	//{
 		cout << "NPCIDLE:stateIn 가게 입장상태" << endl;
@@ -48,12 +43,7 @@ void NpcIdle::StateStay(Npc* npc)
 	//if (npc->GetIsAstarOn())
 		//npc->SetDestination(Vector2(340, 200)); //난로앞으로 가기
 
-			//StateOut(npc);//못움직임
-			
-		
-		int a;
-
-
+	StateOut(npc);//못움직임
 }
 
 void NpcIdle::StateOut(Npc* npc)
@@ -187,17 +177,16 @@ void NpcInline::StateIn(Npc* npc)
 
 void NpcInline::StateStay(Npc* npc)
 {
-	//cout << "계산대 앞에서 기다리는 중" << endl;
-	if (npc->GetIsCheckSOn() == true) //충돌중일떄
-	{
+	cout << "계산대 앞에서 기다리는 중" << endl;
+	//if (npc->GetIsCheckSOn() == true) //충돌중일떄
+	//{
 		if (KEYMANAGER->isOnceKeyDown('J')) //제이를 누르면
 		{
 			_checkStand->SetStandisInUse(false); //비활시키고
 			npc->SetIsCheckSOn(false); //충돌도 아닌걸로 처리
 			//★여기서 아이템값 판매액을 받아야함
 		}
-
-	}
+	//}
 	//플레이어가 J를 누르기를 기다려야 한다..
 	if (_checkStand->GetStandisInUse() == false) //계산대 비활성화 상태면 (플레이어가 J눌렀다면)
 	{

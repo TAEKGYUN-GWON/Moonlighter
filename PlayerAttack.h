@@ -11,8 +11,6 @@ protected:
 
 	Object* _atkArea;
 
-	//bool _isAtk;
-
 public:
 	PlayerAttack(Player* obj) : PlayerState(obj) {}
 

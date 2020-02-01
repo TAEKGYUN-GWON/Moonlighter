@@ -18,7 +18,7 @@ void StartScene::Init()
 	SCENEMANAGER->addScene("test", new TestScene);
 
 	GraphicsManager::getSingleton()->AddImage("dd", L"eagle.png");
-	GraphicsManager::getSingleton()->AddFrameImage("d2", L"fatkachu.png", 4, 1);
+	GraphicsManager::getSingleton()->AddFrameImage("fatkachu", L"fatkachu.png", 4, 1);
 	GRAPHICMANAGER->AddFrameImage("bn", L"blueNumber.png", 4, 1);
 
 	GRAPHICMANAGER->AddImage("coin", L"resource/img/UI/coin.png");
@@ -67,13 +67,20 @@ void StartScene::Init()
 
 	obj = Object::CreateObject<Object>();
 	obj->GetTrans()->SetPos(Vector2(WINSIZEX / 2, 200));
-	obj->AddComponent<Sprite>()->Init();
+	obj->AddComponent<Sprite>();
 	obj->GetComponent<Sprite>()->SetImgName("dd");
-	obj->GetComponent<Sprite>()->SetPosition(obj->GetTrans()->GetPos());
 	auto a = GRAPHICMANAGER->FindImage("dd");
 	obj->GetComponent<Sprite>()->SetSize(Vector2(a->GetFrameWidth(), a->GetFrameHeight()));
 	//obj->GetTrans()->SetScale(Vector2(obj->GetComponent<Sprite>()->GetGraphic()->GetFrameWidth(), obj->GetComponent<Sprite>()->GetGraphic()->GetFrameWidth()));
 	obj->GetTrans()->SetScale(Vector2(100, 50));
+
+
+	Object* obj2 = Object::CreateObject<Object>();
+	obj2->GetTrans()->SetPos(Vector2(WINSIZEX / 2 + 100, 500));
+	obj2->AddComponent<Sprite>()->Init(true);
+	obj2->GetComponent<Sprite>()->SetImgName("fatkachu");
+	obj2->GetComponent<Sprite>()->SetSize(Vector2(100, 38));
+	obj2->GetTrans()->SetScale(Vector2(obj2->GetComponent<Sprite>()->GetGraphic()->GetFrameWidth(), obj2->GetComponent<Sprite>()->GetGraphic()->GetFrameWidth()));
 }
 
 void StartScene::Update()

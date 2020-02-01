@@ -25,7 +25,7 @@ private:
 	ShopStandManager* _shopStandMgr;
 	CheckStand* _checkStand;
 
-	Vector2 Positions[(int)DESTINATION::END];
+	Vector2 Positions[DESTINATION::END];
 
 	DESTINATION _destination;
 

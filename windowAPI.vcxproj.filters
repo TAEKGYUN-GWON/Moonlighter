@@ -94,9 +94,6 @@
     <Filter Include="playGround\Shop\Npc">
       <UniqueIdentifier>{0a0724a8-d624-45bd-9848-e35ab53c5fe1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\HP">
-      <UniqueIdentifier>{d649f8a6-dd46-4811-9899-cd714899015a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="playGround\Bullet">
       <UniqueIdentifier>{606b9db6-d611-446c-afb2-7ae3da391c30}</UniqueIdentifier>
     </Filter>
@@ -117,6 +114,9 @@
     </Filter>
     <Filter Include="playGround\Player\Attack">
       <UniqueIdentifier>{a7c38d5b-d5b6-48d0-8a97-4cc4fba36165}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Ability">
+      <UniqueIdentifier>{d649f8a6-dd46-4811-9899-cd714899015a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -351,9 +351,6 @@
     <ClInclude Include="PlayerMove.h">
       <Filter>playGround\Player</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerAttack.h">
-      <Filter>playGround\Player</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerRoll.h">
       <Filter>playGround\Player</Filter>
     </ClInclude>
@@ -373,7 +370,7 @@
       <Filter>playGround\Player</Filter>
     </ClInclude>
     <ClInclude Include="Ability.h">
-      <Filter>playGround\HP</Filter>
+      <Filter>playGround\Ability</Filter>
     </ClInclude>
     <ClInclude Include="MintPotEnemy.h">
       <Filter>헤더 파일</Filter>
@@ -416,6 +413,9 @@
     </ClInclude>
     <ClInclude Include="PlayerDead.h">
       <Filter>playGround\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttack.h">
+      <Filter>playGround\Player\Attack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -620,9 +620,6 @@
     <ClCompile Include="PlayerMove.cpp">
       <Filter>playGround\Player</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerAttack.cpp">
-      <Filter>playGround\Player</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerRoll.cpp">
       <Filter>playGround\Player</Filter>
     </ClCompile>
@@ -642,7 +639,7 @@
       <Filter>playGround\Player</Filter>
     </ClCompile>
     <ClCompile Include="Ability.cpp">
-      <Filter>playGround\HP</Filter>
+      <Filter>playGround\Ability</Filter>
     </ClCompile>
     <ClCompile Include="MintPotEnemy.cpp">
       <Filter>소스 파일</Filter>
@@ -682,6 +679,9 @@
     </ClCompile>
     <ClCompile Include="PlayerDead.cpp">
       <Filter>playGround\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttack.cpp">
+      <Filter>playGround\Player\Attack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

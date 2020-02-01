@@ -57,7 +57,7 @@ void PlayerIdle::Update()
 		_obj->ChangeState(new PlayerRoll(_obj));
 	}
 
-	if (KEYMANAGER->isOnceKeyDown('J'))
+	if (SCENEMANAGER->GetNowScene()->GetName() != "Shop" && KEYMANAGER->isOnceKeyDown('J'))
 	{
 		if(_obj->GetAttackType() == AttackType::Sword)
 			_obj->ChangeState(new SwordAttack(_obj));
