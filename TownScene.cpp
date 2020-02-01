@@ -40,6 +40,7 @@ void TownScene::Init()
 	GRAPHICMANAGER->AddFrameImage("set_tile", L"set_tile3.png", 4, 6);
 	GRAPHICMANAGER->AddFrameImage("set_tile_dungeon", L"set_tile_dungeon.png", 4, 6);
 
+	GRAPHICMANAGER->AddFrameImage("Smith", L"resource/img/Smithy/Smith_Dott.png", 4, 1);
 
 
 
@@ -51,6 +52,8 @@ void TownScene::Init()
 void TownScene::Update()
 {
 	Scene::Update();
+
+	CAMERA->SetPos(Vector2(_player->GetTrans()->GetPos().x - 600, _player->GetTrans()->GetPos().y - 450));
 }
 
 void TownScene::SetUp()
@@ -146,6 +149,11 @@ void TownScene::SetUp()
 void TownScene::Render()
 {
 	GRAPHICMANAGER->DrawImage("town_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
+
+
 	Scene::Render();
+
 	_player->GetInventory()->Render();
+
+	 
 }

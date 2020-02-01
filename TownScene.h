@@ -9,6 +9,10 @@ private:
 	Tile* _tiles[TILENUMX * TILENUMY];
 	tagTile _tagTiles[TILENUMX * TILENUMY];
 	Player* _player;
+
+	Object* _smith;
+
+
 public:
 	virtual void Init();
 	virtual void Update();
