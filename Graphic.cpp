@@ -392,7 +392,7 @@ void Graphic::FrameRender(Vector2 pos, int curFrameX, int curFrameY, float alpha
 	}
 
 	D2D1_RECT_F dxSrc = RectF(_vFrameRect[frame].X, _vFrameRect[frame].Y, _vFrameRect[frame].X + _vFrameRect[frame].Width, _vFrameRect[frame].Y + _vFrameRect[frame].Height);
-
+	int a = 10;
 	//D2D1_MATRIX_3X2_F cameraMatrix;
 	//cameraMatrix = Matrix3x2F::Scale(D2D1::SizeF(1, 1));
 	//cameraMatrix = cameraMatrix * Matrix3x2F::Rotation(0);
@@ -517,7 +517,7 @@ void Graphic::FrameRender(Vector2 pos, int curFrameX, int curFrameY, Vector2 sca
 	_graphicInfo->size = GetFrameSize(frame);
 
 	Matrix3x2F scale_;
-	scale_ = Matrix3x2F::Scale(1, 1);
+	scale_ = Matrix3x2F::Scale(1,1);
 	if (flipX) scale_ = scale_ * Matrix3x2F::Scale(-1, 1);
 	Matrix3x2F rotation = Matrix3x2F::Rotation(angle, Point2F());
 	Matrix3x2F trans = Matrix3x2F::Translation(pos.x, pos.y);
@@ -574,4 +574,24 @@ void Graphic::SetSize(Vector2 size)
 	//		_vFrameRect.push_back(rc);
 	//	}
 	//}
+}
+
+void Graphic::SetFrameSize(Vector2 size)
+{
+	_graphicInfo->size *= 2;
+	WICRect rc;
+	//_graphicInfo->scale *= size;
+
+	_graphicInfo->frameWidth = _graphicInfo->size.x / _graphicInfo->maxFrameX;
+	_graphicInfo->frameHeight = _graphicInfo->size.y / _graphicInfo->maxFrameY;
+	for (int i = 0; i < _graphicInfo->maxFrameY*_graphicInfo->maxFrameX; i++)
+	{
+		_vFrameRect[i].X = _graphicInfo->frameWidth * i;
+		_vFrameRect[i].Y = _graphicInfo->frameHeight * i;
+		_vFrameRect[i].Width = _graphicInfo->frameWidth;
+		_vFrameRect[i].Height = _graphicInfo->frameHeight;
+		int a=10;
+	}
+
+
 }
