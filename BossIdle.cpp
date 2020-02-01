@@ -1,0 +1,50 @@
+#include "stdafx.h"
+#include "BossIdle.h"
+#include "BossAttack.h"
+#include "BossRockAtk.h"
+#include "BossSlimeAtk.h"
+//보스 어택 세종류
+//보스 죽는거
+//어빌리티?
+
+void BossIdle::Enter()
+{
+	_Bstate = "Idle";
+
+	_count = timer = 0;
+	ExitTime = RND->getFromIntTo(5,10);
+	
+
+	//_boss->GetSprite()->SetImgName("");
+	//_boss->GetSprite()->SetMaxFrameX();
+	//_boss->GetSprite()->SetFrameX(0);
+	//_boss->GetSprite()->SetPosition()
+
+
+}
+
+void BossIdle::Update()
+{
+	timer += TIMEMANAGER->getElapsedTime();
+	if (timer >= ExitTime)
+	{
+		int rand = RND->getInt(2);
+		if (rand)
+		{
+			_boss->SetState(new BossRockAtk(_boss));
+
+		}
+		else 
+		{
+			//_boss 다른공격
+			_boss->SetState(new BossSlimeAtk(_boss));
+		}
+			
+	}
+
+
+}
+
+void BossIdle::Exit()
+{
+}

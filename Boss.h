@@ -2,16 +2,14 @@
 #include "Object.h"
 #include "Ability.h"
 #include "Player.h"
+#include"BossState.h"
 
-class BossBasic;
-class BossIdle;
-class BossAttack;
-class BossHit;
-class BossDead;
+
+class BossState;
 
 
 //보스 공격 패턴
-enum PHASE
+enum class PHASE
 {
 	ROCK,
 	HAND,
@@ -23,33 +21,38 @@ class Boss : public Object
 protected:
 	Sprite* _sprite;
 	PhysicsBody* _physics;
-	Player* _player;
-	float _speed; //굳이 있어야 하나?
 
+	PHASE _phase;
 	Ability* _ability;
-	int _angle;
-	
+	BossState* _Bstate;
+	Player* _player;
 	list<Vector2> _path;
+
+	vector<Object*> _rocks;
+
+	vector<Enemy*> _enemys;
+
+	int _angle;
+	float _speed; //굳이 있어야 하나?
 
 public:
 	Boss();
 	~Boss();
 
-	PHASE _phase;
 
 	int maxFrameX;
 	int frameY;
-
-
+	//float GetAtkArea() { return 200; }
 	void Init(Vector2 pos);
 	void Update();
 	void Render();
 	void Release();
-	
-	
+
+	vector<Object*> GetRocks() { return _rocks; }
+
 	void Attack();
-	void RockAtk();
-	void BslimeAtk();
+	//void AttackEnd();
+	vector<Enemy*>* GetEnemys() { return &_enemys; }
 
 	//스킬(?)마다 함수로 뻬자
 	//그리고 어택에서 스위치문하고
@@ -60,6 +63,7 @@ public:
 	Sprite* GetSprite() { return _sprite; }
 	Player* GetPlayer() { return _player; }
 	PHASE GetPhase() { return _phase; }
-
+	BossState* GetState() { return _Bstate; }
+	void SetState(BossState* state);
 	
 };

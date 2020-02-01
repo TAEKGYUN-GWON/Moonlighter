@@ -147,7 +147,14 @@
   <ItemGroup>
     <ClInclude Include="Astar.h" />
     <ClInclude Include="Boss.h" />
+    <ClInclude Include="BossAttack.h" />
+    <ClInclude Include="BossDead.h" />
+    <ClInclude Include="BossHand.h" />
+    <ClInclude Include="BossIdle.h" />
+    <ClInclude Include="BossRockAtk.h" />
     <ClInclude Include="BossRoom.h" />
+    <ClInclude Include="BossSlimeAtk.h" />
+    <ClInclude Include="BossState.h" />
     <ClInclude Include="BowAttack.h" />
     <ClInclude Include="BoxWorldManager.h" />
     <ClInclude Include="Bullet.h" />
@@ -246,7 +253,14 @@
   <ItemGroup>
     <ClCompile Include="Astar.cpp" />
     <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="BossAttack.cpp" />
+    <ClCompile Include="BossDead.cpp" />
+    <ClCompile Include="BossHand.cpp" />
+    <ClCompile Include="BossIdle.cpp" />
+    <ClCompile Include="BossRockAtk.cpp" />
     <ClCompile Include="BossRoom.cpp" />
+    <ClCompile Include="BossSlimeAtk.cpp" />
+    <ClCompile Include="BossState.cpp" />
     <ClCompile Include="BowAttack.cpp" />
     <ClCompile Include="BoxWorldManager.cpp" />
     <ClCompile Include="Bullet.cpp" />

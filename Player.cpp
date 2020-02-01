@@ -41,6 +41,7 @@ void Player::Init()
 	_physics = AddComponent<PhysicsBody>();
 	_physics->Init(BodyType::DYNAMIC, 1.0f,0.3f);
 	_physics->GetBody()->SetFixedRotation(true);
+	
 
 	_ability = new Ability(100, 100, 10);
 
