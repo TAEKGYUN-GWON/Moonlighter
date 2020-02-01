@@ -5,7 +5,7 @@
 
 Boss::Boss()
 {
-	
+
 }
 
 Boss::~Boss()
@@ -44,7 +44,7 @@ void Boss::Init(Vector2 pos)
 	_physics->Init(BodyType::DYNAMIC, 1.0f);
 	////가상세계의 렉트 뒤틀리는거 고정
 	_physics->GetBody()->SetFixedRotation(true);
-	
+
 #pragma region 무덤
 
 	Object* rock = Object::CreateObject<Object>(this);
@@ -58,7 +58,7 @@ void Boss::Init(Vector2 pos)
 	p->SetBodyPosition();
 	_rocks.push_back(rock);
 
-	Object* rock = Object::CreateObject<Object>(this);
+	rock = Object::CreateObject<Object>(this);
 	rock->GetTrans()->SetScale(100, 109);
 	rock->GetTrans()->SetPos(896, 642);
 	s = rock->AddComponent<Sprite>();
@@ -69,7 +69,7 @@ void Boss::Init(Vector2 pos)
 	p->SetBodyPosition();
 	_rocks.push_back(rock);
 
-	Object* rock = Object::CreateObject<Object>(this);
+	rock = Object::CreateObject<Object>(this);
 	rock->GetTrans()->SetScale(100, 109);
 	rock->GetTrans()->SetPos(1050, 742);
 	s = rock->AddComponent<Sprite>();
@@ -80,7 +80,7 @@ void Boss::Init(Vector2 pos)
 	p->SetBodyPosition();
 	_rocks.push_back(rock);
 
-	Object* rock = Object::CreateObject<Object>(this);
+	rock = Object::CreateObject<Object>(this);
 	rock->GetTrans()->SetScale(100, 109);
 	rock->GetTrans()->SetPos(1195, 642);
 	s = rock->AddComponent<Sprite>();
@@ -91,7 +91,7 @@ void Boss::Init(Vector2 pos)
 	p->SetBodyPosition();
 	_rocks.push_back(rock);
 
-	Object* rock = Object::CreateObject<Object>(this);
+	rock = Object::CreateObject<Object>(this);
 	rock->GetTrans()->SetScale(100, 109);
 	rock->GetTrans()->SetPos(1367, 547);
 	s = rock->AddComponent<Sprite>();
@@ -102,7 +102,7 @@ void Boss::Init(Vector2 pos)
 	p->SetBodyPosition();
 	_rocks.push_back(rock);
 
-	Object* rock = Object::CreateObject<Object>(this);
+	rock = Object::CreateObject<Object>(this);
 	rock->GetTrans()->SetScale(100, 109);
 	rock->GetTrans()->SetPos(583, 601);
 	s = rock->AddComponent<Sprite>();
@@ -113,7 +113,7 @@ void Boss::Init(Vector2 pos)
 	p->SetBodyPosition();
 	_rocks.push_back(rock);
 
-	Object* rock = Object::CreateObject<Object>(this);
+	rock = Object::CreateObject<Object>(this);
 	rock->GetTrans()->SetScale(100, 109);
 	rock->GetTrans()->SetPos(791, 773);
 	s = rock->AddComponent<Sprite>();
@@ -124,7 +124,7 @@ void Boss::Init(Vector2 pos)
 	p->SetBodyPosition();
 	_rocks.push_back(rock);
 
-	Object* rock = Object::CreateObject<Object>(this);
+	rock = Object::CreateObject<Object>(this);
 	rock->GetTrans()->SetScale(100, 109);
 	rock->GetTrans()->SetPos(1050, 917);
 	s = rock->AddComponent<Sprite>();
@@ -135,7 +135,7 @@ void Boss::Init(Vector2 pos)
 	p->SetBodyPosition();
 	_rocks.push_back(rock);
 
-	Object* rock = Object::CreateObject<Object>(this);
+	rock = Object::CreateObject<Object>(this);
 	rock->GetTrans()->SetScale(100, 109);
 	rock->GetTrans()->SetPos(1317, 751);
 	s = rock->AddComponent<Sprite>();
@@ -146,7 +146,7 @@ void Boss::Init(Vector2 pos)
 	p->SetBodyPosition();
 	_rocks.push_back(rock);
 
-	Object* rock = Object::CreateObject<Object>(this);
+	rock = Object::CreateObject<Object>(this);
 	rock->GetTrans()->SetScale(100, 109);
 	rock->GetTrans()->SetPos(1539, 633);
 	s = rock->AddComponent<Sprite>();
@@ -157,7 +157,7 @@ void Boss::Init(Vector2 pos)
 	p->SetBodyPosition();
 	_rocks.push_back(rock);
 
-	Object* rock = Object::CreateObject<Object>(this);
+	rock = Object::CreateObject<Object>(this);
 	rock->GetTrans()->SetScale(100, 109);
 	rock->GetTrans()->SetPos(411, 687);
 	s = rock->AddComponent<Sprite>();
@@ -168,7 +168,7 @@ void Boss::Init(Vector2 pos)
 	p->SetBodyPosition();
 	_rocks.push_back(rock);
 
-	Object* rock = Object::CreateObject<Object>(this);
+	rock = Object::CreateObject<Object>(this);
 	rock->GetTrans()->SetScale(100, 109);
 	rock->GetTrans()->SetPos(651, 917);
 	s = rock->AddComponent<Sprite>();
@@ -179,7 +179,7 @@ void Boss::Init(Vector2 pos)
 	p->SetBodyPosition();
 	_rocks.push_back(rock);
 
-	Object* rock = Object::CreateObject<Object>(this);
+	rock = Object::CreateObject<Object>(this);
 	rock->GetTrans()->SetScale(100, 109);
 	rock->GetTrans()->SetPos(1050, 1076);
 	s = rock->AddComponent<Sprite>();
@@ -190,7 +190,7 @@ void Boss::Init(Vector2 pos)
 	p->SetBodyPosition();
 	_rocks.push_back(rock);
 
-	Object* rock = Object::CreateObject<Object>(this);
+	rock = Object::CreateObject<Object>(this);
 	rock->GetTrans()->SetScale(100, 109);
 	rock->GetTrans()->SetPos(1449, 896);
 	s = rock->AddComponent<Sprite>();
@@ -201,7 +201,7 @@ void Boss::Init(Vector2 pos)
 	p->SetBodyPosition();
 	_rocks.push_back(rock);
 
-	Object* rock = Object::CreateObject<Object>(this);
+	rock = Object::CreateObject<Object>(this);
 	rock->GetTrans()->SetScale(100, 109);
 	rock->GetTrans()->SetPos(1723, 719);
 	s = rock->AddComponent<Sprite>();
@@ -212,7 +212,7 @@ void Boss::Init(Vector2 pos)
 	p->SetBodyPosition();
 	_rocks.push_back(rock);
 
-	Object* rock = Object::CreateObject<Object>(this);
+	rock = Object::CreateObject<Object>(this);
 	rock->GetTrans()->SetScale(100, 109);
 	rock->GetTrans()->SetPos(511, 1037);
 	s = rock->AddComponent<Sprite>();
@@ -223,7 +223,7 @@ void Boss::Init(Vector2 pos)
 	p->SetBodyPosition();
 	_rocks.push_back(rock);
 
-	Object* rock = Object::CreateObject<Object>(this);
+	rock = Object::CreateObject<Object>(this);
 	rock->GetTrans()->SetScale(100, 109);
 	rock->GetTrans()->SetPos(1050, 1251);
 	s = rock->AddComponent<Sprite>();
@@ -234,7 +234,7 @@ void Boss::Init(Vector2 pos)
 	p->SetBodyPosition();
 	_rocks.push_back(rock);
 
-	Object* rock = Object::CreateObject<Object>(this);
+	rock = Object::CreateObject<Object>(this);
 	rock->GetTrans()->SetScale(100, 109);
 	rock->GetTrans()->SetPos(1589, 1026);
 	s = rock->AddComponent<Sprite>();
@@ -245,11 +245,11 @@ void Boss::Init(Vector2 pos)
 	p->SetBodyPosition();
 	_rocks.push_back(rock);
 
-	
-	
-	
-	
-	
+
+
+
+
+
 
 
 #pragma endregion
@@ -273,7 +273,7 @@ void Boss::Render()
 {
 	Object::Render();
 
-	
+
 }
 
 void Boss::Release()

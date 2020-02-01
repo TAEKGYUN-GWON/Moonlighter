@@ -3,7 +3,7 @@
 #include "Ability.h"
 #include "Player.h"
 #include"BossState.h"
-
+#include "Enemy.h"
 
 class BossState;
 
