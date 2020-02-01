@@ -46,7 +46,7 @@ public:
 	virtual void Init();
 	virtual void Update();
 	virtual void Render();
-	virtual void Release()override;
+	virtual void Release();
 
 	void ChangeState(PlayerState* state);
 	void SetDirection(Direction dir) { _dir = dir; }

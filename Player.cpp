@@ -121,6 +121,13 @@ void Player::Render()
 	GRAPHICMANAGER->DrawTextD2D(Vector2(WINSIZEX - 230, 2), str, 20, 200, 70, ColorF::AntiqueWhite, TextPivot::RIGHT_BOTTOM);
 }
 
+void Player::Release()
+{
+	_inven->Release();
+
+	Object::Release();
+}
+
 void Player::ChangeState(PlayerState* state)
 {
 	_state->Exit();
