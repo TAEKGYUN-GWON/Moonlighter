@@ -40,17 +40,20 @@ void TownScene::Init()
 	GRAPHICMANAGER->AddFrameImage("set_tile", L"set_tile3.png", 4, 6);
 	GRAPHICMANAGER->AddFrameImage("set_tile_dungeon", L"set_tile_dungeon.png", 4, 6);
 
-
-
-
 	_player = Object::CreateObject<Player>();
 	_player->Init();
+	_player->GetTrans()->SetPos(Vector2(100, 600));
+	_player->GetPhysics()->SetBodyPosition();
+	_player->GetSprite()->SetPosition(_player->GetTrans()->GetPos());
+
 	SetUp();
 }
 
 void TownScene::Update()
 {
 	Scene::Update();
+
+	CAMERA->SetPosition(_player->GetTrans()->GetPos(), "town_map");
 }
 
 void TownScene::SetUp()

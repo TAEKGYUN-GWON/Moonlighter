@@ -17,7 +17,7 @@ void PlayerIdle::Enter()
 	_obj->GetSprite()->SetFrameX(0);
 	_obj->GetSprite()->SetIsLoop(true);
 	_obj->GetSprite()->SetPosition(_obj->GetTrans()->GetPos() + Vector2(0, -14));
-	
+
 	switch (_obj->GetDirection())
 	{
 	case Dir::Left : case Dir::Left_Up : case Dir::Left_Down :

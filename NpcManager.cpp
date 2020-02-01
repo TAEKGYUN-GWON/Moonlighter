@@ -218,11 +218,10 @@ void NpcManager::SetAstar()
 	
 	for (int i = 0; i < _vNpc.size(); i++) //npc숫자만큼 검사한다
 	{
-
 		if (_vNpc[i]->GetState()->GetStateType() == "Idle")
 		{
 			int a = RND->getInt(DESTINATION::STAND4);
-			AstarFunction(i, a);
+			AstarFunction(i, 0);
 		}
 	}
 }

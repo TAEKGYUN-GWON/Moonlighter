@@ -19,6 +19,9 @@ void ShopScene::Init()
 
 	_player = Object::CreateObject<Player>();
 	_player->Init();
+	_player->GetTrans()->SetPos(Vector2(330, 200));
+	_player->GetPhysics()->SetBodyPosition();
+	_player->GetSprite()->SetPosition(Vector2(330, 200));
 
 	//°è»ê´ë
 	_checkStand = Object::CreateObject<CheckStand>();
@@ -38,7 +41,8 @@ void ShopScene::Init()
 	_shopDoor = Object::CreateObject<ShopDoor>();
 	_shopDoor->Init();
 	
-
+	_pp = PlayerPosition::Up;
+	CAMERA->SetPos(Vector2(-240, -140));
 }
 
 void ShopScene::Release()
@@ -59,6 +63,15 @@ void ShopScene::Update()
 	if (KEYMANAGER->isOnceKeyDown('3')) SCENEMANAGER->changeScene("Town");
 	if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
 	if (KEYMANAGER->isOnceKeyDown('5')) SCENEMANAGER->changeScene("Maptool");
+
+	if (_pp == PlayerPosition::Up && _player->GetTrans()->GetPos().y >= 405.f)
+	{
+		CAMERA->MoveTo(Vector2(-240.f, 250.0f), 2.0f, false);
+	}
+	else if (_player->GetTrans()->GetPos().y < 405.f)
+	{
+		CAMERA->MoveTo(Vector2(-240.f, -140.0f), 2.0f, false);
+	}
 	
 	Scene::Update();
 }

@@ -19,7 +19,7 @@ private:
 	bool _isShopSOn;	//가판대랑 충돌중인지
 	bool _isCheckSOn;	//계산대랑 충돌중인지
 
-	bool _isAstarOn=true;	//astar 받아야하는 상태인지
+	bool _isAstarOn = true;	//astar 받아야하는 상태인지
 
 	
 	NpcShopState* _npcShopState;
