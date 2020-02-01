@@ -50,7 +50,7 @@ void NpcManager::Update()
 	   
 
 	//집에가면 지우기
-	Release();
+	//Release();
 	
 	//충돌
 	//CheckStandCollision(); //계산대
@@ -64,15 +64,6 @@ void NpcManager::Update()
 	{
 		_vNpc[i]->Update();
 	}
-
-	//if (_vNpc.size())
-	//{
-	//	cout << "ASTAR ON : " << _vNpc[0]->GetIsAstarOn() << endl;
-	//	if (_vNpc[0]->GetPath().size())
-	//	{
-	//		cout << "Path size : " << _vNpc[0]->GetPath().size() << endl;
-	//	}
-	//}
 }
 
 void NpcManager::Release()
@@ -221,7 +212,7 @@ void NpcManager::SetAstar()
 		if (_vNpc[i]->GetState()->GetStateType() == "Idle")
 		{
 			int a = RND->getInt(DESTINATION::STAND4);
-			AstarFunction(i, 0);
+			AstarFunction(i, a);
 		}
 	}
 }

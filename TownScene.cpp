@@ -42,7 +42,7 @@ void TownScene::Init()
 
 	_player = Object::CreateObject<Player>();
 	_player->Init();
-	_player->GetTrans()->SetPos(Vector2(100, 600));
+	_player->GetTrans()->SetPos(Vector2(100, 600) + Vector2(0, -14));
 	_player->GetPhysics()->SetBodyPosition();
 	_player->GetSprite()->SetPosition(_player->GetTrans()->GetPos());
 

@@ -15,11 +15,11 @@ class NpcManager;
 class ShopScene : public Scene
 {
 private:
-	enum PlayerPosition : byte
+	typedef enum PlayerPosition : byte
 	{
 		Up,
 		Down,
-	};
+	}PP;
 
 private:
 	Player* _player;
@@ -30,7 +30,7 @@ private:
 	ShopDoor* _shopDoor;			 //상점 출입문
 	vector<Tile*> _tiles;
 	tagTile _tagTiles[SHOPTILEMAXX * SHOPTILEMAXY];
-	PlayerPosition _pp;
+	PP _pp;
 
 public:
 	virtual void Init()override;

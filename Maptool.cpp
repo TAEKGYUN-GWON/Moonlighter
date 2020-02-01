@@ -229,7 +229,7 @@ void Maptool::Render()
 		}
 	}
 
-	Scene::Render();
+	//Scene::Render();
 
 	// sample tile image background
 	GRAPHICMANAGER->DrawFillRect(Vector2(WINSIZEX - 150, WINSIZEY / 2), Vector2(300, WINSIZEY), 0.0f, ColorF::Aquamarine, 1.0f, CENTER, false);
