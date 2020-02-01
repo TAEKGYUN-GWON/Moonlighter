@@ -44,7 +44,12 @@ using namespace std;
 #include "GraphicsManager.h"
 #include "Camera.h"
 #include"ObjectManager.h"
-#include"rapidjson/document.h"
+//#include"rapidjson/document.h"
+//#include"rapidjson/writer.h"
+//#include"nlohmann/json.hpp"
+//#include"nlohmann/json_fwd.hpp"
+#include"lib/single_include/nlohmann/json.hpp"
+using json = nlohmann::json;
 #include"iniDataManager.h"
 #include"lib/single_include/nlohmann/json.hpp"
 using json = nlohmann::json;

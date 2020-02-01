@@ -50,6 +50,7 @@ void Player::Init()
 	_inven = new Inventory;
 	_inven->Init();
 
+	
 	_state = new PlayerIdle(this);
 	_state->Enter();
 
@@ -125,7 +126,6 @@ void Player::Render()
 void Player::Release()
 {
 	_inven->Release();
-
 	Object::Release();
 }
 
