@@ -25,6 +25,7 @@ void Player::Init()
 	_name = "Will";
 
 	_trans->SetPos(WINSIZEX / 2, WINSIZEY / 2);
+	//_trans->SetPos(Vector2(220, 100));
 	//_trans->SetScale(Vector2(36, 50));
 	_trans->SetScale(Vector2(36, 25));
 

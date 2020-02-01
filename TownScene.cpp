@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "TownScene.h"
 #include"Inventory.h"
+#include "Npc.h"
+
 void TownScene::Init()
 {
 	Scene::Init();
@@ -37,23 +39,55 @@ void TownScene::Init()
 #pragma endregion
 
 	GRAPHICMANAGER->AddImage("town_map", L"resource/img/Map/map.png");
+
 	GRAPHICMANAGER->AddFrameImage("set_tile", L"set_tile3.png", 4, 6);
 	GRAPHICMANAGER->AddFrameImage("set_tile_dungeon", L"set_tile_dungeon.png", 4, 6);
 
-	GRAPHICMANAGER->AddFrameImage("Smith", L"resource/img/Smithy/Smith_Dott.png", 4, 1);
+	_smith = GRAPHICMANAGER->AddFrameImage("Smith", L"resource/img/Smithy/Smith_Dott.png", 4, 1);
+
+	_j = GRAPHICMANAGER->AddImage("j", L"resource/img/Smithy/J.png");
 
 
+
+	_frameCount = _frameX = 0;
+
+	SetUp();
 
 	_player = Object::CreateObject<Player>();
 	_player->Init();
-	SetUp();
+
+	_player->GetTrans()->SetPos(Vector2(2000, 1500));
+
+	_player->GetPhysics()->SetBodyPosition();
+
+	_player->GetSprite()->SetPosition(_player->GetTrans()->GetPos());
+
+	
+
+	_smithy = new Smithy;
+	_smithy->Init(_player->GetInventory());
+
+	//_smithy->SetSmithPos(_smith->GetTrans()->GetPos());
+
 }
 
 void TownScene::Update()
 {
 	Scene::Update();
 
-	CAMERA->SetPos(Vector2(_player->GetTrans()->GetPos().x - 600, _player->GetTrans()->GetPos().y - 450));
+	_smithy->Update();
+
+	_frameCount++;
+	if (_frameCount >= 5)
+	{
+		_frameX++;
+		//_frameCount = 0;
+
+		if (_frameX >= 4)
+			_frameX = 0;
+	}
+
+	CAMERA->SetPos(Vector2(_player->GetTrans()->GetPos().x - 650, _player->GetTrans()->GetPos().y - 450));
 }
 
 void TownScene::SetUp()
@@ -155,5 +189,42 @@ void TownScene::Render()
 
 	_player->GetInventory()->Render();
 
+	_smithy->Render();
+
+	if (!_smithy->GetSmithy())
+	{
+		_smith->FrameRender(Vector2(2470, 1080), _frameX, 1, PIVOT::CENTER);
+
+		if (ShowJ())
+		{
+			_j->Render(Vector2(2520, 1040), 1.f, PIVOT::CENTER, true);
+		}
+	}
+
+	if (_smithy->GetSmithy())
+	{
+		if (!(_player->GetTrans()->GetPos().x > 2470 - 200 && _player->GetTrans()->GetPos().y >= 1080
+			&& _player->GetTrans()->GetPos().x < 2470 + 200 && _player->GetTrans()->GetPos().y <= 1080 + 200))
+		{
+			_smithy->SetShow(false);
+		}
+	}
+
 	 
+}
+
+bool TownScene::ShowJ()
+{
+
+	if (_player->GetTrans()->GetPos().x > 2470 - 200 && _player->GetTrans()->GetPos().y >= 1080
+		&& _player->GetTrans()->GetPos().x < 2470 + 200 && _player->GetTrans()->GetPos().y <= 1080 + 200)
+	{
+		_smithy->SetIn(true);
+		return true;
+	}
+	else
+	{
+		_smithy->SetIn(false);
+		return false;
+	}
 }

@@ -5,6 +5,7 @@
 
 void Smithy::Init(Inventory* inven)
 {
+	_back = GRAPHICMANAGER->AddImage("backGround", L"resource/img/Smithy/S_Back.png");
 	_blackSmith = GRAPHICMANAGER->AddImage("blackSmith", L"resource/img/Smithy/BlackSmith.png");
 	_anvil = GRAPHICMANAGER->AddImage("anvil", L"resource/img/Smithy/Anvil.png");
 	_title = GRAPHICMANAGER->AddImage("titleBass", L"resource/img/Smithy/Title_Bass.png");
@@ -78,7 +79,7 @@ void Smithy::Render()
 
 void Smithy::KeyInput()
 {
-	if (KEYMANAGER->isOnceKeyDown(VK_NUMPAD0))
+	if (KEYMANAGER->isOnceKeyDown(VK_NUMPAD0) && _isPlayerIn)
 	{
 		_isShow = !_isShow;
 	}
@@ -114,6 +115,16 @@ void Smithy::KeyInput()
 	}
 }
 
+/*bool Smithy::CheckPlayerPos()
+{
+	if (_player->GetTrans()->GetPos().x < _smithPos.x - 80 && _player->GetTrans()->GetPos().y >= _smithPos.y + 50)
+	{
+		return true;
+	}
+
+	return false;
+}*/
+
 void Smithy::UpdateMaterial()
 {
 	_vMaterialCount.clear();
@@ -129,6 +140,7 @@ void Smithy::ShowImage()
 
 	UpdateMaterial();
 
+	_back->Render(Vector2(0,0), 0.8f, PIVOT::LEFT_TOP, false);
 	_blackSmith->Render(Vector2(250, WINSIZEY / 2), 1, PIVOT::CENTER, false);
 	_anvil->Render(Vector2(WINSIZEX / 2, WINSIZEY - 150), 1, PIVOT::CENTER, false);
 	_title->Render(Vector2(WINSIZEX / 2, 50), 1, PIVOT::CENTER, false);
@@ -205,7 +217,7 @@ void Smithy::Buy()
 	{
 		_inven->DeductionMoney(_recipePrice);
 		_inven->SetATK(_inven->GetATK() + _upgradeGap);
-
+		   
 		for (int i = 0; i < _vMaterialCount.size(); i++)
 		{
 			_inven->Remove(get<0>(_vMaterialCount[i]), get<2>(_vMaterialCount[i]));
@@ -246,9 +258,9 @@ void Smithy::Upgrade()
 	_upgradeGap *= 1.15;
 
 	
-	_m1Count = _inven->GetATK() / 11 *  1.18;
-	_m2Count = _inven->GetATK() / 8 *  1.45;
-	_m3Count = _inven->GetATK() / 12 *  1.23;
+	_m1Count = _inven->GetATK() / 8 *  1.18;
+	_m2Count = _inven->GetATK() /  12*  1.45;
+	_m3Count = _inven->GetATK() / 9 *  1.23;
 
 }
 

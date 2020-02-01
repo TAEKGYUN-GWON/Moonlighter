@@ -60,8 +60,6 @@ void StartScene::Init()
 	inven->Insert(Item::CreateItem<Crystal_Energy>(Vector2(0, 0)));*/
 
 
-	_smithy = new Smithy;
-	_smithy->Init(inven);
 
 
 
@@ -91,7 +89,7 @@ void StartScene::Update()
 
 	inven->Update();
 
-	_smithy->Update();
+	//_smithy->Update();
 }
 
 void StartScene::Render()
@@ -131,6 +129,5 @@ void StartScene::Render()
 	//ui->Render();
 	inven->Render();
 
-	_smithy->Render();
 }
 
