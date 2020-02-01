@@ -82,6 +82,7 @@ public:
 	void ShowUI();
 
 	void Buy();
+	bool CheckMaterial();
 	void Upgrade();
 
 

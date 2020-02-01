@@ -55,9 +55,9 @@ void StartScene::Init()
 	inven->Init();
 	//ui->SetInvenLink(inven);
 
+	/*inven->Insert(Item::CreateItem<Golem_Core>(Vector2(0, 0)));
 	inven->Insert(Item::CreateItem<Golem_Core>(Vector2(0, 0)));
-	inven->Insert(Item::CreateItem<Golem_Core>(Vector2(0, 0)));
-	inven->Insert(Item::CreateItem<Crystal_Energy>(Vector2(0, 0)));
+	inven->Insert(Item::CreateItem<Crystal_Energy>(Vector2(0, 0)));*/
 
 
 	_smithy = new Smithy;

@@ -37,7 +37,7 @@ void Smithy::Init(Inventory* inven)
 	_inven = inven;
 	//_inven->Init();
 	_inven->AddMoney(135948788);
-	//_inven->SetATK(30);
+	_inven->SetATK(30);
 
 	_recipePrice = _inven->GetATK() / 10 * 0.4 * 2316;
 
@@ -59,7 +59,6 @@ void Smithy::Init(Inventory* inven)
 void Smithy::Update()
 {
 	KeyInput();
-	UpdateMaterial();
 }
 
 void Smithy::Release()
@@ -96,9 +95,21 @@ void Smithy::KeyInput()
 			Buy();
 		}
 
-		if (KEYMANAGER->isOnceKeyDown('Y'))
+		if (KEYMANAGER->isStayKeyDown('Y'))
 		{
-			_inven->Insert(Item::CreateItem<Crystal_Energy>(Vector2(0, 0)));
+			Item* i = Item::CreateItem<Crystal_Energy>(Vector2(0, 0));
+			_inven->Insert(i);
+
+			i = Item::CreateItem<Crystal_Energy>(Vector2(0, 0));
+			_inven->Insert(i);
+
+			i = Item::CreateItem<Golem_Core>(Vector2(0, 0));
+			_inven->Insert(i);
+
+			i = Item::CreateItem<Reinforced_Steel_G>(Vector2(0, 0));
+			_inven->Insert(i);
+
+			//_inven->Insert());
 		}
 	}
 }
@@ -115,6 +126,9 @@ void Smithy::UpdateMaterial()
 
 void Smithy::ShowImage()
 {
+
+	UpdateMaterial();
+
 	_blackSmith->Render(Vector2(250, WINSIZEY / 2), 1, PIVOT::CENTER, false);
 	_anvil->Render(Vector2(WINSIZEX / 2, WINSIZEY - 150), 1, PIVOT::CENTER, false);
 	_title->Render(Vector2(WINSIZEX / 2, 50), 1, PIVOT::CENTER, false);
@@ -137,21 +151,18 @@ void Smithy::ShowImage()
 	if (get<2>(_vMaterialCount[2]) <= get<3>(_vMaterialCount[2]))
 	{
 		GRAPHICMANAGER->FindImage(get<1>(_vMaterialCount[2]))->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 262.5), 1, PIVOT::CENTER, false);
-		//_mOn1->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 216.5), 1, PIVOT::CENTER, false);
 	}
 
 	//°­Ã¶
 	if (get<2>(_vMaterialCount[1]) <= get<3>(_vMaterialCount[1]))
 	{
 		GRAPHICMANAGER->FindImage(get<1>(_vMaterialCount[1]))->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 176.5), 1, PIVOT::CENTER, false);
-		//_mOn2->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 176.5), 1, PIVOT::CENTER, false);
 	}
 
 	//ÄÚ¾î
 	if (get<2>(_vMaterialCount[0]) <= get<3>(_vMaterialCount[0]))
 	{
 		GRAPHICMANAGER->FindImage(get<1>(_vMaterialCount[0]))->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 90.5), 1, PIVOT::CENTER, false);
-		//_mOn3->Render(Vector2(WINSIZEX - 89.5, WINSIZEY - 90.5), 1, PIVOT::CENTER, false);
 	}
 
 }
@@ -190,15 +201,14 @@ void Smithy::ShowUI()
 
 void Smithy::Buy()
 {
-	if (_inven->GetMoney() >= _recipePrice)
+	if (_inven->GetMoney() >= _recipePrice && CheckMaterial())
 	{
 		_inven->DeductionMoney(_recipePrice);
 		_inven->SetATK(_inven->GetATK() + _upgradeGap);
 
 		for (int i = 0; i < _vMaterialCount.size(); i++)
 		{
-			//_inven->Remove(get<0>(_vMaterialCount[i]), get<2>(_vMaterialCount[i]));
-			_inven->Remove(get<0>(_vMaterialCount[i]), 2);
+			_inven->Remove(get<0>(_vMaterialCount[i]), get<2>(_vMaterialCount[i]));
 		}
 
 		Upgrade();
@@ -206,14 +216,40 @@ void Smithy::Buy()
 
 }
 
+bool Smithy::CheckMaterial()
+{
+	//Å©¸®½ºÅ»
+	if (get<2>(_vMaterialCount[2]) <= get<3>(_vMaterialCount[2]))
+	{
+		//°­Ã¶
+		if (get<2>(_vMaterialCount[1]) <= get<3>(_vMaterialCount[1]))
+		{
+			//ÄÚ¾î
+			if (get<2>(_vMaterialCount[0]) <= get<3>(_vMaterialCount[0]))
+			{
+				return true;
+			}
+			else
+				return false;
+		}
+		else 
+			return false;
+	}
+	else
+		return false;
+
+}
+
 void Smithy::Upgrade()
 {
-
 	_recipePrice = _inven->GetATK() / 10 * 0.4 * 2316;
-
-	//_recipePrice *= 1.6;
-	
 	_upgradeGap *= 1.15;
+
+	
+	_m1Count = _inven->GetATK() / 11 *  1.18;
+	_m2Count = _inven->GetATK() / 8 *  1.45;
+	_m3Count = _inven->GetATK() / 12 *  1.23;
+
 }
 
 void Smithy::PrintRecipe()
@@ -234,10 +270,5 @@ void Smithy::PrintRecipe()
 		standardStr = to_string(get<2>(_vMaterialCount[i]));
 		printStr.assign(standardStr.begin(), standardStr.end());
 		GRAPHICMANAGER->Text(Vector2(WINSIZEX - 230, WINSIZEY - (20 + (i + 1) *90)), printStr, 20, 100, 25, *color, TextPivot::RIGHT_CENTER, L"³ª´®½ºÄù¾î¶ó¿îµå");
-
-
-
-
-
 	}
 }

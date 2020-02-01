@@ -360,9 +360,6 @@
     <ClInclude Include="PlayerState.h">
       <Filter>playGround\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Smithy.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerState.h">
       <Filter>playGround\Player</Filter>
     </ClInclude>
@@ -404,6 +401,9 @@
     </ClInclude>
     <ClInclude Include="Dungeon.h">
       <Filter>playGround\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Smithy.h">
+      <Filter>playGround\Smithy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -620,9 +620,6 @@
     <ClCompile Include="PlayerState.cpp">
       <Filter>playGround\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Smithy.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerState.cpp">
       <Filter>playGround\Player</Filter>
     </ClCompile>
@@ -661,6 +658,9 @@
     </ClCompile>
     <ClCompile Include="Dungeon.cpp">
       <Filter>playGround\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Smithy.cpp">
+      <Filter>playGround\Smithy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
