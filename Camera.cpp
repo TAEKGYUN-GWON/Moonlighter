@@ -55,11 +55,21 @@ void Camera::Update()
 void Camera::UpdateMatrix()
 {
 	_matrix = Matrix3x2F::Identity();
+	//_matrix = Matrix3x3::identity;
 
 	_matrix = _matrix * _scaleMatrix * Matrix3x2F::Translation(-_pos.x, -_pos.y);
+
+	//_translationMatrix = Matrix3x3(-_pos.x, 0, 0, 0, -_pos.y, 0, 0, 0, 1);
+	//_rotationMatrix = Matrix3x3(cosf(0.0f), -sinf(0.0f), 0, sinf(0.0f), cosf(0.0f), 0, 0, 0, 1);
+	//_scaleMatrix = Matrix3x3(_scale.x, 0, 0, 0, _scale.y, 0, 0, 0, 1);
+	//_originTransMatrix = Matrix3x3(_origin.x, 0, 0, 0, _origin.y, 0, 0, 0, 1);
+	//
+	//_matrix = _translationMatrix * _rotationMatrix * _scaleMatrix * _originTransMatrix;
+	//
+	//_inverseMatrix = _matrix.GetInverseMatrix();
 }
 
-void Camera::SetPosition(Vector2 pos)
+void Camera::SetPosition(Vector2 pos, string key)
 {
 	_pos.x = pos.x - WINSIZEX / 2;
 	_pos.y = pos.y - WINSIZEY / 2;
@@ -67,10 +77,12 @@ void Camera::SetPosition(Vector2 pos)
 	if (_pos.x <= 0) _pos.x = 0;
 	if (_pos.y <= 0) _pos.y = 0;
 
-	if (_pos.x + WINSIZEX >= GRAPHICMANAGER->FindImage("bg")->GetWidth()) _pos.x = GRAPHICMANAGER->FindImage("bg")->GetWidth() - WINSIZEX;
-	if (_pos.y + WINSIZEY >= GRAPHICMANAGER->FindImage("bg")->GetHeight()) _pos.y = GRAPHICMANAGER->FindImage("bg")->GetHeight() - WINSIZEY;
+	if (_pos.x + WINSIZEX >= GRAPHICMANAGER->FindImage(key)->GetWidth()) _pos.x = GRAPHICMANAGER->FindImage(key)->GetWidth() - WINSIZEX;
+	if (_pos.y + WINSIZEY >= GRAPHICMANAGER->FindImage(key)->GetHeight()) _pos.y = GRAPHICMANAGER->FindImage(key)->GetHeight() - WINSIZEY;
 	UpdateMatrix();
 }
+
+
 
 void Camera::SetScale(Vector2 scale)
 {
@@ -78,18 +90,24 @@ void Camera::SetScale(Vector2 scale)
 	float a = Clamp(_scale.x, ZOOM_MIN, ZOOM_MAX);
 
 	_scale = Vector2(a, a);
+	
+	//_scaleMatrix = Matrix3x3(_scale.x,  0,		0,
+	//							0,	_scale.y,	0,
+	//							0,		0,		1);
 
-	_scaleMatrix = Matrix3x2F::Scale(_scale.x, _scale.y, Point2F(WINSIZEX / 2, WINSIZEY / 2));
+	_scaleMatrix = Matrix3x2F::Scale(_scale.x, _scale.y, Point2F(_pos.x + WINSIZEX / 2, _pos.y + WINSIZEY / 2));
 
 	UpdateMatrix();
 }
 
-void Camera::MoveTo(Vector2 endPos, float time)
+void Camera::MoveTo(Vector2 endPos, float time, bool isCenter)
 {
 	_startPos = _pos;
 	//_endPos = endPos;
-	_endPos.x = endPos.x - WINSIZEX / 2;
-	_endPos.y = endPos.y - WINSIZEY / 2;
+	if (isCenter)
+		_endPos = Vector2(endPos.x - WINSIZEX / 2, endPos.y - WINSIZEY / 2);
+	else
+		_endPos = endPos;
 	_moveTime = time;
 	_isMoving = true;
 }
@@ -98,4 +116,20 @@ bool Camera::IsMoving()
 {
 	if (_isMoving) return true;
 	else return false;
+}
+
+Vector2 Camera::GetWorldToCamera(Vector2 pos)
+{
+	pos *= _scale;
+	pos.x -= _pos.x;
+	pos.y -= _pos.y;
+	return std::move(pos);
+}
+
+Vector2 Camera::GetCameraToWorld(Vector2 pos)
+{
+	pos.x += _pos.x;
+	pos.y += _pos.y;
+	pos /= _scale.x;
+	return std::move(pos);
 }

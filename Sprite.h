@@ -29,7 +29,7 @@ private:
 	string _imgKey;
 	Graphic* _graphic;
 
-	ColorF::Enum _color;
+	ColorF _color = NULL;
 	PIVOT _pivot;
 
 	Vector2 _scale;
@@ -61,15 +61,19 @@ public:
 	inline bool GetCameraAffect() { return _isCameraAffect; }
 	inline Vector2 GetSize() { return _scale; }
 	inline Vector2 GetPosition() { return _pos; }
+	inline int GetCurrentFrameX() { return _curFrameX; }
+	inline int GetCurrentFrameY() { return _curFrameY; }
+	inline int GetMaxFrameX() { return _maxFrameX; }
 
 	void Start();
 	void Stop();
 	void Pause();
 	void Resume();
+	void PlayAnimation();
 
 	void SetImgName(string key);
 	void SetMaxFrameX(int maxFrameX) { _maxFrameX = maxFrameX - 1; }
-	inline void SetRectColor(ColorF::Enum color) { _color = color; }
+	inline void SetRectColor(ColorF color) { _color = color; }
 	inline void SetPivot(PIVOT pivot) { _pivot = pivot; }
 	void SetIsFrame(bool isFrame) { _isFrame = isFrame; }
 	void SetIsLoop(bool isLoop) { _isLoop = isLoop; }

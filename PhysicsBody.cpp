@@ -4,7 +4,9 @@
 void PhysicsBody::Init(BodyType type, float32 friction, float32 density, float32 restitution,BOOL isBullet, BOOL isSensor)
 {
 	_trans = _object->GetTrans();
+	scale = _object->GetTrans()->GetScale();
 	_type = type;
+	_bodyActive = true;
 	switch (_type)
 	{
 		case DYNAMIC:
@@ -106,8 +108,8 @@ void PhysicsBody::SetBodyPosition()
 
 void PhysicsBody::Render()
 {
-	if (KEYMANAGER->isToggleKey(VK_F1))
-		GRAPHICMANAGER->DrawRect(_object->GetTrans()->GetPos(), _object->GetTrans()->GetScale(), _body->GetAngle() * RadToDeg, ColorF::Blue, PIVOT::CENTER, 1.0f);
+	if (KEYMANAGER->isToggleKey(VK_F1) && _bodyActive)
+		GRAPHICMANAGER->DrawRect(_object->GetTrans()->GetPos(), scale, _body->GetAngle() * RadToDeg, ColorF::Enum::Green, PIVOT::CENTER, 2.5f);
 }
 
 
@@ -118,7 +120,19 @@ Vector2 PhysicsBody::GetBodyPosition()
 
 Vector2 PhysicsBody::GetBodyScale()
 {
-	return Vector2(_body->GetTransform().p.x*100.f, _body->GetTransform().p.y*100.f);
+	return scale;
+}
+
+void PhysicsBody::SetBodyActive(bool sleep)
+{
+	_body->SetActive(sleep);
+	_bodyActive = sleep;
+}
+
+void PhysicsBody::SetSensor(bool sensor)
+{
+
+	_body->GetFixtureList()->SetSensor(sensor);
 }
 
 Vector2 PhysicsBody::Convert(Vector2 origin)

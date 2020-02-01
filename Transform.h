@@ -22,6 +22,7 @@ public:
 	typedef Component super;
 	Vector2 pos;
 	Vector2 bottomPos;
+	Vector2 topPos;
 	Vector2 scale;
 	Transform();
 
@@ -31,6 +32,8 @@ public:
 
 	//Vector2 타입 좌표 가져오기
 	Vector2 GetPos();
+	Vector2 GetBottomPos();
+	Vector2 GetTopPos();
 
 	//월드좌표 가져오기
 	Vector2 GetWorldPosition();
@@ -61,10 +64,10 @@ public:
 	inline void SetScale(float w, float h) { scale = Vector2(w, h); }
 
 	//라디안값으로 회전값 세팅
-	inline void SetRotateToRadian(float rotate) { _rotate = rotate; }
+	inline void SetRotateToRadian(float radian) { _rotate = radian; }
 
 	//디그리 값으로 회전값 세팅
-	inline void SetRotateToDegree(float rotate) { _rotate = rotate * RadToDeg; }
+	inline void SetRotateToDegree(float degree) { _rotate = degree * DegToRad; }
 
 	RECT GetRect();
 

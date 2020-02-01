@@ -1,21 +1,19 @@
 #pragma once
 #include "Object.h"
-#include "Hp.h"
+#include "Ability.h"
+#include "Player.h"
+#include"BossState.h"
+#include "Enemy.h"
 
-class BossBasic;
-class BossIdle;
-class BossAttack;
-class BossHit;
-class BossDead;
+class BossState;
 
-class Hp;
 
 //보스 공격 패턴
-enum PHASE
+enum class PHASE
 {
-	ONE,
-	TWO,
-	TREE
+	ROCK,
+	HAND,
+	SLIME
 };
 
 class Boss : public Object
@@ -23,108 +21,49 @@ class Boss : public Object
 protected:
 	Sprite* _sprite;
 	PhysicsBody* _physics;
-	BossBasic* state;
-	float _speed; //굳이 있어야 하나?
 
-	Hp* _hp;
+	PHASE _phase;
+	Ability* _ability;
+	BossState* _Bstate;
+	Player* _player;
+	list<Vector2> _path;
+
+	vector<Object*> _rocks;
+
+	vector<Enemy*> _enemys;
+
+	int _angle;
+	float _speed; //굳이 있어야 하나?
 
 public:
 	Boss();
 	~Boss();
 
-	PHASE _phase;
 
-	void SetState(BossBasic* state);
-
-	void Init();
+	int maxFrameX;
+	int frameY;
+	//float GetAtkArea() { return 200; }
+	void Init(Vector2 pos);
 	void Update();
 	void Render();
 	void Release();
 
-	Hp* GetHP() { return _hp; }
+	vector<Object*> GetRocks() { return _rocks; }
+
+	void Attack();
+	//void AttackEnd();
+	vector<Enemy*>* GetEnemys() { return &_enemys; }
+
+	//스킬(?)마다 함수로 뻬자
+	//그리고 어택에서 스위치문하고
+	//어택을 업데이트에 걸어주면 되나??
+
+	Ability* GetHP() { return _ability; }
 	PhysicsBody* GetPhysics() { return _physics; }
-
-};
-
-class BossBasic
-{
-protected:
-
-	void SetBossState(Boss* _sBoss, BossBasic* _BossState)
-	{
-		_sBoss->SetState(_BossState);
-	}
-public:
-	virtual void Init(Boss* _sBoss) {};
-	virtual void Update(Boss* _sBoss);
-	virtual void Release(Boss* _sBoss) {};
-};
-//■■■■■■■■■■■■ Idle ■■■■■■■■■■■■■■
-class BossIdle : public BossBasic
-{
-
-	static BossIdle* instance;
-
-public:
-	//Idle이 아닌 다른 상태들한테 보내줄 인스턴스
-	static BossIdle* GetInstance();
-
-	virtual void Init(Boss* _sBoss);
-	virtual void Update(Boss* _sBoss);
-	virtual void Release(Boss* _sBoss);
-};
-//■■■■■■■■■■■■ Move ■■■■■■■■■■■■■
-//class BossMove : public BossBasic
-//{
-//	
-//	static BossMove* instance;
-//
-//public:
-//	static BossMove* GetInstance();
-//
-//	virtual void Init(Boss* _sBoss);
-//	virtual void Update(Boss* _sBoss);
-//	virtual void Release(Boss* _sBoss);
-//};
-
-//■■■■■■■■■■■ Attack ■■■■■■■■■■■■
-class BossAttack : public BossBasic
-{
-
-	static BossAttack* instance;
-
-public:
-	static BossAttack* GetInstance();
-
-	virtual void Init(Boss* _sBoss);
-	virtual void Update(Boss* _sBoss);
-	virtual void Release(Boss* _sBoss);
-};
-
-//■■■■■■■■■■■■ Hit ■■■■■■■■■■■■■
-class BossHit : public BossBasic
-{
-
-	static BossHit* instance;
-
-public:
-	static BossHit* GetInstance();
-
-	virtual void Init(Boss* _sBoss);
-	virtual void Update(Boss* _sBoss);
-	virtual void Release(Boss* _sBoss);
-};
-//■■■■■■■■■■■■ Dead ■■■■■■■■■■■■
-
-class BossDead : public BossBasic
-{
-
-	static BossDead* instance;
-
-public:
-	static BossDead* GetInstance();
-
-	virtual void Init(Boss* _sBoss);
-	virtual void Update(Boss* _sBoss);
-	virtual void Release(Boss* _sBoss);
+	Sprite* GetSprite() { return _sprite; }
+	Player* GetPlayer() { return _player; }
+	PHASE GetPhase() { return _phase; }
+	BossState* GetState() { return _Bstate; }
+	void SetState(BossState* state);
+	
 };

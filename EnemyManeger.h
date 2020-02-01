@@ -3,10 +3,14 @@
 #include "Enemy.h"
 #include "SlimeEnemy.h"
 #include "GolemEnemy.h"
+#include "MintPotEnemy.h"
 #include "Boss.h"
 #include "Astar.h"
 #include "Player.h"
 #include "Dungeon.h"
+#include "Bullet.h"
+#include "BulletScript.h"
+
 class Dungeon;
 
 class EnemyManeger
@@ -16,22 +20,24 @@ private:
 	Player* _player;
 	Astar* _astar;
 	Boss* _boss;
+	Dungeon* _room;
+	BulletObjPool* _BobjPool;
+	Bullet* _bullet;
+	
+
 	vector<Enemy*> _vEnemy;
-
 public:
+	EnemyManeger();
 	
 	
-	//enemy를 여기서 관리해 줘야 하긴 함
-	//상태라던가 배치라던가 던전룸이 생성되면 세팅하는거를 여기서 해줘야 하나?
-	//그래서 던전에서는 에너미메니저와 플레이어만 걸려 있어야 하나?
-	//으아아아아아ㅏㅏㄷ
 
-	void Init(Dungeon* parent);
+	void Init(Dungeon* room);
 	void Update();
 	void Release();
 	void Render();
 
-
+	void SetEnemy();
+	void Fire();
 	//hp
 	//여기서 아이템?
 };

@@ -1,6 +1,5 @@
 #pragma once
 #include "ShopStand.h"
-#include <vector>
 
 class ShopStandManager
 {
@@ -14,6 +13,8 @@ public:
 	void Init();
 	void Release();
 	void Update();
+
+	vector<ShopStand*> GetShopStandVector() { return _vShopStand; }
 
 
 };

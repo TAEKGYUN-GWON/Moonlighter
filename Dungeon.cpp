@@ -3,7 +3,7 @@
 
 void Dungeon::Init(Vector2 start)
 {
-	Scene::Init();
+	Object::Init();
 	_name = "Dungeon";
 	SetParent(SCENEMANAGER->GetNowScene());
 
@@ -25,69 +25,50 @@ void Dungeon::Init(Vector2 start)
 	//_player = Object::CreateObject<Player>();
 	//_player->Init(this);
 
-	//SetUp();
 	pos = start;
 	_trans->SetPos(pos);
-	//_isAllowInit = true;
+
+
 	_eMgr = new EnemyManeger;
-	//_eMgr->Init(this);
 }
 
 void Dungeon::Update()
 {
-	Scene::Update();
 
 
-	if (!_isAllowInit && Vector2::Distance(pos, CAMERA->GetPosition()) < 10)
-	{
-		SetUp();
-		_isAllowInit = true;
-	}
+	if (!_roomActive)return;
 
-	if (_isAllowInit && Vector2::Distance(pos, CAMERA->GetPosition()) > 100)
-	{
-		for (Tile* t : tiles)
-		{
-			t->SetIsActive(false);
-		}
-		_isAllowInit = false;
-	}
+	Object::Update();
 
-	if (_isAllowInit)
-	{
-		for (Tile* t : tiles)
-		{
-			if (!t->GetIsActive())t->Release();
-		}
-	}
-	//if (_isAllowInit)
-		//_eMgr->Update();
-	//_eMgr->Update();
+	_eMgr->Update();
 }
 
 void Dungeon::Render()
 {
-	GRAPHICMANAGER->FindImage("Dungeon")->Render(pos.x, pos.y, PIVOT::LEFT_TOP);
+	if (!_roomActive)return;
 
-	Scene::Render();
+	GRAPHICMANAGER->FindImage("Dungeon")->Render(pos.x, pos.y, PIVOT::LEFT_TOP);
+	Object::Render();
+
+	_eMgr->Render();
 }
 
 void Dungeon::SetUp()
 {
-
 	for (int i = 0; i < Dungeon_Y; ++i)
 	{
 		for (int j = 0; j < Dungeon_X; ++j)
 		{
 			int index = j + Dungeon_X * i;
 
-			Tile* tile = Object::CreateObject<Tile>(this);
+			Tile* tile = Object::CreateObject<Tile>();
 			tile->Init(j, i);
 			tile->GetTrans()->SetPos(pos.x + j * TILEWIDTH + (TILEWIDTH / 2),
 				pos.y + i * TILEHEIGHT + (TILEHEIGHT / 2));
 			tile->AddComponent<Sprite>();
 			tile->SetAttribute("None");
 
+			tiles.push_back(tile);
 
 			//tiles[index] = Object::CreateObject<Tile>(this);
 			//tiles[index]->Init(j , i );
@@ -95,7 +76,6 @@ void Dungeon::SetUp()
 			//	pos.y + i * TILEHEIGHT + (TILEHEIGHT / 2));
 			//tiles[index]->AddComponent<Sprite>();
 			//tiles[index]->SetAttribute("None");
-			tiles.push_back(tile);
 
 			_tagTiles[index].attribute = "None";
 			_tagTiles[index].imgKey = "None";
@@ -139,7 +119,6 @@ void Dungeon::SetUp()
 			tiles[i]->SetPivot(PIVOT::CENTER);
 
 
-
 			if (tiles[i]->GetChildren().size() > 0) tiles[i]->RemoveChild(tiles[i]->GetChildren()[0]);
 
 
@@ -172,6 +151,8 @@ void Dungeon::SetUp()
 					tiles[i]->GetChildren()[0]->AddComponent<Sprite>()->SetImgName(tiles[i]->GetImgName());
 					tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(tiles[i]->GetPivot());
 				}
+
+				
 			}
 		}
 	}
@@ -181,12 +162,28 @@ void Dungeon::SetUp()
 
 }
 
+void Dungeon::SetRoom()
+{
+	_roomActive = true;
+	SetUp();
+	_eMgr->Init(this);
+}
+
+void Dungeon::CloseRoom()
+{
+	_roomActive = false;
+	_eMgr->Release();
+	for (Object* c : tiles)
+		c->Release();
+	tiles.clear();
+}
+
 vector<Tile*> Dungeon::GetTiles()
 {
-	vector<Tile*> tiles;
+	vector<Tile*> t;
 
 	for (int i = 0; i < Dungeon_X * Dungeon_Y; i++)
-		tiles.push_back(tiles[i]);
+		t.push_back(tiles[i]);
 
-	return tiles;
+	return t;
 }

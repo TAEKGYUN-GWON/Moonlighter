@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Maptool.h"
-
+//º´ÇÕÀ» À§ÇØ ÁÖ¼® ´Ü´Ù Âm
 void Maptool::Init()
 {
 	Scene::Init();
@@ -53,10 +53,12 @@ void Maptool::Init()
 #pragma endregion
 
 	GRAPHICMANAGER->AddImage("town_map", L"resource/img/Map/map.png");
+	GRAPHICMANAGER->AddImage("loby", L"resource/img/Map/Dungeon_Lobby.png");
+	GRAPHICMANAGER->AddImage("bossRoom", L"resource/img/Dungeon/bossRoom.png");
 	GRAPHICMANAGER->AddImage("Shop_map", L"resource/img/Shop/shop_background.png");
-	GRAPHICMANAGER->AddImage("Dungeon", L"resource/img/Dungeon/background.png");
 	GRAPHICMANAGER->AddFrameImage("set_tile", L"set_tile3.png", 4, 6);
 	GRAPHICMANAGER->AddFrameImage("set_tile_dungeon", L"set_tile_dungeon.png", 4, 6);
+
 
 	_page = SamplePage::TOWN;
 	_eraser = EraserType::Single;
@@ -200,7 +202,8 @@ void Maptool::Update()
 
 void Maptool::Render()
 {
-	GRAPHICMANAGER->DrawImage("Dungeon", Vector2(0, 0), 1.0f, LEFT_TOP, true);
+	//GRAPHICMANAGER->DrawImage("Shop_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
+	GRAPHICMANAGER->DrawImage("bossRoom", Vector2(0, 0), 1.0f, LEFT_TOP, true);
 
 	//char buffer[128];
 	wchar_t buffer[128];
@@ -217,7 +220,7 @@ void Maptool::Render()
 	
 			//sprintf_s(buffer, "%d", index);
 			swprintf(buffer, 128, L"%d", index);
-			GRAPHICMANAGER->DrawTextD2D(_tiles[index]->GetTrans()->GetPos() + Vector2(-(TILEWIDTH / 2) + 2, TILEHEIGHT / 7), buffer, 10, 1.0f, ColorF::Yellow, TextPivot::LEFT_TOP, L"¸¼Àº°íµñ", true);
+			GRAPHICMANAGER->DrawTextD2D(_tiles[index]->GetTrans()->GetPos() + Vector2(-(TILEWIDTH / 2) + 2, TILEHEIGHT / 7), buffer, 10, ColorF::Yellow, TextPivot::LEFT_TOP, L"¸¼Àº°íµñ", true);
 		}
 	}
 
@@ -248,11 +251,11 @@ void Maptool::Render()
 
 	// draw load button
 	GRAPHICMANAGER->DrawRect(Vector2(_rcLoad.left, _rcLoad.top), Vector2((_rcLoad.right - _rcLoad.left), (_rcLoad.bottom - _rcLoad.top)), 0.0f, ColorF::Blue, PIVOT::LEFT_TOP, 1.0f, false);
-	GRAPHICMANAGER->Text(Vector2(_rcLoad.left, _rcLoad.top), L"Load Buttom", 14, _rcLoad.right - _rcLoad.left, _rcLoad.bottom - _rcLoad.top, ColorF::Black, 1.0f, TextPivot::CENTER);
+	GRAPHICMANAGER->Text(Vector2(_rcLoad.left, _rcLoad.top), L"Load Buttom", 14, _rcLoad.right - _rcLoad.left, _rcLoad.bottom - _rcLoad.top, ColorF::Black, TextPivot::CENTER);
 
 	// draw save button
 	GRAPHICMANAGER->DrawRect(Vector2(_rcSave.left, _rcSave.top), Vector2((_rcSave.right - _rcSave.left), (_rcSave.bottom - _rcSave.top)), 0.0f, ColorF::Red, PIVOT::LEFT_TOP, 1.0f, false);
-	GRAPHICMANAGER->Text(Vector2(_rcSave.left, _rcSave.top), L"Save Buttom", 14, _rcSave.right - _rcSave.left, _rcSave.bottom - _rcSave.top, ColorF::Black, 1.0f, TextPivot::CENTER);
+	GRAPHICMANAGER->Text(Vector2(_rcSave.left, _rcSave.top), L"Save Buttom", 14, _rcSave.right - _rcSave.left, _rcSave.bottom - _rcSave.top, ColorF::Black, TextPivot::CENTER);
 
 	// draw eraser button
 	GRAPHICMANAGER->DrawRect(Vector2(_rcEraserType.left, _rcEraserType.top), Vector2((_rcEraserType.right - _rcEraserType.left), (_rcEraserType.bottom - _rcEraserType.top)), 0.0f, ColorF::Green, PIVOT::LEFT_TOP, 1.0f, false);
@@ -262,13 +265,24 @@ void Maptool::Render()
 	else if (_eraser == EraserType::OnlyDeleteImage) GRAPHICMANAGER->DrawTextD2D(Vector2(_rcEraserType.left + 8, _rcEraserType.top - 4), L"eraser type\n : OnlyDeleteImage", 14);
 
 #pragma region CoordinatesTest
+	
+	char str[128];
 	//sprintf_s(buffer, "%d, %d", _ptMouse.x, _ptMouse.y);
-	//sprintf_s(buffer, "%d, %d", (int)CAMERA->GetPosition().x + (int)(_ptMouse.x / CAMERA->GetScale().x), (int)CAMERA->GetPosition().y + (int)(_ptMouse.y / CAMERA->GetScale().y));
+
+	// Ä«¸Þ¶ó ºñÀ² ½Ä
+	sprintf_s(str, "%d, %d", (int)CAMERA->GetPosition().x + (int)(_ptMouse.x / CAMERA->GetScale().x), (int)CAMERA->GetPosition().y + (int)(_ptMouse.y / CAMERA->GetScale().y));
 	//GRAPHICMANAGER->DrawTextD2D(Vector2(100, 100), buffer, 20, 1.0f, ColorF::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"¸¼Àº°íµñ", false);
+	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 100), str, 20, ColorF::Red);
 
 	//sprintf_s(buffer, "%f, %f", CAMERA->GetScale().x, CAMERA->GetScale().y);
+	sprintf_s(str, "%f, %f", CAMERA->GetScale().x, CAMERA->GetScale().y);
+	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 70), str, 20, ColorF::Red);
 
-	//sprintf_s(buffer, "%f, %f", CAMERA->GetPosition().x, CAMERA->GetPosition().y);
+	// ? °¡·Î Ä­ ¼ö¸¸ ³ª¿À´Â °Å °°Àºµ¥ ÁÜ ÀÎ ÁÜ ¾Æ¿ô ÇÏ¸é ¾È ¸ÂÀ½
+	sprintf_s(str, "%d", ((int)CAMERA->GetPosition().x + (int)(_ptMouse.x / CAMERA->GetScale().x) / TILEWIDTH)) + TILENUMX * (((int)CAMERA->GetPosition().y + (int)(_ptMouse.y / CAMERA->GetScale().y) / TILEHEIGHT));
+	GRAPHICMANAGER->DrawTextD2D(Vector2(100, 130), str, 20, ColorF::Blue);
+
+	swprintf(buffer, 128, L"%f, %f", CAMERA->GetPosition().x, CAMERA->GetPosition().y);
 
 	// È­¸é Áß¾ÓÀÌ ÁßÁ¡ÀÎ ¼ö½Ä
 	//sprintf_s(buffer, "%f, %f", CAMERA->GetPosition().x - (WINSIZEX / CAMERA->GetScale().x / 2) + (_ptMouse.x / CAMERA->GetScale().x), 
@@ -277,10 +291,11 @@ void Maptool::Render()
 	//swprintf(buffer, 128, L"%1.f %1.f", CAMERA->GetPosition().x - (WINSIZEX / CAMERA->GetScale().x / 2) + (_ptMouse.x / CAMERA->GetScale().x),
 	//	CAMERA->GetPosition().y - (WINSIZEY / CAMERA->GetScale().y / 2) + (_ptMouse.y / CAMERA->GetScale().y));
 
-	//sprintf_s(buffer, "%f, %f", CAMERA->GetPosition().x - (WINSIZEX / CAMERA->GetScale().x / 2) + (_ptMouse.x / CAMERA->GetScale().x) + (WINSIZEX / 2),
+	//sprintf_s(str, "%1.f, %1.f", CAMERA->GetPosition().x - (WINSIZEX / CAMERA->GetScale().x / 2) + (_ptMouse.x / CAMERA->GetScale().x) + (WINSIZEX / 2),
 	//	CAMERA->GetPosition().y - (WINSIZEY / CAMERA->GetScale().y / 2) + (_ptMouse.y / CAMERA->GetScale().y) + (WINSIZEY / 2));
 
-	//GRAPHICMANAGER->Text(Vector2(100, 200), buffer, 20, 200, 50, ColorF::Red);
+	GRAPHICMANAGER->Text(Vector2(100, 200), buffer, 20, 200, 50, ColorF::Blue);
+	//GRAPHICMANAGER->DrawTextD2D(Vector2(100, 100), str, 20, 1.0f, ColorF::Red);
 #pragma endregion
 }
 
@@ -289,7 +304,9 @@ void Maptool::Save()
 	HANDLE file;
 	DWORD write;
 
-	string str = "Dungeon8.map";
+	//string str = "shop.map";
+	//string str = "Town.map";
+	string str = "bossRoom.map";
 
 	//GetWindowText(_saveName, titleSave, 256);
 
@@ -312,7 +329,9 @@ void Maptool::Load()
 
 	//string str = titleLoad;
 	//str += ".map";
-	string str = "Dungeon.map";
+	string str = "loby.map";
+	//string str = "Town.map";
+	//string str = "Test.map";
 
 	//file = CreateFile(titleLoad, GENERIC_READ, 0, NULL,
 	file = CreateFile(str.c_str(), GENERIC_READ, 0, NULL,
@@ -365,6 +384,8 @@ void Maptool::Load()
 					_tiles[i]->GetChildren()[0]->AddComponent<Sprite>()->SetImgName(_tiles[i]->GetImgName());
 					_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(_tiles[i]->GetPivot());
 				}
+				_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPosition(_tiles[i]->GetChildren()[0]->GetTrans()->GetPos());
+				_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetSize(_tiles[i]->GetChildren()[0]->GetTrans()->GetScale());
 			}
 		}
 	}
@@ -436,6 +457,8 @@ void Maptool::SetMap()
 	}
 	else _tiles[index]->GetChildren()[0]->AddComponent<Sprite>()->SetImgName(_currentTile.imgKey);
 
+	_tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->SetPosition(_tiles[index]->GetChildren()[0]->GetTrans()->GetPos());
+	_tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->SetSize(_tiles[index]->GetChildren()[0]->GetTrans()->GetScale());
 	_tiles[index]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(_currentTile.pivot);
 }
 

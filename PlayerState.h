@@ -6,6 +6,7 @@ class PlayerState abstract
 {
 protected:
 	Player* _obj;
+	string _state;
 
 public:
 	PlayerState() {}
@@ -14,5 +15,7 @@ public:
 	virtual void Enter() {}
 	virtual void Update() {}
 	virtual void Exit() {}
+
+	string GetState() { return _state; }
 };
 

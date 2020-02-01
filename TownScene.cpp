@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "TownScene.h"
-
+#include"Inventory.h"
 void TownScene::Init()
 {
 	Scene::Init();
@@ -41,9 +41,10 @@ void TownScene::Init()
 	GRAPHICMANAGER->AddFrameImage("set_tile_dungeon", L"set_tile_dungeon.png", 4, 6);
 
 
+
+
 	_player = Object::CreateObject<Player>();
 	_player->Init();
-
 	SetUp();
 }
 
@@ -65,10 +66,13 @@ void TownScene::SetUp()
 			_tiles[index]->AddComponent<Sprite>();
 			_tiles[index]->SetAttribute("None");
 
+			
+
 			_tagTiles[index].attribute = "None";
 			_tagTiles[index].imgKey = "None";
 			_tagTiles[index].isFrame = false;
 			_tagTiles[index].pivot = PIVOT::CENTER;
+
 		}
 	}
 
@@ -131,6 +135,8 @@ void TownScene::SetUp()
 					_tiles[i]->GetChildren()[0]->AddComponent<Sprite>()->SetImgName(_tiles[i]->GetImgName());
 					_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(_tiles[i]->GetPivot());
 				}
+				_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPosition(_tiles[i]->GetChildren()[0]->GetTrans()->GetPos());
+				_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetSize(_tiles[i]->GetChildren()[0]->GetTrans()->GetScale());
 			}
 		}
 	}
@@ -141,4 +147,5 @@ void TownScene::Render()
 {
 	GRAPHICMANAGER->DrawImage("town_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
 	Scene::Render();
+	_player->GetInventory()->Render();
 }

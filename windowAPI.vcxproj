@@ -147,8 +147,18 @@
   <ItemGroup>
     <ClInclude Include="Astar.h" />
     <ClInclude Include="Boss.h" />
+    <ClInclude Include="BossAttack.h" />
+    <ClInclude Include="BossDead.h" />
+    <ClInclude Include="BossHand.h" />
+    <ClInclude Include="BossIdle.h" />
+    <ClInclude Include="BossRockAtk.h" />
+    <ClInclude Include="BossRoom.h" />
+    <ClInclude Include="BossSlimeAtk.h" />
+    <ClInclude Include="BossState.h" />
+    <ClInclude Include="BowAttack.h" />
     <ClInclude Include="BoxWorldManager.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletScript.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CheckStand.h" />
     <ClInclude Include="Collider.h" />
@@ -161,10 +171,13 @@
     <ClInclude Include="DungeonScene.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManeger.h" />
+    <ClInclude Include="EnemyScript.h" />
     <ClInclude Include="EntranceScene.h" />
     <ClInclude Include="ETC.h" />
+    <ClInclude Include="ETCS.h" />
     <ClInclude Include="GolemEnemy.h" />
-    <ClInclude Include="Hp.h" />
+    <ClInclude Include="Ability.h" />
+    <ClInclude Include="GolemScript.h" />
     <ClInclude Include="iniDataManager.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
@@ -173,12 +186,21 @@
     <ClInclude Include="JsonManager.h" />
     <ClInclude Include="loadingScene.h" />
     <ClInclude Include="Maptool.h" />
+    <ClInclude Include="MintPotEnemy.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="NpcManager.h" />
     <ClInclude Include="NpcShopState.h" />
     <ClInclude Include="omega.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="Particle.hpp" />
+    <ClInclude Include="ParticleManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerAttack.h" />
+    <ClInclude Include="PlayerAttackScript.h" />
+    <ClInclude Include="PlayerDead.h" />
     <ClInclude Include="PlayerIdle.h" />
+    <ClInclude Include="PlayerMove.h" />
+    <ClInclude Include="PlayerRoll.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="Potion.h" />
     <ClInclude Include="Potions.h" />
@@ -191,6 +213,7 @@
     <ClInclude Include="ShopStand.h" />
     <ClInclude Include="ShopStandManager.h" />
     <ClInclude Include="SlimeEnemy.h" />
+    <ClInclude Include="Smithy.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="keyManager.h" />
@@ -209,6 +232,7 @@
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="StartScene.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SwordAttack.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="Text.h" />
@@ -229,8 +253,18 @@
   <ItemGroup>
     <ClCompile Include="Astar.cpp" />
     <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="BossAttack.cpp" />
+    <ClCompile Include="BossDead.cpp" />
+    <ClCompile Include="BossHand.cpp" />
+    <ClCompile Include="BossIdle.cpp" />
+    <ClCompile Include="BossRockAtk.cpp" />
+    <ClCompile Include="BossRoom.cpp" />
+    <ClCompile Include="BossSlimeAtk.cpp" />
+    <ClCompile Include="BossState.cpp" />
+    <ClCompile Include="BowAttack.cpp" />
     <ClCompile Include="BoxWorldManager.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletScript.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CheckStand.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -242,10 +276,13 @@
     <ClCompile Include="DungeonScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManeger.cpp" />
+    <ClCompile Include="EnemyScript.cpp" />
     <ClCompile Include="EntranceScene.cpp" />
     <ClCompile Include="ETC.cpp" />
+    <ClCompile Include="ETCS.cpp" />
     <ClCompile Include="GolemEnemy.cpp" />
-    <ClCompile Include="Hp.cpp" />
+    <ClCompile Include="Ability.cpp" />
+    <ClCompile Include="GolemScript.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -253,11 +290,19 @@
     <ClCompile Include="JsonManager.cpp" />
     <ClCompile Include="loadingScene.cpp" />
     <ClCompile Include="Maptool.cpp" />
+    <ClCompile Include="MintPotEnemy.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="NpcManager.cpp" />
     <ClCompile Include="NpcShopState.cpp" />
+    <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="ParticleManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerAttack.cpp" />
+    <ClCompile Include="PlayerAttackScript.cpp" />
+    <ClCompile Include="PlayerDead.cpp" />
     <ClCompile Include="PlayerIdle.cpp" />
+    <ClCompile Include="PlayerMove.cpp" />
+    <ClCompile Include="PlayerRoll.cpp" />
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="Potion.cpp" />
     <ClCompile Include="Potions.cpp" />
@@ -270,6 +315,7 @@
     <ClCompile Include="ShopStand.cpp" />
     <ClCompile Include="ShopStandManager.cpp" />
     <ClCompile Include="SlimeEnemy.cpp" />
+    <ClCompile Include="Smithy.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="keyManager.cpp" />
@@ -288,6 +334,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SwordAttack.cpp" />
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Tile.cpp" />

@@ -66,7 +66,8 @@ void Text::SetColor(ColorF color, int startPoint, int length)
 {
 	ID2D1SolidColorBrush* brush;
 	//Direct2D::GetInstance()->GetRenderTarger()->CreateSolidColorBrush(ColorF(color.r, color.b, color.g, color.a), &brush);
-	GRAPHICMANAGER->GetRenderTarget()->CreateSolidColorBrush(ColorF(color.r, color.b, color.g, color.a), &brush);
+	//GRAPHICMANAGER->GetRenderTarget()->CreateSolidColorBrush(ColorF(color.r, color.b, color.g, color.a), &brush);
+	GRAPHICMANAGER->GetRenderTarget()->CreateSolidColorBrush(color, &brush);
 	_layout->SetDrawingEffect((IUnknown*)brush, { (UINT32)startPoint, (UINT32)length });
 	brush->Release();
 }
