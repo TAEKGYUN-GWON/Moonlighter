@@ -9,14 +9,23 @@ struct tagItemInfo
 		this->item = item;
 		this->some = some;
 	}
-	tagItemInfo(Item* item,Vector2 pos)
+	tagItemInfo(string item,Vector2 pos,int price,int some)
 	{
-		this->item = item->GetComponent<Sprite>()->GetImgKey();
+		this->item = item;
+		this->some = some;
+		this->pos = pos;
+		this->price = price;
+	}
+	tagItemInfo(string item, Vector2 pos, int price)
+	{
+		this->item = item;
 		this->some = 1;
 		this->pos = pos;
+		this->price = price;
 	}
 	string item;
 	int some;
+	int price;
 	Vector2 pos;
 };
 

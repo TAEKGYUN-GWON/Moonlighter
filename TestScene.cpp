@@ -16,7 +16,7 @@ void TestScene::Init()
 	GRAPHICMANAGER->AddImage("fatkachu", L"resource/img/Object/popcorn.png");
 	GRAPHICMANAGER->AddImage("pop", L"resource/img/Object/pop.png");
 	mgr = new ParticleManager;
-	mgr->Init(500,ParticleType::TRIANGLE, Vector2(WINSIZEX / 2, WINSIZEY / 2), Vector2(10, 10),"fatkachu");
+	mgr->Init(300,ParticleType::POSITION, Vector2(WINSIZEX / 2, WINSIZEY / 2), Vector2(10, 10));
 	Object* floor = Object::CreateObject<Object>();
 	floor->GetTrans()->SetScale(1280, 30);
 	floor->GetTrans()->SetPos(WINSIZEX / 2, WINSIZEY);
@@ -30,7 +30,7 @@ void TestScene::Update()
 {
 	Scene::Update();
 	mgr->Update();
-	if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
+	//if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
 	//if (KEYMANAGER->isOnceKeyDown('S'))
 	//{
 	//	for (Object* obj : test)
@@ -72,6 +72,7 @@ void TestScene::Update()
 	//		test.push_back(obj);
 	//	//}
 	//}
+
 }
 
 void TestScene::Render()

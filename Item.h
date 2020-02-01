@@ -29,16 +29,17 @@ protected:
 	//선형보간을 위한 변수
 	float _followingMovement;
 
+	PhysicsBody* _physics;
+
 public:
-	Item() {
-		_image = AddComponent<Sprite>();
-		_image->Init();
-	}
+	Item();
 	~Item() {}
 
 	virtual void Init();
-	virtual void Init(Vector2 pos) = 0;
+	virtual void Init(Vector2 pos) {};
 	virtual void Update();
+	virtual void Render();
+	virtual void Release();
 
 	//던전 내에서의 아이템의 움직임
 	void FollowPlayer(Vector2 playerPos);
@@ -63,7 +64,7 @@ public:
 
 	template <typename T>
 	static T* CreateItem(Vector2 pos);
-
+	PhysicsBody* GetPhysics() { return _physics; }
 };
 
 #include"Item.hpp"

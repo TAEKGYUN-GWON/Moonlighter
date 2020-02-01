@@ -51,8 +51,8 @@ void StartScene::Init()
 
 	//ui = new UiManager;
 	//ui->Init();
-	inven = new Inventory;
-	inven->Init();
+	//inven = new Inventory;
+	//inven->Init();
 	//ui->SetInvenLink(inven);
 
 	//inven->Insert(Item::CreateItem<Golem_Core>(Vector2(0, 0)));
@@ -60,8 +60,8 @@ void StartScene::Init()
 	//inven->Insert(Item::CreateItem<Crystal_Energy>(Vector2(0, 0)));
 	//
 
-	_smithy = new Smithy;
-	_smithy->Init(inven);
+	//_smithy = new Smithy;
+	//_smithy->Init(inven);
 
 
 
@@ -89,9 +89,9 @@ void StartScene::Update()
 	if (KEYMANAGER->isOnceKeyDown('5')) SCENEMANAGER->changeScene("Maptool");
 	if (KEYMANAGER->isOnceKeyDown('0')) SCENEMANAGER->changeScene("test");
 
-	inven->Update();
+	//inven->Update();
 
-	_smithy->Update();
+	//_smithy->Update();
 }
 
 void StartScene::Render()
@@ -129,8 +129,14 @@ void StartScene::Render()
 	//swprintf(buffer, 128, L"test X : %f\test Y : %f", test->GetTrans()->GetPos().x, test->GetTrans()->GetPos().y);
 	//GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 400), buffer, 20, 300, 50, ColorF::Azure);
 	//ui->Render();
-	inven->Render();
+//	inven->Render();
 
-	_smithy->Render();
+	//_smithy->Render();
+}
+
+void StartScene::Release()
+{
+	Scene::Release();
+	//inven->Release();
 }
 
