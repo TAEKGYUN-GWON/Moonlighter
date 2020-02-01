@@ -114,9 +114,6 @@ void Player::Render()
 	swprintf(buffer, 128, L"%1.f / %1.f", _ability->GetCurrentHP(), _ability->GetMaxHP());
 	GRAPHICMANAGER->Text(_trans->GetPos() + Vector2(-(_trans->GetScale().x + 10.0f), 32.f), buffer, 20, 90, 30, ColorF::LawnGreen, TextPivot::RIGHT_TOP);
 
-	swprintf(buffer, 128, L"player arrow count : %d", _pool->GetActivePoolSize());
-	GRAPHICMANAGER->Text(Vector2(100, 100), buffer, 20, 400, 30, ColorF::BlanchedAlmond);
-
 	if (_ability->IsDead()) GRAPHICMANAGER->Text(_trans->GetPos() + Vector2(-(_trans->GetScale().x - (_trans->GetScale().x * 0.5f) + 4.0f), -62.f), L"Dead", 20, 100, 30, ColorF::Red);
 
 	int a = (int)_dir;

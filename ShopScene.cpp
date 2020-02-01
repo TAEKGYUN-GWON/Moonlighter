@@ -64,6 +64,8 @@ void ShopScene::Render()
 {
 	GRAPHICMANAGER->FindImage("ShopBg")->Render(0, 0, LEFT_TOP);
 
+	Scene::Render();
+
 	//창가 동그라미
 	GRAPHICMANAGER->DrawEllipse(520, 615, 30, 30);
 
@@ -73,6 +75,22 @@ void ShopScene::Render()
 		(int)(_ptMouse.x+CAMERA->GetPosition().x) / TILEWIDTH, 
 		(int)(_ptMouse.y+CAMERA->GetPosition().y) / TILEHEIGHT);
 	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2), buffer, 20, 500, 300, ColorF::White);
+
+	swprintf(buffer, 128, L"x: %f, y:%f", _ptMouse.x + CAMERA->GetPosition().x, _ptMouse.y + CAMERA->GetPosition().y);
+	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2 - 100), buffer, 20, 500, 300, ColorF::White);
+
+	// npc 상태 표시
+	if (_npcMgr->GetNpcVector().size())
+	{
+		if (_npcMgr->GetNpcVector()[0]->GetStatePointer()->GetState() == "Idle")
+		{
+			GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 200), L"Idle", 20, 100, 30, ColorF::AntiqueWhite);
+		}
+		else if (_npcMgr->GetNpcVector()[0]->GetStatePointer()->GetState() == "Move")
+		{
+			GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 200), L"Decide", 20, 100, 30, ColorF::AntiqueWhite);
+		}
+	}
 
 	_player->GetInventory()->Render();
 }
@@ -85,11 +103,6 @@ void ShopScene::SetUp()
 		for (int j = 0; j < SHOPTILEMAXX; ++j)
 		{
 			int index = j + SHOPTILEMAXX * i;
-
-			/*_tiles[index] = Object::CreateObject<Tile>();
-			_tiles[index]->Init(j, i);
-			_tiles[index]->AddComponent<Sprite>();
-			_tiles[index]->SetAttribute("None");*/
 
 			Tile* tile = Object::CreateObject<Tile>();
 			tile->Init(j, i);
@@ -104,12 +117,9 @@ void ShopScene::SetUp()
 		}
 	}
 
-
 	HANDLE file;
 	DWORD read;
 
-	//string str = titleLoad;
-	//str += ".map";
 	string str = "shop.map";
 
 	//file = CreateFile(titleLoad, GENERIC_READ, 0, NULL,

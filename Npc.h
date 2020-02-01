@@ -1,6 +1,7 @@
 #pragma once
 #include "Object.h"
-#include "ShopStand.h"
+//#include "ShopStand.h"
+#include "ShopStandManager.h"
 #include "CheckStand.h"
 #include "Sprite.h"
 #define NPDSPEED 70
@@ -14,22 +15,22 @@ class Npc :	public Object
 private:
 	Sprite* _sprite;
 
+	float _timer;
+
 	//float _speed;
 	bool _isShopSOn;	//가판대랑 충돌중인지
 	bool _isCheckSOn;	//계산대랑 충돌중인지
+
 	bool _isAstarOn=true;	//astar 받아야하는 상태인지
 
 	
 	NpcShopState* _npcShopState;
 
-	ShopStand* _shopStand;
+	//ShopStand* _shopStand; //스탠드를 가져야될지 매니저를 가져야될지 모르겠음
+	ShopStandManager* _shopStandMgr;
 	CheckStand* _checkStand;
 
-	list<Vector2> _lPath;
-
-	Vector2 _destination; //astar 목적지임
-
-
+	list<Vector2> _lPath; //가야하는 길
 
 public:
 	Npc() {};
@@ -42,17 +43,15 @@ public:
 
 	void SetPath(list<Vector2> lpath);
 	void Move();
-	void SetNpcState(NpcShopState* npcshopstate);
 	
+	//상태 정의용
+	void ChangeState(NpcShopState* state);
 
-	//상태패턴 정의용 함수
-	void In();
-	void Stay();
-	void Out();
-
-	//계산대 링크용
+	//계산대/판매대 링크용
 	void SetCheckStandLink(CheckStand* checkstand) { _checkStand = checkstand; }
 	CheckStand* GetCheckStand() { return _checkStand; }
+	void SetShopStandLink(ShopStandManager* shopstand) { _shopStandMgr = shopstand; }
+	ShopStandManager* GetShopStandMgr() { return _shopStandMgr; }
 
 	//계산대랑 가판대랑 충돌중ING인지 체크할 bool
 	void SetIsShopSOn(bool shop) { _isShopSOn = shop; }
@@ -61,9 +60,9 @@ public:
 	bool GetIsCheckSOn() { return _isCheckSOn; }
 	void SetIsAstarOn(bool ast) { _isAstarOn = ast; }
 	bool GetIsAstarOn() { return _isAstarOn; }
-	void SetDestination(Vector2 destination) { _destination = destination; }
-	Vector2 GetDestination() { return _destination; }
 
-	NpcShopState* GetState() {	return _npcShopState; }
+	NpcShopState* GetStatePointer() { return _npcShopState; }
+
+	list<Vector2> GetPath() { return _lPath; }
 };
 
