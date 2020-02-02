@@ -3,7 +3,7 @@
 #include "Ability.h"
 #include "Player.h"
 #include"BossState.h"
-
+#include "Astar.h"
 #include "Enemy.h"
 
 class BossState;
@@ -33,6 +33,7 @@ protected:
 	vector<Object*> _rocks;
 
 	vector<Enemy*> _enemys;
+	Astar* _aStar;
 
 	int _angle;
 	float _speed; //굳이 있어야 하나?
@@ -45,7 +46,7 @@ public:
 	int maxFrameX;
 	int frameY;
 	//float GetAtkArea() { return 200; }
-	void Init(Vector2 pos);
+	void Init(Vector2 pos, vector<Tile*> tiles);
 	void Update();
 	void Render();
 	void Release();

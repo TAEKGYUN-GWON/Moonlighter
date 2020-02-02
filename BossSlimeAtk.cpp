@@ -21,12 +21,12 @@ void BossSlimeAtk::Update()
 	{
 		Ctiemr = 0;
 		SlimeEnemy* slime = Object::CreateObject<SlimeEnemy>(_boss);
-		slime->Init(Vector2(1504, 626));
+		slime->Init(Vector2(_boss->GetTrans()->GetPos() + Vector2::down * (_boss->GetTrans()->GetScale() / 2)));
 
 		_boss->GetEnemys()->push_back(slime);
 	}
 
-	if (timer > 10) _boss->SetState(new BossIdle(_boss));
+	if (timer > 5) _boss->SetState(new BossIdle(_boss));
 }
 
 void BossSlimeAtk::Exit()

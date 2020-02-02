@@ -111,31 +111,31 @@ vector <Tile*> Astar::GetDirList(Vector2 idx)
 	nodeList.clear();
 
 
-	////_miTotalList = _mTotalList.find(Vector2(idx.x+ (int)1, idx.y + (int)1));
-	//if (CanOpenRight(idx) && CanOpenDown(idx))
-	//	nodeList.push_back(_vTotalList[((int)idx.x + maxX * (int)idx.y) + 1 + maxX]);
+	//_miTotalList = _mTotalList.find(Vector2(idx.x+ (int)1, idx.y + (int)1));
+	if (CanOpenRight(idx) && CanOpenDown(idx))
+		nodeList.push_back(_vTotalList[((int)idx.x + maxX * (int)idx.y) + 1 + maxX]);
 
 
-	////_miTotalList = _mTotalList.find(Vector2(idx.x - (int)1, idx.y + (int)1));
-	//if (CanOpenLeft(idx) && CanOpenDown(idx))
-	//	nodeList.push_back(_vTotalList[((int)idx.x + maxX * (int)idx.y) - 1 + maxX]);
+	//_miTotalList = _mTotalList.find(Vector2(idx.x - (int)1, idx.y + (int)1));
+	if (CanOpenLeft(idx) && CanOpenDown(idx))
+		nodeList.push_back(_vTotalList[((int)idx.x + maxX * (int)idx.y) - 1 + maxX]);
 
 
-	////_miTotalList = _mTotalList.find(Vector2(idx.x + (int)1, idx.y - (int)1));
-	//if (CanOpenRight(idx) && CanOpenUp(idx))
-	//	nodeList.push_back(_vTotalList[((int)idx.x + maxX * (int)idx.y) + 1 - maxX]);
+	//_miTotalList = _mTotalList.find(Vector2(idx.x + (int)1, idx.y - (int)1));
+	if (CanOpenRight(idx) && CanOpenUp(idx))
+		nodeList.push_back(_vTotalList[((int)idx.x + maxX * (int)idx.y) + 1 - maxX]);
 
 
-	////_miTotalList = _mTotalList.find(Vector2(idx.x - (int)1, idx.y - (int)1));
-	//if (CanOpenLeft(idx) && CanOpenUp(idx))
-	//	nodeList.push_back(_vTotalList[((int)idx.x + maxX * (int)idx.y) - 1 - maxX]);
+	//_miTotalList = _mTotalList.find(Vector2(idx.x - (int)1, idx.y - (int)1));
+	if (CanOpenLeft(idx) && CanOpenUp(idx))
+		nodeList.push_back(_vTotalList[((int)idx.x + maxX * (int)idx.y) - 1 - maxX]);
 
-	//for (Tile* t : nodeList)
-	//{
-	//	//_miTotalList = _mTotalList.find(Vector2(idx.x, idx.y));
-	//	if (SetCost(t, 14, _vTotalList[((int)idx.x + maxX * (int)idx.y)]))
-	//		dirList.push_back(t);
-	//}
+	for (Tile* t : nodeList)
+	{
+		//_miTotalList = _mTotalList.find(Vector2(idx.x, idx.y));
+		if (SetCost(t, 14, _vTotalList[((int)idx.x + maxX * (int)idx.y)]))
+			dirList.push_back(t);
+	}
 
 	return dirList;
 }

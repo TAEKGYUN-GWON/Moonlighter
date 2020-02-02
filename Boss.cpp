@@ -15,13 +15,14 @@ Boss::~Boss()
 {
 }
 
-void Boss::Init(Vector2 pos)
+void Boss::Init(Vector2 pos, vector<Tile*> tiles)
 {
 	Object::Init();
 
 	_tag = "boss";
 	_name = "Boss";
-
+	_aStar = new Astar;
+	_aStar->Init(tiles, Bossroom_X, Bossroom_Y);
 	_ability = new Ability(100, 100, 10); //더 크게 줘야 하나?
 
 	//maxFrameX = 0;
@@ -308,6 +309,42 @@ void Boss::Update()
 	Object::Update();
 	
 	_Bstate->Update();
+
+	//이건 보스 스테이트 위에 돌아야 할지 아래에 돌아야 할지 모르겠으니까 터지면 위로 올려주세요 슬라임 A스타 주는거에요
+	//그리고 이건 벡터 정방향으로 돌리는건데 터질수도 있으니까 혹시 터지면 밑에 벡터 거꾸로 도는걸 켜주세요
+
+	for (int i = 0; i<_enemys.size();i++)
+	{
+		if (!_enemys[i]->GetIsActive())
+		{
+			SCENEMANAGER->GetNowScene()->GetWorld()->DestroyBody(_enemys[i]->GetComponent<PhysicsBody>()->GetBody());
+			_enemys[i]->Release();
+			_enemys.erase(_enemys.begin() + i);
+			break;
+		}
+		if (_enemys[i]->GetMove())
+		{
+			_enemys[i]->SetPath(_aStar->pathFinder(_enemys[i]->GetTrans()->GetPos(), _player->GetTrans()->GetPos()));
+		}
+		
+	}
+	//for (int i = _enemys.size(); i <= 0; i--)
+	//{
+	//	if (!_enemys[i]->GetIsActive())
+	//	{
+	//		SCENEMANAGER->GetNowScene()->GetWorld()->DestroyBody(_enemys[i]->GetComponent<PhysicsBody>()->GetBody());
+	//		_enemys[i]->Release();
+	//		_enemys.erase(_enemys.begin() + i);
+	//		break;
+	//	}
+	//	if (_enemys[i]->GetMove())
+	//	{
+	//		_enemys[i]->SetPath(_aStar->pathFinder(_enemys[i]->GetTrans()->GetPos(), _player->GetTrans()->GetPos()));
+	//	}
+	//}
+
+
+
 	_hand->Update();
 	//_sprite->GetCurrentFrameX();
 }

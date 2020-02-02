@@ -16,7 +16,7 @@ void BossHandAtk::Enter()
 void BossHandAtk::Update()
 {
 
-	if ()
+//	if ()
 	timer += TIMEMANAGER->getElapsedTime();
 
 	if (timer >= 0.1f)
@@ -41,8 +41,8 @@ void BossHandAtk::Update()
 		_count++;
 	}
 
-	if (_count == rocks.size() && _state == ROCKATK::END)
-		_boss->SetState(new BossIdle(_boss));
+	//if (_count == rocks.size() && _state == ROCKATK::END)
+	//	_boss->SetState(new BossIdle(_boss));
 }
 
 void BossHandAtk::Exit()

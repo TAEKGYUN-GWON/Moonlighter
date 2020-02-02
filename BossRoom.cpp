@@ -35,11 +35,12 @@ void BossRoom::Init()
 	_player->GetComponent<PhysicsBody>()->SetBodyPosition();
 	//CAMERA->SetPos(Vector2(1170, 1440)); //player 쫓아가게 가능? 쫓아가야 하나? 보스 보여줘야 하는데?
 
-	_boss = Object::CreateObject<Boss>();
-	_boss->Init(Vector2(((TILEWIDTH * 35)), ((TILEHEIGHT * 15))));
 	//_boss->GetComponent<PhysicsBody>()->SetBodyPosition();
 	
 	SetUP();
+	_boss = Object::CreateObject<Boss>();
+	_boss->Init(Vector2(((TILEWIDTH * 35)), ((TILEHEIGHT * 15))),_tiles);
+
 	
 }
 
