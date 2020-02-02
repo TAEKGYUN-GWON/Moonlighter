@@ -5,6 +5,8 @@
 #include "PlayerAttack.h"
 #include "SwordAttack.h"
 #include "BowAttack.h"
+#include "Ability.h"
+#include "PlayerDead.h"
 
 void PlayerIdle::Enter()
 {
@@ -62,6 +64,8 @@ void PlayerIdle::Update()
 		else if (_obj->GetAttackType() == AttackType::Bow)
 			_obj->ChangeState(new BowAttack(_obj));
 	}
+
+	if (_obj->GetAbility()->IsDead()) _obj->ChangeState(new PlayerDead(_obj));
 }
 
 void PlayerIdle::Exit()

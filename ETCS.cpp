@@ -38,7 +38,7 @@ void amulet_ring::Init(Vector2 pos)
 
 	_trans->SetPos(pos);
 	_name = "amulet_ring";
-	_image->SetImgName("amulet_ring");
+	_image->SetImgName("Amulet_ring");
 	
 }
 

@@ -1,65 +1,67 @@
 #pragma once
 #include "ShopStand.h"
 #include "CheckStand.h"
+#include "ShopStandManager.h"
 
 class Npc;
 
 class NpcShopState
 {
 protected:
-	int _counter = 0; //idle 상태에 시간잴거
+	
+	string _state;
+	Npc* _npc;
 
-	ShopStand* _shopStand; //써야될거같아서 넣어둠
+	ShopStandManager* _shopStandMgr; //써야될거같아서 넣어둠
 	CheckStand* _checkStand;
 
 public :
-	NpcShopState() {};
-	~NpcShopState() {};
+	NpcShopState() {}
+	//NpcShopState(Npc* npc) : _npc(npc {}
+	NpcShopState(Npc* npc) { _npc = npc; }
 
 	void SetCheckStandLink(CheckStand* checkstand) { _checkStand = checkstand; }
+	void SetShopStandLink(ShopStandManager* shopstandmgr) { _shopStandMgr = shopstandmgr; }
 
-	virtual void StateIn(Npc* npc) = 0;
-	virtual void StateStay(Npc* npc) = 0;
-	virtual void StateOut(Npc* npc) = 0;
+	virtual void Enter() {}
+	virtual void Update() {}
+	virtual void Exit() {}
+
+	string GetState() { return _state; }
 };
 
 class NpcIdle : public NpcShopState
 {
-	static NpcIdle* instance;
-public:
-	static NpcIdle* GetInstance();
+private:
 
-	virtual void StateIn(Npc* npc);
-	virtual void StateStay(Npc* npc);
-	virtual void StateOut(Npc* npc);
+public:
+	NpcIdle(Npc* npc) : NpcShopState(npc) {}
+	
+	virtual void Enter() override;
+	virtual void Update() override;
+	virtual void Exit() override;
 };
-class NpcDecide : public NpcShopState
-{
-	static NpcDecide* instance;
-public:
-	static NpcDecide* GetInstance();
 
-	virtual void StateIn(Npc* npc);
-	virtual void StateStay(Npc* npc);
-	virtual void StateOut(Npc* npc);
+class NpcMove : public NpcShopState
+{
+private:
+
+public:
+	NpcMove(Npc* npc) : NpcShopState(npc) {}
+
+	virtual void Enter() override;
+	virtual void Update() override;
+	virtual void Exit() override;
 };
-class NpcInline : public NpcShopState
-{
-	static NpcInline* instance;
-public:
-	static NpcInline* GetInstance();
 
-	virtual void StateIn(Npc* npc);
-	virtual void StateStay(Npc* npc);
-	virtual void StateOut(Npc* npc);
-};
-class NpcExit : public NpcShopState
+class NpcHome : public NpcShopState
 {
-	static NpcExit* instance;
-public:
-	static NpcExit* GetInstance();
+private:
 
-	virtual void StateIn(Npc* npc);
-	virtual void StateStay(Npc* npc);
-	virtual void StateOut(Npc* npc);
+public:
+	NpcHome(Npc* npc) : NpcShopState(npc) {}
+
+	virtual void Enter() override;
+	virtual void Update() override;
+	virtual void Exit() override;
 };

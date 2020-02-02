@@ -21,7 +21,6 @@ void Bullet::Init(string imgKey, string tag, string name, Object* obj, int atk)
 	_physics->GetBody()->SetFixedRotation(true);
 	_physics->GetBody()->SetActive(false);
 	_isActive = false;
-
 }
 
 void Bullet::Update()
@@ -30,8 +29,7 @@ void Bullet::Update()
 	Object::Update();
 
 	Move();
-	if (_name != "Arrow")
-		_trans->pos = _physics->GetBodyPosition();
+	if (_name != "Arrow") _trans->pos = _physics->GetBodyPosition();
 }
 
 void Bullet::Fire(Vector2 pos, float angle, float speed)
@@ -39,25 +37,21 @@ void Bullet::Fire(Vector2 pos, float angle, float speed)
 	_speed = speed;
 	_trans->pos = pos;
 	_physics->SetBodyPosition();
-	_trans->SetRotateToRadian(angle);
+	_trans->SetRotateToRadian(angle + (PI / 2));
+	
 	_physics->SetBodyActive(true);
 	_sprite->SetPosition(_trans->GetPos());
 	_isActive = true;
+	
+	_physics->GetBody()->SetTransform(b2Vec2(_physics->GetBody()->GetPosition().x, _physics->GetBody()->GetPosition().y), _trans->GetRotateRadian());
 }
 
 void Bullet::Move()
 {
 	if (!_isActive)return;
-	if (_name != "Arrow")
-		_physics->GetBody()->SetLinearVelocity(b2Vec2(cosf(_trans->GetRotateRadian()) * _speed,
-			-sinf(_trans->GetRotateRadian()) * _speed) * TIMEMANAGER->getElapsedTime());
-	else
-	{
-		_trans->SetPos(_trans->GetPos() + Vector2(cosf(_trans->GetRotateRadian()) * _speed, 0));
-		_physics->SetBodyPosition();
-	}
+	_physics->GetBody()->SetLinearVelocity(b2Vec2(cosf(_trans->GetRotateRadian() - (PI / 2)), -sinf(_trans->GetRotateRadian() - (PI / 2)))
+		* _speed * TIMEMANAGER->getElapsedTime());
 
-	//SetIsActive()
 	if (_owner != nullptr)
 	{
 		if (Vector2::Distance(_trans->GetPos(), _owner->GetTrans()->GetPos()) > 1300)
@@ -73,12 +67,9 @@ BulletObjPool::BulletObjPool()
 {
 }
 
-
 BulletObjPool::~BulletObjPool()
 {
 }
-
-
 
 void BulletObjPool::InssertPool(int num)
 {

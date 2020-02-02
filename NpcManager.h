@@ -9,14 +9,14 @@ class ShopScene;
 
 enum DESTINATION
 {
-	WINDOW,
-	STAND1,
-	STAND2,
-	STAND3,
-	STAND4,
-	CHECKSTAND,
-	EXIT,
-	END
+	DES_WINDOW,
+	DES_STAND1,
+	DES_STAND2,
+	DES_STAND3,
+	DES_STAND4,
+	DES_CHECKSTAND,
+	DES_DOOR,
+	DES_END
 };
 class NpcManager
 {
@@ -26,10 +26,7 @@ private:
 	ShopStandManager* _shopStandMgr;
 	CheckStand* _checkStand;
 
-	Vector2 _positions[(int)DESTINATION::END];
-
-	//DESTINATION _destination;
-
+	Vector2 _positions[DESTINATION::DES_END];
 
 	Astar* _ast;
 

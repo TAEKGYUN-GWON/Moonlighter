@@ -69,6 +69,7 @@ public:
 	void Stop();
 	void Pause();
 	void Resume();
+	void PlayAnimation();
 
 	void SetImgName(string key);
 	void SetMaxFrameX(int maxFrameX) { _maxFrameX = maxFrameX - 1; }

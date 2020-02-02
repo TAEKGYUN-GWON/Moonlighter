@@ -10,13 +10,31 @@ void BowAttack::Enter()
 	_obj->GetSprite()->SetFPS(2.8f);
 	_obj->GetSprite()->SetIsLoop(false);
 	
+	int arrowSpd = 350;
 	switch (_obj->GetDirection())
 	{
-	case Dir::Left: case Dir::Left_Up: case Dir::Left_Down: _obj->GetSprite()->SetFrameY(3); break;
-	case Dir::Right: case Dir::Right_Up: case Dir::Right_Down: _obj->GetSprite()->SetFrameY(2); break;
-	case Dir::Up: _obj->GetSprite()->SetFrameY(0); break;
-	case Dir::Down: _obj->GetSprite()->SetFrameY(1); break;
+	case Dir::Left: case Dir::Left_Up: case Dir::Left_Down: 
+		_obj->GetSprite()->SetFrameY(3); 
+		_obj->GetBulletPool()->GetPoolObject()->GetSprite()->SetImgName("arrow_up");
+		_obj->GetBulletPool()->GetPoolObject()->Fire(_obj->GetTrans()->GetPos() + Vector2(-5, -15), PI, arrowSpd);
+		break;
+	case Dir::Right: case Dir::Right_Up: case Dir::Right_Down: 
+		_obj->GetSprite()->SetFrameY(2); 
+		_obj->GetBulletPool()->GetPoolObject()->GetSprite()->SetImgName("arrow_up");
+		_obj->GetBulletPool()->GetPoolObject()->Fire(_obj->GetTrans()->GetPos() + Vector2(5, -15), PI2, arrowSpd);
+		break;
+	case Dir::Up: 
+		_obj->GetSprite()->SetFrameY(0); 
+		_obj->GetBulletPool()->GetPoolObject()->GetSprite()->SetImgName("arrow_down");
+		_obj->GetBulletPool()->GetPoolObject()->Fire(_obj->GetTrans()->GetPos() + Vector2(0, -20), PI / 2, arrowSpd);
+		break;
+	case Dir::Down: 
+		_obj->GetSprite()->SetFrameY(1); 
+		_obj->GetBulletPool()->GetPoolObject()->GetSprite()->SetImgName("arrow_down");
+		_obj->GetBulletPool()->GetPoolObject()->Fire(_obj->GetTrans()->GetPos() + Vector2(0, 20), 3 * PI / 2, arrowSpd);
+		break;
 	}
+	_obj->GetBulletPool()->InssertActiveObject();
 
 	_obj->GetSprite()->SetImgName("will_bow");
 	_obj->GetSprite()->SetMaxFrameX(9);

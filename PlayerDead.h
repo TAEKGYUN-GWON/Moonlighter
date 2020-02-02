@@ -1,14 +1,13 @@
 #pragma once
-#include "PlayerAttack.h"
+#include "PlayerState.h"
 #include "Player.h"
-#include "Bullet.h"
 
-class BowAttack : public PlayerAttack
+class PlayerDead : public PlayerState
 {
 private:
 
 public:
-	BowAttack(Player* obj) : PlayerAttack(obj) {}
+	PlayerDead(Player* obj) : PlayerState(obj) {}
 
 	virtual void Enter() override;
 	virtual void Update() override;

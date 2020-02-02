@@ -29,8 +29,8 @@ void DungeonScene::Init()
 
 void DungeonScene::Update()
 {
-	Scene::Update();
 	_dMgr->Update();
+	Scene::Update();
 	//test->Update();
 }
 

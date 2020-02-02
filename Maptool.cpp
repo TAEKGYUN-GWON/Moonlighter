@@ -200,8 +200,8 @@ void Maptool::Update()
 
 void Maptool::Render()
 {
-	//GRAPHICMANAGER->DrawImage("Shop_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
-	GRAPHICMANAGER->DrawImage("loby", Vector2(0, 0), 1.0f, LEFT_TOP, true);
+	GRAPHICMANAGER->DrawImage("Shop_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
+	//GRAPHICMANAGER->DrawImage("loby", Vector2(0, 0), 1.0f, LEFT_TOP, true);
 
 	//char buffer[128];
 	wchar_t buffer[128];
@@ -304,7 +304,7 @@ void Maptool::Save()
 
 	//string str = "shop.map";
 	//string str = "Town.map";
-	string str = "loby.map";
+	string str = "shop.map";
 
 	//GetWindowText(_saveName, titleSave, 256);
 
@@ -327,7 +327,7 @@ void Maptool::Load()
 
 	//string str = titleLoad;
 	//str += ".map";
-	string str = "loby.map";
+	string str = "shop.map";
 	//string str = "Town.map";
 	//string str = "Test.map";
 
