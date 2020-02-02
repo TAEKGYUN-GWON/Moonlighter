@@ -48,7 +48,7 @@ void Boss::Init(Vector2 pos, vector<Tile*> tiles)
 	_player = (Player*)SCENEMANAGER->GetNowScene()->GetChildFromName("Will");
 	_Bstate = new BossIdle(this);
 	_Bstate->Enter();
-	_hand = new BossHand();
+	_hand = Object::CreateObject<BossHand>(this);
 	_hand->Init();
 
 #pragma region ¹«´ý
@@ -366,7 +366,7 @@ void Boss::Release()
 	for (Object* e : _enemys)
 		SCENEMANAGER->GetNowScene()->GetWorld()->DestroyBody(e->GetComponent<PhysicsBody>()->GetBody());
 	
-	if (_hand)
+	_hand->Release();
 
 	Object::Release();
 

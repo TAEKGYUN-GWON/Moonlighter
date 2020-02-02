@@ -55,7 +55,9 @@ void BossHand::Render()
 
 void BossHand::Release()
 {
+	SCENEMANAGER->GetNowScene()->GetWorld()->DestroyBody(_physics->GetBody());
 	Object::Release();
+
 }
 
 void BossHand::Attack()
