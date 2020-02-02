@@ -3,10 +3,11 @@
 #include "Ability.h"
 #include "Player.h"
 #include"BossState.h"
+
 #include "Enemy.h"
 
 class BossState;
-
+class BossHand;
 
 //보스 공격 패턴
 enum class PHASE
@@ -26,6 +27,7 @@ protected:
 	Ability* _ability;
 	BossState* _Bstate;
 	Player* _player;
+	BossHand* _hand;
 	list<Vector2> _path;
 
 	vector<Object*> _rocks;
@@ -49,7 +51,7 @@ public:
 	void Release();
 
 	vector<Object*> GetRocks() { return _rocks; }
-
+	BossHand* GetHand() { return _hand; }
 	void Attack();
 	//void AttackEnd();
 	vector<Enemy*>* GetEnemys() { return &_enemys; }
@@ -60,5 +62,6 @@ public:
 	PHASE GetPhase() { return _phase; }
 	BossState* GetState() { return _Bstate; }
 	void SetState(BossState* state);
+	//void SetHand(BossHand* hand);
 	
 };

@@ -18,6 +18,8 @@ void BossRoom::Init()
 	GRAPHICMANAGER->AddFrameImage("Hand_Shoot_First", L"resource/img/Enemy/Hand_Shoot_First.png", 20, 1);
 	GRAPHICMANAGER->AddFrameImage("Hand_Shoot_Last", L"resource/img/Enemy/Hand_Shoot_Last.png", 11, 1);
 	GRAPHICMANAGER->AddFrameImage("idleBoss", L"resource/img/Enemy/idleBoss.png", 2, 1);
+	GRAPHICMANAGER->AddFrameImage("Hand", L"resource/img/Enemy/hand.png", 19, 1);
+	
 
 	GRAPHICMANAGER->AddImage("Boss_Rock0", L"resource/img/Enemy/Boss_Rock0.png");
 	GRAPHICMANAGER->AddImage("Boss_Rock1", L"resource/img/Enemy/Boss_Rock1.png");

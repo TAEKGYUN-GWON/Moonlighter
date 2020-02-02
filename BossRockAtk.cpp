@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "BossRockAtk.h"
 #include "BossIdle.h"
+#include "Player.h"
 
 void BossRockAtk::Enter()
 {
@@ -8,7 +9,7 @@ void BossRockAtk::Enter()
 	rocks = _boss->GetRocks();
 	_Bstate = "Attack";
 	_state = ROCKATK::START;
-
+	
 }
 
 void BossRockAtk::Update()
@@ -21,7 +22,7 @@ void BossRockAtk::Update()
 
 	timer += TIMEMANAGER->getElapsedTime();
 
-	if (timer >= 0.3f)
+	if (timer >= 0.1f)
 	{
 		switch (_state)
 		{

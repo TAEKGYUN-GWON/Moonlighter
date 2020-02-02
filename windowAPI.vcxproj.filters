@@ -435,6 +435,9 @@
     <ClInclude Include="BossRockAtk.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="BossHandAtk.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -720,6 +723,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="BossRockAtk.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BossHandAtk.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

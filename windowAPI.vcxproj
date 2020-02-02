@@ -150,6 +150,7 @@
     <ClInclude Include="BossAttack.h" />
     <ClInclude Include="BossDead.h" />
     <ClInclude Include="BossHand.h" />
+    <ClInclude Include="BossHandAtk.h" />
     <ClInclude Include="BossIdle.h" />
     <ClInclude Include="BossRockAtk.h" />
     <ClInclude Include="BossRoom.h" />
@@ -256,6 +257,7 @@
     <ClCompile Include="BossAttack.cpp" />
     <ClCompile Include="BossDead.cpp" />
     <ClCompile Include="BossHand.cpp" />
+    <ClCompile Include="BossHandAtk.cpp" />
     <ClCompile Include="BossIdle.cpp" />
     <ClCompile Include="BossRockAtk.cpp" />
     <ClCompile Include="BossRoom.cpp" />
