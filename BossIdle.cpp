@@ -29,7 +29,7 @@ void BossIdle::Update()
 	timer += TIMEMANAGER->getElapsedTime();
 	if (timer >= ExitTime)
 	{
-		int rand = 0;
+		int rand = RND->getInt(2);
 		//int rand =1;
 		if (rand)
 		{
@@ -43,8 +43,7 @@ void BossIdle::Update()
 		}
 			
 	}
-
-
+	
 }
 
 void BossIdle::Exit()

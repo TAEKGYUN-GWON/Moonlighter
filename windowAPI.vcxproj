@@ -206,6 +206,7 @@
     <ClInclude Include="Potion.h" />
     <ClInclude Include="Potions.h" />
     <ClInclude Include="ProgressBar.h" />
+    <ClInclude Include="RockCollider.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="ObjectManager.h" />
@@ -309,6 +310,7 @@
     <ClCompile Include="Potion.cpp" />
     <ClCompile Include="Potions.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
+    <ClCompile Include="RockCollider.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Graphic.cpp" />
     <ClCompile Include="ObjectManager.cpp" />

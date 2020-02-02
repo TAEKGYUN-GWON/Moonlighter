@@ -5,6 +5,7 @@
 #include "BossState.h"
 #include "BossIdle.h"
 #include "BossHand.h"
+#include "RockCollider.h"
 
 Boss::Boss()
 {
@@ -300,6 +301,7 @@ void Boss::Init(Vector2 pos, vector<Tile*> tiles)
 	{
 		r->GetComponent<PhysicsBody>()->SetBodyActive(false);
 		r->SetIsActive(false);
+		r->AddComponent<RockCollider>();
 	}
 
 }

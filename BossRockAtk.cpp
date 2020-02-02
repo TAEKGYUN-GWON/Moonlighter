@@ -2,6 +2,7 @@
 #include "BossRockAtk.h"
 #include "BossIdle.h"
 #include "Player.h"
+#include "RockCollider.h"
 
 void BossRockAtk::Enter()
 {
@@ -36,6 +37,7 @@ void BossRockAtk::Update()
 		{
 			rocks[_count]->SetIsActive(false); 
 			rocks[_count]->GetComponent<PhysicsBody>()->SetBodyActive(false);
+			rocks[_count]->GetComponent<RockCollider>()->SetColl(false);
 		}
 			break;
 		}
