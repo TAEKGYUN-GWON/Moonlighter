@@ -80,8 +80,9 @@ void BossHand::Attack()
 		switch (_state)
 		{
 		case HANDSTATE::SHADOW:
+			timer == 1.f;
 			//_sprite->SetImgName("Shadow"); 이게 왜 터져???
-			//_trans->SetPos(500, 100);
+			//_trans->SetPos(500, 100); 자ㅗ욮가 안대...ㅠ
 			Vector2::GetAngle(_trans->GetPos(), _target);
 			//_boss->GetPlayer()->GetTrans()->GetPos()
 			//_player->GetTrans()->GetPos()
