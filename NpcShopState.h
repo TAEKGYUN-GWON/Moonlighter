@@ -17,9 +17,9 @@ protected:
 
 public :
 	NpcShopState() {}
-	NpcShopState(Npc* npc) : _npc(npc) {}
+	//NpcShopState(Npc* npc) : _npc(npc {}
+	NpcShopState(Npc* npc) { _npc = npc; }
 
-	//void SetNpcLink(Npc* npc) { _npc = npc; }
 	void SetCheckStandLink(CheckStand* checkstand) { _checkStand = checkstand; }
 	void SetShopStandLink(ShopStandManager* shopstandmgr) { _shopStandMgr = shopstandmgr; }
 

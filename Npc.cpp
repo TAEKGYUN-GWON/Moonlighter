@@ -4,7 +4,6 @@
 
 void Npc::Init(string imgkey)
 {
-	
 	Object::Init();
 
 	_tag = "Npc";
@@ -27,7 +26,10 @@ void Npc::Init(string imgkey)
 	_sprite->SetPosition(_trans->GetPos());
 	_timer = 0;
 
-	//_destination = Vector2(340, 200);
+	_isAstarOn = true;	//astar 받아야하는 상태인지
+
+	_npcThought = NPCTHOUGHT::WINDOW;
+	_npcNowPosition = NPCNOWPOSITION::POS_ENTER;
 }
 
 void Npc::Release()
@@ -80,6 +82,13 @@ void Npc::SetPath(list<Vector2> lpath)
 	this->_lPath = lpath;
 }
 
+void Npc::ChangeState(NpcShopState* state)
+{
+	_npcShopState->Exit();
+	_npcShopState = state;
+	_npcShopState->Enter();
+
+}
 
 void Npc::Move()
 {
@@ -89,12 +98,13 @@ void Npc::Move()
 		{
 
 			Vector2 a = *_lPath.begin() - _trans->GetPos(); // 가야할위치에서 내위치를 빼면, 가야되는 다음 노드가 나옴
-			_trans->pos += a.Nomalized() * NPDSPEED * TIMEMANAGER->getElapsedTime();
+			float b = Vector2::GetAngle(_trans->GetPos(), *_lPath.begin());
 
-			if ((int)Vector2::Distance(*_lPath.begin(), _trans->GetPos()) < (int)10)//조건 느슨하게 예외처리 해주는 부분
-				_lPath.erase(_lPath.begin()); //가장 첫번째 목적지 지우기, 다음 노드를 넣기 위해
+			_trans->SetPos(_trans->GetPos() + Vector2(cosf(b), -sinf(b)) * 50 * TIMEMANAGER->getElapsedTime());
+
+			if ((int)Vector2::Distance(*_lPath.begin(), _trans->GetPos()) < (int)2)//조건 느슨하게 예외처리 해주는 부분
+				_lPath.pop_front(); //가장 첫번째 목적지 지우기, 다음 노드를 넣기 위해		}
 		}
-
 	}
 	else //갈곳이 없으면 true 만들어
 	{
@@ -107,9 +117,4 @@ void Npc::Move()
 	}
 }
 
-void Npc::ChangeState(NpcShopState* state)
-{
-	_npcShopState->Exit();
-	_npcShopState = state;
-	_npcShopState->Enter();
-}
+

@@ -6,14 +6,42 @@
 #include "Sprite.h"
 #define NPDSPEED 70
 
-class ShopStand;
+class ShopStandManager;
 class CheckStand;
 class NpcShopState;
+
+//이제 어디로 가고싶은지(destination이랑 다름)
+enum NPCTHOUGHT
+{
+	WINDOW,//창문에 가고싶음
+	CHOOSE,
+	GOHOME, //집에가고싶음
+	BUY, //사고싶음(줄서고싶음)
+	NOTBUY, //안사고싶음
+	END
+};
+
+//현재 어디 있는지
+enum NPCNOWPOSITION
+{
+	POS_ENTER,
+	POS_WINDOW,
+	POS_STAND1,
+	POS_STAND2,
+	POS_STAND3,
+	POS_STAND4,
+	POS_CHECKSTAND,
+	POS_DOOR,
+	POS_END
+};
 
 class Npc :	public Object
 {
 private:
 	Sprite* _sprite;
+
+	NPCTHOUGHT _npcThought; //머해야할지..
+	NPCNOWPOSITION _npcNowPosition;
 
 	float _timer;
 
@@ -21,9 +49,8 @@ private:
 	bool _isShopSOn;	//가판대랑 충돌중인지
 	bool _isCheckSOn;	//계산대랑 충돌중인지
 
-	bool _isAstarOn=true;	//astar 받아야하는 상태인지
+	bool _isAstarOn;	//astar 받아야하는 상태인지
 
-	
 	NpcShopState* _npcShopState;
 
 	//ShopStand* _shopStand; //스탠드를 가져야될지 매니저를 가져야될지 모르겠음
@@ -61,8 +88,16 @@ public:
 	void SetIsAstarOn(bool ast) { _isAstarOn = ast; }
 	bool GetIsAstarOn() { return _isAstarOn; }
 
-	NpcShopState* GetStatePointer() { return _npcShopState; }
+	//NPC 이제 뭐하고싶은 상태인지..
+	void SetNpcThought(NPCTHOUGHT npcthought) { _npcThought = npcthought; }
+	NPCTHOUGHT GetNpcThought() { return _npcThought; }
+	//위치 뭔지
+	void SetNpcNowPosition(NPCNOWPOSITION npcnowposition) { _npcNowPosition = npcnowposition; }
+	NPCNOWPOSITION GetNpcNowPosition() { return _npcNowPosition; }
 
-	list<Vector2> GetPath() { return _lPath; }
+	NpcShopState* GetStatePointer() { return _npcShopState; }
+	list<Vector2>* GetPath() { return &_lPath; }
+
+
 };
 
