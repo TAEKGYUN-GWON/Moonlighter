@@ -2,7 +2,7 @@
 #include "Npc.h"
 #include "NpcShopState.h"
 
-void Npc::Init(string imgkey)
+void Npc::Init(string imgkey, Vector2 pos)
 {
 	Object::Init();
 
@@ -16,7 +16,7 @@ void Npc::Init(string imgkey)
 	_npcShopState->Enter();
 
 	
-	_trans->SetPos(400, 700); //巩 观俊 积己
+	_trans->SetPos(pos.x, pos.y); //巩 观俊 积己
 	_trans->SetScale(Vector2(
 		//GRAPHICMANAGER->FindImage(imgkey)->GetFrameWidth()+15,
 		//GRAPHICMANAGER->FindImage(imgkey)->GetFrameHeight()+15));

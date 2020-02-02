@@ -97,28 +97,28 @@ void NpcManager::MakeNpc()
 
 		if (a ==0)
 		{
-			_npc->Init("Girl");
+			_npc->Init("Girl", Vector2(400, 700));
 			_npc->SetName("girl");
 			_vNpc.push_back(_npc);
 			return;
 		}
 		if (a == 1)
 		{
-			_npc->Init("Guy");
+			_npc->Init("Guy", Vector2(400, 700));
 			_npc->SetName("guy");
 			_vNpc.push_back(_npc);
 			return;
 		}
 		if (a == 2)
 		{
-			_npc->Init("Kid");
+			_npc->Init("Kid", Vector2(400, 700));
 			_npc->SetName("kid");
 			_vNpc.push_back(_npc);
 			return;
 		}
 		if (a == 3)
 		{
-_npc->Init("Lunk");
+_npc->Init("Lunk", Vector2(400, 700));
 _npc->SetName("lunk");
 _vNpc.push_back(_npc);
 return;
@@ -131,28 +131,28 @@ return;
 	{
 		if (_vNpc[i]->GetName() != "girl")
 		{
-			_npc->Init("Girl");
+			_npc->Init("Girl", Vector2(400, 700));
 			_npc->SetName("girl");
 			_vNpc.push_back(_npc);
 			return;
 		}
 		else if (_vNpc[i]->GetName() != "guy")
 		{
-			_npc->Init("Guy");
+			_npc->Init("Guy", Vector2(400, 700));
 			_npc->SetName("guy");
 			_vNpc.push_back(_npc);
 			return;
 		}
 		else if (_vNpc[i]->GetName() != "kid")
 		{
-			_npc->Init("Kid");
+			_npc->Init("Kid", Vector2(400, 700));
 			_npc->SetName("kid");
 			_vNpc.push_back(_npc);
 			return;
 		}
 		else if (_vNpc[i]->GetName() != "lunk")
 		{
-			_npc->Init("Lunk");
+			_npc->Init("Lunk", Vector2(400, 700));
 			_npc->SetName("lunk");
 			_vNpc.push_back(_npc);
 			return;

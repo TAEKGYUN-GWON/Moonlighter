@@ -63,13 +63,16 @@ public:
 	Npc() {};
 	~Npc() {};
 
-	virtual void Init(string imgkey);
+	virtual void Init(string imgkey, Vector2 pos);
 	virtual void Release() override;
 	virtual void Update() override;
 	virtual void Render() override;
 
 	void SetPath(list<Vector2> lpath);
 	void Move();
+
+	NpcShopState* GetNpcState() { return _npcShopState; }
+
 	
 	//상태 정의용
 	void ChangeState(NpcShopState* state);
@@ -100,4 +103,13 @@ public:
 
 
 };
+
+
+bool operator== (const NpcShopState& a, const NpcShopState& b)
+{
+	if (a == b)
+		return true;
+	else
+		return false;
+}
 

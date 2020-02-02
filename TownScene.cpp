@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "TownScene.h"
 #include"Inventory.h"
+#include "NpcShopState.h"
 
 void TownScene::Init()
 {
@@ -71,9 +72,15 @@ void TownScene::Init()
 	_smithy->Init(_player->GetInventory());
 
 
+	CreateNPC();
+	SetDest();
+
 	SetUp();
 
-	CreateNPC();
+
+	_aStar = new Astar;
+	_aStar->Init(this->_tiles, TILENUMX, TILENUMY);
+
 
 	//_smithy->SetSmithPos(_smith->GetTrans()->GetPos());
 
@@ -95,7 +102,11 @@ void TownScene::Update()
 			_frameX = 0;
 	}
 
-	CAMERA->SetPos(Vector2(_player->GetTrans()->GetPos().x - 650, _player->GetTrans()->GetPos().y - 450));
+
+	CAMERA->SetPosition(Vector2(_player->GetTrans()->GetPos()), 
+		"town_map");
+
+	MoveNPC();
 }
 
 void TownScene::SetUp()
@@ -104,7 +115,7 @@ void TownScene::SetUp()
 	{
 		for (int j = 0; j < TILENUMX; ++j)
 		{
-			int index = j + TILENUMX * i;
+			/*int index = j + TILENUMX * i;
 
 			_tiles[index] = Object::CreateObject<Tile>();
 			_tiles[index]->Init(j, i);
@@ -116,8 +127,20 @@ void TownScene::SetUp()
 			_tagTiles[index].attribute = "None";
 			_tagTiles[index].imgKey = "None";
 			_tagTiles[index].isFrame = false;
-			_tagTiles[index].pivot = PIVOT::CENTER;
+			_tagTiles[index].pivot = PIVOT::CENTER;*/
 
+			int index = j + SHOPTILEMAXX * i;
+
+			Tile* tile = Object::CreateObject<Tile>();
+			tile->Init(j, i);
+			tile->AddComponent<Sprite>();
+			tile->SetAttribute("None");
+			_tiles.push_back(tile);
+
+			_tagTiles[index].attribute = "None";
+			_tagTiles[index].imgKey = "None";
+			_tagTiles[index].isFrame = false;
+			_tagTiles[index].pivot = PIVOT::CENTER;
 		}
 	}
 
@@ -223,11 +246,14 @@ void TownScene::Render()
 		_vNpc[i]->Render();
 	}
 
+	wchar_t buffer[128];
+	swprintf(buffer, 128, L"x: %1.f, y:%1.f", _player->GetTrans()->GetPos().x, _player->GetTrans()->GetPos().y);
+	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2), buffer, 20, 500, 300, ColorF::White);
+
 }
 
 bool TownScene::ShowJ()
 {
-
 	if (_player->GetTrans()->GetPos().x > 2470 - 200 && _player->GetTrans()->GetPos().y >= 1080
 		&& _player->GetTrans()->GetPos().x < 2470 + 200 && _player->GetTrans()->GetPos().y <= 1080 + 250)
 	{
@@ -246,42 +272,73 @@ bool TownScene::ShowJ()
 void TownScene::CreateNPC()
 {
 	Npc* npc = Object::CreateObject<Npc>();
-	//npc->SetCheckStandLink(_checkStand);
 	npc->SetIsCheckSOn(false);
-	npc->SetIsShopSOn(false);
 	npc->SetIsAstarOn(true);
 
-	if (_vNpc.size() < 3)
+	for (int i = 0; i < 10; i++)
 	{
 		int a = RND->getInt(4);
 
 		if (a == 0)
 		{
-			npc->Init("Girl1");
+			npc->Init("Girl1", Vector2(632, 980));
 			npc->SetName("girl");
 			_vNpc.push_back(npc);
-			return;
 		}
 		if (a == 1)
 		{
-			npc->Init("Guy1");
+			npc->Init("Guy1", Vector2(632, 980));
 			npc->SetName("guy");
 			_vNpc.push_back(npc);
-			return;
 		}
 		if (a == 2)
 		{
-			npc->Init("Kid1");
+			npc->Init("Kid1", Vector2(632, 980));
 			npc->SetName("kid");
 			_vNpc.push_back(npc);
-			return;
 		}
 		if (a == 3)
 		{
-			npc->Init("Lunk1");
+			npc->Init("Lunk1", Vector2(632, 980));
 			npc->SetName("lunk");
 			_vNpc.push_back(npc);
-			return;
 		}
+	}
+}
+
+void TownScene::FoundWay(Npc* npc, int i)
+{
+	if (npc->GetIsAstarOn())
+	{
+		npc->SetPath(_aStar->pathFinder(npc->GetTrans()->GetPos(), ReturnDest(i)));
+
+		npc->SetIsAstarOn(false);
+	}
+}
+
+void TownScene::SetDest()
+{
+	_destination.push_back(Vector2(2196, 1609));
+	_destination.push_back(Vector2(1912, 2080));
+	_destination.push_back(Vector2(384, 2186));
+	_destination.push_back(Vector2(632, 980));
+	_destination.push_back(Vector2(752, 206));
+	_destination.push_back(Vector2(1664, 1261));
+	_destination.push_back(Vector2(2553, 769));
+}
+
+Vector2 TownScene::ReturnDest(int i)
+{
+	_destCount[i] = (RND->getInt(8));
+
+	return _destination[_destCount[i]];
+}
+
+void TownScene::MoveNPC()
+{
+	for (int i = 0; i < _vNpc.size(); i++)
+	{
+		if(_vNpc[i]->GetNpcState() == NpcIdle)
+		FoundWay(_vNpc[i], i);
 	}
 }
