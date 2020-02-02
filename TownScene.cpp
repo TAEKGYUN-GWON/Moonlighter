@@ -232,11 +232,13 @@ bool TownScene::ShowJ()
 		&& _player->GetTrans()->GetPos().x < 2470 + 200 && _player->GetTrans()->GetPos().y <= 1080 + 250)
 	{
 		_smithy->SetIn(true);
+		_player->SetIsInteraction(true);
 		return true;
 	}
 	else
 	{
 		_smithy->SetIn(false);
+		_player->SetIsInteraction(false);
 		return false;
 	}
 }
