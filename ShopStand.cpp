@@ -2,7 +2,7 @@
 #include "ShopStand.h"
 #include "Transform.h"
 #include "Sprite.h"
-
+#include"ShopScene.h"
 
 void ShopStand::Init(Vector2 pos, Vector2 scale)
 {

@@ -12,7 +12,8 @@ void Npc::Init(string imgkey)
 	_sprite->Init(true, true);
 	_sprite->SetImgName(imgkey);
 	
-	_trans->SetPos(400, 700); //巩 观俊 积己
+	//_trans->SetPos(400, 700); //巩 观俊 积己
+	_trans->SetPos(400, 800); //巩 观俊 积己
 	_trans->SetScale(Vector2(
 		GRAPHICMANAGER->FindImage(imgkey)->GetFrameWidth(),
 		GRAPHICMANAGER->FindImage(imgkey)->GetFrameHeight()));

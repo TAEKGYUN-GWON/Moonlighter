@@ -20,7 +20,7 @@ void Player::Init()
 	GRAPHICMANAGER->AddFrameImage("will_dungeon", L"resource/img/Player/will_dungeon.png", 10, 13);
 	GRAPHICMANAGER->AddFrameImage("will_sword", L"resource/img/Player/will_sword.png", 11, 4);
 	GRAPHICMANAGER->AddFrameImage("will_bow", L"resource/img/Player/will_bow.png", 9, 4);
-	
+	GRAPHICMANAGER->AddImage("spark", L"spark.png");
 	GRAPHICMANAGER->AddFrameImage("arrow_up", L"resource/img/Player/arrow_up.png", 1, 1);
 	GRAPHICMANAGER->AddFrameImage("arrow_down", L"resource/img/Player/arrow_down.png", 1, 1);
 
@@ -28,7 +28,6 @@ void Player::Init()
 	_name = "Will";
 
 	_trans->SetPos(WINSIZEX / 2, WINSIZEY / 2);
-	//_trans->SetPos(400, 1000);
 	_trans->SetScale(Vector2(36, 25));
 
 	_sprite = AddComponent<Sprite>();
@@ -50,9 +49,17 @@ void Player::Init()
 	_inven = new Inventory;
 	_inven->Init();
 
-	
 	_state = new PlayerIdle(this);
 	_state->Enter();
+
+	//_particleMgr = new ParticleManager;
+	//_particleMgr->Init(10, ParticleType::TRIANGLE, Vector2(), Vector2(10, 10),"spark");
+	//_particleMgr->SetMinAngle(PI / 4);
+	//_particleMgr->SetMaxAngle(3 * PI / 4);
+	//_particleMgr->SetMinSpeed(150.0f);
+	//_particleMgr->SetMaxSpeed(200.0f);
+
+	_isInter = false;
 
 	_pool = new BulletObjPool;
 	_pool->Init(20, "arrow_down", "Arrow", "Arrow", this, 5);
@@ -71,6 +78,11 @@ void Player::Update()
 		CAMERA->ShakingSetting(CAMERA->GetPosition(), 0.3f, 2.0f);
 	}
 
+	if (KEYMANAGER->isOnceKeyDown('N'))
+	{
+		_isInter = !_isInter;
+	}
+
 	if (_state->GetState() != "Attack")
 	{
 		if (KEYMANAGER->isOnceKeyDown('Z')) _atkType = (AttackType)(((int)_atkType + 1) % 2);
@@ -80,26 +92,9 @@ void Player::Update()
 
 	_state->Update();
 
-	// 무언가와 충돌했을 때
-	for (int i = 0; i < _pool->GetActivePoolSize(); i++)
-	{
-		if (_pool->GetActivePool()[i]->GetCollision())
-		{
-			_pool->GetActivePool()[i]->SetCollision(false);
-			_pool->InssertPool(i);
-			break;
-		}
-	}
-
-	// 그 무엇과도 충돌하지 않았을 때
-	for (int i = 0; i < _pool->GetActivePoolSize(); i++)
-	{
-		if (!_pool->GetActivePool()[i]->GetIsActive())
-		{
-			_pool->GetActivePool()[i]->GetComponent<PhysicsBody>()->GetBody()->SetActive(false);
-			_pool->InssertPool(i);
-		}
-	}
+	ReturnBullets();
+	
+	_sprite->SetPosition(_trans->GetPos() + Vector2(0, -14));
 }
 
 void Player::Render()
@@ -127,6 +122,33 @@ void Player::Release()
 {
 	_inven->Release();
 	Object::Release();
+}
+
+void Player::ReturnBullets()
+{
+	// 무언가와 충돌했을 때
+	for (int i = 0; i < _pool->GetActivePoolSize(); i++)
+	{
+		if (_pool->GetActivePool()[i]->GetCollision())
+		{
+			_pool->GetActivePool()[i]->SetCollision(false);
+			_pool->InssertPool(i);
+			break;
+		}
+	}
+
+	//if(_pool->GetActivePoolSize()) _particleMgr->SetPos(_pool->GetActivePool()[0]->GetTrans()->GetPos());
+	//_particleMgr->Update();
+
+	// 그 무엇과도 충돌하지 않았을 때
+	for (int i = 0; i < _pool->GetActivePoolSize(); i++)
+	{
+		if (!_pool->GetActivePool()[i]->GetIsActive())
+		{
+			_pool->GetActivePool()[i]->GetComponent<PhysicsBody>()->GetBody()->SetActive(false);
+			_pool->InssertPool(i);
+		}
+	}
 }
 
 void Player::ChangeState(PlayerState* state)

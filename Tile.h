@@ -10,8 +10,8 @@
 //#define TILENUMX (1335 / TILEWIDTH)
 //#define TILENUMY (1100 / TILEHEIGHT)
 
-#define TILENUMX 22
-#define TILENUMY 28
+#define TILENUMX 100
+#define TILENUMY 100
 
 
 enum type {
@@ -55,7 +55,7 @@ public:
 
     ~Tile() {};
 
-    virtual void Render() { return; }
+    //virtual void Render() { return; }
 
 
     static Vector2 tileSize;

@@ -53,7 +53,6 @@ using json = nlohmann::json;
 #include"iniDataManager.h"
 #include"lib/single_include/nlohmann/json.hpp"
 using json = nlohmann::json;
-using namespace rapidjson;
 using namespace SEVENTEEN_UTIL;
 
 //=========================================

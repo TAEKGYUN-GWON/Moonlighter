@@ -13,13 +13,13 @@ void NpcManager::Init(ShopScene* parent)
 
 	//Positions[0] = Vector2(520, 615); //창문앞
 	////Positions[1] = Vector2(200,515); //1번(1사분면)
-	//Positions[1] = Vector2(200,450); //1번(1사분면)
 	//Positions[2] = Vector2(210,515); //2번
 	//Positions[3] = Vector2(156,625); //3번
 	//Positions[4] = Vector2(320,620); //4번
 	//Positions[5] = Vector2(430,620); //계산대
 	
-	_positions[DESTINATION::WINDOW] = Vector2(520, 550); //창문앞
+	//_positions[DESTINATION::WINDOW] = Vector2(510, 550); //창문앞
+	_positions[DESTINATION::WINDOW] = Vector2(0, 0); //창문앞
 	//Positions[1] = Vector2(200,515); //1번(1사분면)
 	_positions[DESTINATION::STAND1] = _shopStandMgr->GetShopStandVector()[0]->GetTrans()->GetPos()
 		+ Vector2(50.0f, 0.0f); //1번(1사분면)
@@ -157,7 +157,6 @@ void NpcManager::MakeNpc()
 	}
 }
 
-
 //계산대랑 충돌
 void NpcManager::CheckStandCollision()
 {
@@ -212,7 +211,7 @@ void NpcManager::SetAstar()
 		if (_vNpc[i]->GetState()->GetStateType() == "Idle")
 		{
 			int a = RND->getInt(DESTINATION::STAND4);
-			AstarFunction(i, a);
+			AstarFunction(i, 0);
 		}
 	}
 }
@@ -222,8 +221,11 @@ void NpcManager::AstarFunction(int i, int astar)
 	//if (_vNpc[i]->GetState() == (NpcShopState*)NpcIdle::GetInstance()) //idle상태일떄
 	if (_vNpc[i]->GetIsAstarOn())
 	{
-		_vNpc[i]->SetPath(_ast->pathFinder( //길찾기 함수를 부른다 //여기까지 들어옴 
-			_vNpc[i]->GetTrans()->GetPos(), //NPC의 위치를 찾고 //여기서 터지는거같음
+
+		Vector2 startId((int)(_vNpc[i]->GetTrans()->GetPos().x / TILEWIDTH), (int)(_vNpc[i]->GetTrans()->GetPos().y / TILEHEIGHT));
+
+		_vNpc[i]->SetPath(_ast->pathFinderForIndex( //길찾기 함수를 부른다 //여기까지 들어옴 
+			startId, //NPC의 위치를 찾고 //여기서 터지는거같음
 			_positions[astar])); //가야할 위치를 받아옴 //이 숫자 일단 랜덤넣어둠
 
 		_vNpc[i]->SetIsAstarOn(false);

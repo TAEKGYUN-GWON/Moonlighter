@@ -229,7 +229,7 @@ void Maptool::Render()
 		}
 	}
 
-	//Scene::Render();
+	Scene::Render();
 
 	// sample tile image background
 	GRAPHICMANAGER->DrawFillRect(Vector2(WINSIZEX - 150, WINSIZEY / 2), Vector2(300, WINSIZEY), 0.0f, ColorF::Aquamarine, 1.0f, CENTER, false);
@@ -312,6 +312,7 @@ void Maptool::Save()
 	//string str = "shop.map";
 	//string str = "Town.map";
 	string str = "shop.map";
+	//string str = "test.map";
 
 	//GetWindowText(_saveName, titleSave, 256);
 
@@ -336,7 +337,7 @@ void Maptool::Load()
 	//str += ".map";
 	string str = "shop.map";
 	//string str = "Town.map";
-	//string str = "Test.map";
+	//string str = "test.map";
 
 	//file = CreateFile(titleLoad, GENERIC_READ, 0, NULL,
 	file = CreateFile(str.c_str(), GENERIC_READ, 0, NULL,
@@ -502,7 +503,9 @@ void Maptool::RemoveObject()
 				if ((_ptMouse.x <= WINSIZEX - 300) && PtInRect(&RectMakeRightBottom(_tiles[i]->GetChildren()[0]->GetTrans()->GetPos().x - CAMERA->GetPosition().x, _tiles[i]->GetChildren()[0]->GetTrans()->GetPos().y - CAMERA->GetPosition().y, _tiles[i]->GetChildren()[0]->GetTrans()->GetScale().x, _tiles[i]->GetChildren()[0]->GetTrans()->GetScale().y), _ptMouse))
 				{
 					string s = _tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->GetImgKey();
+
 					SetAttribute(i, FindTile(s)->startPos, FindTile(s)->size, FindTile(s)->startPos2, FindTile(s)->size2, "None");
+					_tagTiles[i].imgKey = "empty";
 
 					if (_tiles[i]->GetChildren().size() <= 0) return;
 					_tiles[i]->RemoveChild(_tiles[i]->GetChildren()[0]);
@@ -515,11 +518,16 @@ void Maptool::RemoveObject()
 	else if (_eraser == EraserType::Single)
 	{
 		_tiles[index]->SetAttribute("None");
+		_tagTiles[index].attribute = "None";
 
 		if (_tiles[index]->GetChildren().size() <= 0) return;
 		_tiles[index]->RemoveChild(_tiles[index]->GetChildren()[0]);
 	}
-	else if (_eraser == EraserType::NoDeleteImage) _tiles[index]->SetAttribute("None");
+	else if (_eraser == EraserType::NoDeleteImage)
+	{
+		_tiles[index]->SetAttribute("None");
+		_tagTiles[index].attribute = "None";
+	}
 	else if (_eraser == EraserType::OnlyDeleteImage)
 	{
 		if (_tiles[index]->GetChildren().size() <= 0) return;
