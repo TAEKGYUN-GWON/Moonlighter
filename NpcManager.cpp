@@ -32,8 +32,6 @@ void NpcManager::Update()
 {
 	//NPC가 4명 미만이면 더 넣어줘라	
 	if (_vNpc.size() < 4)
-
-
 	{
 		_counter++;
 		if (_counter == _timer)
@@ -262,7 +260,7 @@ void NpcManager::SetAstar()
 					{
 						AstarFunction(i, j + 1); //1사분면이 1번이라, j+1 하면 각 사분면 앞 포지션 됨
 					}
-					else if (_shopStandMgr->GetShopStandVector()[j+1]->GetIsInUse() == false &&
+					/*else if (_shopStandMgr->GetShopStandVector()[j+1]->GetIsInUse() == false &&
 						_shopStandMgr->GetShopStandVector()[j+1]->GetIsItemOn() == true)
 					{
 						AstarFunction(i, j + 2);
@@ -276,7 +274,7 @@ void NpcManager::SetAstar()
 						_shopStandMgr->GetShopStandVector()[j + 3]->GetIsItemOn() == true)
 					{
 						AstarFunction(i, j + 4);
-					}
+					}*/
 				}
 			}
 		}

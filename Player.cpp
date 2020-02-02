@@ -57,11 +57,11 @@ void Player::Init()
 	vertices[0].Set(0.f, 0.f);
 	vertices[1].Set(300.0f, 100.f);
 
-	chain = new b2ChainShape();
+	/*chain = new b2ChainShape();
 	chain->CreateChain(vertices, 2);
 
 	chain->SetPrevVertex(b2Vec2(0.0f, 0.0f));
-	chain->SetNextVertex(b2Vec2(300.0f, 100.0f));
+	chain->SetNextVertex(b2Vec2(300.0f, 100.0f));*/
 }
 
 void Player::Update()
@@ -94,8 +94,8 @@ void Player::Render()
 	GRAPHICMANAGER->Text(_trans->GetPos() + Vector2(-(_trans->GetScale().x + 10.0f), 32.f), buffer, 20, 90, 30, ColorF::LawnGreen, TextPivot::RIGHT_TOP);
 
 
-	swprintf(buffer, 128, L"%f", angle);
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 400), buffer, 20, 90, 30, ColorF::LawnGreen);
+	/*swprintf(buffer, 128, L"%f", angle);
+	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 400), buffer, 20, 90, 30, ColorF::LawnGreen);*/
 
 	if (_ability->IsDead()) GRAPHICMANAGER->Text(_trans->GetPos() + Vector2(-(_trans->GetScale().x - (_trans->GetScale().x * 0.5f) + 4.0f), -62.f), L"Dead", 20, 100, 30, ColorF::Red);
 

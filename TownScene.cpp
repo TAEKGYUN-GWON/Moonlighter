@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "TownScene.h"
 #include"Inventory.h"
-#include "Npc.h"
 
 void TownScene::Init()
 {
@@ -66,6 +65,8 @@ void TownScene::Init()
 
 	_smithy = new Smithy;
 	_smithy->Init(_player->GetInventory());
+
+
 
 	//_smithy->SetSmithPos(_smith->GetTrans()->GetPos());
 
@@ -217,7 +218,7 @@ bool TownScene::ShowJ()
 {
 
 	if (_player->GetTrans()->GetPos().x > 2470 - 200 && _player->GetTrans()->GetPos().y >= 1080
-		&& _player->GetTrans()->GetPos().x < 2470 + 200 && _player->GetTrans()->GetPos().y <= 1080 + 200)
+		&& _player->GetTrans()->GetPos().x < 2470 + 200 && _player->GetTrans()->GetPos().y <= 1080 + 250)
 	{
 		_smithy->SetIn(true);
 		return true;
@@ -226,5 +227,42 @@ bool TownScene::ShowJ()
 	{
 		_smithy->SetIn(false);
 		return false;
+	}
+}
+
+void TownScene::CreateNPC()
+{
+	Npc* npc;
+
+	for (int i = 0; i < _vNpc.size(); i++)
+	{
+		if (_vNpc[i]->GetName() != "girl")
+		{
+			npc->Init("Girl");
+			npc->SetName("girl");
+			_vNpc.push_back(npc);
+			return;
+		}
+		else if (_vNpc[i]->GetName() != "guy")
+		{
+			npc->Init("Guy");
+			npc->SetName("guy");
+			_vNpc.push_back(npc);
+			return;
+		}
+		else if (_vNpc[i]->GetName() != "kid")
+		{
+			npc->Init("Kid");
+			npc->SetName("kid");
+			_vNpc.push_back(npc);
+			return;
+		}
+		else if (_vNpc[i]->GetName() != "lunk")
+		{
+			npc->Init("Lunk");
+			npc->SetName("lunk");
+			_vNpc.push_back(npc);
+			return;
+		}
 	}
 }

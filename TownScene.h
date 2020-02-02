@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Maptool.h"
 #include "Smithy.h"
+#include "Npc.h"
 
 class TownScene : public Scene
 {
@@ -21,6 +22,9 @@ private:
 	Graphic* _j;
 	int _frameCount, _frameX;
 
+	//∏∂¿ª ¡÷πŒµÈ
+	vector<Npc*> _vNpc;
+
 public:
 	virtual void Init();
 	virtual void Update();
@@ -29,6 +33,8 @@ public:
 	void Render();
 
 	bool ShowJ();
+
+	void CreateNPC();
 
 };
 
