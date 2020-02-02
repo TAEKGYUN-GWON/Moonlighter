@@ -5,6 +5,9 @@ Vector2 Tile::tileSize = Vector2(TILEWIDTH, TILEHEIGHT);
 void Tile::Init(int idX, int idY)
 {
 	Object::Init();
+
+	_tag = "Tile";
+
 	//_sprite->Init();
 	//_sprite->Stop();
 	_color = ColorF::Enum::Gray;

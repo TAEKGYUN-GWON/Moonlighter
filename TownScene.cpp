@@ -141,6 +141,12 @@ void TownScene::SetUp()
 				_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPosition(_tiles[i]->GetChildren()[0]->GetTrans()->GetPos());
 				_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetSize(_tiles[i]->GetChildren()[0]->GetTrans()->GetScale());
 			}
+			if (_tiles[i]->GetAttribute() == "Wall")
+			{
+				auto p = _tiles[i]->AddComponent<PhysicsBody>();
+				p->Init(BodyType::STATIC, 1, 1);
+				p->SetBodyPosition();
+			}
 		}
 	}
 	else MessageBox(_hWnd, "can not found the file.", str.c_str(), MB_OK);

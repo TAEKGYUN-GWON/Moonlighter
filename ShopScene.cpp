@@ -8,6 +8,7 @@ void ShopScene::Init()
 
 	_name = "Shop";
 
+
 	GRAPHICMANAGER->AddImage("ShopBg", L"resource/img/Shop/shop_background.png");
 	GRAPHICMANAGER->AddImage("empty", L"resource/img/empty.png");
 	GRAPHICMANAGER->AddImage("npcNone", L"resource/img/npcNone.png");
@@ -17,11 +18,13 @@ void ShopScene::Init()
 	GRAPHICMANAGER->AddFrameImage("Lunk", L"resource/img/Shop/Lunk.png", 9, 4);
 	GRAPHICMANAGER->AddFrameImage("Door", L"resource/img/Shop/shop_door.png", 5, 1);
 
+	SetUp();
 	_player = Object::CreateObject<Player>();
 	_player->Init();
 	_player->GetTrans()->SetPos(Vector2(330, 200));
 	_player->GetPhysics()->SetBodyPosition();
 	_player->GetSprite()->SetPosition(Vector2(330, 200) + Vector2(0, -14));
+	_player->SetTiles(_tiles, SHOPTILEMAXX, SHOPTILEMAXY);
 
 	//계산대
 	_checkStand = Object::CreateObject<CheckStand>();
@@ -31,7 +34,6 @@ void ShopScene::Init()
 	_shopStandMgr = new ShopStandManager; //가판대
 	_shopStandMgr->Init();
 
-	SetUp();
 	_npcMgr = new NpcManager; //NPC CreateObject는 NpcManager에서 해준다.
 	_npcMgr->SetCheckStandLink(_checkStand); //이게 npcmanager를 거쳐서 state로 간다
 	_npcMgr->SetShopStandMgrLink(_shopStandMgr); //엔피씨가 충돌할 스탠드는 이것이다
@@ -64,6 +66,7 @@ void ShopScene::Update()
 	if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
 	if (KEYMANAGER->isOnceKeyDown('5')) SCENEMANAGER->changeScene("Maptool");
 
+	// Camera 위치 옮기기 위한 부분
 	if (_pp == PP::Up && _player->GetTrans()->GetPos().y >= 405.f)
 	{
 		_pp = PP::Down;
@@ -82,13 +85,39 @@ void ShopScene::Render()
 {
 	GRAPHICMANAGER->FindImage("ShopBg")->Render(0, 0, LEFT_TOP);
 
+#pragma region Tile attribute
+	wchar_t buffer[128];
+	for (int i = 0; i < 22; ++i)
+	{
+		for (int j = 0; j < 28; ++j)
+		{
+			int index = (i + (int)CAMERA->GetPosition().y / TILEHEIGHT) * SHOPTILEMAXX + (j + (int)CAMERA->GetPosition().x / TILEWIDTH);
+
+			if (index < 0 || index >= SHOPTILEMAXX * SHOPTILEMAXY) continue;
+
+			if (_tiles[index]->GetAttribute() == "Wall") _tiles[index]->GetComponent<Sprite>()->SetFillRect(true);
+			else if (_tiles[index]->GetAttribute() == "NpcNone")
+			{
+				_tiles[index]->GetComponent<Sprite>()->SetRectColor(ColorF::YellowGreen);
+				_tiles[index]->GetComponent<Sprite>()->SetFillRect(true);
+			}
+			//else if (_tiles[index]->GetAttribute() != "Wall") _tiles[index]->GetComponent<Sprite>()->SetFillRect(false);
+			else _tiles[index]->GetComponent<Sprite>()->SetFillRect(false);
+
+			//sprintf_s(buffer, "%d", index);
+			swprintf(buffer, 128, L"%d", index);
+			GRAPHICMANAGER->DrawTextD2D(_tiles[index]->GetTrans()->GetPos() + Vector2(-(TILEWIDTH / 2) + 2, TILEHEIGHT / 7), buffer, 10, ColorF::Yellow, TextPivot::LEFT_TOP, L"맑은고딕", true);
+		}
+	}
+#pragma endregion
+
 	Scene::Render();
 
 	//창가 동그라미
 	GRAPHICMANAGER->DrawEllipse(520, 615, 30, 30);
 
 	//마우스 좌표
-	wchar_t buffer[128];
+	//wchar_t buffer[128];
 	swprintf(buffer, 128, L"x: %d, y:%d", 
 		(int)(_ptMouse.x+CAMERA->GetPosition().x) / TILEWIDTH, 
 		(int)(_ptMouse.y+CAMERA->GetPosition().y) / TILEHEIGHT);

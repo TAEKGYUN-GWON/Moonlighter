@@ -21,6 +21,7 @@ void Player::Init()
 	GRAPHICMANAGER->AddFrameImage("will_sword", L"resource/img/Player/will_sword.png", 11, 4);
 	GRAPHICMANAGER->AddFrameImage("will_bow", L"resource/img/Player/will_bow.png", 9, 4);
 	GRAPHICMANAGER->AddImage("spark", L"spark.png");
+	GRAPHICMANAGER->AddFrameImage("arrow_left", L"resource/img/Player/arrow_left.png", 1, 1);
 	GRAPHICMANAGER->AddFrameImage("arrow_up", L"resource/img/Player/arrow_up.png", 1, 1);
 	GRAPHICMANAGER->AddFrameImage("arrow_down", L"resource/img/Player/arrow_down.png", 1, 1);
 
@@ -156,4 +157,12 @@ void Player::ChangeState(PlayerState* state)
 	_state->Exit();
 	_state = state;
 	_state->Enter();
+}
+
+void Player::SetTiles(vector<Tile*> tiles, int maxX, int maxY)
+{
+	_tiles = tiles;
+	_mapTileMax_X = maxX;
+	_mapTileMax_Y = maxY;
+	int a;
 }
