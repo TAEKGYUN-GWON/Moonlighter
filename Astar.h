@@ -47,6 +47,7 @@ public:
 	vector <Tile*> GetDirList(Vector2 idx);
 
 	list<Vector2> pathFinder(Vector2 start, Vector2 end);
+	list<Vector2> pathFinderForIndex(Vector2 start, Vector2 end);
 
 	void Render();
 

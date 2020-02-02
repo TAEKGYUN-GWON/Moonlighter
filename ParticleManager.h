@@ -5,14 +5,15 @@ class ParticleManager;
 enum ParticleType
 {
 	TRIANGLE,
-	CIRCLE
+	CIRCLE,
+	POSITION
 };
 
-#define MAX_ANGLE_MAX PI
-#define MAX_ANGLE_MIN 2.1f
-
-#define MIN_ANGLE_MAX 1.1f
-#define MIN_ANGLE_MIN 0
+//#define MAX_ANGLE_MAX PI
+//#define MAX_ANGLE_MIN 2.1f
+//
+//#define MIN_ANGLE_MAX 1.1f
+//#define MIN_ANGLE_MIN 0
 
 class ParticlePool
 {
@@ -26,7 +27,7 @@ public:
 	void InssertPool(int num);
 	void InssertActiveObject();
 
-	void Init(int size,string imgKey = "None",bool isFrame = false, float FPS = 0);
+	void Init(int size,string imgKey = "None",bool isFrame = false, float FPS = 0, bool isPhysics = false);
 	inline Particle* GetPoolObject() { return pool.top(); }
 	inline Particle* GetActivePoolObject(int num) { return ActivePool[num]; }
 	inline int GetPoolSize() { return pool.size(); }
@@ -45,13 +46,18 @@ private:
 	float _minAngle;
 	float _maxSpeed;
 	float _minSpeed;
+	float _range;
 	Vector2 _pos;
 	Vector2 _scale;
 	Graphic* pop;
+	float _maxX;
+	float _minX;
+	float _angle;
+
 public:
 	ParticleManager();
 	~ParticleManager() {};
-	void Init(int size,ParticleType type, Vector2 pos, Vector2 scale, string imgKey = "None", bool isFrame = false, float FPS = 0);
+	void Init(int size,ParticleType type, Vector2 pos, Vector2 scale, string imgKey = "None", bool isFrame = false, float FPS = 0,bool isPhysics = false);
 
 	void Update();
 	void Render();
@@ -59,6 +65,10 @@ public:
 	void Triangle();
 
 	void Circle();
+
+	void Position();
+
+	void SetRange(float range) { _range = range; }
 
 	void KeyCon();
 	//제발 라디안으로.... 주세요 
@@ -68,9 +78,14 @@ public:
 
 	void SetMaxSpeed(float speed) { _maxSpeed = speed; }
 	void SetMinSpeed(float speed) { _minSpeed = speed; }
+	//POSITION타입 전용
+	void SetAngle(float radian) { _angle = radian; }
 
 	void SetPos(float x, float y) { _pos = Vector2(x, y); }
 	void SetPos(Vector2 pos) { _pos = pos; }
+
+	void SetMinPos(float x) { _minX = x; }
+	void SetMaxPos(float x) { _maxX = x; }
 
 	Vector2 GetPos() { return _pos; }
 

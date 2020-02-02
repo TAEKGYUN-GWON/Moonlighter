@@ -6,8 +6,11 @@ void ShopScene::Init()
 {
 	Scene::Init();
 
+	_name = "Shop";
+
 	GRAPHICMANAGER->AddImage("ShopBg", L"resource/img/Shop/shop_background.png");
 	GRAPHICMANAGER->AddImage("empty", L"resource/img/empty.png");
+	GRAPHICMANAGER->AddImage("npcNone", L"resource/img/npcNone.png");
 	GRAPHICMANAGER->AddFrameImage("Girl", L"resource/img/Shop/Girl.png", 9, 4);
 	GRAPHICMANAGER->AddFrameImage("Guy", L"resource/img/Shop/Guy.png", 9, 4);
 	GRAPHICMANAGER->AddFrameImage("Kid", L"resource/img/Shop/Kids.png", 6, 4);
@@ -16,6 +19,9 @@ void ShopScene::Init()
 
 	_player = Object::CreateObject<Player>();
 	_player->Init();
+	_player->GetTrans()->SetPos(Vector2(330, 200));
+	_player->GetPhysics()->SetBodyPosition();
+	_player->GetSprite()->SetPosition(Vector2(330, 200) + Vector2(0, -14));
 
 	//계산대
 	_checkStand = Object::CreateObject<CheckStand>();
@@ -35,7 +41,8 @@ void ShopScene::Init()
 	_shopDoor = Object::CreateObject<ShopDoor>();
 	_shopDoor->Init();
 	
-
+	_pp = PP::Up;
+	CAMERA->SetPos(Vector2(-240, -140));
 }
 
 void ShopScene::Release()
@@ -56,6 +63,17 @@ void ShopScene::Update()
 	if (KEYMANAGER->isOnceKeyDown('3')) SCENEMANAGER->changeScene("Town");
 	if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
 	if (KEYMANAGER->isOnceKeyDown('5')) SCENEMANAGER->changeScene("Maptool");
+
+	if (_pp == PP::Up && _player->GetTrans()->GetPos().y >= 405.f)
+	{
+		_pp = PP::Down;
+		CAMERA->MoveTo(Vector2(-240.f, 250.0f), 1.0f, false);
+	}
+	else if (_pp == PP::Down && _player->GetTrans()->GetPos().y < 405.f)
+	{
+		_pp = PP::Up;
+		CAMERA->MoveTo(Vector2(-240.f, -140.0f), 1.0f, false);
+	}
 	
 	Scene::Update();
 }
@@ -78,19 +96,6 @@ void ShopScene::Render()
 
 	swprintf(buffer, 128, L"x: %f, y:%f", _ptMouse.x + CAMERA->GetPosition().x, _ptMouse.y + CAMERA->GetPosition().y);
 	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2 - 100), buffer, 20, 500, 300, ColorF::White);
-
-	// npc 상태 표시
-	if (_npcMgr->GetNpcVector().size())
-	{
-		if (_npcMgr->GetNpcVector()[0]->GetStatePointer()->GetState() == "Idle")
-		{
-			GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 200), L"Idle", 20, 100, 30, ColorF::AntiqueWhite);
-		}
-		else if (_npcMgr->GetNpcVector()[0]->GetStatePointer()->GetState() == "Move")
-		{
-			GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 200), L"Decide", 20, 100, 30, ColorF::AntiqueWhite);
-		}
-	}
 
 	_player->GetInventory()->Render();
 }
@@ -176,6 +181,12 @@ void ShopScene::SetUp()
 
 				_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPosition(_tiles[i]->GetChildren()[0]->GetTrans()->GetPos());
 				_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetSize(_tiles[i]->GetChildren()[0]->GetTrans()->GetScale());
+			}
+			if (_tiles[i]->GetAttribute() == "Wall")
+			{
+				auto p = _tiles[i]->AddComponent<PhysicsBody>();
+				p->Init(BodyType::STATIC, 1, 1);
+				p->SetBodyPosition();
 			}
 		}
 	}

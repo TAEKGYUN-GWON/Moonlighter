@@ -11,8 +11,6 @@ HRESULT Camera::init()
 
 void Camera::Update()
 {
-	Control();
-
 	ShakingCamera();
 
 	if (!_isMoving)

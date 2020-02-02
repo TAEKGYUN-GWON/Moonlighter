@@ -15,6 +15,13 @@ class NpcManager;
 class ShopScene : public Scene
 {
 private:
+	typedef enum PlayerPosition : byte
+	{
+		Up,
+		Down,
+	}PP;
+
+private:
 	Player* _player;
 	NpcManager* _npcMgr;			 //npc 매니저
 	CheckStand* _checkStand;		 //계산대
@@ -23,7 +30,7 @@ private:
 	ShopDoor* _shopDoor;			 //상점 출입문
 	vector<Tile*> _tiles;
 	tagTile _tagTiles[SHOPTILEMAXX * SHOPTILEMAXY];
-
+	PP _pp;
 
 public:
 	virtual void Init()override;

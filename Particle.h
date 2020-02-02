@@ -14,13 +14,15 @@ private:
 	float _rotate;
 
 	bool _active;
+	bool _isPhysics;
 public:
 	Particle();
-	virtual void Init(float angle, float speed, Vector2 pos, Vector2 scale, string imgKey = "None", bool isFrame = false, float FPS = 0);
+	virtual void Init(float angle, float speed, Vector2 pos, Vector2 scale, string imgKey = "None", bool isFrame = false, float FPS = 0, bool isPhysics = false);
 	virtual void Update();
 	virtual void Render();
 
-
+	bool GetIsPhysics() { return _isPhysics; }
+	void SetIsPhysics();
 	float GetRotateToDegree() { return _trans->GetRotateDegree(); }
 	float GetRotateToRadian() { return _trans->GetRotateRadian(); }
 

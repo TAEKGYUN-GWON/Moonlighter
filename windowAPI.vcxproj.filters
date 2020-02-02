@@ -348,9 +348,6 @@
     <ClInclude Include="PlayerMove.h">
       <Filter>playGround\Player</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerAttack.h">
-      <Filter>playGround\Player</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerRoll.h">
       <Filter>playGround\Player</Filter>
     </ClInclude>
@@ -404,6 +401,9 @@
     </ClInclude>
     <ClInclude Include="Smithy.h">
       <Filter>playGround\Smithy</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttack.h">
+      <Filter>playGround\Player\Attack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -608,9 +608,6 @@
     <ClCompile Include="PlayerMove.cpp">
       <Filter>playGround\Player</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerAttack.cpp">
-      <Filter>playGround\Player</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerRoll.cpp">
       <Filter>playGround\Player</Filter>
     </ClCompile>
@@ -661,6 +658,9 @@
     </ClCompile>
     <ClCompile Include="Smithy.cpp">
       <Filter>playGround\Smithy</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttack.cpp">
+      <Filter>playGround\Player\Attack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

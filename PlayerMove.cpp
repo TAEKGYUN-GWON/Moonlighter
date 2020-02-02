@@ -67,7 +67,8 @@ void PlayerMove::Update()
 	if (KEYMANAGER->isOnceKeyDown(VK_SPACE)) _obj->ChangeState(new PlayerRoll(_obj));
 
 	// Attack
-	if (KEYMANAGER->isOnceKeyDown('J'))
+	if (SCENEMANAGER->GetNowScene()->GetName() != "Shop" && 
+		!_obj->GetIsInteraction() && KEYMANAGER->isOnceKeyDown('J'))
 	{
 		if (_obj->GetAttackType() == AttackType::Sword)
 			_obj->ChangeState(new SwordAttack(_obj));
@@ -84,7 +85,6 @@ void PlayerMove::Update()
 
 	_obj->GetTrans()->SetPos(_obj->GetTrans()->GetPos() + Vector2(cosf((int)_obj->GetDirection() * 45 * Deg2Rad), -sinf((int)_obj->GetDirection() * 45 * Deg2Rad)) * _obj->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	_obj->GetPhysics()->SetBodyPosition();
-	_obj->GetSprite()->SetPosition(_obj->GetTrans()->GetPos() + Vector2(0, -14));
 }
 
 void PlayerMove::Exit()

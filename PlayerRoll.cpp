@@ -9,11 +9,11 @@ void PlayerRoll::Enter()
 	_obj->GetSprite()->SetMaxFrameX(8);
 	_obj->GetSprite()->SetFrameX(0);
 	_obj->GetSprite()->SetFPS(2.5f);
-	_obj->GetSprite()->SetPosition(_obj->GetTrans()->GetPos() + Vector2(0, -14));
-	_obj->GetSprite()->SetFillRect(true);
 	_obj->GetPhysics()->SetSensor(true);
 
-	_rollSpeed = 350.0f;
+	_rollSpeed = 200.0f;
+	//_rollSpeed = 10.0f;
+	_friction = -0.4f;
 }
 
 void PlayerRoll::Update()
@@ -31,7 +31,7 @@ void PlayerRoll::Update()
 		if (_obj->GetSprite()->GetCurrentFrameY() != 5)
 		{
 			_obj->GetSprite()->SetFrameY(5);
-			_obj->GetPhysics()->ApplyForce(b2Vec2(cosf(PI * RadToDeg), -sinf((PI / 2) * RadToDeg)) * _rollSpeed * TIMEMANAGER->getElapsedTime());
+			_obj->GetPhysics()->ApplyForce(b2Vec2(cosf(2.53f * RadToDeg), -sinf(2.53f * RadToDeg)) * _rollSpeed * TIMEMANAGER->getElapsedTime());
 		}
 	}
 	else if (_obj->GetDirection() == Dir::Left_Down)
@@ -83,11 +83,39 @@ void PlayerRoll::Update()
 		}
 	}
 
-	//_obj->GetSprite()->SetPosition(_obj->GetTrans()->GetPos() + Vector2(0, -14));
-	_obj->GetSprite()->SetPosition(_obj->GetPhysics()->GetBodyPosition());
+	/*if (_obj->GetDirection() == Dir::Left)
+	{
+		_obj->GetSprite()->SetFrameY(5);
+		_obj->GetTrans()->SetPos(_obj->GetTrans()->GetPos() + Vector2(cosf(PI), -sinf(0.0f)) * _rollSpeed);
+	}
+	else if (_obj->GetDirection() == Dir::Left_Up)
+	{
+		_obj->GetSprite()->SetFrameY(5);
+		_obj->GetTrans()->SetPos(_obj->GetTrans()->GetPos() + Vector2(cosf(2.53f), -sinf(2.53f)) * _rollSpeed);
+	}
+	else if (_obj->GetDirection() == Dir::Left_Down)
+	{
+			_obj->GetSprite()->SetFrameY(5);
+			_obj->GetPhysics()->ApplyForce(b2Vec2(cosf(PI * RadToDeg), -sinf((5 * PI / 4) * Rad2Deg)) * _rollSpeed * TIMEMANAGER->getElapsedTime());
+	}
+	else if (_obj->GetDirection() == Dir::Right)
+	{
+		_obj->GetSprite()->SetFrameY(4);
+		_obj->GetTrans()->SetPos(_obj->GetTrans()->GetPos() + Vector2(cosf(PI2), -sinf(0.0f)) * _rollSpeed);
+	}
+
+	_rollSpeed += _friction;
+	_obj->GetPhysics()->SetBodyPosition();
+
+	if (_rollSpeed <= 0)
+	{
+		_obj->GetPhysics()->SetSensor(false);
+		_obj->ChangeState(new PlayerIdle(_obj));
+	}*/
 
 	if (_obj->GetSprite()->GetCurrentFrameX() >= _obj->GetSprite()->GetMaxFrameX())
 	{
+		_obj->GetPhysics()->GetBody()->SetLinearVelocity(Vector2::b2Zero);
 		_obj->GetPhysics()->SetSensor(false);
 		_obj->ChangeState(new PlayerIdle(_obj));
 	}

@@ -36,6 +36,7 @@ void EntranceScene::Init()
 	GRAPHICMANAGER->AddImage("empty", L"resource/img/empty.png");
 #pragma endregion
 
+	GRAPHICMANAGER->AddImage("fatkachu", L"resource/img/Object/popcorn.png");
 	GRAPHICMANAGER->AddImage("loby", L"resource/img/Map/Dungeon_Lobby.png");
 
 	SetUp();
@@ -59,6 +60,7 @@ void EntranceScene::Render()
 
 	//Scene::Render();
 	_player->Render();
+
 	GRAPHICMANAGER->Text(Vector2(10, 6), L"Entrance Scene", 20, 200, 30, ColorF::Aqua);
 }
 
@@ -77,13 +79,6 @@ void EntranceScene::SetUp()
 
 			tiles.push_back(tile);
 
-			//tiles[index] = Object::CreateObject<Tile>(this);
-			//tiles[index]->Init(j , i );
-			//tiles[index]->GetTrans()->SetPos(pos.x + j * TILEWIDTH + (TILEWIDTH / 2),
-			//	pos.y + i * TILEHEIGHT + (TILEHEIGHT / 2));
-			//tiles[index]->AddComponent<Sprite>();
-			//tiles[index]->SetAttribute("None");
-
 			_tagTiles[index].attribute = "None";
 			_tagTiles[index].imgKey = "None";
 			_tagTiles[index].isFrame = false;
@@ -91,25 +86,16 @@ void EntranceScene::SetUp()
 		}
 	}
 
-
 	HANDLE file;
 	DWORD read;
 
-	//string str = titleLoad;
-	//str += ".map";
-
-
-
 	string str = "loby.map";
 
-	//file = CreateFile(titleLoad, GENERIC_READ, 0, NULL,
 	file = CreateFile(str.c_str(), GENERIC_READ, 0, NULL,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	if (file != INVALID_HANDLE_VALUE)
 	{
-		//MessageBox(_hWnd, "load วัดู", str.c_str(), MB_OK);
-
 		ReadFile(file, _tagTiles, sizeof(tagTile) * TILENUMX * TILENUMY, &read, NULL);
 		CloseHandle(file);
 
@@ -121,16 +107,13 @@ void EntranceScene::SetUp()
 			tiles[i]->SetIsFrame(false);
 			tiles[i]->SetPivot(PIVOT::CENTER);
 
-
 			if (tiles[i]->GetChildren().size() > 0) tiles[i]->RemoveChild(tiles[i]->GetChildren()[0]);
-
 
 			// value setting
 			tiles[i]->SetAttribute(_tagTiles[i].attribute);
 			tiles[i]->SetImgName(_tagTiles[i].imgKey);
 			tiles[i]->SetIsFrame(_tagTiles[i].isFrame);
 			tiles[i]->SetPivot(_tagTiles[i].pivot);
-
 
 			if (tiles[i]->GetImgName() != "None")
 			{

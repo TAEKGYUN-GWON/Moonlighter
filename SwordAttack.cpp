@@ -24,7 +24,7 @@ void SwordAttack::Enter()
 
 	int d = (int)_obj->GetDirection();
 	int width = 100;
-	int height = 50;
+	int height = 60;
 
 	_atkArea = Object::CreateObject<Object>(_obj);
 	_atkArea->GetTrans()->SetPos(_obj->GetTrans()->GetPos() + Vector2(cosf(d * 45 * Deg2Rad), -sinf(d * 45 * Deg2Rad)) * 20);
@@ -55,7 +55,6 @@ void SwordAttack::Enter()
 
 	_obj->GetSprite()->SetPosition(_obj->GetTrans()->GetPos() + Vector2(0, -14));
 
-	//_isAtk = false;
 	_timer = _count = 0;
 	_delay = 0.3f;
 }
