@@ -99,31 +99,31 @@ void NpcManager::MakeNpc()
 
 		if (a ==0)
 		{
-			_npc->Init("Girl");
+			_npc->Init("Girl", Vector2(400, 700));
 			_npc->SetName("girl");
 			_vNpc.push_back(_npc);
 			return;
 		}
 		if (a == 1)
 		{
-			_npc->Init("Guy");
+			_npc->Init("Guy", Vector2(400, 700));
 			_npc->SetName("guy");
 			_vNpc.push_back(_npc);
 			return;
 		}
 		if (a == 2)
 		{
-			_npc->Init("Kid");
+			_npc->Init("Kid", Vector2(400, 700));
 			_npc->SetName("kid");
 			_vNpc.push_back(_npc);
 			return;
 		}
 		if (a == 3)
 		{
-_npc->Init("Lunk");
-_npc->SetName("lunk");
-_vNpc.push_back(_npc);
-return;
+			_npc->Init("Lunk", Vector2(400, 700));
+			_npc->SetName("lunk");
+			_vNpc.push_back(_npc);
+			return;
 		}
 	}
 
@@ -133,28 +133,28 @@ return;
 	{
 		if (_vNpc[i]->GetName() != "girl")
 		{
-			_npc->Init("Girl");
+			_npc->Init("Girl", Vector2(400, 700));
 			_npc->SetName("girl");
 			_vNpc.push_back(_npc);
 			return;
 		}
 		else if (_vNpc[i]->GetName() != "guy")
 		{
-			_npc->Init("Guy");
+			_npc->Init("Guy", Vector2(400, 700));
 			_npc->SetName("guy");
 			_vNpc.push_back(_npc);
 			return;
 		}
 		else if (_vNpc[i]->GetName() != "kid")
 		{
-			_npc->Init("Kid");
+			_npc->Init("Kid", Vector2(400, 700));
 			_npc->SetName("kid");
 			_vNpc.push_back(_npc);
 			return;
 		}
 		else if (_vNpc[i]->GetName() != "lunk")
 		{
-			_npc->Init("Lunk");
+			_npc->Init("Lunk", Vector2(400, 700));
 			_npc->SetName("lunk");
 			_vNpc.push_back(_npc);
 			return;
@@ -222,18 +222,15 @@ void NpcManager::SetAstar()
 			if (_vNpc[i]->GetNpcThought() == NPCTHOUGHT::WINDOW)
 			{
 				_vNpc[i]->SetNpcNowPosition(NPCNOWPOSITION::POS_DOOR); //현재 위치는 창문이다
-				if (_vNpc[i]->GetNpcThought() == NPCTHOUGHT::WINDOW) //창문으로 가고싶은 상태면
-				{
-					AstarFunction(i, DESTINATION::DES_WINDOW); //창문으로 가
-				}
-
+				AstarFunction(i, DESTINATION::DES_WINDOW); //창문으로 가
+	
 			}
 		}
 		//문앞에 있음(집에 가야하는 상태)
 		if (_vNpc[i]->GetTrans()->GetPos().x > 401 && _vNpc[i]->GetTrans()->GetPos().x < 411 &&
 			_vNpc[i]->GetTrans()->GetPos().y > 729 && _vNpc[i]->GetTrans()->GetPos().y < 739)
 		{
-			//_vNpc[i]->SetNpcThought(NPCTHOUGHT::GOHOME); //창문앞에서 셋팅 해주긴 해줌..
+			_vNpc[i]->SetNpcThought(NPCTHOUGHT::GOHOME); //창문앞에서 셋팅 해주긴 해줌..
 			_vNpc[i]->SetNpcNowPosition(NPCNOWPOSITION::POS_DOOR);
 			//어디로 가라고 명령은 안함 갈데없음
 			//npcstate가 이 위치인지 체크해서 isactive=false; 해줄거임
@@ -244,47 +241,44 @@ void NpcManager::SetAstar()
 		{
 			_vNpc[i]->SetNpcNowPosition(NPCNOWPOSITION::POS_WINDOW); //창문앞임
 
-			int a = RND->getInt(4); //랜덤값 받을 변수
+			int a = RND->getInt(2); //랜덤값 받을 변수
 
 			if (a == 0)// 집에가고싶다
 			{
-				_vNpc[i]->SetNpcThought(NPCTHOUGHT::GOHOME); //집에가고싶다
-				AstarFunction(i, DESTINATION::DES_DOOR);
+				_vNpc[i]->SetNpcThought(NPCTHOUGHT::GOHOME); //집에가고싶은 마음
+				AstarFunction(i, DESTINATION::DES_DOOR); //문으로 가
 			}
-			if (a == 1 || a == 2 || a == 3) //사러가라
+			if (a == 1)// || a == 2 || a == 3) //구경하러 가라
 			{
-				_vNpc[i]->SetNpcThought(NPCTHOUGHT::CHOOSE); //구경하고싶다
+				_vNpc[i]->SetNpcThought(NPCTHOUGHT::CHOOSE); //구경하고싶은 마음
 				for (int j = 0; j < _shopStandMgr->GetShopStandVector().size(); j++)//가판대체크
 				{
-
+					//조건이 채워졌으면
 					if (_shopStandMgr->GetShopStandVector()[j]->GetIsInUse() == false && //아무도없음
-						_shopStandMgr->GetShopStandVector()[j]->GetIsItemOn() == true) //아이템 있음
-					{
+						_shopStandMgr->GetShopStandVector()[j]->GetIsItemOn() == false) //아이템 있음
+					{ //GetIsItemOn이 계속 true로 나옴 
+						//해당 판매대로 가라
 						AstarFunction(i, j + 1); //1사분면이 1번이라, j+1 하면 각 사분면 앞 포지션 됨
-					}
-					else if (_shopStandMgr->GetShopStandVector()[j+1]->GetIsInUse() == false &&
-						_shopStandMgr->GetShopStandVector()[j+1]->GetIsItemOn() == true)
-					{
-						AstarFunction(i, j + 2);
-					}
-					else if (_shopStandMgr->GetShopStandVector()[j + 2]->GetIsInUse() == false &&
-						_shopStandMgr->GetShopStandVector()[j + 2]->GetIsItemOn() == true)
-					{
-						AstarFunction(i, j + 3);
-					}
-					else if (_shopStandMgr->GetShopStandVector()[j + 3]->GetIsInUse() == false &&
-						_shopStandMgr->GetShopStandVector()[j + 3]->GetIsItemOn() == true)
-					{
-						AstarFunction(i, j + 4);
+						_shopStandMgr->GetShopStandVector()[j]->SetIsInUse(true); //여긴 오지도 않았는데 true?
+						
+						//판매대 앞에 도착했음
+						//if (_vNpc[i]->GetTrans()->GetPos().x > 510 && _vNpc[i]->GetTrans()->GetPos().x < 520 &&
+						//	_vNpc[i]->GetTrans()->GetPos().y > 610 && _vNpc[i]->GetTrans()->GetPos().y < 620)
+						//{
+						//	//도착했으면 누가 쓰고있나 다시 체크해..
+						//	//쓰고있으면 for문 빠져나가서 가판대 번호에 ++해
+						//	//if (_shopStandMgr->GetShopStandVector()[j]->GetIsInUse() == true) break;
+						//	//else
+						//	//{
+						//		_vNpc[i]->SetNpcNowPosition(NPCNOWPOSITION::POS_STAND1);
+						//		_vNpc[i]->SetIsShopSOn(true); //내가 충돌중이다.. 이게 왜필요하지?
+
+						//	//}
+						//}
+						
 					}
 				}
 			}
-		}
-		//판매대 앞에 있음
-		if (_vNpc[i]->GetTrans()->GetPos().x > 510 && _vNpc[i]->GetTrans()->GetPos().x < 520 &&
-			_vNpc[i]->GetTrans()->GetPos().y > 610 && _vNpc[i]->GetTrans()->GetPos().y < 620)
-		{
-			_vNpc[i]->SetNpcNowPosition(NPCNOWPOSITION::POS_STAND1);
 		}
 		//계산대
 		

@@ -4,7 +4,7 @@
 #include "ShopStandManager.h"
 #include "CheckStand.h"
 #include "Sprite.h"
-#define NPDSPEED 70
+#define NPCSPEED 70
 
 class ShopStandManager;
 class CheckStand;
@@ -63,7 +63,7 @@ public:
 	Npc() {};
 	~Npc() {};
 
-	virtual void Init(string imgkey);
+	virtual void Init(string imgkey, Vector2 pos);
 	virtual void Release() override;
 	virtual void Update() override;
 	virtual void Render() override;
