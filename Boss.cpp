@@ -64,7 +64,7 @@ void Boss::Init(Vector2 pos)
 	rock->GetTrans()->SetPos(896, 642);
 	s = rock->AddComponent<Sprite>();
 	s->Init();
-	s->SetImgName("");
+	s->SetImgName("Boss_Rock1");
 	p = rock->AddComponent<PhysicsBody>();
 	p->Init(BodyType::STATIC, 1, 1);
 	p->SetBodyPosition();
@@ -75,7 +75,7 @@ void Boss::Init(Vector2 pos)
 	rock->GetTrans()->SetPos(1050, 742);
 	s = rock->AddComponent<Sprite>();
 	s->Init();
-	s->SetImgName("");
+	s->SetImgName("Boss_Rock2");
 	p = rock->AddComponent<PhysicsBody>();
 	p->Init(BodyType::STATIC, 1, 1);
 	p->SetBodyPosition();
@@ -86,7 +86,7 @@ void Boss::Init(Vector2 pos)
 	rock->GetTrans()->SetPos(1195, 642);
 	s = rock->AddComponent<Sprite>();
 	s->Init();
-	s->SetImgName("");
+	s->SetImgName("Boss_Rock3");
 	p = rock->AddComponent<PhysicsBody>();
 	p->Init(BodyType::STATIC, 1, 1);
 	p->SetBodyPosition();
@@ -97,7 +97,7 @@ void Boss::Init(Vector2 pos)
 	rock->GetTrans()->SetPos(1367, 547);
 	s = rock->AddComponent<Sprite>();
 	s->Init();
-	s->SetImgName("");
+	s->SetImgName("Boss_Rock0");
 	p = rock->AddComponent<PhysicsBody>();
 	p->Init(BodyType::STATIC, 1, 1);
 	p->SetBodyPosition();
@@ -108,7 +108,7 @@ void Boss::Init(Vector2 pos)
 	rock->GetTrans()->SetPos(583, 601);
 	s = rock->AddComponent<Sprite>();
 	s->Init();
-	s->SetImgName("");
+	s->SetImgName("Boss_Rock1");
 	p = rock->AddComponent<PhysicsBody>();
 	p->Init(BodyType::STATIC, 1, 1);
 	p->SetBodyPosition();
@@ -119,7 +119,7 @@ void Boss::Init(Vector2 pos)
 	rock->GetTrans()->SetPos(791, 773);
 	s = rock->AddComponent<Sprite>();
 	s->Init();
-	s->SetImgName("");
+	s->SetImgName("Boss_Rock2");
 	p = rock->AddComponent<PhysicsBody>();
 	p->Init(BodyType::STATIC, 1, 1);
 	p->SetBodyPosition();
@@ -130,7 +130,7 @@ void Boss::Init(Vector2 pos)
 	rock->GetTrans()->SetPos(1050, 917);
 	s = rock->AddComponent<Sprite>();
 	s->Init();
-	s->SetImgName("");
+	s->SetImgName("Boss_Rock3");
 	p = rock->AddComponent<PhysicsBody>();
 	p->Init(BodyType::STATIC, 1, 1);
 	p->SetBodyPosition();
@@ -141,7 +141,7 @@ void Boss::Init(Vector2 pos)
 	rock->GetTrans()->SetPos(1317, 751);
 	s = rock->AddComponent<Sprite>();
 	s->Init();
-	s->SetImgName("");
+	s->SetImgName("Boss_Rock0");
 	p = rock->AddComponent<PhysicsBody>();
 	p->Init(BodyType::STATIC, 1, 1);
 	p->SetBodyPosition();
@@ -152,7 +152,7 @@ void Boss::Init(Vector2 pos)
 	rock->GetTrans()->SetPos(1539, 633);
 	s = rock->AddComponent<Sprite>();
 	s->Init();
-	s->SetImgName("");
+	s->SetImgName("Boss_Rock1");
 	p = rock->AddComponent<PhysicsBody>();
 	p->Init(BodyType::STATIC, 1, 1);
 	p->SetBodyPosition();
@@ -163,7 +163,7 @@ void Boss::Init(Vector2 pos)
 	rock->GetTrans()->SetPos(411, 687);
 	s = rock->AddComponent<Sprite>();
 	s->Init();
-	s->SetImgName("");
+	s->SetImgName("Boss_Rock2");
 	p = rock->AddComponent<PhysicsBody>();
 	p->Init(BodyType::STATIC, 1, 1);
 	p->SetBodyPosition();
@@ -174,7 +174,7 @@ void Boss::Init(Vector2 pos)
 	rock->GetTrans()->SetPos(651, 917);
 	s = rock->AddComponent<Sprite>();
 	s->Init();
-	s->SetImgName("");
+	s->SetImgName("Boss_Rock3");
 	p = rock->AddComponent<PhysicsBody>();
 	p->Init(BodyType::STATIC, 1, 1);
 	p->SetBodyPosition();
@@ -185,7 +185,7 @@ void Boss::Init(Vector2 pos)
 	rock->GetTrans()->SetPos(1050, 1076);
 	s = rock->AddComponent<Sprite>();
 	s->Init();
-	s->SetImgName("");
+	s->SetImgName("Boss_Rock0");
 	p = rock->AddComponent<PhysicsBody>();
 	p->Init(BodyType::STATIC, 1, 1);
 	p->SetBodyPosition();
@@ -196,7 +196,7 @@ void Boss::Init(Vector2 pos)
 	rock->GetTrans()->SetPos(1449, 896);
 	s = rock->AddComponent<Sprite>();
 	s->Init();
-	s->SetImgName("");
+	s->SetImgName("Boss_Rock1");
 	p = rock->AddComponent<PhysicsBody>();
 	p->Init(BodyType::STATIC, 1, 1);
 	p->SetBodyPosition();
@@ -207,7 +207,7 @@ void Boss::Init(Vector2 pos)
 	rock->GetTrans()->SetPos(1723, 719);
 	s = rock->AddComponent<Sprite>();
 	s->Init();
-	s->SetImgName("");
+	s->SetImgName("Boss_Rock2");
 	p = rock->AddComponent<PhysicsBody>();
 	p->Init(BodyType::STATIC, 1, 1);
 	p->SetBodyPosition();
@@ -218,7 +218,7 @@ void Boss::Init(Vector2 pos)
 	rock->GetTrans()->SetPos(511, 1037);
 	s = rock->AddComponent<Sprite>();
 	s->Init();
-	s->SetImgName("");
+	s->SetImgName("Boss_Rock3");
 	p = rock->AddComponent<PhysicsBody>();
 	p->Init(BodyType::STATIC, 1, 1);
 	p->SetBodyPosition();
@@ -229,7 +229,7 @@ void Boss::Init(Vector2 pos)
 	rock->GetTrans()->SetPos(1050, 1251);
 	s = rock->AddComponent<Sprite>();
 	s->Init();
-	s->SetImgName("");
+	s->SetImgName("Boss_Rock0");
 	p = rock->AddComponent<PhysicsBody>();
 	p->Init(BodyType::STATIC, 1, 1);
 	p->SetBodyPosition();
@@ -240,7 +240,7 @@ void Boss::Init(Vector2 pos)
 	rock->GetTrans()->SetPos(1589, 1026);
 	s = rock->AddComponent<Sprite>();
 	s->Init();
-	s->SetImgName("");
+	s->SetImgName("Boss_Rock1");
 	p = rock->AddComponent<PhysicsBody>();
 	p->Init(BodyType::STATIC, 1, 1);
 	p->SetBodyPosition();

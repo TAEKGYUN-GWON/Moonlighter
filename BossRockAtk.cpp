@@ -6,7 +6,9 @@ void BossRockAtk::Enter()
 {
 	_count = timer = 0;
 	rocks = _boss->GetRocks();
+	_Bstate = "Attack";
 	_state = ROCKATK::START;
+
 }
 
 void BossRockAtk::Update()

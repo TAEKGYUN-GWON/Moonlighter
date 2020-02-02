@@ -24,6 +24,7 @@ void BossRoom::Init()
 	GRAPHICMANAGER->AddImage("Boss_Rock2", L"resource/img/Enemy/Boss_Rock2.png");
 	GRAPHICMANAGER->AddImage("Boss_Rock3", L"resource/img/Enemy/Boss_Rock3.png");
 	GRAPHICMANAGER->FindImage("Open_Boss");
+
 	_player = Object::CreateObject<Player>();
 	_player->Init();
 	//_player->GetTrans()->SetPos(Vector2(35, 37) + Vector2((TILEWIDTH * Bossroom_X) / 2, (TILEHEIGHT * Bossroom_Y) - 150));
