@@ -2,10 +2,16 @@
 #include "Boss.h"
 #include "BossRoom.h"
 
-enum class HANDATK
+//enum class HANDATK
+//{
+//	ON,
+//	OFF
+//};
+enum class HANDSTATE
 {
-	ON,
-	OFF
+	SHADOW,
+	HAND,
+	END
 };
 
 
@@ -19,13 +25,16 @@ protected:
 
 	Boss* _boss;
 	Player* _player;
-	HANDATK Hatk;
+	//HANDATK Hatk;
+	HANDSTATE _state;
 
 	float _angle;
 	float _speed;
 	float timer = 0;
 	int _count = 0;
 	bool changeImg;
+
+	Vector2 _target;
 	//int changeImg; //보스에? 그림자에서 손으로 이동시?
 public:
 	BossHand();
@@ -44,6 +53,7 @@ public:
 
 	BossState* GetState() { return _Bstate; }
 	//void SetState(BossState* state);
+	void SetTarget(Vector2 target) { _target = target; }
 };
 
 

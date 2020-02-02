@@ -50,6 +50,8 @@ void Boss::Init(Vector2 pos, vector<Tile*> tiles)
 	_Bstate->Enter();
 	_hand = Object::CreateObject<BossHand>(this);
 	_hand->Init();
+	_hand->SetTarget(_player->GetTrans()->GetPos());
+	//_hand->GetTrans()->SetPos(_player->GetTrans()->GetPos());
 
 #pragma region ¹«´ý
 

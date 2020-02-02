@@ -25,6 +25,7 @@ void BossRoom::Init()
 	GRAPHICMANAGER->AddImage("Boss_Rock1", L"resource/img/Enemy/Boss_Rock1.png");
 	GRAPHICMANAGER->AddImage("Boss_Rock2", L"resource/img/Enemy/Boss_Rock2.png");
 	GRAPHICMANAGER->AddImage("Boss_Rock3", L"resource/img/Enemy/Boss_Rock3.png");
+	GRAPHICMANAGER->AddImage("Shadow", L"resource/img/Enemy/Shadow.png");
 	GRAPHICMANAGER->FindImage("Open_Boss");
 
 	_player = Object::CreateObject<Player>();
