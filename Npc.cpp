@@ -62,14 +62,15 @@ void Npc::Render()
 	Object::Render();
 
 	//이거 안하면 자꾸 정체불명의 동그라미가 엔피씨처럼 움직임.. erase할때 false 해줌
-	if (_isActive)
+	/*if (_isActive)
 	{
+		if(SCENEMANAGER->GetNowScene()->GetName() == )
 		GRAPHICMANAGER->DrawEllipse(
 			_trans->GetPos().x, 
 			_trans->GetPos().y, 
 			_trans->GetScale().x / 2, 
 			_trans->GetScale().y / 2);
-	}
+	}*/
 
 	wchar_t buffer[128];
 	swprintf(buffer, 128, L"x: %1.f, y:%1.f", _trans->GetPos().x , _trans->GetPos().y);

@@ -37,6 +37,11 @@ void TownScene::Init()
 	GRAPHICMANAGER->AddImage("empty", L"resource/img/empty.png");
 #pragma endregion
 
+	GRAPHICMANAGER->AddFrameImage("Girl1", L"resource/img/Smithy/Girl.png", 9, 4);
+	GRAPHICMANAGER->AddFrameImage("Guy1", L"resource/img/Smithy/Guy.png", 9, 4);
+	GRAPHICMANAGER->AddFrameImage("Kid1", L"resource/img/Smithy/Kids.png", 6, 4);
+	GRAPHICMANAGER->AddFrameImage("Lunk1", L"resource/img/Smithy/Lunk.png", 9, 4);
+
 	GRAPHICMANAGER->AddImage("town_map", L"resource/img/Map/map.png");
 
 	GRAPHICMANAGER->AddFrameImage("set_tile", L"set_tile3.png", 4, 6);
@@ -50,7 +55,6 @@ void TownScene::Init()
 
 	_frameCount = _frameX = 0;
 
-	SetUp();
 
 	_player = Object::CreateObject<Player>();
 	_player->Init();
@@ -67,6 +71,9 @@ void TownScene::Init()
 	_smithy->Init(_player->GetInventory());
 
 
+	SetUp();
+
+	CreateNPC();
 
 	//_smithy->SetSmithPos(_smith->GetTrans()->GetPos());
 
@@ -211,7 +218,11 @@ void TownScene::Render()
 		}
 	}
 
-	 
+	for (int i = 0; i < _vNpc.size(); i++)
+	{
+		_vNpc[i]->Render();
+	}
+
 }
 
 bool TownScene::ShowJ()
@@ -232,34 +243,40 @@ bool TownScene::ShowJ()
 
 void TownScene::CreateNPC()
 {
-	Npc* npc;
+	Npc* npc = Object::CreateObject<Npc>();
+	//npc->SetCheckStandLink(_checkStand);
+	npc->SetIsCheckSOn(false);
+	npc->SetIsShopSOn(false);
+	npc->SetIsAstarOn(true);
 
-	for (int i = 0; i < _vNpc.size(); i++)
+	if (_vNpc.size() < 3)
 	{
-		if (_vNpc[i]->GetName() != "girl")
+		int a = RND->getInt(4);
+
+		if (a == 0)
 		{
-			npc->Init("Girl");
+			npc->Init("Girl1");
 			npc->SetName("girl");
 			_vNpc.push_back(npc);
 			return;
 		}
-		else if (_vNpc[i]->GetName() != "guy")
+		if (a == 1)
 		{
-			npc->Init("Guy");
+			npc->Init("Guy1");
 			npc->SetName("guy");
 			_vNpc.push_back(npc);
 			return;
 		}
-		else if (_vNpc[i]->GetName() != "kid")
+		if (a == 2)
 		{
-			npc->Init("Kid");
+			npc->Init("Kid1");
 			npc->SetName("kid");
 			_vNpc.push_back(npc);
 			return;
 		}
-		else if (_vNpc[i]->GetName() != "lunk")
+		if (a == 3)
 		{
-			npc->Init("Lunk");
+			npc->Init("Lunk1");
 			npc->SetName("lunk");
 			_vNpc.push_back(npc);
 			return;
