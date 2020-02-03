@@ -43,7 +43,6 @@ private:
 	bool				_isMoving;
 
 private:
-	void Control();
 	void ShakingCamera();
 
 public:
@@ -79,6 +78,8 @@ public:
 	void Update();
 
 	void UpdateMatrix();
+
+	void Control();
 	
 	void ShakingSetting(Vector2 prevPos, float time, float amount);
 	void SetScale(Vector2 scale);

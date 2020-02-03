@@ -5,6 +5,9 @@
 #include "Smithy.h"
 #include "Npc.h"
 #include "Astar.h"
+#include "UiManager.h"
+
+#define NPCCOUNT 15
 
 class TownScene : public Scene
 {
@@ -31,13 +34,19 @@ private:
 
 	//vector<int> _destCount;
 	vector<int>	_destCount;
+	vector<int> _waitCount;
 
 	vector<Npc*> _vNpc;
+	UiManager* UI;
 
+	string _prevScene;
+	float _fadeAlpha;
+	bool _isFade;
 
 public:
 	virtual void Init();
 	virtual void Update();
+	virtual void Release();
 
 	void SetUp();
 	void Render();
@@ -47,6 +56,7 @@ public:
 
 
 	//NPC ฐüทร
+
 	void CreateNPC();
 	void FoundWay(Npc* npc, int i);
 
@@ -55,6 +65,8 @@ public:
 	Vector2 ReturnDest(int i);
 
 	void MoveNPC();
+
+	void CheckPos();
 
 };
 

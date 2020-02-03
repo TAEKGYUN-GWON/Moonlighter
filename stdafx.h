@@ -18,6 +18,7 @@
 #include <fstream>
 #include <string>
 #include<iomanip>
+
 using namespace std;
 #include "Box2D/Box2D.h"
 #ifdef _DEBUG
@@ -50,9 +51,8 @@ using namespace std;
 #include"lib/single_include/nlohmann/json.hpp"
 using json = nlohmann::json;
 #include"iniDataManager.h"
-//using namespace rapidjson;
-//using namespace nlohmann;
-
+#include"lib/single_include/nlohmann/json.hpp"
+using json = nlohmann::json;
 using namespace SEVENTEEN_UTIL;
 
 //=========================================

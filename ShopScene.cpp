@@ -9,6 +9,8 @@ void ShopScene::Init()
 	_name = "Shop";
 
 	GRAPHICMANAGER->AddImage("ShopBg", L"resource/img/Shop/shop_background.png");
+	GRAPHICMANAGER->AddImage("ShopBgDoor", L"resource/img/Shop/shop_background_door.png");
+	GRAPHICMANAGER->AddImage("ShopBgDoor2", L"resource/img/Shop/shop_background_door2.png");
 	GRAPHICMANAGER->AddImage("empty", L"resource/img/empty.png");
 	GRAPHICMANAGER->AddImage("npcNone", L"resource/img/npcNone.png");
 	GRAPHICMANAGER->AddFrameImage("Girl", L"resource/img/Shop/Girl.png", 9, 4);
@@ -23,6 +25,29 @@ void ShopScene::Init()
 	_player->GetTrans()->SetPos(Vector2(330, 200));
 	_player->GetPhysics()->SetBodyPosition();
 	_player->GetSprite()->SetPosition(Vector2(330, 200) + Vector2(0, -14));
+	_player->SetTiles(_tiles, SHOPTILEMAXX, SHOPTILEMAXY);
+
+	std::ifstream file("PlayerInfo.json");
+	string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+	json j = json::parse(content);
+
+	if (j["Position"]["curScene"] == "Town")
+	{
+		_pp = PP::Down;
+		CAMERA->SetPos(Vector2(-240.f, 250.0f));
+
+		_player->GetTrans()->SetPos(Vector2(392, 730));
+	}
+	// 첫 시작부분
+	else
+	{
+		_pp = PP::Up;
+		CAMERA->SetPos(Vector2(-240, -140));
+
+		_player->GetTrans()->SetPos(Vector2(330, 200));
+	}
+
+	_player->GetPhysics()->SetBodyPosition();
 	_player->SetTiles(_tiles, SHOPTILEMAXX, SHOPTILEMAXY);
 
 	//계산대
@@ -46,12 +71,14 @@ void ShopScene::Init()
 	CAMERA->SetPos(Vector2(-240, -140));
 	UI = new UiManager;
 	UI->Init();
+	_fadeAlpha = 1.0f;
 }
 
 void ShopScene::Release()
 {
 	_npcMgr->Release(); //비어있음
 	
+	_player->Release();
 	std::ofstream file("PlayerInfo.json");
 	json j;
 	
@@ -105,6 +132,39 @@ void ShopScene::Update()
 		}
 	}
 	
+
+	// Camera 위치 옮기기 위한 부분
+	if (_pp == PP::Up && _player->GetTrans()->GetPos().y >= 405.f)
+	{
+		_pp = PP::Down;
+		CAMERA->MoveTo(Vector2(-240.f, 250.0f), 1.0f, false);
+	}
+	else if (_pp == PP::Down && _player->GetTrans()->GetPos().y < 405.f)
+	{
+		_pp = PP::Up;
+		CAMERA->MoveTo(Vector2(-240.f, -140.0f), 1.0f, false);
+	}
+
+	// 씬 전환
+	if (_player->GetTrans()->GetPos().x >= 350.f && _player->GetTrans()->GetPos().x <= 420.f &&
+		_player->GetTrans()->GetPos().y >= 745.0f)
+	{
+		if (KEYMANAGER->isOnceKeyDown('J'))
+		{
+			//_isFade = true;
+			SCENEMANAGER->changeScene("Town");
+		}
+	}
+	
+	if (_fadeAlpha >= 0.0f)
+	{
+		_fadeAlpha -= 0.7f * TIMEMANAGER->getElapsedTime();
+		if (_fadeAlpha < 0.0f)
+		{
+			_fadeAlpha = 0.0f;
+		}
+	}
+
 	Scene::Update();
 }
 
@@ -141,6 +201,8 @@ void ShopScene::Render()
 
 	Scene::Render();
 
+	//GRAPHICMANAGER->FindImage("ShopBgDoor2")->Render(0, 0, LEFT_TOP);
+
 	//창가 동그라미
 	//GRAPHICMANAGER->DrawEllipse(520, 615, 30, 30);
 
@@ -165,6 +227,12 @@ void ShopScene::Render()
 	}
 	_player->GetInventory()->Render();
 	UI->Render();
+	_player->GetInventory()->Render();
+	UI->Render();
+
+	GRAPHICMANAGER->DrawFillRect(Vector2(WINSIZEX / 2 + CAMERA->GetPosition().x, WINSIZEY / 2 + CAMERA->GetPosition().y),
+		Vector2(WINSIZEX, WINSIZEY), 0.0f, ColorF::Black, _fadeAlpha, PIVOT::CENTER, true);
+
 }
 
 void ShopScene::SetUp()
@@ -258,5 +326,9 @@ void ShopScene::SetUp()
 	}
 	else MessageBox(_hWnd, "can not found the file.", str.c_str(), MB_OK);
 
+}
+
+void ShopScene::FadeOut()
+{
 }
 

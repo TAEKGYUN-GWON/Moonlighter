@@ -2,12 +2,11 @@
 #include "ShopStand.h"
 #include "Transform.h"
 #include "Sprite.h"
-
+#include"ShopScene.h"
 
 void ShopStand::Init(Vector2 pos, Vector2 scale)
 {
 	_tag = "ShopObject";
-	_name = "ShopStand";
 
 	//가판대의 렉트 만들기
 	_trans->SetPos(pos);

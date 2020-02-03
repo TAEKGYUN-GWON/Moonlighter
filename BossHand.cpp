@@ -33,8 +33,6 @@ void BossHand::Init()
 	_physics->GetBody()->SetFixedRotation(true);
 	_physics->SetBodyActive(false);
 	AddComponent<RockCollider>();
-	//_obj = Object::CreateObject<Player>();
-	//_player->GetTrans()->SetPos(_player->GetTrans()->GetPos());
 	_count = timer = 0;
 
 	_state = HANDSTATE::SHADOW;
@@ -64,9 +62,6 @@ void BossHand::Attack()
 
 	//온 오프..같은 느낌? 
 	timer += TIMEMANAGER->getElapsedTime();
-	//BossHand* h = (BossHand*)&h;
-	//Player* p = (Player*)&p;
-
 
 	switch (_state)
 	{
@@ -74,29 +69,16 @@ void BossHand::Attack()
 	{
 		if (timer >= 5)
 		{
-			//_sprite->SetImgName("Shadow"); 이게 왜 터져???
-			//_trans->SetPos(500, 100); 자ㅗ욮가 안대...ㅠ
-
-			
-
 			Vector2::GetAngle(_trans->GetPos(), _target);
-
-
-			//_boss->GetPlayer()->GetTrans()->GetPos()
-			//_player->GetTrans()->GetPos()
 			timer = 0;
 		}
 		else
 		{
-
 			float angle = Vector2::GetAngle(_trans->GetPos(), _player->GetTrans()->GetPos());
 			Vector2 anlgePos(cosf(angle), -sinf(angle));
 			
 			_trans->SetPos(_trans->GetPos() + anlgePos * 70 * TIMEMANAGER->getElapsedTime());
-
-
 		}
-
 	}
 	break;
 
@@ -104,7 +86,6 @@ void BossHand::Attack()
 	{
 		if (timer >= 1.f)
 		{
-
 			_physics->SetBodyActive(true);
 			timer = 0;
 		}
@@ -114,11 +95,9 @@ void BossHand::Attack()
 	{
 		if (timer >= 2.f)
 		{
-
 			_physics->SetBodyActive(false);
 			timer = 0;
 		}
-
 	}
 
 	break;
@@ -150,10 +129,8 @@ void BossHand::Attack()
 		}
 			break;
 		}
-		//timer = 0;
 	}
 	_physics->SetBodyPosition();
 	_sprite->SetPosition(_trans->GetPos());
-	//나가는 조건? 그것두 있어야 함..
 }
 

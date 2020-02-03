@@ -57,12 +57,12 @@ void BossRoom::Update()
 void BossRoom::Render()
 {
 	GRAPHICMANAGER->DrawImage("BossRoom_bg", 0, 0, LEFT_TOP);
-	wchar_t buffer[128];
+	//wchar_t buffer[128];
 	//swprintf(buffer, 128, L"x : %d \n y : %d ", (55 + _ptMouse.x) / TILEWIDTH, _ptMouse.y);
 	//swprintf(buffer, 128, L"x : %f \n y : %f ", _ptMouse.x + CAMERA->GetPosition().x, _ptMouse.y + CAMERA->GetPosition().y);
-	swprintf(buffer, 128, L"x : %d \n y : %d ", (int)(_ptMouse.x + CAMERA->GetPosition().x) / TILEWIDTH
-		, (int)(_ptMouse.y + CAMERA->GetPosition().y) / TILEHEIGHT);
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2 - 200, 0), buffer, 20, 300, 50, ColorF::Azure);
+	//swprintf(buffer, 128, L"x : %d \n y : %d ", (int)(_ptMouse.x + CAMERA->GetPosition().x) / TILEWIDTH
+	//	, (int)(_ptMouse.y + CAMERA->GetPosition().y) / TILEHEIGHT);
+	//GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2 - 200, 0), buffer, 20, 300, 50, ColorF::Azure);
 
 	Scene::Render();
 	UI->Render();

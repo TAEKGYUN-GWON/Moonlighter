@@ -44,8 +44,8 @@ public:
 	void SetAstar(); //목적지 정해주는것임
 	void AstarFunction(int i, int asttar); //astar 돌아가는 곳
 
-	//void CheckStandCollision(); //계산대랑 충돌
-	//void ShopStandCollision(); //가판대랑 충돌
+	void CheckStandCollision(); //계산대랑 충돌
+	void ShopStandCollision(); //가판대랑 충돌
 
 	void SetCheckStandLink(CheckStand* checkstand) { _checkStand = checkstand; }
 	void SetShopStandMgrLink(ShopStandManager* shopstsandmgr) { _shopStandMgr = shopstsandmgr; }

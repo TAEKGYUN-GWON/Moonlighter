@@ -8,6 +8,7 @@
 #include "Maptool.h"
 #include "ShopDoor.h"
 #include "UiManager.h"
+
 #define SHOPTILEMAXX 22
 #define SHOPTILEMAXY 28
 
@@ -33,6 +34,7 @@ private:
 	tagTile _tagTiles[SHOPTILEMAXX * SHOPTILEMAXY];
 	PP _pp;
 	UiManager* UI;
+	float _fadeAlpha;
 
 public:
 	virtual void Init()override;
@@ -40,6 +42,7 @@ public:
 	virtual void Update()override;
 	virtual void Render()override;
 	void SetUp();
+	void FadeOut();
 
 	vector<Tile*>GetTiles() { return _tiles; }
 	
