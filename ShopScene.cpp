@@ -8,7 +8,6 @@ void ShopScene::Init()
 
 	_name = "Shop";
 
-
 	GRAPHICMANAGER->AddImage("ShopBg", L"resource/img/Shop/shop_background.png");
 	GRAPHICMANAGER->AddImage("empty", L"resource/img/empty.png");
 	GRAPHICMANAGER->AddImage("npcNone", L"resource/img/npcNone.png");
@@ -51,6 +50,12 @@ void ShopScene::Release()
 {
 	_npcMgr->Release(); //비어있음
 	
+	//std::ofstream file("PlayerInfo.json");
+	//json j;
+	//
+	//j["Position"]["posX"] = _player->GetTrans()->GetPos().x;
+	//j["Position"]["posY"] = _player->GetTrans()->GetPos().y;
+	//j["Position"]["curScene"] = SCENEMANAGER->GetNowScene()->GetName();
 
 	Scene::Release();
 }
@@ -77,6 +82,7 @@ void ShopScene::Update()
 		_pp = PP::Up;
 		CAMERA->MoveTo(Vector2(-240.f, -140.0f), 1.0f, false);
 	}
+
 	
 	Scene::Update();
 }
