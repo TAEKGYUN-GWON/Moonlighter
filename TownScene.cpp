@@ -155,6 +155,13 @@ void TownScene::Update()
 	{
 		SCENEMANAGER->changeScene("Entrance");
 	}
+
+	MoveNPC();
+
+	CheckPos();
+
+
+	Scene::Update();
 }
 
 void TownScene::Release()
@@ -166,6 +173,8 @@ void TownScene::Release()
 	Scene::Release();
 }
 
+/*void TownScene::Update()
+{
 	if((_player->GetTrans()->GetPos().x >= 1955 - 100 && _player->GetTrans()->GetPos().y >= 500
 		&& _player->GetTrans()->GetPos().x <= 1955 + 100 && _player->GetTrans()->GetPos().y <= 500 + 20))
 	{
@@ -183,7 +192,7 @@ void TownScene::Release()
 
 
 	Scene::Update();
-}
+}*/
 
 void TownScene::SetUp()
 {
