@@ -22,6 +22,10 @@ void ShopScene::Init()
 	SetUp();
 	_player = Object::CreateObject<Player>();
 	_player->Init();
+	_player->GetTrans()->SetPos(Vector2(330, 200));
+	_player->GetPhysics()->SetBodyPosition();
+	_player->GetSprite()->SetPosition(Vector2(330, 200) + Vector2(0, -14));
+	_player->SetTiles(_tiles, SHOPTILEMAXX, SHOPTILEMAXY);
 
 	std::ifstream file("PlayerInfo.json");
 	string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
@@ -63,9 +67,10 @@ void ShopScene::Init()
 	_shopDoor = Object::CreateObject<ShopDoor>();
 	_shopDoor->Init();
 	
+	_pp = PP::Up;
+	CAMERA->SetPos(Vector2(-240, -140));
 	UI = new UiManager;
 	UI->Init();
-
 	_fadeAlpha = 1.0f;
 	cout << _player->GetAbility()->GetCurrentHP() << endl;
 }
@@ -91,6 +96,21 @@ void ShopScene::Update()
 	if (KEYMANAGER->isOnceKeyDown('3')) SCENEMANAGER->changeScene("Town");
 	if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
 	if (KEYMANAGER->isOnceKeyDown('5')) SCENEMANAGER->changeScene("Maptool");
+
+	for (ShopStand* s : _shopStandMgr->GetShopStandVector())
+	{
+		if (Vector2::Distance(_player->GetTrans()->GetPos(), s->GetTrans()->GetPos()) < 80)
+		{
+			if (_player->GetInventory()->GetActive())
+			{
+				if (KEYMANAGER->isOnceKeyDown('J'))
+				{
+					s->SetItemInfo(_player->GetInventory()->GetItem());
+				}
+			}
+		}
+	}
+	
 
 	// Camera 위치 옮기기 위한 부분
 	if (_pp == PP::Up && _player->GetTrans()->GetPos().y >= 405.f)
@@ -132,15 +152,16 @@ void ShopScene::Render()
 	GRAPHICMANAGER->FindImage("ShopBg")->Render(0, 0, LEFT_TOP);
 
 #pragma region Tile attribute
-	wchar_t buffer[128];
+	//타일 좌표 그리는거
+	//wchar_t buffer[128];
 	//for (int i = 0; i < 22; ++i)
 	//{
 	//	for (int j = 0; j < 28; ++j)
 	//	{
 	//		int index = (i + (int)CAMERA->GetPosition().y / TILEHEIGHT) * SHOPTILEMAXX + (j + (int)CAMERA->GetPosition().x / TILEWIDTH);
-	//
+
 	//		if (index < 0 || index >= SHOPTILEMAXX * SHOPTILEMAXY) continue;
-	//
+
 	//		if (_tiles[index]->GetAttribute() == "Wall") _tiles[index]->GetComponent<Sprite>()->SetFillRect(true);
 	//		else if (_tiles[index]->GetAttribute() == "NpcNone")
 	//		{
@@ -149,7 +170,7 @@ void ShopScene::Render()
 	//		}
 	//		//else if (_tiles[index]->GetAttribute() != "Wall") _tiles[index]->GetComponent<Sprite>()->SetFillRect(false);
 	//		else _tiles[index]->GetComponent<Sprite>()->SetFillRect(false);
-	//
+
 	//		//sprintf_s(buffer, "%d", index);
 	//		swprintf(buffer, 128, L"%d", index);
 	//		GRAPHICMANAGER->DrawTextD2D(_tiles[index]->GetTrans()->GetPos() + Vector2(-(TILEWIDTH / 2) + 2, TILEHEIGHT / 7), buffer, 10, ColorF::Yellow, TextPivot::LEFT_TOP, L"맑은고딕", true);
@@ -162,17 +183,27 @@ void ShopScene::Render()
 	//GRAPHICMANAGER->FindImage("ShopBgDoor2")->Render(0, 0, LEFT_TOP);
 
 	//창가 동그라미
-	GRAPHICMANAGER->DrawEllipse(520, 615, 30, 30);
+	//GRAPHICMANAGER->DrawEllipse(520, 615, 30, 30);
 
 	//마우스 좌표
 	//wchar_t buffer[128];
-	swprintf(buffer, 128, L"x: %d, y:%d", 
-		(int)(_ptMouse.x+CAMERA->GetPosition().x) / TILEWIDTH, 
-		(int)(_ptMouse.y+CAMERA->GetPosition().y) / TILEHEIGHT);
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2), buffer, 20, 500, 300, ColorF::White);
+	//swprintf(buffer, 128, L"x: %d, y:%d", 
+	//	(int)(_ptMouse.x+CAMERA->GetPosition().x) / TILEWIDTH, 
+	//	(int)(_ptMouse.y+CAMERA->GetPosition().y) / TILEHEIGHT);
+	//GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2), buffer, 20, 500, 300, ColorF::White);
 
-	swprintf(buffer, 128, L"x: %f, y:%f", _ptMouse.x + CAMERA->GetPosition().x, _ptMouse.y + CAMERA->GetPosition().y);
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2 - 100), buffer, 20, 500, 300, ColorF::White);
+	//swprintf(buffer, 128, L"x: %f, y:%f", _ptMouse.x + CAMERA->GetPosition().x, _ptMouse.y + CAMERA->GetPosition().y);
+	//GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2 - 100), buffer, 20, 500, 300, ColorF::White);
+
+
+	for (ShopStand* s : _shopStandMgr->GetShopStandVector())
+	{
+		if (s->GetIsItemOn())
+		{
+			GRAPHICMANAGER->FindImage(s->GetItem().item)->Render(s->GetTrans()->GetPos(), Vector2(30, 30), 0);
+
+		}
+	}
 
 	_player->GetInventory()->Render();
 	UI->Render();

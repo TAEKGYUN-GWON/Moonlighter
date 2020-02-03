@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "BossRoom.h"
 #include "Ability.h"
-
+#include "PlayerState.h"
 
 
 void BossRoom::Init()
@@ -56,6 +56,10 @@ void BossRoom::Update()
 {
 	Scene::Update();
 	CAMERA->SetPosition(_player->GetTrans()->GetPos(), "BossRoom_bg");
+	if (_player->GetState()->GetState() == "Dead" && _player->GetSprite()->IsFrameEnd())
+	{
+		SCENEMANAGER->changeScene("Entrance");
+	}
 	UI->Update();
 }
 

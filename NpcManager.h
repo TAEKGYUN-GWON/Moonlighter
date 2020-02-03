@@ -33,6 +33,7 @@ private:
 	int _counter; //이 시간만큼 흐른 뒤 새로운 엔피씨 입장함
 	int _timer;
 
+	int _counter2;
 public:
 	void Init(ShopScene* parent);
 	void Update();

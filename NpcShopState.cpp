@@ -75,6 +75,7 @@ void NpcMove::Update()
 	{
 		_npc->ChangeState(new NpcHome(_npc)); //집으로 가..
 	}
+
 }
 
 void NpcMove::Exit()
@@ -91,11 +92,7 @@ void NpcHome::Update()
 {
 	if (_npc->GetNpcNowPosition() == NPCNOWPOSITION::POS_DOOR) //나가는문 앞인데
 	{
-		if (_npc->GetNpcThought() == NPCTHOUGHT::GOHOME) //집에 가고싶어하면
-		{
-			_npc->SetIsActive(false); //이렇게 해두면 매니저가 지움
-
-		}
+		_npc->SetIsActive(false); //이렇게 해두면 매니저가 지움
 	}
 }
 

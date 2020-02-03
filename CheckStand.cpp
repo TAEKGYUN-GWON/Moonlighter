@@ -36,8 +36,8 @@ void CheckStand::Update()
 
 void CheckStand::Render()
 {
-	GRAPHICMANAGER->DrawEllipse(
-		_trans->GetPos().x, _trans->GetPos().y, 
-		_trans->GetScale().x, _trans->GetScale().y);
+	//GRAPHICMANAGER->DrawEllipse(
+	//	_trans->GetPos().x, _trans->GetPos().y, 
+	//	_trans->GetScale().x, _trans->GetScale().y);
 	Object::Render();
 }
