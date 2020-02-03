@@ -6,7 +6,7 @@
 void TownScene::Init()
 {
 	Scene::Init();
-
+	_name = "Town";
 #pragma region SetTilePage1
 	GRAPHICMANAGER->AddImage("build_fountain", L"resource/img/Object/build_fountain.png");
 	GRAPHICMANAGER->AddImage("build_Retaile", L"resource/img/Object/build_Retaile.png");
