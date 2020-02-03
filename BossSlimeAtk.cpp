@@ -21,7 +21,7 @@ void BossSlimeAtk::Update()
 	{
 		Ctiemr = 0;
 		SlimeEnemy* slime = Object::CreateObject<SlimeEnemy>(_boss);
-		slime->Init(Vector2(_boss->GetTrans()->GetPos() + Vector2::down * (_boss->GetTrans()->GetScale() / 2)));
+		slime->Init(Vector2(_boss->GetTrans()->GetPos() + Vector2::down * (_boss->GetTrans()->GetScale() / 2) + Vector2(0, 20)));
 
 		_boss->GetEnemys()->push_back(slime);
 	}

@@ -5,6 +5,8 @@
 #include "Item.h"
 #include "EnemyScript.h"
 #include "ETCS.h"
+#include "Player.h"
+#include "Inventory.h"
 //#include "Player.h"
 //전방선언 같은 거...?
 
@@ -367,8 +369,10 @@ void EnemyDead::Release(Enemy* _sEnemy)
 
 	//if (_sEnemy->GetHP()->IsDead())
 	//cout << "죽었다 ㅠㅠ" << endl;
-
 	_sEnemy->SetIsActive(false);
+	if (SCENEMANAGER->GetNowScene()->GetName() == "BossRoom")return;
+	Player* player = (Player*)SCENEMANAGER->GetNowScene()->GetChildFromName("Will");
+	if (player->GetInventory()->GetInventorySize()>=20)return;
 
 	int some = RND->getInt(3);
 	//int some = 1;

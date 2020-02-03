@@ -40,7 +40,7 @@ void Boss::Init(Vector2 pos, vector<Tile*> tiles)
 
 
 	_physics = AddComponent<PhysicsBody>();
-	_physics->Init(BodyType::DYNAMIC, 1.0f);
+	_physics->Init(BodyType::DYNAMIC, 1.0f, 10.0f);
 	////가상세계의 렉트 뒤틀리는거 고정
 	_physics->GetBody()->SetFixedRotation(true);
 
@@ -312,7 +312,7 @@ void Boss::Init(Vector2 pos, vector<Tile*> tiles)
 void Boss::Update()
 {
 	Object::Update();
-	
+	_physics->SetBodyPosition();
 	_Bstate->Update();
 
 	//이건 보스 스테이트 위에 돌아야 할지 아래에 돌아야 할지 모르겠으니까 터지면 위로 올려주세요 슬라임 A스타 주는거에요
