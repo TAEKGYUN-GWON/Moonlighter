@@ -31,9 +31,7 @@ void NpcManager::Init(ShopScene* parent)
 void NpcManager::Update()
 {
 	//NPC가 4명 미만이면 더 넣어줘라	
-	if (_vNpc.size() < 4)
-
-
+	if (_vNpc.size() < 2)
 	{
 		_counter++;
 		if (_counter == _timer)
