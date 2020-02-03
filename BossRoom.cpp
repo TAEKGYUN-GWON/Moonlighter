@@ -29,6 +29,10 @@ void BossRoom::Init()
 	GRAPHICMANAGER->AddFrameImage("Shadow", L"resource/img/Enemy/Shadow.png",1,1);
 	GRAPHICMANAGER->FindImage("Open_Boss");
 
+	_hp = GRAPHICMANAGER->AddImage("boss_hp", L"resource/img/UI/bossHp.png");
+	hpMaxX = _hp->GetWidth();
+	hpMaxY = _hp->GetHeight();
+
 	_player = Object::CreateObject<Player>();
 	_player->Init();
 	//_player->GetTrans()->SetPos(Vector2(35, 37) + Vector2((TILEWIDTH * Bossroom_X) / 2, (TILEHEIGHT * Bossroom_Y) - 150));
@@ -45,6 +49,7 @@ void BossRoom::Init()
 
 	UI = new UiManager;
 	UI->Init();
+	CAMERA->SetPosition(_player->GetTrans()->GetPos(), "BossRoom_bg");
 }
 
 void BossRoom::Update()
@@ -57,15 +62,16 @@ void BossRoom::Update()
 void BossRoom::Render()
 {
 	GRAPHICMANAGER->DrawImage("BossRoom_bg", 0, 0, LEFT_TOP);
-	wchar_t buffer[128];
+	//wchar_t buffer[128];
 	//swprintf(buffer, 128, L"x : %d \n y : %d ", (55 + _ptMouse.x) / TILEWIDTH, _ptMouse.y);
 	//swprintf(buffer, 128, L"x : %f \n y : %f ", _ptMouse.x + CAMERA->GetPosition().x, _ptMouse.y + CAMERA->GetPosition().y);
-	swprintf(buffer, 128, L"x : %d \n y : %d ", (int)(_ptMouse.x + CAMERA->GetPosition().x) / TILEWIDTH
-		, (int)(_ptMouse.y + CAMERA->GetPosition().y) / TILEHEIGHT);
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2 - 200, 0), buffer, 20, 300, 50, ColorF::Azure);
+	//swprintf(buffer, 128, L"x : %d \n y : %d ", (int)(_ptMouse.x + CAMERA->GetPosition().x) / TILEWIDTH
+	//	, (int)(_ptMouse.y + CAMERA->GetPosition().y) / TILEHEIGHT);
+	//GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2 - 200, 0), buffer, 20, 300, 50, ColorF::Azure);
 
 	Scene::Render();
 	UI->Render();
+	_hp->Render(Vector2(300, WINSIZEY-50), Vector2((hpMaxX + 100) / (_boss->GetHP()->GetMaxHP() / _boss->GetHP()->GetCurrentHP()), hpMaxY), 0, false, 0.9f, PIVOT::LEFT_TOP, false);
 }
 
 void BossRoom::SetUP()

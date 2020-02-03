@@ -317,7 +317,7 @@ void Boss::Update()
 
 	//이건 보스 스테이트 위에 돌아야 할지 아래에 돌아야 할지 모르겠으니까 터지면 위로 올려주세요 슬라임 A스타 주는거에요
 	//그리고 이건 벡터 정방향으로 돌리는건데 터질수도 있으니까 혹시 터지면 밑에 벡터 거꾸로 도는걸 켜주세요
-	cout << _ability->GetCurrentHP() << endl;
+	//cout << _ability->GetCurrentHP() << endl;
 	for (int i = 0; i<_enemys.size();i++)
 	{
 		if (!_enemys[i]->GetIsActive())
@@ -358,7 +358,8 @@ void Boss::Render()
 {
 	Object::Render();
 
-
+	//_hp->Render(Vector2(170, 30), Vector2((hpMaxX + 60) / (player->GetAbility()->GetMaxHP() / player->GetAbility()->GetCurrentHP()), hpMaxY), 0, false, 0.7f, PIVOT::LEFT_TOP, false);
+	
 }
 
 void Boss::Release()

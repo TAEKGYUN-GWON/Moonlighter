@@ -33,9 +33,6 @@ void EnemyManeger::Init(Dungeon* room)
 
 void EnemyManeger::Update()
 {
-	//vector 만큼 돌아야 겠지...생성해줘야 하니까?
-	//각각의 enemy의 state를 변경? slime 은 slime 어택 골렘은 골렘어택?
-
 	for (int i = 0; i < _vEnemy.size(); i++)
 	{
 		if (!_vEnemy[i]->GetIsActive())
@@ -69,7 +66,6 @@ void EnemyManeger::Update()
 			break;
 		}
 	}
-	/*if (!_bullet->GetIsActive()) _BobjPool->InssertPool()*/
 	Fire();
 }
 
@@ -96,9 +92,6 @@ void EnemyManeger::Render()
 {
 	for (Object* a : _BobjPool->GetActivePool()) a->Render();
 
-	wchar_t buffer[128];
-	swprintf(buffer, 128, L"%d", _BobjPool->GetActivePoolSize());
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2 - 200), buffer, 20, 200, 30, ColorF::Honeydew);
 	
 }
 

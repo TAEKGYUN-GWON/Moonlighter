@@ -38,7 +38,6 @@ protected:
 	list<Vector2> _path;
 
 	bool move;
-	//타임도 줘야 하나?
 	bool _isAtk;
 
 	bool _changePos = true;

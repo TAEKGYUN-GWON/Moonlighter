@@ -52,17 +52,17 @@ void DungeonScene::Render()
 	_player->GetInventory()->Render();
 	GRAPHICMANAGER->Text(Vector2(10, 6), L"Dungeon Scene", 20, 200, 30, ColorF::AliceBlue);
 
-	wchar_t buffer[128];
-	swprintf(buffer, 128, L"Fps : %f", TIMEMANAGER->GetFps());
-
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 0), buffer, 20, 300, 50, ColorF::Azure);
-
-	//swprintf(buffer, 128, L"x : %d \n y : %d ", _ptMouse.x, _ptMouse.y);
-	swprintf(buffer, 128, L"x : %d \n y : %d ", (55 + _ptMouse.x) / TILEWIDTH,_ptMouse.y);
-
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2-200, 0), buffer, 20, 300, 50, ColorF::Azure);
-
-	GRAPHICMANAGER->Text(Vector2(10, 6), L"Dungeon Scene", 20, 200, 30, ColorF::AliceBlue);
+	//wchar_t buffer[128];
+	//swprintf(buffer, 128, L"Fps : %f", TIMEMANAGER->GetFps());
+	//
+	//GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 0), buffer, 20, 300, 50, ColorF::Azure);
+	//
+	////swprintf(buffer, 128, L"x : %d \n y : %d ", _ptMouse.x, _ptMouse.y);
+	//swprintf(buffer, 128, L"x : %d \n y : %d ", (55 + _ptMouse.x) / TILEWIDTH,_ptMouse.y);
+	//
+	//GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2-200, 0), buffer, 20, 300, 50, ColorF::Azure);
+	//
+	//GRAPHICMANAGER->Text(Vector2(10, 6), L"Dungeon Scene", 20, 200, 30, ColorF::AliceBlue);
 
 
 	//wchar_t buffer[128];

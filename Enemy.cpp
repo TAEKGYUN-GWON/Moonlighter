@@ -126,10 +126,7 @@ void Enemy::Update()
 void Enemy::Render()
 {
 	Object::Render();
-	wchar_t buffer[128];
-	swprintf(buffer, 128, L"Angle : %f", Vector2::GetAngle(_trans->GetPos(), _player->GetTrans()->GetPos()) * Rad2Deg);
-	GRAPHICMANAGER->Text(_trans->GetPos() - Vector2::down * 20, buffer, 20, 300, 50, ColorF::Azure, TextPivot::CENTER, L"맑은고딕", true);
-
+	
 }
 
 void Enemy::SetPath(list<Vector2> _path)
@@ -182,11 +179,8 @@ void EnemyIdle::Update(Enemy* _sEnemy)
 }
 void EnemyIdle::Release(Enemy* _sEnemy)
 {
-//	cout << "move로 가!!!" << endl;
 	//  체력이 0 이면 죽어라
-	
-	
-		SetEnemyState(_sEnemy, EnemyMove::GetInstance());
+	SetEnemyState(_sEnemy, EnemyMove::GetInstance());
 }
 //■■■■■■■■■■■■ Move ■■■■■■■■■■■■■
 EnemyMove* EnemyMove::GetInstance()
@@ -226,10 +220,6 @@ void EnemyMove::Update(Enemy* _sEnemy)
 		_sEnemy->GetSprite()->SetFrameY(3);
 		break;
 	}
-	
-	//cout << "여기는 무브 오예 두둠칫" << endl;
-	//loat a = RND->getFloat(10000000);
-	//if(a<30)
 	_sEnemy->SetMove(false);
 
 	timer += TIMEMANAGER->getElapsedTime();
@@ -243,14 +233,7 @@ void EnemyMove::Update(Enemy* _sEnemy)
 
 void EnemyMove::Release(Enemy* _sEnemy)
 {
-
-	//if 범위에 플레이어가 있으면 공격하고
-	//SetEnemyState(_sEnemy, EnemyAttack::GetInstance());
-	// else if 범위에 플레이어가 없으면 다시 무브
-	//SetEnemyState(_sEnemy, EnemyMove::GetInstance());
-	//cout << "다시 무브?" << endl;
 	SetEnemyState(_sEnemy, EnemyIdle::GetInstance());
-	
 }
 //■■■■■■■■■■■ Attack ■■■■■■■■■■■■
 EnemyAttack* EnemyAttack::GetInstance()

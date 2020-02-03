@@ -7,7 +7,7 @@ void ShopScene::Init()
 	Scene::Init();
 
 	_name = "Shop";
-
+	
 	GRAPHICMANAGER->AddImage("ShopBg", L"resource/img/Shop/shop_background.png");
 	GRAPHICMANAGER->AddImage("ShopBgDoor", L"resource/img/Shop/shop_background_door.png");
 	GRAPHICMANAGER->AddImage("ShopBgDoor2", L"resource/img/Shop/shop_background_door2.png");
@@ -67,6 +67,7 @@ void ShopScene::Init()
 	UI->Init();
 
 	_fadeAlpha = 1.0f;
+	cout << _player->GetAbility()->GetCurrentHP() << endl;
 }
 
 void ShopScene::Release()
@@ -75,6 +76,8 @@ void ShopScene::Release()
 	
 	_player->Release();
 
+	_tiles.clear();
+	_shopDoor->Release();
 	Scene::Release();
 }
 

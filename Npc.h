@@ -64,7 +64,6 @@ public:
 	~Npc() {};
 
 	virtual void Init(string imgkey, Vector2 pos);
-	virtual void Release() override;
 	virtual void Update() override;
 	virtual void Render() override;
 
