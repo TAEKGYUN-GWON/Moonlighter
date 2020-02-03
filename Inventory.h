@@ -66,8 +66,6 @@ public:
 	bool DeductionMoney(int money);
 	int GetMoney() { return _money; }
 
-	string GetItem();
-
 	int GetATK() { return _atk; }
 	void SetATK(int atk) { _atk = atk; }
 	tagItemInfo GetItem();
