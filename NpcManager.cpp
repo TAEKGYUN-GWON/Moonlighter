@@ -51,8 +51,8 @@ void NpcManager::Update()
 	Release();
 	
 	//충돌
-	CheckStandCollision(); //계산대
-	ShopStandCollision(); //가판대
+	//CheckStandCollision(); //계산대
+	//ShopStandCollision(); //가판대
 
 	//Astar
 	SetAstar();
@@ -93,7 +93,7 @@ void NpcManager::MakeNpc()
 	//_npc->SetDestination(Vector2(392, 700)); //시작하면 문으로 들어가라고
 	//_npc->Move(); //astar 일단 여기다가 담아놓음
 
-	if (_vNpc.size() < 4)
+	if (_vNpc.size() < 2)
 	{
 		int a = RND->getInt(4);
 
@@ -163,49 +163,49 @@ void NpcManager::MakeNpc()
 	}
 }
 
-
-//계산대랑 충돌
-void NpcManager::CheckStandCollision()
-{
-	for (int i = 0; i < _vNpc.size(); i++)
-	{
-		int D = getDistance(
-			_vNpc[i]->GetTrans()->GetPos().x, //엔피씨 위치랑
-			_vNpc[i]->GetTrans()->GetPos().y,
-			_checkStand->GetTrans()->GetPos().x,// 계산대 위치
-			_checkStand->GetTrans()->GetPos().y);
-		//거리가 반지름 더한거보다 작아야 충돌임
-		if (D < _vNpc[i]->GetTrans()->GetScale().x / 2 + _checkStand->GetTrans()->GetScale().x / 2)
-		{
-			_vNpc[i]->SetIsCheckSOn(true); //NPC가 계산대랑 충돌중 On!!!!!!!!!
-			_checkStand->SetStandisInUse(true); //계산대가 사용중 ON!!!!!!!!!
-		}
-	}
-}
-
-//가판대랑 충돌
-void NpcManager::ShopStandCollision()
-{
-	for (int i = 0; i < _vNpc.size(); i++)
-	{
-		for (int j = 0; j < _shopStandMgr->GetShopStandVector().size(); j++)
-		{
-			int D = getDistance(
-				_vNpc[i]->GetTrans()->GetPos().x, //엔피씨 위치랑
-				_vNpc[i]->GetTrans()->GetPos().y,
-				_shopStandMgr->GetShopStandVector()[j]->GetTrans()->GetPos().x, //테이블위치
-				_shopStandMgr->GetShopStandVector()[j]->GetTrans()->GetPos().y);
-			//거리가 반지름 더한거보다 작아야 충돌임
-			if (D < _vNpc[i]->GetTrans()->GetScale().x / 2 + _shopStandMgr->GetShopStandVector()[j]->GetTrans()->GetScale().x / 2)
-			{
-				_vNpc[i]->SetIsShopSOn(true); //NPC가 가판대랑 충돌중 On!!!!!!!!!
-				_shopStandMgr->GetShopStandVector()[j]->SetIsInUse(true); //가판대가 사용중 ON!!!!!!!!!
-
-				cout << "가판대!!!" << endl;
-			}
-		}
-	}
-}
+//
+////계산대랑 충돌
+//void NpcManager::CheckStandCollision()
+//{
+//	for (int i = 0; i < _vNpc.size(); i++)
+//	{
+//		int D = getDistance(
+//			_vNpc[i]->GetTrans()->GetPos().x, //엔피씨 위치랑
+//			_vNpc[i]->GetTrans()->GetPos().y,
+//			_checkStand->GetTrans()->GetPos().x,// 계산대 위치
+//			_checkStand->GetTrans()->GetPos().y);
+//		//거리가 반지름 더한거보다 작아야 충돌임
+//		if (D < _vNpc[i]->GetTrans()->GetScale().x / 2 + _checkStand->GetTrans()->GetScale().x / 2)
+//		{
+//			_vNpc[i]->SetIsCheckSOn(true); //NPC가 계산대랑 충돌중 On!!!!!!!!!
+//			_checkStand->SetStandisInUse(true); //계산대가 사용중 ON!!!!!!!!!
+//		}
+//	}
+//}
+//
+////가판대랑 충돌
+//void NpcManager::ShopStandCollision()
+//{
+//	for (int i = 0; i < _vNpc.size(); i++)
+//	{
+//		for (int j = 0; j < _shopStandMgr->GetShopStandVector().size(); j++)
+//		{
+//			int D = getDistance(
+//				_vNpc[i]->GetTrans()->GetPos().x, //엔피씨 위치랑
+//				_vNpc[i]->GetTrans()->GetPos().y,
+//				_shopStandMgr->GetShopStandVector()[j]->GetTrans()->GetPos().x, //테이블위치
+//				_shopStandMgr->GetShopStandVector()[j]->GetTrans()->GetPos().y);
+//			//거리가 반지름 더한거보다 작아야 충돌임
+//			if (D < _vNpc[i]->GetTrans()->GetScale().x / 2 + _shopStandMgr->GetShopStandVector()[j]->GetTrans()->GetScale().x / 2)
+//			{
+//				_vNpc[i]->SetIsShopSOn(true); //NPC가 가판대랑 충돌중 On!!!!!!!!!
+//				_shopStandMgr->GetShopStandVector()[j]->SetIsInUse(true); //가판대가 사용중 ON!!!!!!!!!
+//
+//				cout << "가판대!!!" << endl;
+//			}
+//		}
+//	}
+//}
 
 //상태 조건을 여기다가 걸어줘서 위치를 옮겨줘야함
 void NpcManager::SetAstar()
@@ -213,7 +213,6 @@ void NpcManager::SetAstar()
 	//얘가 뭘하려고 여기있는지 매니저에서 다 체크하고 해줘야함
 	for (int i = 0; i < _vNpc.size(); i++) //npc숫자만큼 검사한다
 	{
-
 		//문앞에 있음(입장상태)
 		if (_vNpc[i]->GetTrans()->GetPos().x > 390 && _vNpc[i]->GetTrans()->GetPos().x < 410 &&
 			_vNpc[i]->GetTrans()->GetPos().y > 690 && _vNpc[i]->GetTrans()->GetPos().y < 710)
@@ -241,42 +240,41 @@ void NpcManager::SetAstar()
 		{
 			_vNpc[i]->SetNpcNowPosition(NPCNOWPOSITION::POS_WINDOW); //창문앞임
 
-			int a = RND->getInt(2); //랜덤값 받을 변수
+			int a = RND->getInt(4); //랜덤값 받을 변수
 
 			if (a == 0)// 집에가고싶다
 			{
 				_vNpc[i]->SetNpcThought(NPCTHOUGHT::GOHOME); //집에가고싶은 마음
 				AstarFunction(i, DESTINATION::DES_DOOR); //문으로 가
 			}
-			if (a == 1)// || a == 2 || a == 3) //구경하러 가라
+			if (a > 0) //구경하러 가라
 			{
-				_vNpc[i]->SetNpcThought(NPCTHOUGHT::CHOOSE); //구경하고싶은 마음
+				_vNpc[i]->SetNpcThought(NPCTHOUGHT::CHOOSE); //구경하고싶다
 				for (int j = 0; j < _shopStandMgr->GetShopStandVector().size(); j++)//가판대체크
 				{
 					//조건이 채워졌으면
 					if (_shopStandMgr->GetShopStandVector()[j]->GetIsInUse() == false && //아무도없음
 						_shopStandMgr->GetShopStandVector()[j]->GetIsItemOn() == false) //아이템 있음
-					{ //GetIsItemOn이 계속 true로 나옴 
+					{  
 						//해당 판매대로 가라
-						AstarFunction(i, j + 1); //1사분면이 1번이라, j+1 하면 각 사분면 앞 포지션 됨
-						_shopStandMgr->GetShopStandVector()[j]->SetIsInUse(true); //여긴 오지도 않았는데 true?
+						AstarFunction(i, j+1); //1사분면이 1번이라, j+1 하면 각 사분면 앞 포지션 됨
 						
 						//판매대 앞에 도착했음
-						//if (_vNpc[i]->GetTrans()->GetPos().x > 510 && _vNpc[i]->GetTrans()->GetPos().x < 520 &&
-						//	_vNpc[i]->GetTrans()->GetPos().y > 610 && _vNpc[i]->GetTrans()->GetPos().y < 620)
-						//{
-						//	//도착했으면 누가 쓰고있나 다시 체크해..
-						//	//쓰고있으면 for문 빠져나가서 가판대 번호에 ++해
-						//	//if (_shopStandMgr->GetShopStandVector()[j]->GetIsInUse() == true) break;
-						//	//else
-						//	//{
-						//		_vNpc[i]->SetNpcNowPosition(NPCNOWPOSITION::POS_STAND1);
-						//		_vNpc[i]->SetIsShopSOn(true); //내가 충돌중이다.. 이게 왜필요하지?
-
-						//	//}
-						//}
-						
+						if (_vNpc[i]->GetTrans()->GetPos().x > 282 && _vNpc[i]->GetTrans()->GetPos().x < 292 &&
+							_vNpc[i]->GetTrans()->GetPos().y > 520 && _vNpc[i]->GetTrans()->GetPos().y < 530)
+						{
+							//도착했으면 누가 쓰고있나 다시 체크해..
+							//쓰고있으면 for문 빠져나가서 가판대 번호에 ++해
+							if (_shopStandMgr->GetShopStandVector()[j]->GetIsInUse() == true) continue;
+							else if (_shopStandMgr->GetShopStandVector()[j]->GetIsInUse() == false)
+							{
+								_vNpc[i]->SetNpcNowPosition(NPCNOWPOSITION::POS_STAND1);
+								_vNpc[i]->SetIsShopSOn(true); //내가 충돌중이다.. 이게 왜필요하지
+								_shopStandMgr->GetShopStandVector()[j]->SetIsInUse(true);
+							}
+						}						
 					}
+					break;
 				}
 			}
 		}
