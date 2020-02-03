@@ -34,10 +34,12 @@ public:
 
 	bool GetActive() { return _isActive; }
 	void SetActive(bool isActive) { _isActive = isActive; }
-	Vector2 GetItemPos() { return _itemPos; }
 
 	bool GetIsInUse() { return _isInUse; }
 	void SetIsInUse(bool isinuse) { _isInUse = isinuse; }
+
+	bool GetIsItemOn() { return _isItemOn; }
+	Vector2 GetItemPos() { return _itemPos; }
 
 
 

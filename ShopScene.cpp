@@ -145,7 +145,6 @@ void ShopScene::Render()
 
 void ShopScene::SetUp()
 {
-	
 	for (int i = 0; i < SHOPTILEMAXY; ++i)
 	{
 		for (int j = 0; j < SHOPTILEMAXX; ++j)
