@@ -1,11 +1,17 @@
 {
     "item": {
+        "crystal_Energy": {
+            "name": "Crystal_Energy",
+            "price": 0,
+            "some": [
+                3
+            ]
+        },
         "energy_Crystal": {
             "name": "Energy_Crystal",
             "price": 0,
             "some": [
-                10,
-                1
+                10
             ]
         },
         "familiar_Egg": {
@@ -19,25 +25,24 @@
             "name": "Golem_Core",
             "price": 0,
             "some": [
-                10,
-                1
+                4,
+                10
             ]
         },
-        "treated_Wood": {
-            "name": "Treated_Wood",
-            "price": 0,
-            "some": [
-                10,
-                1
-            ]
-        },
-        "vine": {
-            "name": "Vine",
+        "naja_Note": {
+            "name": "Naja_Note",
             "price": 0,
             "some": [
                 2
             ]
+        },
+        "reinforced_Steel_G": {
+            "name": "Reinforced_Steel_G",
+            "price": 0,
+            "some": [
+                4
+            ]
         }
     },
-    "money": 135948
+    "money": 129464
 }
