@@ -40,11 +40,36 @@ void TownScene::Init()
 	GRAPHICMANAGER->AddFrameImage("set_tile", L"set_tile3.png", 4, 6);
 	GRAPHICMANAGER->AddFrameImage("set_tile_dungeon", L"set_tile_dungeon.png", 4, 6);
 
+	_name = "Town";
+
 	_player = Object::CreateObject<Player>();
 	_player->Init();
-	_player->GetTrans()->SetPos(Vector2(100, 600) + Vector2(0, -14));
+
+	std::ifstream file("PlayerInfo.json");
+	string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+	json j = json::parse(content);
+	
+	string prevScene = j["Position"]["curScene"];
+	_prevScene = prevScene;
+
+	if (_prevScene == "Shop")
+	{
+		_player->GetTrans()->SetPos(Vector2(1969, 528));
+	}
+	else if (_prevScene == "Entrance")
+	{
+		//_player->GetTrans()->SetPos(Vector2(1893, 385));
+		_player->GetTrans()->SetPos(Vector2(2746, 752));
+	}
+	else
+	{
+		_player->GetTrans()->SetPos(Vector2(100, 600) + Vector2(0, -14));
+	}
+
 	_player->GetPhysics()->SetBodyPosition();
 	_player->GetSprite()->SetPosition(_player->GetTrans()->GetPos());
+
+	_fadeAlpha = 1.0f;
 
 	SetUp();
 }
@@ -54,6 +79,46 @@ void TownScene::Update()
 	Scene::Update();
 
 	CAMERA->SetPosition(_player->GetTrans()->GetPos(), "town_map");
+
+	
+	if (_fadeAlpha >= 0.0f)
+	{
+		_fadeAlpha -= 0.7f * TIMEMANAGER->getElapsedTime();
+		if (_fadeAlpha < 0.0f)
+		{
+			_fadeAlpha = 0.0f;
+		}
+	}
+
+	if (_player->GetTrans()->GetPos().x >= 1930.0f && _player->GetTrans()->GetPos().x <= 2000 &&
+		_player->GetTrans()->GetPos().y >= 490 && _player->GetTrans()->GetPos().y <= 540)
+	{
+		_player->SetIsInteraction(true);
+	}
+
+	if (_player->GetIsInteraction() && _player->GetTrans()->GetPos().x >= 1930.0f && _player->GetTrans()->GetPos().x <= 2000 &&
+		_player->GetTrans()->GetPos().y >= 490 && _player->GetTrans()->GetPos().y <= 540)
+	{
+		if (KEYMANAGER->isOnceKeyDown('J'))
+		{
+			SCENEMANAGER->changeScene("Shop");
+		}
+	}
+
+	if (_player->GetTrans()->GetPos().x >= 3000.0f &&
+		_player->GetTrans()->GetPos().y >= 719 && _player->GetTrans()->GetPos().y <= 854)
+	{
+		SCENEMANAGER->changeScene("Entrance");
+	}
+}
+
+void TownScene::Release()
+{
+	_player->Release();
+
+
+
+	Scene::Release();
 }
 
 void TownScene::SetUp()
@@ -157,4 +222,7 @@ void TownScene::Render()
 	GRAPHICMANAGER->DrawImage("town_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
 	Scene::Render();
 	_player->GetInventory()->Render();
+
+	GRAPHICMANAGER->DrawFillRect(Vector2(WINSIZEX / 2 + CAMERA->GetPosition().x, WINSIZEY / 2 + CAMERA->GetPosition().y),
+		Vector2(WINSIZEX, WINSIZEY), 0.0f, ColorF::Black, _fadeAlpha, PIVOT::CENTER, true);
 }

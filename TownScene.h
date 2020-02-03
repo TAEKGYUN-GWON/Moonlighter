@@ -9,9 +9,14 @@ private:
 	Tile* _tiles[TILENUMX * TILENUMY];
 	tagTile _tagTiles[TILENUMX * TILENUMY];
 	Player* _player;
+	string _prevScene;
+	float _fadeAlpha;
+	bool _isFade;
+
 public:
 	virtual void Init();
 	virtual void Update();
+	virtual void Release();
 
 	void SetUp();
 	void Render();
