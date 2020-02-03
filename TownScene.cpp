@@ -40,17 +40,20 @@ void TownScene::Init()
 	GRAPHICMANAGER->AddFrameImage("set_tile", L"set_tile3.png", 4, 6);
 	GRAPHICMANAGER->AddFrameImage("set_tile_dungeon", L"set_tile_dungeon.png", 4, 6);
 
-
-
-
 	_player = Object::CreateObject<Player>();
 	_player->Init();
+	_player->GetTrans()->SetPos(Vector2(100, 600) + Vector2(0, -14));
+	_player->GetPhysics()->SetBodyPosition();
+	_player->GetSprite()->SetPosition(_player->GetTrans()->GetPos());
+
 	SetUp();
 }
 
 void TownScene::Update()
 {
 	Scene::Update();
+
+	CAMERA->SetPosition(_player->GetTrans()->GetPos(), "town_map");
 }
 
 void TownScene::SetUp()
@@ -137,6 +140,12 @@ void TownScene::SetUp()
 				}
 				_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPosition(_tiles[i]->GetChildren()[0]->GetTrans()->GetPos());
 				_tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetSize(_tiles[i]->GetChildren()[0]->GetTrans()->GetScale());
+			}
+			if (_tiles[i]->GetAttribute() == "Wall")
+			{
+				auto p = _tiles[i]->AddComponent<PhysicsBody>();
+				p->Init(BodyType::STATIC, 1, 1);
+				p->SetBodyPosition();
 			}
 		}
 	}

@@ -372,10 +372,11 @@ void EnemyDead::Release(Enemy* _sEnemy)
 	if (SCENEMANAGER->GetNowScene()->GetChildFromName("Will") )return;
 
 	int some = RND->getInt(3);
+	//int some = 1;
 
 	for (int i = 0; i < some; i++)
 	{
-		int rand = RND->getInt(10);
+		int rand =  RND->getInt(10);
 		switch (rand)
 		{
 		case 0: Item::CreateItem<Vine>(_sEnemy->GetTrans()->GetPos()); break;

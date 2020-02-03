@@ -4,18 +4,30 @@
 #include "Component.h"
 struct tagItemInfo
 {
-	tagItemInfo(Item* item, int some)
+	tagItemInfo() {};
+	tagItemInfo(string name, int some)
 	{
 		this->item = item;
 		this->some = some;
 	}
-	tagItemInfo(Item* item)
+	tagItemInfo(string item,Vector2 pos,int price,int some)
+	{
+		this->item = item;
+		this->some = some;
+		this->pos = pos;
+		this->price = price;
+	}
+	tagItemInfo(string item, Vector2 pos, int price)
 	{
 		this->item = item;
 		this->some = 1;
+		this->pos = pos;
+		this->price = price;
 	}
-	Item* item;
+	string item;
 	int some;
+	int price;
+	Vector2 pos;
 };
 
 class Inventory
@@ -54,8 +66,7 @@ public:
 	bool DeductionMoney(int money);
 	int GetMoney() { return _money; }
 
-	string GetItem();
-
 	int GetATK() { return _atk; }
 	void SetATK(int atk) { _atk = atk; }
+	tagItemInfo GetItem();
 };

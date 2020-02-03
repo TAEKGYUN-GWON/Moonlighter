@@ -36,12 +36,14 @@ void Object::Update()
 
 void Object::Release()
 {
-	if (_parent)
+	if (_parent != nullptr)
 		_parent->RemoveChild(this);
 	for (Object* child : _children)
 	{
 		child->Release();
 	}
+
+
 	for (int i = _components.size() - 1; i >= 0; i--)
 	{
 		_components[i]->Release();

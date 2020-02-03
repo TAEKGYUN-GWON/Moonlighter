@@ -21,7 +21,7 @@ void StartScene::Init()
 	SCENEMANAGER->addScene("BossRoom", new BossRoom);
 
 	GraphicsManager::getSingleton()->AddImage("dd", L"eagle.png");
-	GraphicsManager::getSingleton()->AddFrameImage("d2", L"fatkachu.png", 4, 1);
+	GraphicsManager::getSingleton()->AddFrameImage("fatkachu", L"fatkachu.png", 4, 1);
 	GRAPHICMANAGER->AddFrameImage("bn", L"blueNumber.png", 4, 1);
 
 	GRAPHICMANAGER->AddImage("coin", L"resource/img/UI/coin.png");
@@ -31,7 +31,14 @@ void StartScene::Init()
 	GRAPHICMANAGER->AddImage("heart", L"resource/img/UI/heart.png");
 	GRAPHICMANAGER->AddImage("heart", L"resource/img/UI/heart.png");
 	GRAPHICMANAGER->AddFrameImage("UI_WeaponSwap", L"resource/img/UI/UI_WeaponSwap.png", 4, 2);
-
+	GRAPHICMANAGER->AddFrameImage("num", L"number.png", 4, 1);
+	GRAPHICMANAGER->FindImage("num")->SetFrameSize(Vector2(10,10));
+	Object* obj = Object::CreateObject<Object>();
+	obj->GetTrans()->SetPos(WINSIZEX / 2+200, WINSIZEY - 200);
+	//obj->GetTrans()->SetScale(200,200);
+	auto n = obj->AddComponent<Sprite>();
+	n->Init(true, true);
+	n->SetImgName("num");
 
 
 	GRAPHICMANAGER->AddImage("Vine", L"resource/img/Items/Vine.png");
@@ -54,8 +61,8 @@ void StartScene::Init()
 
 	//ui = new UiManager;
 	//ui->Init();
-	inven = new Inventory;
-	inven->Init();
+	//inven = new Inventory;
+	//inven->Init();
 	//ui->SetInvenLink(inven);
 
 	//inven->Insert(Item::CreateItem<Golem_Core>(Vector2(0, 0)));
@@ -63,20 +70,27 @@ void StartScene::Init()
 	//inven->Insert(Item::CreateItem<Crystal_Energy>(Vector2(0, 0)));
 	//
 
-	_smithy = new Smithy;
-	_smithy->Init(inven);
+	//_smithy = new Smithy;
+	//_smithy->Init(inven);
 
 
 
 	obj = Object::CreateObject<Object>();
 	obj->GetTrans()->SetPos(Vector2(WINSIZEX / 2, 200));
-	obj->AddComponent<Sprite>()->Init();
+	obj->AddComponent<Sprite>();
 	obj->GetComponent<Sprite>()->SetImgName("dd");
-	obj->GetComponent<Sprite>()->SetPosition(obj->GetTrans()->GetPos());
 	auto a = GRAPHICMANAGER->FindImage("dd");
 	obj->GetComponent<Sprite>()->SetSize(Vector2(a->GetFrameWidth(), a->GetFrameHeight()));
 	//obj->GetTrans()->SetScale(Vector2(obj->GetComponent<Sprite>()->GetGraphic()->GetFrameWidth(), obj->GetComponent<Sprite>()->GetGraphic()->GetFrameWidth()));
 	obj->GetTrans()->SetScale(Vector2(100, 50));
+
+
+	Object* obj2 = Object::CreateObject<Object>();
+	obj2->GetTrans()->SetPos(Vector2(WINSIZEX / 2 + 100, 500));
+	obj2->AddComponent<Sprite>()->Init(true);
+	obj2->GetComponent<Sprite>()->SetImgName("fatkachu");
+	obj2->GetComponent<Sprite>()->SetSize(Vector2(100, 38));
+	obj2->GetTrans()->SetScale(Vector2(obj2->GetComponent<Sprite>()->GetGraphic()->GetFrameWidth(), obj2->GetComponent<Sprite>()->GetGraphic()->GetFrameWidth()));
 }
 
 void StartScene::Update()
@@ -93,9 +107,9 @@ void StartScene::Update()
 	if (KEYMANAGER->isOnceKeyDown('0')) SCENEMANAGER->changeScene("test");
 	if (KEYMANAGER->isOnceKeyDown('6')) SCENEMANAGER->changeScene("BossRoom");
 
-	inven->Update();
+	//inven->Update();
 
-	_smithy->Update();
+	//_smithy->Update();
 }
 
 void StartScene::Render()
@@ -118,23 +132,29 @@ void StartScene::Render()
 	wchar_t* str;
 	str = &b[0];
 
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX/2, 200), b, 20, 300, 50, ColorF::Azure);
-
-	GRAPHICMANAGER->DrawFrameImage("bn", Vector2(WINSIZEX / 2, 400), 0, 0, Vector2(320, 50));
-	GRAPHICMANAGER->DrawFrameImage("bn", Vector2(WINSIZEX / 2, 460), 1, 0, Vector2(320, 50));
-	GRAPHICMANAGER->DrawFrameImage("bn", Vector2(WINSIZEX / 2, 520), 2, 0, Vector2(320, 50));
-	GRAPHICMANAGER->DrawFrameImage("bn", Vector2(WINSIZEX / 2, 580), 3, 0, Vector2(320, 50));
-
-	GRAPHICMANAGER->DrawRect(Vector2(WINSIZEX / 2, 400), Vector2(80, 50), 0.0f, ColorF::Red);
-	GRAPHICMANAGER->DrawRect(Vector2(WINSIZEX / 2, 460), Vector2(80, 50), 0.0f, ColorF::Red);
-	GRAPHICMANAGER->DrawRect(Vector2(WINSIZEX / 2, 520), Vector2(80, 50), 0.0f, ColorF::Red);
-	GRAPHICMANAGER->DrawRect(Vector2(WINSIZEX / 2, 580), Vector2(80, 50), 0.0f, ColorF::Red);
+	//GRAPHICMANAGER->Text(Vector2(WINSIZEX/2, 200), b, 20, 300, 50, ColorF::Azure);
+	//
+	//GRAPHICMANAGER->DrawFrameImage("bn", Vector2(WINSIZEX / 2, 400), 0, 0, Vector2(320, 50));
+	//GRAPHICMANAGER->DrawFrameImage("bn", Vector2(WINSIZEX / 2, 460), 1, 0, Vector2(320, 50));
+	//GRAPHICMANAGER->DrawFrameImage("bn", Vector2(WINSIZEX / 2, 520), 2, 0, Vector2(320, 50));
+	//GRAPHICMANAGER->DrawFrameImage("bn", Vector2(WINSIZEX / 2, 580), 3, 0, Vector2(320, 50));
+	//
+	//GRAPHICMANAGER->DrawRect(Vector2(WINSIZEX / 2, 400), Vector2(80, 50), 0.0f, ColorF::Red);
+	//GRAPHICMANAGER->DrawRect(Vector2(WINSIZEX / 2, 460), Vector2(80, 50), 0.0f, ColorF::Red);
+	//GRAPHICMANAGER->DrawRect(Vector2(WINSIZEX / 2, 520), Vector2(80, 50), 0.0f, ColorF::Red);
+	//GRAPHICMANAGER->DrawRect(Vector2(WINSIZEX / 2, 580), Vector2(80, 50), 0.0f, ColorF::Red);
 
 	//swprintf(buffer, 128, L"test X : %f\test Y : %f", test->GetTrans()->GetPos().x, test->GetTrans()->GetPos().y);
 	//GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 400), buffer, 20, 300, 50, ColorF::Azure);
 	//ui->Render();
-	inven->Render();
+//	inven->Render();
 
-	_smithy->Render();
+	//_smithy->Render();
+}
+
+void StartScene::Release()
+{
+	Scene::Release();
+	//inven->Release();
 }
 

@@ -34,10 +34,11 @@ void Scene::Release()
 	//	return;
 	//}
 	//Object::Release();
-	for (Object* child : _children)
+	for (int i = _children.size(); i <= 0; i--)
 	{
-		child->Release();
+		_children[i]->Release();
 	}
+
 }
 
 void Scene::Update()
@@ -62,10 +63,12 @@ void Scene::PhysicsUpdate()
 			_b2World->DestroyBody(deletedObject);
 			continue;
 		}
-
-		Transform* now = ((Object*)body->GetUserData())->GetTrans();
-		PhysicsBody* nowP = ((Object*)body->GetUserData())->GetComponent<PhysicsBody>();
-		now->SetPos(nowP->GetBodyPosition());
+		if (((Object*)body->GetUserData())->GetTrans() != nullptr)
+		{
+			Transform* now = ((Object*)body->GetUserData())->GetTrans();
+			PhysicsBody* nowP = ((Object*)body->GetUserData())->GetComponent<PhysicsBody>();
+			now->SetPos(nowP->GetBodyPosition());
+		}
 	}
 }
 

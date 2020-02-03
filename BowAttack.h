@@ -6,7 +6,7 @@
 class BowAttack : public PlayerAttack
 {
 private:
-
+	bool _isFire;
 public:
 	BowAttack(Player* obj) : PlayerAttack(obj) {}
 
