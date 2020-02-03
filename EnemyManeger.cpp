@@ -92,9 +92,6 @@ void EnemyManeger::Render()
 {
 	for (Object* a : _BobjPool->GetActivePool()) a->Render();
 
-	wchar_t buffer[128];
-	swprintf(buffer, 128, L"%d", _BobjPool->GetActivePoolSize());
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2 - 200), buffer, 20, 200, 30, ColorF::Honeydew);
 	
 }
 

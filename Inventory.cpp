@@ -100,6 +100,7 @@ void Inventory::Init()
 		}
 	}
 
+	_money = j["money"];
 	file.close();
 
 
@@ -135,6 +136,7 @@ void Inventory::Release()
 		//_vName.push_back(iter->first);
 		j["item"][iter->first]["price"] = iter->second.price;
 	}
+	j["money"] = _money;
 	file << std::setw(4) << j << endl;
 
 }

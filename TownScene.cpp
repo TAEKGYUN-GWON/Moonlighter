@@ -106,7 +106,7 @@ void TownScene::Init()
 	UI->Init();
 
 	//_smithy->SetSmithPos(_smith->GetTrans()->GetPos());
-
+	cout << _player->GetAbility()->GetCurrentHP() << endl;
 }
 
 void TownScene::Update()
@@ -147,6 +147,7 @@ void TownScene::Update()
 		if (KEYMANAGER->isOnceKeyDown('J'))
 		{
 			SCENEMANAGER->changeScene("Shop");
+			return;
 		}
 	}
 
@@ -168,6 +169,21 @@ void TownScene::Release()
 {
 	_player->Release();
 
+	 
+	for (int i = _tiles.size(); i <= 0; i--)
+		_tiles[i]->Release();
+
+	_tiles.clear();
+
+	for (int i = _vNpc.size(); i <= 0; i--)
+		_vNpc[i]->Release();
+	_vNpc.clear();
+
+	_destination.clear();
+	_destCount.clear();
+	_waitCount.clear();
+
+	_smithy->Release();
 
 
 	Scene::Release();
@@ -206,6 +222,8 @@ void TownScene::SetUp()
 			tile->Init(j, i);
 			tile->AddComponent<Sprite>();
 			tile->SetAttribute("None");
+			tile->SetAllowsRender(false);
+			tile->SetIsActive(false);
 			_tiles.push_back(tile);
 
 			_tagTiles[index].attribute = "None";
@@ -254,6 +272,7 @@ void TownScene::SetUp()
 
 			if (_tiles[i]->GetImgName() != "None")
 			{
+				_tiles[i]->SetIsActive(true);
 				_tiles[i]->AddChild(Object::CreateObject<Object>());
 
 				_tiles[i]->GetChildren()[0]->GetTrans()->SetPos(_tiles[i]->GetTrans()->GetPos() + Vector2(0, TILEHEIGHT / 2));

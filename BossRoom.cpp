@@ -29,6 +29,10 @@ void BossRoom::Init()
 	GRAPHICMANAGER->AddFrameImage("Shadow", L"resource/img/Enemy/Shadow.png",1,1);
 	GRAPHICMANAGER->FindImage("Open_Boss");
 
+	_hp = GRAPHICMANAGER->AddImage("boss_hp", L"resource/img/UI/bossHp.png");
+	hpMaxX = _hp->GetWidth();
+	hpMaxY = _hp->GetHeight();
+
 	_player = Object::CreateObject<Player>();
 	_player->Init();
 	//_player->GetTrans()->SetPos(Vector2(35, 37) + Vector2((TILEWIDTH * Bossroom_X) / 2, (TILEHEIGHT * Bossroom_Y) - 150));
@@ -45,6 +49,7 @@ void BossRoom::Init()
 
 	UI = new UiManager;
 	UI->Init();
+	CAMERA->SetPosition(_player->GetTrans()->GetPos(), "BossRoom_bg");
 }
 
 void BossRoom::Update()
@@ -66,6 +71,7 @@ void BossRoom::Render()
 
 	Scene::Render();
 	UI->Render();
+	_hp->Render(Vector2(300, WINSIZEY-50), Vector2((hpMaxX + 100) / (_boss->GetHP()->GetMaxHP() / _boss->GetHP()->GetCurrentHP()), hpMaxY), 0, false, 0.9f, PIVOT::LEFT_TOP, false);
 }
 
 void BossRoom::SetUP()

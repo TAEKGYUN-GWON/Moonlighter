@@ -32,10 +32,6 @@ void Npc::Init(string imgkey, Vector2 pos)
 	_npcNowPosition = NPCNOWPOSITION::POS_ENTER;
 }
 
-void Npc::Release()
-{
-	Object::Release();
-}
 
 void Npc::Update()
 {

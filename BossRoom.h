@@ -17,6 +17,9 @@ private:
 	Boss* _boss;
 	UiManager* UI;
 	vector<Tile*> _tiles;
+	Graphic* _hp;
+	int hpMaxX;
+	int hpMaxY;
 	tagTile _tagTiles[Bossroom_X * Bossroom_Y];
 public:
 	virtual void Init();
