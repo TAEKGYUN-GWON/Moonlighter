@@ -51,7 +51,7 @@ void Particle::Update()
 	Object::Update();
 	Setdepth();
 
-	_alpha -= 2 * TIMEMANAGER->getElapsedTime();
+	_alpha -= 0.4*TIMEMANAGER->getElapsedTime();
 
 	if (_alpha <= 0.f) _isActive = false;
 
@@ -75,7 +75,7 @@ void Particle::SetIsPhysics()
 
 void Particle::Setdepth()
 {
-	_trans->bottomPos = Vector2(_trans->bottomPos.x, 9999999);
+	_trans->bottomPos = Vector2(_trans->bottomPos.x, 99999);
 }
 
 void Particle::move()

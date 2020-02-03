@@ -39,6 +39,11 @@ private:
 	BulletObjPool* _pool;
 
 	//ParticleManager* _particleMgr;
+	vector<Tile*> _tiles;
+
+	int _mapTileMax_X;
+	int _mapTileMax_Y;
+
 
 	float _speed;
 	bool _isInter;
@@ -57,6 +62,11 @@ public:
 	void SetDirection(Direction dir) { _dir = dir; }
 	void SetAttackType(AttackType type) { _atkType = type; }
 	void SetIsInteraction(bool isTrue) { _isInter = isTrue; }
+
+	void SetTiles(vector<Tile*> tiles, int maxX, int maxY);
+	vector<Tile*> GetTiles() { return _tiles; }
+	int GetMaxX() { return _mapTileMax_X; }
+	int GetMaxY() { return _mapTileMax_Y; }
 
 	bool GetIsInteraction() { return _isInter; }
 	float GetSpeed() { return _speed; }

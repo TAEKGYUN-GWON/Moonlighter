@@ -21,6 +21,7 @@ void Player::Init()
 	GRAPHICMANAGER->AddFrameImage("will_sword", L"resource/img/Player/will_sword.png", 11, 4);
 	GRAPHICMANAGER->AddFrameImage("will_bow", L"resource/img/Player/will_bow.png", 9, 4);
 	GRAPHICMANAGER->AddImage("spark", L"spark.png");
+	GRAPHICMANAGER->AddFrameImage("arrow_left", L"resource/img/Player/arrow_left.png", 1, 1);
 	GRAPHICMANAGER->AddFrameImage("arrow_up", L"resource/img/Player/arrow_up.png", 1, 1);
 	GRAPHICMANAGER->AddFrameImage("arrow_down", L"resource/img/Player/arrow_down.png", 1, 1);
 
@@ -105,6 +106,9 @@ void Player::Render()
 	swprintf(buffer, 128, L"%1.f / %1.f", _ability->GetCurrentHP(), _ability->GetMaxHP());
 	GRAPHICMANAGER->Text(_trans->GetPos() + Vector2(-(_trans->GetScale().x + 10.0f), 22.f) - CAMERA->GetPosition(), buffer, 20, 90, 30, ColorF::LawnGreen, TextPivot::RIGHT_TOP);
 
+	swprintf(buffer, 128, L"%1.f / %1.f", _trans->GetPos().x, _trans->GetPos().y);
+	GRAPHICMANAGER->Text(_trans->GetPos() + Vector2(-(_trans->GetScale().x + 10.0f), 50.f) - CAMERA->GetPosition(), buffer, 20, 90, 30, ColorF::LawnGreen, TextPivot::RIGHT_TOP);
+
 	if (_ability->IsDead()) GRAPHICMANAGER->Text(_trans->GetPos() + Vector2(-(_trans->GetScale().x - (_trans->GetScale().x * 0.5f) + 4.0f), -52.f) - CAMERA->GetPosition(), L"Dead", 20, 100, 30, ColorF::Red);
 
 	int a = (int)_dir;
@@ -156,4 +160,12 @@ void Player::ChangeState(PlayerState* state)
 	_state->Exit();
 	_state = state;
 	_state->Enter();
+}
+
+void Player::SetTiles(vector<Tile*> tiles, int maxX, int maxY)
+{
+	_tiles = tiles;
+	_mapTileMax_X = maxX;
+	_mapTileMax_Y = maxY;
+	int a;
 }

@@ -5,6 +5,8 @@
 #include "Item.h"
 #include "EnemyScript.h"
 #include "ETCS.h"
+#include "Player.h"
+#include "Inventory.h"
 //#include "Player.h"
 //전방선언 같은 거...?
 
@@ -169,18 +171,18 @@ EnemyIdle* EnemyIdle::GetInstance()
 
 void EnemyIdle::Init(Enemy* _sEnemy)
 {
-	cout << "왜 안들어와?" << endl;
+	//cout << "왜 안들어와?" << endl;
 }
 
 void EnemyIdle::Update(Enemy* _sEnemy)
 {
 	EnemyBasic::Update(_sEnemy);
 	Release(_sEnemy);
-	cout << "들어오냐?" << endl;
+	//cout << "들어오냐?" << endl;
 }
 void EnemyIdle::Release(Enemy* _sEnemy)
 {
-	cout << "move로 가!!!" << endl;
+//	cout << "move로 가!!!" << endl;
 	//  체력이 0 이면 죽어라
 	
 	
@@ -199,7 +201,7 @@ EnemyMove* EnemyMove::GetInstance()
 
 void EnemyMove::Init(Enemy* _sEnemy)
 {
-	cout << "move 들어옴?" << endl;
+	//cout << "move 들어옴?" << endl;
 	_sEnemy->SetMove(true);
 	timer = 0;
 }
@@ -246,7 +248,7 @@ void EnemyMove::Release(Enemy* _sEnemy)
 	//SetEnemyState(_sEnemy, EnemyAttack::GetInstance());
 	// else if 범위에 플레이어가 없으면 다시 무브
 	//SetEnemyState(_sEnemy, EnemyMove::GetInstance());
-	cout << "다시 무브?" << endl;
+	//cout << "다시 무브?" << endl;
 	SetEnemyState(_sEnemy, EnemyIdle::GetInstance());
 	
 }
@@ -367,8 +369,10 @@ void EnemyDead::Release(Enemy* _sEnemy)
 
 	//if (_sEnemy->GetHP()->IsDead())
 	//cout << "죽었다 ㅠㅠ" << endl;
-
 	_sEnemy->SetIsActive(false);
+	if (SCENEMANAGER->GetNowScene()->GetName() == "BossRoom")return;
+	Player* player = (Player*)SCENEMANAGER->GetNowScene()->GetChildFromName("Will");
+	if (player->GetInventory()->GetInventorySize()>=20)return;
 
 	int some = RND->getInt(3);
 	//int some = 1;

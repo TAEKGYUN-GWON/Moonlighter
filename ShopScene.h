@@ -7,6 +7,7 @@
 #include "ShopStandManager.h"
 #include "Maptool.h"
 #include "ShopDoor.h"
+#include "UiManager.h"
 #define SHOPTILEMAXX 22
 #define SHOPTILEMAXY 28
 
@@ -31,6 +32,7 @@ private:
 	vector<Tile*> _tiles;
 	tagTile _tagTiles[SHOPTILEMAXX * SHOPTILEMAXY];
 	PP _pp;
+	UiManager* UI;
 
 public:
 	virtual void Init()override;

@@ -11,6 +11,7 @@ void BowAttack::Enter()
 	_obj->GetSprite()->SetIsLoop(false);
 	
 	int arrowSpd = 350;
+
 	switch (_obj->GetDirection())
 	{
 	case Dir::Left: case Dir::Left_Up: case Dir::Left_Down: 

@@ -349,3 +349,20 @@ bool Inventory::DeductionMoney(int money)
 	return true;
 }
 
+tagItemInfo Inventory::GetItem()
+{
+	tagItemInfo item;
+	
+	for (iter = _inven.begin(); iter != _inven.end(); ++iter)
+	{
+		if (Vector2::Distance(iter->second.pos, pos) < 10)
+		{
+			item = iter->second;
+			_inven.erase(iter);
+			break;
+		}
+	}
+
+	return item;
+}
+

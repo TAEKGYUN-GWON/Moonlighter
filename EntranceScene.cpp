@@ -44,6 +44,7 @@ void EntranceScene::Init()
 	_player = Object::CreateObject<Player>();
 	_player->Init();
 	_player->GetTrans()->SetPos(1249, 2020);
+	_player->SetTiles(tiles, TILENUMX, TILENUMY);
 }
 
 void EntranceScene::Update()
@@ -139,6 +140,13 @@ void EntranceScene::SetUp()
 				}
 
 				tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPosition(tiles[i]->GetChildren()[0]->GetTrans()->GetPos());
+
+			}
+			if (tiles[i]->GetAttribute() == "Wall")
+			{
+				auto p = tiles[i]->AddComponent<PhysicsBody>();
+				p->Init(BodyType::STATIC, 1, 1);
+				p->SetBodyPosition();
 			}
 		}
 	}

@@ -85,6 +85,7 @@ void PlayerMove::Update()
 
 	_obj->GetTrans()->SetPos(_obj->GetTrans()->GetPos() + Vector2(cosf((int)_obj->GetDirection() * 45 * Deg2Rad), -sinf((int)_obj->GetDirection() * 45 * Deg2Rad)) * _obj->GetSpeed() * TIMEMANAGER->getElapsedTime());
 	_obj->GetPhysics()->SetBodyPosition();
+	
 }
 
 void PlayerMove::Exit()
