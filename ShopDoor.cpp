@@ -9,8 +9,9 @@ void ShopDoor::Init()
 	_name = "ShopDoor";
 
 	_sprite = AddComponent<Sprite>();
-	_sprite->Init(true, true);
+	_sprite->Init(true);
 	_sprite->SetImgName("Door");
+	_sprite->Stop();
 
 	_trans->SetPos(Vector2(400, 745));
 	_trans->SetScale(Vector2(
@@ -21,6 +22,8 @@ void ShopDoor::Init()
 void ShopDoor::Update()
 {
 	Object::Update();
+	
+
 
 	_sprite->SetPosition(_trans->GetPos()); //스프라이트가 자신의 포지션을 가지고 있어야함
 

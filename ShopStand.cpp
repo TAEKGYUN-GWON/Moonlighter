@@ -36,22 +36,24 @@ void ShopStand::Update()
 
 void ShopStand::Render()
 {
-	GRAPHICMANAGER->DrawEllipse(
-		_trans->GetPos().x, _trans->GetPos().y, 
-		_trans->GetScale().x+10, _trans->GetScale().y+10);
-
+	//GRAPHICMANAGER->DrawEllipse(
+	//	_trans->GetPos().x, _trans->GetPos().y, 
+	//	_trans->GetScale().x+10, _trans->GetScale().y+10);
 	Object::Render();
-}
+	//if(_isItemOn)
+		//GRAPHICMANAGER->FindImage(item.item)->Render(_trans->GetPos(), Vector2(50, 50), 0);
 
-void ShopStand::SetItem(string item)
-{
-	_item = item;
-	_isItemOn = true;
 }
 
 void ShopStand::BuyItem()
 {
 	//물건을 산다
 	_isItemOn = false; //아이템 없음
+	_isItemOn = false;
 }
 
+void ShopStand::SetItemInfo(tagItemInfo item)
+{
+	this->item = item;
+	_isItemOn = true;
+}

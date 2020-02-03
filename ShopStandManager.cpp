@@ -45,4 +45,5 @@ void ShopStandManager::Release()
 
 void ShopStandManager::Update()
 {
+
 }

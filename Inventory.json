@@ -1,12 +1,5 @@
 {
     "item": {
-        "crystal_Energy": {
-            "name": "Crystal_Energy",
-            "price": 0,
-            "some": [
-                2
-            ]
-        },
         "energy_Crystal": {
             "name": "Energy_Crystal",
             "price": 0,
