@@ -1,10 +1,27 @@
 {
     "item": {
+        "amulet_ring": {
+            "name": "Amulet_ring",
+            "price": 0,
+            "some": [
+                10,
+                1
+            ]
+        },
+        "broken_Sword": {
+            "name": "Broken_Sword",
+            "price": 0,
+            "some": [
+                2
+            ]
+        },
         "crystal_Energy": {
             "name": "Crystal_Energy",
             "price": 0,
             "some": [
-                2
+                10,
+                10,
+                1
             ]
         },
         "energy_Crystal": {
@@ -19,7 +36,8 @@
             "name": "Familiar_Egg",
             "price": 0,
             "some": [
-                3
+                10,
+                1
             ]
         },
         "golem_Core": {
@@ -27,13 +45,30 @@
             "price": 0,
             "some": [
                 10,
+                10,
                 1
+            ]
+        },
+        "naja_Note": {
+            "name": "Naja_Note",
+            "price": 0,
+            "some": [
+                3
+            ]
+        },
+        "reinforced_Steel_G": {
+            "name": "Reinforced_Steel_G",
+            "price": 0,
+            "some": [
+                3
             ]
         },
         "treated_Wood": {
             "name": "Treated_Wood",
             "price": 0,
             "some": [
+                10,
+                10,
                 10,
                 1
             ]
