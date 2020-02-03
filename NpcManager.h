@@ -15,26 +15,25 @@ enum DESTINATION
 	STAND3,
 	STAND4,
 	CHECKSTAND,
-	EXIT,
 	END
 };
 class NpcManager
 {
 private:
-	Npc* _npc;
 	vector<Npc*> _vNpc;
 	ShopStandManager* _shopStandMgr;
 	CheckStand* _checkStand;
 
-	Vector2 _positions[(int)DESTINATION::END];
+	Vector2 _positions[DESTINATION::END];
 
-	//DESTINATION _destination;
+	DESTINATION _destination;
 
 
 	Astar* _ast;
 
 	int _counter; //이 시간만큼 흐른 뒤 새로운 엔피씨 입장함
 	int _timer;
+
 
 public:
 	void Init(ShopScene* parent);
@@ -44,7 +43,7 @@ public:
 
 	void MakeNpc();
 	void SetAstar(); //목적지 정해주는것임
-	void AstarFunction(int i, int asttar); //astar 돌아가는 곳
+	void AstarFunction(int i, int astar); //astar 돌아가는 곳
 
 	void CheckStandCollision(); //계산대랑 충돌
 	void ShopStandCollision(); //가판대랑 충돌

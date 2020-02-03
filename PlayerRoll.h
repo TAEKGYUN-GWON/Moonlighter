@@ -6,6 +6,7 @@ class PlayerRoll : public PlayerState
 {
 private:
 	float _rollSpeed;
+	float _friction;
 
 public:
 	PlayerRoll(Player* obj) : PlayerState(obj) {}

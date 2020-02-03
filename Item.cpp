@@ -18,7 +18,7 @@ void Item::Init()
 	_image->Init();
 	_trans->SetScale(20, 20);
 	_physics = AddComponent<PhysicsBody>();
-	_physics->Init(BodyType::DYNAMIC, 0, 0, 0, false);
+	_physics->Init(BodyType::DYNAMIC, 0, 0, false, true);
 	
 	AddComponent<ItemScript>();
 }
@@ -48,7 +48,7 @@ void Item::Release()
 
 void Item::FollowPlayer(Vector2 playerPos)
 {
-	_followingMovement += 0.01f;
+	_followingMovement += 0.001f;
 
 	_trans->SetPos(Vector2::Lerp(_trans->GetPos(), playerPos, _followingMovement));
 	_physics->SetBodyPosition();

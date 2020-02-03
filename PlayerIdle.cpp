@@ -16,8 +16,7 @@ void PlayerIdle::Enter()
 	_obj->GetSprite()->SetMaxFrameX(10);
 	_obj->GetSprite()->SetFrameX(0);
 	_obj->GetSprite()->SetIsLoop(true);
-	_obj->GetSprite()->SetPosition(_obj->GetTrans()->GetPos() + Vector2(0, -14));
-	
+
 	switch (_obj->GetDirection())
 	{
 	case Dir::Left : case Dir::Left_Up : case Dir::Left_Down :
@@ -57,7 +56,8 @@ void PlayerIdle::Update()
 		_obj->ChangeState(new PlayerRoll(_obj));
 	}
 
-	if (KEYMANAGER->isOnceKeyDown('J'))
+	if (SCENEMANAGER->GetNowScene()->GetName() != "Shop" && 
+		!_obj->GetIsInteraction() && KEYMANAGER->isOnceKeyDown('J'))
 	{
 		if(_obj->GetAttackType() == AttackType::Sword)
 			_obj->ChangeState(new SwordAttack(_obj));

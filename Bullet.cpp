@@ -37,16 +37,19 @@ void Bullet::Fire(Vector2 pos, float angle, float speed)
 	_speed = speed;
 	_trans->pos = pos;
 	_physics->SetBodyPosition();
-	_trans->SetRotateToRadian(angle);
+	_trans->SetRotateToRadian(angle + (PI / 2));
+	
 	_physics->SetBodyActive(true);
 	_sprite->SetPosition(_trans->GetPos());
 	_isActive = true;
+	
+	_physics->GetBody()->SetTransform(b2Vec2(_physics->GetBody()->GetPosition().x, _physics->GetBody()->GetPosition().y), _trans->GetRotateRadian());
 }
 
 void Bullet::Move()
 {
 	if (!_isActive)return;
-	_physics->GetBody()->SetLinearVelocity(b2Vec2(cosf(_trans->GetRotateRadian()), -sinf(_trans->GetRotateRadian()))
+	_physics->GetBody()->SetLinearVelocity(b2Vec2(cosf(_trans->GetRotateRadian() - (PI / 2)), -sinf(_trans->GetRotateRadian() - (PI / 2)))
 		* _speed * TIMEMANAGER->getElapsedTime());
 
 	if (_owner != nullptr)

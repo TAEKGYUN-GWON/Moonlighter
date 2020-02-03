@@ -7,6 +7,18 @@
 class Camera :public singletonBase<Camera>
 {
 private:
+	Vector2				_shakeUpPos;
+	Vector2				_shakeDownPos;
+
+	Vector2				_prevPos;
+	Vector2				_lastPos;
+
+	float				_shakingTime;
+	float				_shakeCount;
+	float				_amount;
+	bool				_isShaking;
+
+private:
 	D2D1_MATRIX_3X2_F	_matrix;
 	//Matrix3x3			_matrix;
 
@@ -23,15 +35,16 @@ private:
 	Vector2				_startPos;
 	Vector2				_endPos;
 
-	Vector2				_shakeUpPos;
-	Vector2				_shakeDownPos;
-
 	float				_angle;
 	float				_speed;
 	float				_lerpCount;
 	float				_moveTime;
 	float				_prevDistance;
 	bool				_isMoving;
+
+private:
+	void Control();
+	void ShakingCamera();
 
 public:
 	Camera()
@@ -46,20 +59,29 @@ public:
 		_scale = Vector2(1, 1);
 		_pos = Vector2().zero;
 		_origin = Vector2().zero;
+		_prevPos = Vector2().zero;
+		_lastPos = Vector2().zero;
 		_angle = 0.0f;
 		_speed = 300.f;
 		_lerpCount = 0;
+
+		_shakingTime = 0.0f;
+		_shakeCount = 0.0f;
+		_amount = 0.0f;
+
+
 		_isMoving = false;
+		_isShaking = false;
 	};
 	~Camera() {};
 
 	HRESULT init();
 	void Update();
-	//void release();
 
 	void UpdateMatrix();
-
-	void SetScale(Vector2 scale);// { _scale = scale; };
+	
+	void ShakingSetting(Vector2 prevPos, float time, float amount);
+	void SetScale(Vector2 scale);
 	//void SetAngle(float angle) { _angle = angle; };
 	void SetPosition(Vector2 pos, string key);
 	void SetPos(Vector2 pos) { _pos = pos; }
