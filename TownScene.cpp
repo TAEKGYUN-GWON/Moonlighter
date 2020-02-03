@@ -324,9 +324,9 @@ void TownScene::Render()
 	}
 
 
-	wchar_t buffer[128];
-	swprintf(buffer, 128, L"x: %1.f, y:%1.f", _player->GetTrans()->GetPos().x, _player->GetTrans()->GetPos().y);
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2), buffer, 20, 500, 300, ColorF::White);
+	//wchar_t buffer[128];
+	//swprintf(buffer, 128, L"x: %1.f, y:%1.f", _player->GetTrans()->GetPos().x, _player->GetTrans()->GetPos().y);
+	//GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2), buffer, 20, 500, 300, ColorF::White);
 
 }
 
