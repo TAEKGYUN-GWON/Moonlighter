@@ -31,14 +31,14 @@ void StartScene::Init()
 	GRAPHICMANAGER->AddImage("heart", L"resource/img/UI/heart.png");
 	GRAPHICMANAGER->AddImage("heart", L"resource/img/UI/heart.png");
 	GRAPHICMANAGER->AddFrameImage("UI_WeaponSwap", L"resource/img/UI/UI_WeaponSwap.png", 4, 2);
-	GRAPHICMANAGER->AddFrameImage("num", L"number.png", 4, 1);
-	GRAPHICMANAGER->FindImage("num")->SetFrameSize(Vector2(10,10));
-	Object* obj = Object::CreateObject<Object>();
-	obj->GetTrans()->SetPos(WINSIZEX / 2+200, WINSIZEY - 200);
-	//obj->GetTrans()->SetScale(200,200);
-	auto n = obj->AddComponent<Sprite>();
-	n->Init(true, true);
-	n->SetImgName("num");
+	//GRAPHICMANAGER->AddFrameImage("num", L"number.png", 4, 1);
+	//GRAPHICMANAGER->FindImage("num")->SetFrameSize(Vector2(10,10));
+	//Object* obj = Object::CreateObject<Object>();
+	//obj->GetTrans()->SetPos(WINSIZEX / 2+200, WINSIZEY - 200);
+	////obj->GetTrans()->SetScale(200,200);
+	//auto n = obj->AddComponent<Sprite>();
+	//n->Init(true, true);
+	//n->SetImgName("num");
 
 
 	GRAPHICMANAGER->AddImage("Vine", L"resource/img/Items/Vine.png");
@@ -74,7 +74,7 @@ void StartScene::Init()
 	//_smithy->Init(inven);
 
 
-
+	
 	obj = Object::CreateObject<Object>();
 	obj->GetTrans()->SetPos(Vector2(WINSIZEX / 2, 200));
 	obj->AddComponent<Sprite>();
@@ -83,14 +83,14 @@ void StartScene::Init()
 	obj->GetComponent<Sprite>()->SetSize(Vector2(a->GetFrameWidth(), a->GetFrameHeight()));
 	//obj->GetTrans()->SetScale(Vector2(obj->GetComponent<Sprite>()->GetGraphic()->GetFrameWidth(), obj->GetComponent<Sprite>()->GetGraphic()->GetFrameWidth()));
 	obj->GetTrans()->SetScale(Vector2(100, 50));
-
-
-	Object* obj2 = Object::CreateObject<Object>();
-	obj2->GetTrans()->SetPos(Vector2(WINSIZEX / 2 + 100, 500));
-	obj2->AddComponent<Sprite>()->Init(true);
-	obj2->GetComponent<Sprite>()->SetImgName("fatkachu");
-	obj2->GetComponent<Sprite>()->SetSize(Vector2(100, 38));
-	obj2->GetTrans()->SetScale(Vector2(obj2->GetComponent<Sprite>()->GetGraphic()->GetFrameWidth(), obj2->GetComponent<Sprite>()->GetGraphic()->GetFrameWidth()));
+	
+	//
+	//Object* obj2 = Object::CreateObject<Object>();
+	//obj2->GetTrans()->SetPos(Vector2(WINSIZEX / 2 + 100, 500));
+	//obj2->AddComponent<Sprite>()->Init(true);
+	//obj2->GetComponent<Sprite>()->SetImgName("fatkachu");
+	//obj2->GetComponent<Sprite>()->SetSize(Vector2(100, 38));
+	//obj2->GetTrans()->SetScale(Vector2(obj2->GetComponent<Sprite>()->GetGraphic()->GetFrameWidth(), obj2->GetComponent<Sprite>()->GetGraphic()->GetFrameWidth()));
 }
 
 void StartScene::Update()
@@ -116,22 +116,22 @@ void StartScene::Render()
 {
 	Scene::Render();
 
-	GRAPHICMANAGER->Text(Vector2(100, 100), L"1) Dungeon Scene", 20, 300, 50, ColorF::AliceBlue);
-	GRAPHICMANAGER->Text(Vector2(100, 150), L"2) Town Scene", 20, 300, 50, ColorF::AntiqueWhite);
-	GRAPHICMANAGER->Text(Vector2(100, 200), L"3) Entrance Scene", 20, 300, 50, ColorF::Aqua);
-	GRAPHICMANAGER->Text(Vector2(100, 250), L"4) Shop Scene", 20, 300, 50, ColorF::Aquamarine);
-	GRAPHICMANAGER->Text(Vector2(100, 300), L"5) Maptool Scene", 20, 300, 50, ColorF::Azure);
-
-	wchar_t buffer[1024];
-	swprintf(buffer, 128, L"Camera X : %f\nCamera Y : %f", CAMERA->GetPosition().x, CAMERA->GetPosition().y);
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX/2, 100), buffer, 20, 300, 50, ColorF::Azure);
-
-
-	string a = "None";
-	wstring b(a.begin(), a.end());
-	wchar_t* str;
-	str = &b[0];
-
+	//GRAPHICMANAGER->Text(Vector2(100, 100), L"1) Dungeon Scene", 20, 300, 50, ColorF::AliceBlue);
+	//GRAPHICMANAGER->Text(Vector2(100, 150), L"2) Town Scene", 20, 300, 50, ColorF::AntiqueWhite);
+	//GRAPHICMANAGER->Text(Vector2(100, 200), L"3) Entrance Scene", 20, 300, 50, ColorF::Aqua);
+	//GRAPHICMANAGER->Text(Vector2(100, 250), L"4) Shop Scene", 20, 300, 50, ColorF::Aquamarine);
+	//GRAPHICMANAGER->Text(Vector2(100, 300), L"5) Maptool Scene", 20, 300, 50, ColorF::Azure);
+	//
+	wchar_t buffer[128];
+	swprintf(buffer, 128, L"스페이스바를 누르면 시작합니다");
+	GRAPHICMANAGER->Text(Vector2(WINSIZEX/2-100, WINSIZEY-200), buffer, 20, 300, 50, ColorF::White);
+	//
+	//
+	//string a = "None";
+	//wstring b(a.begin(), a.end());
+	//wchar_t* str;
+	//str = &b[0];
+	//
 	//GRAPHICMANAGER->Text(Vector2(WINSIZEX/2, 200), b, 20, 300, 50, ColorF::Azure);
 	//
 	//GRAPHICMANAGER->DrawFrameImage("bn", Vector2(WINSIZEX / 2, 400), 0, 0, Vector2(320, 50));
