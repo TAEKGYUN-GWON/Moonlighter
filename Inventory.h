@@ -4,6 +4,7 @@
 #include "Component.h"
 struct tagItemInfo
 {
+	tagItemInfo();
 	tagItemInfo(string name, int some)
 	{
 		this->item = item;
@@ -68,4 +69,5 @@ public:
 
 	int GetATK() { return _atk; }
 	void SetATK(int atk) { _atk = atk; }
+	tagItemInfo GetItem();
 };

@@ -52,7 +52,7 @@ void Astar::InitTotalList()
 	//}
 	for (Tile* t : _vTotalList)
 	{
-		if (t->GetAttribute() == "Wall")continue;
+		if (t->GetAttribute() == "Wall"|| t->GetAttribute() == "NpcNone")continue;
 		t->SetCostF(-1);
 		t->SetCostG(0);
 		t->SetCostH(0);
@@ -111,31 +111,31 @@ vector <Tile*> Astar::GetDirList(Vector2 idx)
 	nodeList.clear();
 
 
-	////_miTotalList = _mTotalList.find(Vector2(idx.x+ (int)1, idx.y + (int)1));
-	//if (CanOpenRight(idx) && CanOpenDown(idx))
-	//	nodeList.push_back(_vTotalList[((int)idx.x + maxX * (int)idx.y) + 1 + maxX]);
+	//_miTotalList = _mTotalList.find(Vector2(idx.x+ (int)1, idx.y + (int)1));
+	if (CanOpenRight(idx) && CanOpenDown(idx))
+		nodeList.push_back(_vTotalList[((int)idx.x + maxX * (int)idx.y) + 1 + maxX]);
 
 
-	////_miTotalList = _mTotalList.find(Vector2(idx.x - (int)1, idx.y + (int)1));
-	//if (CanOpenLeft(idx) && CanOpenDown(idx))
-	//	nodeList.push_back(_vTotalList[((int)idx.x + maxX * (int)idx.y) - 1 + maxX]);
+	//_miTotalList = _mTotalList.find(Vector2(idx.x - (int)1, idx.y + (int)1));
+	if (CanOpenLeft(idx) && CanOpenDown(idx))
+		nodeList.push_back(_vTotalList[((int)idx.x + maxX * (int)idx.y) - 1 + maxX]);
 
 
-	////_miTotalList = _mTotalList.find(Vector2(idx.x + (int)1, idx.y - (int)1));
-	//if (CanOpenRight(idx) && CanOpenUp(idx))
-	//	nodeList.push_back(_vTotalList[((int)idx.x + maxX * (int)idx.y) + 1 - maxX]);
+	//_miTotalList = _mTotalList.find(Vector2(idx.x + (int)1, idx.y - (int)1));
+	if (CanOpenRight(idx) && CanOpenUp(idx))
+		nodeList.push_back(_vTotalList[((int)idx.x + maxX * (int)idx.y) + 1 - maxX]);
 
 
-	////_miTotalList = _mTotalList.find(Vector2(idx.x - (int)1, idx.y - (int)1));
-	//if (CanOpenLeft(idx) && CanOpenUp(idx))
-	//	nodeList.push_back(_vTotalList[((int)idx.x + maxX * (int)idx.y) - 1 - maxX]);
+	//_miTotalList = _mTotalList.find(Vector2(idx.x - (int)1, idx.y - (int)1));
+	if (CanOpenLeft(idx) && CanOpenUp(idx))
+		nodeList.push_back(_vTotalList[((int)idx.x + maxX * (int)idx.y) - 1 - maxX]);
 
-	//for (Tile* t : nodeList)
-	//{
-	//	//_miTotalList = _mTotalList.find(Vector2(idx.x, idx.y));
-	//	if (SetCost(t, 14, _vTotalList[((int)idx.x + maxX * (int)idx.y)]))
-	//		dirList.push_back(t);
-	//}
+	for (Tile* t : nodeList)
+	{
+		//_miTotalList = _mTotalList.find(Vector2(idx.x, idx.y));
+		if (SetCost(t, 14, _vTotalList[((int)idx.x + maxX * (int)idx.y)]))
+			dirList.push_back(t);
+	}
 
 	return dirList;
 }
@@ -220,7 +220,8 @@ bool Astar::CanOpenLeft(Vector2 idx)
 	//_miTotalList = _mTotalList.find(Vector2(idx.x - (int)1, idx.y));
 	if (idx.x - (int)1 <= -1) return false;
 
-	if (_vTotalList[((int)idx.x + maxX * (int)idx.y) - 1]->GetAttribute() == "Wall") return false;
+	if (_vTotalList[((int)idx.x + maxX * (int)idx.y) - 1]->GetAttribute() == "Wall"||
+		_vTotalList[((int)idx.x + maxX * (int)idx.y) - 1]->GetAttribute() == "NpcNone") return false;
 
 	if (_vTotalList[((int)idx.x + maxX * (int)idx.y) - 1]->GetIsClose()) return false;
 
@@ -235,7 +236,8 @@ bool Astar::CanOpenRight(Vector2 idx)
 
 	if (idx.x + (int)1 >= maxX) return false;
 
-	if (_vTotalList[((int)idx.x + maxX * (int)idx.y) + 1]->GetAttribute() == "Wall") return false;
+	if (_vTotalList[((int)idx.x + maxX * (int)idx.y) + 1]->GetAttribute() == "Wall" ||
+		_vTotalList[((int)idx.x + maxX * (int)idx.y) - 1]->GetAttribute() == "NpcNone") return false;
 
 	if (_vTotalList[((int)idx.x + maxX * (int)idx.y) + 1]->GetIsClose()) return false;
 
@@ -250,7 +252,8 @@ bool Astar::CanOpenUp(Vector2 idx)
 
 	if (idx.y - (int)1 <= -1) return false;
 
-	if (_vTotalList[((int)idx.x + maxX * (int)idx.y) - maxX]->GetAttribute() == "Wall") return false;
+	if (_vTotalList[((int)idx.x + maxX * (int)idx.y) - maxX]->GetAttribute() == "Wall" ||
+		_vTotalList[((int)idx.x + maxX * (int)idx.y) - 1]->GetAttribute() == "NpcNone") return false;
 
 	if (_vTotalList[((int)idx.x + maxX * (int)idx.y) - maxX]->GetIsClose()) return false;
 
@@ -265,7 +268,8 @@ bool Astar::CanOpenDown(Vector2 idx)
 
 	if (idx.y + (int)1 >= maxY) return false;
 
-	if (_vTotalList[((int)idx.x + maxX * (int)idx.y) + maxX]->GetAttribute() == "Wall") return false;
+	if (_vTotalList[((int)idx.x + maxX * (int)idx.y) + maxX]->GetAttribute() == "Wall" ||
+		_vTotalList[((int)idx.x + maxX * (int)idx.y) - 1]->GetAttribute() == "NpcNone") return false;
 
 	if (_vTotalList[((int)idx.x + maxX * (int)idx.y) + maxX]->GetIsClose()) return false;
 
@@ -276,7 +280,7 @@ bool Astar::CanOpenDown(Vector2 idx)
 
 bool Astar::SetCost(Tile* node, float cost, Tile* parent)
 {
-	if (node == nullptr || node->GetAttribute() == "Wall" || node->GetIsClose() || node->GetIsOpen()) return false;
+	if (node == nullptr || node->GetAttribute() == "Wall" || node->GetAttribute() == "NpcNone" || node->GetIsClose() || node->GetIsOpen()) return false;
 
 	float valH = 0;
 	cost += node->GetCostG();
@@ -298,7 +302,7 @@ bool Astar::SetCost(Tile* node, float cost, Tile* parent)
 
 void Astar::AddOpenList(Tile* node)
 {
-	if (node == nullptr || node->GetAttribute() == "Wall") return;
+	if (node == nullptr || node->GetAttribute() == "Wall"|| node->GetAttribute() == "NpcNone") return;
 
 	if (node->GetIsClose()) return;
 	if (node->GetIsOpen()) return;
