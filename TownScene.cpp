@@ -111,7 +111,6 @@ void TownScene::Init()
 
 void TownScene::Update()
 {
-
 	_smithy->Update();
 
 	_frameCount++;
@@ -155,6 +154,13 @@ void TownScene::Update()
 	{
 		SCENEMANAGER->changeScene("Entrance");
 	}
+
+
+	MoveNPC();
+
+	CheckPos();
+
+	Scene::Update();
 }
 
 void TownScene::Release()
@@ -164,25 +170,6 @@ void TownScene::Release()
 
 
 	Scene::Release();
-}
-
-	if((_player->GetTrans()->GetPos().x >= 1955 - 100 && _player->GetTrans()->GetPos().y >= 500
-		&& _player->GetTrans()->GetPos().x <= 1955 + 100 && _player->GetTrans()->GetPos().y <= 500 + 20))
-	{
-		//cout << "h" << endl;
-		//smithy->SetShow(false);
-		SCENEMANAGER->changeScene("Shop");
-	}
-	 
-
-	CAMERA->SetPosition(Vector2(_player->GetTrans()->GetPos()), "town_map");
-
-	MoveNPC();
-
-	CheckPos();
-
-
-	Scene::Update();
 }
 
 void TownScene::SetUp()
