@@ -339,25 +339,25 @@ void TownScene::CreateNPC()
 
 		if (a == 0)
 		{
-			npc->Init("Girl1", Vector2(632, 980));
+			npc->Init("Girl1", Vector2(2196, 1609));
 			npc->SetName("girl");
 			_vNpc.push_back(npc);
 		}
 		if (a == 1)
 		{
-			npc->Init("Guy1", Vector2(2208, 1447));
+			npc->Init("Guy1", Vector2(1912, 2080));
 			npc->SetName("guy");
 			_vNpc.push_back(npc);
 		}
 		if (a == 2)
 		{
-			npc->Init("Kid1", Vector2(1300, 800));
+			npc->Init("Kid1", Vector2(632, 980));
 			npc->SetName("kid");
 			_vNpc.push_back(npc);
 		}
 		if (a == 3)
 		{
-			npc->Init("Lunk1", Vector2(1490, 2100));
+			npc->Init("Lunk1", Vector2(2553, 769));
 			npc->SetName("lunk");
 			_vNpc.push_back(npc);
 		}

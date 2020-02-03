@@ -81,26 +81,26 @@ public:
 
 	void SetSmithPos(Vector2 smithPos) { _smithPos = smithPos; }
 
-	void KeyInput();
-	bool CheckPlayerPos();
+	void KeyInput();		//대장간에서 사용되는 키입력
+	bool CheckPlayerPos();	
 
 	void SetIn(bool in) { _isPlayerIn = in; }
 	void SetShow(bool show) { _isShow = show; }
 
-	void UpdateMaterial();
+	void UpdateMaterial();	//인벤토리내에 재료들의 갯수를 업데이트 하여 보여줌
 
-	void ShowImage();
-	void ShowUI();
+	void ShowImage();	//기본적인 이미지 출력
+	void ShowUI();		//레시피 출력과 텍스트 출력
 
-	void Buy();
-	bool CheckMaterial();
-	void Upgrade();
+	void Buy();				//구매 하기 위한 조건 판단
+	bool CheckMaterial();	//강화를 위한 갯수 판단
+	void Upgrade();			//강화시 변하는 데이터
 
-	bool GetSmithy() { return _isShow; }
+	bool GetSmithy() { return _isShow; }	
 
 
 
-	void PrintRecipe();
+	void PrintRecipe();		//레시피를 출력
 
 };
 
