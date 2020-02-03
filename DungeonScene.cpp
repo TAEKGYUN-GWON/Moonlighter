@@ -25,6 +25,8 @@ void DungeonScene::Init()
 	_dMgr->Init(_player);
 	//test = new Dungeon;
 	//test->Init(Vector2::zero);
+	UI = new UiManager;
+	UI->Init();
 }
 
 void DungeonScene::Update()
@@ -64,4 +66,5 @@ void DungeonScene::Render()
 	//	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 50 + a * 50), buffer, 20, 300, 50, ColorF::Azure);
 
 	//}
+	UI->Render();
 }

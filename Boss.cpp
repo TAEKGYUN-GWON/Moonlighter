@@ -49,8 +49,9 @@ void Boss::Init(Vector2 pos, vector<Tile*> tiles)
 	_Bstate = new BossIdle(this);
 	_Bstate->Enter();
 	_hand = Object::CreateObject<BossHand>(this);
+	_hand->SetPlayer(_player);
 	_hand->Init();
-	_hand->SetTarget(_player->GetTrans()->GetPos());
+	//_hand->SetTarget(_player->GetTrans()->GetPos());
 	//_hand->GetTrans()->SetPos(_player->GetTrans()->GetPos());
 
 #pragma region 무덤
@@ -316,7 +317,7 @@ void Boss::Update()
 
 	//이건 보스 스테이트 위에 돌아야 할지 아래에 돌아야 할지 모르겠으니까 터지면 위로 올려주세요 슬라임 A스타 주는거에요
 	//그리고 이건 벡터 정방향으로 돌리는건데 터질수도 있으니까 혹시 터지면 밑에 벡터 거꾸로 도는걸 켜주세요
-
+	cout << _ability->GetCurrentHP() << endl;
 	for (int i = 0; i<_enemys.size();i++)
 	{
 		if (!_enemys[i]->GetIsActive())

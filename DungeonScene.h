@@ -5,6 +5,7 @@
 #include "EnemyManeger.h"
 #include "Dungeon.h"
 #include "DungeonMgr.h"
+#include "UiManager.h"
 
 class DungeonScene : public Scene
 {
@@ -13,6 +14,7 @@ private:
 	Enemy* _enemy;	//나중에 enemymaneger로 바꿔줘야 할걸...?
 	Dungeon* test;
 	DungeonMgr* _dMgr;
+	UiManager* UI;
 
 public:
 	virtual void Init();

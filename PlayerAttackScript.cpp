@@ -4,7 +4,7 @@
 #include "GolemEnemy.h"
 #include "MintPotEnemy.h"
 #include "SlimeEnemy.h"
-
+#include "Boss.h"
 void PlayerAttackScript::CollisionBegin(void* obj)
 {
 	Object* to = (Object*)obj;
@@ -30,6 +30,11 @@ void PlayerAttackScript::CollisionBegin(void* obj)
 			if (pot->GetPhysics()->GetBody()->GetFixtureList()->IsSensor()) return;
 			pot->GetHP()->DamageHP(me->GetAbility()->GetAttackPoint());
 		}
+	}
+	else if (to->GetTag() == "boss")
+	{
+		Boss* boss = (Boss*)to;
+		boss->GetHP()->DamageHP(me->GetAbility()->GetAttackPoint());
 	}
 }
 

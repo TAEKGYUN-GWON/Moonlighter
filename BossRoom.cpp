@@ -25,7 +25,7 @@ void BossRoom::Init()
 	GRAPHICMANAGER->AddImage("Boss_Rock1", L"resource/img/Enemy/Boss_Rock1.png");
 	GRAPHICMANAGER->AddImage("Boss_Rock2", L"resource/img/Enemy/Boss_Rock2.png");
 	GRAPHICMANAGER->AddImage("Boss_Rock3", L"resource/img/Enemy/Boss_Rock3.png");
-	GRAPHICMANAGER->AddImage("Shadow", L"resource/img/Enemy/Shadow.png");
+	GRAPHICMANAGER->AddFrameImage("Shadow", L"resource/img/Enemy/Shadow.png",1,1);
 	GRAPHICMANAGER->FindImage("Open_Boss");
 
 	_player = Object::CreateObject<Player>();
@@ -42,12 +42,15 @@ void BossRoom::Init()
 	_boss = Object::CreateObject<Boss>();
 	_boss->Init(Vector2(((TILEWIDTH * 35)), ((TILEHEIGHT * 15))),_tiles);
 
-	
+	UI = new UiManager;
+	UI->Init();
 }
 
 void BossRoom::Update()
 {
 	Scene::Update();
+	CAMERA->SetPosition(_player->GetTrans()->GetPos(), "BossRoom_bg");
+	UI->Update();
 }
 
 void BossRoom::Render()
@@ -61,6 +64,7 @@ void BossRoom::Render()
 	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2 - 200, 0), buffer, 20, 300, 50, ColorF::Azure);
 
 	Scene::Render();
+	UI->Render();
 }
 
 void BossRoom::SetUP()

@@ -13,9 +13,10 @@ void RockCollider::CollisionBegin(void* obj)
 
 			_firstColl = true;
 			will->GetAbility()->DamageHP(7);
+			cout << will->GetAbility()->GetCurrentHP() << endl;
 		}
 	}
-
+	
 }
 
 void RockCollider::CollisionPreSolve(void* obj)
@@ -28,6 +29,7 @@ void RockCollider::CollisionPreSolve(void* obj)
 
 			_firstColl = true;
 			will->GetAbility()->DamageHP(7);
+			cout << will->GetAbility()->GetCurrentHP() << endl;
 		}
 	}
 
@@ -43,6 +45,7 @@ void RockCollider::CollisionEnd(void* obj)
 
 			_firstColl = true;
 			will->GetAbility()->DamageHP(7);
+			cout << will->GetAbility()->GetCurrentHP() << endl;
 		}
 	}
 }

@@ -51,6 +51,8 @@ public:
 	Player* GetPlayer() { return _player; }
 	Boss* GetBoss() { return _boss; }
 
+	void SetPlayer(Player* player) { _player = player; }
+
 	BossState* GetState() { return _Bstate; }
 	//void SetState(BossState* state);
 	void SetTarget(Vector2 target) { _target = target; }
