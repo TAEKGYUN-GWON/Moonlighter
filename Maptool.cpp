@@ -52,7 +52,7 @@ void Maptool::Init()
 	GRAPHICMANAGER->AddImage("brokenPillar", L"resource/img/Object/brokenPillar.png");
 	GRAPHICMANAGER->AddImage("npcNone", L"resource/img/npcNone.png");
 #pragma endregion
-
+	GRAPHICMANAGER->AddImage("Dungeon", L"resource/img/Dungeon/background.png");
 	GRAPHICMANAGER->AddImage("town_map", L"resource/img/Map/map.png");
 	GRAPHICMANAGER->AddImage("loby", L"resource/img/Map/Dungeon_Lobby.png");
 	GRAPHICMANAGER->AddImage("Shop_map", L"resource/img/Shop/shop_background.png");
@@ -201,7 +201,8 @@ void Maptool::Update()
 
 void Maptool::Render()
 {
-	GRAPHICMANAGER->DrawImage("Shop_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
+	//GRAPHICMANAGER->DrawImage("Shop_map", Vector2(0, 0), 1.0f, LEFT_TOP, true);
+	GRAPHICMANAGER->DrawImage("Dungeon", Vector2(0, 0), 1.0f, LEFT_TOP, true);
 	//GRAPHICMANAGER->DrawImage("loby", Vector2(0, 0), 1.0f, LEFT_TOP, true);
 
 	//char buffer[128];
@@ -311,7 +312,8 @@ void Maptool::Save()
 
 	//string str = "shop.map";
 	//string str = "Town.map";
-	string str = "shop.map";
+	//string str = "shop.map";
+	string str = "Dungeon1.map";
 	//string str = "test.map";
 
 	//GetWindowText(_saveName, titleSave, 256);
@@ -335,7 +337,8 @@ void Maptool::Load()
 
 	//string str = titleLoad;
 	//str += ".map";
-	string str = "shop.map";
+	//string str = "shop.map";
+	string str = "Dungeon1.map";
 	//string str = "Town.map";
 	//string str = "test.map";
 

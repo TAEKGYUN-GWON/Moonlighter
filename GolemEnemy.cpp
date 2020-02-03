@@ -100,7 +100,7 @@ void GolemEnemy::Update()
 
 	_sprite->SetPosition(_trans->GetPos()+Vector2::up*30);
 	AtkPosUpdate();
-	if (KEYMANAGER->isOnceKeyDown('8'))GetLeftAtk()->SetBodyActive(true);
+	//if (KEYMANAGER->isOnceKeyDown('8'))GetLeftAtk()->SetBodyActive(true);
 
 }
 

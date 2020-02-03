@@ -35,6 +35,7 @@ void DungeonScene::Update()
 	_dMgr->Update();
 	if (KEYMANAGER->isOnceKeyDown('0')) SCENEMANAGER->changeScene("test");
 	//test->Update();
+	//if (_player->GetState())
 }
 
 void DungeonScene::Render()

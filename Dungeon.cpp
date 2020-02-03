@@ -22,6 +22,9 @@ void Dungeon::Init(Vector2 start)
 	GRAPHICMANAGER->AddImage("brokenPillar", L"resource/img/Object/brokenPillar.png");
 	GRAPHICMANAGER->AddImage("Dungeon", L"resource/img/Dungeon/background.png");
 	GRAPHICMANAGER->AddImage("empty", L"resource/img/empty.png");
+	GRAPHICMANAGER->AddFrameImage("door", L"resource/img/Object/door.png", 5, 1);
+	GRAPHICMANAGER->AddFrameImage("doordown", L"resource/img/Object/doordown.png", 5, 1);
+
 	//_player = Object::CreateObject<Player>();
 	//_player->Init(this);
 

@@ -6,7 +6,6 @@ class DungeonMgr
 {
 private:
 	vector<Dungeon*> _rooms;
-	//BossRoom* _Broom;
 	Player* _player;
 
 	int _count = 0;
