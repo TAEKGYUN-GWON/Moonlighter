@@ -52,12 +52,12 @@ void ShopScene::Release()
 {
 	_npcMgr->Release(); //비어있음
 	
-	//std::ofstream file("PlayerInfo.json");
-	//json j;
-	//
-	//j["Position"]["posX"] = _player->GetTrans()->GetPos().x;
-	//j["Position"]["posY"] = _player->GetTrans()->GetPos().y;
-	//j["Position"]["curScene"] = SCENEMANAGER->GetNowScene()->GetName();
+	std::ofstream file("PlayerInfo.json");
+	json j;
+	
+	j["Position"]["posX"] = _player->GetTrans()->GetPos().x;
+	j["Position"]["posY"] = _player->GetTrans()->GetPos().y;
+	j["Position"]["curScene"] = SCENEMANAGER->GetNowScene()->GetName();
 
 	Scene::Release();
 }
@@ -85,6 +85,11 @@ void ShopScene::Update()
 		CAMERA->MoveTo(Vector2(-240.f, -140.0f), 1.0f, false);
 	}
 
+	if (_player->GetTrans()->GetPos().x >= 350.f && _player->GetTrans()->GetPos().x <= 393.f &&
+		_player->GetTrans()->GetPos().y >= 728.0f)
+	{
+		SCENEMANAGER->changeScene("Town");
+	}
 	
 	Scene::Update();
 }
