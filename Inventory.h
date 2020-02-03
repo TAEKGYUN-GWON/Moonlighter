@@ -4,7 +4,7 @@
 #include "Component.h"
 struct tagItemInfo
 {
-	tagItemInfo();
+	tagItemInfo() {};
 	tagItemInfo(string name, int some)
 	{
 		this->item = item;
