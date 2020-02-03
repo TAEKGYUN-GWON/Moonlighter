@@ -8,6 +8,7 @@
 #include "Maptool.h"
 #include "ShopDoor.h"
 #include "UiManager.h"
+
 #define SHOPTILEMAXX 22
 #define SHOPTILEMAXY 28
 

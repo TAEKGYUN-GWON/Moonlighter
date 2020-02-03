@@ -5,6 +5,7 @@
 #include "Smithy.h"
 #include "Npc.h"
 #include "Astar.h"
+#include "UiManager.h"
 
 #define NPCCOUNT 15
 
@@ -36,7 +37,7 @@ private:
 	vector<int> _waitCount;
 
 	vector<Npc*> _vNpc;
-
+	UiManager* UI;
 
 	string _prevScene;
 	float _fadeAlpha;

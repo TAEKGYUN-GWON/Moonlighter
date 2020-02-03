@@ -71,9 +71,13 @@ void Smithy::Render()
 
 void Smithy::KeyInput()
 {
-	if (KEYMANAGER->isOnceKeyDown('J') && _isPlayerIn)
+	if (_isPlayerIn)
 	{
-		_isShow = !_isShow;
+		if(KEYMANAGER->isOnceKeyDown('J'))
+		{
+
+			_isShow = !_isShow;
+		}
 	}
 
 	if (_isShow)

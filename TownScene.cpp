@@ -87,8 +87,6 @@ void TownScene::Init()
 
 	_player->GetSprite()->SetPosition(_player->GetTrans()->GetPos() + Vector2(0,-14));
 
-	
-
 	_smithy = new Smithy;
 	_smithy->Init(_player->GetInventory());
 
@@ -104,6 +102,8 @@ void TownScene::Init()
 	_aStar = new Astar;
 	_aStar->Init(this->_tiles, TILENUMX, TILENUMY);
 
+	UI = new UiManager;
+	UI->Init();
 
 	//_smithy->SetSmithPos(_smith->GetTrans()->GetPos());
 
@@ -323,11 +323,14 @@ void TownScene::Render()
 		}
 	}
 
+	UI->Render();
 
-	wchar_t buffer[128];
-	swprintf(buffer, 128, L"x: %1.f, y:%1.f", _player->GetTrans()->GetPos().x, _player->GetTrans()->GetPos().y);
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2), buffer, 20, 500, 300, ColorF::White);
+	//wchar_t buffer[128];
+	//swprintf(buffer, 128, L"x: %1.f, y:%1.f", _player->GetTrans()->GetPos().x, _player->GetTrans()->GetPos().y);
+	//GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2), buffer, 20, 500, 300, ColorF::White);
 
+	GRAPHICMANAGER->DrawFillRect(Vector2(WINSIZEX / 2 + CAMERA->GetPosition().x, WINSIZEY / 2 + CAMERA->GetPosition().y),
+		Vector2(WINSIZEX, WINSIZEY), 0.0f, ColorF::Black, _fadeAlpha, PIVOT::CENTER, true);
 }
 
 bool TownScene::ShowJ()
@@ -398,13 +401,13 @@ void TownScene::FoundWay(Npc* npc, int i)
 
 void TownScene::SetDest()
 {
-	_destination.push_back(Vector2(2196, 1609));
-	_destination.push_back(Vector2(1912, 2080));
-	_destination.push_back(Vector2(384, 2186));
-	_destination.push_back(Vector2(632, 980));
-	_destination.push_back(Vector2(752, 206));
-	_destination.push_back(Vector2(1664, 1261));
-	_destination.push_back(Vector2(2553, 769));
+	_destination.push_back(Vector2(2517, 809));
+	_destination.push_back(Vector2(1679,1295));
+	_destination.push_back(Vector2(1912,2092));
+	_destination.push_back(Vector2(418,2083));
+	_destination.push_back(Vector2(618,957));
+	_destination.push_back(Vector2(435,734));
+	_destination.push_back(Vector2(801,293));
 
 	for (int i = 0; i < NPCCOUNT; i++)
 	{

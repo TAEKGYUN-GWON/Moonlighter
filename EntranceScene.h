@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "Player.h"
 #include "Maptool.h"
+#include "UiManager.h"
 
 class EntranceScene : public Scene
 {
@@ -10,6 +11,7 @@ private:
 	tagTile _tagTiles[TILENUMX * TILENUMY];
 	
 	Player* _player;
+	UiManager* UI;
 
 	float _fadeAlpha;
 
