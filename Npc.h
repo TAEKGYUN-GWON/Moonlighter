@@ -103,13 +103,3 @@ public:
 
 
 };
-
-
-bool operator== (const NpcShopState& a, const NpcShopState& b)
-{
-	if (a == b)
-		return true;
-	else
-		return false;
-}
-

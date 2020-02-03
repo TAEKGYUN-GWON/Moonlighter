@@ -29,7 +29,8 @@ private:
 
 	vector<Vector2> _destination;
 
-	vector<int> _destCount;
+	//vector<int> _destCount;
+	vector<int>	_destCount;
 
 	vector<Npc*> _vNpc;
 
@@ -56,4 +57,6 @@ public:
 	void MoveNPC();
 
 };
+
+
 

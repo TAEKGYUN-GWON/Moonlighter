@@ -102,6 +102,13 @@ void TownScene::Update()
 			_frameX = 0;
 	}
 
+	if((_player->GetTrans()->GetPos().x > 1955 - 100 && _player->GetTrans()->GetPos().y == 525
+		&& _player->GetTrans()->GetPos().x < 1955 + 100))//                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       && _player->GetTrans()->GetPos().y <= 525 ))
+	{
+		cout << "h" << endl;
+		//smithy->SetShow(false);
+	}
+	 
 
 	CAMERA->SetPosition(Vector2(_player->GetTrans()->GetPos()), 
 		"town_map");
@@ -325,11 +332,16 @@ void TownScene::SetDest()
 	_destination.push_back(Vector2(752, 206));
 	_destination.push_back(Vector2(1664, 1261));
 	_destination.push_back(Vector2(2553, 769));
+
+	for (int i = 0; i < 10; i++)
+	{
+		_destCount.push_back(-1);
+	}
 }
 
 Vector2 TownScene::ReturnDest(int i)
 {
-	_destCount[i] = (RND->getInt(8));
+	_destCount[i] = RND->getInt(8);
 
 	return _destination[_destCount[i]];
 }
@@ -338,7 +350,7 @@ void TownScene::MoveNPC()
 {
 	for (int i = 0; i < _vNpc.size(); i++)
 	{
-		if(_vNpc[i]->GetNpcState() == NpcIdle)
-		FoundWay(_vNpc[i], i);
+		//if(_vNpc[i]->GetNpcState() == NpcIdle)
+		//FoundWay(_vNpc[i], i);
 	}
 }
