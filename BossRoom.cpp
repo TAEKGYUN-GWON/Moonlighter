@@ -7,7 +7,8 @@
 void BossRoom::Init()
 {
 	Scene::Init();
-
+	
+	_name = "BossRoom";
 	GRAPHICMANAGER->AddImage("BossRoom_bg", L"resource/img/Dungeon/bossRoom.png");
 
 	GRAPHICMANAGER->AddFrameImage("Open_Boss", L"resource/img/Enemy/BossUp.png", 32, 1);

@@ -367,8 +367,9 @@ void EnemyDead::Release(Enemy* _sEnemy)
 
 	//if (_sEnemy->GetHP()->IsDead())
 	//cout << "Á×¾ú´Ù ¤Ð¤Ð" << endl;
-
 	_sEnemy->SetIsActive(false);
+	if (SCENEMANAGER->GetNowScene()->GetName() == "BossRoom")return;
+	if (SCENEMANAGER->GetNowScene()->GetChildFromName("Will") )return;
 
 	int some = RND->getInt(3);
 
