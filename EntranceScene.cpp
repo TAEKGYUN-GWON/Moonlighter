@@ -65,6 +65,9 @@ void EntranceScene::Init()
 	_player->SetTiles(tiles, TILENUMX, TILENUMY);
 
 	_fadeAlpha = 1.0f;
+
+	UI = new UiManager;
+	UI->Init();
 }
 
 void EntranceScene::Update()
@@ -115,6 +118,8 @@ void EntranceScene::Render()
 	_player->Render();
 
 	//GRAPHICMANAGER->Text(Vector2(10, 6), L"Entrance Scene", 20, 200, 30, ColorF::Aqua);
+
+	UI->Render();
 
 	GRAPHICMANAGER->DrawFillRect(Vector2(WINSIZEX / 2 + CAMERA->GetPosition().x, WINSIZEY / 2 + CAMERA->GetPosition().y),
 		Vector2(WINSIZEX, WINSIZEY), 0.0f, ColorF::Black, _fadeAlpha, PIVOT::CENTER, true);
