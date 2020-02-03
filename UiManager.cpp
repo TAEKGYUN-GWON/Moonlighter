@@ -14,27 +14,6 @@ void UiManager::Init()
 	//_heart =		GRAPHICMANAGER->AddImage("heart", L"resource/img/UI/heart.png");
 	_weapon =		GRAPHICMANAGER->AddFrameImage("UI_WeaponSwap", L"resource/img/UI/UI_WeaponSwap.png",4,2);
 
-	//_coin = UiObject::CreateUiObject<UiObject>();
-	//_bag = UiObject::CreateUiObject<UiObject>();
-	//_bagButton = UiObject::CreateUiObject<UiObject>();
-	//_potionButton = UiObject::CreateUiObject<UiObject>();
-	//_heart = UiObject::CreateUiObject<UiObject>();
-	//_weapon = UiObject::CreateUiObject<UiObject>();
-
-	/*_coin->GetTrans()->SetPos(Vector2(25.5f, 114));
-	_bag->GetTrans()->SetPos(Vector2(54, 58.5f));
-	_bagButton->GetTrans()->SetPos(Vector2(1210, 207));
-	_potionButton->GetTrans()->SetPos(Vector2(1243.5, 30));
-	_heart->GetTrans()->SetPos(Vector2(132, 46));
-	_weapon->GetTrans()->SetPos(Vector2(1150.f, 103));
-
-	_coin->SetSprite("coin");
-	_bag->SetSprite("moneyBag");
-	_bagButton->SetSprite("UI_Bag");
-	_potionButton->SetSprite("UI_Potion");
-	_heart->SetSprite("heart");
-	_weapon->SetSprite("UI_WeaponSwap",true);
-	_weapon->GetSprite()->Stop();*/
 	player = (Player*) SCENEMANAGER->GetNowScene()->GetChildFromName("Will");
 	inven = player->GetInventory();
 }
@@ -57,5 +36,8 @@ void UiManager::Render()
 	_coin->Render(Vector2(25.5f, 114), 1, PIVOT::CENTER, false);
 	_potionButton->Render(Vector2(1243.5, 30), 1, PIVOT::CENTER, false);
 	_bagButton->Render(Vector2(1210, 207), 1, PIVOT::CENTER, false);
-	_weapon->FrameRender(Vector2(1150.f, 103), 0, 0, 1, PIVOT::CENTER, false);
+	if(player->GetAttackType() == AttackType::Sword)
+		_weapon->FrameRender(Vector2(1150.f, 103), 0, 0, 1, PIVOT::CENTER, false);
+	else
+		_weapon->FrameRender(Vector2(1150.f, 103), 0, 1, 1, PIVOT::CENTER, false);
 }

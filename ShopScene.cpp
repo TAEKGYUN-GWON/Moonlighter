@@ -205,8 +205,8 @@ void ShopScene::Render()
 		}
 	}
 
-	_player->GetInventory()->Render();
 	UI->Render();
+	_player->GetInventory()->Render();
 
 	GRAPHICMANAGER->DrawFillRect(Vector2(WINSIZEX / 2 + CAMERA->GetPosition().x, WINSIZEY / 2 + CAMERA->GetPosition().y),
 		Vector2(WINSIZEX, WINSIZEY), 0.0f, ColorF::Black, _fadeAlpha, PIVOT::CENTER, true);

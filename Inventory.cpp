@@ -19,8 +19,6 @@ void Inventory::Init()
 	string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 	json j = json::parse(content);
 
-
-
 	for (json::iterator iter = j["item"].begin(); iter != j["item"].end(); ++iter)
 	{
 		Vector2 pos;
@@ -103,15 +101,9 @@ void Inventory::Init()
 	_money = j["money"];
 	file.close();
 
-
-
-
 	_ui = GRAPHICMANAGER->AddImage("inventory", L"resource/img/UI/Inventory.png");
 	_select = GRAPHICMANAGER->AddImage("invenSlot", L"resource/img/UI/invenSlot.png");
 	GRAPHICMANAGER->AddImage("Potion_S", L"resource/img/Items/Potion_S.png");
-
-
-
 
 	_isActive = false;
 }
@@ -133,7 +125,6 @@ void Inventory::Release()
 	{
 		j["item"][iter->first]["some"] += iter->second.some;
 		j["item"][iter->first]["name"] = iter->second.item;
-		//_vName.push_back(iter->first);
 		j["item"][iter->first]["price"] = iter->second.price;
 	}
 	j["money"] = _money;
@@ -147,16 +138,11 @@ void Inventory::Render()
 
 	if (!_isActive) return;
 
-	//_ui->RenderUI(Vector2(WINSIZEX / 2, WINSIZEY / 2));
 	_ui->Render(Vector2(WINSIZEX / 2, WINSIZEY / 2),1,PIVOT::CENTER,false);
 	for (iter = _inven.begin(); iter != _inven.end(); iter++)
 	{
-		//iter->second.item->GetComponent<Sprite>()->GetGraphic()->RenderUI(iter->second.item->GetTrans()->GetPos());
 		GRAPHICMANAGER->FindImage(iter->second.item)->Render(iter->second.pos,1,PIVOT::CENTER,false);
-		//char buffer[128];
-		//sprintf_s(buffer, "%d",iter->second.some);
 		Vector2 pos = Vector2(iter->second.pos.x + 20, iter->second.pos.y + 20);
-		//GRAPHICMANAGER->DrawTextD2D(pos, buffer, 15);
 
 		wchar_t buffer[128];
 		swprintf(buffer, 128, L"%d", iter->second.some);

@@ -95,8 +95,6 @@ void Smithy::KeyInput()
 			Item* i;
 			_inven->Insert(i = Item::CreateItem<Crystal_Energy>(Vector2(0, 0)));
 
-	
-			_inven->Insert(i = Item::CreateItem<Crystal_Energy>(Vector2(0, 0)));
 
 			i = Item::CreateItem<Golem_Core>(Vector2(0, 0));
 			_inven->Insert(i);

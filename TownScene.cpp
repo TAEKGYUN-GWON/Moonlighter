@@ -175,8 +175,8 @@ void TownScene::Release()
 
 	_tiles.clear();
 
-	for (int i = _vNpc.size(); i <= 0; i--)
-		_vNpc[i]->Release();
+	for (Npc* n :_vNpc)
+		n->Release();
 	_vNpc.clear();
 
 	_destination.clear();
@@ -316,7 +316,6 @@ void TownScene::Render()
 
 	_player->GetInventory()->Render();
 
-	_smithy->Render();
 
 	if (!_smithy->GetSmithy())
 	{
@@ -326,11 +325,6 @@ void TownScene::Render()
 		{
 			_j->Render(Vector2(2520, 1040), 1.f, PIVOT::CENTER, true);
 		}
-	}
-
-	for (int i = 0; i < _vNpc.size(); i++)
-	{
-		_vNpc[i]->Render();
 	}
 
 	if (_smithy->GetSmithy())
@@ -343,6 +337,7 @@ void TownScene::Render()
 	}
 
 	UI->Render();
+	_smithy->Render();
 
 	//wchar_t buffer[128];
 	//swprintf(buffer, 128, L"x: %1.f, y:%1.f", _player->GetTrans()->GetPos().x, _player->GetTrans()->GetPos().y);
