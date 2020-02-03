@@ -5,19 +5,21 @@ class UiManager
 {
 private:
 
-	//Graphic* _coin;
-	//Graphic* _bag;
-	//Graphic* _bagButton;
-	//Graphic* _potionButton;
-	//Graphic* _heart;
-	//Graphic* _weapon;
-
-	UiObject* _coin;
-	UiObject* _bag;
-	UiObject* _bagButton;
-	UiObject* _potionButton;
-	UiObject* _heart;
-	UiObject* _weapon;
+	Graphic* _coin;
+	Graphic* _bag;
+	Graphic* _bagButton;
+	Graphic* _potionButton;
+	Graphic* _heart;
+	Graphic* _weapon;
+	Graphic* _hp;
+	int hpMaxX;
+	int hpMaxY;
+	//UiObject* _coin;
+	//UiObject* _bag;
+	//UiObject* _bagButton;
+	//UiObject* _potionButton;
+	//UiObject* _heart;
+	//UiObject* _weapon;
 	Inventory* inven;
 	Player* player;
 

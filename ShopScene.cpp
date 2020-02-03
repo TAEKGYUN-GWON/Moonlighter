@@ -34,8 +34,8 @@ void ShopScene::Init()
 	//_checkStand->SetNpc(_npcMgr->GetNpcVector());
 	_shopDoor = Object::CreateObject<ShopDoor>();
 	_shopDoor->Init();
-	
-
+	UI = new UiManager;
+	UI->Init();
 }
 
 void ShopScene::Release()
@@ -68,6 +68,7 @@ void ShopScene::Render()
 	Scene::Render();
 
 	_player->GetInventory()->Render();
+	UI->Render();
 }
 
 void ShopScene::SetUp()

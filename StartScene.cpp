@@ -7,6 +7,8 @@
 #include "Maptool.h"
 #include "TestScene.h"
 #include"ETCS.h"
+#include "BossRoom.h"
+
 void StartScene::Init()
 {
 	Scene::Init();
@@ -16,6 +18,7 @@ void StartScene::Init()
 	SCENEMANAGER->addScene("Shop", new ShopScene);
 	SCENEMANAGER->addScene("Maptool", new Maptool);
 	SCENEMANAGER->addScene("test", new TestScene);
+	SCENEMANAGER->addScene("BossRoom", new BossRoom);
 
 	GraphicsManager::getSingleton()->AddImage("dd", L"eagle.png");
 	GraphicsManager::getSingleton()->AddFrameImage("d2", L"fatkachu.png", 4, 1);
@@ -95,6 +98,7 @@ void StartScene::Update()
 	if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
 	if (KEYMANAGER->isOnceKeyDown('5')) SCENEMANAGER->changeScene("Maptool");
 	if (KEYMANAGER->isOnceKeyDown('0')) SCENEMANAGER->changeScene("test");
+	if (KEYMANAGER->isOnceKeyDown('6')) SCENEMANAGER->changeScene("BossRoom");
 
 	//inven->Update();
 
