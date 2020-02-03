@@ -200,7 +200,7 @@ void TownScene::SetUp()
 	{
 		for (int j = 0; j < TILENUMX; ++j)
 		{
-			int index = j + SHOPTILEMAXX * i;
+			int index = j + TILENUMX * i;
 
 			Tile* tile = Object::CreateObject<Tile>();
 			tile->Init(j, i);

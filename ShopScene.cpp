@@ -79,12 +79,6 @@ void ShopScene::Release()
 	_npcMgr->Release(); //비어있음
 	
 	_player->Release();
-	std::ofstream file("PlayerInfo.json");
-	json j;
-	
-	j["Position"]["posX"] = _player->GetTrans()->GetPos().x;
-	j["Position"]["posY"] = _player->GetTrans()->GetPos().y;
-	j["Position"]["curScene"] = SCENEMANAGER->GetNowScene()->GetName();
 
 	Scene::Release();
 }
@@ -99,24 +93,6 @@ void ShopScene::Update()
 	if (KEYMANAGER->isOnceKeyDown('3')) SCENEMANAGER->changeScene("Town");
 	if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
 	if (KEYMANAGER->isOnceKeyDown('5')) SCENEMANAGER->changeScene("Maptool");
-
-	// Camera 위치 옮기기 위한 부분
-	if (_pp == PP::Up && _player->GetTrans()->GetPos().y >= 405.f)
-	{
-		_pp = PP::Down;
-		CAMERA->MoveTo(Vector2(-240.f, 250.0f), 1.0f, false);
-	}
-	else if (_pp == PP::Down && _player->GetTrans()->GetPos().y < 405.f)
-	{
-		_pp = PP::Up;
-		CAMERA->MoveTo(Vector2(-240.f, -140.0f), 1.0f, false);
-	}
-
-	if (_player->GetTrans()->GetPos().x >= 350.f && _player->GetTrans()->GetPos().x <= 393.f &&
-		_player->GetTrans()->GetPos().y >= 728.0f)
-	{
-		SCENEMANAGER->changeScene("Town");
-	}
 
 	for (ShopStand* s : _shopStandMgr->GetShopStandVector())
 	{
@@ -225,8 +201,7 @@ void ShopScene::Render()
 
 		}
 	}
-	_player->GetInventory()->Render();
-	UI->Render();
+
 	_player->GetInventory()->Render();
 	UI->Render();
 
