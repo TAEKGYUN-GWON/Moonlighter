@@ -94,6 +94,9 @@
     <Filter Include="playGround\Shop\Npc">
       <UniqueIdentifier>{0a0724a8-d624-45bd-9848-e35ab53c5fe1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\HP">
+      <UniqueIdentifier>{d649f8a6-dd46-4811-9899-cd714899015a}</UniqueIdentifier>
+    </Filter>
     <Filter Include="playGround\Bullet">
       <UniqueIdentifier>{606b9db6-d611-446c-afb2-7ae3da391c30}</UniqueIdentifier>
     </Filter>
@@ -111,12 +114,6 @@
     </Filter>
     <Filter Include="2DGameFramework\Object\Particle">
       <UniqueIdentifier>{fbab504b-552c-4043-83e9-4c0d931a68e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="playGround\Player\Attack">
-      <UniqueIdentifier>{a7c38d5b-d5b6-48d0-8a97-4cc4fba36165}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="playGround\Ability">
-      <UniqueIdentifier>{d649f8a6-dd46-4811-9899-cd714899015a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -373,7 +370,7 @@
       <Filter>playGround\Player</Filter>
     </ClInclude>
     <ClInclude Include="Ability.h">
-      <Filter>playGround\Ability</Filter>
+      <Filter>playGround\HP</Filter>
     </ClInclude>
     <ClInclude Include="MintPotEnemy.h">
       <Filter>헤더 파일</Filter>
@@ -386,6 +383,12 @@
     </ClInclude>
     <ClInclude Include="ParticleManager.h">
       <Filter>2DGameFramework\Object\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="BowAttack.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SwordAttack.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="BulletScript.h">
       <Filter>playGround\Bullet</Filter>
@@ -405,17 +408,14 @@
     <ClInclude Include="BossRoom.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="BowAttack.h">
-      <Filter>playGround\Player\Attack</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerAttackScript.h">
-      <Filter>playGround\Player\Attack</Filter>
-    </ClInclude>
-    <ClInclude Include="SwordAttack.h">
-      <Filter>playGround\Player\Attack</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="PlayerDead.h">
-      <Filter>playGround\Player</Filter>
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemScript.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -642,7 +642,7 @@
       <Filter>playGround\Player</Filter>
     </ClCompile>
     <ClCompile Include="Ability.cpp">
-      <Filter>playGround\Ability</Filter>
+      <Filter>playGround\HP</Filter>
     </ClCompile>
     <ClCompile Include="MintPotEnemy.cpp">
       <Filter>소스 파일</Filter>
@@ -652,6 +652,12 @@
     </ClCompile>
     <ClCompile Include="ParticleManager.cpp">
       <Filter>2DGameFramework\Object\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="BowAttack.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SwordAttack.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="BulletScript.cpp">
       <Filter>playGround\Bullet</Filter>
@@ -671,17 +677,14 @@
     <ClCompile Include="BossRoom.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="BowAttack.cpp">
-      <Filter>playGround\Player\Attack</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerAttackScript.cpp">
-      <Filter>playGround\Player\Attack</Filter>
-    </ClCompile>
-    <ClCompile Include="SwordAttack.cpp">
-      <Filter>playGround\Player\Attack</Filter>
+      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="PlayerDead.cpp">
-      <Filter>playGround\Player</Filter>
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemScript.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -52,9 +52,7 @@ void Player::Init()
 	_inven = new Inventory;
 	_inven->Init();
 
-	Item* item = Item::CreateItem<Golem_Core>(Vector2(100, 100));
-	_inven->Insert(item);
-
+	
 	_state = new PlayerIdle(this);
 	_state->Enter();
 
@@ -125,6 +123,12 @@ void Player::Render()
 	else if (_atkType == AttackType::Bow) sprintf_s(str, "Attack Type : Bow\nState Type : %s", _state->GetState().c_str());
 
 	GRAPHICMANAGER->DrawTextD2D(Vector2(WINSIZEX - 230, 2), str, 20, 200, 70, ColorF::AntiqueWhite, TextPivot::RIGHT_BOTTOM);
+}
+
+void Player::Release()
+{
+	_inven->Release();
+	Object::Release();
 }
 
 void Player::ChangeState(PlayerState* state)

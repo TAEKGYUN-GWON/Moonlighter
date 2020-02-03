@@ -29,8 +29,9 @@ void DungeonScene::Init()
 
 void DungeonScene::Update()
 {
-	_dMgr->Update();
 	Scene::Update();
+	_dMgr->Update();
+	if (KEYMANAGER->isOnceKeyDown('0')) SCENEMANAGER->changeScene("test");
 	//test->Update();
 }
 
@@ -39,6 +40,8 @@ void DungeonScene::Render()
 	_dMgr->Render();
 	//test->Render();
 	Scene::Render();
+
+	_player->GetInventory()->Render();
 	GRAPHICMANAGER->Text(Vector2(10, 6), L"Dungeon Scene", 20, 200, 30, ColorF::AliceBlue);
 
 	wchar_t buffer[128];
@@ -64,4 +67,10 @@ void DungeonScene::Render()
 	//	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, 50 + a * 50), buffer, 20, 300, 50, ColorF::Azure);
 
 	//}
+}
+
+void DungeonScene::Release()
+{
+	_player->Release();
+	Scene::Release();
 }

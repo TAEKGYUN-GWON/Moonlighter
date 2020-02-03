@@ -17,7 +17,7 @@
 #include <map>
 #include <fstream>
 #include <string>
-
+#include<iomanip>
 using namespace std;
 #include "Box2D/Box2D.h"
 #ifdef _DEBUG
@@ -43,9 +43,16 @@ using namespace std;
 #include "GraphicsManager.h"
 #include "Camera.h"
 #include"ObjectManager.h"
-#include"rapidjson/document.h"
+//#include"rapidjson/document.h"
+//#include"rapidjson/writer.h"
+//#include"nlohmann/json.hpp"
+//#include"nlohmann/json_fwd.hpp"
+#include"lib/single_include/nlohmann/json.hpp"
+using json = nlohmann::json;
 #include"iniDataManager.h"
-using namespace rapidjson;
+//using namespace rapidjson;
+//using namespace nlohmann;
+
 using namespace SEVENTEEN_UTIL;
 
 //=========================================
