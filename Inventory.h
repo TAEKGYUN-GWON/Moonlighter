@@ -65,6 +65,7 @@ public:
 	void AddMoney(int money) { _money += money; }
 	bool DeductionMoney(int money);
 	int GetMoney() { return _money; }
+	int GetInventorySize() { return _inven.size(); }
 
 	int GetATK() { return _atk; }
 	void SetATK(int atk) { _atk = atk; }
