@@ -15,6 +15,7 @@ class Smithy
 {
 private:
 
+	Graphic* _back;
 	Graphic* _blackSmith;
 	Graphic* _anvil;
 	Graphic* _title;
@@ -40,8 +41,13 @@ private:
 	string standardStr;
 	wstring printStr;
 
+	//켜지기 전에
+
+	Vector2 _smithPos;	//대장장이의 위치
+
 	//대장간이 켜졌습니까?
 	bool _isShow;
+	bool _isPlayerIn;
 
 	Inventory* _inven;
 	Player* _player;
@@ -73,8 +79,13 @@ public:
 	void Release();
 	void Render();
 
+	void SetSmithPos(Vector2 smithPos) { _smithPos = smithPos; }
 
 	void KeyInput();
+	bool CheckPlayerPos();
+
+	void SetIn(bool in) { _isPlayerIn = in; }
+	void SetShow(bool show) { _isShow = show; }
 
 	void UpdateMaterial();
 
@@ -82,7 +93,10 @@ public:
 	void ShowUI();
 
 	void Buy();
+	bool CheckMaterial();
 	void Upgrade();
+
+	bool GetSmithy() { return _isShow; }
 
 
 

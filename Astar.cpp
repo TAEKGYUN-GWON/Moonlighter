@@ -161,7 +161,7 @@ list<Vector2> Astar::pathFinder(Vector2 start, Vector2 end)
 	_endTile = _vTotalList[(int)endId.x + maxX * (int)endId.y];
 	_endTile->SetAttribute("end");
 
-	_currentTile = _startTile;
+ 	_currentTile = _startTile;
 	AddOpenList(_currentTile);
 	bool theEnd = false;
 
@@ -186,7 +186,7 @@ list<Vector2> Astar::pathFinder(Vector2 start, Vector2 end)
 
 	int a;
 	return _pathList;
-}
+ }
 
 list<Vector2> Astar::pathFinderForIndex(Vector2 start, Vector2 end)
 {
