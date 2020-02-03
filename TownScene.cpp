@@ -122,9 +122,9 @@ void TownScene::SetUp()
 	{
 		for (int j = 0; j < TILENUMX; ++j)
 		{
-			/*int index = j + TILENUMX * i;
+			int index = j + TILENUMX * i;
 
-			_tiles[index] = Object::CreateObject<Tile>();
+			/*_tiles[index] = Object::CreateObject<Tile>();
 			_tiles[index]->Init(j, i);
 			_tiles[index]->AddComponent<Sprite>();
 			_tiles[index]->SetAttribute("None");
@@ -136,7 +136,7 @@ void TownScene::SetUp()
 			_tagTiles[index].isFrame = false;
 			_tagTiles[index].pivot = PIVOT::CENTER;*/
 
-			int index = j + SHOPTILEMAXX * i;
+			//int index = j + SHOPTILEMAXX * i;
 
 			Tile* tile = Object::CreateObject<Tile>();
 			tile->Init(j, i);

@@ -90,6 +90,20 @@ void ShopScene::Update()
 	{
 		SCENEMANAGER->changeScene("Town");
 	}
+
+	for (ShopStand* s : _shopStandMgr->GetShopStandVector())
+	{
+		if (Vector2::Distance(_player->GetTrans()->GetPos(), s->GetTrans()->GetPos()) < 80)
+		{
+			if (_player->GetInventory()->GetActive())
+			{
+				if (KEYMANAGER->isOnceKeyDown('J'))
+				{
+					s->SetItemInfo(_player->GetInventory()->GetItem());
+				}
+			}
+		}
+	}
 	
 	Scene::Update();
 }
@@ -139,6 +153,15 @@ void ShopScene::Render()
 	swprintf(buffer, 128, L"x: %f, y:%f", _ptMouse.x + CAMERA->GetPosition().x, _ptMouse.y + CAMERA->GetPosition().y);
 	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2 - 100), buffer, 20, 500, 300, ColorF::White);
 
+
+	for (ShopStand* s : _shopStandMgr->GetShopStandVector())
+	{
+		if (s->GetIsItemOn())
+		{
+			GRAPHICMANAGER->FindImage(s->GetItem().item)->Render(s->GetTrans()->GetPos(), Vector2(30, 30), 0);
+
+		}
+	}
 	_player->GetInventory()->Render();
 	UI->Render();
 }

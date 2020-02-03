@@ -91,7 +91,7 @@ void NpcHome::Update()
 {
 	if (_npc->GetNpcNowPosition() == NPCNOWPOSITION::POS_DOOR) //나가는문 앞인데
 	{
-		if (_npc->GetNpcThought() == NPCTHOUGHT::GOHOME) //집에 가고싶어하면
+		if (_npc->GetNpcThought() == NPCTHOUGHT::BUY) //집에 가고싶어하면
 		{
 			_npc->SetIsActive(false); //이렇게 해두면 매니저가 지움
 
