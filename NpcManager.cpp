@@ -56,7 +56,7 @@ void NpcManager::Update()
 	SetAstar();
 	//AstarFunction(); //이건 일단 치워..
 
-
+	cout << _vNpc.size() << endl;
 
 	//if (_vNpc.size())
 	//{
@@ -126,40 +126,40 @@ void NpcManager::MakeNpc()
 		}
 	}
 
-	else
-	{
-	for (int i = 0; i < _vNpc.size(); i++)
-	{
-		if (_vNpc[i]->GetName() != "girl")
-		{
-			_npc->Init("Girl", Vector2(400, 700));
-			_npc->SetName("girl");
-			_vNpc.push_back(_npc);
-			return;
-		}
-		else if (_vNpc[i]->GetName() != "guy")
-		{
-			_npc->Init("Guy", Vector2(400, 700));
-			_npc->SetName("guy");
-			_vNpc.push_back(_npc);
-			return;
-		}
-		else if (_vNpc[i]->GetName() != "kid")
-		{
-			_npc->Init("Kid", Vector2(400, 700));
-			_npc->SetName("kid");
-			_vNpc.push_back(_npc);
-			return;
-		}
-		else if (_vNpc[i]->GetName() != "lunk")
-		{
-			_npc->Init("Lunk", Vector2(400, 700));
-			_npc->SetName("lunk");
-			_vNpc.push_back(_npc);
-			return;
-		}
-	}
-	}
+	//else
+	//{
+	//for (int i = 0; i < _vNpc.size(); i++)
+	//{
+	//	if (_vNpc[i]->GetName() != "girl")
+	//	{
+	//		_npc->Init("Girl", Vector2(400, 700));
+	//		_npc->SetName("girl");
+	//		_vNpc.push_back(_npc);
+	//		return;
+	//	}
+	//	else if (_vNpc[i]->GetName() != "guy")
+	//	{
+	//		_npc->Init("Guy", Vector2(400, 700));
+	//		_npc->SetName("guy");
+	//		_vNpc.push_back(_npc);
+	//		return;
+	//	}
+	//	else if (_vNpc[i]->GetName() != "kid")
+	//	{
+	//		_npc->Init("Kid", Vector2(400, 700));
+	//		_npc->SetName("kid");
+	//		_vNpc.push_back(_npc);
+	//		return;
+	//	}
+	//	else if (_vNpc[i]->GetName() != "lunk")
+	//	{
+	//		_npc->Init("Lunk", Vector2(400, 700));
+	//		_npc->SetName("lunk");
+	//		_vNpc.push_back(_npc);
+	//		return;
+	//	}
+	//}
+	//}
 }
 
 //
