@@ -11,6 +11,7 @@ void BowAttack::Enter()
 	_obj->GetSprite()->SetIsLoop(false);
 	
 	int arrowSpd = 350;
+
 	switch (_obj->GetDirection())
 	{
 	case Dir::Left: case Dir::Left_Up: case Dir::Left_Down: 
@@ -41,7 +42,6 @@ void BowAttack::Enter()
 
 	_obj->GetSprite()->SetPosition(_obj->GetTrans()->GetPos() + Vector2(0, -14));
 	
-	//_isAtk = false;
 	_timer = _count = 0;
 	_delay = 0.29f;
 }

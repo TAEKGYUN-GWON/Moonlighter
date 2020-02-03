@@ -7,6 +7,7 @@
 #include "ShopStandManager.h"
 #include "Maptool.h"
 #include "ShopDoor.h"
+#include "UiManager.h"
 #define SHOPTILEMAXX 22
 #define SHOPTILEMAXY 28
 
@@ -14,6 +15,13 @@ class NpcManager;
 
 class ShopScene : public Scene
 {
+private:
+	typedef enum PlayerPosition : byte
+	{
+		Up,
+		Down,
+	}PP;
+
 private:
 	Player* _player;
 	NpcManager* _npcMgr;			 //npc 매니저
@@ -23,7 +31,8 @@ private:
 	ShopDoor* _shopDoor;			 //상점 출입문
 	vector<Tile*> _tiles;
 	tagTile _tagTiles[SHOPTILEMAXX * SHOPTILEMAXY];
-
+	PP _pp;
+	UiManager* UI;
 
 public:
 	virtual void Init()override;

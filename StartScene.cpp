@@ -7,6 +7,8 @@
 #include "Maptool.h"
 #include "TestScene.h"
 #include"ETCS.h"
+#include "BossRoom.h"
+
 void StartScene::Init()
 {
 	Scene::Init();
@@ -16,9 +18,10 @@ void StartScene::Init()
 	SCENEMANAGER->addScene("Shop", new ShopScene);
 	SCENEMANAGER->addScene("Maptool", new Maptool);
 	SCENEMANAGER->addScene("test", new TestScene);
+	SCENEMANAGER->addScene("BossRoom", new BossRoom);
 
 	GraphicsManager::getSingleton()->AddImage("dd", L"eagle.png");
-	GraphicsManager::getSingleton()->AddFrameImage("d2", L"fatkachu.png", 4, 1);
+	GraphicsManager::getSingleton()->AddFrameImage("fatkachu", L"fatkachu.png", 4, 1);
 	GRAPHICMANAGER->AddFrameImage("bn", L"blueNumber.png", 4, 1);
 
 	GRAPHICMANAGER->AddImage("coin", L"resource/img/UI/coin.png");
@@ -74,13 +77,20 @@ void StartScene::Init()
 
 	obj = Object::CreateObject<Object>();
 	obj->GetTrans()->SetPos(Vector2(WINSIZEX / 2, 200));
-	obj->AddComponent<Sprite>()->Init();
+	obj->AddComponent<Sprite>();
 	obj->GetComponent<Sprite>()->SetImgName("dd");
-	obj->GetComponent<Sprite>()->SetPosition(obj->GetTrans()->GetPos());
 	auto a = GRAPHICMANAGER->FindImage("dd");
 	obj->GetComponent<Sprite>()->SetSize(Vector2(a->GetFrameWidth(), a->GetFrameHeight()));
 	//obj->GetTrans()->SetScale(Vector2(obj->GetComponent<Sprite>()->GetGraphic()->GetFrameWidth(), obj->GetComponent<Sprite>()->GetGraphic()->GetFrameWidth()));
 	obj->GetTrans()->SetScale(Vector2(100, 50));
+
+
+	Object* obj2 = Object::CreateObject<Object>();
+	obj2->GetTrans()->SetPos(Vector2(WINSIZEX / 2 + 100, 500));
+	obj2->AddComponent<Sprite>()->Init(true);
+	obj2->GetComponent<Sprite>()->SetImgName("fatkachu");
+	obj2->GetComponent<Sprite>()->SetSize(Vector2(100, 38));
+	obj2->GetTrans()->SetScale(Vector2(obj2->GetComponent<Sprite>()->GetGraphic()->GetFrameWidth(), obj2->GetComponent<Sprite>()->GetGraphic()->GetFrameWidth()));
 }
 
 void StartScene::Update()
@@ -95,6 +105,7 @@ void StartScene::Update()
 	if (KEYMANAGER->isOnceKeyDown('4')) SCENEMANAGER->changeScene("Shop");
 	if (KEYMANAGER->isOnceKeyDown('5')) SCENEMANAGER->changeScene("Maptool");
 	if (KEYMANAGER->isOnceKeyDown('0')) SCENEMANAGER->changeScene("test");
+	if (KEYMANAGER->isOnceKeyDown('6')) SCENEMANAGER->changeScene("BossRoom");
 
 	//inven->Update();
 

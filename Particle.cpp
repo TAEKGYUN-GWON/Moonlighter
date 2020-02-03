@@ -75,7 +75,7 @@ void Particle::SetIsPhysics()
 
 void Particle::Setdepth()
 {
-	_trans->bottomPos = Vector2(_trans->bottomPos.x, 0);
+	_trans->bottomPos = Vector2(_trans->bottomPos.x, 99999);
 }
 
 void Particle::move()

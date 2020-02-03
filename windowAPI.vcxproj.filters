@@ -348,9 +348,6 @@
     <ClInclude Include="PlayerMove.h">
       <Filter>playGround\Player</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerAttack.h">
-      <Filter>playGround\Player</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerRoll.h">
       <Filter>playGround\Player</Filter>
     </ClInclude>
@@ -359,9 +356,6 @@
     </ClInclude>
     <ClInclude Include="PlayerState.h">
       <Filter>playGround\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Smithy.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="PlayerState.h">
       <Filter>playGround\Player</Filter>
@@ -405,17 +399,37 @@
     <ClInclude Include="Dungeon.h">
       <Filter>playGround\Dungeon</Filter>
     </ClInclude>
-    <ClInclude Include="BossRoom.h">
+    <ClInclude Include="Smithy.h">
+      <Filter>playGround\Smithy</Filter>
+    </ClInclude>
+    <ClInclude Include="BossState.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerAttackScript.h">
+    <ClInclude Include="BossAttack.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerDead.h">
+    <ClInclude Include="BossIdle.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="ItemScript.h">
+    <ClInclude Include="BossSlimeAtk.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BossDead.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BossHand.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BossRockAtk.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BossHandAtk.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="RockCollider.h">
+      <Filter>헤더 파일</Filter>
+    <ClInclude Include="PlayerAttack.h">
+      <Filter>playGround\Player\Attack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -620,9 +634,6 @@
     <ClCompile Include="PlayerMove.cpp">
       <Filter>playGround\Player</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerAttack.cpp">
-      <Filter>playGround\Player</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerRoll.cpp">
       <Filter>playGround\Player</Filter>
     </ClCompile>
@@ -631,9 +642,6 @@
     </ClCompile>
     <ClCompile Include="PlayerState.cpp">
       <Filter>playGround\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Smithy.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="PlayerState.cpp">
       <Filter>playGround\Player</Filter>
@@ -674,17 +682,37 @@
     <ClCompile Include="Dungeon.cpp">
       <Filter>playGround\Dungeon</Filter>
     </ClCompile>
-    <ClCompile Include="BossRoom.cpp">
+    <ClCompile Include="Smithy.cpp">
+      <Filter>playGround\Smithy</Filter>
+    </ClCompile>
+    <ClCompile Include="BossState.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerAttackScript.cpp">
+    <ClCompile Include="BossAttack.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerDead.cpp">
+    <ClCompile Include="BossIdle.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="ItemScript.cpp">
+    <ClCompile Include="BossSlimeAtk.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BossDead.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BossHand.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BossRockAtk.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BossHandAtk.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="RockCollider.cpp">
+      <Filter>소스 파일</Filter>
+    <ClCompile Include="PlayerAttack.cpp">
+      <Filter>playGround\Player\Attack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

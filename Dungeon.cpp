@@ -53,6 +53,7 @@ void Dungeon::Render()
 	_eMgr->Render();
 }
 
+
 void Dungeon::SetUp()
 {
 	for (int i = 0; i < Dungeon_Y; ++i)
@@ -151,8 +152,13 @@ void Dungeon::SetUp()
 					tiles[i]->GetChildren()[0]->AddComponent<Sprite>()->SetImgName(tiles[i]->GetImgName());
 					tiles[i]->GetChildren()[0]->GetComponent<Sprite>()->SetPivot(tiles[i]->GetPivot());
 				}
-
 				
+			}
+			if (tiles[i]->GetAttribute() == "Wall")
+			{
+				auto p = tiles[i]->AddComponent<PhysicsBody>();
+				p->Init(BodyType::STATIC, 1, 1);
+				p->SetBodyPosition();
 			}
 		}
 	}
@@ -173,8 +179,12 @@ void Dungeon::CloseRoom()
 {
 	_roomActive = false;
 	_eMgr->Release();
-	for (Object* c : tiles)
+	for (Tile* c : tiles)
+	{
+		if(c->GetAttribute()=="Wall")
+			SCENEMANAGER->GetNowScene()->GetWorld()->DestroyBody(c->GetComponent<PhysicsBody>()->GetBody());
 		c->Release();
+	}
 	tiles.clear();
 }
 

@@ -12,6 +12,7 @@ void ItemScript::CollisionBegin(void* obj)
 		Player* will = (Player*)to;
 		Item* me = (Item*)_object;
 		will->GetInventory()->Insert(me);
+
 	}
 
 }

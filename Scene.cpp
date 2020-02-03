@@ -63,10 +63,12 @@ void Scene::PhysicsUpdate()
 			_b2World->DestroyBody(deletedObject);
 			continue;
 		}
-
-		Transform* now = ((Object*)body->GetUserData())->GetTrans();
-		PhysicsBody* nowP = ((Object*)body->GetUserData())->GetComponent<PhysicsBody>();
-		now->SetPos(nowP->GetBodyPosition());
+		if (((Object*)body->GetUserData())->GetTrans() != nullptr)
+		{
+			Transform* now = ((Object*)body->GetUserData())->GetTrans();
+			PhysicsBody* nowP = ((Object*)body->GetUserData())->GetComponent<PhysicsBody>();
+			now->SetPos(nowP->GetBodyPosition());
+		}
 	}
 }
 
