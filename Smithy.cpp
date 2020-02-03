@@ -37,7 +37,7 @@ void Smithy::Init(Inventory* inven)
 	//_inven = new Inventory();
 	_inven = inven;
 	//_inven->Init();
-	_inven->AddMoney(135948788);
+	_inven->AddMoney(135948);
 	_inven->SetATK(30);
 
 	_recipePrice = _inven->GetATK() / 10 * 0.4 * 2316;
@@ -45,14 +45,6 @@ void Smithy::Init(Inventory* inven)
 	_m1Count = 2;
 	_m2Count = 2;
 	_m3Count = 2;
-
-
-	/*for (int i = 0; i < 3; i++)
-	{
-		_mRecipe.insert(make_pair(new Graphic(), 2));
-	}*/
-
-
 
 	_isShow = false;
 }
@@ -98,11 +90,11 @@ void Smithy::KeyInput()
 
 		if (KEYMANAGER->isStayKeyDown('Y'))
 		{
-			Item* i = Item::CreateItem<Crystal_Energy>(Vector2(0, 0));
-			_inven->Insert(i);
+			Item* i;
+			_inven->Insert(i = Item::CreateItem<Crystal_Energy>(Vector2(0, 0)));
 
-			i = Item::CreateItem<Crystal_Energy>(Vector2(0, 0));
-			_inven->Insert(i);
+	
+			_inven->Insert(i = Item::CreateItem<Crystal_Energy>(Vector2(0, 0)));
 
 			i = Item::CreateItem<Golem_Core>(Vector2(0, 0));
 			_inven->Insert(i);
@@ -114,16 +106,6 @@ void Smithy::KeyInput()
 		}
 	}
 }
-
-/*bool Smithy::CheckPlayerPos()
-{
-	if (_player->GetTrans()->GetPos().x < _smithPos.x - 80 && _player->GetTrans()->GetPos().y >= _smithPos.y + 50)
-	{
-		return true;
-	}
-
-	return false;
-}*/
 
 void Smithy::UpdateMaterial()
 {
@@ -228,6 +210,18 @@ void Smithy::Buy()
 
 }
 
+void Smithy::Upgrade()
+{
+	_recipePrice = _inven->GetATK() / 10 * 0.4 * 2316;
+	_upgradeGap *= 1.15;
+
+
+	_m1Count = _inven->GetATK() / 8 * 1.18;
+	_m2Count = _inven->GetATK() / 12 * 1.45;
+	_m3Count = _inven->GetATK() / 9 * 1.23;
+
+}
+
 bool Smithy::CheckMaterial()
 {
 	//Å©¸®½ºÅ»
@@ -252,26 +246,12 @@ bool Smithy::CheckMaterial()
 
 }
 
-void Smithy::Upgrade()
-{
-	_recipePrice = _inven->GetATK() / 10 * 0.4 * 2316;
-	_upgradeGap *= 1.15;
-
-	
-	_m1Count = _inven->GetATK() / 8 *  1.18;
-	_m2Count = _inven->GetATK() /  12*  1.45;
-	_m3Count = _inven->GetATK() / 9 *  1.23;
-
-}
-
 void Smithy::PrintRecipe()
 {
 	ColorF* color = new ColorF(0x191919, 1.f);
 
 	for (int i = 0; i <= 2; i++)
 	{
-		//GRAPHICMANAGER->FindImage(get<0>(_vMaterialCount[i]))->Render(Vector2(WINSIZEX - 300, WINSIZEY - (-10 + (i + 1) * 90)), 1, PIVOT::CENTER, false);
-
 		GRAPHICMANAGER->Text(Vector2(WINSIZEX - 280, WINSIZEY - 30 - ((i+1) * 90)), L"ÇÊ¿ä:", 20, 100, 50, *color, TextPivot::CENTER, L"³ª´®½ºÄù¾î¶ó¿îµå");
 		GRAPHICMANAGER->Text(Vector2(WINSIZEX - 280, WINSIZEY - ((i+1) * 90)), L"¼ÒÁö:", 20, 100, 50, *color, TextPivot::CENTER, L"³ª´®½ºÄù¾î¶ó¿îµå");
 

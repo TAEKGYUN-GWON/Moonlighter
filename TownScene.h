@@ -6,6 +6,8 @@
 #include "Npc.h"
 #include "Astar.h"
 
+#define NPCCOUNT 15
+
 class TownScene : public Scene
 {
 private:
@@ -31,6 +33,7 @@ private:
 
 	//vector<int> _destCount;
 	vector<int>	_destCount;
+	vector<int> _waitCount;
 
 	vector<Npc*> _vNpc;
 
@@ -52,6 +55,7 @@ public:
 
 
 	//NPC ฐüทร
+
 	void CreateNPC();
 	void FoundWay(Npc* npc, int i);
 
@@ -60,6 +64,8 @@ public:
 	Vector2 ReturnDest(int i);
 
 	void MoveNPC();
+
+	void CheckPos();
 
 };
 
