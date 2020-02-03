@@ -39,12 +39,32 @@ void EntranceScene::Init()
 	GRAPHICMANAGER->AddImage("fatkachu", L"resource/img/Object/popcorn.png");
 	GRAPHICMANAGER->AddImage("loby", L"resource/img/Map/Dungeon_Lobby.png");
 
+	_name = "Entrance";
+
 	SetUp();
 
 	_player = Object::CreateObject<Player>();
 	_player->Init();
-	_player->GetTrans()->SetPos(1249, 2020);
+
+	std::ifstream file("PlayerInfo.json");
+	string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+	json j = json::parse(content);
+
+	// Town -> Entrance
+	if (j["Position"]["curScene"] == "Town")
+	{
+		_player->GetTrans()->SetPos(Vector2(1245, 1940));
+	}
+	// Dungeon -> Entrance
+	else
+	{
+		_player->GetTrans()->SetPos(Vector2(718, 983));
+	}
+
+	_player->GetPhysics()->SetBodyPosition();
 	_player->SetTiles(tiles, TILENUMX, TILENUMY);
+
+	_fadeAlpha = 1.0f;
 }
 
 void EntranceScene::Update()
@@ -52,8 +72,40 @@ void EntranceScene::Update()
 	Scene::Update();
 
 	CAMERA->SetPosition(_player->GetTrans()->GetPos(),"loby");
-}
 
+	// ¾À ÀüÈ¯
+	//SetPos(Vector2(718, 983));
+	if (_player->GetTrans()->GetPos().x >= 672.f && _player->GetTrans()->GetPos().x <= 745.f &&
+		_player->GetTrans()->GetPos().y >= 936.0f && _player->GetTrans()->GetPos().y <= 971.0f)
+	{
+		_player->SetIsInteraction(true);
+	}
+
+	if (_player->GetIsInteraction() && _player->GetTrans()->GetPos().x >= 672.f && _player->GetTrans()->GetPos().x <= 745.f &&
+		_player->GetTrans()->GetPos().y >= 936.0f && _player->GetTrans()->GetPos().y <= 971.0f)
+	{
+		_player->SetIsInteraction(true);
+
+		if (KEYMANAGER->isOnceKeyDown('J'))
+		{
+			SCENEMANAGER->changeScene("Dungeon");
+		}
+	}
+
+	if (_player->GetTrans()->GetPos().y >= 2100.0f)
+	{
+		SCENEMANAGER->changeScene("Town");
+	}
+
+	if (_fadeAlpha >= 0.0f)
+	{
+		_fadeAlpha -= 0.7f * TIMEMANAGER->getElapsedTime();
+		if (_fadeAlpha < 0.0f)
+		{
+			_fadeAlpha = 0.0f;
+		}
+	}
+}
 
 void EntranceScene::Render()
 {
@@ -63,6 +115,16 @@ void EntranceScene::Render()
 	_player->Render();
 
 	GRAPHICMANAGER->Text(Vector2(10, 6), L"Entrance Scene", 20, 200, 30, ColorF::Aqua);
+
+	GRAPHICMANAGER->DrawFillRect(Vector2(WINSIZEX / 2 + CAMERA->GetPosition().x, WINSIZEY / 2 + CAMERA->GetPosition().y),
+		Vector2(WINSIZEX, WINSIZEY), 0.0f, ColorF::Black, _fadeAlpha, PIVOT::CENTER, true);
+}
+
+void EntranceScene::Release()
+{
+	_player->Release();
+
+	Scene::Release();
 }
 
 void EntranceScene::SetUp()

@@ -11,10 +11,13 @@ private:
 	
 	Player* _player;
 
+	float _fadeAlpha;
+
 public:
 	virtual void Init();
 	virtual void Update();
 	virtual void Render();
+	virtual void Release();
 	void SetUp();
 };
 
