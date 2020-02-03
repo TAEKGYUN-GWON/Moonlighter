@@ -398,13 +398,13 @@ void TownScene::FoundWay(Npc* npc, int i)
 
 void TownScene::SetDest()
 {
-	_destination.push_back(Vector2(2196, 1609));
-	_destination.push_back(Vector2(1912, 2080));
-	_destination.push_back(Vector2(384, 2186));
-	_destination.push_back(Vector2(632, 980));
-	_destination.push_back(Vector2(752, 206));
-	_destination.push_back(Vector2(1664, 1261));
-	_destination.push_back(Vector2(2553, 769));
+	_destination.push_back(Vector2(2517, 809));
+	_destination.push_back(Vector2(1679,1295));
+	_destination.push_back(Vector2(1912,2092));
+	_destination.push_back(Vector2(418,2083));
+	_destination.push_back(Vector2(618,957));
+	_destination.push_back(Vector2(435,734));
+	_destination.push_back(Vector2(801,293));
 
 	for (int i = 0; i < NPCCOUNT; i++)
 	{
