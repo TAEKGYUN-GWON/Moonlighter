@@ -113,29 +113,30 @@ void ShopScene::Render()
 	GRAPHICMANAGER->FindImage("ShopBg")->Render(0, 0, LEFT_TOP);
 
 #pragma region Tile attribute
-	wchar_t buffer[128];
-	for (int i = 0; i < 22; ++i)
-	{
-		for (int j = 0; j < 28; ++j)
-		{
-			int index = (i + (int)CAMERA->GetPosition().y / TILEHEIGHT) * SHOPTILEMAXX + (j + (int)CAMERA->GetPosition().x / TILEWIDTH);
+	//Å¸ÀÏ ÁÂÇ¥ ±×¸®´Â°Å
+	//wchar_t buffer[128];
+	//for (int i = 0; i < 22; ++i)
+	//{
+	//	for (int j = 0; j < 28; ++j)
+	//	{
+	//		int index = (i + (int)CAMERA->GetPosition().y / TILEHEIGHT) * SHOPTILEMAXX + (j + (int)CAMERA->GetPosition().x / TILEWIDTH);
 
-			if (index < 0 || index >= SHOPTILEMAXX * SHOPTILEMAXY) continue;
+	//		if (index < 0 || index >= SHOPTILEMAXX * SHOPTILEMAXY) continue;
 
-			if (_tiles[index]->GetAttribute() == "Wall") _tiles[index]->GetComponent<Sprite>()->SetFillRect(true);
-			else if (_tiles[index]->GetAttribute() == "NpcNone")
-			{
-				_tiles[index]->GetComponent<Sprite>()->SetRectColor(ColorF::YellowGreen);
-				_tiles[index]->GetComponent<Sprite>()->SetFillRect(true);
-			}
-			//else if (_tiles[index]->GetAttribute() != "Wall") _tiles[index]->GetComponent<Sprite>()->SetFillRect(false);
-			else _tiles[index]->GetComponent<Sprite>()->SetFillRect(false);
+	//		if (_tiles[index]->GetAttribute() == "Wall") _tiles[index]->GetComponent<Sprite>()->SetFillRect(true);
+	//		else if (_tiles[index]->GetAttribute() == "NpcNone")
+	//		{
+	//			_tiles[index]->GetComponent<Sprite>()->SetRectColor(ColorF::YellowGreen);
+	//			_tiles[index]->GetComponent<Sprite>()->SetFillRect(true);
+	//		}
+	//		//else if (_tiles[index]->GetAttribute() != "Wall") _tiles[index]->GetComponent<Sprite>()->SetFillRect(false);
+	//		else _tiles[index]->GetComponent<Sprite>()->SetFillRect(false);
 
-			//sprintf_s(buffer, "%d", index);
-			swprintf(buffer, 128, L"%d", index);
-			GRAPHICMANAGER->DrawTextD2D(_tiles[index]->GetTrans()->GetPos() + Vector2(-(TILEWIDTH / 2) + 2, TILEHEIGHT / 7), buffer, 10, ColorF::Yellow, TextPivot::LEFT_TOP, L"¸¼Àº°íµñ", true);
-		}
-	}
+	//		//sprintf_s(buffer, "%d", index);
+	//		swprintf(buffer, 128, L"%d", index);
+	//		GRAPHICMANAGER->DrawTextD2D(_tiles[index]->GetTrans()->GetPos() + Vector2(-(TILEWIDTH / 2) + 2, TILEHEIGHT / 7), buffer, 10, ColorF::Yellow, TextPivot::LEFT_TOP, L"¸¼Àº°íµñ", true);
+	//	}
+	//}
 #pragma endregion
 
 	Scene::Render();
