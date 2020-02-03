@@ -88,7 +88,6 @@ void TownScene::Init()
 
 void TownScene::Update()
 {
-	Scene::Update();
 
 	_smithy->Update();
 
@@ -102,18 +101,23 @@ void TownScene::Update()
 			_frameX = 0;
 	}
 
-	if((_player->GetTrans()->GetPos().x > 1955 - 100 && _player->GetTrans()->GetPos().y == 525
-		&& _player->GetTrans()->GetPos().x < 1955 + 100))//                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       && _player->GetTrans()->GetPos().y <= 525 ))
+	if((_player->GetTrans()->GetPos().x >= 1955 - 100 && _player->GetTrans()->GetPos().y >= 500
+		&& _player->GetTrans()->GetPos().x <= 1955 + 100 && _player->GetTrans()->GetPos().y <= 500 + 20))
 	{
-		cout << "h" << endl;
+		//cout << "h" << endl;
 		//smithy->SetShow(false);
+		SCENEMANAGER->changeScene("Shop");
 	}
 	 
 
-	CAMERA->SetPosition(Vector2(_player->GetTrans()->GetPos()), 
-		"town_map");
+	CAMERA->SetPosition(Vector2(_player->GetTrans()->GetPos()), "town_map");
 
 	MoveNPC();
+
+	CheckPos();
+
+
+	Scene::Update();
 }
 
 void TownScene::SetUp()
@@ -122,20 +126,6 @@ void TownScene::SetUp()
 	{
 		for (int j = 0; j < TILENUMX; ++j)
 		{
-			/*int index = j + TILENUMX * i;
-
-			_tiles[index] = Object::CreateObject<Tile>();
-			_tiles[index]->Init(j, i);
-			_tiles[index]->AddComponent<Sprite>();
-			_tiles[index]->SetAttribute("None");
-
-			
-
-			_tagTiles[index].attribute = "None";
-			_tagTiles[index].imgKey = "None";
-			_tagTiles[index].isFrame = false;
-			_tagTiles[index].pivot = PIVOT::CENTER;*/
-
 			int index = j + SHOPTILEMAXX * i;
 
 			Tile* tile = Object::CreateObject<Tile>();
@@ -239,6 +229,11 @@ void TownScene::Render()
 		}
 	}
 
+	for (int i = 0; i < _vNpc.size(); i++)
+	{
+		_vNpc[i]->Render();
+	}
+
 	if (_smithy->GetSmithy())
 	{
 		if (!(_player->GetTrans()->GetPos().x > 2470 - 200 && _player->GetTrans()->GetPos().y >= 1080
@@ -248,10 +243,6 @@ void TownScene::Render()
 		}
 	}
 
-	for (int i = 0; i < _vNpc.size(); i++)
-	{
-		_vNpc[i]->Render();
-	}
 
 	wchar_t buffer[128];
 	swprintf(buffer, 128, L"x: %1.f, y:%1.f", _player->GetTrans()->GetPos().x, _player->GetTrans()->GetPos().y);
@@ -278,12 +269,14 @@ bool TownScene::ShowJ()
 
 void TownScene::CreateNPC()
 {
-	Npc* npc = Object::CreateObject<Npc>();
-	npc->SetIsCheckSOn(false);
-	npc->SetIsAstarOn(true);
+	Npc* npc;
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < NPCCOUNT; i++)
 	{
+		npc = Object::CreateObject<Npc>();
+		npc->SetIsCheckSOn(false);
+		npc->SetIsAstarOn(true);
+
 		int a = RND->getInt(4);
 
 		if (a == 0)
@@ -294,19 +287,19 @@ void TownScene::CreateNPC()
 		}
 		if (a == 1)
 		{
-			npc->Init("Guy1", Vector2(632, 980));
+			npc->Init("Guy1", Vector2(2208, 1447));
 			npc->SetName("guy");
 			_vNpc.push_back(npc);
 		}
 		if (a == 2)
 		{
-			npc->Init("Kid1", Vector2(632, 980));
+			npc->Init("Kid1", Vector2(1300, 800));
 			npc->SetName("kid");
 			_vNpc.push_back(npc);
 		}
 		if (a == 3)
 		{
-			npc->Init("Lunk1", Vector2(632, 980));
+			npc->Init("Lunk1", Vector2(1490, 2100));
 			npc->SetName("lunk");
 			_vNpc.push_back(npc);
 		}
@@ -333,15 +326,17 @@ void TownScene::SetDest()
 	_destination.push_back(Vector2(1664, 1261));
 	_destination.push_back(Vector2(2553, 769));
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < NPCCOUNT; i++)
 	{
 		_destCount.push_back(-1);
+		_waitCount.push_back(0);
 	}
 }
 
 Vector2 TownScene::ReturnDest(int i)
 {
-	_destCount[i] = RND->getInt(8);
+	if(_destCount[i] == -1)
+		_destCount[i] = RND->getInt(7);
 
 	return _destination[_destCount[i]];
 }
@@ -350,7 +345,27 @@ void TownScene::MoveNPC()
 {
 	for (int i = 0; i < _vNpc.size(); i++)
 	{
-		//if(_vNpc[i]->GetNpcState() == NpcIdle)
-		//FoundWay(_vNpc[i], i);
+		//if(_vNpc[i]->GetNpcState() == Np cIdle)
+		FoundWay(_vNpc[i], i);
+	}
+}
+
+void TownScene::CheckPos()
+{
+	for (int i = 0; i < _vNpc.size(); i++)
+	{
+		if (_vNpc[i]->GetTrans()->GetPos().x <= _destination[_destCount[i]].x + 100
+			&& _vNpc[i]->GetTrans()->GetPos().x >= _destination[_destCount[i]].x - 100
+			&& _vNpc[i]->GetTrans()->GetPos().y <= _destination[_destCount[i]].y + 100
+			&& _vNpc[i]->GetTrans()->GetPos().y >= _destination[_destCount[i]].y - 100)
+		{
+			_waitCount[i]++;
+
+			if (_waitCount[i] >= 20)
+			{
+				_destCount[i] = RND->getInt(7);
+				_waitCount[i] = 0;
+			}
+		}
 	}
 }
