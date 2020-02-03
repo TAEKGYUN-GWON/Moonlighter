@@ -62,18 +62,18 @@ void Npc::Render()
     Object::Render();
 
     //이거 안하면 자꾸 정체불명의 동그라미가 엔피씨처럼 움직임.. erase할때 false 해줌
-    if (_isActive)
-    {
-       GRAPHICMANAGER->DrawEllipse(
-          _trans->GetPos().x,
-          _trans->GetPos().y,
-          _trans->GetScale().x / 2,
-          _trans->GetScale().y / 2);
-    }
+    //if (_isActive)
+    //{
+    //   GRAPHICMANAGER->DrawEllipse(
+    //      _trans->GetPos().x,
+    //      _trans->GetPos().y,
+    //      _trans->GetScale().x / 2,
+    //      _trans->GetScale().y / 2);
+    //}
 
-    wchar_t buffer[128];
-    swprintf(buffer, 128, L"x: %1.f, y:%1.f", _trans->GetPos().x, _trans->GetPos().y);
-    GRAPHICMANAGER->Text(Vector2(_trans->GetPos().x - CAMERA->GetPosition().x, _trans->GetPos().y - CAMERA->GetPosition().y), buffer, 20, 500, 300, ColorF::White);
+    //wchar_t buffer[128];
+    //swprintf(buffer, 128, L"x: %1.f, y:%1.f", _trans->GetPos().x, _trans->GetPos().y);
+    //GRAPHICMANAGER->Text(Vector2(_trans->GetPos().x - CAMERA->GetPosition().x, _trans->GetPos().y - CAMERA->GetPosition().y), buffer, 20, 500, 300, ColorF::White);
 }
 
 void Npc::SetPath(list<Vector2> lpath)
@@ -101,7 +101,7 @@ void Npc::Move()
             float b = Vector2::GetAngle(_trans->GetPos(), *_lPath.begin());
 
             _trans->SetPos(_trans->GetPos() + Vector2(cosf(b), -sinf(b)) * 50 * TIMEMANAGER->getElapsedTime());
-
+            int ca;
             if ((int)Vector2::Distance(*_lPath.begin(), _trans->GetPos()) < (int)2)//조건 느슨하게 예외처리 해주는 부분
                 _lPath.pop_front(); //가장 첫번째 목적지 지우기, 다음 노드를 넣기 위해      }
         }

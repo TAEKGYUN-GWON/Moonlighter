@@ -141,17 +141,17 @@ void ShopScene::Render()
 	Scene::Render();
 
 	//창가 동그라미
-	GRAPHICMANAGER->DrawEllipse(520, 615, 30, 30);
+	//GRAPHICMANAGER->DrawEllipse(520, 615, 30, 30);
 
 	//마우스 좌표
 	//wchar_t buffer[128];
-	swprintf(buffer, 128, L"x: %d, y:%d", 
-		(int)(_ptMouse.x+CAMERA->GetPosition().x) / TILEWIDTH, 
-		(int)(_ptMouse.y+CAMERA->GetPosition().y) / TILEHEIGHT);
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2), buffer, 20, 500, 300, ColorF::White);
+	//swprintf(buffer, 128, L"x: %d, y:%d", 
+	//	(int)(_ptMouse.x+CAMERA->GetPosition().x) / TILEWIDTH, 
+	//	(int)(_ptMouse.y+CAMERA->GetPosition().y) / TILEHEIGHT);
+	//GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2), buffer, 20, 500, 300, ColorF::White);
 
-	swprintf(buffer, 128, L"x: %f, y:%f", _ptMouse.x + CAMERA->GetPosition().x, _ptMouse.y + CAMERA->GetPosition().y);
-	GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2 - 100), buffer, 20, 500, 300, ColorF::White);
+	//swprintf(buffer, 128, L"x: %f, y:%f", _ptMouse.x + CAMERA->GetPosition().x, _ptMouse.y + CAMERA->GetPosition().y);
+	//GRAPHICMANAGER->Text(Vector2(WINSIZEX / 2, WINSIZEY / 2 - 100), buffer, 20, 500, 300, ColorF::White);
 
 
 	for (ShopStand* s : _shopStandMgr->GetShopStandVector())

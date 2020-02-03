@@ -37,9 +37,9 @@ void ShopStand::Update()
 
 void ShopStand::Render()
 {
-	GRAPHICMANAGER->DrawEllipse(
-		_trans->GetPos().x, _trans->GetPos().y, 
-		_trans->GetScale().x+10, _trans->GetScale().y+10);
+	//GRAPHICMANAGER->DrawEllipse(
+	//	_trans->GetPos().x, _trans->GetPos().y, 
+	//	_trans->GetScale().x+10, _trans->GetScale().y+10);
 	Object::Render();
 	//if(_isItemOn)
 		//GRAPHICMANAGER->FindImage(item.item)->Render(_trans->GetPos(), Vector2(50, 50), 0);
