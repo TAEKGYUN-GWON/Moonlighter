@@ -6,53 +6,74 @@
 void NpcIdle::Enter()
 {
 	_state = "Idle";
-
+	
 
 }
 
 void NpcIdle::Update()
 {
-	//좌표를 받아서. 계산대, 가판대 일 때 다르게 처리함
-	
-
+	//창문으로 가고싶은 상태면(입장직후는 무조건 이거)
+	if (_npc->GetNpcThought() == NPCTHOUGHT::WINDOW)
+	{
+		_npc->ChangeState(new NpcMove(_npc));
+	}
+	//물건을 구경하러 판매대로 가고싶다
+	if (_npc->GetNpcThought() == NPCTHOUGHT::CHOOSE)
+	{
+		_npc->ChangeState(new NpcMove(_npc));
+	}
+	//물건을 가격비교 해보고 사고싶은 상태면
+	if (_npc->GetNpcThought() == NPCTHOUGHT::BUY)
+	{
+		_npc->ChangeState(new NpcMove(_npc));
+	}
+	//물건 비교해보고 안사고싶으면
+	if (_npc->GetNpcThought() == NPCTHOUGHT::NOTBUY)
+	{
+		_npc->ChangeState(new NpcMove(_npc));
+	}
+	//집에 가고 싶으면
+	if (_npc->GetNpcThought() == NPCTHOUGHT::GOHOME)
+	{
+		_npc->ChangeState(new NpcMove(_npc));
+	}
 }
 
 void NpcIdle::Exit()
 {
+
 }
 
 //MOVE==========================
 void NpcMove::Enter()
 {
 	_state = "Move";
-	_timer = 0.0f;
 }
 
 void NpcMove::Update()
 {
-	if (_npc->GetPath()->size())
-	{
-		if (!_npc->GetIsAstarOn()) //갈곳이 있으면 false 상태
-		{
-			Vector2 a = *_npc->GetPath()->begin() - _npc->GetTrans()->GetPos(); // 가야할위치에서 내위치를 빼면, 가야되는 다음 노드가 나옴
-			float b = Vector2::GetAngle( _npc->GetTrans()->GetPos(), *_npc->GetPath()->begin());
-		
-			_npc->GetTrans()->SetPos(_npc->GetTrans()->GetPos() + Vector2(cosf(b),-sinf(b)) * 30 * TIMEMANAGER->getElapsedTime());
-
-			if ((int)Vector2::Distance(*_npc->GetPath()->begin(), _npc->GetTrans()->GetPos()) < (int)1)//조건 느슨하게 예외처리 해주는 부분
-				_npc->GetPath()->pop_front(); //가장 첫번째 목적지 지우기, 다음 노드를 넣기 위해
-		}
+	//여기서 POS_ENTER가 나올일은 없다! 입장한 이후로 ENTER에서 IDLE이 될일은 없음
+	//도착했으면 IDLE로 바꿔줘야함
 	
-	}
-	else //갈곳이 없으면 약간의 텀을 준 다음 true 만들어
+	//해당 좌표에 도착했으면 IDLE로 바꿔줘라
+	if (_npc->GetNpcNowPosition() == NPCNOWPOSITION::POS_WINDOW)
 	{
-		_timer += TIMEMANAGER->getElapsedTime();
-		if (_timer > 2)
-		{
-			_npc->SetIsAstarOn(true);
-			_timer = 0;
-			_npc->ChangeState(new NpcIdle(_npc));
-		}
+		_npc->ChangeState(new NpcIdle(_npc)); //IDLE 로 바꿔줘
+	}
+	if (_npc->GetNpcNowPosition() == NPCNOWPOSITION::POS_STAND1 ||
+		_npc->GetNpcNowPosition() == NPCNOWPOSITION::POS_STAND2 ||
+		_npc->GetNpcNowPosition() == NPCNOWPOSITION::POS_STAND3 ||
+		_npc->GetNpcNowPosition() == NPCNOWPOSITION::POS_STAND4)
+	{
+		_npc->ChangeState(new NpcIdle(_npc)); 
+	}
+	if (_npc->GetNpcNowPosition() == NPCNOWPOSITION::POS_CHECKSTAND)
+	{
+		_npc->ChangeState(new NpcIdle(_npc));
+	}
+	if (_npc->GetNpcNowPosition() == NPCNOWPOSITION::POS_DOOR) //문앞에 있으면
+	{
+		_npc->ChangeState(new NpcHome(_npc)); //집으로 가..
 	}
 }
 
@@ -68,6 +89,14 @@ void NpcHome::Enter()
 
 void NpcHome::Update()
 {
+	if (_npc->GetNpcNowPosition() == NPCNOWPOSITION::POS_DOOR) //나가는문 앞인데
+	{
+		if (_npc->GetNpcThought() == NPCTHOUGHT::GOHOME) //집에 가고싶어하면
+		{
+			_npc->SetIsActive(false); //이렇게 해두면 매니저가 지움
+
+		}
+	}
 }
 
 void NpcHome::Exit()

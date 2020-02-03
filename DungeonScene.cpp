@@ -4,6 +4,7 @@
 #include "TownScene.h"
 #include "Ability.h"
 #include "Inventory.h"
+#include "PlayerState.h"
 
 void DungeonScene::Init()
 {
@@ -35,7 +36,11 @@ void DungeonScene::Update()
 	_dMgr->Update();
 	if (KEYMANAGER->isOnceKeyDown('0')) SCENEMANAGER->changeScene("test");
 	//test->Update();
-	//if (_player->GetState())
+
+	if (_player->GetState()->GetState() == "Dead" && _player->GetSprite()->IsFrameEnd())
+	{
+		SCENEMANAGER->changeScene("Entrance");
+	}
 }
 
 void DungeonScene::Render()
