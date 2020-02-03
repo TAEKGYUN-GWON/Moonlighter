@@ -87,8 +87,6 @@ void TownScene::Init()
 
 	_player->GetSprite()->SetPosition(_player->GetTrans()->GetPos() + Vector2(0,-14));
 
-	
-
 	_smithy = new Smithy;
 	_smithy->Init(_player->GetInventory());
 
@@ -104,6 +102,8 @@ void TownScene::Init()
 	_aStar = new Astar;
 	_aStar->Init(this->_tiles, TILENUMX, TILENUMY);
 
+	UI = new UiManager;
+	UI->Init();
 
 	//_smithy->SetSmithPos(_smith->GetTrans()->GetPos());
 
@@ -323,6 +323,7 @@ void TownScene::Render()
 		}
 	}
 
+	UI->Render();
 
 	//wchar_t buffer[128];
 	//swprintf(buffer, 128, L"x: %1.f, y:%1.f", _player->GetTrans()->GetPos().x, _player->GetTrans()->GetPos().y);
